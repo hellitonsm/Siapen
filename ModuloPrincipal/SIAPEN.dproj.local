@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<BT_BuildType>Debug</BT_BuildType>
+	<Transactions>
+    <Transaction>2023/06/13 13:02:48.000.716,=C:\Users\remoto\Documents\Siapen\siapen\ModuloPrincipal\WindowsDarkMode.pas</Transaction>
+    <Transaction>2023/06/13 13:09:09.000.021,=C:\Users\remoto\Documents\Siapen\siapen\ModuloPrincipal\Unit1.pas</Transaction>
+    <Transaction>2023/06/13 13:10:03.000.162,C:\Users\remoto\Documents\Siapen\siapen\ModuloPrincipal\Unit1.pas=C:\Users\remoto\Documents\Siapen\siapen\ModuloPrincipal\mudarTema.pas</Transaction>
+    <Transaction>2023/06/16 15:41:04.000.761,=C:\Users\remoto\Documents\Siapen\siapen\ModuloPrincipal\Unit1.pas</Transaction>
+    <Transaction>2023/06/16 15:41:23.000.890,C:\Users\remoto\Documents\Siapen\siapen\ModuloPrincipal\Unit1.pas=C:\Users\remoto\Documents\Siapen\siapen\ModuloPrincipal\atualizar.pas</Transaction>
+  </Transactions>
+</BorlandProject>
