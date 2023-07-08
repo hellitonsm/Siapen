@@ -1,0 +1,82 @@
+object DM2: TDM2
+  OldCreateOrder = False
+  Height = 407
+  Width = 753
+  object SQLConnect: TSQLConnection
+    ConnectionName = 'SISAP'
+    DriverName = 'DevartInterBase'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverName=DevartInterBase'
+      'DataBase='
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'RoleName='
+      'SQLDialect=3'
+      'BlobSize=-1'
+      'ErrorResourceFile='
+      'LocaleCode=0000'
+      'DevartInterBase TransIsolation=ReadCommited'
+      'WaitOnLocks=True'
+      'Charset=WIN1252'
+      'CharLength=1'
+      'EnableBCD=True'
+      'OptimizedNumerics=True'
+      'LongStrings=True'
+      'UseQuoteChar=False'
+      'FetchAll=False')
+    Left = 29
+    Top = 12
+  end
+  object SQLQuery1: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = SQLConnect
+    Left = 96
+    Top = 8
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = SQLQuery1
+    Left = 128
+    Top = 8
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider1'
+    Left = 160
+    Top = 8
+  end
+  object DataSource1: TDataSource
+    DataSet = ClientDataSet1
+    Left = 192
+    Top = 8
+  end
+  object SQLvestimentas: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select * from vestimentas'
+      'order by vestimentas')
+    SQLConnection = SQLConnect
+    Left = 32
+    Top = 72
+  end
+  object dspvestimentas: TDataSetProvider
+    DataSet = SQLvestimentas
+    Left = 64
+    Top = 72
+  end
+  object cdsvestimentas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspvestimentas'
+    Left = 96
+    Top = 72
+  end
+  object dsvestimentas: TDataSource
+    DataSet = cdsvestimentas
+    Left = 128
+    Top = 72
+  end
+end
