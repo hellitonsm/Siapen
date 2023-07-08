@@ -1,0 +1,228 @@
+CREATE OR ALTER TRIGGER PROCESSO_AI_SINCRONISMO FOR PROCESSO
+ACTIVE BEFORE INSERT POSITION 999
+AS
+DECLARE VARIABLE TXT VARCHAR(32700);
+DECLARE VARIABLE IDSINCRONISMO_CONTROLE INTEGER;
+DECLARE VARIABLE USUARIO_REPLICACAO VARCHAR(200);
+BEGIN
+
+   /* TRIGGER DE SINCRONISMO GERADA DIA: 2012-05-10 10:27:46.8790
+
+   Trigger gerada automaticamente,
+   pelas procedures:
+        -> SP_GERA_TRIGGERS_REPLICACAO
+        -> SP_GERA_TRIGGERS_TABELA
+        -> SP_GERA_SCRIPT_INSERT_TRIGGER
+   */
+   IF (USER = 'SINCRONIZADOR') THEN
+      EXIT;
+   IF (GEN_ID(COD_UP,0)=0) THEN
+      EXIT;
+   USUARIO_REPLICACAO = RDB$GET_CONTEXT('USER_TRANSACTION', 'USUARIO_REPLICACAO');
+   IF (COALESCE(USUARIO_REPLICACAO,'')='') THEN
+     USUARIO_REPLICACAO = USER ;
+   TXT = 'INSERT INTO PROCESSO (IDPROCESSO,'
+||' IDINTERNO,'
+||' OBSERVACAO,'
+||' TOTAL_PENA_ANO,'
+||' TOTAL_PENA_MES,'
+||' TOTAL_PENA_DIA,'
+||' IDCOMARCA,'
+||' VARA,'
+||' PRISAO,'
+||' REU,'
+||' NPROCESSO,'
+||' GR,'
+||' SITUACAOJURIDICA,'
+||' TIPOJUSTICA,'
+||' DATA_PROCESSO,'
+||' PARTICIPACAO_CRIME,'
+||' DATA_FATO_CONDENACAO,'
+||' DATA_INICIO_CONDENACAO,'
+||' PROGRESSAO_REGIME,'
+||' LIVRAMENTO_CONDICIONAL,'
+||' ANO_PROGRESSAO,'
+||' MES_PROGRESSAO,'
+||' DIA_PROGRESSAO,'
+||' ANO_CONDICIONAL,'
+||' MES_CONDICIONAL,'
+||' DIA_CONDICIONAL) VALUES ('
+||COALESCE(NEW.IDPROCESSO,'NULL')||','
+||COALESCE(NEW.IDINTERNO,'NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.OBSERVACAO,'''',''''''))||'''','NULL')||','
+||COALESCE(NEW.TOTAL_PENA_ANO,'NULL')||','
+||COALESCE(NEW.TOTAL_PENA_MES,'NULL')||','
+||COALESCE(NEW.TOTAL_PENA_DIA,'NULL')||','
+||COALESCE(NEW.IDCOMARCA,'NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.VARA,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.PRISAO,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.REU,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.NPROCESSO,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.GR,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.SITUACAOJURIDICA,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.TIPOJUSTICA,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||NEW.DATA_PROCESSO||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.PARTICIPACAO_CRIME,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||NEW.DATA_FATO_CONDENACAO||'''','NULL')||','
+||COALESCE(''''||NEW.DATA_INICIO_CONDENACAO||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.PROGRESSAO_REGIME,'''',''''''))||'''','NULL')||','
+||COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.LIVRAMENTO_CONDICIONAL,'''',''''''))||'''','NULL')||','
+||COALESCE(NEW.ANO_PROGRESSAO,'NULL')||','
+||COALESCE(NEW.MES_PROGRESSAO,'NULL')||','
+||COALESCE(NEW.DIA_PROGRESSAO,'NULL')||','
+||COALESCE(NEW.ANO_CONDICIONAL,'NULL')||','
+||COALESCE(NEW.MES_CONDICIONAL,'NULL')||','
+||COALESCE(NEW.DIA_CONDICIONAL,'NULL')||');';
+   FOR
+     SELECT IDSINCRONISMO_CONTROLE
+     FROM SINCRONISMO_CONTROLE
+     WHERE USUARIO <> TRIM(:USUARIO_REPLICACAO)
+     INTO :IDSINCRONISMO_CONTROLE
+   DO
+   BEGIN
+       INSERT INTO SINCRONISMO (IDSINCRONISMO,IDSINCRONISMO_CONTROLE,SCRIPT,STATUS,ORDEM,DATA_HORA,USUARIO)
+       VALUES (0,:IDSINCRONISMO_CONTROLE,:TXT,'A',0,'NOW',TRIM(:USUARIO_REPLICACAO));
+   END
+END;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+CREATE OR ALTER TRIGGER PROCESSO_AU_SINCRONISMO FOR PROCESSO
+ACTIVE BEFORE UPDATE POSITION 999
+AS
+DECLARE VARIABLE TXT VARCHAR(32700);
+DECLARE VARIABLE IDSINCRONISMO_CONTROLE INTEGER;
+DECLARE VARIABLE USUARIO_REPLICACAO VARCHAR(200);
+BEGIN
+
+   /* TRIGGER DE SINCRONISMO GERADA DIA: 2012-05-10 10:27:46.8790
+   Trigger gerada automaticamente,
+   pelas procedures:
+        -> SP_GERA_TRIGGERS_REPLICACAO
+        -> SP_GERA_TRIGGERS_TABELA
+        -> SP_GERA_SCRIPT_UPDATE_TRIGGER
+   */
+   IF (USER = 'SINCRONIZADOR') THEN
+      EXIT;
+   IF (GEN_ID(COD_UP,0)=0) THEN
+      EXIT;
+   USUARIO_REPLICACAO = RDB$GET_CONTEXT('USER_TRANSACTION', 'USUARIO_REPLICACAO');
+   IF (COALESCE(USUARIO_REPLICACAO,'')='') THEN
+     USUARIO_REPLICACAO = USER ;
+   TXT = '';
+
+IF (COALESCE(NEW.IDINTERNO,'')<>COALESCE(OLD.IDINTERNO,'')) THEN TXT=TXT||',IDINTERNO = '||COALESCE(NEW.IDINTERNO,'NULL');
+IF (COALESCE(NEW.OBSERVACAO,'')<>COALESCE(OLD.OBSERVACAO,'')) THEN TXT=TXT||',OBSERVACAO = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.OBSERVACAO,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.TOTAL_PENA_ANO,'')<>COALESCE(OLD.TOTAL_PENA_ANO,'')) THEN TXT=TXT||',TOTAL_PENA_ANO = '||COALESCE(NEW.TOTAL_PENA_ANO,'NULL');
+IF (COALESCE(NEW.TOTAL_PENA_MES,'')<>COALESCE(OLD.TOTAL_PENA_MES,'')) THEN TXT=TXT||',TOTAL_PENA_MES = '||COALESCE(NEW.TOTAL_PENA_MES,'NULL');
+IF (COALESCE(NEW.TOTAL_PENA_DIA,'')<>COALESCE(OLD.TOTAL_PENA_DIA,'')) THEN TXT=TXT||',TOTAL_PENA_DIA = '||COALESCE(NEW.TOTAL_PENA_DIA,'NULL');
+IF (COALESCE(NEW.IDCOMARCA,'')<>COALESCE(OLD.IDCOMARCA,'')) THEN TXT=TXT||',IDCOMARCA = '||COALESCE(NEW.IDCOMARCA,'NULL');
+IF (COALESCE(NEW.VARA,'')<>COALESCE(OLD.VARA,'')) THEN TXT=TXT||',VARA = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.VARA,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.PRISAO,'')<>COALESCE(OLD.PRISAO,'')) THEN TXT=TXT||',PRISAO = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.PRISAO,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.REU,'')<>COALESCE(OLD.REU,'')) THEN TXT=TXT||',REU = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.REU,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.NPROCESSO,'')<>COALESCE(OLD.NPROCESSO,'')) THEN TXT=TXT||',NPROCESSO = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.NPROCESSO,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.GR,'')<>COALESCE(OLD.GR,'')) THEN TXT=TXT||',GR = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.GR,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.SITUACAOJURIDICA,'')<>COALESCE(OLD.SITUACAOJURIDICA,'')) THEN TXT=TXT||',SITUACAOJURIDICA = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.SITUACAOJURIDICA,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.TIPOJUSTICA,'')<>COALESCE(OLD.TIPOJUSTICA,'')) THEN TXT=TXT||',TIPOJUSTICA = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.TIPOJUSTICA,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.DATA_PROCESSO,'')<>COALESCE(OLD.DATA_PROCESSO,'')) THEN TXT=TXT||',DATA_PROCESSO = '||COALESCE(''''||NEW.DATA_PROCESSO||'''','NULL');
+IF (COALESCE(NEW.PARTICIPACAO_CRIME,'')<>COALESCE(OLD.PARTICIPACAO_CRIME,'')) THEN TXT=TXT||',PARTICIPACAO_CRIME = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.PARTICIPACAO_CRIME,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.DATA_FATO_CONDENACAO,'')<>COALESCE(OLD.DATA_FATO_CONDENACAO,'')) THEN TXT=TXT||',DATA_FATO_CONDENACAO = '||COALESCE(''''||NEW.DATA_FATO_CONDENACAO||'''','NULL');
+IF (COALESCE(NEW.DATA_INICIO_CONDENACAO,'')<>COALESCE(OLD.DATA_INICIO_CONDENACAO,'')) THEN TXT=TXT||',DATA_INICIO_CONDENACAO = '||COALESCE(''''||NEW.DATA_INICIO_CONDENACAO||'''','NULL');
+IF (COALESCE(NEW.PROGRESSAO_REGIME,'')<>COALESCE(OLD.PROGRESSAO_REGIME,'')) THEN TXT=TXT||',PROGRESSAO_REGIME = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.PROGRESSAO_REGIME,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.LIVRAMENTO_CONDICIONAL,'')<>COALESCE(OLD.LIVRAMENTO_CONDICIONAL,'')) THEN TXT=TXT||',LIVRAMENTO_CONDICIONAL = '||
+COALESCE(''''||(SELECT V FROM SP_BUSCA_TROCA (NEW.LIVRAMENTO_CONDICIONAL,'''',''''''))||'''','NULL');
+IF (COALESCE(NEW.ANO_PROGRESSAO,'')<>COALESCE(OLD.ANO_PROGRESSAO,'')) THEN TXT=TXT||',ANO_PROGRESSAO = '||COALESCE(NEW.ANO_PROGRESSAO,'NULL');
+IF (COALESCE(NEW.MES_PROGRESSAO,'')<>COALESCE(OLD.MES_PROGRESSAO,'')) THEN TXT=TXT||',MES_PROGRESSAO = '||COALESCE(NEW.MES_PROGRESSAO,'NULL');
+IF (COALESCE(NEW.DIA_PROGRESSAO,'')<>COALESCE(OLD.DIA_PROGRESSAO,'')) THEN TXT=TXT||',DIA_PROGRESSAO = '||COALESCE(NEW.DIA_PROGRESSAO,'NULL');
+IF (COALESCE(NEW.ANO_CONDICIONAL,'')<>COALESCE(OLD.ANO_CONDICIONAL,'')) THEN TXT=TXT||',ANO_CONDICIONAL = '||COALESCE(NEW.ANO_CONDICIONAL,'NULL');
+IF (COALESCE(NEW.MES_CONDICIONAL,'')<>COALESCE(OLD.MES_CONDICIONAL,'')) THEN TXT=TXT||',MES_CONDICIONAL = '||COALESCE(NEW.MES_CONDICIONAL,'NULL');
+IF (COALESCE(NEW.DIA_CONDICIONAL,'')<>COALESCE(OLD.DIA_CONDICIONAL,'')) THEN TXT=TXT||',DIA_CONDICIONAL = '||COALESCE(NEW.DIA_CONDICIONAL,'NULL');
+IF (TXT <> '') THEN TXT = 'UPDATE PROCESSO SET IDPROCESSO = '''||NEW.IDPROCESSO||''''||TXT||' WHERE IDPROCESSO = '''||NEW.IDPROCESSO||''' ;';
+    IF (TXT<>'') THEN
+    BEGIN
+       FOR
+         SELECT IDSINCRONISMO_CONTROLE
+         FROM SINCRONISMO_CONTROLE
+         WHERE USUARIO <> TRIM(:USUARIO_REPLICACAO)
+         INTO :IDSINCRONISMO_CONTROLE
+       DO
+       BEGIN
+           INSERT INTO SINCRONISMO (IDSINCRONISMO,IDSINCRONISMO_CONTROLE,SCRIPT,STATUS,ORDEM,DATA_HORA,USUARIO)
+           VALUES (0,:IDSINCRONISMO_CONTROLE,:TXT,'A',0,'NOW',TRIM(:USUARIO_REPLICACAO));
+       END
+    END
+END;  
+CREATE OR ALTER TRIGGER PROCESSO_AD_SINCRONISMO FOR PROCESSO
+ACTIVE BEFORE DELETE POSITION 999
+AS
+DECLARE VARIABLE TXT VARCHAR(32700);
+DECLARE VARIABLE IDSINCRONISMO_CONTROLE INTEGER;
+DECLARE VARIABLE USUARIO_REPLICACAO VARCHAR(200);
+BEGIN
+   /* TRIGGER DE SINCRONISMO GERADA DIA: 2012-05-10 10:27:46.8790
+   Trigger gerada automaticamente,
+   pelas procedures:
+        -> SP_GERA_TRIGGERS_REPLICACAO
+        -> SP_GERA_TRIGGERS_TABELA
+   */
+   IF (USER = 'SINCRONIZADOR') THEN
+      EXIT;
+   IF (GEN_ID(COD_UP,0)=0) THEN
+      EXIT;
+   USUARIO_REPLICACAO = RDB$GET_CONTEXT('USER_TRANSACTION', 'USUARIO_REPLICACAO');
+   IF (COALESCE(USUARIO_REPLICACAO,'')='') THEN
+     USUARIO_REPLICACAO = USER ;
+   TXT = 'DELETE FROM PROCESSO WHERE IDPROCESSO = '||OLD.IDPROCESSO||';';
+   FOR
+     SELECT IDSINCRONISMO_CONTROLE
+     FROM SINCRONISMO_CONTROLE
+     WHERE USUARIO <> TRIM(:USUARIO_REPLICACAO)
+     INTO :IDSINCRONISMO_CONTROLE
+   DO
+   BEGIN
+     INSERT INTO SINCRONISMO (IDSINCRONISMO,IDSINCRONISMO_CONTROLE,SCRIPT,STATUS,ORDEM,DATA_HORA,USUARIO)
+     VALUES (0,:IDSINCRONISMO_CONTROLE,:TXT,'A',0,'NOW',TRIM(:USUARIO_REPLICACAO));
+   END
+
+END;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+CREATE OR ALTER TRIGGER PROCESSO_AD_SINCRONISMO FOR PROCESSO
+ACTIVE BEFORE DELETE POSITION 999
+AS
+DECLARE VARIABLE TXT VARCHAR(32700);
+DECLARE VARIABLE IDSINCRONISMO_CONTROLE INTEGER;
+DECLARE VARIABLE USUARIO_REPLICACAO VARCHAR(200);
+BEGIN
+   /* TRIGGER DE SINCRONISMO GERADA DIA: 2012-05-10 10:27:46.8790
+   Trigger gerada automaticamente,
+   pelas procedures:
+        -> SP_GERA_TRIGGERS_REPLICACAO
+        -> SP_GERA_TRIGGERS_TABELA
+   */
+   IF (USER = 'SINCRONIZADOR') THEN
+      EXIT;
+   IF (GEN_ID(COD_UP,0)=0) THEN
+      EXIT;
+   USUARIO_REPLICACAO = RDB$GET_CONTEXT('USER_TRANSACTION', 'USUARIO_REPLICACAO');
+   IF (COALESCE(USUARIO_REPLICACAO,'')='') THEN
+     USUARIO_REPLICACAO = USER ;
+   TXT = 'DELETE FROM PROCESSO WHERE IDPROCESSO = '||OLD.IDPROCESSO||';';
+   FOR
+     SELECT IDSINCRONISMO_CONTROLE
+     FROM SINCRONISMO_CONTROLE
+     WHERE USUARIO <> TRIM(:USUARIO_REPLICACAO)
+     INTO :IDSINCRONISMO_CONTROLE
+   DO
+   BEGIN
+     INSERT INTO SINCRONISMO (IDSINCRONISMO,IDSINCRONISMO_CONTROLE,SCRIPT,STATUS,ORDEM,DATA_HORA,USUARIO)
+     VALUES (0,:IDSINCRONISMO_CONTROLE,:TXT,'A',0,'NOW',TRIM(:USUARIO_REPLICACAO));
+   END
+
+END;
+  ;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
