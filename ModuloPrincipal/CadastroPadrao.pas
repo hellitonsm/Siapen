@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, jpeg;
+  Mask, jpeg, System.ImageList;
 
 type
   TFrmCadastroPadrao = class(TFrmModeloCadastro)

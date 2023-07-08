@@ -1,17 +1,17 @@
 inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
   Left = 329
   Top = 56
-  Width = 744
-  Height = 726
   Caption = 'Cadastro de Ocorr'#234'ncias Plant'#227'o (Vers. 2013.1)'
   Menu = MainMenu1
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 615
+    Height = 531
+    ExplicitHeight = 530
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 597
+      Height = 513
+      ExplicitHeight = 512
       inherited Fechar: TToolButton
         Wrap = True
       end
@@ -25,21 +25,26 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 597
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 512
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 613
-    Height = 615
+    Height = 531
+    ExplicitHeight = 530
+    inherited Image2: TImage
+      Width = 728
+      ExplicitWidth = 728
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 613
-      Height = 615
-      ActivePage = TabSheetCadastro
+      Height = 531
+      ExplicitHeight = 530
       inherited TabSheetCadastro: TTabSheet
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Width = 605
-          Height = 587
+          Height = 503
+          ExplicitHeight = 503
           object Label9: TLabel
             Left = 7
             Top = 101
@@ -256,8 +261,8 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
             Top = 48
             Width = 186
             Height = 21
-            Date = 41144.617721956020000000
-            Time = 41144.617721956020000000
+            Date = 41144.000000000000000000
+            Time = 0.617721956019522600
             TabOrder = 1
             DataField = 'DATA_INICIO'
             DataSource = DsCadastro
@@ -268,8 +273,8 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
             Top = 48
             Width = 186
             Height = 21
-            Date = 41144.617844247690000000
-            Time = 41144.617844247690000000
+            Date = 41144.000000000000000000
+            Time = 0.617844247688481100
             TabOrder = 2
             DataField = 'DATA_FINAL'
             DataSource = DsCadastro
@@ -397,9 +402,10 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitHeight = 503
         inherited PanelLocalizaConsulta: TPanel
-          Width = 605
           Height = 57
+          ExplicitHeight = 57
           inherited Label1: TLabel
             Left = 43
             Top = 37
@@ -410,11 +416,17 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
             Font.Color = clRed
             Font.Style = [fsBold]
             ParentFont = False
+            ExplicitLeft = 43
+            ExplicitTop = 37
+            ExplicitWidth = 513
           end
           inherited EditLocalizar: TEdit
             Left = 199
             Top = 5
             Width = 318
+            ExplicitLeft = 199
+            ExplicitTop = 5
+            ExplicitWidth = 318
           end
           object RadioGroupTipoLocalizar: TRadioGroup
             Left = 4
@@ -446,8 +458,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         end
         inherited PanelConsulta: TPanel
           Top = 57
-          Width = 605
-          Height = 530
+          Height = 446
+          ExplicitTop = 57
+          ExplicitHeight = 445
           inherited DBGridConsulta: TDBGrid
             Left = 0
             Width = 601
@@ -462,16 +475,11 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    Width = 728
-    inherited Image2: TImage
-      Width = 728
-    end
-  end
   inherited StatusBar1: TStatusBar
-    Top = 647
-    Width = 728
+    Top = 563
     Height = 21
+    ExplicitTop = 562
+    ExplicitHeight = 21
   end
   inherited ImageListCadastro: TImageList
     Left = 776
@@ -696,7 +704,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     Top = 175
   end
   object FrxOcorrrenciaPlantao: TfrxReport
-    Version = '4.3.6'
+    Version = '2022.1.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -836,6 +844,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       object Sqlup: TfrxDBXQuery
         UserName = 'Sqlup'
         CloseDataSource = True
+        BCDToCurrency = False
+        DataSetOptions = []
+        IgnoreDupParams = False
         Params = <
           item
             Name = 'ID_UP'
@@ -867,6 +878,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       object sqlListaOcorrencia: TfrxDBXQuery
         UserName = 'sqlListaOcorrencia'
         CloseDataSource = True
+        BCDToCurrency = False
+        DataSetOptions = []
+        IgnoreDupParams = False
         Params = <
           item
             Name = 'ID_UP'
@@ -935,6 +949,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       object sqlUnidadePenal: TfrxDBXQuery
         UserName = 'sqlUnidadePenal'
         CloseDataSource = True
+        BCDToCurrency = False
+        DataSetOptions = []
+        IgnoreDupParams = False
         Params = <
           item
             Name = 'id_up'
@@ -957,6 +974,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       object SQLDIRETOR: TfrxDBXQuery
         UserName = 'SQLDIRETOR'
         CloseDataSource = True
+        BCDToCurrency = False
+        DataSetOptions = []
+        IgnoreDupParams = False
         Params = <
           item
             Name = 'id_up'
@@ -982,6 +1002,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       object SqlOcorrencia: TfrxDBXQuery
         UserName = 'SqlOcorrencia'
         CloseDataSource = True
+        BCDToCurrency = False
+        DataSetOptions = []
+        IgnoreDupParams = False
         Params = <
           item
             Name = 'ID_UP'
@@ -1032,8 +1055,16 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       ColumnWidth = 211.900000000000000000
       ColumnPositions.Strings = (
         '0')
+      Frame.Typ = []
+      MirrorMode = []
       OnBeforePrint = 'Page1OnBeforePrint'
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -13
@@ -1044,6 +1075,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         Top = 18.897650000000000000
         Width = 710.551640000000000000
         object Memo2: TfrxMemoView
+          AllowVectorExport = True
           Left = -11.338590000000000000
           Top = 70.929190000000000000
           Width = 718.110700000000000000
@@ -1054,8 +1086,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -9
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             
               '[Sqlup."ENDERECO"]  [Sqlup."NUMERO"]  [Sqlup."BAIRRO"]  [Sqlup."' +
               'COMPLEMENTO"]'
@@ -1066,6 +1099,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           ParentFont = False
         end
         object Memo11: TfrxMemoView
+          AllowVectorExport = True
           Left = 3.779530000000000000
           Top = 124.724490000000000000
           Width = 997.795920000000000000
@@ -1076,10 +1110,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          Frame.Typ = []
           HAlign = haCenter
           ParentFont = False
         end
         object Memo3: TfrxMemoView
+          AllowVectorExport = True
           Left = 149.708720000000000000
           Top = 113.842610000000000000
           Width = 377.953000000000000000
@@ -1090,20 +1126,27 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -21
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          Frame.Typ = []
           HAlign = haCenter
-          Memo.UTF8 = (
-            'Ocorr'#195#170'ncia Administrativa')
+          Memo.UTF8W = (
+            'Ocorr'#234'ncia Administrativa')
           ParentFont = False
         end
       end
       object Picture4: TfrxPictureView
+        AllowVectorExport = True
         Left = 10.559060000000000000
         Top = 8.677175120000000000
         Width = 109.606299210000000000
         Height = 105.826771650000000000
+        Frame.Typ = []
         FileLink = '..\logo\esquerda.jpg'
+        HightQuality = False
+        Transparent = False
+        TransparentColor = clWhite
       end
       object Memo1: TfrxMemoView
+        AllowVectorExport = True
         Left = -3.779530000000000000
         Top = 10.118120000000000000
         Width = 718.110700000000000000
@@ -1114,8 +1157,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         Font.Height = -13
         Font.Name = 'Arial'
         Font.Style = [fsBold]
+        Frame.Typ = []
         HAlign = haCenter
-        Memo.UTF8 = (
+        Memo.UTF8W = (
           '[GLOBAL_ORGAO]'
           '[GLOBAL_DEPARTAMENTO]'
           '[GLOBAL_DIRETORIA]'
@@ -1123,13 +1167,24 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         ParentFont = False
       end
       object Picture3: TfrxPictureView
+        AllowVectorExport = True
         Left = 569.149979760000000000
         Top = 8.897650000000000000
         Width = 109.606299210000000000
         Height = 105.826771650000000000
+        Frame.Typ = []
         FileLink = '..\logo\direita.jpg'
+        HightQuality = False
+        Transparent = False
+        TransparentColor = clWhite
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Height = 19.236240000000000000
         Top = 748.346940000000000000
         Width = 710.551640000000000000
@@ -1138,6 +1193,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         RowCount = 0
         Stretched = True
         object Memo4: TfrxMemoView
+          AllowVectorExport = True
           Left = 8.338590000000000000
           Top = 3.118119999999976000
           Width = 400.630180000000000000
@@ -1150,16 +1206,24 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             '[sqlListaOcorrencia."RGI"] -[sqlListaOcorrencia."NOME_INTERNO"]')
           ParentFont = False
         end
       end
       object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Height = 22.677180000000000000
         Top = 827.717070000000000000
         Width = 710.551640000000000000
         object Memo19: TfrxMemoView
+          AllowVectorExport = True
           Left = 172.078850000000000000
           Top = 7.133889999999951000
           Width = 502.677490000000000000
@@ -1170,8 +1234,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             
               'Projeto SIAPEN, Impresso em [Date] - [time], Pag. [Page#]/[Total' +
               'Pages#]')
@@ -1179,6 +1244,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         end
       end
       object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Height = 494.764070000000000000
         Top = 230.551330000000000000
         Width = 710.551640000000000000
@@ -1187,6 +1258,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         StartNewPage = True
         Stretched = True
         object Memo6: TfrxMemoView
+          AllowVectorExport = True
           Left = 8.338590000000000000
           Top = 475.866419999999900000
           Width = 226.771800000000000000
@@ -1198,11 +1270,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
-            'Internos envolvidos na ocorr'#195#170'ncia:')
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Internos envolvidos na ocorr'#234'ncia:')
           ParentFont = False
         end
         object SQLDIRETORNOME_FUNCIONARIO: TfrxMemoView
+          AllowVectorExport = True
           Left = 9.677180000000000000
           Top = 416.260050000000000000
           Width = 627.401980000000000000
@@ -1215,12 +1289,14 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[SQLDIRETOR."NOME_FUNCIONARIO"]')
           ParentFont = False
         end
         object SQLDIRETORFUNCAO: TfrxMemoView
+          AllowVectorExport = True
           Left = 9.574830000000000000
           Top = 435.937230000000000000
           Width = 627.401980000000000000
@@ -1233,12 +1309,14 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[SQLDIRETOR."FUNCAO"] - [SQLDIRETOR."SIGLA"]')
           ParentFont = False
         end
         object Memo30: TfrxMemoView
+          AllowVectorExport = True
           Left = 271.992270000000000000
           Top = 342.826839999999900000
           Width = 404.409710000000000000
@@ -1253,12 +1331,14 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -12
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[Sqlup."CIDADE"], [Date]')
           ParentFont = False
         end
         object Memo5: TfrxMemoView
+          AllowVectorExport = True
           Left = 192.756030000000000000
           Top = 393.582869999999900000
           Width = 272.126160000000000000
@@ -1269,11 +1349,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             '__________________________________________')
           ParentFont = False
         end
         object sqlListaOcorrenciaID_OCORRENCIA_PLANTAO: TfrxMemoView
+          AllowVectorExport = True
           Left = 5.338590000000000000
           Top = 32.456709999999990000
           Width = 238.110390000000000000
@@ -1286,13 +1368,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -16
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
-          Memo.UTF8 = (
-            
-              'N'#195#186'mero Ocorr'#195#170'ncia: [sqlListaOcorrencia."ID_OCORRENCIA_PLANTAO"' +
-              ']')
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'N'#250'mero Ocorr'#234'ncia: [sqlListaOcorrencia."ID_OCORRENCIA_PLANTAO"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaDATA_INICIO: TfrxMemoView
+          AllowVectorExport = True
           Left = 250.433210000000000000
           Top = 33.015769999999970000
           Width = 147.401670000000000000
@@ -1305,11 +1387,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -16
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'Data In'#195#173'cio: [sqlListaOcorrencia."DATA_INICIO"]')
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Data In'#237'cio: [sqlListaOcorrencia."DATA_INICIO"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaDATA_FINAL: TfrxMemoView
+          AllowVectorExport = True
           Left = 402.291590000000000000
           Top = 33.236240000000010000
           Width = 204.094620000000000000
@@ -1322,11 +1406,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -16
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             'Data Final: [sqlListaOcorrencia."DATA_FINAL"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaASSUNTO: TfrxMemoView
+          AllowVectorExport = True
           Left = 6.118120000000000000
           Top = 131.929190000000000000
           Width = 801.260360000000000000
@@ -1340,11 +1426,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -16
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             'Assunto: [sqlListaOcorrencia."ASSUNTO"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaOCORRENCIA: TfrxMemoView
+          AllowVectorExport = True
           Left = 8.338590000000000000
           Top = 188.842610000000000000
           Width = 695.433520000000000000
@@ -1358,12 +1446,14 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haBlock
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sqlListaOcorrencia."OCORRENCIA"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaOBS: TfrxMemoView
+          AllowVectorExport = True
           Left = 14.338590000000000000
           Top = 271.535560000000000000
           Width = 661.417750000000000000
@@ -1377,12 +1467,14 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haBlock
-          Memo.UTF8 = (
-            'Observa'#195#167#195#163'o: [sqlListaOcorrencia."OBS"]')
+          Memo.UTF8W = (
+            'Observa'#231#227'o: [sqlListaOcorrencia."OBS"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaADJUNTO: TfrxMemoView
+          AllowVectorExport = True
           Left = 5.338590000000000000
           Top = 61.913419999999970000
           Width = 548.031850000000000000
@@ -1395,13 +1487,15 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             
               'Adjunto: [sqlListaOcorrencia."ADJUNTO"] - [sqlListaOcorrencia."M' +
               'AT"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaAUXILIAR: TfrxMemoView
+          AllowVectorExport = True
           Left = 4.574830000000000000
           Top = 85.692950000000000000
           Width = 548.031850000000000000
@@ -1414,27 +1508,33 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             
               'Auxiliar de Adjunto: [sqlListaOcorrencia."AUXILIAR"] - [sqlLista' +
               'Ocorrencia."MATRICULA"]')
           ParentFont = False
         end
         object Rich1: TfrxRichView
+          AllowVectorExport = True
           Left = 6.559060000000000000
           Top = 166.165430000000000000
           Width = 113.385900000000000000
           Height = 18.897650000000000000
+          Frame.Typ = []
           GapX = 2.000000000000000000
           GapY = 1.000000000000000000
           RichEdit = {
-            7B5C727466315C616E73695C616E7369637067313235325C64656666305C6465
-            666C616E67313034367B5C666F6E7474626C7B5C66305C666E696C5C66636861
-            727365743020417269616C3B7D7B5C66315C666E696C20417269616C3B7D7D0D
-            0A5C766965776B696E64345C7563315C706172645C625C667332342048697374
-            5C2766337269636F3A5C66315C7061720D0A7D0D0A00}
+            7B5C727466315C616E73695C616E7369637067313235325C64656666305C6E6F
+            7569636F6D7061745C6465666C616E67313034367B5C666F6E7474626C7B5C66
+            305C666E696C5C66636861727365743020417269616C3B7D7B5C66315C666E69
+            6C20417269616C3B7D7D0D0A7B5C2A5C67656E657261746F7220526963686564
+            32302031302E302E31393034317D5C766965776B696E64345C756331200D0A5C
+            706172645C625C6673323420486973745C2766337269636F3A5C66315C706172
+            0D0A7D0D0A00}
         end
         object Memo7: TfrxMemoView
+          AllowVectorExport = True
           Left = 292.787570000000000000
           Top = 245.433210000000000000
           Width = 343.937230000000000000
@@ -1450,11 +1550,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Style = []
           Frame.Typ = [ftTop]
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sqlListaOcorrencia."ADJUNTO"] - [sqlListaOcorrencia."MAT"]')
           ParentFont = False
         end
         object Memo8: TfrxMemoView
+          AllowVectorExport = True
           Left = 5.338590000000000000
           Top = 108.692950000000000000
           Width = 801.260360000000000000
@@ -1467,11 +1568,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             'Natureza: [sqlListaOcorrencia."NATUREZA_OCORRENCIA"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaNOME_UP: TfrxMemoView
+          AllowVectorExport = True
           Left = 167.299320000000000000
           Width = 400.630180000000000000
           Height = 18.897650000000000000
@@ -1483,11 +1586,13 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             'Unidade Penal: [sqlListaOcorrencia."NOME_UP"]')
           ParentFont = False
         end
         object sqlListaOcorrenciaDESPACHO: TfrxMemoView
+          AllowVectorExport = True
           Left = 15.118120000000000000
           Top = 306.141930000000000000
           Width = 661.417750000000000000
@@ -1501,8 +1606,9 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
+          Frame.Typ = []
           HAlign = haBlock
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Despacho: [sqlListaOcorrencia."DESPACHO"]')
           ParentFont = False
         end
@@ -1514,10 +1620,14 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
+      DoubleBuffered = False
       Height = 172.000000000000000000
+      ClientHeight = 133.000000000000000000
       Left = 265.000000000000000000
       Top = 179.000000000000000000
       Width = 421.000000000000000000
+      Scaled = True
+      ClientWidth = 405.000000000000000000
       OnShow = 'DialogPage1OnShow'
       object Label2: TfrxLabelControl
         Left = 12.000000000000000000
@@ -1530,6 +1640,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        ShowHint = True
         Caption = 'Selecione a Ocorr'#234'ncia Desejada'
         Color = 13948117
       end
@@ -1538,6 +1649,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         Top = 68.000000000000000000
         Width = 95.000000000000000000
         Height = 49.000000000000000000
+        ShowHint = True
         Caption = 'OK'
         Default = True
         ModalResult = 1
@@ -1548,6 +1660,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         Top = 35.000000000000000000
         Width = 389.000000000000000000
         Height = 21.000000000000000000
+        ShowHint = True
         Color = clWindow
         Text = 'Clique ou use setas para selecionar a Ocorr'#234'ncia'
         ItemIndex = -1

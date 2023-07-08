@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, CadastroCidade, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, Mask,
-  DBCtrls, ToolWin, Lib;
+  DBCtrls, ToolWin, Lib, System.ImageList;
 
 type
   TFrmCadastroNaturezaOcorrencia = class(TFrmCadastroCidade)

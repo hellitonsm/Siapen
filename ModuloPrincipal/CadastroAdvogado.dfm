@@ -3,35 +3,42 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
   Left = 319
   Top = 134
   Caption = 'Cadastro Advogado'
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 371
+    ExplicitHeight = 531
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 353
-      ExplicitHeight = 353
+      Height = 514
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 353
+      Top = 514
       Hints.Strings = ()
-      ExplicitTop = 353
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 665
-    ExplicitHeight = 371
+    ExplicitWidth = 821
+    ExplicitHeight = 531
+    inherited Image2: TImage
+      Width = 780
+      ExplicitWidth = 793
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 665
-      Height = 371
+      Width = 825
+      Height = 532
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 665
-      ExplicitHeight = 371
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 657
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 657
-          Height = 344
-          ExplicitWidth = 657
-          ExplicitHeight = 343
+          Width = 817
+          Height = 504
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 152
             Top = 10
@@ -330,19 +337,17 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitWidth = 657
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 670
-          ExplicitWidth = 670
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 670
-          Height = 462
-          ExplicitWidth = 670
-          ExplicitHeight = 462
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 668
-            Height = 460
+            Width = 815
+            Height = 468
             DataSource = DsConsulta
           end
         end
@@ -350,15 +355,11 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 780
-    inherited Image2: TImage
-      Width = 780
-      ExplicitWidth = 793
-    end
+    ExplicitWidth = 936
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 403
-    ExplicitWidth = 780
+    ExplicitTop = 563
+    ExplicitWidth = 936
   end
   inherited ImageListCadastro: TImageList
     Left = 648

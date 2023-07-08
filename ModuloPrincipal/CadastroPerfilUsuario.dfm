@@ -9,23 +9,23 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
   TextHeight = 13
   inherited PanelBotoes: TPanel
     Height = 600
-    ExplicitHeight = 370
+    ExplicitHeight = 599
     inherited ToolBarModeloCadastro: TToolBar
       Height = 582
-      ExplicitHeight = 352
+      ExplicitHeight = 581
     end
     inherited DBNavigator1: TDBNavigator
       Top = 582
       Enabled = False
       Hints.Strings = ()
-      ExplicitTop = 352
+      ExplicitTop = 581
     end
   end
   inherited PanelModeloCadastro: TPanel
     Width = 835
     Height = 600
-    ExplicitWidth = 661
-    ExplicitHeight = 370
+    ExplicitWidth = 831
+    ExplicitHeight = 599
     inherited Image2: TImage
       Width = 940
       ExplicitWidth = 940
@@ -34,16 +34,16 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
       Width = 835
       Height = 600
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 661
-      ExplicitHeight = 370
+      ExplicitWidth = 831
+      ExplicitHeight = 599
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 827
         ExplicitHeight = 572
         inherited PanelCadastro: TPanel
           Width = 827
           Height = 572
-          ExplicitWidth = 653
-          ExplicitHeight = 342
+          ExplicitWidth = 823
+          ExplicitHeight = 571
           object PageControlFuncionario: TPageControl
             Left = 1
             Top = 1
@@ -52,8 +52,8 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
             ActivePage = TabSheetPermissao
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 651
-            ExplicitHeight = 340
+            ExplicitWidth = 821
+            ExplicitHeight = 569
             object TabSheetPermissao: TTabSheet
               Caption = 'Permiss'#245'es do Perfil'
               ImageIndex = 2
@@ -5348,17 +5348,17 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
         ExplicitWidth = 827
         ExplicitHeight = 572
         inherited PanelLocalizaConsulta: TPanel
-          Width = 817
-          ExplicitWidth = 817
+          Width = 827
+          ExplicitWidth = 827
         end
         inherited PanelConsulta: TPanel
-          Width = 817
-          Height = 541
-          ExplicitWidth = 817
-          ExplicitHeight = 541
+          Width = 827
+          Height = 538
+          ExplicitWidth = 827
+          ExplicitHeight = 538
           inherited DBGridConsulta: TDBGrid
-            Width = 815
-            Height = 539
+            Width = 825
+            Height = 536
             DataSource = DsConsulta
           end
         end
@@ -5367,13 +5367,13 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
   end
   inherited PanelTituloModeloCadastro: TPanel
     Width = 950
-    ExplicitWidth = 776
+    ExplicitWidth = 946
   end
   inherited StatusBar1: TStatusBar
     Top = 632
     Width = 950
-    ExplicitTop = 402
-    ExplicitWidth = 776
+    ExplicitTop = 631
+    ExplicitWidth = 946
   end
   inherited ImageListCadastro: TImageList
     Left = 760

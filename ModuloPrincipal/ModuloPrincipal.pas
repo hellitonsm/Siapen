@@ -14,7 +14,7 @@ uses
   ImgList,
   DBGrids, ToolWin, FMTBcd, DB, DBClient, Provider, SqlExpr, frxDBSet,
   frxGradient, frxDock, frxDBXComponents, DBCtrls, Mask, ColorGrd,
-  System.ImageList, IniFiles,System.IOUtils;
+  System.ImageList, IniFiles,System.IOUtils, RoundedPanel;
 
 type
   TFrmModuloPrincipal = class(TForm)
@@ -314,6 +314,7 @@ type
     TimeraAtualizaRelAgendaDia: TTimer;
     TimerAtualizaRelQtdPresos: TTimer;
     CargaHorria1: TMenuItem;
+    RoundedPanel1: TRoundedPanel;
     procedure CadastrodeInternos1Click(Sender: TObject);
     procedure Cela1Click(Sender: TObject);
     procedure Galeria1Click(Sender: TObject);
@@ -473,6 +474,8 @@ type
     procedure CargaHorria1Click(Sender: TObject);
     procedure frxPreview2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormPaint(Sender: TObject);
+
 
   private
     Data1, Data2: TDateTime;
@@ -481,6 +484,9 @@ type
     procedure MontaRelProcedimentos;
     procedure MontaRelExtratoProcedimentos;
     procedure AbreAgendaOURequerimento;
+    procedure deixararredondado;
+
+   // procedure deixararrendondado;
     { Private declarations }
   public
     { Public declarations }
@@ -657,6 +663,7 @@ var
   IniFile: TIniFile;
   ConfigFilePath: string;
   WindowStateValue: Integer;
+
 begin
 
   // RadioGroupBancoDados.Visible := DirectoryExists(GLOBAL_PASTA_LOCAL);
@@ -839,6 +846,7 @@ begin
   LabelLOGIN.Caption := 'USUÁRIO: ' + LOGIN_CONECTADO + ' | ' +
     NOME_PERFILUSUARIO_LOGADO;
   LabelDatabase.Caption := DM.SQLConnect.Params.Values['Database'];
+//  LabelDatabase.Color:= ClWhite;
 
 end;
 
@@ -851,6 +859,20 @@ begin
     close;
   end;
 
+end;
+
+procedure TFrmModuloPrincipal.FormPaint(Sender: TObject);
+begin
+  {rgn := CreateRoundRectRgn(0, 0, Image1.Width, Image1.Height, RoundedPanel1.RoundedRadius, RoundedPanel1.RoundedRadius);
+  dc := GetDC(RoundedPanel1.Handle);
+  SetWindowRgn(RoundedPanel1.Handle, rgn, true);
+  ReleaseDC(RoundedPanel1.Handle, dc);
+  DeleteObject(rgn);  }
+{  rgn:=arredondar(RoundedPanel1, RoundedPanel1.RoundedRadius);
+  DeleteObject(Rgn);
+
+  rgn1:=arredondar(PanelCabecalho, 20);
+  DeleteObject(Rgn1); }
 end;
 
 procedure TFrmModuloPrincipal.FormClose(Sender: TObject;
@@ -1672,7 +1694,7 @@ procedure TFrmModuloPrincipal.FormShow(Sender: TObject);
 var
   sMensagemInteligencia: string;
 begin
-
+  deixararredondado;
   RadioGroupBancoDados.Items.Add('SPF');
   RadioGroupBancoDados.Items.Add('DF');
   RadioGroupBancoDados.Items.Add('MA');
@@ -2488,6 +2510,8 @@ begin
     FormatDateTime('dd/MM/yyy hh:mm',
     FileDateToDateTime(FileAge(Application.ExeName)));
   // Self.Caption := 'SIAPEN em Desenvolvimento';
+  //Arrendodar TPanel
+
 
 end;
 
@@ -4318,6 +4342,23 @@ end;
 procedure TFrmModuloPrincipal.frxPreview2Click(Sender: TObject);
 begin
   frxReport2.PrepareReport;
+end;
+
+procedure TFrmModuloPrincipal.deixararredondado;
+var
+  rgn: HRGN;
+begin
+   rgn := arredondar(RoundedPanel1, RoundedPanel1.RoundedRadius);
+   DeleteObject(Rgn);
+
+   rgn := arredondar(PanelCabecalho, 20);
+   DeleteObject(Rgn);
+
+   rgn := arredondar(Panel1, 20);
+   DeleteObject(Rgn);
+
+   rgn := arredondar(Pnl1, 20);
+   DeleteObject(Rgn);
 end;
 
 end.

@@ -215,7 +215,8 @@ uses
   Vcl.Styles,
   WindowsDarkMode in 'WindowsDarkMode.pas',
   mudarTema in 'mudarTema.pas',
-  atualizar in 'atualizar.pas';
+  atualizar in 'atualizar.pas',
+  RoundedPanel in 'RoundedPanel.pas';
 
 {$E exe}
 

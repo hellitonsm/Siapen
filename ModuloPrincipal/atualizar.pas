@@ -1,3 +1,9 @@
+{$IFDEF WIN32}
+{$DEFINE PLATFORM32}
+{$ENDIF}
+{$IFDEF WIN64}
+{$DEFINE PLATFORM64}
+{$ENDIF}
 unit atualizar;
 
 interface
@@ -16,43 +22,76 @@ end;
 
 procedure atualizador;
 var
-  appPath, iniFile, redePath,dbxfb: string;
+  appPath, updateFile, redePath, dbxcon, configFile, versao: string;
   configIni: TIniFile;
 
 begin
   appPath := ExtractFilePath(ParamStr(0));
-  iniFile := appPath + 'atualizacao.ini';
-  dbxfb   := appPath + 'dbxfb.dll';
+  updateFile := appPath + 'atualizacao.ini';
+  configFile := appPath + 'config.ini';
+  dbxcon := appPath + '../config/dbxconnections.ini';
   // Verificar se o arquivo atualizador.ini existe
 
-  if not FileExists(dbxfb) then
+  if FileExists(configFile) then
   begin
-    // Ler o arquivo atualizador.ini para obter o diretório na rede
-    configIni := TIniFile.Create(iniFile);
+    configIni := TIniFile.Create(configFile);
+    versao := '';
     try
-      // Obter o diretório na rede do [aplicativo] [Diretorio Aplicativo]
-      redePath := configIni.ReadString('aplicativo', 'Diretorio Aplicativo', '');
+      versao := configIni.ReadString('versao', 'versao', '');
     finally
       configIni.Free;
     end;
+  end;
 
-    // Copiar os arquivos: fbclient.dll, midas.dll, dbexpida41.dll, dbxfb.dll
-    FileCopy(redePath + 'fbclient.dll', appPath + 'fbclient.dll');
-    FileCopy(redePath + 'midas.dll', appPath + 'midas.dll');
-    //FileCopy(redePath + 'dbexpida41.dll', appPath + 'dbexpida41.dll');
-    FileCopy(redePath + 'dbxfb.dll', appPath + 'dbxfb.dll');
-    FileCopy(redePath + 'logo_panel1.jpg', appPath + 'logo_panel1.jpg');
-    FileCopy(redePath + 'Específicos\*', appPath + 'Específicos\*');
+{$IFDEF PLATFORM64}
+  if not versao.Equals('64') then
+{$ELSE PLATFORM32}
+  if not versao.Equals('32') then
+{$ENDIF}
+  begin
+    if FileExists(updateFile) then
+    begin
+      configIni := TIniFile.Create(updateFile);
+      try
+        redePath := configIni.ReadString('Aplicativo',
+          'Diretorio Aplicativo', '');
+      finally
+        configIni.Free;
+      end;
+    end;
+
+    if not redePath.Equals('') then
+    begin
+      filecopy(redePath + 'fbclient.dll', appPath + 'fbclient.dll');
+      filecopy(redePath + 'midas.dll', appPath + 'midas.dll');
+      filecopy(redePath + 'dbxfb.dll', appPath + 'dbxfb.dll');
+      filecopy(redePath + 'logo_panel1.jpg', appPath + 'logo_panel1.jpg');
+      filecopy(redePath + 'logo_fundo.jpg', appPath + 'logo_fundo.jpg');
+      filecopy(redePath + 'Específicos\*', appPath + 'Específicos\*');
+    end;
 
     // Alterar o arquivo de configuração ../config/dbxconnections.ini
-    configIni := TIniFile.Create(appPath + '../config/dbxconnections.ini');
+    configIni := TIniFile.Create(dbxcon);
     try
       // Definir [SISAP] [DriverName] Firebird
       configIni.WriteString('SISAP', 'DriverName', 'Firebird');
     finally
       configIni.Free;
     end;
+
+    configIni := TIniFile.Create(configFile);
+    try
+      // Definir versao
+{$IFDEF PLATFORM64}
+      configIni.WriteString('versao', 'versao', '64');
+{$ELSE PLATFORM32}
+      configIni.WriteString('versao', 'versao', '32');
+{$ENDIF}
+    finally
+      configIni.Free;
+    end;
   end;
+
 end;
 
 end.

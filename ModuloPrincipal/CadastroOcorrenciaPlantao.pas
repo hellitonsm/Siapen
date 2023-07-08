@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, Mask, DBCtrls, DB, DBClient, Provider,
   SqlExpr, ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls,
-  ToolWin, adpDBDateTimePicker, Buttons, frxClass, Menus;
+  ToolWin, adpDBDateTimePicker, Buttons, frxClass, Menus, System.ImageList;
 
 type
   TFrmCadastroOcorrenciaPlantao = class(TFrmModeloCadastro)
@@ -125,7 +125,7 @@ begin
   Codigo:= StrToInt(Concat(Chave1,Chave2,Ano));
   DSCadastro.DataSet.FieldByName('ID_OCORRENCIA_PLANTAO').AsInteger := Codigo;}
   GLOBAL_DATA := adpDBDateTimePicker1.Date;
-  DSCadastro.DataSet.FieldByName('ID_OCORRENCIA_PLANTAO').AsInteger := DBGeneratorOcorrencia('ID_OCORRENCIA_PLANTAO');
+  DSCadastro.DataSet.FieldByName('ID_OCORRENCIA_PLANTAO').AsInteger := DBGenerator('ID_OCORRENCIA_PLANTAO');
   DSCadastro.DataSet.FieldByName('ID_FUNCIONARIO').AsInteger := GLOBAL_ID_FUNCIONARIO;
   DSCadastro.DataSet.FieldByName('ID_UP').AsInteger := GLOBAL_ID_UP;
   DsCadastro.DataSet.FieldByName('DATA_INICIO').AsDateTime := date;
