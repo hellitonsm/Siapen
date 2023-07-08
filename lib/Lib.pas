@@ -102,6 +102,7 @@ procedure ValidaDataKeyPress(Componente: TObject; var Key: Char);
 procedure ValidaDataExit(Componente: TObject);
 procedure SoNumeros(var Key: Char);
 function RemoveAcentos(Str: string): string;
+function arredondar(APanel: TPanel; ARadius: Integer): HRGN;
 function MesclarPermissoes(Permissao1, Permissao2, TipoPermissao: string): string;
 
 const
@@ -3669,6 +3670,23 @@ begin
 
   Result := permissaoFinal;
 
+end;
+
+function arredondar(APanel: TPanel; ARadius: Integer): HRGN;
+var
+  RoundRectRgn: HRGN;
+begin
+  Result := 0;
+
+  if Assigned(APanel) then
+  begin
+    RoundRectRgn := CreateRoundRectRgn(0, 0, APanel.Width, APanel.Height, ARadius, ARadius);
+    if RoundRectRgn <> 0 then
+    begin
+      Result := RoundRectRgn;
+      SetWindowRgn(APanel.Handle, RoundRectRgn, True);
+    end;
+  end;
 end;
 
 end.
