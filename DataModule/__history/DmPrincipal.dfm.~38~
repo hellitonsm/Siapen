@@ -4,43 +4,46 @@ object DM: TDM
   Width = 798
   object SQLConnect: TSQLConnection
     ConnectionName = 'SISAP'
-    DriverName = 'Firebird'
+    DriverName = 'DevartFirebird'
     LoginPrompt = False
     Params.Strings = (
-      'DriverUnit=Data.DBXInterBase'
+      'DriverUnit=DbxDevartInterBase'
       
-        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver280.' +
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DBXCommonDriver280.' +
         'bpl'
       
-        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
-        'nd.Data.DbxCommonDriver,Version=24.0.0.0,Culture=neutral,PublicK' +
-        'eyToken=91d62ebb5b0d1b1b'
-      
-        'MetaDataPackageLoader=TDBXInterbaseMetaDataCommandFactory,DbxInt' +
-        'erBaseDriver280.bpl'
-      
-        'MetaDataAssemblyLoader=Borland.Data.TDBXInterbaseMetaDataCommand' +
-        'Factory,Borland.Data.DbxInterBaseDriver,Version=24.0.0.0,Culture' +
-        '=neutral,PublicKeyToken=91d62ebb5b0d1b1b'
-      'GetDriverFunc=getSQLDriverINTERBASE'
-      'LibraryName=dbxfb.dll'
-      'LibraryNameOsx=libsqlib.dylib'
+        'MetaDataPackageLoader=TDBXDevartInterBaseMetaDataCommandFactory,' +
+        'DbxDevartInterBaseDriver280.bpl'
+      'ProductName=DevartFirebird'
+      'GetDriverFunc=getSQLDriverFirebird'
+      'LibraryName=dbexpida41.dll'
       'VendorLib=fbclient.dll'
-      'VendorLibWin64=fbclient.dll'
-      'VendorLibOsx=libgds.dylib'
-      'BlobSize=-1'
-      'CommitRetain=False'
-      'Database=172.18.15.251:siapen'
-      'ErrorResourceFile='
-      'LocaleCode=0000'
+      'LibraryNameOsx=libdbexpida41.dylib'
+      'VendorLibOsx=libfbclient.dylib'
+      'Database=172.18.15.251:Siapen'
+      'User_Name=SYSDBA'
       'Password=masterkey'
-      'RoleName=RoleName'
-      'ServerCharSet='
       'SQLDialect=3'
-      'IsolationLevel=ReadCommitted'
-      'User_Name=sysdba'
+      'MaxBlobSize=-1'
+      'LocaleCode=0000'
+      'DevartInterBase TransIsolation=ReadCommitted'
       'WaitOnLocks=True'
-      'Trim Char=False'
+      'CharLength=0'
+      'EnableBCD=True'
+      'OptimizedNumerics=True'
+      'LongStrings=True'
+      'UseQuoteChar=False'
+      'FetchAll=False'
+      'DeferredBlobRead=False'
+      'DeferredArrayRead=False'
+      'ForceUsingDefaultPort=False'
+      'ForceUnloadClientLibrary=False'
+      'WireCompression=False'
+      'UseSSL=False'
+      'UseUnicode=True'
+      'BlobSize=-1'
+      'ErrorResourceFile='
+      'DevartFirebird TransIsolation=ReadCommitted'
       'Charset=WIN1252')
     BeforeDisconnect = SQLConnectBeforeDisconnect
     Left = 21
@@ -39741,5 +39744,51 @@ object DM: TDM
     DataSet = cdsturma
     Left = 112
     Top = 592
+  end
+  object SQLConnection1: TSQLConnection
+    DriverName = 'Interbase'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverUnit=Data.DBXInterBase'
+      
+        'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver280.' +
+        'bpl'
+      
+        'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
+        'nd.Data.DbxCommonDriver,Version=24.0.0.0,Culture=neutral,PublicK' +
+        'eyToken=91d62ebb5b0d1b1b'
+      
+        'MetaDataPackageLoader=TDBXInterbaseMetaDataCommandFactory,DbxInt' +
+        'erBaseDriver280.bpl'
+      
+        'MetaDataAssemblyLoader=Borland.Data.TDBXInterbaseMetaDataCommand' +
+        'Factory,Borland.Data.DbxInterBaseDriver,Version=24.0.0.0,Culture' +
+        '=neutral,PublicKeyToken=91d62ebb5b0d1b1b'
+      'GetDriverFunc=getSQLDriverINTERBASE'
+      'LibraryName=dbxint.dll'
+      'LibraryNameOsx=libsqlib.dylib'
+      'VendorLib=fbclient.dll'
+      'VendorLibWin64=fbclient.dll'
+      'VendorLibOsx=libgds.dylib'
+      'Database=172.18.15.251:siapen'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Role=RoleName'
+      'MaxBlobSize=-1'
+      'LocaleCode=0000'
+      'IsolationLevel=ReadCommitted'
+      'SQLDialect=3'
+      'CommitRetain=False'
+      'WaitOnLocks=True'
+      'TrimChar=False'
+      'DisplayDriverName=InterBase Server'
+      'BlobSize=-1'
+      'ErrorResourceFile='
+      'RoleName=RoleName'
+      'ServerCharSet='
+      'Trim Char=False'
+      'SEP=')
+    Left = 216
+    Top = 608
   end
 end

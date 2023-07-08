@@ -6,7 +6,8 @@ uses
   SysUtils, Classes,  DB, SqlExpr,
   IniFiles, DBClient, Forms, FMTBcd, Provider, WinSkinData, ImgList,
   Controls, Dialogs, Windows, System.ImageList,
-  Data.DBXInterbase, IPPeerClient, Data.DBXCommon, Data.DBXFirebird,System.IOUtils,ShellApi;
+  Data.DBXInterbase, IPPeerClient, Data.DBXCommon, Data.DBXFirebird,System.IOUtils,ShellApi,
+  DbxDevartInterBase;
 
 type
   TDM = class(TDataModule)

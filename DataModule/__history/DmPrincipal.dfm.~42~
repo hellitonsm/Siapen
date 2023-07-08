@@ -1,7 +1,7 @@
 object DM: TDM
   OnCreate = DataModuleCreate
   Height = 716
-  Width = 798
+  Width = 1084
   object SQLConnect: TSQLConnection
     ConnectionName = 'SISAP'
     DriverName = 'Firebird'
@@ -28152,6 +28152,7 @@ object DM: TDM
       000000000000}
   end
   object ImageListCorel1: TImageList
+    DrawingStyle = dsTransparent
     Masked = False
     Left = 872
     Top = 280
