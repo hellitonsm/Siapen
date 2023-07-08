@@ -983,8 +983,6 @@ object FrmModeloCadastro: TFrmModeloCadastro
       item
         Width = 200
       end>
-    ExplicitTop = 564
-    ExplicitWidth = 940
   end
   object ImageListCadastro: TImageList
     Height = 32

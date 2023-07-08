@@ -53,12 +53,10 @@ inherited FrmModeloInterno: TFrmModeloInterno
     end
     inherited PageControlModeloCadastro: TPageControl
       Height = 526
-      ExplicitWidth = 825
       ExplicitHeight = 525
       inherited TabSheetCadastro: TTabSheet
         ExplicitHeight = 498
         inherited PanelCadastro: TPanel
-          Width = 821
           Height = 498
           ExplicitHeight = 497
           object PageControlPrincipal: TPageControl
