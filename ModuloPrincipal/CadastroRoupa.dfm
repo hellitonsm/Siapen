@@ -1,36 +1,31 @@
 inherited FrmRoupa: TFrmRoupa
   Left = 318
   Top = 302
-  Width = 814
-  Height = 505
   Caption = 'Cadastro de Roupas '
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 584
+  ClientWidth = 944
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 427
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 409
-    end
+    Height = 533
     inherited DBNavigator1: TDBNavigator
-      Top = 409
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 691
-    Height = 427
+    Width = 829
+    Height = 533
+    inherited Image2: TImage
+      Width = 806
+      ExplicitWidth = 806
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 691
-      Height = 427
+      ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 683
-          Height = 399
           object Label3: TLabel
             Left = 152
             Top = 14
-            Width = 27
+            Width = 28
             Height = 13
             Caption = 'Data'
             Font.Charset = DEFAULT_CHARSET
@@ -43,7 +38,7 @@ inherited FrmRoupa: TFrmRoupa
           object Label4: TLabel
             Left = 8
             Top = 16
-            Width = 39
+            Width = 40
             Height = 13
             Caption = 'C'#243'digo'
             FocusControl = DBEditCodigo
@@ -57,7 +52,7 @@ inherited FrmRoupa: TFrmRoupa
           object Label7: TLabel
             Left = 8
             Top = 56
-            Width = 58
+            Width = 59
             Height = 13
             Caption = 'Prontu'#225'rio'
             Font.Charset = DEFAULT_CHARSET
@@ -70,7 +65,7 @@ inherited FrmRoupa: TFrmRoupa
           object Label6: TLabel
             Left = 101
             Top = 56
-            Width = 40
+            Width = 41
             Height = 13
             Caption = 'Interno'
             Font.Charset = DEFAULT_CHARSET
@@ -130,7 +125,7 @@ inherited FrmRoupa: TFrmRoupa
             object Label5: TLabel
               Left = 352
               Top = 12
-              Width = 31
+              Width = 32
               Height = 13
               Caption = 'Qtde.'
               Font.Charset = DEFAULT_CHARSET
@@ -143,7 +138,7 @@ inherited FrmRoupa: TFrmRoupa
             object Label2: TLabel
               Left = 6
               Top = 12
-              Width = 43
+              Width = 44
               Height = 13
               Caption = 'Roupas'
               Font.Charset = DEFAULT_CHARSET
@@ -182,9 +177,6 @@ inherited FrmRoupa: TFrmRoupa
               Font.Height = -13
               Font.Name = 'MS Sans Serif'
               Font.Style = [fsBold]
-              ParentFont = False
-              TabOrder = 2
-              OnClick = BitBtn1Click
               Glyph.Data = {
                 DE010000424DDE01000000000000760000002800000024000000120000000100
                 0400000000006801000000000000000000001000000000000000000000000000
@@ -203,6 +195,9 @@ inherited FrmRoupa: TFrmRoupa
                 333A333333333333333338330000333333333333333333333333333333333333
                 0000}
               NumGlyphs = 2
+              ParentFont = False
+              TabOrder = 2
+              OnClick = BitBtn1Click
             end
             object DBGrid1: TDBGrid
               Left = 3
@@ -261,23 +256,16 @@ inherited FrmRoupa: TFrmRoupa
       end
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
-          Width = 683
           inherited EditLocalizar: TEdit
             OnKeyUp = EditLocalizarKeyUp
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 683
-          Height = 365
-          inherited DBGridConsulta: TDBGrid
-            Width = 681
-            Height = 363
-          end
           object DBGrid2: TDBGrid
             Left = 1
             Top = 1
-            Width = 681
-            Height = 363
+            Width = 819
+            Height = 469
             Align = alClient
             DataSource = DsConsulta
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -329,14 +317,13 @@ inherited FrmRoupa: TFrmRoupa
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 806
-    inherited Image2: TImage
-      Width = 806
-    end
+    Width = 944
   end
   inherited StatusBar1: TStatusBar
-    Top = 459
-    Width = 806
+    Top = 565
+    Width = 944
+    ExplicitTop = 564
+    ExplicitWidth = 940
   end
   inherited SqlCadastro: TSQLQuery
     DataSource = DsCadastro

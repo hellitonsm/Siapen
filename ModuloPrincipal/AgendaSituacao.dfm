@@ -1,28 +1,19 @@
 inherited FrmAgendaSituacao: TFrmAgendaSituacao
   Left = 316
   Top = 175
-  Height = 488
   Caption = 'Situa'#231#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 399
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 381
-    end
     inherited DBNavigator1: TDBNavigator
-      Top = 381
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 399
     inherited PageControlModeloCadastro: TPageControl
-      Height = 399
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
           Height = 371
+          ExplicitHeight = 371
           object Label2: TLabel
             Left = 20
             Top = 18
@@ -60,18 +51,10 @@ inherited FrmAgendaSituacao: TFrmAgendaSituacao
           end
         end
       end
-      inherited TabSheetConsulta: TTabSheet
-        inherited PanelConsulta: TPanel
-          Height = 337
-          inherited DBGridConsulta: TDBGrid
-            Height = 335
-          end
-        end
-      end
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 431
+    ExplicitTop = 564
   end
   inherited SqlCadastro: TSQLQuery
     SQL.Strings = (

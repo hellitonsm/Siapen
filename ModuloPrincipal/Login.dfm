@@ -1580,7 +1580,7 @@ object TelaLogin: TTelaLogin
     Top = 70
     Width = 161
     Height = 118
-    Caption = 'Identfica'#231#227'o'
+    Caption = 'Identifica'#231#227'o'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
     Font.Height = -11

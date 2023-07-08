@@ -55,7 +55,7 @@ begin
 
       if ThemeName.Equals('Carbon') then
         RadioGroup1.ItemIndex:=0;
-      if ThemeName.Equals('Tablet Light') then
+      if ThemeName.Equals('Light') then
         RadioGroup1.ItemIndex:=1;
       if ThemeName.Equals('Sem Tema') then
         RadioGroup1.ItemIndex:=2;
@@ -75,8 +75,8 @@ procedure TFrmMudaSkin.RadioGroup1Click(Sender: TObject);
 begin
 
    case RadioGroup1.ItemIndex of
-       0: SetSpecificThemeMode(True, 'Carbon', 'Tablet Light');
-       1: SetSpecificThemeMode(False, 'Carbon', 'Tablet Light');
+       0: SetSpecificThemeMode(True, 'Carbon', 'Light');
+       1: SetSpecificThemeMode(False, 'Carbon', 'Light');
        2: SetNoTheme;
    end;
 end;

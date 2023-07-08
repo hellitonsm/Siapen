@@ -1,6 +1,5 @@
 unit mudarTema;
 
-
 interface
 
 uses
@@ -22,7 +21,8 @@ begin
   AppDataPath := GetEnvironmentVariable('APPDATA');
 
   // Crie o caminho completo para o arquivo INI
-  AppDataPath := IncludeTrailingPathDelimiter(AppDataPath) + 'Siapen\config.ini';
+  AppDataPath := IncludeTrailingPathDelimiter(AppDataPath) +
+    'Siapen\config.ini';
 
   // Verifique se o arquivo INI existe
   if FileExists(AppDataPath) then
@@ -32,7 +32,11 @@ begin
     try
       // Leia o nome do tema do arquivo INI
       ThemeName := IniFile.ReadString('Config', 'Theme', '');
-
+      if (ThemeName <> 'Carbon') and (ThemeName <> 'Light') and (ThemeName <> '')
+      then
+      begin
+        IniFile.WriteString('Config', 'Theme', '');
+      end;
       // Verifique se o tema existe antes de definir
       if ThemeName <> '' then
         TStyleManager.TrySetStyle(ThemeName)
@@ -43,7 +47,7 @@ begin
     end;
   end
   else
-      TStyleManager.TrySetStyle('Carbon');
+    TStyleManager.TrySetStyle('Carbon');
 end;
 
 procedure SaveThemeToConfig(const ThemeName: string);
@@ -73,6 +77,5 @@ begin
     IniFile.Free;
   end;
 end;
-
 
 end.
