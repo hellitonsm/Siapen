@@ -1,7 +1,7 @@
 object DM: TDM
   OnCreate = DataModuleCreate
   Height = 716
-  Width = 798
+  Width = 1084
   object SQLConnect: TSQLConnection
     ConnectionName = 'SISAP'
     DriverName = 'Firebird'
@@ -1970,9 +1970,10 @@ object DM: TDM
     Top = 528
   end
   object ImageListNetworkI: TImageList
+    Height = 15
     Left = 872
     Top = 64
-    Bitmap = {
+	Bitmap = {
       494C0101CA00CC00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003003000001002000000000000030
       0300000000000000000000000000000000000000000000000000000000000000
@@ -28152,7 +28153,7 @@ object DM: TDM
       000000000000}
   end
   object ImageListCorel1: TImageList
-    Masked = False
+    DrawingStyle = dsTransparent
     Left = 872
     Top = 280
     Bitmap = {
