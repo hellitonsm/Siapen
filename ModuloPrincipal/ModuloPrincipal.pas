@@ -667,21 +667,12 @@ var
 begin
 
   // RadioGroupBancoDados.Visible := DirectoryExists(GLOBAL_PASTA_LOCAL);
+  ConfigFilePath := GetEnvironmentVariable('APPDATA');
 
-  // if GLOBAL_UF <> '' then
-  // RadioGroupBancoDados.Items.Add(GLOBAL_UF)
-  // else
-  // RadioGroupBancoDados.Items.Add('Local');
+  // Crie o caminho completo para o arquivo INI
+  ConfigFilePath := IncludeTrailingPathDelimiter(ConfigFilePath) + 'Siapen\config.ini';
 
-  for iComp := 0 to Componentcount - 1 do
-  begin
-
-    if (Components[iComp] is TSQLQuery) then
-      TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
-
-  end;
-
- ConfigFilePath := TPath.Combine(TPath.GetLibraryPath, 'config.ini');
+ //ConfigFilePath := TPath.Combine(TPath.GetLibraryPath, 'config.ini');
 
   if FileExists(ConfigFilePath) then
   begin
@@ -702,6 +693,20 @@ begin
       IniFile.Free;
     end;
   end;
+  // if GLOBAL_UF <> '' then
+  // RadioGroupBancoDados.Items.Add(GLOBAL_UF)
+  // else
+  // RadioGroupBancoDados.Items.Add('Local');
+
+  for iComp := 0 to Componentcount - 1 do
+  begin
+
+    if (Components[iComp] is TSQLQuery) then
+      TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
+
+  end;
+
+
   // Self.Width := Screen.WorkAreaWidth;
   // Self.Height := Screen.WorkAreaHeight;
   Self.BorderIcons := [biSystemMenu, biMinimize, biMaximize];
@@ -879,8 +884,13 @@ procedure TFrmModuloPrincipal.FormClose(Sender: TObject;
   var Action: TCloseAction);
 var
   IniFile: TIniFile;
+  ConfigFilePath: String;
 begin
-  IniFile := TIniFile.create(TPath.Combine(TPath.GetLibraryPath, 'config.ini'));
+  ConfigFilePath := GetEnvironmentVariable('APPDATA');
+
+  // Crie o caminho completo para o arquivo INI
+  ConfigFilePath := IncludeTrailingPathDelimiter(ConfigFilePath) + 'Siapen\config.ini';
+  IniFile := TIniFile.create(ConfigFilePAth);
   try
     IniFile.WriteInteger('WindowState', 'State', Ord(WindowState));
     if WindowState = wsNormal then

@@ -226,28 +226,29 @@ uses
 
 var
   PastaUsuario: String;
-  SourcePath: String;
+ // SourcePath: String;
   DestinationPath: String;
-  FileName : String;
+ // FileName : String;
   IsFileFound: Boolean;
   ShortDateFormat:String;
 begin
-  PastaUsuario := GetEnvironmentVariable('userprofile');
-  Filename := 'dbxconnections.ini';
-  SourcePath := ExtractFilePath(Application.ExeName) +'..\config\'+ FileName;
-  DestinationPath := PastaUsuario + '\config\';
+  PastaUsuario := GetEnvironmentVariable('APPDATA');
+ // Filename := 'dbxconnections.ini';
+  //SourcePath := ExtractFilePath(Application.ExeName) +'..\config\'+ FileName;
+  DestinationPath := PastaUsuario + '\Siapen';
 
   if not DirectoryExists(DestinationPath) then
     CreateDir(DestinationPath);
-  DestinationPath := DestinationPath + FileName;
-  IsFileFound := FileExists(DestinationPath);
+
+  //DestinationPath := DestinationPath + FileName;
+ // IsFileFound := FileExists(DestinationPath);
 
   //Função para atualizar bibliotecas caso não tenha o arquivo dbxfb.dll na pasta do Aplicativo
 
   atualizador;
 
 
-
+ {
   if not IsFileFound then
   begin
      if FileExists(SourcePath) then
@@ -257,7 +258,7 @@ begin
         //ShowMessage(FileName + ' copiado com sucesso!');
       end;
   end;
-
+  }
   Application.Initialize;
 
   Application.UpdateFormatSettings := False;

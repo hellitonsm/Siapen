@@ -9,18 +9,23 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
   TextHeight = 13
   inherited PanelBotoes: TPanel
     Height = 571
+    ExplicitHeight = 570
     inherited ToolBarModeloCadastro: TToolBar
       Height = 553
+      ExplicitHeight = 552
     end
     inherited DBNavigator1: TDBNavigator
       Top = 553
       Hints.Strings = ()
       OnClick = DBNavigator1Click
+      ExplicitTop = 552
     end
   end
   inherited PanelModeloCadastro: TPanel
     Width = 890
     Height = 571
+    ExplicitWidth = 886
+    ExplicitHeight = 570
     inherited Image2: TImage
       Width = 941
       ExplicitWidth = 941
@@ -29,24 +34,26 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
       Width = 890
       Height = 571
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 886
+      ExplicitHeight = 570
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 882
         ExplicitHeight = 543
         inherited PanelCadastro: TPanel
           Width = 882
           Height = 543
-          ExplicitWidth = 657
-          ExplicitHeight = 343
+          ExplicitWidth = 878
+          ExplicitHeight = 542
           object PageControlFuncionario: TPageControl
             Left = 1
             Top = 1
             Width = 880
             Height = 541
-            ActivePage = TabPermissao
+            ActivePage = TabPrincipal
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 655
-            ExplicitHeight = 341
+            ExplicitWidth = 876
+            ExplicitHeight = 540
             object TabPrincipal: TTabSheet
               Caption = 'Principal'
               object Label2: TLabel
@@ -497,7 +504,7 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
                   'CHEFE DO MONITORAMENTO'
                   'CHEFE NUARQ'
                   'DIRETOR'
-                  'DIRETOR ADJUNTO'
+                  'DIRETOR EM SUBSTITUI'#199#195'O'
                   'DISCIPLINA'
                   'EDUCACAO'
                   'ENFERMAGEM'
@@ -512,6 +519,8 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
                   'RECURSOS HUMANOS'
                   'SAUDE'
                   'SERVICO SOCIAL'
+                  'SUBDIRETOR'
+                  'SUBDIRETOR EM SUBSTITUI'#199#195'O'
                   'TERAPIA OCUPACIONAL')
                 Sorted = True
                 TabOrder = 26
@@ -6258,13 +6267,13 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
         ExplicitHeight = 543
         inherited PanelLocalizaConsulta: TPanel
           Width = 882
-          ExplicitWidth = 661
+          ExplicitWidth = 882
         end
         inherited PanelConsulta: TPanel
           Width = 882
           Height = 509
-          ExplicitWidth = 661
-          ExplicitHeight = 310
+          ExplicitWidth = 882
+          ExplicitHeight = 509
           inherited DBGridConsulta: TDBGrid
             Width = 880
             Height = 507
@@ -6276,10 +6285,13 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
   end
   inherited PanelTituloModeloCadastro: TPanel
     Width = 1005
+    ExplicitWidth = 1001
   end
   inherited StatusBar1: TStatusBar
     Top = 603
     Width = 1005
+    ExplicitTop = 602
+    ExplicitWidth = 1001
   end
   inherited SqlCadastro: TSQLQuery
     Params = <

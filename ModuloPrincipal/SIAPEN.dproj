@@ -8,7 +8,7 @@
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>
         <ProjectVersion>19.5</ProjectVersion>
-        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -71,12 +71,12 @@
         <VerInfo_Locale>1046</VerInfo_Locale>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
         <DCC_S>false</DCC_S>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.3.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0</VerInfo_Keys>
-        <VerInfo_Build>6</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.3.10;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0</VerInfo_Keys>
+        <VerInfo_Build>10</VerInfo_Build>
         <DCC_UnitSearchPath>C:\Program Files\Borland\Delphi7\Lib;Z:\home\helliton\Documentos\Siapen\siapen\Componentes\Calendario;Z:\home\helliton\Documentos\Siapen\siapen\Componentes\PNG;Z:\home\helliton\Documentos\Siapen\siapen\Componentes\VCL Skin\path\d7;C:\Users\remoto\Documents\Siapen\Componentes\Calendario;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_UsePackage>vcl;rtl;vclx;vcldb;dbrtl;dbexpress;teeui;teedb;tee;ibxpress;vclie;dsnap;inet;xmlrtl;inetdbxpress;vclshlctrls;VclSmp;soaprtl;vclactnband;$(DCC_UsePackage)</DCC_UsePackage>
         <DCC_K>false</DCC_K>
-        <Custom_Styles>&quot;Tablet Light|VCLSTYLE|$(BDSCOMMONDIR)\Styles\TabletLight.vsf&quot;;Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf;Carbon|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Carbon.vsf</Custom_Styles>
+        <Custom_Styles>Windows10|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Windows10.vsf;Carbon|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Carbon.vsf;Light|VCLSTYLE|$(BDSCOMMONDIR)\Styles\Light.vsf</Custom_Styles>
         <FeatureFilesAdded>Interbase;DB2;Firebird;SQLite;&quot;Interbase;DB2;Firebird;SQLite&quot;</FeatureFilesAdded>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -84,8 +84,7 @@
         <DCC_Namespace>System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
         <Icon_MainIcon>SIAPEN_Icon.ico</Icon_MainIcon>
         <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileVersion=2.0.3.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=2.0.3.10;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
@@ -96,7 +95,7 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <Manifest_File>(None)</Manifest_File>
         <AppDPIAwarenessMode>none</AppDPIAwarenessMode>
-        <DCC_UnitSearchPath>C:\Users\remoto\Documents\Siapen\siapen\Componentes\Calendario;C:\Users\remoto\Documents\Siapen\Componentes\VCL Skin64\source;C:\Users\remoto\Documents\Siapen\Componentes\PNGEXTRA;C:\Users\remoto\Documents\Siapen\Componentes\dbxfirebird;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\LibD28x64;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\Users\remoto\Documents\Siapen\Componentes\VCL Skin64\source;C:\Users\remoto\Documents\Siapen\Componentes\PNGEXTRA;C:\Users\remoto\Documents\Siapen\Componentes\dbxfirebird;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\LibD28x64;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
@@ -106,8 +105,7 @@
         <UsePackages>true</UsePackages>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileVersion=2.0.3.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=2.0.3.10;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <DCC_UnitSearchPath>C:\Users\remoto\Documents\Siapen\siapen\Componentes\Calendario;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\ExportPack;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\ADO;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\DBX;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\IBX;C:\Users\remoto\Documents\Siapen\Componentes\VCL Skin\source;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\FastScript;C:\Users\remoto\Documents\Siapen\Componentes\PNGEXTRA;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\FastQB;C:\Users\remoto\Documents\Siapen\Componentes\dbxfirebird;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_ExeOutput>C:\Users\remoto\Documents\Siapen\siapen\Bin\</DCC_ExeOutput>
         <BT_BuildType>Debug</BT_BuildType>
@@ -128,8 +126,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
         <DCC_UnitSearchPath>C:\Users\remoto\Documents\Siapen\siapen\Componentes\Calendario;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\ExportPack;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\ADO;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\DBX;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\Source\IBX;C:\Users\remoto\Documents\Siapen\Componentes\VCL Skin\source;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\FastScript;C:\Users\remoto\Documents\Siapen\Componentes\PNGEXTRA;C:\Users\remoto\Documents\Siapen\FastReport 2022-1-3 VCL Enterprise for D11.1 and 11.1.5\FastQB;C:\Users\remoto\Documents\Siapen\Componentes\dbxfirebird;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileVersion=2.0.3.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileVersion=2.0.3.10;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductVersion=1.0.0.0;Comments=;ProgramID=com.embarcadero.$(MSBuildProjectName);FileDescription=$(MSBuildProjectName);ProductName=$(MSBuildProjectName)</VerInfo_Keys>
         <BT_BuildType>Debug</BT_BuildType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
