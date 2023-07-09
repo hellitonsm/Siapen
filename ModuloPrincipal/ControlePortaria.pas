@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloMovimentacao, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, jpeg, Menus;
+  Mask, jpeg, Menus, System.ImageList;
 
 type
   TFrmControlePortaria = class(TFrmModeloMovimentacao)
@@ -701,7 +701,10 @@ begin
               if iErro = 0 then
                 finalizaTransCadastro
               else
+              begin
+
                 CancelaTransCadastro;
+              end;
 
               EditLocalizar.Text := '';
               EditLocalizar.SetFocus;

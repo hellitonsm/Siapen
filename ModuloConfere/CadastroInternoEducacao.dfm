@@ -37,13 +37,15 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
   end
   inherited PanelModeloCadastro: TPanel
     Width = 953
-    ExplicitWidth = 825
+    ExplicitWidth = 949
     inherited Image2: TImage
       Width = 858
       ExplicitWidth = 858
     end
     inherited PageControlModeloCadastro: TPageControl
       Width = 953
+      ActivePage = TabSheetCadastro
+      ExplicitWidth = 949
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 945
         inherited PanelCadastro: TPanel
@@ -52,7 +54,7 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
           ExplicitHeight = 498
           inherited PageControlPrincipal: TPageControl
             Width = 943
-            ActivePage = TabSheet1
+            ActivePage = TabSheet3
             OnChange = PageControlPrincipalChange
             ExplicitWidth = 943
             ExplicitHeight = 496
@@ -1048,14 +1050,14 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
         ExplicitWidth = 945
         inherited PanelLocalizaConsulta: TPanel
           Width = 945
-          ExplicitWidth = 817
+          ExplicitWidth = 941
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
             Left = 648
             TabOrder = 3
-            ExplicitLeft = 520
+            ExplicitLeft = 644
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
@@ -1063,18 +1065,18 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
         end
         inherited PanelConsulta: TPanel
           Width = 945
-          ExplicitWidth = 817
-          ExplicitHeight = 455
+          ExplicitWidth = 945
+          ExplicitHeight = 456
           inherited DBGridConsulta: TDBGrid
             Width = 943
-            Height = 454
+            Height = 455
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
             Width = 943
-            Height = 454
-            PanelHeight = 90
+            Height = 455
+            PanelHeight = 91
             PanelWidth = 926
-            ExplicitWidth = 815
+            ExplicitWidth = 939
             ExplicitHeight = 453
           end
         end
@@ -1083,12 +1085,12 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
   end
   inherited PanelTituloModeloCadastro: TPanel
     Width = 1068
-    ExplicitWidth = 940
+    ExplicitWidth = 1064
   end
   inherited StatusBar1: TStatusBar
     Width = 1068
     ExplicitTop = 557
-    ExplicitWidth = 940
+    ExplicitWidth = 1064
   end
   inherited SqlCadastro: TSQLQuery
     Left = 728

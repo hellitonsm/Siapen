@@ -1,0 +1,52 @@
+A corrupção de um BD que pode ser reparada geralmente poderá ser recuperada usando o gfix ou uma combinação do gfix e do gbak. 
+
+1. Defina as seguints variáveis para tornar o processo mais fácil pois voce não terá que digitar toda hora o usuário e a senha. 
+
+SET ISC_USER=SYSDBA 
+
+SET ISC_PASSWORD=masterkey 
+
+2. Sempre tenha certeza de estar trabalhando com uma cópia do BD e não o arquivo original. Use o sistema operacional para fazer uma cópia do arquivo. Voce deve ter acesso exclusivo ao BD para fazer isso. 
+
+copy employee.gdb database.gdb 
+
+3.Agora confira se o BD está corrompido. Voce precisa ter acesso exclusivo ao BD para fazer isso, mas como voce está trabalhando com uma cópia do BD original, isso não é problema. 
+
+gfix -v -full database.gdb 
+
+4. Se o comando anterior indicou que há um problema com o BD, agora nós devemos repara-lo. 
+
+gfix -mend -full -ignore database.gdb 
+
+5.O próximo passo é conferir se o BD foi reparado. 
+
+gfix -v -full database.gdb 
+
+6. Se o BD continua com erros, voce deve fazer um backup completo e restaura-lo. No seu estilo mais simples, a linha de comando do backup pode ser : 
+
+gbak -backup -v -ignore database.gdb database.gbk 
+
+7. No entanto, se o gbak falhar porque está tendo problemas com garbage collection, então use o seguinte comando : 
+
+gbak -backup -v -ignore -garbage database.gdb database.gbk 
+
+8. Se houver corrupção nas versões dos registros de uma transação em limbo, então voce deve incluir a opção -limbo : 
+
+gbak -backup -v -ignore -garbage -limbo database.gdb database.gbk 
+
+9. Agora crie um novo BD do backup: 
+
+gbak -create -v atlas.gbk atlas_new.gdb 
+
+10. Se houver problemas durante o restore, considere usar as seguintes opções. 
+
+-inactive, se houver problemas de índices, isso irá restaurar o BD mas não irá ativar nenhum índice, depois voce poderá ativar os índices manualmente um de cada vez. 
+
+-one_at_a_time, isso irá restaurar o BD uma tabela por vez, e commitar as tabelas restauradas, se houver um problema maior pelo menos voce terá uma parte dos dados. 
+
+Se tudo isso não funcionar, mas voce ainda puder acessar o banco de dados corrompido, considere usar o QLI para mover os dados e estruturas das tabelas do BD danificado para um novo. 
+
+1. Crie um banco de dados em branco. 
+
+2. Edite o seguinte (get_tables.sql) para apontar para o BD corrompido. 
+connect database.gdb  ->  user 'sysdba' password 'masterkey; ->  select 'define relation tgt.', 

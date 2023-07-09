@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, Buttons, Menus;
+  ToolWin, Mask, Buttons, Menus, System.ImageList;
 
 type
   TFrmMudancaCela = class(TFrmModeloCadastro)
@@ -144,9 +144,8 @@ type
     procedure DBGridMudancaDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure Especifico1Click(Sender: TObject);
-    procedure DBGridConsultaDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridConsultaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DsCadastroDataChange(Sender: TObject; Field: TField);
     procedure Button2Click(Sender: TObject);
     procedure BtnTodosCelaClick(Sender: TObject);
@@ -175,7 +174,7 @@ uses DmPrincipal, CadastroDestino, Lib, CancelarSaidao,
 procedure TFrmMudancaCela.FormShow(Sender: TObject);
 begin
   inherited;
-  //  DBEditdata.Field.EditMask := '99\/99\/9999;1;_';
+  // DBEditdata.Field.EditMask := '99\/99\/9999;1;_';
 
   dm.DsUP.DataSet.Close;
   dm.DsUP.DataSet.OPEN;
@@ -219,41 +218,41 @@ begin
   if DBLookupComboBoxPavilhao.KeyValue = null then
   begin
     PageControlTransferencia.ActivePageIndex := 0;
-    ShowMessage('Informe o ' + GLOBAL_NIVEL_1 + '!');
-    if DBLookupComboBoxPavilhao.canFocus then
+    showmessage('Informe o ' + GLOBAL_NIVEL_1 + '!');
+    if DBLookupComboBoxPavilhao.CanFocus then
       DBLookupComboBoxPavilhao.SetFocus;
     Editprontuario.Text := '';
-    Exit;
+    exit;
   end;
 
   if DBLookupComboBoxGaleria.KeyValue = null then
   begin
     PageControlTransferencia.ActivePageIndex := 0;
-    ShowMessage('Informe o ' + GLOBAL_NIVEL_2 + '!');
-    if DBLookupComboBoxGaleria.canFocus then
+    showmessage('Informe o ' + GLOBAL_NIVEL_2 + '!');
+    if DBLookupComboBoxGaleria.CanFocus then
       DBLookupComboBoxGaleria.SetFocus;
     Editprontuario.Text := '';
-    Exit;
+    exit;
   end;
 
   if DBLookupComboBoxSolario.KeyValue = null then
   begin
     PageControlTransferencia.ActivePageIndex := 0;
-    ShowMessage('Informe o ' + GLOBAL_NIVEL_3 + '!');
-    if DBLookupComboBoxSolario.canFocus then
+    showmessage('Informe o ' + GLOBAL_NIVEL_3 + '!');
+    if DBLookupComboBoxSolario.CanFocus then
       DBLookupComboBoxSolario.SetFocus;
     Editprontuario.Text := '';
-    Exit;
+    exit;
   end;
 
   if DBLookupComboBoxCela.KeyValue = null then
   begin
     PageControlTransferencia.ActivePageIndex := 0;
-    ShowMessage('Informe o ' + GLOBAL_NIVEL_4 + '!');
-    if DBLookupComboBoxCela.canFocus then
+    showmessage('Informe o ' + GLOBAL_NIVEL_4 + '!');
+    if DBLookupComboBoxCela.CanFocus then
       DBLookupComboBoxCela.SetFocus;
     Editprontuario.Text := '';
-    Exit;
+    exit;
   end;
 
   result := true;
@@ -264,15 +263,16 @@ procedure TFrmMudancaCela.BtnincluirClick(Sender: TObject);
 begin
   inherited;
 
-  if not validacao then
+  if not Validacao then
     exit;
 
   if DBLookupComboBoxinterno.KeyValue > 0 then
   begin
 
-    if DsVinc_Mudanca_Cela.DataSet.Locate('ID_INTERNO', DBLookupComboBoxinterno.KeyValue, []) then
+    if DsVinc_Mudanca_Cela.DataSet.Locate('ID_INTERNO',
+      DBLookupComboBoxinterno.KeyValue, []) then
     begin
-      ShowMessage('Interno ' + DBLookupComboBoxinterno.Text + ', já lançado.');
+      showmessage('Interno ' + DBLookupComboBoxinterno.Text + ', já lançado.');
       DBLookupComboBoxinterno.KeyValue := null;
       Editprontuario.Text := '';
       if Editprontuario.CanFocus then
@@ -280,22 +280,23 @@ begin
       exit;
     end;
 
-    {Lançando Preso na tabela de transferencia}
+    { Lançando Preso na tabela de transferencia }
     DsVinc_Mudanca_Cela.DataSet.Append;
-    DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_VINC_MUDANCA_CELA').AsInteger := 0;
+    DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_VINC_MUDANCA_CELA')
+      .AsInteger := 0;
     DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_MUDANCA_CELA').AsInteger :=
       DsCadastro.DataSet.fieldbyname('ID_MUDANCA_CELA').AsInteger;
     DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_INTERNO').AsInteger :=
       DBLookupComboBoxinterno.KeyValue;
 
     DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_PAVILHAO_ANTES').AsInteger :=
-      DsInterno.DataSet.FieldByname('IDPAVILHAO').AsInteger;
+      DsInterno.DataSet.fieldbyname('IDPAVILHAO').AsInteger;
     DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_GALERIA_ANTES').AsInteger :=
-      DsInterno.DataSet.FieldByname('IDGALERIA').AsInteger;
+      DsInterno.DataSet.fieldbyname('IDGALERIA').AsInteger;
     DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_SOLARIO_ANTES').AsInteger :=
-      DsInterno.DataSet.FieldByname('IDSOLARIO').AsInteger;
+      DsInterno.DataSet.fieldbyname('IDSOLARIO').AsInteger;
     DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_CELA_ANTES').AsInteger :=
-      DsInterno.DataSet.FieldByname('IDCELA').AsInteger;
+      DsInterno.DataSet.fieldbyname('IDCELA').AsInteger;
 
     DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_PAVILHAO_NOVO').AsInteger :=
       DBLookupComboBoxPavilhao.KeyValue;
@@ -323,21 +324,23 @@ procedure TFrmMudancaCela.NovoClick(Sender: TObject);
 begin
   inherited;
   PageControlTransferencia.ActivePageIndex := 0;
-  DsCadastro.DataSet.fieldbyname('ID_MUDANCA_CELA').AsInteger := DBGenerator('ID_MUDANCA_CELA');
+  DsCadastro.DataSet.fieldbyname('ID_MUDANCA_CELA').AsInteger :=
+    DBGenerator('ID_MUDANCA_CELA');
   DsCadastro.DataSet.fieldbyname('ID_UP').AsInteger := GLOBAL_ID_UP;
-  DsCadastro.DataSet.FieldByName('DATA').AsDateTime := date;
-  DsCadastro.DataSet.FieldByName('ID_FUNCIONARIO').AsInteger := GLOBAL_ID_FUNCIONARIO;
+  DsCadastro.DataSet.fieldbyname('DATA').AsDateTime := date;
+  DsCadastro.DataSet.fieldbyname('ID_FUNCIONARIO').AsInteger :=
+    GLOBAL_ID_FUNCIONARIO;
 
 end;
 
 procedure TFrmMudancaCela.FormCreate(Sender: TObject);
 begin
   inherited;
-//  DM.cdsInterno.Close;
-//  DM.cdsInterno.Open;
+  // DM.cdsInterno.Close;
+  // DM.cdsInterno.Open;
 
   dm.DsInterno.DataSet.Close;
-  DM.SqlInterno.Params[0].Value := GLOBAL_ID_UP;
+  dm.SqlInterno.Params[0].Value := GLOBAL_ID_UP;
   dm.DsInterno.DataSet.OPEN;
 
   LabelPavilhao.Caption := GLOBAL_NIVEL_1;
@@ -345,44 +348,50 @@ begin
   LabelSolario.Caption := GLOBAL_NIVEL_3;
   LabelCela.Caption := GLOBAL_NIVEL_4;
 
-  SqlPavilhao.SQL.Text := ' select * from pavilhao where id_up=' + inttostr(GLOBAL_ID_UP) + ' order by pavilhao';
+  SqlPavilhao.SQL.Text := ' select * from pavilhao where id_up=' +
+    inttostr(GLOBAL_ID_UP) + ' order by pavilhao';
 
   DsPavilhao.DataSet.Close;
-  DsPavilhao.DataSet.Open;
+  DsPavilhao.DataSet.OPEN;
 
   DsGaleria.DataSet.Close;
-  DsGaleria.DataSet.Open;
+  DsGaleria.DataSet.OPEN;
 
   DsSolario.DataSet.Close;
-  DsSolario.DataSet.Open;
+  DsSolario.DataSet.OPEN;
 
   DsCela.DataSet.Close;
-  DsCela.DataSet.Open;
+  DsCela.DataSet.OPEN;
 
-  SqlPavAntes.SQL.Text := ' select * from pavilhao where id_up=' + inttostr(GLOBAL_ID_UP) + ' order by pavilhao';
+  SqlPavAntes.SQL.Text := ' select * from pavilhao where id_up=' +
+    inttostr(GLOBAL_ID_UP) + ' order by pavilhao';
 
   DsPavAntes.DataSet.Close;
-  DsPavAntes.DataSet.Open;
+  DsPavAntes.DataSet.OPEN;
 
   DsGalAntes.DataSet.Close;
-  DsGalAntes.DataSet.Open;
+  DsGalAntes.DataSet.OPEN;
 
   DsSolAntes.DataSet.Close;
-  DsSolAntes.DataSet.Open;
+  DsSolAntes.DataSet.OPEN;
 
   DsCelaAntes.DataSet.Close;
-  DsCelaAntes.DataSet.Open;
+  DsCelaAntes.DataSet.OPEN;
 
-  {selecionando cela virtual}
-  SQLconspadrao.sql.text := 'select * from padrao where cod_up ='
-    + qs(inttostr(global_id_up));
-  dsconspadrao.dataset.close;
-  dsconspadrao.dataset.open;
+  { selecionando cela virtual }
+  SQLconspadrao.SQL.Text := 'select * from padrao where cod_up =' +
+    qs(inttostr(GLOBAL_ID_UP));
+  Dsconspadrao.DataSet.Close;
+  Dsconspadrao.DataSet.OPEN;
 
-  DBLookupComboBoxPavilhao.KeyValue := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
-  DBLookupComboBoxGaleria.KeyValue := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
-  DBLookupComboBoxSolario.KeyValue := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
-  DBLookupComboBoxCela.KeyValue := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
+  DBLookupComboBoxPavilhao.KeyValue := Dsconspadrao.DataSet.fieldbyname
+    ('id_pavilhao').AsVariant;
+  DBLookupComboBoxGaleria.KeyValue := Dsconspadrao.DataSet.fieldbyname
+    ('id_galeria').AsVariant;
+  DBLookupComboBoxSolario.KeyValue := Dsconspadrao.DataSet.fieldbyname
+    ('id_solario').AsVariant;
+  DBLookupComboBoxCela.KeyValue := Dsconspadrao.DataSet.fieldbyname('id_cela')
+    .AsVariant;
 
   DBGridMudancaConsulta.Columns[3].Title.Caption := '<' + GLOBAL_NIVEL_1;
   DBGridMudancaConsulta.Columns[4].Title.Caption := '<' + GLOBAL_NIVEL_2;
@@ -406,91 +415,91 @@ begin
 
   SqlConsulta.Params[0].Value := GLOBAL_ID_UP;
   SqlConsulta.Params[1].Value := date;
-  DateTimePicker1.Date := date;
+  DateTimePicker1.date := date;
 
   DsConsulta.DataSet.Close;
-  DsConsulta.DataSet.Open;
+  DsConsulta.DataSet.OPEN;
 
   DsCadastro.DataSet.Close;
-  DsCadastro.DataSet.Open;
+  DsCadastro.DataSet.OPEN;
 
   DsVinc_Mudanca_Cela.DataSet.Close;
-  DsVinc_Mudanca_Cela.DataSet.Open;
+  DsVinc_Mudanca_Cela.DataSet.OPEN;
 
   PageControlTransferencia.ActivePageIndex := 0;
 
-  {Verifica as permissões que o usuário possui para esta tela
-  e habilita ou não os respectivos botões.
-  Estas verificações devem ser colocadas no final do evento FormCreate e
-  no final do evento OnDataChance do DsCadastro de cada tela.
-  Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
-  Ex. ContemValor('I', PERMISSAO_CONFERE).}
+  { Verifica as permissões que o usuário possui para esta tela
+    e habilita ou não os respectivos botões.
+    Estas verificações devem ser colocadas no final do evento FormCreate e
+    no final do evento OnDataChance do DsCadastro de cada tela.
+    Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
+    Ex. ContemValor('I', PERMISSAO_CONFERE). }
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
-    Editar.Visible := False;
-    Excluir.Visible := False;
-    Salvar.Visible := False;
+    Novo.Visible := false;
+    Editar.Visible := false;
+    Excluir.Visible := false;
+    Salvar.Visible := false;
   end;
 
-  if ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Editar.Visible := False;
-    Excluir.Visible := False;
+    Editar.Visible := false;
+    Excluir.Visible := false;
     if not Salvar.Visible then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
     if not Salvar.Enabled then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
   end;
 
-  if ContemValor('I', PERMISSAO_MUDANCACELA)
-    and ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if ContemValor('I', PERMISSAO_MUDANCACELA) and
+    ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Excluir.Visible := False;
+    Excluir.Visible := false;
   end;
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and ContemValor('E', PERMISSAO_MUDANCACELA)
-    and ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    ContemValor('E', PERMISSAO_MUDANCACELA) and
+    ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
+    Novo.Visible := false;
   end;
 
-  if ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Editar.Visible := False;
+    Editar.Visible := false;
     if not Salvar.Visible then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
     if not Salvar.Enabled then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
   end;
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
-    Editar.Visible := False;
+    Novo.Visible := false;
+    Editar.Visible := false;
     if not Salvar.Visible then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
     if not Salvar.Enabled then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
   end;
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
-    Excluir.Visible := False;
+    Novo.Visible := false;
+    Excluir.Visible := false;
   end;
 
 end;
@@ -503,26 +512,29 @@ begin
   if Editprontuario.Text <> '' then
   begin
 
-    dm.SqlExecute.sql.text := 'select id_interno, nome_interno, idpavilhao, idgaleria, idsolario, idcela, rgi from interno where rgi =' + Qs(Editprontuario.Text)
-      + ' and id_up = ' + IntToStr(GLOBAL_ID_UP) + 'and st = ''A''';
-    dm.DsExecute.dataset.close;
-    dm.DsExecute.dataset.open;
+    dm.SqlExecute.SQL.Text :=
+      'select id_interno, nome_interno, idpavilhao, idgaleria, idsolario, idcela, rgi from interno where rgi ='
+      + qs(Editprontuario.Text) + ' and id_up = ' + inttostr(GLOBAL_ID_UP) +
+      'and st = ''A''';
+    dm.DsExecute.DataSet.Close;
+    dm.DsExecute.DataSet.OPEN;
 
-    if dm.DsExecute.dataset.recordcount > 0 then
+    if dm.DsExecute.DataSet.recordcount > 0 then
     begin
-      DBLookupComboBoxinterno.KeyValue := dm.DsExecute.DataSet.fieldbyname('id_interno').AsInteger;
+      DBLookupComboBoxinterno.KeyValue := dm.DsExecute.DataSet.fieldbyname
+        ('id_interno').AsInteger;
       BtnincluirClick(nil);
-      if Editprontuario.canfocus then
+      if Editprontuario.CanFocus then
         Editprontuario.SetFocus;
     end
     else
     begin
       showmessage('Interno não Localizado!');
-      if Editprontuario.canfocus then
+      if Editprontuario.CanFocus then
         Editprontuario.SetFocus;
     end;
 
-    dm.DsExecute.dataset.close;
+    dm.DsExecute.DataSet.Close;
 
   end;
 
@@ -533,14 +545,15 @@ begin
   if not DsVinc_Mudanca_Cela.DataSet.IsEmpty then
   begin
 
-    if MessageDlg('Confirma excluir a mudança de ' + DsVinc_Mudanca_Cela.DataSet.fieldbyname('INTERNO').AsString, mtConfirmation, [mbYes,
-      mbNo], 0) = mrYes then
+    if MessageDlg('Confirma excluir a mudança de ' +
+      DsVinc_Mudanca_Cela.DataSet.fieldbyname('INTERNO').Asstring,
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     begin
       DsVinc_Mudanca_Cela.DataSet.Delete;
-      ShowMessage('Interno excluido na mudança!');
+      showmessage('Interno excluido na mudança!');
     end
     else
-      ShowMessage('Transação Cancelada!');
+      showmessage('Transação Cancelada!');
 
   end;
 end;
@@ -556,11 +569,11 @@ end;
 procedure TFrmMudancaCela.CancelarClick(Sender: TObject);
 begin
   inherited;
-  DsVinc_Mudanca_Cela.DataSet.close;
-  DsVinc_Mudanca_Cela.DataSet.open;
+  DsVinc_Mudanca_Cela.DataSet.Close;
+  DsVinc_Mudanca_Cela.DataSet.OPEN;
 
   DsCadastro.DataSet.Close;
-  DsCadastro.DataSet.Open;
+  DsCadastro.DataSet.OPEN;
 
   PageControlTransferencia.ActivePageIndex := 0;
 
@@ -576,8 +589,8 @@ begin
 
   if VarToStrDef(interno, '') <> '' then
   begin
-    DBLookupComboBoxInterno.KeyValue := interno;
-    Editprontuario.Text := DsInterno.dataset.fieldbyname('RGI').asstring;
+    DBLookupComboBoxinterno.KeyValue := interno;
+    Editprontuario.Text := DsInterno.DataSet.fieldbyname('RGI').Asstring;
 
     if Editprontuario.CanFocus then
       Editprontuario.SetFocus;
@@ -585,38 +598,53 @@ begin
 
 end;
 
-procedure TFrmMudancaCela.CdsVinc_Mudanca_CelaCalcFields(
-  DataSet: TDataSet);
+procedure TFrmMudancaCela.CdsVinc_Mudanca_CelaCalcFields(DataSet: TDataSet);
 begin
   inherited;
 
   DataSet.fieldbyname('STATUS').Asstring := '';
 
-  //ANTES
-  if DsPavAntes.DataSet.Locate('ID_PAVILHAO', DataSet.fieldbyname('ID_PAVILHAO_ANTES').AsInteger, []) then
-    DataSet.fieldbyname('PAVILHAO_ANTES').Asstring := DsPavAntes.DataSet.fieldbyname('PAVILHAO').Asstring;
+  // ANTES
+  if DsPavAntes.DataSet.Locate('ID_PAVILHAO',
+    DataSet.fieldbyname('ID_PAVILHAO_ANTES').AsInteger, []) then
+    DataSet.fieldbyname('PAVILHAO_ANTES').Asstring :=
+      DsPavAntes.DataSet.fieldbyname('PAVILHAO').Asstring;
 
-  if DsGalAntes.DataSet.Locate('ID_GALERIA', DataSet.fieldbyname('ID_GALERIA_ANTES').AsInteger, []) then
-    DataSet.fieldbyname('GALERIA_ANTES').Asstring := DsGalAntes.DataSet.fieldbyname('GALERIA').Asstring;
+  if DsGalAntes.DataSet.Locate('ID_GALERIA',
+    DataSet.fieldbyname('ID_GALERIA_ANTES').AsInteger, []) then
+    DataSet.fieldbyname('GALERIA_ANTES').Asstring :=
+      DsGalAntes.DataSet.fieldbyname('GALERIA').Asstring;
 
-  if DsSolAntes.DataSet.Locate('ID_SOLARIO', DataSet.fieldbyname('ID_SOLARIO_ANTES').AsInteger, []) then
-    DataSet.fieldbyname('SOLARIO_ANTES').Asstring := DsSolAntes.DataSet.fieldbyname('SOLARIO').Asstring;
+  if DsSolAntes.DataSet.Locate('ID_SOLARIO',
+    DataSet.fieldbyname('ID_SOLARIO_ANTES').AsInteger, []) then
+    DataSet.fieldbyname('SOLARIO_ANTES').Asstring :=
+      DsSolAntes.DataSet.fieldbyname('SOLARIO').Asstring;
 
-  if DsCelaAntes.DataSet.Locate('ID_CELA', DataSet.fieldbyname('ID_CELA_ANTES').AsInteger, []) then
-    DataSet.fieldbyname('CELA_ANTES').Asstring := DsCelaAntes.DataSet.fieldbyname('CELA').Asstring;
+  if DsCelaAntes.DataSet.Locate('ID_CELA', DataSet.fieldbyname('ID_CELA_ANTES')
+    .AsInteger, []) then
+    DataSet.fieldbyname('CELA_ANTES').Asstring :=
+      DsCelaAntes.DataSet.fieldbyname('CELA').Asstring;
 
-  //NOVO
-  if DsPavAntes.DataSet.Locate('ID_PAVILHAO', DataSet.fieldbyname('ID_PAVILHAO_NOVO').AsInteger, []) then
-    DataSet.fieldbyname('PAVILHAO_NOVO').Asstring := DsPavAntes.DataSet.fieldbyname('PAVILHAO').Asstring;
+  // NOVO
+  if DsPavAntes.DataSet.Locate('ID_PAVILHAO',
+    DataSet.fieldbyname('ID_PAVILHAO_NOVO').AsInteger, []) then
+    DataSet.fieldbyname('PAVILHAO_NOVO').Asstring :=
+      DsPavAntes.DataSet.fieldbyname('PAVILHAO').Asstring;
 
-  if DsGalAntes.DataSet.Locate('ID_GALERIA', DataSet.fieldbyname('ID_GALERIA_NOVO').AsInteger, []) then
-    DataSet.fieldbyname('GALERIA_NOVO').Asstring := DsGalAntes.DataSet.fieldbyname('GALERIA').Asstring;
+  if DsGalAntes.DataSet.Locate('ID_GALERIA',
+    DataSet.fieldbyname('ID_GALERIA_NOVO').AsInteger, []) then
+    DataSet.fieldbyname('GALERIA_NOVO').Asstring :=
+      DsGalAntes.DataSet.fieldbyname('GALERIA').Asstring;
 
-  if DsSolAntes.DataSet.Locate('ID_SOLARIO', DataSet.fieldbyname('ID_SOLARIO_NOVO').AsInteger, []) then
-    DataSet.fieldbyname('SOLARIO_NOVO').Asstring := DsSolAntes.DataSet.fieldbyname('SOLARIO').Asstring;
+  if DsSolAntes.DataSet.Locate('ID_SOLARIO',
+    DataSet.fieldbyname('ID_SOLARIO_NOVO').AsInteger, []) then
+    DataSet.fieldbyname('SOLARIO_NOVO').Asstring :=
+      DsSolAntes.DataSet.fieldbyname('SOLARIO').Asstring;
 
-  if DsCelaAntes.DataSet.Locate('ID_CELA', DataSet.fieldbyname('ID_CELA_NOVO').AsInteger, []) then
-    DataSet.fieldbyname('CELA_NOVO').Asstring := DsCelaAntes.DataSet.fieldbyname('CELA').Asstring;
+  if DsCelaAntes.DataSet.Locate('ID_CELA', DataSet.fieldbyname('ID_CELA_NOVO')
+    .AsInteger, []) then
+    DataSet.fieldbyname('CELA_NOVO').Asstring := DsCelaAntes.DataSet.fieldbyname
+      ('CELA').Asstring;
 
   if DataSet.fieldbyname('ID_PAVILHAO_NOVO').Asstring = '' then
     exit;
@@ -635,52 +663,55 @@ begin
 end;
 
 procedure TFrmMudancaCela.DBGridMudancaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   inherited;
 
   if (State <> [gdSelected]) and (State <> [gdSelected, gdFocused]) then
   begin
 
-    if (Column.Field = TDBGrid(Sender).DataSource.DataSet.FieldByName('Interno')) then
-      if TDBGrid(Sender).DataSource.DataSet.FieldByName('STATUS').AsString = '' then
+    if (Column.Field = TDBGrid(Sender).DataSource.DataSet.fieldbyname('Interno'))
+    then
+      if TDBGrid(Sender).DataSource.DataSet.fieldbyname('STATUS').Asstring = ''
+      then
         TDBGrid(Sender).Canvas.Font.Style := [fsStrikeOut];
 
     TDBGrid(Sender).Canvas.Font.Color := clBlack;
 
     if odd(TDBGrid(Sender).DataSource.DataSet.Recno) then
     begin
-      TDBGrid(Sender).Canvas.Brush.color := cl3DLight;
+      TDBGrid(Sender).Canvas.Brush.Color := cl3DLight;
     end
     else
     begin
-      TDBGrid(Sender).Canvas.Brush.color := clWhite;
+      TDBGrid(Sender).Canvas.Brush.Color := clWhite;
     end;
 
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
 
   end
   else
   begin
-    TDBGrid(Sender).Canvas.Brush.color := $00854F3F;
+    TDBGrid(Sender).Canvas.Brush.Color := $00854F3F;
     TDBGrid(Sender).Canvas.Font.Color := clWhite;
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
   end;
 
-  if (Column.Field = TDBGrid(Sender).DataSource.DataSet.FieldByName('STATUS')) then
+  if (Column.Field = TDBGrid(Sender).DataSource.DataSet.fieldbyname('STATUS'))
+  then
   begin
 
     TDBGrid(Sender).Canvas.FillRect(Rect);
 
-    DM.ImageListNetworkI.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10, Rect.Top
-      + 1, 24);
+    dm.ImageListNetworkI.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10,
+      Rect.Top + 1, 24);
 
-    if TDBGrid(Sender).DataSource.DataSet.FieldByName('STATUS').AsString = '' then
+    if TDBGrid(Sender).DataSource.DataSet.fieldbyname('STATUS').Asstring = ''
+    then
     begin
-      DM.ImageListNetworkI.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10,
+      dm.ImageListNetworkI.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10,
         Rect.Top + 1, 25);
     end;
 
@@ -700,30 +731,31 @@ begin
 
       if not Active then
       begin
-        ShowMessage('Não tem registro posicionada na tela.');
+        showmessage('Não tem registro posicionada na tela.');
         exit;
       end;
 
       if IsEmpty then
       begin
-        ShowMessage('Não tem registro posicionada na tela.');
+        showmessage('Não tem registro posicionada na tela.');
         exit;
       end;
 
-      if state in [dsinsert] then
+      if State in [dsinsert] then
       begin
-        ShowMessage('Salve este registro depois posicione nele.');
+        showmessage('Salve este registro depois posicione nele.');
         exit;
       end;
 
-      GLOBAL_ID_MUDANCA_CELA := fieldbyname('ID_MUDANCA_CELA').AsString;
+      GLOBAL_ID_MUDANCA_CELA := fieldbyname('ID_MUDANCA_CELA').Asstring;
 
     end;
 
     if not DirectoryExists(GLOBAL_PATCH_SISTEMA + '\Específicos\') then
       CreateDir(GLOBAL_PATCH_SISTEMA + '\Específicos\');
 
-    PATH_MOMENTO := GLOBAL_PATCH_SISTEMA + '\Específicos\' + trim(copy(self.Name, 4, 100)) + '\';
+    PATH_MOMENTO := GLOBAL_PATCH_SISTEMA + '\Específicos\' +
+      trim(copy(self.Name, 4, 100)) + '\';
     if not DirectoryExists(PATH_MOMENTO) then
       CreateDir(PATH_MOMENTO);
 
@@ -740,25 +772,26 @@ begin
 
 end;
 
-procedure TFrmMudancaCela.DBGridConsultaDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFrmMudancaCela.DBGridConsultaDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   inherited;
   //
-  if (Column.Field = TDBGrid(Sender).DataSource.DataSet.FieldByName('CONFIRMADA')) then
+  if (Column.Field = TDBGrid(Sender).DataSource.DataSet.fieldbyname
+    ('CONFIRMADA')) then
   begin
 
     TDBGrid(Sender).Canvas.FillRect(Rect);
 
-    if TDBGrid(Sender).DataSource.DataSet.FieldByName('CONFIRMADA').AsString = '' then
+    if TDBGrid(Sender).DataSource.DataSet.fieldbyname('CONFIRMADA').Asstring = ''
+    then
     begin
-      DM.ImageListSelecao.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10,
+      dm.ImageListSelecao.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10,
         Rect.Top + 1, 0);
     end
     else
     begin
-      DM.ImageListSelecao.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10,
+      dm.ImageListSelecao.Draw(TDBGrid(Sender).Canvas, Rect.Left + 10,
         Rect.Top + 1, 2);
     end;
 
@@ -766,8 +799,7 @@ begin
 
 end;
 
-procedure TFrmMudancaCela.DsCadastroDataChange(Sender: TObject;
-  Field: TField);
+procedure TFrmMudancaCela.DsCadastroDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
 
@@ -776,26 +808,26 @@ begin
     LabelAguardando.Visible := false;
     LabelAguardando2.Visible := false;
     Timer1.Enabled := false;
-    if not active then
+    if not Active then
       exit;
 
-    if isempty then
+    if IsEmpty then
       exit;
 
-    if not (state in [dsedit, dsinsert]) then
+    if not(State in [dsedit, dsinsert]) then
     begin
-      if DsConsulta.DataSet.FieldByName('CONFIRMADA').AsString <> 'S' then
+      if DsConsulta.DataSet.fieldbyname('CONFIRMADA').Asstring <> 'S' then
         Timer1.Enabled := true;
     end;
 
-    if state in [dsedit] then
+    if State in [dsedit] then
     begin
 
-      if DsConsulta.DataSet.FieldByName('CONFIRMADA').AsString = 'S' then
+      if DsConsulta.DataSet.fieldbyname('CONFIRMADA').Asstring = 'S' then
       begin
         Cancelar.OnClick(nil);
         TabSheetConsulta.Show;
-        ShowMessage('Transferência está com status de CONFIRMADA.');
+        showmessage('Transferência está com status de CONFIRMADA.');
         exit;
       end;
 
@@ -803,78 +835,78 @@ begin
 
   end;
 
-  {Verifica as permissões que o usuário possui para esta tela
-  e habilita ou não os respectivos botões.
-  Estas verificações devem ser colocadas no final do evento FormCreate e
-  no final do evento OnDataChance do DsCadastro de cada tela.
-  Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
-  Ex. ContemValor('I', PERMISSAO_CONFERE).}
+  { Verifica as permissões que o usuário possui para esta tela
+    e habilita ou não os respectivos botões.
+    Estas verificações devem ser colocadas no final do evento FormCreate e
+    no final do evento OnDataChance do DsCadastro de cada tela.
+    Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
+    Ex. ContemValor('I', PERMISSAO_CONFERE). }
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
-    Editar.Visible := False;
-    Excluir.Visible := False;
-    Salvar.Visible := False;
+    Novo.Visible := false;
+    Editar.Visible := false;
+    Excluir.Visible := false;
+    Salvar.Visible := false;
   end;
 
-  if ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Editar.Visible := False;
-    Excluir.Visible := False;
+    Editar.Visible := false;
+    Excluir.Visible := false;
     if not Salvar.Visible then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
     if not Salvar.Enabled then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
   end;
 
-  if ContemValor('I', PERMISSAO_MUDANCACELA)
-    and ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if ContemValor('I', PERMISSAO_MUDANCACELA) and
+    ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Excluir.Visible := False;
+    Excluir.Visible := false;
   end;
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and ContemValor('E', PERMISSAO_MUDANCACELA)
-    and ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    ContemValor('E', PERMISSAO_MUDANCACELA) and
+    ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
+    Novo.Visible := false;
   end;
 
-  if ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Editar.Visible := False;
+    Editar.Visible := false;
     if not Salvar.Visible then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
     if not Salvar.Enabled then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
   end;
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and not ContemValor('E', PERMISSAO_MUDANCACELA)
-    and ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    not ContemValor('E', PERMISSAO_MUDANCACELA) and
+    ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
-    Editar.Visible := False;
+    Novo.Visible := false;
+    Editar.Visible := false;
     if not Salvar.Visible then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
     if not Salvar.Enabled then
-      Salvar.Visible := False;
+      Salvar.Visible := false;
   end;
 
-  if not ContemValor('I', PERMISSAO_MUDANCACELA)
-    and ContemValor('E', PERMISSAO_MUDANCACELA)
-    and not ContemValor('D', PERMISSAO_MUDANCACELA) then
+  if not ContemValor('I', PERMISSAO_MUDANCACELA) and
+    ContemValor('E', PERMISSAO_MUDANCACELA) and
+    not ContemValor('D', PERMISSAO_MUDANCACELA) then
   begin
-    Novo.Visible := False;
-    Excluir.Visible := False;
+    Novo.Visible := false;
+    Excluir.Visible := false;
   end;
 
 end;
@@ -883,10 +915,10 @@ procedure TFrmMudancaCela.Button2Click(Sender: TObject);
 begin
   inherited;
   SqlConsulta.Params[0].Value := GLOBAL_ID_UP;
-  SqlConsulta.Params[1].Value := DateTimePicker1.Date;
+  SqlConsulta.Params[1].Value := DateTimePicker1.date;
 
   DsConsulta.DataSet.Close;
-  DsConsulta.DataSet.Open;
+  DsConsulta.DataSet.OPEN;
 
 end;
 
@@ -894,7 +926,7 @@ procedure TFrmMudancaCela.BtnTodosCelaClick(Sender: TObject);
 begin
   inherited;
   //
-  if not validacao then
+  if not Validacao then
     exit;
   try
     FrmFiltroCela := TFrmFiltroCela.Create(Application);
@@ -913,12 +945,13 @@ begin
       with DSCelaInterno.DataSet do
       begin
         Close;
-        Open;
+        OPEN;
         first;
         while not eof do
         begin
-          Editprontuario.Text := fieldbyname('rgi').AsString;
-          DBLookupComboBoxinterno.KeyValue := fieldbyname('id_interno').AsString;
+          Editprontuario.Text := fieldbyname('rgi').Asstring;
+          DBLookupComboBoxinterno.KeyValue := fieldbyname('id_interno')
+            .Asstring;
           BtnincluirClick(nil);
           next;
         end;
@@ -933,11 +966,11 @@ procedure TFrmMudancaCela.Liberar1Click(Sender: TObject);
 begin
   inherited;
 
-  if DsConsulta.DataSet.FieldByName('CONFIRMADA').AsString = 'S' then
+  if DsConsulta.DataSet.fieldbyname('CONFIRMADA').Asstring = 'S' then
   begin
     Cancelar.OnClick(nil);
     TabSheetConsulta.Show;
-    ShowMessage('Transferência está com status de CONFIRMADA.');
+    showmessage('Transferência está com status de CONFIRMADA.');
     exit;
   end;
 
@@ -946,10 +979,10 @@ begin
   Screen.Cursor := crSQLWait;
   IniciaTransMovimento;
   try
-    DsCadastro.DataSet.Edit;
-    DsCadastro.DataSet.FieldByName('CONFIRMADA').AsString := 'S';
-    //    DsCadastro.DataSet.FieldByName('DATA').AsDateTime := now;
-    DsCadastro.DataSet.post;
+    // DsCadastro.DataSet.Edit;
+    // DsCadastro.DataSet.FieldByName('CONFIRMADA').AsString := 'S';
+    // DsCadastro.DataSet.FieldByName('DATA').AsDateTime := now;
+    // DsCadastro.DataSet.post;
 
     FrmAguarde := TFrmAguarde.Create(Application);
     with FrmAguarde do
@@ -959,51 +992,58 @@ begin
       LblAguarde.Font.Color := clBlack;
       LblAguarde.Anchors := [akLeft, akBottom];
       ProgressBarAguarde.Visible := true;
-      ProgressBarAguarde.Max := DsVinc_Mudanca_Cela.DataSet.RecordCount;
+      ProgressBarAguarde.Max := DsVinc_Mudanca_Cela.DataSet.recordcount;
       ProgressBarAguarde.Position := 0;
       LblAguarde.Visible := true;
       Show;
-      frmaguarde.Refresh;
+      FrmAguarde.Refresh;
       with DsVinc_Mudanca_Cela.DataSet do
       begin
         first;
         while not eof do
         begin
-          {lANÇANDO A SAIDA DO INTERNO NO HISTÓRICO}
+          { lANÇANDO A SAIDA DO INTERNO NO HISTÓRICO }
           DSHISTORICO_interno.DataSet.Append;
-          DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+          DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno')
+            .AsInteger := 0;
           DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
             fieldbyname('id_interno').AsInteger;
-          DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsString := DBEditdata.text;
-          DSHISTORICO_interno.DataSet.fieldbyname('descricao').AsString := 'Mudança de Cela: ' +
-            DBLookupComboBoxorigem.Text + ', Motivo: ' +
-            DBMemo1.Text +
-            ', Origem: ' +
-            fieldbyname('PAVILHAO_ANTES').asstring + '/' +
-            fieldbyname('GALERIA_ANTES').asstring + '/' +
-            fieldbyname('SOLARIO_ANTES').asstring + '/' +
-            fieldbyname('CELA_ANTES').asstring +
-            ', Destino: ' +
-            fieldbyname('PAVILHAO_NOVO').asstring + '/' +
-            fieldbyname('GALERIA_NOVO').asstring + '/' +
-            fieldbyname('SOLARIO_NOVO').asstring + '/' +
-            fieldbyname('CELA_NOVO').asstring +
-            ', Conforme Documento: ' + DBEditDoc.Text + '.';
-          DSHISTORICO_interno.DataSet.fieldbyname('status').AsString := 'M';
-          DSHISTORICO_interno.DataSet.fieldbyname('motivo_saida').AsString := 'Mudança de Cela';
-          DSHISTORICO_interno.DataSet.fieldbyname('IDUP').AsInteger := DBLookupComboBoxorigem.KeyValue;
+          DSHISTORICO_interno.DataSet.fieldbyname('data_hora').Asstring :=
+            DBEditdata.Text;
+          DSHISTORICO_interno.DataSet.fieldbyname('descricao').Asstring :=
+            'Mudança de Cela: ' + DBLookupComboBoxorigem.Text + ', Motivo: ' +
+            DBMemo1.Text + ', Origem: ' + fieldbyname('PAVILHAO_ANTES').Asstring
+            + '/' + fieldbyname('GALERIA_ANTES').Asstring + '/' +
+            fieldbyname('SOLARIO_ANTES').Asstring + '/' +
+            fieldbyname('CELA_ANTES').Asstring + ', Destino: ' +
+            fieldbyname('PAVILHAO_NOVO').Asstring + '/' +
+            fieldbyname('GALERIA_NOVO').Asstring + '/' +
+            fieldbyname('SOLARIO_NOVO').Asstring + '/' +
+            fieldbyname('CELA_NOVO').Asstring + ', Conforme Documento: ' +
+            DBEditDoc.Text + '.';
+          DSHISTORICO_interno.DataSet.fieldbyname('status').Asstring := 'M';
+          DSHISTORICO_interno.DataSet.fieldbyname('motivo_saida').Asstring :=
+            'Mudança de Cela';
+          DSHISTORICO_interno.DataSet.fieldbyname('IDUP').AsInteger :=
+            DBLookupComboBoxorigem.KeyValue;
           DSHISTORICO_interno.DataSet.Post;
+          { ATUALIZANDO A CELA CADASTRO DO INTERNO }
+          dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' + 'idpavilhao=' +
+            fieldbyname('ID_PAVILHAO_NOVO').Asstring + ',idgaleria=' +
+            fieldbyname('ID_GALERIA_NOVO').Asstring + ',idsolario=' +
+            fieldbyname('ID_SOLARIO_NOVO').Asstring + ',idcela=' +
+            fieldbyname('ID_CELA_NOVO').Asstring + ',id_up=' +
+            inttostr(GLOBAL_ID_UP) + ' WHERE ID_INTERNO = ' +
+            fieldbyname('id_interno').Asstring);
 
-          dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' +
-            'idpavilhao=' + Fieldbyname('ID_PAVILHAO_NOVO').AsString +
-            ',idgaleria=' + Fieldbyname('ID_GALERIA_NOVO').AsString +
-            ',idsolario=' + Fieldbyname('ID_SOLARIO_NOVO').AsString +
-            ',idcela=' + Fieldbyname('ID_CELA_NOVO').AsString +
-            ',id_up=' + inttostr(GLOBAL_ID_UP) +
-            ' WHERE ID_INTERNO = ' + fieldbyname('id_interno').Asstring);
-          ProgressBarAguarde.Position := recno;
-          LblAguarde.Caption := inttostr(recno) + ' de ' + inttostr(recordcount);
-          lblaguarde.repaint;
+          { DEIXANDO A TRANSFERENCIA CONFIRMADA }
+          dm.SQLConnect.ExecuteDirect(' UPDATE MUDANCA_CELA a ' +
+            'SET a.CONFIRMADA = ''S'' ' + 'WHERE ' + 'a.ID_MUDANCA_CELA = ' +
+            DsCadastro.DataSet.fieldbyname('ID_MUDANCA_CELA').Asstring);
+          ProgressBarAguarde.Position := Recno;
+          LblAguarde.Caption := inttostr(Recno) + ' de ' +
+            inttostr(recordcount);
+          LblAguarde.repaint;
           Application.ProcessMessages;
 
           next;
@@ -1013,7 +1053,7 @@ begin
       LblAguarde.Caption := 'Salvando... aguarde.';
       Application.ProcessMessages;
       CDSHISTORICO_interno.ApplyUpdates(-1);
-      CdsCadastro.ApplyUpdates(-1);
+      //CdsCadastro.ApplyUpdates(-1);
     end;
 
     FinalizaTransMovimento;
@@ -1021,19 +1061,21 @@ begin
 
     PageControlModeloCadastro.ActivePageIndex := 1;
 
-    FrmAguarde.close;
+    FrmAguarde.Close;
     FreeAndNil(FrmAguarde);
-    dsconsulta.dataset.close;
-    dsconsulta.dataset.open;
-    ShowMessage('Registro Salvo com Sucesso!');
+    DsConsulta.DataSet.Close;
+    DsConsulta.DataSet.OPEN;
+    DsCadastro.DataSet.Close;
+    DsCadastro.DataSet.OPEN;
+    showmessage('Registro Salvo com Sucesso!');
 
   except
     on e: Exception do
     begin
-      FrmAguarde.close;
+      FrmAguarde.Close;
       FreeAndNil(FrmAguarde);
       CancelaTransMovimento;
-      ShowMessage('Inconsistência nos dados:' + TrataExceptionErro(e.Message));
+      showmessage('Inconsistência nos dados:' + TrataExceptionErro(e.Message));
 
     end;
   end;
@@ -1064,13 +1106,13 @@ end;
 procedure TFrmMudancaCela.SalvarClick(Sender: TObject);
 begin
   inherited;
-//
+  //
 
 end;
 
 procedure TFrmMudancaCela.PageControlModeloCadastroChange(Sender: TObject);
 begin
-  //inherited;
+  // inherited;
   if PageControlModeloCadastro.ActivePageIndex = 1 then
   begin
     CancelarClick(nil);
@@ -1078,4 +1120,3 @@ begin
 end;
 
 end.
-

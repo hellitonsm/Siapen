@@ -1,0 +1,19 @@
+Emploing the directions: 
+     
+	rebuild vclskin within ide and  install, you can see three unit, TSkinData, TSkinStore , TSkinCaption at VCLSKIN Components
+	please places a TSkincaption to a form which has contained a TSkindata component, set TSkincaption active property to true if your main form have not contain a TSkinCaption.
+	vclSkin has become retail's version already when the patch opens,the patch support developments have dymatic open when application running. 
+	note: this patch have worked fine with TNT Unicode Controls components.
+
+	Add support skin have transparency when SkinAlpha > 0.
+
+
+
+
+
+	Please put derivation show clearly if you want transmit this patch.
+
+maotpo@126.com
+QQ: 378453102
+
+

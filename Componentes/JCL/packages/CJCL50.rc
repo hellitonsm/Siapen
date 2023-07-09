@@ -1,0 +1,29 @@
+1 VERSIONINFO
+FILEVERSION 1,20,1,779
+PRODUCTVERSION 1,20,1,779
+FILEFLAGSMASK 0x3FL
+FILEFLAGS 0x20L
+FILEOS 0x40004L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+         BLOCK "040904E4"
+         BEGIN
+              VALUE "CompanyName", "Project JEDI\0"
+              VALUE "FileDescription", "C5 package for JCL\0"
+              VALUE "FileVersion", "1.20.1.779\0"
+              VALUE "InternalName", "CJCL50\0"
+              VALUE "LegalCopyright", "Copyright (C) 1999, 2002 Project JEDI\0"
+              VALUE "OriginalFilename", "CJCL50.bpk\0"
+              VALUE "ProductName", "Jedi Code Library\0"
+              VALUE "ProductVersion", "1.20.1.779 Release 1.20\0"
+              VALUE "SpecialBuild", "for C++Builder 5\0"
+         END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+         VALUE "Translation", 0x0409, 1252
+    END
+END

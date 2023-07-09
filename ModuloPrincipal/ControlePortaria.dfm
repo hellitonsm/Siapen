@@ -1,53 +1,68 @@
 inherited FrmControlePortaria: TFrmControlePortaria
   Left = 645
   Top = 222
-  Width = 849
-  Height = 665
   Caption = 'Controle Portaria'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 548
+  ClientWidth = 810
+  ExplicitWidth = 822
+  ExplicitHeight = 586
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 841
+    Width = 810
     Height = 89
+    ExplicitWidth = 695
+    ExplicitHeight = 89
     inherited ToolBarModeloCadastro: TToolBar
       Top = 42
-      Width = 841
+      Width = 810
       Height = 47
-      ButtonWidth = 189
+      ButtonWidth = 185
+      ExplicitTop = 42
+      ExplicitHeight = 47
       inherited Novo: TToolButton
         Caption = '&Cadastrar'
+        ExplicitWidth = 185
       end
       inherited Editar: TToolButton
-        Left = 190
+        Left = 186
         AllowAllUp = True
         AutoSize = True
         Caption = '&Alterar'
+        ExplicitLeft = 186
+        ExplicitWidth = 77
       end
       inherited Cancelar: TToolButton
-        Left = 267
+        Left = 263
         AllowAllUp = True
         AutoSize = True
+        ExplicitLeft = 263
+        ExplicitWidth = 95
       end
       inherited Salvar: TToolButton
-        Left = 362
+        Left = 358
         AllowAllUp = True
         AutoSize = True
+        ExplicitLeft = 358
+        ExplicitWidth = 77
       end
       inherited Excluir: TToolButton
-        Left = 439
+        Left = 435
         AllowAllUp = True
         AutoSize = True
         Visible = False
+        ExplicitLeft = 435
+        ExplicitWidth = 78
       end
       inherited Fechar: TToolButton
-        Left = 517
+        Left = 513
         AllowAllUp = True
         AutoSize = True
+        ExplicitLeft = 513
+        ExplicitWidth = 80
       end
       object ToolButtonmovimentar: TToolButton
-        Left = 597
-        Top = 2
+        Left = 593
+        Top = 0
         AllowAllUp = True
         AutoSize = True
         Caption = '&Inserir / Salvar Movimenta'#231#227'o'
@@ -56,20 +71,26 @@ inherited FrmControlePortaria: TFrmControlePortaria
       end
     end
     inherited PanelLocalizaConsulta: TPanel
-      Width = 841
+      Width = 810
       Height = 41
+      ExplicitWidth = 695
+      ExplicitHeight = 41
       inherited Label1: TLabel
         Left = 7
         Top = 14
-        Width = 55
+        Width = 56
         Font.Style = [fsBold]
         ParentFont = False
+        ExplicitLeft = 7
+        ExplicitTop = 14
+        ExplicitWidth = 56
       end
       inherited EditLocalizar: TEdit
         Left = 312
-        Width = 521
-        Height = 31
+        Width = 490
         OnChange = EditLocalizarChange
+        ExplicitLeft = 312
+        ExplicitWidth = 375
       end
       object RadioGroupPessoa: TRadioGroup
         Left = 64
@@ -89,15 +110,20 @@ inherited FrmControlePortaria: TFrmControlePortaria
   end
   inherited PanelModeloCadastro: TPanel
     Top = 89
-    Width = 841
-    Height = 530
+    Width = 810
+    Height = 440
+    ExplicitTop = 89
+    ExplicitHeight = 352
     inherited PageControlModeloCadastro: TPageControl
-      Width = 841
+      Width = 810
       Height = 217
       ActivePage = TabSheetAdvogado
       OnChange = PageControlModeloCadastroChange
+      ExplicitHeight = 217
       inherited TabSheetCadastro: TTabSheet
         Caption = 'Indiv'#237'duos'
+        ExplicitWidth = 802
+        ExplicitHeight = 189
         object Label18: TLabel
           Left = 8
           Top = 8
@@ -693,13 +719,17 @@ inherited FrmControlePortaria: TFrmControlePortaria
     end
     inherited PageControlConsulta: TPageControl
       Top = 217
-      Width = 841
-      Height = 313
+      Width = 810
+      Height = 223
+      ExplicitTop = 217
+      ExplicitHeight = 135
       inherited TabSheetConsulta: TTabSheet
         Caption = 'Indiv'#237'duos em movimento'
+        ExplicitWidth = 802
+        ExplicitHeight = 195
         inherited DBGridConsulta: TDBGrid
-          Width = 833
-          Height = 285
+          Width = 802
+          Height = 195
           DataSource = dsGrid
           Columns = <
             item
@@ -751,9 +781,11 @@ inherited FrmControlePortaria: TFrmControlePortaria
       end
       inherited TabSheetMovimentacao: TTabSheet
         Caption = 'Advogados em movimento'
+        ExplicitWidth = 802
+        ExplicitHeight = 195
         inherited DBGrid1: TDBGrid
-          Width = 825
-          Height = 274
+          Width = 802
+          Height = 195
           DataSource = DsConsulta
         end
       end
@@ -772,8 +804,8 @@ inherited FrmControlePortaria: TFrmControlePortaria
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 619
-    Width = 841
+    Top = 529
+    Width = 810
   end
   inherited ImageListCadastro: TImageList
     Left = 624

@@ -2,7 +2,13 @@
 *.dcu
 #ignore DDP
 *.ddp
+#ignore ~DDP
+*.~ddp
 #ignore ~pas
 *.~pas
 #ignore ~dfm
 *.~dfm
+#ignore exe
+*.exe
+#ignore 
+*.bpl

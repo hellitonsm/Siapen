@@ -1,0 +1,18 @@
+The demo directory have a demo for hidden TSkinData and patch
+and not need adding any TWinskin* into main form unit
+
+// the program code and idea had provide by  "CoolSlob" <coolslob@163.com>, so thanks a lot
+
+ Usage:
+  Call initskin function when Form foundation and transfers form.handle as paramter to initskin,
+  initskin function have use only one time,
+  then set default skiin by seskinfile function when the form showing or creating.
+
+  After  completes initskin, according to needs change or replaces skin by SetSkinFile funciton which needs also may found skin tabulates,
+  how ones has customer owner chooses
+
+  Concludes:
+  When form Query close transfers UnLoadAll to bleeds off skin which founds by initskin function
+
+
+maotpo@126.com

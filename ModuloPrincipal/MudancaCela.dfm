@@ -1,82 +1,121 @@
 inherited FrmMudancaCela: TFrmMudancaCela
   Left = 189
   Top = 30
-  Width = 910
-  Height = 642
   Caption = 'Mudan'#231'a de Cela'
+  ClientWidth = 909
   Menu = MainMenu1
-  OldCreateOrder = True
   WindowState = wsMaximized
-  PixelsPerInch = 96
+  ExplicitWidth = 921
+  ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 894
+    Width = 909
     Height = 40
     Align = alTop
+    ExplicitWidth = 905
+    ExplicitHeight = 40
     inherited ToolBarModeloCadastro: TToolBar
-      Width = 814
+      Width = 829
       Height = 40
+      ButtonWidth = 115
+      ExplicitWidth = 825
+      ExplicitHeight = 40
       inherited Novo: TToolButton
         Wrap = False
+        ExplicitWidth = 115
       end
       inherited Editar: TToolButton
-        Left = 113
+        Left = 121
         Top = 0
         Wrap = False
+        ExplicitLeft = 121
+        ExplicitTop = 0
+        ExplicitWidth = 115
       end
       inherited Cancelar: TToolButton
-        Left = 220
+        Left = 236
         Top = 0
         Wrap = False
+        ExplicitLeft = 236
+        ExplicitTop = 0
+        ExplicitWidth = 115
       end
       inherited Salvar: TToolButton
-        Left = 327
+        Left = 351
         Top = 0
         Wrap = False
+        ExplicitLeft = 351
+        ExplicitTop = 0
+        ExplicitWidth = 115
       end
       inherited Excluir: TToolButton
-        Left = 434
+        Left = 466
         Top = 0
         Wrap = False
+        ExplicitLeft = 466
+        ExplicitTop = 0
+        ExplicitWidth = 115
       end
       inherited Fechar: TToolButton
-        Left = 541
+        Left = 581
         Top = 0
+        ExplicitLeft = 581
+        ExplicitTop = 0
+        ExplicitWidth = 115
       end
       object ConfirmaMudanca: TToolButton
-        Left = 648
+        Left = 696
         Top = 0
-        Caption = 'Confirma'
+        Caption = 'Confirmar'
         ImageIndex = 39
         OnClick = ConfirmaMudancaClick
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Left = 814
+      Left = 829
       Top = 0
       Width = 80
       Height = 40
       DataSource = DsConsulta
       Align = alRight
       Hints.Strings = ()
+      ExplicitLeft = 825
+      ExplicitTop = 0
+      ExplicitWidth = 80
+      ExplicitHeight = 40
     end
   end
   inherited PanelModeloCadastro: TPanel
     Left = 0
     Top = 72
-    Width = 894
+    Width = 909
     Height = 493
-    inherited PageControlModeloCadastro: TPageControl
+    ExplicitLeft = 0
+    ExplicitTop = 72
+    ExplicitWidth = 905
+    ExplicitHeight = 492
+    inherited Image2: TImage
       Width = 894
+      ExplicitWidth = 894
+    end
+    inherited PageControlModeloCadastro: TPageControl
+      Width = 909
       Height = 493
+      ActivePage = TabSheetCadastro
+      ExplicitWidth = 905
+      ExplicitHeight = 492
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 901
+        ExplicitHeight = 465
         inherited PanelCadastro: TPanel
-          Width = 886
+          Width = 901
           Height = 465
+          ExplicitWidth = 901
+          ExplicitHeight = 465
           object PageControlTransferencia: TPageControl
             Left = 1
             Top = 1
-            Width = 884
+            Width = 899
             Height = 463
             ActivePage = TabSheetTransferencia
             Align = alClient
@@ -198,9 +237,9 @@ inherited FrmMudancaCela: TFrmMudancaCela
                 Height = 21
                 DataField = 'TIPO_DOCUMENTO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'N'#227'o Informado'
+                  'CI'
                   'Alvar'#225
                   'Carta Livramento'
                   'Memorando'
@@ -440,9 +479,13 @@ inherited FrmMudancaCela: TFrmMudancaCela
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 901
+        ExplicitHeight = 465
         inherited PanelLocalizaConsulta: TPanel
-          Width = 886
+          Width = 901
           Height = 73
+          ExplicitWidth = 897
+          ExplicitHeight = 73
           inherited Label1: TLabel
             Visible = False
           end
@@ -474,8 +517,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
             Top = 40
             Width = 113
             Height = 21
-            Date = 41070.024699270830000000
-            Time = 41070.024699270830000000
+            Date = 41070.000000000000000000
+            Time = 0.024699270827113650
             TabOrder = 1
           end
           object Button2: TButton
@@ -490,10 +533,13 @@ inherited FrmMudancaCela: TFrmMudancaCela
         end
         inherited PanelConsulta: TPanel
           Top = 73
-          Width = 886
+          Width = 901
           Height = 392
+          ExplicitTop = 73
+          ExplicitWidth = 897
+          ExplicitHeight = 391
           inherited DBGridConsulta: TDBGrid
-            Width = 884
+            Width = 899
             Height = 214
             DataSource = DsConsulta
             PopupMenu = PopupMenuLiberar
@@ -558,7 +604,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
           object DBGridMudancaConsulta: TDBGrid
             Left = 1
             Top = 215
-            Width = 884
+            Width = 899
             Height = 176
             Align = alBottom
             DataSource = DsVinc_Mudanca_Cela
@@ -648,14 +694,13 @@ inherited FrmMudancaCela: TFrmMudancaCela
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 894
-    inherited Image2: TImage
-      Width = 894
-    end
+    Width = 909
+    ExplicitWidth = 905
   end
   inherited StatusBar1: TStatusBar
-    Top = 565
-    Width = 894
+    Width = 909
+    ExplicitTop = 564
+    ExplicitWidth = 905
   end
   inherited ImageListCadastro: TImageList
     Left = 832
@@ -966,6 +1011,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Top = 32
   end
   object DsConsulta: TDataSource
+    AutoEdit = False
     DataSet = CdsConsulta
     OnDataChange = DsCadastroDataChange
     Left = 756

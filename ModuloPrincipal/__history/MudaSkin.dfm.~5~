@@ -1,0 +1,38 @@
+object FrmMudaSkin: TFrmMudaSkin
+  Left = 237
+  Top = 143
+  BiDiMode = bdLeftToRight
+  Caption = 'VclSkin'
+  ClientHeight = 320
+  ClientWidth = 463
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  ParentBiDiMode = False
+  Position = poScreenCenter
+  ShowHint = True
+  TextHeight = 13
+  object Button1: TButton
+    Left = 121
+    Top = 40
+    Width = 177
+    Height = 25
+    Caption = 'Verificar modo do Sistema'
+    TabOrder = 0
+  end
+  object RadioGroup1: TRadioGroup
+    Left = 24
+    Top = 88
+    Width = 409
+    Height = 137
+    Caption = 'Definir Tema'
+    ItemIndex = 1
+    Items.Strings = (
+      'Escuro'
+      'Claro')
+    TabOrder = 1
+  end
+end

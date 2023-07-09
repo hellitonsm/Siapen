@@ -1,0 +1,24 @@
+这是一个利用 TSkinCaption 如何彻底隐藏 TSkin* 及其补丁的范例
+在窗体主应用中无需加入任何 TWinSkin* 即可实现窗体 Skin。
+
+// 程序原代码和创意由网友 "CoolSlob" <coolslob@163.com> 提供，在此特别感谢
+
+{
+  使用方法；
+
+  在 Form 创建时调用 initskin(handle), initskin 只需调用一次
+  在 initskin 之后或者是 show 时由 SetSkinFile 设置缺省的 skin
+
+  如何更换 skin :
+  当完成 initskin 后，根据需要由 SetSkinFile　加载所需要的 skin
+  也可以创建 skin 列表，有客户自己选择
+
+  如何收尾：
+  在 Query form close 时调用 UnLoadAll 释放掉由 initskin 创建的 skin
+
+ }
+
+
+maotpo@126.com
+QQ: 378453102 (欢迎交流)
+QQ群：10310017(欢迎交流)

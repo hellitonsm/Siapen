@@ -1,0 +1,75 @@
+unit mudarTema;
+
+
+interface
+
+uses
+  System.SysUtils, Winapi.ShellAPI, Vcl.Themes, IniFiles;
+
+procedure SetVCLThemeFromConfig;
+procedure SaveThemeToConfig(const ThemeName: string);
+
+implementation
+
+procedure SetVCLThemeFromConfig;
+var
+  AppDataPath: string;
+  IniFile: TIniFile;
+  ThemeName: string;
+begin
+  // Obtenha o caminho para o diretório AppData do usuário
+  AppDataPath := GetEnvironmentVariable('APPDATA');
+
+  // Crie o caminho completo para o arquivo INI
+  AppDataPath := IncludeTrailingPathDelimiter(AppDataPath) + 'Siapen\config.ini';
+
+  // Verifique se o arquivo INI existe
+  if FileExists(AppDataPath) then
+  begin
+    // Crie um objeto TIniFile apontando para o arquivo INI
+    IniFile := TIniFile.Create(AppDataPath);
+    try
+      // Leia o nome do tema do arquivo INI
+      ThemeName := IniFile.ReadString('Config', 'Theme', '');
+
+      // Verifique se o tema existe antes de definir
+      if TStyleManager.IsValidStyle(ThemeName) then
+        TStyleManager.TrySetStyle(ThemeName, False)
+      else
+        TStyleManager.SetStyle('Windows10');
+    finally
+      IniFile.Free;
+    end;
+  end;
+end;
+
+procedure SaveThemeToConfig(const ThemeName: string);
+var
+  AppDataPath: string;
+  IniFile: TIniFile;
+begin
+  // Obtenha o caminho para o diretório AppData do usuário
+  AppDataPath := GetEnvironmentVariable('APPDATA');
+
+  // Crie o caminho completo para o diretório do arquivo INI
+  AppDataPath := IncludeTrailingPathDelimiter(AppDataPath) + 'Siapen';
+
+  // Verifique se o diretório não existe e crie-o, se necessário
+  if not DirectoryExists(AppDataPath) then
+    ForceDirectories(AppDataPath);
+
+  // Crie o caminho completo para o arquivo INI
+  AppDataPath := IncludeTrailingPathDelimiter(AppDataPath) + 'config.ini';
+
+  // Crie um objeto TIniFile apontando para o arquivo INI
+  IniFile := TIniFile.Create(AppDataPath);
+  try
+    // Escreva o nome do tema no arquivo INI
+    IniFile.WriteString('Config', 'Theme', ThemeName);
+  finally
+    IniFile.Free;
+  end;
+end;
+
+
+end.
