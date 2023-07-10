@@ -1,0 +1,17 @@
+Boas Pessoal...
+
+Aqui fica um pequeno tutorial de como instalar este novo componente...
+
+1-> Abrir o delphi
+2-> Ir ao Menu Component
+3-> Clicar em Install Componet
+4-> No Campo "Unit File name" Clicar em Browse
+5-> Procurar o ficheiro "pngextra.pas" dentro da pasta que extrairam
+6-> Clicar em OK
+7-> depois em "Yes"
+7-> depois "OK" dinovo
+7-> feche o delphi e clique em ok dinovo.fim da instalação
+
+
+Espero que tenha ajudado...
+

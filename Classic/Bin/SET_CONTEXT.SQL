@@ -1,0 +1,8 @@
+CREATE PROCEDURE SET_CONTEXT (
+    id_funcionario integer)
+as
+begin
+
+  RDB$SET_CONTEXT('USER_TRANSACTION', 'ID_FUNCIONARIO', ID_FUNCIONARIO);
+
+end
