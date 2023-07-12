@@ -14,8 +14,7 @@ uses
   ImgList,
   DBGrids, ToolWin, FMTBcd, DB, DBClient, Provider, SqlExpr, frxDBSet,
   frxGradient, frxDock, frxDBXComponents, DBCtrls, Mask, ColorGrd,
-  System.ImageList, IniFiles, System.IOUtils, RoundedPanel, progresso,
-  Threading;
+  System.ImageList, IniFiles,System.IOUtils, RoundedPanel;
 
 type
   TFrmModuloPrincipal = class(TForm)
@@ -316,7 +315,6 @@ type
     TimerAtualizaRelQtdPresos: TTimer;
     CargaHorria1: TMenuItem;
     RoundedPanel1: TRoundedPanel;
-    verlogs: TButton;
     procedure CadastrodeInternos1Click(Sender: TObject);
     procedure Cela1Click(Sender: TObject);
     procedure Galeria1Click(Sender: TObject);
@@ -477,20 +475,18 @@ type
     procedure frxPreview2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormPaint(Sender: TObject);
-    procedure verlogsClick(Sender: TObject);
+
 
   private
     Data1, Data2: TDateTime;
-    FormProgresso: TFormProgresso;
     procedure MudarComEnter(var Msg: TMsg; var Handled: Boolean);
     procedure BuscaOcorrencia;
     procedure MontaRelProcedimentos;
     procedure MontaRelExtratoProcedimentos;
     procedure AbreAgendaOURequerimento;
     procedure deixararredondado;
-    procedure atualizarprogressbar;
 
-    // procedure deixararrendondado;
+   // procedure deixararrendondado;
     { Private declarations }
   public
     { Public declarations }
@@ -674,10 +670,9 @@ begin
   ConfigFilePath := GetEnvironmentVariable('APPDATA');
 
   // Crie o caminho completo para o arquivo INI
-  ConfigFilePath := IncludeTrailingPathDelimiter(ConfigFilePath) +
-    'Siapen\config.ini';
+  ConfigFilePath := IncludeTrailingPathDelimiter(ConfigFilePath) + 'Siapen\config.ini';
 
-  // ConfigFilePath := TPath.Combine(TPath.GetLibraryPath, 'config.ini');
+ //ConfigFilePath := TPath.Combine(TPath.GetLibraryPath, 'config.ini');
 
   if FileExists(ConfigFilePath) then
   begin
@@ -710,6 +705,7 @@ begin
       TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
 
   end;
+
 
   // Self.Width := Screen.WorkAreaWidth;
   // Self.Height := Screen.WorkAreaHeight;
@@ -855,7 +851,7 @@ begin
   LabelLOGIN.Caption := 'USUÁRIO: ' + LOGIN_CONECTADO + ' | ' +
     NOME_PERFILUSUARIO_LOGADO;
   LabelDatabase.Caption := DM.SQLConnect.Params.Values['Database'];
-  // LabelDatabase.Color:= ClWhite;
+//  LabelDatabase.Color:= ClWhite;
 
 end;
 
@@ -872,16 +868,16 @@ end;
 
 procedure TFrmModuloPrincipal.FormPaint(Sender: TObject);
 begin
-  { rgn := CreateRoundRectRgn(0, 0, Image1.Width, Image1.Height, RoundedPanel1.RoundedRadius, RoundedPanel1.RoundedRadius);
-    dc := GetDC(RoundedPanel1.Handle);
-    SetWindowRgn(RoundedPanel1.Handle, rgn, true);
-    ReleaseDC(RoundedPanel1.Handle, dc);
-    DeleteObject(rgn); }
-  { rgn:=arredondar(RoundedPanel1, RoundedPanel1.RoundedRadius);
-    DeleteObject(Rgn);
+  {rgn := CreateRoundRectRgn(0, 0, Image1.Width, Image1.Height, RoundedPanel1.RoundedRadius, RoundedPanel1.RoundedRadius);
+  dc := GetDC(RoundedPanel1.Handle);
+  SetWindowRgn(RoundedPanel1.Handle, rgn, true);
+  ReleaseDC(RoundedPanel1.Handle, dc);
+  DeleteObject(rgn);  }
+{  rgn:=arredondar(RoundedPanel1, RoundedPanel1.RoundedRadius);
+  DeleteObject(Rgn);
 
-    rgn1:=arredondar(PanelCabecalho, 20);
-    DeleteObject(Rgn1); }
+  rgn1:=arredondar(PanelCabecalho, 20);
+  DeleteObject(Rgn1); }
 end;
 
 procedure TFrmModuloPrincipal.FormClose(Sender: TObject;
@@ -893,9 +889,8 @@ begin
   ConfigFilePath := GetEnvironmentVariable('APPDATA');
 
   // Crie o caminho completo para o arquivo INI
-  ConfigFilePath := IncludeTrailingPathDelimiter(ConfigFilePath) +
-    'Siapen\config.ini';
-  IniFile := TIniFile.create(ConfigFilePath);
+  ConfigFilePath := IncludeTrailingPathDelimiter(ConfigFilePath) + 'Siapen\config.ini';
+  IniFile := TIniFile.create(ConfigFilePAth);
   try
     IniFile.WriteInteger('WindowState', 'State', Ord(WindowState));
     if WindowState = wsNormal then
@@ -2471,13 +2466,13 @@ begin
   DsFuncionario.DataSet.close;
   DsFuncionario.DataSet.Open;
 
-  { SqlUltimosLogs.Sql.Text :=
+  SqlUltimosLogs.Sql.Text :=
     'select first 100 l.data_hora,l.script_reversao,l.ip_maquina from log_sistema l '
     + ' where l.id_funcionario=' + IntToStr(GLOBAL_ID_FUNCIONARIO) +
     ' order by l.data_hora desc';
-  }
+
   DsUltimosLogs.DataSet.close;
-  // DsUltimosLogs.DataSet.Open;
+  DsUltimosLogs.DataSet.Open;
   {
     if PERMISSAO_INTELIGENCIA <> '' then
     begin
@@ -2525,7 +2520,8 @@ begin
     FormatDateTime('dd/MM/yyy hh:mm',
     FileDateToDateTime(FileAge(Application.ExeName)));
   // Self.Caption := 'SIAPEN em Desenvolvimento';
-  // Arrendodar TPanel
+  //Arrendodar TPanel
+
 
 end;
 
@@ -3404,55 +3400,6 @@ begin
   FrmVara := TFrmVara.create(Application);
   FrmVara.ShowModal;
   FreeAndNil(FrmVara);
-
-end;
-
-procedure TFrmModuloPrincipal.verlogsClick(Sender: TObject);
-var
-  i: Integer;
-  Task: ITask;
-begin
-  SqlUltimosLogs.Sql.Text :=
-    'select first 100 l.data_hora,l.script_reversao,l.ip_maquina from log_sistema l '
-    + ' where l.id_funcionario=' + IntToStr(GLOBAL_ID_FUNCIONARIO) +
-    ' order by l.data_hora desc';
-
-  // atualizarprogressbar;
-  atualizarprogressbar;
-  // Task.Start;
-  // DsUltimosLogs.DataSet.Open;
-  // DBGrid1.Visible := True;
-  /// Tasks[0] := TTask.create(atualizarprogressbar);
-
-  // Tasks[1] := TTask.create(DsUltimosLogs.DataSet.Open);
-
-
-  // Tasks[0].Start;
-
-  // Tasks[1].Start;
-
-
-  // TTask.WaitForAll(Tasks);
-
-  // dbgrid1.Visible := true;
-
-  // Chame o método AtualizarProgresso para atualizar o ProgressBar na thread principal
-
-  {
-    DsUltimosLogs.DataSet.Open;
-    FormProgresso.ProgressBar1.Max:=100;
-    for i := 0 to 100 do
-    begin
-    FormProgresso.ProgressBar1.Position :=
-    FormProgresso.ProgressBar1.Position + 1;
-    sleep(200);
-    end; }
-  // DsUltimosLogs.DataSet.Open;
-
-
-
-
-  // Associe o manipulador de eventos personalizado ao evento OnDataChange do DataSource
 
 end;
 
@@ -4411,85 +4358,17 @@ procedure TFrmModuloPrincipal.deixararredondado;
 var
   rgn: HRGN;
 begin
-  rgn := arredondar(RoundedPanel1, RoundedPanel1.RoundedRadius);
-  DeleteObject(rgn);
+   rgn := arredondar(RoundedPanel1, RoundedPanel1.RoundedRadius);
+   DeleteObject(Rgn);
 
-  rgn := arredondar(PanelCabecalho, 20);
-  DeleteObject(rgn);
+   rgn := arredondar(PanelCabecalho, 20);
+   DeleteObject(Rgn);
 
-  rgn := arredondar(Panel1, 20);
-  DeleteObject(rgn);
+   rgn := arredondar(Panel1, 20);
+   DeleteObject(Rgn);
 
-  rgn := arredondar(pnl1, 20);
-  DeleteObject(rgn);
+   rgn := arredondar(Pnl1, 20);
+   DeleteObject(Rgn);
 end;
 
-procedure TFrmModuloPrincipal.atualizarprogressbar;
-var
-  FormProgresso: TFormProgresso;
-  i: Integer;
-begin
-  FormProgresso := TFormProgresso.create(Application);
-  FormProgresso.Label1.Caption:='Carregando...';
-  FormProgresso.Label1.Visible:=True;
-  FormProgresso.Show;
-  try
-    if not DBGrid1.Visible then
-    begin
-      FormProgresso.StartThreads(DsUltimosLogs);
-      // DsUltimosLogs.DataSet.Open;
-      // Após abrir o dataset, faça o que for necessário
-      Application.ProcessMessages;
-      for i := 0 to 50 do
-      begin
-        FormProgresso.ProgressBar1.Position := i;
-        Sleep(100);
-      end;
-      while not FormProgresso.ThreadsCompleted do
-        Application.ProcessMessages;
-      for i := 5 to 10 do
-      begin
-        FormProgresso.ProgressBar1.Position := (i*5)+50;
-        Sleep(10);
-      end;
-      DBGrid1.Visible := True;
-    end;
-
-  finally
-    FormProgresso.Free;
-  end;
-end;
-
-{
-  // Atualize o ProgressBar com base no progresso da thread de progresso
-  if Assigned
-  (ProgressoThread) then
-  ProgressBar.Position := ProgressoThread.getposition;
-
-  // Verifique se o carregamento do banco de dados foi concluído
-  if Assigned(ProgressoThread) and not ProgressoThread.getactivedatasource then
-  begin
-  // Aguarde a conclusão da thread de progresso
-  ProgressoThread.WaitFor;
-
-  // Libere a memória da thread de progresso
-  FreeAndNil(FormProgresso);
-  FreeAndNil(ProgressoThread);
-
-  // Faça o que for necessário após o carregamento do banco de dados
-  // ...
-
-  DBGrid1.Visible := True;
-  ShowMessage('Banco de dados carregado!');
-  end
-  else
-  // Chame novamente o método AtualizarProgresso após um pequeno intervalo de tempo
-  if Assigned(FormProgresso) then
-  TThread.Queue(nil,
-  procedure
-  begin
-  AtualizarProgresso(FormProgresso.ProgressBar1); // Pass the required parameter here
-  end);
-  end;
-}
 end.
