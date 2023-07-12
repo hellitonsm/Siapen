@@ -12,3 +12,7 @@
 *.exe
 #ignore 
 *.bpl
+# matches any files and directories with the name _history
+__history
+#ignore 
+*.indentcache

@@ -4,8 +4,8 @@ object FrmAguarde: TFrmAguarde
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Aguarde...'
-  ClientHeight = 90
-  ClientWidth = 257
+  ClientHeight = 89
+  ClientWidth = 253
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -259,13 +259,11 @@ object FrmAguarde: TFrmAguarde
   end
   object ProgressBarAguarde: TProgressBar
     Left = 0
-    Top = 69
-    Width = 257
+    Top = 68
+    Width = 253
     Height = 21
     Align = alBottom
     Smooth = True
     TabOrder = 0
-    ExplicitTop = 68
-    ExplicitWidth = 253
   end
 end
