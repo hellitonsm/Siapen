@@ -216,7 +216,8 @@ uses
   WindowsDarkMode in 'WindowsDarkMode.pas',
   mudarTema in 'mudarTema.pas',
   atualizar in 'atualizar.pas',
-  RoundedPanel in 'RoundedPanel.pas';
+  RoundedPanel in 'RoundedPanel.pas',
+  Progresso in '..\Templete\Progresso.pas';
 
 {$E exe}
 
