@@ -5,7 +5,7 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
   VertScrollBar.Visible = False
   Caption = 'SIAPEN'
   ClientHeight = 703
-  ClientWidth = 1020
+  ClientWidth = 1000
   Color = clNone
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,7 +27,7 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
   object Bevel1: TBevel
     Left = 0
     Top = 0
-    Width = 1020
+    Width = 1000
     Height = 703
     Align = alClient
     ExplicitWidth = 1163
@@ -5571,7 +5571,7 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
     Top = 144
     Width = 1001
     Height = 558
-    ActivePage = Identificacao
+    ActivePage = TabSheet2
     Images = ImageList1
     MultiLine = True
     TabOrder = 1
@@ -10810,7 +10810,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
-            Visible = False
             OnDrawColumnCell = DBGrid1DrawColumnCell
             Columns = <
               item
@@ -10849,15 +10848,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
             TabOrder = 0
           end
         end
-      end
-      object verlogs: TButton
-        Left = 168
-        Top = 185
-        Width = 129
-        Height = 25
-        Caption = 'Exibir logs de acesso'
-        TabOrder = 2
-        OnClick = verlogsClick
       end
     end
   end

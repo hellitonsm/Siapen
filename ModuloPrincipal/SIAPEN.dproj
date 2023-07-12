@@ -745,7 +745,6 @@
         <DCCReference Include="mudarTema.pas"/>
         <DCCReference Include="atualizar.pas"/>
         <DCCReference Include="RoundedPanel.pas"/>
-        <DCCReference Include="..\Templete\Progresso.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
