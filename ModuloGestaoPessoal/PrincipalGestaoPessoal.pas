@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, WinSkinStore, WinSkinData, ComCtrls, ImgList, ExtCtrls,
+  Dialogs, Menus, ComCtrls, ImgList, ExtCtrls,
   Grids, DBGrids, jpeg, FMTBcd, DB, DBClient, Provider, SqlExpr, StdCtrls,
-  DBCtrls, ToolWin, frxClass, frxPreview, Buttons;
+  DBCtrls, ToolWin, frxClass, frxPreview, Buttons, System.ImageList;
 
 type
   TFrmPrincipalGestaoPessoal = class(TForm)

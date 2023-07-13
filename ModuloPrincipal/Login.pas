@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DBCtrls, FMTBcd, DB, DBClient, Provider, SqlExpr, Grids,
-  WinSkinStore, WinSkinData, Buttons, ExtCtrls, jpeg, styles, System.ImageList,
+   Buttons, ExtCtrls, jpeg, styles, System.ImageList,
   Vcl.ImgList, Vcl.Imaging.pngimage;
 
 type

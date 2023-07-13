@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, jpeg, ExtCtrls, Buttons, StdCtrls, WinSkinStore,
-  WinSkinData,
+  Dialogs, Menus, jpeg, ExtCtrls, Buttons, StdCtrls,
   Grids,
   frxClass,
   frxPreview,

@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes,  DB, SqlExpr,
-  IniFiles, DBClient, Forms, FMTBcd, Provider, WinSkinData, ImgList,
+  IniFiles, DBClient, Forms, FMTBcd, Provider, ImgList,
   Controls, Dialogs, Windows, System.ImageList,
   Data.DBXInterbase, IPPeerClient, Data.DBXCommon, Data.DBXFirebird,System.IOUtils,ShellApi;
 

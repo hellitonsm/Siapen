@@ -1,5 +1,4 @@
 object DM2: TDM2
-  OldCreateOrder = False
   Height = 407
   Width = 753
   object SQLConnect: TSQLConnection

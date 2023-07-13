@@ -54,8 +54,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
         inherited PanelCadastro: TPanel
           Width = 801
           Height = 545
-          ExplicitWidth = 801
-          ExplicitHeight = 545
+          ExplicitWidth = 797
+          ExplicitHeight = 544
           object SpeedButton3: TSpeedButton
             Left = 288
             Top = 136
@@ -78,6 +78,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
             TabOrder = 0
             TabWidth = 80
             OnChange = PageControlInternoChange
+            ExplicitWidth = 795
+            ExplicitHeight = 542
             object TabSheet1: TTabSheet
               Caption = 'Principal'
               object Label2: TLabel
@@ -1769,6 +1771,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
                 Top = 33
                 Width = 91
                 Height = 21
+                Date = 45117.000000000000000000
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -2191,7 +2194,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
             Left = 1
             Top = 1
             Width = 799
-            Height = 509
+            Height = 505
             Align = alClient
             DataSource = DsConsulta
             PanelHeight = 101

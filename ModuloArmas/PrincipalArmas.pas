@@ -4,8 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Menus, WinSkinStore, WinSkinData, ComCtrls, ImgList, ExtCtrls,
-  Grids, DBGrids, jpeg, FMTBcd, DB, DBClient, Provider, SqlExpr, StdCtrls;
+  Dialogs, Menus, ComCtrls, ImgList, ExtCtrls,
+  Grids, DBGrids, jpeg, FMTBcd, DB, DBClient, Provider, SqlExpr, StdCtrls,
+  System.ImageList;
 
 type
   TFrmPrincipalArmas = class(TForm)
