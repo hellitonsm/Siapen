@@ -18,6 +18,8 @@ __history
 *.indentcache
 #ignore config
 config
+#ignore Config
+Config
 #ignore bin
 bin
 #ignore bin64
