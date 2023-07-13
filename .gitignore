@@ -16,3 +16,14 @@
 __history
 #ignore 
 *.indentcache
+#ignore config
+config
+#ignore bin
+bin
+#ignore bin64
+bin64
+#ignore log
+log
+*.log
+#ignore debug
+debug

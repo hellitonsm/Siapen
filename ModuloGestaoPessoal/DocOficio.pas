@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls, lib,
-  ToolWin, Mask, adpDBDateTimePicker;
+  ToolWin, Mask, adpDBDateTimePicker, System.ImageList;
 
 type
   TfrmDocOficio = class(TFrmModeloCadastro)

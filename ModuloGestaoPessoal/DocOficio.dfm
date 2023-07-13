@@ -1,34 +1,25 @@
 inherited frmDocOficio: TfrmDocOficio
   Left = 267
   Top = 96
-  Width = 869
-  Height = 546
   Caption = 'Cadastro de Oficios'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 457
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 439
-    end
     inherited DBNavigator1: TDBNavigator
-      Top = 439
       Hints.Strings = ()
       OnClick = DBNavigator1Click
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 738
-    Height = 457
+    inherited Image2: TImage
+      Width = 853
+      ExplicitWidth = 853
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 738
-      Height = 457
       ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 730
-          Height = 429
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 28
             Top = 24
@@ -156,8 +147,8 @@ inherited frmDocOficio: TfrmDocOficio
             Top = 128
             Width = 145
             Height = 21
-            Date = 41059.664939444450000000
-            Time = 41059.664939444450000000
+            Date = 41059.000000000000000000
+            Time = 0.664939444446645200
             TabOrder = 7
             DataField = 'DOC_DATA'
             DataSource = DsCadastro
@@ -168,8 +159,8 @@ inherited frmDocOficio: TfrmDocOficio
             Top = 128
             Width = 153
             Height = 21
-            Date = 41060.665054814820000000
-            Time = 41060.665054814820000000
+            Date = 41060.000000000000000000
+            Time = 0.665054814817267500
             TabOrder = 8
             DataField = 'DOC_DATA_CGICR'
             DataSource = DsCadastro
@@ -208,8 +199,8 @@ inherited frmDocOficio: TfrmDocOficio
             Top = 128
             Width = 145
             Height = 21
-            Date = 41062.473274340280000000
-            Time = 41062.473274340280000000
+            Date = 41062.000000000000000000
+            Time = 0.473274340278294400
             TabOrder = 9
             DataField = 'DOC_AUTORIZADOR_DOC_DATA'
             DataSource = DsCadastro
@@ -280,10 +271,13 @@ inherited frmDocOficio: TfrmDocOficio
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
           Width = 730
+          ExplicitWidth = 730
         end
         inherited PanelConsulta: TPanel
           Width = 730
           Height = 395
+          ExplicitWidth = 730
+          ExplicitHeight = 395
           inherited DBGridConsulta: TDBGrid
             Width = 728
             Height = 393
@@ -389,18 +383,15 @@ inherited frmDocOficio: TfrmDocOficio
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 853
-    inherited Image2: TImage
-      Width = 853
-    end
     inherited LabelTitulo: TLabel
       Width = 165
       Caption = 'Cadastro de Oficios'
+      ExplicitWidth = 165
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 489
-    Width = 853
+    ExplicitTop = 564
+    ExplicitWidth = 940
   end
   inherited SqlCadastro: TSQLQuery
     SQL.Strings = (
