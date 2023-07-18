@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, jpeg, ExtCtrls, Menus, ImgList, FMTBcd, DB, DBClient,
-  Provider, SqlExpr, dbcgrids, DBCtrls, Buttons, ComCtrls, Grids, DBGrids, ShellAPI;
+  Provider, SqlExpr, dbcgrids, DBCtrls, Buttons, ComCtrls, Grids, DBGrids, ShellAPI,
+  System.ImageList;
 
 type
   TFrmPrincipalMonitoramento = class(TForm)
@@ -128,7 +129,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(Self.Caption)
+      DM.SQLConnect.Execsql('update conexao set tela_momento = ' + qs(Self.Caption)
         + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
     except
     end;

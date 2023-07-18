@@ -3,7 +3,7 @@
         <ProjectGuid>{B4B48B80-F553-4D96-8361-DF375ED55B4B}</ProjectGuid>
         <MainSource>SIAPEN.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
         <FrameworkType>VCL</FrameworkType>

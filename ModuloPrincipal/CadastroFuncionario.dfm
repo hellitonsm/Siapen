@@ -463,6 +463,7 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
                   'PSIQUIATRA'
                   'GERENTE DE MANUTEN'#199#195'O'
                   'PEDAGOGO'
+                  'ENFERMEIRO'
                   'NUTRICIONISTA')
                 TabOrder = 23
                 OnKeyPress = DBComboBox2KeyPress

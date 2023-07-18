@@ -1,37 +1,58 @@
 inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
   Left = 432
   Top = 264
-  Width = 877
-  Height = 639
   Caption = 'Cadastro de Trabalho'
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 535
+    ExplicitHeight = 535
     inherited ToolBarModeloCadastro: TToolBar
       Height = 517
+      ExplicitHeight = 517
+      inherited Novo: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Editar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Cancelar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Salvar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Excluir: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Fechar: TToolButton
+        ExplicitWidth = 99
+      end
     end
     inherited DBNavigator1: TDBNavigator
       Top = 517
       Hints.Strings = ()
+      ExplicitTop = 517
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 754
-    Height = 535
+    ExplicitWidth = 754
+    ExplicitHeight = 535
+    inherited Image2: TImage
+      Width = 869
+      ExplicitWidth = 869
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 754
-      Height = 535
+      ExplicitWidth = 754
+      ExplicitHeight = 535
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 746
-          Height = 507
+          ExplicitWidth = 746
+          ExplicitHeight = 507
           inherited PageControlPrincipal: TPageControl
-            Width = 744
-            Height = 505
             ActivePage = TabSheet1
             TabWidth = 100
             OnChange = PageControlPrincipalChange
+            ExplicitWidth = 744
+            ExplicitHeight = 505
             object TabSheet1: TTabSheet
               Caption = 'Trabalho'
               ImageIndex = 2
@@ -39,11 +60,13 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
               object PageControl2: TPageControl
                 Left = 0
                 Top = 0
-                Width = 736
-                Height = 477
+                Width = 811
+                Height = 468
                 ActivePage = TabSheet5
                 Align = alClient
                 TabOrder = 0
+                ExplicitWidth = 736
+                ExplicitHeight = 477
                 object TabSheet5: TTabSheet
                   Caption = 'Lan'#231'amento'
                   object Label48: TLabel
@@ -273,7 +296,6 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                     Height = 21
                     DataField = 'TIPO_ATIVIDADE'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'INTERNA'
                       'EXTERNA')
@@ -649,12 +671,14 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
               object PageControl1: TPageControl
                 Left = 0
                 Top = 0
-                Width = 736
-                Height = 477
+                Width = 811
+                Height = 468
                 ActivePage = TabSheet4
                 Align = alClient
                 TabOrder = 0
                 TabWidth = 100
+                ExplicitWidth = 736
+                ExplicitHeight = 477
                 object TabSheet4: TTabSheet
                   Caption = 'Dados'
                   object Label16: TLabel
@@ -769,8 +793,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                     Top = 32
                     Width = 97
                     Height = 21
-                    Date = 41058.395588993060000000
-                    Time = 41058.395588993060000000
+                    Date = 41058.000000000000000000
+                    Time = 0.395588993058481700
                     TabOrder = 0
                   end
                   object DateTimePickerdatafinal: TDateTimePicker
@@ -778,8 +802,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                     Top = 32
                     Width = 97
                     Height = 21
-                    Date = 41058.395606736110000000
-                    Time = 41058.395606736110000000
+                    Date = 41058.000000000000000000
+                    Time = 0.395606736106856300
                     TabOrder = 1
                   end
                   object Editdiastrabalhado: TEdit
@@ -857,8 +881,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                     Top = 32
                     Width = 121
                     Height = 21
-                    Date = 41058.395588993060000000
-                    Time = 41058.395588993060000000
+                    Date = 41058.000000000000000000
+                    Time = 0.395588993058481700
                     TabOrder = 0
                   end
                   object BitBtn1: TBitBtn
@@ -872,9 +896,6 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                     Font.Height = -13
                     Font.Name = 'MS Sans Serif'
                     Font.Style = [fsBold]
-                    ParentFont = False
-                    TabOrder = 2
-                    OnClick = BitBtn1Click
                     Glyph.Data = {
                       DE010000424DDE01000000000000760000002800000024000000120000000100
                       0400000000006801000000000000000000001000000000000000000000000000
@@ -893,6 +914,9 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                       3333333333338888883333330000333333333333333333333333333333333333
                       0000}
                     NumGlyphs = 2
+                    ParentFont = False
+                    TabOrder = 2
+                    OnClick = BitBtn1Click
                   end
                   object Editdiastrabalhadocertidao: TEdit
                     Left = 128
@@ -995,8 +1019,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                     Top = 32
                     Width = 121
                     Height = 21
-                    Date = 41094.636673703700000000
-                    Time = 41094.636673703700000000
+                    Date = 41094.000000000000000000
+                    Time = 0.636673703702399500
                     TabOrder = 1
                     ReadOnly = False
                   end
@@ -1012,9 +1036,6 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                     Font.Height = -13
                     Font.Name = 'MS Sans Serif'
                     Font.Style = [fsBold]
-                    ParentFont = False
-                    TabOrder = 8
-                    OnClick = BitBtn2Click
                     Glyph.Data = {
                       DE010000424DDE01000000000000760000002800000024000000120000000100
                       0400000000006801000000000000000000001000000000000000000000000000
@@ -1033,6 +1054,9 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                       333A333333333333333338330000333333333333333333333333333333333333
                       0000}
                     NumGlyphs = 2
+                    ParentFont = False
+                    TabOrder = 8
+                    OnClick = BitBtn2Click
                   end
                   object Edittotaltrabalhado: TEdit
                     Left = 224
@@ -1060,7 +1084,6 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                 Top = 33
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -1137,46 +1160,48 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
           Width = 746
+          ExplicitWidth = 746
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
             Left = 612
             TabOrder = 3
+            ExplicitLeft = 612
           end
           inherited chkSoundex: TCheckBox
             Width = 60
             TabOrder = 2
+            ExplicitWidth = 60
           end
         end
         inherited PanelConsulta: TPanel
           Width = 746
           Height = 465
+          ExplicitWidth = 746
+          ExplicitHeight = 465
           inherited DBGridConsulta: TDBGrid
             Width = 736
             Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 735
-            Height = 450
-            PanelHeight = 90
+            Width = 736
             PanelWidth = 719
+            ExplicitWidth = 735
+            ExplicitHeight = 450
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 869
-    inherited Image2: TImage
-      Width = 869
-    end
+    ExplicitWidth = 869
   end
   inherited StatusBar1: TStatusBar
-    Top = 567
-    Width = 869
+    ExplicitTop = 567
+    ExplicitWidth = 869
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     Left = 704
     Top = 0
   end
@@ -1196,7 +1221,7 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
     Left = 427
     Top = 8
   end
-  inherited SqlFaccao: TSQLQuery
+  inherited SqlFaccao: TFDQuery
     Left = 48
     Top = 0
   end

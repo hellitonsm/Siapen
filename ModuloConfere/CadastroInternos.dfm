@@ -5,8 +5,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
   ClientHeight = 624
   ClientWidth = 924
   Menu = MainMenu1
-  ExplicitWidth = 936
-  ExplicitHeight = 682
+  ExplicitWidth = 940
+  ExplicitHeight = 683
   TextHeight = 13
   object Label59: TLabel [0]
     Left = 616
@@ -3216,20 +3216,20 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     ExplicitTop = 604
     ExplicitWidth = 920
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'select *'
       'from interno'
       'where id_interno=:id_interno')
     Left = 26
     Top = 11
+    ParamData = <
+      item
+        Name = 'id_interno'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
     object SqlCadastroID_INTERNO: TIntegerField
       FieldName = 'ID_INTERNO'
       Required = True
@@ -4010,9 +4010,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 679
     Top = 8
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select '
       '    interno.nome_interno,'
@@ -4055,7 +4054,6 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       'ORDER BY INTERNO.NOME_INTERNO'
       ''
       ' ')
-    SQLConnection = DM.SQLConnect
     Left = 41
     Top = 295
   end
@@ -4078,8 +4076,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 149
     Top = 295
   end
-  object SqlSelectInterno: TSQLQuery
-    Params = <>
+  object SqlSelectInterno: TFDQuery
     SQL.Strings = (
       'select '
       '    interno.nome_interno,'
@@ -4107,22 +4104,21 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 640
     Top = 12
   end
-  object SQLHISTORICO_interno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
+  object SQLHISTORICO_interno: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select *'
       'from historico_interno'
       'where idinterno=:id_interno'
       'order by data_hora desc, IDHISTORICO_INTERNO desc')
-    SQLConnection = DM.SQLConnect
     Left = 177
     Top = 17
+    ParamData = <
+      item
+        Name = 'id_interno'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
   object DSPHISTORICO_interno: TDataSetProvider
     DataSet = SQLHISTORICO_interno
@@ -4146,8 +4142,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 261
     Top = 17
   end
-  object SqlSelectInternoInativo: TSQLQuery
-    Params = <>
+  object SqlSelectInternoInativo: TFDQuery
     SQL.Strings = (
       'select '
       '   nome_interno,'
@@ -4164,9 +4159,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 592
     Top = 12
   end
-  object SqlSoundex: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlSoundex: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select '
       '    interno.nome_interno,'
@@ -4193,7 +4187,6 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       'order by interno.nome_interno'
       ''
       ' ')
-    SQLConnection = DM.SQLConnect
     Left = 529
     Top = 15
   end
@@ -4252,14 +4245,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 752
     Top = 8
   end
-  object SQLadvogadointerno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
+  object SQLadvogadointerno: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT ai.*'
       'FROM advogados_internos ai'
@@ -4268,26 +4255,30 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       
         'order by ai.status, a.advogado, ai.data_constituicao, ai.data_de' +
         'sconstituicao')
-    SQLConnection = DM.SQLConnect
     Left = 728
     Top = 8
-  end
-  object SqlFilhos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
+    ParamData = <
       item
-        DataType = ftInteger
         Name = 'id_interno'
+        DataType = ftInteger
         ParamType = ptInput
       end>
+  end
+  object SqlFilhos: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select *'
       'from filhos'
       'where idinterno=:id_interno'
       '')
-    SQLConnection = DM.SQLConnect
     Left = 1
     Top = 353
+    ParamData = <
+      item
+        Name = 'id_interno'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
   object DspFilhos: TDataSetProvider
     DataSet = SqlFilhos
@@ -4357,12 +4348,10 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     DataSet = SqlLista
     Left = 484
   end
-  object SqlLista: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlLista: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT DISTINCT FACCAO FROM INTERNO')
-    SQLConnection = DM.SQLConnect
     Left = 456
   end
   object PopupMenuRecuperarFotoEmergencia: TPopupMenu
@@ -4380,9 +4369,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       OnClick = RecuperarFotosdeArquivo1Click
     end
   end
-  object SqlConsultaBackup: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlConsultaBackup: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select '
       '    interno.nome_interno,'
@@ -4429,7 +4417,6 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
         '_CIDADE)'
       '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
       'where coalesce(interno.nome_interno,'#39#39')<>'#39#39)
-    SQLConnection = DM.SQLConnect
     Left = 8
     Top = 296
   end
@@ -4461,9 +4448,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 44
     Top = 64
   end
-  object SqlFaccao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlFaccao: TFDQuery
     SQL.Strings = (
       
         'SELECT  COALESCE(FACCAO,'#39#39') || '#39' - '#39' || COALESCE(SIGLA,'#39#39')  AS F' +
@@ -4473,23 +4458,22 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 16
     Top = 64
   end
-  object SqlFoto: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = -1
-      end>
+  object SqlFoto: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select *'
       'from foto_interno'
       'where id_interno=:id_interno'
       '')
-    SQLConnection = DM.SQLConnect
     Left = 297
     Top = 1
+    ParamData = <
+      item
+        Name = 'id_interno'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   object DspFoto: TDataSetProvider
     DataSet = SqlFoto

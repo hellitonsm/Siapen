@@ -1,21 +1,19 @@
 object FrmHistoricoInterno: TFrmHistoricoInterno
   Left = 301
   Top = 95
-  Width = 767
-  Height = 618
   ActiveControl = Editlocalizar
   Caption = 'Hist'#243'rico / Ficha Disciplinar'
+  ClientHeight = 579
+  ClientWidth = 751
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 0
@@ -125,11 +123,12 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
     Left = 0
     Top = 149
     Width = 751
-    Height = 431
+    Height = 430
     Align = alClient
     Caption = 'PanelPrincipal'
     Enabled = False
     TabOrder = 1
+    ExplicitHeight = 431
     object Label53: TLabel
       Left = 18
       Top = 16
@@ -149,7 +148,6 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
       Top = 33
       Width = 91
       Height = 21
-      Date = 0.302563541663403200
       Time = 0.302563541663403200
       TabOrder = 0
     end

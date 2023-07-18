@@ -22,6 +22,8 @@ object FrmFiltros: TFrmFiltros
     Align = alClient
     TabOrder = 0
     TabWidth = 100
+    ExplicitWidth = 372
+    ExplicitHeight = 369
     object TabSheet1: TTabSheet
       Caption = 'Sele'#231#227'o'
       object Label1: TLabel

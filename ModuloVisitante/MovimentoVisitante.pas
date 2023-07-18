@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloMovimentacao, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, Buttons, Jpeg, Menus;
+  Mask, Buttons, Jpeg, Menus, System.ImageList;
 
 type
   TFrmMovimentoVisitante = class(TFrmModeloMovimentacao)
@@ -1084,7 +1084,7 @@ begin
 
     try
       IniciaTransCadastro;
-      dm.SQLConnect.ExecuteDirect(sSql);
+      dm.SQLConnect.ExecSql(sSql);
       FinalizaTransCadastro;
     except
       FinalizaTransCadastro;

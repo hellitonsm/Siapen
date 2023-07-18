@@ -4,8 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, FMTBcd, DB, DBClient, Provider, SqlExpr, StdCtrls, ExtCtrls,
-  Grids, DBGrids, DBCtrls, jpeg;
+  Dialogs, FMTBcd, DB, DBClient, Provider , StdCtrls, ExtCtrls,
+  Grids, DBGrids, DBCtrls, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmConsultaGeral = class(TForm)
@@ -13,7 +14,7 @@ type
     PanelLocalizar: TPanel;
     EdtPesquisa: TEdit;
     Label1: TLabel;
-    SqlConsulta: TSQLQuery;
+    SqlConsulta: TFDQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -22,7 +23,7 @@ type
     Image2: TImage;
     LabelTitulo: TLabel;
     Image3: TImage;
-    SqlCadastro: TSQLQuery;
+    SqlCadastro: TFDQuery;
     DspCadastro: TDataSetProvider;
     CdsCadastro: TClientDataSet;
     DsCadastro: TDataSource;

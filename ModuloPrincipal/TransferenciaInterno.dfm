@@ -1,22 +1,24 @@
 inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
   Left = 261
   Top = 76
-  Width = 928
-  Height = 654
   Caption = 'Transfer'#234'ncia de Internos'
   Menu = MainMenu1
-  OldCreateOrder = True
   WindowState = wsMaximized
   OnClose = FormClose
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 912
+    Width = 944
     Height = 40
     Align = alTop
+    ExplicitWidth = 912
+    ExplicitHeight = 40
     inherited ToolBarModeloCadastro: TToolBar
       Width = 832
       Height = 40
+      ExplicitWidth = 832
+      ExplicitHeight = 40
       inherited Novo: TToolButton
         Wrap = False
       end
@@ -24,25 +26,35 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
         Left = 113
         Top = 0
         Wrap = False
+        ExplicitLeft = 113
+        ExplicitTop = 0
       end
       inherited Cancelar: TToolButton
         Left = 220
         Top = 0
         Wrap = False
+        ExplicitLeft = 220
+        ExplicitTop = 0
       end
       inherited Salvar: TToolButton
         Left = 327
         Top = 0
         Wrap = False
+        ExplicitLeft = 327
+        ExplicitTop = 0
       end
       inherited Excluir: TToolButton
         Left = 434
         Top = 0
         Wrap = False
+        ExplicitLeft = 434
+        ExplicitTop = 0
       end
       inherited Fechar: TToolButton
         Left = 541
         Top = 0
+        ExplicitLeft = 541
+        ExplicitTop = 0
       end
     end
     inherited DBNavigator1: TDBNavigator
@@ -53,35 +65,54 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
       DataSource = DsConsulta
       Align = alRight
       Hints.Strings = ()
+      ExplicitLeft = 832
+      ExplicitTop = 0
+      ExplicitWidth = 80
+      ExplicitHeight = 40
     end
   end
   inherited PanelModeloCadastro: TPanel
     Left = 0
     Top = 72
-    Width = 912
-    Height = 505
-    inherited PageControlModeloCadastro: TPageControl
+    Width = 944
+    Height = 493
+    ExplicitLeft = 0
+    ExplicitTop = 72
+    ExplicitWidth = 944
+    ExplicitHeight = 494
+    inherited Image2: TImage
       Width = 912
-      Height = 505
+      ExplicitWidth = 912
+    end
+    inherited PageControlModeloCadastro: TPageControl
+      Width = 944
+      Height = 493
+      ExplicitWidth = 944
+      ExplicitHeight = 494
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 936
+        ExplicitHeight = 465
         inherited PanelCadastro: TPanel
-          Width = 904
-          Height = 477
+          Width = 936
+          Height = 465
+          ExplicitWidth = 936
+          ExplicitHeight = 466
           object PageControlTransferencia: TPageControl
             Left = 1
             Top = 1
-            Width = 902
-            Height = 475
+            Width = 934
+            Height = 463
             ActivePage = TabSheetTransferencia
             Align = alClient
             TabOrder = 0
             TabWidth = 200
+            ExplicitHeight = 464
             object TabSheetTransferencia: TTabSheet
               Caption = 'Dados da Transfer'#234'ncia'
               ImageIndex = 1
               DesignSize = (
-                894
-                447)
+                926
+                435)
               object Label2: TLabel
                 Left = 16
                 Top = 16
@@ -184,7 +215,6 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
                 Height = 21
                 DataField = 'TIPO_DOCUMENTO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'N'#227'o Informado'
                   'Alvar'#225
@@ -408,13 +438,19 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
       end
       inherited TabSheetConsulta: TTabSheet
         Caption = 'Transfer'#234'ncias Gravadas'
+        ExplicitWidth = 936
+        ExplicitHeight = 465
         inherited PanelLocalizaConsulta: TPanel
           Width = 904
           Height = 49
+          ExplicitWidth = 904
+          ExplicitHeight = 49
           inherited Label1: TLabel
             Left = 736
             Top = 24
             Visible = False
+            ExplicitLeft = 736
+            ExplicitTop = 24
           end
           object Label5: TLabel [1]
             Left = 12
@@ -448,14 +484,17 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
             Width = 600
             TabOrder = 1
             Visible = False
+            ExplicitLeft = 792
+            ExplicitTop = 24
+            ExplicitWidth = 600
           end
           object DateTimePicker1: TDateTimePicker
             Left = 112
             Top = 16
             Width = 105
             Height = 21
-            Date = 41070.024699270830000000
-            Time = 41070.024699270830000000
+            Date = 41070.000000000000000000
+            Time = 0.024699270827113650
             TabOrder = 0
           end
           object Button2: TButton
@@ -478,8 +517,8 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
             Top = 16
             Width = 105
             Height = 21
-            Date = 41234.624808402780000000
-            Time = 41234.624808402780000000
+            Date = 41234.000000000000000000
+            Time = 0.624808402782946400
             TabOrder = 2
           end
         end
@@ -487,6 +526,9 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
           Top = 49
           Width = 904
           Height = 428
+          ExplicitTop = 49
+          ExplicitWidth = 904
+          ExplicitHeight = 428
           inherited DBGridConsulta: TDBGrid
             Width = 902
             Height = 233
@@ -617,33 +659,30 @@ inherited FrmTransferenciaInterno: TFrmTransferenciaInterno
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 912
-    inherited Image2: TImage
-      Width = 912
-    end
+    ExplicitWidth = 912
   end
   inherited StatusBar1: TStatusBar
-    Top = 577
-    Width = 912
+    ExplicitTop = 565
+    ExplicitWidth = 944
   end
   inherited ImageListCadastro: TImageList
     Left = 832
     Top = 0
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_transferencia_interno'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM transferencia_interno'
       'where id_transferencia_interno= :id_transferencia_interno')
     Left = 672
     Top = 88
+    ParamData = <
+      item
+        Name = 'id_transferencia_interno'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 700

@@ -5,8 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
-  FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, DBCtrls, DBXpress,
-  ModeloCadastro, Jpeg, Buttons;
+  FMTBcd, DB, DBClient, Provider , Mask, DBCtrls, DBXpress,
+  ModeloCadastro, Jpeg, Buttons, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmCadastroInternos = class(TFrmModeloCadastro)
@@ -111,11 +112,11 @@ type
     Label36: TLabel;
     DBEdit25: TDBEdit;
     DBComboBox1: TDBComboBox;
-    SqlConsulta: TSQLQuery;
+    SqlConsulta: TFDQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
-    SqlSelectInterno: TSQLQuery;
+    SqlSelectInterno: TFDQuery;
     Label39: TLabel;
     DBEdit26: TDBEdit;
     Label47: TLabel;
@@ -124,7 +125,7 @@ type
     DBEdit28: TDBEdit;
     DataSource1: TDataSource;
     TabSheet5: TTabSheet;
-    SQLHISTORICO_interno: TSQLQuery;
+    SQLHISTORICO_interno: TFDQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     DSHISTORICO_interno: TDataSource;
@@ -176,7 +177,7 @@ type
     Label56: TLabel;
     DBEdit30: TDBEdit;
     TabSheet7: TTabSheet;
-    SQLHISTORICOEDUCACAO: TSQLQuery;
+    SQLHISTORICOEDUCACAO: TFDQuery;
     DSPHISTORICOEDUCACAO: TDataSetProvider;
     CDSHISTORICOEDUCACAO: TClientDataSet;
     DSHISTORICOEDUCACAO: TDataSource;
@@ -231,7 +232,7 @@ type
     EditMes: TEdit;
     Label75: TLabel;
     EditDia: TEdit;
-    SQLCONDENACAO_INTERNO: TSQLQuery;
+    SQLCONDENACAO_INTERNO: TFDQuery;
     DspCONDENACAO_INTERNO: TDataSetProvider;
     CdsCONDENACAO_INTERNO: TClientDataSet;
     DsCONDENACAO_INTERNO: TDataSource;
@@ -343,14 +344,14 @@ function TFrmCadastroInternos.IniciaTransCadastro: Boolean;
 begin
   try
     TD.TransactionID := 0;
-    TD.IsolationLevel := xilREADCOMMITTED;
+    TD.IsolationLevel := xiReadCommitted;
     DM.SQLConnect.StartTransaction(TD);
   except //se der erro para abrir uma TransCadastro
     begin //tente uma nova
       try
         Result := False;
         TD.TransactionID := TD.TransactionID + 1;
-        TD.IsolationLevel := xilREADCOMMITTED;
+        TD.IsolationLevel := xiReadCommitted;
         DM.SQLConnect.StartTransaction(TD);
       except
       end;
@@ -363,7 +364,7 @@ begin
   try
     FinalizaTransCadastro;
     TD.TransactionID := TD.TransactionID + 1;
-    TD.IsolationLevel := xilREADCOMMITTED;
+    TD.IsolationLevel := xiReadCommitted;
     DM.SQLConnect.StartTransaction(TD);
   except
   end;

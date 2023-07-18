@@ -1,7 +1,6 @@
 inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
   Left = 263
   Top = 174
-  VertScrollBar.Range = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Informa'#231#245'es da Ocorrencia'
@@ -9,11 +8,14 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
   ClientWidth = 684
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
-  PixelsPerInch = 96
+  ExplicitWidth = 700
+  ExplicitHeight = 364
   TextHeight = 13
   inherited PanelGeral: TPanel
     Width = 684
     Height = 284
+    ExplicitWidth = 684
+    ExplicitHeight = 284
     object DBGrid1: TDBGrid
       Left = 26
       Top = 1
@@ -451,8 +453,6 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
         Height = 25
         Caption = 'Conf&irma'
         Default = True
-        TabOrder = 0
-        OnClick = BitBtnConfirmaClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -471,6 +471,8 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
           333A333333333333333338330000333333333333333333333333333333333333
           0000}
         NumGlyphs = 2
+        TabOrder = 0
+        OnClick = BitBtnConfirmaClick
       end
       object BitBtnCancela: TBitBtn
         Left = 25
@@ -478,9 +480,6 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
         Width = 150
         Height = 25
         Caption = 'Ca&ncela'
-        ModalResult = 3
-        TabOrder = 1
-        OnClick = BitBtnCancelaClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -498,7 +497,10 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
           38F338F300003333333333333919333333388333338FFF830000333333333333
           3333333333333333333888330000333333333333333333333333333333333333
           0000}
+        ModalResult = 3
         NumGlyphs = 2
+        TabOrder = 1
+        OnClick = BitBtnCancelaClick
       end
     end
     object DBNavigator1: TDBNavigator
@@ -525,8 +527,10 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
   end
   inherited PanelTitulo: TPanel
     Width = 684
+    ExplicitWidth = 684
     inherited Image2: TImage
       Width = 682
+      ExplicitWidth = 682
     end
   end
   object DspMovOcorrenciaQuest: TDataSetProvider

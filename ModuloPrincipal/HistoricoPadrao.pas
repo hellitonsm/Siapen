@@ -95,7 +95,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(Self.Caption)
+      DM.SQLConnect.ExecSQL('update conexao set tela_momento = ' + qs(Self.Caption)
         + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
     except
     end;

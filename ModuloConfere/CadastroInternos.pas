@@ -5,9 +5,12 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
-  FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, DBCtrls,
+  FMTBcd, DB, DBClient, Provider , Mask, DBCtrls,
   ModeloCadastro, Jpeg, Buttons, frxCtrls, dbcgrids, Menus,
-  adpDBDateTimePicker, System.ImageList;
+  adpDBDateTimePicker, System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmCadastroInternos = class(TFrmModeloCadastro)
@@ -15,12 +18,12 @@ type
     SpeedButton3: TSpeedButton;
     SpeedButton10: TSpeedButton;
     OpenDialogCapturarFoto: TOpenDialog;
-    SqlConsulta: TSQLQuery;
+    SqlConsulta: TFDQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
-    SqlSelectInterno: TSQLQuery;
-    SQLHISTORICO_interno: TSQLQuery;
+    SqlSelectInterno: TFDQuery;
+    SQLHISTORICO_interno: TFDQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     DSHISTORICO_interno: TDataSource;
@@ -143,7 +146,7 @@ type
     DBImageFOTO_SINAIS2: TDBImage;
     DBImageFOTO_SINAIS3: TDBImage;
     DBImageFOTO_SINAIS4: TDBImage;
-    SqlSelectInternoInativo: TSQLQuery;
+    SqlSelectInternoInativo: TFDQuery;
     Label149: TLabel;
     DBEdit83: TDBEdit;
     MemoDescricao: TMemo;
@@ -156,7 +159,7 @@ type
     lbl2: TLabel;
     btn1: TSpeedButton;
     dbrgrpST: TDBRadioGroup;
-    SqlSoundex: TSQLQuery;
+    SqlSoundex: TFDQuery;
     tsAdvogado: TTabSheet;
     lbl3: TLabel;
     DBLookupComboBoxIDADVOGADO: TDBLookupComboBox;
@@ -174,7 +177,7 @@ type
     dsADVOGADO_INTERNO: TDataSource;
     cdsadvogadointerno: TClientDataSet;
     dspadvogadointerno: TDataSetProvider;
-    SQLadvogadointerno: TSQLQuery;
+    SQLadvogadointerno: TFDQuery;
     DBGrid3: TDBGrid;
     cdsadvogadointernoADVOGADOESCRITRIO: TStringField;
     cdsadvogadointernoID_ADVOGADOS_INTERNOS: TIntegerField;
@@ -182,7 +185,7 @@ type
     cdsadvogadointernoID_INTERNO: TIntegerField;
     cdsadvogadointernoOBSADVOGADO_INTERNO: TStringField;
     BitBtn1: TBitBtn;
-    SqlFilhos: TSQLQuery;
+    SqlFilhos: TFDQuery;
     DspFilhos: TDataSetProvider;
     CdsFilhos: TClientDataSet;
     DsFilhos: TDataSource;
@@ -199,7 +202,7 @@ type
     DsLista: TDataSource;
     CdsLista: TClientDataSet;
     DspLista: TDataSetProvider;
-    SqlLista: TSQLQuery;
+    SqlLista: TFDQuery;
     DBCtrlGridConsulta: TDBCtrlGrid;
     Label68: TLabel;
     LabelPavilhao: TLabel;
@@ -221,7 +224,7 @@ type
     DBEdit20: TDBEdit;
     PopupMenuRecuperarFotoEmergencia: TPopupMenu;
     Recalculartodasasfotos1: TMenuItem;
-    SqlConsultaBackup: TSQLQuery;
+    SqlConsultaBackup: TFDQuery;
     MainMenu1: TMainMenu;
     Relatorios1: TMenuItem;
     Especifico1: TMenuItem;
@@ -247,9 +250,9 @@ type
     DsFaccao: TDataSource;
     CdsFaccao: TClientDataSet;
     DspFaccao: TDataSetProvider;
-    SqlFaccao: TSQLQuery;
+    SqlFaccao: TFDQuery;
     DBEdit84: TDBEdit;
-    SqlFoto: TSQLQuery;
+    SqlFoto: TFDQuery;
     DspFoto: TDataSetProvider;
     CdsFoto: TClientDataSet;
     DsFoto: TDataSource;
@@ -1126,7 +1129,7 @@ begin
     GLOBAL_ID_FUNCIONARIO;
   DSHISTORICO_interno.DataSet.Post;
 
-  DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+  DM.SQLConnect.ExecSql('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
   TClientDataSet(DSHISTORICO_interno.DataSet).ApplyUpdates(0);
 
   MemoDescricao.Lines.Clear;

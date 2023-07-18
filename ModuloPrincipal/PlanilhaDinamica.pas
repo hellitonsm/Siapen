@@ -4,14 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, FMTBcd, SqlExpr, DB, DBClient, Provider, Grids, DBGrids,
-  ExtCtrls, StdCtrls, frxChart, frxDBXComponents, frxIBXComponents,
+  Dialogs, FMTBcd , DB, DBClient, Provider, Grids, DBGrids,
+  ExtCtrls, StdCtrls, frxChart, frxDBXComponents,
   frxADOComponents, frxClass,  frxDBSet, frxCrypt,
   frxGZip, frxDCtrl, frxDMPExport, frxGradient, frxChBox, frxCross,
   frxRich, frxOLE, frxBarcode, frxDesgn, frxExportODF, frxExportTXT,
   frxExportMail, frxExportCSV, frxExportText, frxExportImage, frxExportRTF,
   frxExportXML, frxExportXLS, frxExportHTML, frxExportPDF, DBCtrls, jpeg,
-  frxExportBaseDialog;
+  frxExportBaseDialog, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmPlanilhaDinamica = class(TForm)
@@ -19,7 +20,7 @@ type
     DspPrincipal: TDataSetProvider;
     CdsPrincipal: TClientDataSet;
     DsPrincipal: TDataSource;
-    SqlPrincipal: TSQLQuery;
+    SqlPrincipal: TFDQuery;
     PnlConfig: TPanel;
     frxPDFExport1: TfrxPDFExport;
     frxHTMLExport1: TfrxHTMLExport;
@@ -49,13 +50,11 @@ type
     frxGZipCompressor1: TfrxGZipCompressor;
     frxCrypt1: TfrxCrypt;
     frxDBDataset1: TfrxDBDataset;
-    frxADOComponents1: TfrxADOComponents;
-    frxIBXComponents1: TfrxIBXComponents;
     frxDBXComponents1: TfrxDBXComponents;
     frxChartObject1: TfrxChartObject;
     Panel1: TPanel;
     DBGrid1: TDBGrid;
-    SqlPlanilhaDinamica: TSQLQuery;
+    SqlPlanilhaDinamica: TFDQuery;
     DspPlanilhaDinamica: TDataSetProvider;
     CdsPlanilhaDinamica: TClientDataSet;
     DsPlanilhaDinamica: TDataSource;

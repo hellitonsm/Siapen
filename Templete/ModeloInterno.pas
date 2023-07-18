@@ -4,16 +4,18 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
+  Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider ,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, Buttons, jpeg, dbcgrids, Menus, adpDBDateTimePicker, System.ImageList;
+  Mask, Buttons, jpeg, dbcgrids, Menus, adpDBDateTimePicker, System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.DApt;
 
 type
   TFrmModeloInterno = class(TFrmModeloCadastro)
     DsConsulta: TDataSource;
     CdsConsulta: TClientDataSet;
     DspConsulta: TDataSetProvider;
-    SqlConsulta: TSQLQuery;
+    SqlConsulta: TFDQuery;
     RadioGroupStatus: TRadioGroup;
     chkSoundex: TCheckBox;
     PageControlPrincipal: TPageControl;
@@ -141,7 +143,7 @@ type
     DBTextEstado: TDBText;
     LabelProced: TLabel;
     Image1: TImage;
-    SqlConsultaBackup: TSQLQuery;
+    SqlConsultaBackup: TFDQuery;
     MainMenu1: TMainMenu;
     Relatorios1: TMenuItem;
     Especifico1: TMenuItem;
@@ -152,7 +154,7 @@ type
     Label54: TLabel;
     DBLookupComboBoxFACCAO: TDBLookupComboBox;
     SpeedButton8: TSpeedButton;
-    SqlFaccao: TSQLQuery;
+    SqlFaccao: TFDQuery;
     DspFaccao: TDataSetProvider;
     CdsFaccao: TClientDataSet;
     DsFaccao: TDataSource;

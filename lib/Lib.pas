@@ -4,12 +4,14 @@ interface
 
 uses Windows, Controls, msxmldom, WinSock, DBCtrls, Grids, DBGrids,
   Messages, SysUtils, StrUtils, Variants, Classes, Graphics, Forms,
-  Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
+  Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider ,
   ImgList, ExtCtrls, ComCtrls, ToolWin, StdCtrls, idText,  IdSSLOpenSSL,IdIOHandlerSocket, IdIOHandler,
   Mask, jpeg, DateUtils, IdSMTP, IdMessage, ShellAPI,
   IdServerIOHandler,IdSocketHandle, idAttachment,  IdExplicitTLSClientServerBase,
   IdIOHandlerStack, IdSSL,   IdSSLOpenSSLHeaders,
-  pngextra, pngimage;
+  pngextra, pngimage, FireDAC.DBX.Migrate, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+FireDAC.Comp.DataSet;
 
 type
   TChars = set of Char;
@@ -28,7 +30,7 @@ function ExecuteSqlDinamico(aSql: string): Boolean;
 function BuscaGeral(NomeEdit: TWinControl; NomeCons, SqlEspecifica: string;
   aTop, aLeft, aWidth, aHeight: Integer; CampoResult: string = 'CODIGO';
   ADDSql: string = ' WHERE 1=1 '; IdBusca: string = '0';
-  Connect: TSQLConnection = nil;
+  Connect: TFDConnection = nil;
   MultiplaSelecao: Boolean = False; FiltraPorNome: Boolean = False): Variant;
 function StrZero(const AValue: Variant; ALength: Integer; Vazio: Boolean = False): string;
 function ValidarEditSql(DsPrincipal: TDataSource; FormChamada: TForm; NomeEdit:
@@ -80,7 +82,7 @@ function TamanhoArquivoFormatado(const bytes: Longint): string;
 procedure SalvarBlobDatabase(Ds: TDataSource; sField, sFileName: string);
 procedure SalvarBlobDisco(Ds: TDataSource; sField, sFileName: string);
 function CaptureImgRect(ARect: TRect): TBitmap;
-procedure AddWhere(Query: TSQLQuery; WhereClause: string; StrAndOr: string = ' AND ');
+procedure AddWhere(Query: TFDQuery; WhereClause: string; StrAndOr: string = ' AND ');
 function TrataExceptionErro(MsgErro: string): string;
 function SiapStringReplace(sString, OldCaracter1, NewCaracter1: string; OldCaracter2: string = '';
   NewCaracter2: string = ''; OldCaracter3: string = ''; NewCaracter3: string = ''): string;
@@ -169,7 +171,7 @@ var
 
 //  template: TTemplate;
 //  DB: TDBClass;
-  MV: TTransactionDesc; // Para os Lançamentos .
+  MV: TFDDBXTransactionDesc; // Para os Lançamentos .
   IDSENHA: Integer;
   GLOBAL_ID_UP, filtropostotrabalho: Integer;
   GLOBAL_INDEX_DO_GRID: Integer = 0;
@@ -221,7 +223,7 @@ var
   FECHA_AGENDA_ATENDIMENTO: boolean;
   EDITANDO_SEUS_DADOS_DE_USUARIO:Boolean;
 
-  CompSql: TSQLQuery;
+  CompSql: TFDQuery;
   CompDsp: TDataSetProvider;
   CompCds: TClientDataSet;
   {Dataset de fields do sistema para abrir apenas uma unica vez}
@@ -604,8 +606,8 @@ function ClientDatasetDinamico(aSql: string; Ident: Integer = 1; forca: boolean
 begin
   try
     // SqlQuery
-    CompSql := TSQLQuery.Create(Application);
-    CompSql.SQLConnection := DM.SQLConnect;
+    CompSql := TFDQuery.Create(Application);
+    CompSql.Connection := DM.SQLConnect;
     CompSql.SQL.Text := aSql;
 
     // DataSetProvider
@@ -669,7 +671,7 @@ function ExecuteSqlDinamico(aSql: string): Boolean;
 begin
   Result := True;
   try
-    DM.SQLConnect.ExecuteDirect(aSql)
+    DM.SQLConnect.ExecSQL(aSql)
   except
     begin
       Result := False;
@@ -681,14 +683,14 @@ end;
 function BuscaGeral(NomeEdit: TWinControl; NomeCons, SqlEspecifica: string;
   aTop, aLeft, aWidth, aHeight: Integer; CampoResult: string = 'CODIGO';
   ADDSql: string = ' WHERE 1=1 '; IdBusca: string = '0';
-  Connect: TSQLConnection = nil;
+  Connect: TFDConnection = nil;
   MultiplaSelecao: Boolean = False; FiltraPorNome: Boolean = False): Variant;
 var
   SQL: string;
   x, i: Integer;
   Reg: TBookmark;
   sFiltroPorNome: string;
-  vSqlFiltroPorNome: TSQLQuery;
+  vSqlFiltroPorNome: TFDQuery;
 begin
   if Trim(ADDSql) = '' then
     ADDSql := ' WHERE 1=1 ';
@@ -720,7 +722,7 @@ begin
     if not assigned(FrmConsultaGeral) then
       FrmConsultaGeral := TFrmConsultaGeral.Create(Application);
 
-    FrmConsultaGeral.SqlConsulta.SQLConnection := Dm.SQLConnect;
+    FrmConsultaGeral.SqlConsulta.Connection := Dm.SQLConnect;
 
     if NomeCons = 'INTERNO' then
       SQL := ' select interno.nome_interno, interno.rgi PRONTUARIO, ' +
@@ -933,7 +935,7 @@ var
   Valor: Variant;
   SqlTextDsEdit: string;
   ProviderDsEdit: TProvider;
-  SqlDsEdit: TSQLQuery;
+  SqlDsEdit: TFDQuery;
   lk_KeyField, lk_ListField: string;
   lk_DataSource: TDataSource;
   verifica_string: string;
@@ -953,7 +955,7 @@ var
       Result := True;
   end;
 
-  procedure AddWhere(Query: TSQLQuery; WhereClause: string);
+  procedure AddWhere(Query: TFDQuery; WhereClause: string);
   var
     sCmd, sOrder: string;
     iPosOrderBy: Integer;
@@ -1046,7 +1048,7 @@ begin
         ProviderDsEdit :=
           TProvider(DsCampoEdit.DataSet.Owner.FindComponent(TClientDataSet(DsCampoEdit.DataSet).ProviderName));
         if ProviderDsEdit <> nil then
-          SqlDsEdit := TSQLQuery(ProviderDsEdit.DataSet);
+          SqlDsEdit := TFDQuery(ProviderDsEdit.DataSet);
       end;
     except
       Exit;
@@ -1103,7 +1105,7 @@ begin
         ProviderDsEdit :=
           TProvider(DsCampoEdit.DataSet.Owner.FindComponent(TClientDataSet(DsCampoEdit.DataSet).ProviderName));
         if ProviderDsEdit <> nil then
-          SqlDsEdit := TSQLQuery(ProviderDsEdit.DataSet);
+          SqlDsEdit := TFDQuery(ProviderDsEdit.DataSet);
       end;
     except
       Exit;
@@ -1745,15 +1747,15 @@ function IniciaTransMovimento: Boolean;
 begin
   try
     MV.TransactionID := MV.TransactionID + 1;
-    MV.IsolationLevel := xilREADCOMMITTED;
+    MV.IsolationLevel := xiReadCommitted;
     DM.SQLConnect.StartTransaction(MV);
-    DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+    DM.SQLConnect.ExecSQL('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
   except //se der erro para abrir uma TransCadastro
     begin //tente uma nova
       try
         Result := False;
         MV.TransactionID := MV.TransactionID + 1;
-        MV.IsolationLevel := xilREADCOMMITTED;
+        MV.IsolationLevel := xiReadCommitted;
         DM.SQLConnect.StartTransaction(MV);
       except
       end;
@@ -2276,8 +2278,8 @@ begin
   try
 
     // SqlQuery
-    CompSql := TSQLQuery.Create(Application);
-    CompSql.SQLConnection := DM.SQLConnect;
+    CompSql := TFDQuery.Create(Application);
+    CompSql.Connection := DM.SQLConnect;
     CompSql.SQL.Text := aSql;
 
     // DataSetProvider
@@ -2762,7 +2764,7 @@ begin
   end;
 end;
 
-procedure AddWhere(Query: TSQLQuery; WhereClause: string; StrAndOr: string = ' AND ');
+procedure AddWhere(Query: TFDQuery; WhereClause: string; StrAndOr: string = ' AND ');
 var
   sCmd, sOrder, sGroup: string;
   iPosOrderBy: Integer;

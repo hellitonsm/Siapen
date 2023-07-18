@@ -1,51 +1,70 @@
 inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
   Left = 199
-  Width = 889
-  Height = 645
   Caption = 'Agenda de Saida do Interno'
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 529
+    ExplicitHeight = 526
     inherited ToolBarModeloCadastro: TToolBar
       Height = 511
+      ExplicitHeight = 511
+      inherited Novo: TToolButton
+        ExplicitWidth = 99
+      end
       inherited Editar: TToolButton
         Caption = '&ABRIR'
+        ExplicitWidth = 99
+      end
+      inherited Cancelar: TToolButton
+        ExplicitWidth = 99
       end
       inherited Salvar: TToolButton
         Visible = False
+        ExplicitWidth = 99
+      end
+      inherited Excluir: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Fechar: TToolButton
+        ExplicitWidth = 99
       end
     end
     inherited DBNavigator1: TDBNavigator
       Top = 511
       Hints.Strings = ()
+      ExplicitTop = 511
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 758
-    Height = 529
+    ExplicitWidth = 829
+    ExplicitHeight = 527
+    inherited Image2: TImage
+      Width = 873
+      ExplicitWidth = 873
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 758
-      Height = 529
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 829
+      ExplicitHeight = 527
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 750
-          Height = 501
+          ExplicitHeight = 499
           inherited PageControlPrincipal: TPageControl
-            Width = 748
-            Height = 499
             ActivePage = TabSheet1
+            ExplicitWidth = 819
+            ExplicitHeight = 497
             object TabSheet1: TTabSheet [0]
               Caption = 'Agenda de Sa'#237'da'
               ImageIndex = 2
               object PanelAgenda: TPanel
                 Left = 0
                 Top = 0
-                Width = 740
-                Height = 471
+                Width = 811
+                Height = 468
                 Align = alClient
                 TabOrder = 0
+                ExplicitHeight = 469
                 object lbl8: TLabel
                   Left = 24
                   Top = 314
@@ -223,7 +242,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                   Height = 21
                   DataField = 'TIPO_DOCUMENTO_SOLICITACAO'
                   DataSource = DsAgenda
-                  ItemHeight = 13
                   Items.Strings = (
                     'Alvar'#225
                     'Carta Livramento'
@@ -343,7 +361,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                   Height = 21
                   DataField = 'CARGO_SOLICITANTE'
                   DataSource = DsAgenda
-                  ItemHeight = 13
                   Items.Strings = (
                     'Comandante da 3'#170' CPMind'
                     'Comandante do 4'#186' BPM'
@@ -384,7 +401,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                   Height = 21
                   DataField = 'VOCATIVO_SOLICITANTE'
                   DataSource = DsAgenda
-                  ItemHeight = 13
                   Items.Strings = (
                     'Ilustrimimo(a)'
                     'Merit'#237'ssimo(a) Juiz(a)'
@@ -408,7 +424,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                   Height = 21
                   DataField = 'FORMA_DE_TRATAMENTO'
                   DataSource = DsAgenda
-                  ItemHeight = 13
                   Items.Strings = (
                     'Excelent'#237'ssimo(a) Senhor(a)'
                     'Excelent'#237'ssimo(a) Senhor(a)'
@@ -508,8 +523,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                   Width = 100
                   Height = 25
                   Caption = 'Novo'
-                  TabOrder = 1
-                  OnClick = BtnNovoClick
                   Glyph.Data = {
                     36030000424D3603000000000000360000002800000010000000100000000100
                     18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -537,6 +550,8 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                     E4BCA4FBF4F0FBF4EFFAF3EFFAF3EFF8F2EFF7F2EFF7F2EFD8C2C0B77F62C183
                     6CFF00FFFF00FFFF00FFFF00FFFF00FFE8C4ADEBCBB7EBCBB7EACBB7EACAB6EA
                     CAB6EACAB6EACAB6E3C2B1A56B5FFF00FFFF00FFFF00FFFF00FF}
+                  TabOrder = 1
+                  OnClick = BtnNovoClick
                 end
                 object BtnConcluir: TBitBtn
                   Left = 136
@@ -545,8 +560,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                   Height = 25
                   Caption = 'Salvar'
                   Enabled = False
-                  TabOrder = 2
-                  OnClick = BtnConcluirClick
                   Glyph.Data = {
                     36030000424D3603000000000000360000002800000010000000100000000100
                     18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -574,6 +587,8 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                     7F2B28F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F7F77F2B
                     28FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
                     00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+                  TabOrder = 2
+                  OnClick = BtnConcluirClick
                 end
                 object Button1: TButton
                   Left = 294
@@ -626,71 +641,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
                 end
               end
             end
-            inherited TabSheetPrincipal: TTabSheet
-              inherited DBEdit3: TDBEdit
-                TabOrder = 4
-              end
-              inherited DBEditID_PROCEDENCIA: TDBEdit
-                TabOrder = 19
-              end
-              inherited DBLookupComboBoxID_PROCEDENCIA: TDBLookupComboBox
-                TabOrder = 20
-              end
-              inherited DBRadioGroup1: TDBRadioGroup
-                TabOrder = 6
-              end
-              inherited DBRadioGroup2: TDBRadioGroup
-                TabOrder = 18
-              end
-              inherited DBEdit7: TDBEdit
-                TabOrder = 16
-              end
-              inherited DBLookupComboBox2: TDBLookupComboBox
-                TabOrder = 17
-              end
-              inherited DBComboBox3: TDBComboBox
-                TabOrder = 15
-              end
-              inherited DBEdit86: TDBEdit
-                TabOrder = 3
-              end
-              inherited dbrgrpST: TDBRadioGroup
-                TabOrder = 5
-              end
-              inherited DBEdit4: TDBEdit
-                TabOrder = 9
-              end
-              inherited DBEdit20: TDBEdit
-                TabOrder = 10
-              end
-              inherited DBEdit29: TDBEdit
-                TabOrder = 12
-              end
-              inherited DBComboBox2: TDBComboBox
-                TabOrder = 13
-              end
-              inherited DBEditpermanencia: TDBEdit
-                TabOrder = 11
-              end
-              inherited DBLookupComboBoxFACCAO: TDBLookupComboBox
-                TabOrder = 21
-              end
-              inherited DBEdit8: TDBEdit
-                TabOrder = 24
-              end
-              inherited DBEdit31: TDBEdit
-                TabOrder = 25
-              end
-              inherited DBEdit33: TDBEdit
-                TabOrder = 26
-              end
-              inherited DBComboBox5: TDBComboBox
-                TabOrder = 27
-              end
-              inherited DBComboBox4: TDBComboBox
-                TabOrder = 28
-              end
-            end
             inherited TabSheetDadosGerais: TTabSheet
               TabVisible = False
             end
@@ -700,12 +650,14 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
           Width = 750
+          ExplicitWidth = 750
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
             Left = 621
             TabOrder = 3
+            ExplicitLeft = 621
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
@@ -714,6 +666,8 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
         inherited PanelConsulta: TPanel
           Width = 750
           Height = 459
+          ExplicitWidth = 750
+          ExplicitHeight = 459
           inherited DBGridConsulta: TDBGrid
             Width = 748
             Height = 457
@@ -723,25 +677,24 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
             Height = 457
             PanelHeight = 91
             PanelWidth = 731
+            ExplicitWidth = 748
+            ExplicitHeight = 457
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 873
-    inherited Image2: TImage
-      Width = 873
-    end
+    ExplicitWidth = 873
   end
   inherited StatusBar1: TStatusBar
-    Top = 561
-    Width = 873
+    ExplicitTop = 558
+    ExplicitWidth = 944
   end
   inherited ImageListCadastro: TImageList
     Left = 640
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     Left = 720
     Top = 96
   end

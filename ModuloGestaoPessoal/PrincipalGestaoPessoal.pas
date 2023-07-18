@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, ComCtrls, ImgList, ExtCtrls,
   Grids, DBGrids, jpeg, FMTBcd, DB, DBClient, Provider, SqlExpr, StdCtrls,
-  DBCtrls, ToolWin, frxClass, frxPreview, Buttons, System.ImageList;
+  DBCtrls, ToolWin, frxClass, frxPreview, Buttons, System.ImageList,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmPrincipalGestaoPessoal = class(TForm)
@@ -119,7 +122,7 @@ begin
 
   for iComp := 0 to Componentcount - 1 do
     if (Components[iComp] is TSQLQuery) then
-      TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
+      TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
   if (Screen.Width <= 800) and (Screen.Height <= 600) then
   begin
@@ -379,7 +382,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(Self.Caption)
+      DM.SQLConnect.ExecSQL('update conexao set tela_momento = ' + qs(Self.Caption)
         + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
     except
     end;

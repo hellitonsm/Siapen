@@ -4,15 +4,15 @@ inherited FrmModeloInterno: TFrmModeloInterno
   Caption = 'FrmModeloInterno'
   KeyPreview = True
   Menu = MainMenu1
-  ExplicitHeight = 642
+  ExplicitHeight = 643
   TextHeight = 13
   inherited PanelBotoes: TPanel
     Height = 526
-    ExplicitHeight = 359
+    ExplicitHeight = 525
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 347
+      Height = 508
       ButtonWidth = 99
-      ExplicitHeight = 341
+      ExplicitHeight = 507
       inherited Novo: TToolButton
         Caption = '&N'#195'O'
         Visible = False
@@ -25,11 +25,11 @@ inherited FrmModeloInterno: TFrmModeloInterno
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 347
+      Top = 508
       DataSource = DsConsulta
       Hints.Strings = ()
       TabOrder = 2
-      ExplicitTop = 341
+      ExplicitTop = 507
     end
     object DBImage1: TDBImage
       Left = 8
@@ -1324,7 +1324,7 @@ inherited FrmModeloInterno: TFrmModeloInterno
               'Inativo')
             TabOrder = 1
             OnClick = RadioGroupStatusClick
-            ExplicitLeft = 518
+            ExplicitLeft = 520
           end
           object chkSoundex: TCheckBox
             Left = 541
@@ -1354,9 +1354,9 @@ inherited FrmModeloInterno: TFrmModeloInterno
           Top = 42
           Height = 456
           ExplicitTop = 42
-          ExplicitHeight = 289
+          ExplicitHeight = 455
           inherited DBGridConsulta: TDBGrid
-            Height = 293
+            Height = 454
             DataSource = DsConsulta
             Columns = <
               item
@@ -1405,18 +1405,18 @@ inherited FrmModeloInterno: TFrmModeloInterno
           object DBCtrlGridConsulta: TDBCtrlGrid
             Left = 1
             Top = 1
-            Width = 659
-            Height = 290
+            Width = 819
+            Height = 450
             Align = alClient
             DataSource = DsConsulta
-            PanelHeight = 58
-            PanelWidth = 642
+            PanelHeight = 90
+            PanelWidth = 802
             TabOrder = 1
             RowCount = 5
             SelectedColor = clSilver
             OnDblClick = DBGridConsultaDblClick
-            ExplicitWidth = 653
-            ExplicitHeight = 287
+            ExplicitWidth = 815
+            ExplicitHeight = 453
             object LabelNome: TLabel
               Left = 82
               Top = 4
@@ -2420,23 +2420,23 @@ inherited FrmModeloInterno: TFrmModeloInterno
   inherited StatusBar1: TStatusBar
     Top = 558
     Height = 26
-    ExplicitTop = 391
+    ExplicitTop = 557
     ExplicitHeight = 26
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'select *'
       'from interno'
       'where id_interno=:id_interno')
     Left = 776
     Top = 168
+    ParamData = <
+      item
+        Name = 'id_interno'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 804
@@ -2473,9 +2473,8 @@ inherited FrmModeloInterno: TFrmModeloInterno
     Left = 285
     Top = 65535
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select'
       '    interno.nome_interno,'
@@ -2523,13 +2522,11 @@ inherited FrmModeloInterno: TFrmModeloInterno
       '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
       'where coalesce(interno.nome_interno,'#39#39')<>'#39#39
       'ORDER BY INTERNO.NOME_INTERNO collate win_ptbr')
-    SQLConnection = DM.SQLConnect
     Left = 257
     Top = 65535
   end
-  object SqlConsultaBackup: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlConsultaBackup: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select '
       '    interno.nome_interno,'
@@ -2576,7 +2573,6 @@ inherited FrmModeloInterno: TFrmModeloInterno
         '_CIDADE)'
       '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
       'where coalesce(interno.nome_interno,'#39#39')<>'#39#39)
-    SQLConnection = DM.SQLConnect
     Left = 168
   end
   object MainMenu1: TMainMenu
@@ -2589,9 +2585,7 @@ inherited FrmModeloInterno: TFrmModeloInterno
       end
     end
   end
-  object SqlFaccao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlFaccao: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM FACCAO')

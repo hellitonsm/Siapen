@@ -1,11 +1,9 @@
 inherited FrmNovaEscala: TFrmNovaEscala
-  Height = 208
   Caption = 'Nova Escala'
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Height = 129
+    ExplicitHeight = 129
     object Label3: TLabel
       Left = 25
       Top = 8
@@ -43,8 +41,8 @@ inherited FrmNovaEscala: TFrmNovaEscala
       Top = 52
       Width = 89
       Height = 21
-      Date = 40934.485215416670000000
-      Time = 40934.485215416670000000
+      Date = 40934.000000000000000000
+      Time = 0.485215416672872400
       TabOrder = 1
     end
     object Button1: TButton

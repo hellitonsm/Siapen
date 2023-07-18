@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, Buttons, Menus;
+  ToolWin, Mask, Buttons, Menus, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmRecebimentoTransferencia = class(TFrmModeloCadastro)
@@ -417,7 +420,7 @@ begin
             DSHISTORICO_interno.DataSet.fieldbyname('status').AsString := 'E';
             DSHISTORICO_interno.DataSet.Post;
 
-            dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' +
+            dm.SQLConnect.Execsql('UPDATE INTERNO SET ' +
               'st=' + qs('A') +
               ',data_saida=null' +
               ',iddestino=null' +
@@ -469,7 +472,7 @@ begin
               DSHISTORICO_interno.DataSet.fieldbyname('IDUP').AsInteger := DBLookupComboBoxUPDestino.KeyValue;
               DSHISTORICO_interno.DataSet.Post;
 
-              dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' +
+              dm.SQLConnect.Execsql('UPDATE INTERNO SET ' +
                 'st=' + qs('A') +
                 ',data_entrada=' + qs(formatdatetime('dd.mm.yyyy', date)) +
                 ',ci=' + qs(DBEditDoc.Text) +

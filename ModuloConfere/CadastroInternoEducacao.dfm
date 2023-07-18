@@ -3,13 +3,10 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
   Top = 249
   Caption = 'Cadastro da Educa'#231#227'o'
   ClientWidth = 1068
-  ExplicitWidth = 1080
+  ExplicitWidth = 1084
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 525
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 508
-      ExplicitHeight = 507
       inherited Novo: TToolButton
         ExplicitWidth = 99
       end
@@ -30,9 +27,7 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 508
       Hints.Strings = ()
-      ExplicitTop = 507
     end
   end
   inherited PanelModeloCadastro: TPanel
@@ -1077,7 +1072,6 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
             PanelHeight = 91
             PanelWidth = 926
             ExplicitWidth = 939
-            ExplicitHeight = 453
           end
         end
       end
@@ -1089,10 +1083,9 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
   end
   inherited StatusBar1: TStatusBar
     Width = 1068
-    ExplicitTop = 557
     ExplicitWidth = 1064
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     Left = 728
     Top = 0
   end
@@ -1108,7 +1101,7 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
     Left = 812
     Top = 0
   end
-  inherited SqlFaccao: TSQLQuery
+  inherited SqlFaccao: TFDQuery
     Left = 48
     Top = 0
   end

@@ -1,12 +1,9 @@
 inherited FrmMotivoEncerrarProcedimento: TFrmMotivoEncerrarProcedimento
-  Width = 590
-  Height = 164
   Caption = 'Motivo para Encerrar o Procedimento'
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 574
-    Height = 85
+    ExplicitWidth = 574
+    ExplicitHeight = 85
     object Button1: TButton
       Left = 176
       Top = 48
@@ -36,6 +33,6 @@ inherited FrmMotivoEncerrarProcedimento: TFrmMotivoEncerrarProcedimento
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 574
+    ExplicitWidth = 574
   end
 end

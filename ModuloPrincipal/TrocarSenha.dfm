@@ -1,18 +1,16 @@
 object FRMTrocarSenha: TFRMTrocarSenha
   Left = 192
   Top = 114
-  Width = 351
-  Height = 206
   Caption = 'Trocar Senha'
+  ClientHeight = 167
+  ClientWidth = 335
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 24
@@ -101,7 +99,8 @@ object FRMTrocarSenha: TFRMTrocarSenha
     Width = 75
     Height = 25
     Caption = '&Sair'
-    TabOrder = 4
     Kind = bkClose
+    NumGlyphs = 2
+    TabOrder = 4
   end
 end

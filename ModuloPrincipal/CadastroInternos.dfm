@@ -1912,7 +1912,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Top = 578
     Width = 816
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'select *'
       'from interno'
@@ -1934,8 +1934,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 112
     Top = 57
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
+  object SqlConsulta: TFDQuery
+
     Params = <>
     SQL.Strings = (
       'select '
@@ -1961,7 +1961,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
         ')'
       '  '
       ' order by nome_interno ')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 520
     Top = 8
   end
@@ -2016,7 +2016,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 604
     Top = 8
   end
-  object SqlSelectInterno: TSQLQuery
+  object SqlSelectInterno: TFDQuery
     Params = <>
     SQL.Strings = (
       'select '
@@ -2050,8 +2050,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 416
     Top = 8
   end
-  object SQLHISTORICO_interno: TSQLQuery
-    MaxBlobSize = -1
+  object SQLHISTORICO_interno: TFDQuery
+
     Params = <
       item
         DataType = ftInteger
@@ -2063,7 +2063,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       'from historico_interno'
       'where idinterno=:id_interno'
       'order by data_hora desc')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 696
     Top = 8
   end
@@ -2108,8 +2108,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 780
     Top = 8
   end
-  object SQLHISTORICOEDUCACAO: TSQLQuery
-    MaxBlobSize = -1
+  object SQLHISTORICOEDUCACAO: TFDQuery
+
     Params = <
       item
         DataType = ftInteger
@@ -2121,7 +2121,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       'from historico_estudo'
       'where id_interno=:id_interno'
       'order by data_historico desc')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 696
     Top = 40
   end
@@ -2163,8 +2163,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Left = 780
     Top = 40
   end
-  object SQLCONDENACAO_INTERNO: TSQLQuery
-    MaxBlobSize = -1
+  object SQLCONDENACAO_INTERNO: TFDQuery
+
     Params = <
       item
         DataType = ftInteger
@@ -2177,7 +2177,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       'from CONDENACAO_INTERNO'
       'where id_interno=:id_interno'
       '')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 696
     Top = 80
   end

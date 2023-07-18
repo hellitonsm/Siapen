@@ -7,7 +7,7 @@ uses
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, Grids, DBGrids,
   FMTBcd, SqlExpr, DB, DBClient, Provider, DBCtrls, ComCtrls, ToolWin,
   ActnMan, ActnCtrls, StdActns, BandActn, ExtActns, ActnList,
-  StdStyleActnCtrls, ImgList;
+  StdStyleActnCtrls, ImgList, System.Actions, System.ImageList;
 
 type
   TFrmBatePapo = class(TFrmModeloFormulario)
@@ -112,7 +112,7 @@ begin
   inherited;
   try
     IniciaTransMovimento;
-    DM.SQLConnect.ExecuteDirect(
+    DM.SQLConnect.ExecSQl(
       'insert into bate_papo (idbate_papo, idconexao, mensagem, lida, data_hora,idconexao_envio) values ('
       + '0, ' + inttostr(GLOBAL_IDCONEXAO) + ', ' + qs(MemoMensagem.Lines.Text) + ', ''N'', current_timestamp,' +
       DsFuncionario.DataSet.fieldbyname('IDCONEXAO').AsString + ')');
@@ -158,7 +158,7 @@ begin
 
     IniciaTransMovimento;
 
-    DM.SQLConnect.ExecuteDirect('update bate_papo b set b.data_hora_leitura=current_timestamp, b.lida=''S'' where idbate_papo='
+    DM.SQLConnect.Execsql('update bate_papo b set b.data_hora_leitura=current_timestamp, b.lida=''S'' where idbate_papo='
       + SqlLeitura.fieldbyname('idbate_papo').AsString);
     FinalizaTransMovimento;
     MemoHistorico.Lines.Add('.......................................');

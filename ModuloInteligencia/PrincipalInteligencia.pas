@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, jpeg, ExtCtrls, Menus, ImgList, FMTBcd, DB, DBClient,
-  Provider, SqlExpr, dbcgrids, DBCtrls, Buttons, ComCtrls, Grids, DBGrids;
+  Provider, SqlExpr, dbcgrids, DBCtrls, Buttons, ComCtrls, Grids, DBGrids,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmPrincipalInteligencia = class(TForm)
@@ -121,7 +124,7 @@ begin
 
   for iComp := 0 to Componentcount - 1 do
     if (Components[iComp] is TSQLQuery) then
-      TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
+      TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
   if (Screen.Width <= 800) and (Screen.Height <= 600) then
   begin
@@ -250,7 +253,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(Self.Caption)
+      DM.SQLConnect.Execsql('update conexao set tela_momento = ' + qs(Self.Caption)
         + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
     except
     end;

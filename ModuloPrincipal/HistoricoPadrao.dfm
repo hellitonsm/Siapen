@@ -1,20 +1,18 @@
 object Frmhistoricopadrao: TFrmhistoricopadrao
   Left = 248
   Top = 72
-  Width = 794
-  Height = 627
   Caption = 'Frmhistoricopadrao'
+  ClientHeight = 588
+  ClientWidth = 778
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 0
@@ -125,11 +123,12 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
     Left = 0
     Top = 149
     Width = 778
-    Height = 440
+    Height = 439
     Align = alClient
     Caption = 'PanelPrincipal'
     Enabled = False
     TabOrder = 1
+    ExplicitHeight = 440
     object Label53: TLabel
       Left = 10
       Top = 16
@@ -149,7 +148,6 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
       Top = 33
       Width = 91
       Height = 21
-      Date = 0.302563541663403200
       Time = 0.302563541663403200
       TabOrder = 0
     end

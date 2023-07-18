@@ -417,7 +417,7 @@ begin
           if dm.DsExecute.DataSet.IsEmpty then
           begin
             IDMOV_PROCEDIMENTOS_PRINCIPAL := DBGenerator('IDMOV_PROCEDIMENTOS');
-            DM.SQLConnect.ExecuteDirect(
+            DM.SQLConnect.Execsql(
               'insert into mov_procedimentos (idmov_procedimentos, idprocedimentos, data, hora_inicial, ' +
               'hora_final, observacao, st, data_encerramento, motivo_encerramento, id_up, idmov_ocorrencia_origem) ' +
               'values (' + inttostr(IDMOV_PROCEDIMENTOS_PRINCIPAL) + ', ' + inttostr(IDPROCEDIMENTO_NOVO) + ', '
@@ -434,7 +434,7 @@ begin
 
           IDMOV_PROCEDIMENTOS := DBGenerator('IDMOV_PROCEDIMENTOS');
           //laço para quanto tem PROCEDIMENTO_NOVO
-          DM.SQLConnect.ExecuteDirect(
+          DM.SQLConnect.Execsql(
             'insert into mov_procedimentos (idmov_procedimentos,idmov_procedimentos_principal, idprocedimentos, data, hora_inicial, ' +
             'hora_final, observacao, st, data_encerramento, motivo_encerramento, id_up, idmov_ocorrencia_origem) ' +
             'values (' + inttostr(IDMOV_PROCEDIMENTOS) + ', ' + inttostr(IDMOV_PROCEDIMENTOS_PRINCIPAL) + ', '
@@ -786,7 +786,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_procedimentos_adv (idmov_procedimentos_adv, idmov_procedimentos, idadvogado) ' +
           'values (0, ' + inttostr(IDMOV_PROCEDIMENTOS) + ', ' +
           FieldByname('idadvogado').AsString + ')');
@@ -806,7 +806,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_procedimentos_func (idmov_procedimentos_func, idmov_procedimentos, idfuncionario) ' +
           'values (0, ' + inttostr(IDMOV_OCORRENCIA) + ', ' +
           FieldByname('idfuncionario').AsString + ')');
@@ -826,7 +826,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_procedimentos_int (idmov_procedimentos_int, idmov_procedimentos, idinterno) ' +
           'values (0, ' + inttostr(IDMOV_PROCEDIMENTOS) + ', ' +
           FieldByname('idinterno').AsString + ')');
@@ -846,7 +846,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_procedimentos_vis (idmov_procedimentos_vis, idmov_procedimentos, idvisitante) ' +
           'values (0, ' + inttostr(IDMOV_PROCEDIMENTOS) + ', ' +
           FieldByname('idvisitante').AsString + ')');
@@ -876,8 +876,8 @@ begin
       DsMovFunc.DataSet.Close;
       DsMovAdv.DataSet.Close;
 
-      DM.SQLConnect.ExecuteDirect('delete from mov_ocorrencia_quest where idmov_ocorrencia = ' + IntToStr(IDMOV_OCORRENCIA));
-      DM.SQLConnect.ExecuteDirect('delete from mov_ocorrencia where idmov_ocorrencia = ' + IntToStr(IDMOV_OCORRENCIA));
+      DM.SQLConnect.Execsql('delete from mov_ocorrencia_quest where idmov_ocorrencia = ' + IntToStr(IDMOV_OCORRENCIA));
+      DM.SQLConnect.Execsql('delete from mov_ocorrencia where idmov_ocorrencia = ' + IntToStr(IDMOV_OCORRENCIA));
 
       CanClose := True;
 

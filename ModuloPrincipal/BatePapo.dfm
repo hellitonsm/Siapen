@@ -1,23 +1,26 @@
 inherited FrmBatePapo: TFrmBatePapo
   Left = 229
   Top = 54
-  Width = 882
-  Height = 561
   Caption = 'Siapen Messenger'
-  OldCreateOrder = True
+  ClientHeight = 553
+  ClientWidth = 969
   OnShow = FormShow
-  PixelsPerInch = 96
+  ExplicitWidth = 985
+  ExplicitHeight = 592
   TextHeight = 13
   inherited PanelGeral: TPanel
     Top = 42
-    Width = 866
-    Height = 481
+    Width = 969
+    Height = 511
     TabOrder = 1
+    ExplicitTop = 42
+    ExplicitWidth = 969
+    ExplicitHeight = 511
     object DBGridListaConexao: TDBGrid
-      Left = 533
+      Left = 636
       Top = 1
       Width = 332
-      Height = 291
+      Height = 321
       Align = alRight
       DataSource = DsFuncionario
       TabOrder = 1
@@ -51,8 +54,8 @@ inherited FrmBatePapo: TFrmBatePapo
     end
     object Panel1: TPanel
       Left = 1
-      Top = 292
-      Width = 864
+      Top = 322
+      Width = 967
       Height = 188
       Align = alBottom
       Caption = 'Panel1'
@@ -63,7 +66,7 @@ inherited FrmBatePapo: TFrmBatePapo
         Width = 169
         Height = 25
         Caption = 'Enviar'
-        TabOrder = 2
+        TabOrder = 1
         OnClick = Button1Click
       end
       object RadioGroupDialogo: TRadioGroup
@@ -83,46 +86,71 @@ inherited FrmBatePapo: TFrmBatePapo
       object ActionToolBar1: TActionToolBar
         Left = 1
         Top = 1
-        Width = 862
+        Width = 965
         Height = 26
         ActionManager = ActionManager1
         Caption = 'ActionToolBar1'
-        ColorMap.HighlightColor = clBtnHighlight
+        Color = clMenuBar
+        ColorMap.DisabledFontColor = 7171437
+        ColorMap.HighlightColor = clWhite
+        ColorMap.BtnSelectedFont = clBlack
         ColorMap.UnusedColor = clWhite
-        ColorMap.SelectedColor = clHighlight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
         Spacing = 0
       end
       object MemoMensagem: TRichEdit
         Left = 1
         Top = 27
-        Width = 862
+        Width = 965
         Height = 86
         Align = alTop
-        TabOrder = 1
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
       end
     end
     object MemoHistorico: TRichEdit
       Left = 1
       Top = 1
-      Width = 532
-      Height = 291
+      Width = 635
+      Height = 321
       Align = alClient
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 866
+    Width = 969
     Height = 42
     TabOrder = 0
+    ExplicitWidth = 973
+    ExplicitHeight = 42
     inherited Image2: TImage
-      Width = 864
+      Width = 971
       Height = 40
+      ExplicitWidth = 864
+      ExplicitHeight = 40
     end
     inherited LabelTitulo: TLabel
-      Left = 853
-      Width = 121
-      Height = 115
+      Left = 416
+      Top = 8
       WordWrap = True
+      ExplicitLeft = 416
+      ExplicitTop = 8
     end
     object DBText1: TDBText
       Left = 48

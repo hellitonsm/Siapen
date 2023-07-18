@@ -59,15 +59,15 @@ begin
   try
     TD.TransactionID := 0;
     TD.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD);
-    DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE SET_CONTEXT(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+    DM.SQLConnect.StartTransaction();
+    DM.SQLConnect.ExecSql('EXECUTE PROCEDURE SET_CONTEXT(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
   except //se der erro para abrir uma TransCadastro
     begin //tente uma nova
       try
         Result := False;
         TD.TransactionID := TD.TransactionID + 1;
         TD.IsolationLevel := xilREADCOMMITTED;
-        DM.SQLConnect.StartTransaction(TD);
+        DM.SQLConnect.StartTransaction();
       except
       end;
     end;
@@ -80,7 +80,7 @@ begin
     FinalizaTransCadastro;
     TD.TransactionID := TD.TransactionID + 1;
     TD.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD);
+    DM.SQLConnect.StartTransaction();
   except
   end;
 end;
@@ -90,7 +90,7 @@ begin
   try
     Result := False;
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Commit(TD);
+      DM.SQLConnect.Commit();
     Result := True;
   except
   end;
@@ -100,7 +100,7 @@ function TFrmPermaneciaScaner.CancelaTransCadastro: Boolean;
 begin
   try
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Rollback(TD);
+      DM.SQLConnect.Rollback();
   except
   end;
 

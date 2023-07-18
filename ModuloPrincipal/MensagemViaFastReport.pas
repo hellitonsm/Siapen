@@ -9,8 +9,8 @@ uses
   frxCross, frxBarcode, frxRich, frxCrypt, frxGZip, frxExportMail,
   frxExportImage, frxExportCSV, frxExportRTF, frxExportText, frxExportHTML,
   frxExportXLS, frxExportXML, frxExportPDF, frxExportODF, frxChart,
-  frxIBXComponents, frxDBSet, frxDBXComponents, frxDesgn, FMTBcd, SqlExpr,
-  Provider, DB, DBClient;
+  frxDBSet, frxDBXComponents, frxDesgn, FMTBcd, SqlExpr,
+  Provider, DB, DBClient, frxExportBaseDialog;
 
 type
   TFrmMensagemViaFastReport = class(TFrmModeloFormulario)
@@ -24,7 +24,6 @@ type
     frxDBXComponents1: TfrxDBXComponents;
     frxTIFFExport1: TfrxTIFFExport;
     frxDBDataset1: TfrxDBDataset;
-    frxIBXComponents1: TfrxIBXComponents;
     frxChartObject1: TfrxChartObject;
     frxODTExport1: TfrxODTExport;
     frxODSExport1: TfrxODSExport;

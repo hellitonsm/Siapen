@@ -14,7 +14,10 @@ uses
   DBGrids, ToolWin, FMTBcd, DB, DBClient, Provider, SqlExpr, frxDBSet,
   frxGradient, frxDock, frxDBXComponents, DBCtrls, Mask, ColorGrd,
   System.ImageList, IniFiles, System.IOUtils, RoundedPanel, progresso,
-  Threading;
+  Threading,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmModuloPrincipal = class(TForm)
@@ -705,8 +708,8 @@ begin
   for iComp := 0 to Componentcount - 1 do
   begin
 
-    if (Components[iComp] is TSQLQuery) then
-      TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
+    if (Components[iComp] is TFDQuery) then
+      TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
   end;
 
@@ -1143,7 +1146,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+      DM.SQLConnect.ExecSql('update conexao set tela_momento = ' +
         qs('Modulo Principal') + ' where idconexao=' +
         IntToStr(GLOBAL_IDCONEXAO));
     except
@@ -1601,7 +1604,7 @@ begin
 
   for iComp := 0 to Componentcount - 1 do
     if (Components[iComp] is TSQLQuery) then
-      TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
+      TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
   if (PERMISSAO_JURIDICA = '') or (PERMISSAO_JURIDICA = 'R') then
   begin
@@ -2718,7 +2721,7 @@ begin
       if Application.MessageBox('Ativar/Reabrir o procedimento.', 'Confirme',
         mb_YesNo + Mb_IconQuestion) = idYes then
       begin
-        DM.SQLConnect.ExecuteDirect
+        DM.SQLConnect.Execsql
           ('UPDATE MOV_PROCEDIMENTOS SET ST=''A'', DATA_ENCERRAMENTO=NULL,' +
           ' MOTIVO_ENCERRAMENTO=NULL WHERE IDMOV_PROCEDIMENTOS=' + vID);
         ToolButtonAtualizar.OnClick(nil);
@@ -3119,7 +3122,7 @@ begin
   if Application.MessageBox('Apagar a escala deste dia da equipe?', 'Confirme',
     mb_YesNo + Mb_IconQuestion) = idYes then
   begin
-    DM.SQLConnect.ExecuteDirect('DELETE FROM ESCALA_PLANTAO WHERE IDEQUIPE =' +
+    DM.SQLConnect.Execsql('DELETE FROM ESCALA_PLANTAO WHERE IDEQUIPE =' +
       IntToStr(DBLookupComboBoxEquipe.KeyValue) + ' AND DATA_PLANTAO = ' +
       qs(FormatDateTime('dd.mm.yyyy', DateTimePickerEscala.date)));
   end;
@@ -3273,7 +3276,7 @@ begin
     begin
       IniciaTransMovimento;
       try
-        DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+        DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
           qs(DBLookupComboBoxUP.Text) + ' where idconexao=' +
           IntToStr(GLOBAL_IDCONEXAO));
       except
@@ -3812,7 +3815,7 @@ begin
       begin
         IniciaTransMovimento;
         try
-          DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+          DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
             qs(DBLookupComboBoxUP.Text) + ' where idconexao=' +
             IntToStr(GLOBAL_IDCONEXAO));
         except
@@ -3895,7 +3898,7 @@ begin
       begin
         IniciaTransMovimento;
         try
-          DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+          DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
             qs(DBLookupComboBoxUP.Text) + ' where idconexao=' +
             IntToStr(GLOBAL_IDCONEXAO));
         except
@@ -3983,7 +3986,7 @@ begin
       begin
         IniciaTransMovimento;
         try
-          DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+          DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
             qs(DBLookupComboBoxUP.Text) + ' where idconexao=' +
             IntToStr(GLOBAL_IDCONEXAO));
         except
@@ -4071,7 +4074,7 @@ begin
       begin
         IniciaTransMovimento;
         try
-          DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+          DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
             qs(DBLookupComboBoxUP.Text) + ' where idconexao=' +
             IntToStr(GLOBAL_IDCONEXAO));
         except
@@ -4159,7 +4162,7 @@ begin
       begin
         IniciaTransMovimento;
         try
-          DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+          DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
             qs(DBLookupComboBoxUP.Text) + ' where idconexao=' +
             IntToStr(GLOBAL_IDCONEXAO));
         except
@@ -4247,7 +4250,7 @@ begin
       begin
         IniciaTransMovimento;
         try
-          DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' +
+          DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
             qs(DBLookupComboBoxUP.Text) + ' where idconexao=' +
             IntToStr(GLOBAL_IDCONEXAO));
         except

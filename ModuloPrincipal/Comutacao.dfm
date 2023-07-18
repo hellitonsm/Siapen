@@ -2,8 +2,6 @@ inherited FrmComutacao: TFrmComutacao
   Left = 223
   Top = 143
   Caption = 'Comuta'#231#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -144,8 +142,8 @@ inherited FrmComutacao: TFrmComutacao
             Top = 71
             Width = 129
             Height = 21
-            Date = 41073.216900474540000000
-            Time = 41073.216900474540000000
+            Date = 41073.000000000000000000
+            Time = 0.216900474537396800
             Enabled = False
             TabOrder = 3
             DataField = 'DATA'
@@ -159,7 +157,6 @@ inherited FrmComutacao: TFrmComutacao
             Height = 21
             DataField = 'TIPO_COMUTACAO'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'Comuta'#231#227'o'
               'Unifica'#231#227'o'
@@ -180,8 +177,8 @@ inherited FrmComutacao: TFrmComutacao
             Top = 70
             Width = 129
             Height = 21
-            Date = 41073.216900474540000000
-            Time = 41073.216900474540000000
+            Date = 41073.000000000000000000
+            Time = 0.216900474537396800
             TabOrder = 2
             DataField = 'DATA_LIBERACAO'
             DataSource = DsCadastro
@@ -334,18 +331,18 @@ inherited FrmComutacao: TFrmComutacao
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_INTERNO'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM COMUTACAO'
       'WHERE ID_INTERNO=:ID_INTERNO')
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   object SqlProcesso: TSQLQuery
     MaxBlobSize = -1

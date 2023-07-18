@@ -4,8 +4,8 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'SIAPEN'
-  ClientHeight = 703
-  ClientWidth = 1020
+  ClientHeight = 702
+  ClientWidth = 1016
   Color = clNone
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,8 +27,8 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
   object Bevel1: TBevel
     Left = 0
     Top = 0
-    Width = 1020
-    Height = 703
+    Width = 1016
+    Height = 702
     Align = alClient
     ExplicitWidth = 1163
     ExplicitHeight = 714
@@ -5571,7 +5571,7 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
     Top = 144
     Width = 1001
     Height = 558
-    ActivePage = Identificacao
+    ActivePage = TabSheet1
     Images = ImageList1
     MultiLine = True
     TabOrder = 1
@@ -11381,7 +11381,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
       object SiapenMessenger1: TMenuItem
         Caption = 'Siapen - Messenger'
         ImageIndex = 23
-        Visible = False
         OnClick = SiapenMessenger1Click
       end
       object N32: TMenuItem
@@ -12119,15 +12118,12 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
         DataSetName = 'frxDBDataset1'
       end
       item
-        DataSet = frxReport1.Sqlup
         DataSetName = 'Sqlup'
       end
       item
-        DataSet = frxReport1.sqlfichadisciplinar
         DataSetName = 'sqlfichadisciplinar'
       end
       item
-        DataSet = frxReport1.sqllistainterno
         DataSetName = 'sqllistainterno'
       end>
     Variables = <
@@ -12165,110 +12161,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
     object Data: TfrxDataPage
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
-      object Sqlup: TfrxIBXQuery
-        UserName = 'Sqlup'
-        CloseDataSource = True
-        BCDToCurrency = False
-        DataSetOptions = []
-        IgnoreDupParams = False
-        Params = <
-          item
-            Name = 'ID_UP'
-            DataType = ftInteger
-            Expression = '<ID_UP>'
-          end>
-        SQL.Strings = (
-          
-            ' SELECT u.nome_up, u.endereco, u.bairro, u.numero, u.complemento' +
-            ',u.sigla, u.cep,'
-          'c.cidade||'#39' - '#39'||c.uf as cidade                    '
-          'from unidade_penal u'
-          
-            'inner join cidade c on(c.id_cidade=u.id_cidade)                 ' +
-            '                                      '
-          'WHERE ID_UP = :ID_UP  ')
-        Database = frxReport1.Database
-        pLeft = 232
-        pTop = 128
-        Parameters = <
-          item
-            Name = 'ID_UP'
-            DataType = ftInteger
-            Expression = '<ID_UP>'
-          end>
-      end
-      object sqlfichadisciplinar: TfrxIBXQuery
-        UserName = 'sqlfichadisciplinar'
-        CloseDataSource = True
-        BCDToCurrency = False
-        DataSetOptions = []
-        IgnoreDupParams = False
-        Params = <
-          item
-            Name = 'nome_interno'
-            DataType = ftString
-            Expression = 'ComboBox1.text'
-          end>
-        SQL.Strings = (
-          'select'
-          'i.nome_interno,  i.foto, t.setor_trabalho, i.data_setor'
-          '    from interno i'
-          
-            'inner join setor_trabalho t ON (i.idsetor_trabalho = t.id_setor_' +
-            'trabalho)'
-          
-            '    where upper(i.NOME_INTERNO)||'#39' ('#39'||i.id_interno||'#39')'#39' = upper' +
-            '(:nome_interno)    ')
-        Database = frxReport1.Database
-        pLeft = 232
-        pTop = 196
-        Parameters = <
-          item
-            Name = 'nome_interno'
-            DataType = ftString
-            Expression = 'ComboBox1.text'
-          end>
-      end
-      object sqllistainterno: TfrxIBXQuery
-        UserName = 'sqllistainterno'
-        CloseDataSource = True
-        BCDToCurrency = False
-        DataSetOptions = []
-        IgnoreDupParams = False
-        Params = <
-          item
-            Name = 'ID_UP'
-            DataType = ftInteger
-            Expression = '<ID_UP>'
-          end>
-        SQL.Strings = (
-          'select'
-          'I.nome_interno,'
-          'i.id_interno                          '
-          'from interno i    '
-          'where I.ID_UP = :ID_UP'
-          'and coalesce(i.nome_interno,'#39#39')<>'#39#39
-          'order by i.nome_interno  ')
-        Database = frxReport1.Database
-        pLeft = 232
-        pTop = 276
-        Parameters = <
-          item
-            Name = 'ID_UP'
-            DataType = ftInteger
-            Expression = '<ID_UP>'
-          end>
-      end
-      object Database: TfrxIBXDatabase
-        DatabaseName = 'siap:siap'
-        LoginPrompt = False
-        Params.Strings = (
-          'user_name=SYSDBA'
-          'password=masterkey')
-        SQLDialect = 3
-        pLeft = 236
-        pTop = 36
-      end
     end
     object Page1: TfrxReportPage
       Font.Charset = DEFAULT_CHARSET
@@ -12319,7 +12211,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
           Width = 183.630180000000000000
           Height = 40.897650000000000000
           DataField = 'SIGLA'
-          DataSet = frxReport1.Sqlup
           DataSetName = 'Sqlup'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -12354,7 +12245,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
           Width = 185.196847950000000000
           Height = 151.181053540000000000
           DataField = 'FOTO'
-          DataSet = frxReport1.sqlfichadisciplinar
           DataSetName = 'sqlfichadisciplinar'
           Frame.Typ = []
           HightQuality = False
@@ -12401,7 +12291,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
           Top = 192.756030000000000000
           Width = 309.921460000000000000
           Height = 18.897650000000000000
-          DataSet = frxReport1.sqlfichadisciplinar
           DataSetName = 'sqlfichadisciplinar'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET
@@ -12420,7 +12309,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
           Top = 211.653680000000000000
           Width = 313.700990000000000000
           Height = 18.897650000000000000
-          DataSet = frxReport1.sqlfichadisciplinar
           DataSetName = 'sqlfichadisciplinar'
           DisplayFormat.DecimalSeparator = ','
           Font.Charset = DEFAULT_CHARSET

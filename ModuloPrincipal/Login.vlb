@@ -16,9 +16,6 @@ Coordinates=1402,1387,155,36
 [DM.Cdsrelation_fields]
 Coordinates=661,992,141,58
 
-[DspUP]
-Coordinates=1405,1762,55,36
-
 [DM.DSNACIONALIDADE]
 Coordinates=1156,694,160,36
 
@@ -39,9 +36,6 @@ Coordinates=952,540,125,36
 
 [DM.dsartigo_perfil]
 Coordinates=456,1282,119,36
-
-[CdsUP]
-Coordinates=230,10,103,388
 
 [DM.Dsartigo]
 Coordinates=1833,1618,86,36
@@ -160,9 +154,6 @@ Coordinates=273,992,101,58
 [DM.CDSSERIEESTUDO]
 Coordinates=495,992,156,58
 
-[CdsUPREGIAO]
-Coordinates=1147,1762,104,36
-
 [DM.SQLQuery1]
 Coordinates=522,652,105,58
 
@@ -201,9 +192,6 @@ Coordinates=1402,1079,104,36
 
 [DM.cdsmedico]
 Coordinates=10,992,99,58
-
-[CdsUPID_UP]
-Coordinates=1048,1762,92,36
 
 [DM.SqlPavilhao]
 Coordinates=202,584,106,58
@@ -298,9 +286,6 @@ Coordinates=1480,652,170,58
 [DM.CDScalcpermanencia]
 Coordinates=2144,720,162,58
 
-[Dsservidor]
-Coordinates=1402,771,76,36
-
 [DM.CdsProcedimentos]
 Coordinates=2217,652,146,58
 
@@ -309,9 +294,6 @@ Coordinates=324,788,74,58
 
 [DM.SqlOcorrencias]
 Coordinates=1468,720,126,58
-
-[CdsUPCAPITAL]
-Coordinates=840,1762,108,36
 
 [DM.cdstipodieta]
 Coordinates=2027,720,107,58
@@ -345,9 +327,6 @@ Coordinates=873,856,79,58
 
 [DM.CDSFUNCAOINTERNO]
 Coordinates=10,924,176,58
-
-[CdsUPNOME_UP]
-Coordinates=721,1762,118,36
 
 [DM.CdsEquipe]
 Coordinates=384,992,101,58
@@ -403,9 +382,6 @@ Coordinates=918,584,95,58
 [DM.SQLenfermidade]
 Coordinates=1999,856,135,58
 
-[CdsUPCEP]
-Coordinates=632,1762,81,36
-
 [DM.dsenfermidade]
 Coordinates=1607,1233,123,36
 
@@ -427,9 +403,6 @@ Coordinates=192,720,137,58
 [DM.cdsenfermidade]
 Coordinates=665,584,129,58
 
-[CdsUPNUMERO]
-Coordinates=513,1762,111,36
-
 [DM.SqlHorarioFuncionario]
 Coordinates=1806,992,166,58
 
@@ -439,17 +412,11 @@ Coordinates=1833,617,113,36
 [DM.CdsUP]
 Coordinates=10,584,78,58
 
-[CdsUPFOTO]
-Coordinates=414,1762,90,36
-
 [DM.dstipodieta]
 Coordinates=952,694,101,36
 
 [DM.Sqltiposaidao]
 Coordinates=987,652,116,58
-
-[CdsUPCONTATO]
-Coordinates=295,1762,117,36
 
 [GroupBoxLocal]
 Coordinates=2253,788,103,58
@@ -459,9 +426,6 @@ Coordinates=1332,788,163,58
 
 [DM.DsMovProcDetalhado]
 Coordinates=591,1378,163,36
-
-[SqlUP]
-Coordinates=228,856,51,58
 
 [DM.CdsCondicaoInterno]
 Coordinates=1102,720,155,58
@@ -520,12 +484,6 @@ Coordinates=941,720,151,58
 [DM.SqlInterno]
 Coordinates=1079,856,97,58
 
-[CdsUPFONE]
-Coordinates=196,1762,90,36
-
-[CdsUPID_CIDADE]
-Coordinates=67,1762,123,36
-
 [DM.dscurso]
 Coordinates=346,1666,83,36
 
@@ -581,9 +539,6 @@ Coordinates=2015,652,192,58
 [DM.DsPostoTrabalho]
 Coordinates=1137,1378,137,36
 
-[CdsUPCOMPLEMENTO]
-Coordinates=2283,56,154,36
-
 [DM.Cdstiposaidao]
 Coordinates=1202,788,120,58
 
@@ -596,14 +551,8 @@ Coordinates=533,584,122,58
 [DM.DsEscalaPlantao]
 Coordinates=1156,1079,136,36
 
-[CdsUPSIGLA]
-Coordinates=2283,111,93,36
-
 [DM.SqlExecute]
 Coordinates=658,788,103,58
-
-[DsUP]
-Coordinates=50,154,48,36
 
 [DM.DSlivro]
 Coordinates=0,1224,80,36
@@ -619,9 +568,6 @@ Coordinates=1896,856,93,58
 
 [DM.SQLestado]
 Coordinates=2141,788,102,58
-
-[CdsUPBAIRRO]
-Coordinates=2283,166,104,36
 
 [DM.dsEscolta]
 Coordinates=772,1666,94,36
@@ -659,9 +605,6 @@ Coordinates=292,603,107,36
 [Dspservidor]
 Coordinates=2283,221,83,36
 
-[CdsUPENDERECO]
-Coordinates=2283,276,127,36
-
 [DM.DsFuncionario]
 Coordinates=722,309,121,36
 
@@ -670,9 +613,6 @@ Coordinates=735,924,98,58
 
 [DM.SqlTurma]
 Coordinates=98,584,94,58
-
-[CdsUPFAX]
-Coordinates=2283,331,80,36
 
 [DM.CdsExecute]
 Coordinates=962,856,107,58
@@ -726,5 +666,14 @@ Coordinates=1833,232,90,36
 Coordinates=2082,924,143,58
 
 []
-Coordinates=2283,386,77,36
+Coordinates=230,10,103,388
+
+[Dslservidor]
+Coordinates=1402,771,76,36
+
+[DslUP]
+Coordinates=50,154,48,36
+
+[SqllUP]
+Coordinates=228,856,51,58
 

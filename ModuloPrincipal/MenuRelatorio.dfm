@@ -21,9 +21,9 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
   object Label1: TLabel
     Left = 8
     Top = 13
-    Width = 168
+    Width = 172
     Height = 13
-    Caption = 'c:\...\embarcadero\studio\22.0\bin'
+    Caption = 'C:\...\Embarcadero\Studio\22.0\bin'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -32,7 +32,7 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     ParentFont = False
   end
   object Button1: TButton
-    Left = 237
+    Left = 235
     Top = 366
     Width = 97
     Height = 25
@@ -40,13 +40,13 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     Caption = 'Visualizar'
     TabOrder = 5
     OnClick = Button1Click
-    ExplicitLeft = 235
+    ExplicitLeft = 233
     ExplicitTop = 365
   end
   object ListBox1: TListBox
     Left = 568
     Top = 368
-    Width = 39
+    Width = 35
     Height = 25
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clBtnFace
@@ -60,8 +60,6 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     PopupMenu = PopupMenu1
     TabOrder = 6
     Visible = False
-    ExplicitWidth = 35
-    ExplicitHeight = 24
   end
   object DirectoryListBox1: TDirectoryListBox
     Left = 8
@@ -91,7 +89,7 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
   object FileListBox2: TFileListBox
     Left = 216
     Top = 28
-    Width = 407
+    Width = 403
     Height = 323
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clWhite
@@ -103,13 +101,11 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     PopupMenu = PopupMenu1
     TabOrder = 1
     OnDblClick = Button1Click
-    ExplicitWidth = 403
-    ExplicitHeight = 322
   end
   object FileEdit: TEdit
     Left = 216
     Top = 5
-    Width = 407
+    Width = 403
     Height = 19
     Anchors = [akLeft, akTop, akRight]
     Ctl3D = False
@@ -122,7 +118,6 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     ParentFont = False
     TabOrder = 0
     Text = '*.fr3'
-    ExplicitWidth = 403
   end
   object DirectoryListBoxTeste: TDirectoryListBox
     Left = 16
@@ -484,10 +479,6 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     MemoParentFont = False
     Left = 208
     Top = 104
-  end
-  object frxIBXComponents1: TfrxIBXComponents
-    Left = 408
-    Top = 240
   end
   object frxChartObject1: TfrxChartObject
     Left = 464

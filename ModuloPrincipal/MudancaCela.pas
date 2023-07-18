@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, Buttons, Menus, System.ImageList;
+  ToolWin, Mask, Buttons, Menus, System.ImageList, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMudancaCela = class(TFrmModeloCadastro)
@@ -1028,7 +1031,7 @@ begin
             DBLookupComboBoxorigem.KeyValue;
           DSHISTORICO_interno.DataSet.Post;
           { ATUALIZANDO A CELA CADASTRO DO INTERNO }
-          dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' + 'idpavilhao=' +
+          dm.SQLConnect.Execsql('UPDATE INTERNO SET ' + 'idpavilhao=' +
             fieldbyname('ID_PAVILHAO_NOVO').Asstring + ',idgaleria=' +
             fieldbyname('ID_GALERIA_NOVO').Asstring + ',idsolario=' +
             fieldbyname('ID_SOLARIO_NOVO').Asstring + ',idcela=' +
@@ -1037,7 +1040,7 @@ begin
             fieldbyname('id_interno').Asstring);
 
           { DEIXANDO A TRANSFERENCIA CONFIRMADA }
-          dm.SQLConnect.ExecuteDirect(' UPDATE MUDANCA_CELA a ' +
+          dm.SQLConnect.Execsql(' UPDATE MUDANCA_CELA a ' +
             'SET a.CONFIRMADA = ''S'' ' + 'WHERE ' + 'a.ID_MUDANCA_CELA = ' +
             DsCadastro.DataSet.fieldbyname('ID_MUDANCA_CELA').Asstring);
           ProgressBarAguarde.Position := Recno;

@@ -1570,7 +1570,6 @@ object TelaLogin: TTelaLogin
       Enabled = False
       KeyField = 'ID_UP'
       ListField = 'NOME_UP'
-      ListSource = DsUP
       TabOrder = 0
       OnClick = DBLookupComboBox1Click
     end
@@ -1652,15 +1651,13 @@ object TelaLogin: TTelaLogin
       OnExit = Edit1Exit
     end
   end
-  object Sqlservidor: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object Sqlservidor: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select * from funcionario'
       
         'left join perfil_usuario on (perfil_usuario.id_perfil_usuario = ' +
         'funcionario.id_perfil_usuario)')
-    SQLConnection = DM.SQLConnect
     Left = 552
     Top = 104
   end
@@ -1681,90 +1678,17 @@ object TelaLogin: TTelaLogin
     Left = 636
     Top = 104
   end
-  object SqlUP: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object DataSource1: TDataSource
+    DataSet = SqlUP
+    Left = 605
+    Top = 155
+  end
+  object SqlUP: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * FROM UNIDADE_PENAL'
       'order by nome_up')
-    SQLConnection = DM.SQLConnect
-    Left = 552
-    Top = 152
-  end
-  object DspUP: TDataSetProvider
-    DataSet = SqlUP
-    Left = 580
-    Top = 152
-  end
-  object CdsUP: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'DspUP'
-    Left = 608
-    Top = 152
-    object CdsUPID_UP: TIntegerField
-      FieldName = 'ID_UP'
-      Required = True
-    end
-    object CdsUPNOME_UP: TStringField
-      FieldName = 'NOME_UP'
-      Size = 50
-    end
-    object CdsUPENDERECO: TStringField
-      FieldName = 'ENDERECO'
-      Size = 50
-    end
-    object CdsUPNUMERO: TStringField
-      FieldName = 'NUMERO'
-      Size = 30
-    end
-    object CdsUPBAIRRO: TStringField
-      FieldName = 'BAIRRO'
-      Size = 50
-    end
-    object CdsUPCOMPLEMENTO: TStringField
-      FieldName = 'COMPLEMENTO'
-      Size = 50
-    end
-    object CdsUPCEP: TStringField
-      FieldName = 'CEP'
-      Size = 8
-    end
-    object CdsUPID_CIDADE: TIntegerField
-      FieldName = 'ID_CIDADE'
-    end
-    object CdsUPFONE: TStringField
-      FieldName = 'FONE'
-      Size = 10
-    end
-    object CdsUPFAX: TStringField
-      FieldName = 'FAX'
-      Size = 10
-    end
-    object CdsUPCONTATO: TStringField
-      FieldName = 'CONTATO'
-      Size = 50
-    end
-    object CdsUPFOTO: TStringField
-      FieldName = 'FOTO'
-      Size = 16386
-    end
-    object CdsUPCAPITAL: TStringField
-      FieldName = 'CAPITAL'
-      Size = 30
-    end
-    object CdsUPREGIAO: TStringField
-      FieldName = 'REGIAO'
-      Size = 50
-    end
-    object CdsUPSIGLA: TStringField
-      FieldName = 'SIGLA'
-      Size = 50
-    end
-  end
-  object DsUP: TDataSource
-    DataSet = CdsUP
-    Left = 636
-    Top = 152
+    Left = 549
+    Top = 155
   end
 end

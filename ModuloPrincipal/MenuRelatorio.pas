@@ -8,7 +8,7 @@ uses
   frxClass, frxADOComponents, frxBarcode, frxRich, frxExportCSV,
   frxExportImage, frxExportMail, frxGZip, frxCrypt, frxDesgn, frxExportODF,
   frxExportPDF, frxExportXML, frxExportXLS, frxExportHTML, frxExportText,
-  frxExportRTF, frxChart, frxDBSet, frxIBXComponents, FMTBcd,
+  frxExportRTF, frxChart, frxDBSet,  FMTBcd,
   SqlExpr, Provider, DB, DBClient, Menus, FileCtrl, frxDBXComponents, Mask,
   frxExportXLSX, frxExportDOCX, frxExportBaseDialog;
 
@@ -40,7 +40,6 @@ type
     frxCheckBoxObject1: TfrxCheckBoxObject;
     Button1: TButton;
     frxDesigner1: TfrxDesigner;
-    frxIBXComponents1: TfrxIBXComponents;
     frxChartObject1: TfrxChartObject;
     ListBox1: TListBox;
     DsCadastro: TDataSource;
@@ -91,7 +90,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(Self.Caption)
+      DM.SQLConnect.ExecSql('update conexao set tela_momento = ' + qs(Self.Caption)
         + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
     except
     end;
@@ -139,7 +138,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(copy(FileListBox2.FileName, 1, 99))
+      DM.SQLConnect.ExecSql('update conexao set tela_momento = ' + qs(copy(FileListBox2.FileName, 1, 99))
         + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
     except
     end;

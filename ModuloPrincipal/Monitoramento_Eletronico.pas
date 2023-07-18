@@ -292,7 +292,7 @@ begin
   DSHISTORICO_interno.DataSet.fieldbyname('IDUP').AsInteger := GLOBAL_ID_UP;
   DSHISTORICO_interno.DataSet.fieldbyname('ID_FUNCIONARIO').AsInteger := GLOBAL_ID_FUNCIONARIO;
   DSHISTORICO_interno.DataSet.Post;
-  DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+  DM.SQLConnect.Execsql('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
   CDSHISTORICO_interno.ApplyUpdates(-1);
 
   FinalizaTransMovimento;

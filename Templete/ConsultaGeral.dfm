@@ -877,13 +877,13 @@ object FrmConsultaGeral: TFrmConsultaGeral
       TabOrder = 0
     end
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
+  object SqlConsulta: TFDQuery
+
     Params = <>
     SQL.Strings = (
       'select * from interno'
       'where id_interno = -1')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 224
     Top = 44
   end
@@ -904,8 +904,8 @@ object FrmConsultaGeral: TFrmConsultaGeral
     Left = 308
     Top = 44
   end
-  object SqlCadastro: TSQLQuery
-    MaxBlobSize = -1
+  object SqlCadastro: TFDQuery
+
     Params = <
       item
         DataType = ftInteger
@@ -917,7 +917,7 @@ object FrmConsultaGeral: TFrmConsultaGeral
       'select *'
       'from interno'
       'where id_interno=:id_interno')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 224
     Top = 104
   end

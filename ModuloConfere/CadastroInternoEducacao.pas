@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, jpeg, dbcgrids, Menus, adpDBDateTimePicker, System.ImageList;
+  ToolWin, jpeg, dbcgrids, Menus, adpDBDateTimePicker, System.ImageList,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmCadastroInternoEducacao = class(TFrmModeloInterno)
@@ -575,7 +578,7 @@ procedure TFrmCadastroInternoEducacao.BitBtn3Click(Sender: TObject);
 var
 t, turma, portaria:String;
 strArray  : TStringArray;
-sqlfind : TSqlQuery;
+sqlfind : TFDQuery;
 begin
   inherited;
   {Inserir Historico Setor Trabalho}
@@ -600,8 +603,8 @@ begin
     begin
       turma := strArray[0];
       portaria := strArray[1];
-      sqlfind:= TSqlQuery.Create(nil);
-      sqlfind.SQLConnection := DM.SQLConnect;
+      sqlfind:= TFDQuery.Create(nil);
+      sqlfind.Connection := DM.SQLConnect;
       sqlfind.SQL.Text := 'SELECT ID_PORTARIA_EDUCACAO FROM PORTARIA_EDUCACAO where TURMA = :turma and PORTARIA = :portaria and ID_INTERNO = :interno;';
       Sqlfind.ParamByName('turma').AsString := turma;
       Sqlfind.ParamByName('portaria').AsString := portaria;

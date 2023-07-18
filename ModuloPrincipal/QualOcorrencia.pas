@@ -121,7 +121,7 @@ begin
 
     IDMOV_OCORRENCIA := DBGenerator('IDMOV_OCORRENCIA');
 
-    DM.SQLConnect.ExecuteDirect('insert into mov_ocorrencia (idmov_ocorrencia,idocorrencia,data,hora,descricao,idmov_procedimentos) ' +
+    DM.SQLConnect.Execsql('insert into mov_ocorrencia (idmov_ocorrencia,idocorrencia,data,hora,descricao,idmov_procedimentos) ' +
       'values (' + inttostr(IDMOV_OCORRENCIA) + ',' + DsOcorrencia.DataSet.FieldByname('idocorrencia').AsString +
       ',cast(current_date as timestamp),current_time,' +
       Qs(DsOcorrencia.DataSet.FieldByname('descricao').AsString) + ',' + inttostr(IDMOV_PROCEDIMENTOS) + ')');
@@ -137,7 +137,7 @@ begin
         First;
         while not Eof do
         begin
-          DM.SQLConnect.ExecuteDirect(
+          DM.SQLConnect.Execsql(
             'insert into mov_ocorrencia_quest (idmov_ocorrencia_quest, idmov_ocorrencia, idquestionamento, pergunta, tipo_resposta, resposta_default) ' +
             'values (0, ' + inttostr(IDMOV_OCORRENCIA) + ', ' +
             FieldByname('idquestionamento').AsString + ', ' +
@@ -193,7 +193,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_ocorrencia_adv (idmov_ocorrencia_adv, idmov_ocorrencia, idadvogado) ' +
           'values (0, ' + inttostr(IDMOV_OCORRENCIA) + ', ' +
           FieldByname('idadvogado').AsString + ')');
@@ -212,7 +212,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_ocorrencia_func (idmov_ocorrencia_func, idmov_ocorrencia, idfuncionario) ' +
           'values (0, ' + inttostr(IDMOV_OCORRENCIA) + ', ' +
           FieldByname('idfuncionario').AsString + ')');
@@ -231,7 +231,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_ocorrencia_int (idmov_ocorrencia_int, idmov_ocorrencia, idinterno) ' +
           'values (0, ' + inttostr(IDMOV_OCORRENCIA) + ', ' +
           FieldByname('idinterno').AsString + ')');
@@ -250,7 +250,7 @@ begin
       First;
       while not Eof do
       begin
-        DM.SQLConnect.ExecuteDirect(
+        DM.SQLConnect.Execsql(
           'insert into mov_ocorrencia_vis (idmov_ocorrencia_vis, idmov_ocorrencia, idvisitante) ' +
           'values (0, ' + inttostr(IDMOV_OCORRENCIA) + ', ' +
           FieldByname('idvisitante').AsString + ')');

@@ -1,19 +1,22 @@
 inherited FrmQualOcorrencia: TFrmQualOcorrencia
   Left = 274
   Top = 247
-  VertScrollBar.Range = 0
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Qual Ocorrencia:'
   ClientHeight = 121
   ClientWidth = 684
   OnShow = FormShow
-  PixelsPerInch = 96
+  ExplicitWidth = 700
+  ExplicitHeight = 160
   TextHeight = 13
   inherited PanelGeral: TPanel
     Top = 40
     Width = 684
     Height = 81
+    ExplicitTop = 40
+    ExplicitWidth = 684
+    ExplicitHeight = 81
     object DBGridOcorrencia: TDBGrid
       Left = 1
       Top = 1
@@ -70,8 +73,6 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
         Height = 25
         Caption = 'Conf&irma'
         Default = True
-        TabOrder = 0
-        OnClick = BitBtnConfirmaClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -90,6 +91,8 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
           333A333333333333333338330000333333333333333333333333333333333333
           0000}
         NumGlyphs = 2
+        TabOrder = 0
+        OnClick = BitBtnConfirmaClick
       end
       object BitBtnCancela: TBitBtn
         Left = 25
@@ -97,9 +100,6 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
         Width = 150
         Height = 25
         Caption = 'Ca&ncela'
-        ModalResult = 3
-        TabOrder = 1
-        OnClick = BitBtnCancelaClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -117,19 +117,27 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
           38F338F300003333333333333919333333388333338FFF830000333333333333
           3333333333333333333888330000333333333333333333333333333333333333
           0000}
+        ModalResult = 3
         NumGlyphs = 2
+        TabOrder = 1
+        OnClick = BitBtnCancelaClick
       end
     end
   end
   inherited PanelTitulo: TPanel
     Width = 684
     Height = 40
+    ExplicitWidth = 684
+    ExplicitHeight = 40
     inherited Image2: TImage
       Width = 682
       Height = 38
+      ExplicitWidth = 682
+      ExplicitHeight = 38
     end
     inherited LabelTitulo: TLabel
       Top = 8
+      ExplicitTop = 8
     end
   end
   object DsOcorrencia: TDataSource

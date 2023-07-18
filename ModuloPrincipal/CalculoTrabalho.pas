@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
   FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, DBCtrls,
-  ModeloCadastro, jpeg, System.ImageList;
+  ModeloCadastro, jpeg, System.ImageList, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 
 type
@@ -134,15 +137,15 @@ begin
   try
     TD.TransactionID := 0;
     TD.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD);
-    DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+    DM.SQLConnect.StartTransaction();
+    DM.SQLConnect.ExecSQl('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
   except //se der erro para abrir uma TransCadastro
     begin //tente uma nova
       try
         Result := False;
         TD.TransactionID := TD.TransactionID + 1;
         TD.IsolationLevel := xilREADCOMMITTED;
-        DM.SQLConnect.StartTransaction(TD);
+        DM.SQLConnect.StartTransaction();
       except
       end;
     end;
@@ -155,7 +158,7 @@ begin
     FinalizaTransCadastro;
     TD.TransactionID := TD.TransactionID + 1;
     TD.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD);
+    DM.SQLConnect.StartTransaction();
   except
   end;
 end;
@@ -165,7 +168,7 @@ begin
   try
     Result := False;
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Commit(TD);
+      DM.SQLConnect.Commit();
     Result := True;
   except
   end;
@@ -175,7 +178,7 @@ function TFrmCalculoTrabalho.CancelaTransCadastro: Boolean;
 begin
   try
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Rollback(TD);
+      DM.SQLConnect.Rollback();
   except
   end;
 

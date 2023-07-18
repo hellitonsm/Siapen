@@ -25,7 +25,6 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 695
     object ToolBarModeloCadastro: TToolBar
       Left = 0
       Top = 36
@@ -94,7 +93,6 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
       Height = 34
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 695
       DesignSize = (
         699
         34)

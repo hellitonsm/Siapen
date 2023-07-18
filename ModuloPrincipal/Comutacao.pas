@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, Mask, DBCtrls, DB, DBClient, Provider,
   SqlExpr, ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls,
-  ToolWin, adpDBDateTimePicker, Buttons;
+  ToolWin, adpDBDateTimePicker, Buttons, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmComutacao = class(TFrmModeloCadastro)
@@ -113,7 +116,7 @@ begin
     try
       try
         IniciaTransMovimento;
-        DM.SQLConnect.ExecuteDirect('INSERT INTO VINC_COMUTACAO (ID_VINC_COMUTACAO,ID_COMUTACAO,IDPROCESSO) VALUES (0,'
+        DM.SQLConnect.ExecSql('INSERT INTO VINC_COMUTACAO (ID_VINC_COMUTACAO,ID_COMUTACAO,IDPROCESSO) VALUES (0,'
           + DsCadastro.DataSet.fieldbyname('ID_COMUTACAO').AsString + ','
           + VarToStr(PROCESSO) + ')');
       except
@@ -231,7 +234,7 @@ begin
     try
       try
         IniciaTransMovimento;
-        DM.SQLConnect.ExecuteDirect('DELETE FROM VINC_COMUTACAO WHERE ID_VINC_COMUTACAO = '
+        DM.SQLConnect.ExecSql('DELETE FROM VINC_COMUTACAO WHERE ID_VINC_COMUTACAO = '
           + DsProcesso.DataSet.fieldbyname('ID_VINC_COMUTACAO').AsString);
       except
       end;

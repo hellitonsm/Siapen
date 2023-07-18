@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ModeloFormulario, ExtCtrls, StdCtrls;
+  Dialogs, ModeloFormulario, ExtCtrls, StdCtrls, Vcl.Imaging.jpeg;
 
 type
   TFrmMotivoEncerrarProcedimento = class(TFrmModeloFormulario)
@@ -36,7 +36,7 @@ begin
   if Application.MessageBox('Encerrar o procedimento?',
     'Confirme', mb_YesNo + Mb_IconQuestion) = idYes then
   begin
-    dm.SQLConnect.ExecuteDirect('UPDATE MOV_PROCEDIMENTOS SET ST=''E'', DATA_ENCERRAMENTO=CURRENT_TIMESTAMP,'
+    dm.SQLConnect.ExecSql('UPDATE MOV_PROCEDIMENTOS SET ST=''E'', DATA_ENCERRAMENTO=CURRENT_TIMESTAMP,'
       + ' MOTIVO_ENCERRAMENTO=' + QS(Edit1.Text) + ' WHERE IDMOV_PROCEDIMENTOS=' + IntToStr(IDMOV_PROCEDIMENTOS));
     ModalResult := mrOk;
   end;

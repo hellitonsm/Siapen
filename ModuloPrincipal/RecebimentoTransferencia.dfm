@@ -1,20 +1,22 @@
 inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
   Top = 134
-  Width = 891
-  Height = 643
   Caption = 'Conferir Transfer'#234'ncia Recebida'
   Menu = MainMenu1
-  OldCreateOrder = True
   WindowState = wsMaximized
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 875
+    Width = 944
     Height = 40
     Align = alTop
+    ExplicitWidth = 875
+    ExplicitHeight = 40
     inherited ToolBarModeloCadastro: TToolBar
       Width = 795
       Height = 40
+      ExplicitWidth = 795
+      ExplicitHeight = 40
       inherited Novo: TToolButton
         Wrap = False
         Visible = False
@@ -26,27 +28,37 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
         ImageIndex = 36
         Wrap = False
         Visible = False
+        ExplicitLeft = 113
+        ExplicitTop = 0
       end
       inherited Cancelar: TToolButton
         Left = 220
         Top = 0
         Wrap = False
         Visible = False
+        ExplicitLeft = 220
+        ExplicitTop = 0
       end
       inherited Salvar: TToolButton
         Left = 327
         Top = 0
         Wrap = False
         Visible = False
+        ExplicitLeft = 327
+        ExplicitTop = 0
       end
       inherited Excluir: TToolButton
         Left = 434
         Top = 0
         Wrap = False
+        ExplicitLeft = 434
+        ExplicitTop = 0
       end
       inherited Fechar: TToolButton
         Left = 541
         Top = 0
+        ExplicitLeft = 541
+        ExplicitTop = 0
       end
     end
     inherited DBNavigator1: TDBNavigator
@@ -56,30 +68,49 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       Height = 40
       Align = alRight
       Hints.Strings = ()
+      ExplicitLeft = 795
+      ExplicitTop = 0
+      ExplicitWidth = 80
+      ExplicitHeight = 40
     end
   end
   inherited PanelModeloCadastro: TPanel
     Left = 0
     Top = 72
-    Width = 875
-    Height = 494
-    inherited PageControlModeloCadastro: TPageControl
+    Width = 944
+    Height = 493
+    ExplicitLeft = 0
+    ExplicitTop = 72
+    ExplicitWidth = 944
+    ExplicitHeight = 494
+    inherited Image2: TImage
       Width = 875
-      Height = 494
+      ExplicitWidth = 875
+    end
+    inherited PageControlModeloCadastro: TPageControl
+      Width = 944
+      Height = 493
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 944
+      ExplicitHeight = 494
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 936
+        ExplicitHeight = 465
         inherited PanelCadastro: TPanel
-          Width = 867
-          Height = 466
+          Width = 936
+          Height = 465
+          ExplicitWidth = 936
+          ExplicitHeight = 466
           object PageControlTransferencia: TPageControl
             Left = 1
             Top = 1
-            Width = 865
-            Height = 464
+            Width = 934
+            Height = 463
             ActivePage = TabSheetTransferencia
             Align = alClient
             TabOrder = 0
             TabWidth = 200
+            ExplicitHeight = 464
             object TabSheetTransferencia: TTabSheet
               Caption = 'Dados do Recebimento'
               ImageIndex = 1
@@ -192,7 +223,6 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
                 DataField = 'TIPO_DOCUMENTO'
                 DataSource = DsCadastro
                 Enabled = False
-                ItemHeight = 13
                 Items.Strings = (
                   'N'#227'o Informado'
                   'Alvar'#225
@@ -438,9 +468,13 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 936
+        ExplicitHeight = 465
         inherited PanelLocalizaConsulta: TPanel
           Width = 867
           Height = 73
+          ExplicitWidth = 867
+          ExplicitHeight = 73
           object Label5: TLabel [1]
             Left = 8
             Top = 40
@@ -453,8 +487,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
             Top = 40
             Width = 113
             Height = 21
-            Date = 41070.024699270830000000
-            Time = 41070.024699270830000000
+            Date = 41070.000000000000000000
+            Time = 0.024699270827113650
             TabOrder = 1
           end
           object Button2: TButton
@@ -471,6 +505,9 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
           Top = 73
           Width = 867
           Height = 393
+          ExplicitTop = 73
+          ExplicitWidth = 867
+          ExplicitHeight = 393
           inherited DBGridConsulta: TDBGrid
             Width = 865
             Height = 198
@@ -601,29 +638,26 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 875
-    inherited Image2: TImage
-      Width = 875
-    end
+    ExplicitWidth = 875
   end
   inherited StatusBar1: TStatusBar
-    Top = 566
-    Width = 875
+    ExplicitTop = 565
+    ExplicitWidth = 944
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_transferencia_interno'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM transferencia_interno'
       'where id_transferencia_interno= :id_transferencia_interno')
     Left = 672
     Top = 88
+    ParamData = <
+      item
+        Name = 'id_transferencia_interno'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 700

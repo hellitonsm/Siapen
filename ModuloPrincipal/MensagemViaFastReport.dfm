@@ -1,7 +1,6 @@
 inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
   Left = 1017
   Top = 18
-  VertScrollBar.Range = 0
   BorderStyle = bsNone
   Caption = 'Mensagem'
   ClientHeight = 331
@@ -9,12 +8,16 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
   FormStyle = fsStayOnTop
   Position = poDefaultPosOnly
   OnClose = FormClose
-  PixelsPerInch = 96
+  ExplicitWidth = 325
+  ExplicitHeight = 331
   TextHeight = 13
   inherited PanelGeral: TPanel
     Top = 18
     Width = 325
     Height = 313
+    ExplicitTop = 18
+    ExplicitWidth = 325
+    ExplicitHeight = 313
     object Panel1: TPanel
       Left = 1
       Top = 60
@@ -32,6 +35,10 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
         OutlineVisible = True
         OutlineWidth = 121
         ThumbnailVisible = False
+        FindFmVisible = False
+        UseReportHints = True
+        OutlineTreeSortType = dtsUnsorted
+        HideScrolls = False
       end
     end
     object RadioGroupTipo: TRadioGroup
@@ -55,17 +62,22 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
       Width = 93
       Height = 25
       Caption = 'Atualizar'
+      Kind = bkRetry
+      NumGlyphs = 2
       TabOrder = 2
       OnClick = BitBtn1Click
-      Kind = bkRetry
     end
   end
   inherited PanelTitulo: TPanel
     Width = 325
     Height = 18
+    ExplicitWidth = 325
+    ExplicitHeight = 18
     inherited Image2: TImage
       Width = 323
       Height = 16
+      ExplicitWidth = 323
+      ExplicitHeight = 16
     end
     inherited LabelTitulo: TLabel
       Left = 13
@@ -74,6 +86,10 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
       Height = 15
       Caption = ''
       Font.Height = -13
+      ExplicitLeft = 13
+      ExplicitTop = 1
+      ExplicitWidth = 3
+      ExplicitHeight = 15
     end
     inherited Image3: TImage
       Left = 276
@@ -82,6 +98,9 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
       Proportional = True
       Stretch = True
       Visible = False
+      ExplicitLeft = 276
+      ExplicitWidth = 29
+      ExplicitHeight = 28
     end
     object ToolBar1: TToolBar
       Left = 203
@@ -93,7 +112,6 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
       ButtonHeight = 29
       ButtonWidth = 35
       Caption = 'ToolBar1'
-      Flat = True
       Images = DM.ImageListCorel2
       TabOrder = 0
       Transparent = True
@@ -153,13 +171,17 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     DefaultBottomMargin = 10.000000000000000000
     DefaultPaperSize = 9
     DefaultOrientation = poPortrait
+    GradientEnd = 11982554
+    GradientStart = clWindow
+    TemplatesExt = 'fr3'
     Restrictions = []
     RTLLanguage = False
+    MemoParentFont = False
     Left = 136
     Top = 160
   end
   object frxReport1: TfrxReport
-    Version = '4.3.6'
+    Version = '2022.1.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -192,27 +214,49 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      MirrorMode = []
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Height = 22.677180000000000000
         Top = 18.897650000000000000
         Width = 718.110700000000000000
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Height = 22.677180000000000000
         Top = 102.047310000000000000
         Width = 718.110700000000000000
         RowCount = 0
       end
       object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Height = 22.677180000000000000
         Top = 185.196970000000000000
         Width = 718.110700000000000000
         object Memo1: TfrxMemoView
+          AllowVectorExport = True
           Left = 642.520100000000000000
           Width = 75.590600000000000000
           Height = 18.897650000000000000
+          Frame.Typ = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[Page#]')
         end
       end
@@ -226,18 +270,17 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     Left = 480
     Top = 112
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
     CloseDataSource = False
+    BCDToCurrency = False
+    DataSetOptions = []
     Left = 424
     Top = 248
-  end
-  object frxIBXComponents1: TfrxIBXComponents
-    Left = 336
-    Top = 296
   end
   object frxChartObject1: TfrxChartObject
     Left = 392
@@ -247,9 +290,13 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    CreationTime = 0.000000000000000000
+    DataOnly = False
+    PictureType = gpPNG
+    OpenAfterExport = False
     Background = True
     Creator = 'FastReport'
-    EmptyLines = True
+    Language = 'en'
     SuppressPageHeadersFooters = False
     Left = 344
     Top = 248
@@ -258,9 +305,13 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    CreationTime = 0.000000000000000000
+    DataOnly = False
+    PictureType = gpPNG
+    OpenAfterExport = False
     Background = True
     Creator = 'FastReport'
-    EmptyLines = True
+    Language = 'en'
     SuppressPageHeadersFooters = False
     Left = 312
     Top = 248
@@ -270,14 +321,28 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    EmbedFontsIfProtected = False
+    InteractiveFormsFontSubset = 'A-Z,a-z,0-9,#43-#47 '
+    OpenAfterExport = False
     PrintOptimized = False
     Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
     Author = 'FastReport'
     Subject = 'FastReport PDF export'
-    Background = False
     Creator = 'FastReport (http://www.fast-report.com)'
-    HTMLTags = True
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    PdfA = False
+    PDFStandard = psNone
+    PDFVersion = pv17
     Left = 280
     Top = 248
   end
@@ -285,10 +350,13 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     Background = True
     Creator = 'FastReport'
     EmptyLines = True
     SuppressPageHeadersFooters = False
+    RowsCount = 0
+    Split = ssNotSplit
     Left = 248
     Top = 248
   end
@@ -296,6 +364,8 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    ExportEMF = True
     AsText = False
     Background = True
     FastExport = True
@@ -309,10 +379,15 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    OpenAfterExport = False
     FixedWidth = True
     Background = False
     Centered = False
     EmptyLines = True
+    Print = False
+    PictureType = gpPNG
+    Outline = False
     Left = 184
     Top = 248
   end
@@ -320,9 +395,13 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     Frames = False
     EmptyLines = False
     OEMCodepage = False
+    UTF8 = False
+    OpenAfterExport = False
+    DeleteEmptyColumns = True
     Left = 152
     Top = 248
   end
@@ -330,10 +409,14 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
+    PictureType = gpPNG
+    OpenAfterExport = False
     Wysiwyg = True
     Creator = 'FastReport http://www.fast-report.com'
     SuppressPageHeadersFooters = False
     HeaderFooterMode = hfText
+    AutoSize = False
     Left = 120
     Top = 248
   end
@@ -341,6 +424,7 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     Left = 56
     Top = 248
   end
@@ -348,6 +432,7 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     Left = 24
     Top = 248
   end
@@ -355,8 +440,13 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     Separator = ';'
     OEMCodepage = False
+    UTF8 = False
+    OpenAfterExport = False
+    NoSysSymbols = True
+    ForcedQuotes = False
     Left = 16
     Top = 92
   end
@@ -364,6 +454,7 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     Left = 48
     Top = 92
   end
@@ -371,9 +462,14 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     ShowExportDialog = True
     SmtpPort = 25
     UseIniFile = True
+    TimeOut = 60
+    ConfurmReading = False
+    UseMAPI = SMTP
+    MAPISendFlag = 0
     Left = 80
     Top = 92
   end
@@ -401,6 +497,7 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False
+    DataOnly = False
     EscModel = 0
     GraphicFrames = False
     SaveToFile = False

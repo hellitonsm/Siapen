@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, ExtCtrls, ComCtrls, Buttons, DBCtrls, StdCtrls,
-  FMTBcd, DB, SqlExpr;
+  FMTBcd, DB, SqlExpr, Vcl.Imaging.jpeg;
 
 type
   TFrmNovaEscala = class(TFrmModeloFormulario)
@@ -74,7 +74,7 @@ begin
     Exit;
   end;
 
-  DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE SP_AGENDA_ESCALA_EQUIPE (' + inttostr(DBLookupComboBox1.KeyValue) + ','
+  DM.SQLConnect.Execsql('EXECUTE PROCEDURE SP_AGENDA_ESCALA_EQUIPE (' + inttostr(DBLookupComboBox1.KeyValue) + ','
     + Qs(FormatDateTime('dd.mm.yyyy', DateTimePickerEscala.Date)) + ')');
 
   ShowMessage('Escala Gerada Com sucesso!');

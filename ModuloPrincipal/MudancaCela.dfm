@@ -92,8 +92,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Height = 493
     ExplicitLeft = 0
     ExplicitTop = 72
-    ExplicitWidth = 905
-    ExplicitHeight = 492
+    ExplicitWidth = 909
+    ExplicitHeight = 494
     inherited Image2: TImage
       Width = 894
       ExplicitWidth = 894
@@ -102,8 +102,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       Width = 909
       Height = 493
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 905
-      ExplicitHeight = 492
+      ExplicitWidth = 909
+      ExplicitHeight = 494
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 901
         ExplicitHeight = 465
@@ -111,7 +111,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
           Width = 901
           Height = 465
           ExplicitWidth = 901
-          ExplicitHeight = 465
+          ExplicitHeight = 466
           object PageControlTransferencia: TPageControl
             Left = 1
             Top = 1
@@ -121,6 +121,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
             Align = alClient
             TabOrder = 0
             TabWidth = 200
+            ExplicitHeight = 464
             object TabSheetTransferencia: TTabSheet
               Caption = 'Dados da Mudan'#231'a'
               ImageIndex = 1
@@ -699,27 +700,26 @@ inherited FrmMudancaCela: TFrmMudancaCela
   end
   inherited StatusBar1: TStatusBar
     Width = 909
-    ExplicitTop = 564
-    ExplicitWidth = 905
+    ExplicitWidth = 909
   end
   inherited ImageListCadastro: TImageList
     Left = 832
     Top = 0
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_MUDANCA_CELA'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM MUDANCA_CELA'
       'WHERE ID_MUDANCA_CELA= :ID_MUDANCA_CELA')
     Left = 672
     Top = 88
+    ParamData = <
+      item
+        Name = 'ID_MUDANCA_CELA'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 700

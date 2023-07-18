@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, Buttons, Menus;
+  ToolWin, Mask, Buttons, Menus, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmTransferenciaInterno = class(TFrmModeloCadastro)
@@ -544,7 +547,7 @@ begin
             DSHISTORICO_interno.DataSet.fieldbyname('status').AsString := 'E';
             DSHISTORICO_interno.DataSet.Post;
 
-            dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' +
+            dm.SQLConnect.Execsql('UPDATE INTERNO SET ' +
               'st=' + qs('A') +
               ',data_saida=null' +
               ',iddestino=null' +
@@ -1191,7 +1194,7 @@ begin
 
       frmaguarde.Refresh;
 
-      CDSHISTORICO_interno.OnReconcileError := ClientDataSetReconcileError;
+    //  CDSHISTORICO_interno.OnReconcileError := ClientDataSetReconcileError;
 
       with Dsvinc_transferencia_interno.DataSet do
       begin
@@ -1223,7 +1226,7 @@ begin
             DSHISTORICO_interno.DataSet.Post;
             CDSHISTORICO_interno.ApplyUpdates(-1);
 
-            dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' +
+            dm.SQLConnect.Execsql('UPDATE INTERNO SET ' +
               'st=' + qs('I') +
               ',data_saida=' + qs(formatdatetime('dd.mm.yyy', strtodate(DBEditdata.text))) +
               ',ci=' + qs(DBEditDoc.Text) +
@@ -1244,7 +1247,7 @@ begin
               ',OBSEDUCACAO=null'
               + ' WHERE ID_INTERNO = ' + fieldbyname('id_interno').Asstring);
 
-            dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' +
+            dm.SQLConnect.Execsql('UPDATE INTERNO SET ' +
               'st=' + qs('A') +
               ',data_entrada=' + qs(formatdatetime('dd.mm.yyyy', strtodate(DBEditdata.text))) +
               ',ci=' + qs(DBEditDoc.Text) +
@@ -1326,7 +1329,7 @@ begin
 
           LblAguarde.Caption := 'Salvando... aguarde.';
 
-          dm.SQLConnect.ExecuteDirect('UPDATE TRANSFERENCIA_INTERNO SET LIBERADA=''S'', RECEBIDA=''S'''
+          dm.SQLConnect.Execsql('UPDATE TRANSFERENCIA_INTERNO SET LIBERADA=''S'', RECEBIDA=''S'''
             + ' WHERE ID_TRANSFERENCIA_INTERNO = ' + DsConsulta.DataSet.fieldbyname('ID_TRANSFERENCIA_INTERNO').AsString);
 
           Application.ProcessMessages;
@@ -1383,7 +1386,7 @@ begin
 
       frmaguarde.Refresh;
 
-      CDSHISTORICO_interno.OnReconcileError := ClientDataSetReconcileError;
+    //  CDSHISTORICO_interno.OnReconcileError := ClientDataSetReconcileError;
 
       with Dsvinc_transferencia_interno.DataSet do
       begin
@@ -1415,7 +1418,7 @@ begin
             DSHISTORICO_interno.DataSet.Post;
             CDSHISTORICO_interno.ApplyUpdates(-1);
 
-            dm.SQLConnect.ExecuteDirect('UPDATE INTERNO SET ' +
+            dm.SQLConnect.Execsql('UPDATE INTERNO SET ' +
               'st=' + qs('I') +
               ',data_saida=' + qs(formatdatetime('dd.mm.yyyy', strtodate(DBEditdata.text))) +
               ',ci=' + qs(DBEditDoc.Text) +
@@ -1486,7 +1489,7 @@ begin
 
           LblAguarde.Caption := 'Salvando... aguarde.';
 
-          dm.SQLConnect.ExecuteDirect('UPDATE TRANSFERENCIA_INTERNO SET LIBERADA=''S'', RECEBIDA=''S'' ' +
+          dm.SQLConnect.Execsql('UPDATE TRANSFERENCIA_INTERNO SET LIBERADA=''S'', RECEBIDA=''S'' ' +
             ' WHERE ID_TRANSFERENCIA_INTERNO = ' + DsConsulta.DataSet.fieldbyname('ID_TRANSFERENCIA_INTERNO').AsString);
 
           Application.ProcessMessages;

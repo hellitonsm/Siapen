@@ -1,22 +1,20 @@
 object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   Left = 0
   Top = 113
-  Width = 1024
-  Height = 566
   Caption = 'Monitoramento Eletr'#244'nico'
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   WindowState = wsMaximized
   OnShow = FormShow
   DesignSize = (
-    1008
-    528)
-  PixelsPerInch = 96
+    120
+    0)
   TextHeight = 13
   object WebBrowser1: TWebBrowser
     Left = 185
@@ -37,10 +35,11 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   object PnlTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 1008
+    Width = 120
     Height = 72
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 1008
     object Image1: TImage
       Left = 1
       Top = 1
@@ -52,10 +51,11 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   object PnlDados: TPanel
     Left = 0
     Top = 72
-    Width = 1008
+    Width = 120
     Height = 140
     Align = alTop
     TabOrder = 1
+    ExplicitWidth = 1008
     object Label1: TLabel
       Left = 157
       Top = 2
@@ -224,9 +224,6 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
       Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      OnClick = BitBtn1Click
       Glyph.Data = {
         DE010000424DDE01000000000000760000002800000024000000120000000100
         0400000000006801000000000000000000001000000000000000000000000000
@@ -245,6 +242,9 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
         3333333333338888883333330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
+      ParentFont = False
+      TabOrder = 1
+      OnClick = BitBtn1Click
     end
     object DBImage1: TDBImage
       Left = 16
@@ -269,9 +269,10 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
       Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = []
+      Kind = bkCancel
+      NumGlyphs = 2
       ParentFont = False
       TabOrder = 2
-      Kind = bkCancel
     end
     object Button3: TButton
       Left = 184
@@ -339,11 +340,13 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   end
   object Panel3: TPanel
     Left = 0
-    Top = 509
-    Width = 1008
+    Top = -19
+    Width = 120
     Height = 19
     Align = alBottom
     TabOrder = 2
+    ExplicitTop = 509
+    ExplicitWidth = 1008
     object BtnTelaCheia: TButton
       Left = 10
       Top = 3
@@ -474,11 +477,13 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   object PnlLegenda: TPanel
     Left = 184
     Top = 212
-    Width = 532
-    Height = 64
+    Width = -356
+    Height = -463
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clWhite
     TabOrder = 4
+    ExplicitWidth = 532
+    ExplicitHeight = 64
     object ImgLegenda: TImage
       Left = 1
       Top = 1
@@ -2227,18 +2232,18 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
     end
   end
   object IdHTTP1: TIdHTTP
-    MaxLineAction = maException
-    ReadTimeout = 0
-    AllowCookies = True
     ProxyParams.BasicAuthentication = False
     ProxyParams.ProxyPort = 0
     Request.ContentLength = -1
     Request.ContentRangeEnd = 0
     Request.ContentRangeStart = 0
+    Request.ContentRangeInstanceLength = -1
     Request.ContentType = 'text/html'
     Request.Accept = 'text/html, */*'
     Request.BasicAuthentication = False
     Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
     Left = 912
     Top = 8

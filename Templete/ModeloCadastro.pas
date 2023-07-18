@@ -5,8 +5,12 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
-  FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, DBCtrls, jpeg,
-  Menus, adpDBDateTimePicker, System.ImageList;
+  FMTBcd, DB, DBClient, Provider, Mask, DBCtrls, jpeg,
+  Menus, adpDBDateTimePicker, System.ImageList, FireDAC.DBX.Migrate,
+  FireDAC.Phys.Intf, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.DApt;
 
 type
   TFrmModeloCadastro = class(TForm)
@@ -30,7 +34,7 @@ type
     Label1: TLabel;
     EditLocalizar: TEdit;
     DBGridConsulta: TDBGrid;
-    SqlCadastro: TSQLQuery;
+    SqlCadastro: TFDQuery;
     DspCadastro: TDataSetProvider;
     CdsCadastro: TClientDataSet;
     DsCadastro: TDataSource;
@@ -47,12 +51,10 @@ type
     procedure ExcluirClick(Sender: TObject);
     procedure FecharClick(Sender: TObject);
     procedure DsCadastroDataChange(Sender: TObject; Field: TField);
-    procedure DBGridConsultaDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridConsultaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridConsultaTitleClick(Column: TColumn);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -66,17 +68,15 @@ type
     procedure DBEditCPFExit(Sender: TObject);
     procedure DBEditCNPJExit(Sender: TObject);
     procedure PageControlModeloCadastroChange(Sender: TObject);
-    procedure CdsCadastroFilterRecord(DataSet: TDataSet;
-      var Accept: Boolean);
+    procedure CdsCadastroFilterRecord(DataSet: TDataSet; var Accept: Boolean);
   private
     { Private declarations }
     CompLookupComboBox: array of TDBLookupComboBox;
     CompDBEdit: array of TDBEdit;
     CompClientDataSet: array of TClientDataSet;
   public
-    procedure ClientDataSetReconcileError(DataSet: TCustomClientDataSet;
-      E: EReconcileError; UpdateKind: TUpdateKind;
-      var Action: TReconcileAction);
+    procedure FDClientDataSetReconcileError(DataSet: TFDMemTable;
+  E: EFDException; UpdateKind: TFDDatSRowState; var Action: TFDDAptReconcileAction);
     procedure CorNosCampos;
     function IniciaTransCadastro: Boolean;
     function FinalizaTransCadastro: Boolean;
@@ -88,7 +88,7 @@ type
 
 var
   FrmModeloCadastro: TFrmModeloCadastro;
-  TD: TTransactionDesc; // Para os Lançamentos .
+  TD: TFDDBXTransactionDesc; // Para os Lançamentos .
 
 implementation
 
@@ -114,8 +114,8 @@ begin
   PageControlModeloCadastro.ActivePageIndex := 0;
   StatusBar1.Panels[1].Text := 'NOVO';
   Editar.Enabled := False;
-  Salvar.Enabled := True;
-  Cancelar.Enabled := True;
+  Salvar.Enabled := true;
+  Cancelar.Enabled := true;
   Excluir.Enabled := False;
   DsCadastro.DataSet.Append;
 
@@ -123,10 +123,10 @@ begin
 
   if assigned(CompEdit) then
   begin
-    TDBEdit(CompEdit).field.value := 0;
+    TDBEdit(CompEdit).Field.value := 0;
   end;
 
-  Salvar.Visible := True;
+  Salvar.Visible := true;
 
   CorNosCampos;
 
@@ -136,12 +136,12 @@ procedure TFrmModeloCadastro.EditarClick(Sender: TObject);
 begin
   PanelCadastro.Enabled := true;
   PageControlModeloCadastro.ActivePageIndex := 0;
-  //  IniciaTransCadastro;
+  // IniciaTransCadastro;
   StatusBar1.Panels[1].Text := 'EDIÇÃO';
   Novo.Enabled := False;
   Editar.Enabled := False;
-  Salvar.Enabled := True;
-  Cancelar.Enabled := True;
+  Salvar.Enabled := true;
+  Cancelar.Enabled := true;
   Excluir.Enabled := False;
   DsCadastro.DataSet.Edit;
   CorNosCampos;
@@ -154,27 +154,27 @@ var
 begin
 
   StatusBar1.Panels[1].Text := 'CANCELANDO';
-  Novo.Enabled := True;
-  Editar.Enabled := True;
+  Novo.Enabled := true;
+  Editar.Enabled := true;
   Salvar.Enabled := False;
-  Excluir.Enabled := True;
+  Excluir.Enabled := true;
   Cancelar.Enabled := False;
   if PageControlModeloCadastro.CanFocus then
     PageControlModeloCadastro.SetFocus;
   DsCadastro.DataSet.Cancel;
   StatusBar1.Panels[1].Text := '...';
-  cancelaTransCadastro;
+  CancelaTransCadastro;
   CorNosCampos;
   PanelCadastro.Enabled := False;
 
-  {for iComp := Low(CompClientDataSet) to High(CompClientDataSet) do
-  begin
+  { for iComp := Low(CompClientDataSet) to High(CompClientDataSet) do
+    begin
     with (CompClientDataSet[iComp] as TClientDataSet) do
     begin
-      Close;
-      Open;
+    Close;
+    Open;
     end;
-  end;}
+    end; }
 
 end;
 
@@ -193,9 +193,9 @@ begin
 
   try
     StatusBar1.Panels[1].Text := 'SALVANDO';
-    Novo.Enabled := True;
-    Editar.Enabled := True;
-    Excluir.Enabled := True;
+    Novo.Enabled := true;
+    Editar.Enabled := true;
+    Excluir.Enabled := true;
     Salvar.Enabled := False;
     Cancelar.Enabled := False;
 
@@ -206,7 +206,8 @@ begin
 
     erro_transacao := 0;
 
-    erro_transacao := erro_transacao + TClientDataSet(DsCadastro.DataSet).ApplyUpdates(0);
+    erro_transacao := erro_transacao + TClientDataSet(DsCadastro.DataSet)
+      .ApplyUpdates(0);
 
     if erro_transacao = 0 then
     begin
@@ -215,7 +216,8 @@ begin
         with (CompClientDataSet[iComp] as TClientDataSet) do
         begin
 
-          TClientDataSet(CompClientDataSet[iComp]).OnReconcileError := ClientDataSetReconcileError;
+         // TClientDataSet(CompClientDataSet[iComp]).OnReconcileError :=
+         //   FDClientDataSetReconcileError;
 
           if Active then
           begin
@@ -231,7 +233,7 @@ begin
       end;
     end;
   except
-    on e: Exception do
+    on E: Exception do
     begin
       erro_transacao := 1;
       CancelaTransCadastro;
@@ -239,7 +241,7 @@ begin
   end;
 
   if erro_transacao = 0 then
-    finalizaTransCadastro
+    FinalizaTransCadastro
   else
   begin
     CancelaTransCadastro;
@@ -258,7 +260,7 @@ begin
   EditLocalizar.Text := '';
   DBGridConsulta.DataSource.DataSet.Open;
 
-  if Assigned(ItenRecord) then
+  if assigned(ItenRecord) then
   begin
     try
       if DBGridConsulta.DataSource.DataSet.BookmarkValid(ItenRecord) then
@@ -277,8 +279,8 @@ begin
 
   StatusBar1.Panels[1].Text := 'EXCLUINDO';
 
-  if Application.MessageBox(' Excluir este registro?',
-    'Confirme.', mb_YesNo + Mb_IconQuestion) = idYes then
+  if Application.MessageBox(' Excluir este registro?', 'Confirme.',
+    mb_YesNo + Mb_IconQuestion) = idYes then
   begin
 
     try
@@ -286,7 +288,7 @@ begin
       DsCadastro.DataSet.Delete;
       if TClientDataSet(DsCadastro.DataSet).ApplyUpdates(0) = 0 then
       begin
-        finalizaTransCadastro;
+        FinalizaTransCadastro;
         ShowMessage('Registro Excluído com Sucesso!');
       end
       else
@@ -320,23 +322,23 @@ begin
   begin
 
     if not Active then
-      Exit;
+      exit;
 
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       Novo.Enabled := False;
       Editar.Enabled := False;
       Excluir.Enabled := False;
-      Salvar.Enabled := True;
-      Cancelar.Enabled := True;
+      Salvar.Enabled := true;
+      Cancelar.Enabled := true;
       TabSheetCadastro.Enabled := true;
-      Exit;
+      exit;
     end;
 
-    TabSheetCadastro.Enabled := false;
-    Novo.Enabled := True;
-    Editar.Enabled := True;
-    Excluir.Enabled := True;
+    TabSheetCadastro.Enabled := False;
+    Novo.Enabled := true;
+    Editar.Enabled := true;
+    Excluir.Enabled := true;
     Salvar.Enabled := False;
     Cancelar.Enabled := False;
 
@@ -344,17 +346,17 @@ begin
     begin
       Editar.Enabled := False;
       Excluir.Enabled := False;
-      Exit;
+      exit;
     end;
 
-   { if not ContemValor('I', PERMISSAO_CADASTRO) then
+    { if not ContemValor('I', PERMISSAO_CADASTRO) then
       Novo.Visible := False;
-    if not ContemValor('E', PERMISSAO_CADASTRO) then
-    begin
+      if not ContemValor('E', PERMISSAO_CADASTRO) then
+      begin
       Editar.Visible := False;
-     // Salvar.Visible := False;
-    end;
-    if not ContemValor('D', PERMISSAO_CADASTRO) then
+      // Salvar.Visible := False;
+      end;
+      if not ContemValor('D', PERMISSAO_CADASTRO) then
       Excluir.Visible := False; }
 
   end;
@@ -362,8 +364,7 @@ begin
 end;
 
 procedure TFrmModeloCadastro.DBGridConsultaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if (State <> [gdSelected]) and (State <> [gdSelected, gdFocused]) then
   begin
@@ -372,22 +373,22 @@ begin
 
     if odd(TDBGrid(Sender).DataSource.DataSet.Recno) then
     begin
-      TDBGrid(Sender).Canvas.Brush.color := cl3DLight;
+      TDBGrid(Sender).Canvas.Brush.Color := cl3DLight;
     end
     else
     begin
-      TDBGrid(Sender).Canvas.Brush.color := clWhite;
+      TDBGrid(Sender).Canvas.Brush.Color := clWhite;
     end;
 
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
 
   end
   else
   begin
-    TDBGrid(Sender).Canvas.Brush.color := $00854F3F;
+    TDBGrid(Sender).Canvas.Brush.Color := $00854F3F;
     TDBGrid(Sender).Canvas.Font.Color := clWhite;
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
   end;
 
@@ -402,35 +403,35 @@ end;
 procedure TFrmModeloCadastro.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if key = vk_escape then
-    close;
+  if Key = vk_escape then
+    Close;
 end;
 
 procedure TFrmModeloCadastro.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 var
-  sfechar: array[0..1000] of Char;
+  sfechar: array [0 .. 1000] of Char;
 begin
 
-  StrPCopy(sfechar, 'Fechar ' + self.Caption + '?');
+  StrPCopy(sfechar, 'Fechar ' + Self.Caption + '?');
 
   with DsCadastro.DataSet do
   begin
     CanClose := False;
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
-      if Application.MessageBox(' Cancelar inserção/edição?',
-        'Confirme.', mb_YesNo + Mb_IconQuestion) = idYes then
+      if Application.MessageBox(' Cancelar inserção/edição?', 'Confirme.',
+        mb_YesNo + Mb_IconQuestion) = idYes then
       begin
-        CanClose := True;
+        CanClose := true;
         Cancel;
       end;
     end
-    else if Application.MessageBox(sfechar,
-      'Confirme.', mb_YesNo + Mb_IconQuestion) = mrYes then
+    else if Application.MessageBox(sfechar, 'Confirme.',
+      mb_YesNo + Mb_IconQuestion) = mrYes then
     begin
-      CanClose := True;
-      Active := false;
+      CanClose := true;
+      Active := False;
     end;
   end;
 
@@ -445,8 +446,8 @@ begin
 
   SetCurrentDir(GLOBAL_PATCH_SISTEMA);
   PageControlModeloCadastro.ActivePageIndex := 0;
-  PanelTituloModeloCadastro.caption := self.caption;
-  LabelTitulo.caption := self.caption;
+  PanelTituloModeloCadastro.Caption := Self.Caption;
+  LabelTitulo.Caption := Self.Caption;
   PanelCadastro.Enabled := False;
 
   for iComp := 0 to Componentcount - 1 do
@@ -460,13 +461,13 @@ begin
       if TDBEdit(Components[iComp]).Tag = 0 then
         (Components[iComp] as TDBEdit).CharCase := ecUpperCase;
 
-
     end;
 
     if (Components[iComp] is TDBLookupComboBox) then
     begin
       SetLength(CompLookupComboBox, High(CompLookupComboBox) + 2);
-      CompLookupComboBox[High(CompLookupComboBox)] := (Components[iComp] as TDBLookupComboBox);
+      CompLookupComboBox[High(CompLookupComboBox)] :=
+        (Components[iComp] as TDBLookupComboBox);
       (Components[iComp] as TDBLookupComboBox).Color := CorCompInativo;
     end;
 
@@ -475,32 +476,33 @@ begin
       if TClientDataSet(Components[iComp]).Name <> CdsCadastro.Name then
       begin
         SetLength(CompClientDataSet, High(CompClientDataSet) + 2);
-        CompClientDataSet[High(CompClientDataSet)] := (Components[iComp] as TClientDataSet);
+        CompClientDataSet[High(CompClientDataSet)] :=
+          (Components[iComp] as TClientDataSet);
       end;
     end;
 
-    if (Components[iComp] is TSQLQuery) then
-      TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
+    if (Components[iComp] is TFDQuery) then
+      TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
     if (Components[iComp] is TadpDBDateTimePicker) then
       TadpDBDateTimePicker(Components[iComp]).Time := 0;
 
   end;
 
- { if not ContemValor('I', PERMISSAO_CADASTRO) then
+  { if not ContemValor('I', PERMISSAO_CADASTRO) then
     Novo.Visible := False;
-  if not ContemValor('E', PERMISSAO_CADASTRO) then
-  begin
+    if not ContemValor('E', PERMISSAO_CADASTRO) then
+    begin
     Editar.Visible := False;
     //Salvar.Visible := False;
-  end;
-  if not ContemValor('D', PERMISSAO_CADASTRO) then
-    Excluir.Visible := False;  }
+    end;
+    if not ContemValor('D', PERMISSAO_CADASTRO) then
+    Excluir.Visible := False; }
 
   Screen.Cursor := crDefault;
 
   Screen.Cursor := crSQLWait;
-  DsCadastro.DataSet.close;
+  DsCadastro.DataSet.Close;
   DsCadastro.DataSet.Open;
   Screen.Cursor := crDefault;
 
@@ -509,9 +511,9 @@ end;
 procedure TFrmModeloCadastro.FormShow(Sender: TObject);
 begin
   PageControlModeloCadastro.ActivePageIndex := 0;
-  //  if DsCadastro.DataSet.State in [dsinsert, dsedit] then
-  //    DsCadastro.DataSet.Cancel;
-  //  CancelarClick(nil);
+  // if DsCadastro.DataSet.State in [dsinsert, dsedit] then
+  // DsCadastro.DataSet.Cancel;
+  // CancelarClick(nil);
 
 end;
 
@@ -528,7 +530,7 @@ begin
         with (CompDBEdit[iComp] as TDBEdit) do
         begin
           try
-            if (DSCadastro.DataSet.State in [dsbrowse]) then
+            if (DsCadastro.DataSet.State in [dsbrowse]) then
               Color := CorCompInativo
             else
               Color := CorCompAtivo;
@@ -561,12 +563,12 @@ begin
       begin
         try
 
-          if (DSCadastro.DataSet.State in [dsbrowse]) then
+          if (DsCadastro.DataSet.State in [dsbrowse]) then
             Color := CorCompInativo
           else
             Color := CorCompAtivo;
 
-          if not (Enabled) then
+          if not(Enabled) then
           begin
             Color := CorCompInativo
           end;
@@ -585,15 +587,16 @@ function TFrmModeloCadastro.IniciaTransCadastro: Boolean;
 begin
   try
     TD.TransactionID := 0;
-    TD.IsolationLevel := xilREADCOMMITTED;
+    TD.IsolationLevel := xiReadCommitted;
     DM.SQLConnect.StartTransaction(TD);
-    DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE SET_CONTEXT(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
-  except //se der erro para abrir uma TransCadastro
-    begin //tente uma nova
+    DM.SQLConnect.Execsql('EXECUTE PROCEDURE SET_CONTEXT(' +
+      inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+  except // se der erro para abrir uma TransCadastro
+    begin // tente uma nova
       try
         Result := False;
         TD.TransactionID := TD.TransactionID + 1;
-        TD.IsolationLevel := xilREADCOMMITTED;
+        TD.IsolationLevel := xiReadCommitted;
         DM.SQLConnect.StartTransaction(TD);
       except
       end;
@@ -606,7 +609,7 @@ begin
   try
     FinalizaTransCadastro;
     TD.TransactionID := TD.TransactionID + 1;
-    TD.IsolationLevel := xilREADCOMMITTED;
+    TD.IsolationLevel := xiReadCommitted;
     DM.SQLConnect.StartTransaction(TD);
   except
   end;
@@ -618,7 +621,7 @@ begin
     Result := False;
     if DM.SQLConnect.InTransaction then
       DM.SQLConnect.Commit(TD);
-    Result := True;
+    Result := true;
   except
   end;
 end;
@@ -658,7 +661,7 @@ end;
 procedure TFrmModeloCadastro.DBGridConsultaKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
-  if (key = vk_return) then
+  if (Key = vk_return) then
   begin
     Editar.onclick(nil);
   end;
@@ -670,14 +673,15 @@ begin
   TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
   if EditLocalizar.Text <> '' then
   begin
-    if DBGridConsulta.datasource.dataset.active then
+    if DBGridConsulta.DataSource.DataSet.Active then
     begin
 
-      if DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex].Field.FieldKind in [fkdata] then
+      if DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex]
+        .Field.FieldKind in [fkData] then
       begin
 
         TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
-        TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := True;
+        TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := true;
 
       end;
 
@@ -694,8 +698,8 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(Self.Caption)
-        + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
+      DM.SQLConnect.Execsql('update conexao set tela_momento = ' +
+        qs(Self.Caption) + ' where idconexao=' + inttostr(GLOBAL_IDCONEXAO));
     except
     end;
     FinalizaTransMovimento;
@@ -703,16 +707,14 @@ begin
 
 end;
 
-procedure TFrmModeloCadastro.ClientDataSetReconcileError(
-  DataSet: TCustomClientDataSet; E: EReconcileError;
-  UpdateKind: TUpdateKind; var Action: TReconcileAction);
+
+procedure TFrmModeloCadastro.FDClientDataSetReconcileError(DataSet: TFDMemTable;
+  E: EFDException; UpdateKind: TFDDatSRowState; var Action: TFDDAptReconcileAction);
 var
   arquivo: TextFile;
   NomeArquivo: string;
 begin
-
   try
-
     if not DirectoryExists('../log') then
       CreateDir('../log');
 
@@ -726,14 +728,16 @@ begin
 
     CloseFile(arquivo);
 
-    Action := raAbort;
+    Action := TFDDAptReconcileAction.raAbort;
 
-    ShowMessage('Inconsistência nos dados:' + TrataExceptionErro(e.Message));
+    ShowMessage('Inconsistência nos dados:' + TrataExceptionErro(E.Message));
 
   except
+    // Tratar qualquer exceção que possa ocorrer no tratamento do erro
   end;
-
 end;
+
+
 
 procedure TFrmModeloCadastro.DBEditCPFExit(Sender: TObject);
 var
@@ -743,11 +747,11 @@ begin
 
   if assigned(CompEdit) then
   begin
-    if not ValidaCPF(TDBEdit(CompEdit).text) then
+    if not ValidaCPF(TDBEdit(CompEdit).Text) then
     begin
       ShowMessage('CPF Inválido!');
-      TDBEdit(CompEdit).setfocus;
-      Exit;
+      TDBEdit(CompEdit).SetFocus;
+      exit;
     end;
   end;
 end;
@@ -760,19 +764,18 @@ begin
 
   if assigned(CompEdit) then
   begin
-    if not ValidaCNPJ(TDBEdit(CompEdit).text) then
+    if not ValidaCNPJ(TDBEdit(CompEdit).Text) then
     begin
       ShowMessage('CNPJ Inválido!');
-      TDBEdit(CompEdit).setfocus;
-      Exit;
+      TDBEdit(CompEdit).SetFocus;
+      exit;
     end;
   end;
 end;
 
-procedure TFrmModeloCadastro.PageControlModeloCadastroChange(
-  Sender: TObject);
+procedure TFrmModeloCadastro.PageControlModeloCadastroChange(Sender: TObject);
 begin
-  //Se o usuário trocar para a aba de Consulta a edição ou inserção é cancelada.
+  // Se o usuário trocar para a aba de Consulta a edição ou inserção é cancelada.
   if PageControlModeloCadastro.ActivePageIndex = 1 then
   begin
     CancelarClick(nil);
@@ -783,28 +786,34 @@ begin
   end;
 end;
 
-//Procedure que faz o filtro da busca
+// Procedure que faz o filtro da busca
 
 procedure TFrmModeloCadastro.CdsCadastroFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
 
-  if DataSet[DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex].FieldName] <> Null then
+  if DataSet[DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex]
+    .FieldName] <> Null then
   begin
 
     if EditLocalizar.Text <> ' ' then
     begin
 
-      if (DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex].Field.DataType in [ftSmallint, ftInteger, ftWord, ftFloat, ftCurrency, ftFMTBcd]) then
+      if (DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex]
+        .Field.DataType in [ftSmallint, ftInteger, ftWord, ftFloat, ftCurrency,
+        ftFMTBcd]) then
       begin
 
-        if AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)) = AnsiUpperCase(RemoveAcentos(DataSet[DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex].FieldName])) then
+        if AnsiUpperCase(RemoveAcentos(EditLocalizar.Text))
+          = AnsiUpperCase
+          (RemoveAcentos(DataSet[DBGridConsulta.Columns.Items
+          [DBGridConsulta.SelectedIndex].FieldName])) then
         begin
           Accept := true;
         end
         else
         begin
-          Accept := false;
+          Accept := False;
         end;
 
       end
@@ -812,12 +821,14 @@ begin
       begin
 
         if pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
-          AnsiUpperCase(RemoveAcentos(DataSet[DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex].FieldName]))) <> 0 then
+          AnsiUpperCase(RemoveAcentos(DataSet[DBGridConsulta.Columns.Items
+          [DBGridConsulta.SelectedIndex].FieldName]))) <> 0 then
         begin
           Accept := true;
-        end else
+        end
+        else
         begin
-          Accept := false;
+          Accept := False;
         end;
 
       end;
@@ -825,14 +836,15 @@ begin
     end
     else
     begin
-
       if pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
-        AnsiUpperCase(RemoveAcentos(DataSet[DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex].FieldName]))) = 1 then
+        AnsiUpperCase(RemoveAcentos(DataSet[DBGridConsulta.Columns.Items
+        [DBGridConsulta.SelectedIndex].FieldName]))) = 1 then
       begin
         Accept := true;
-      end else
+      end
+      else
       begin
-        Accept := false;
+        Accept := False;
       end;
 
     end;
@@ -842,10 +854,9 @@ begin
     if EditLocalizar.Text = ' ' then
       Accept := true
     else
-      Accept := false;
+      Accept := False;
   end;
 
 end;
 
 end.
-

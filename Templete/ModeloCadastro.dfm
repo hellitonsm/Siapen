@@ -983,6 +983,8 @@ object FrmModeloCadastro: TFrmModeloCadastro
       item
         Width = 200
       end>
+    ExplicitTop = 564
+    ExplicitWidth = 940
   end
   object ImageListCadastro: TImageList
     Height = 32
@@ -7861,9 +7863,7 @@ object FrmModeloCadastro: TFrmModeloCadastro
       FFFFFFFFFFFFFFFFFF9FFFFFFFF07FFF00000000000000000000000000000000
       000000000000}
   end
-  object SqlCadastro: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM SENHA')

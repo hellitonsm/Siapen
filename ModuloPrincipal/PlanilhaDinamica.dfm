@@ -10,11 +10,9 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poMainFormCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object DBGrdConsulta: TDBGrid
     Left = 0
@@ -39,8 +37,8 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Height = 160
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = -160
-    ExplicitWidth = 120
+    ExplicitTop = 412
+    ExplicitWidth = 978
     object Panel1: TPanel
       Left = 585
       Top = 1
@@ -49,7 +47,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
       Align = alClient
       Caption = 'Panel1'
       TabOrder = 0
-      ExplicitWidth = 433
+      ExplicitWidth = 392
       object DBGrid1: TDBGrid
         Left = 1
         Top = 1
@@ -87,7 +85,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
         Height = 29
         Align = alBottom
         TabOrder = 1
-        ExplicitWidth = 431
+        ExplicitWidth = 390
         object DBNavigator1: TDBNavigator
           Left = 6
           Top = 4
@@ -216,7 +214,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitWidth = 120
+    ExplicitWidth = 978
     object Image2: TImage
       Left = 1
       Top = 1
@@ -980,12 +978,12 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Left = 160
     Top = 64
   end
-  object SqlPrincipal: TSQLQuery
-    MaxBlobSize = -1
+  object SqlPrincipal: TFDQuery
+
     Params = <>
     SQL.Strings = (
       'SELECT * FROM VW_INTERNO')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 64
     Top = 64
   end
@@ -994,6 +992,8 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     ShowProgress = True
     OverwritePrompt = False
     DataOnly = False
+    EmbedFontsIfProtected = False
+    InteractiveFormsFontSubset = 'A-Z,a-z,0-9,#43-#47 '
     OpenAfterExport = False
     PrintOptimized = False
     Outline = False
@@ -1029,6 +1029,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     EmptyLines = True
     Print = False
     PictureType = gpPNG
+    Outline = False
     Left = 476
     Top = 168
   end
@@ -1116,6 +1117,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Frames = False
     EmptyLines = False
     OEMCodepage = False
+    UTF8 = False
     OpenAfterExport = False
     DeleteEmptyColumns = True
     Left = 705
@@ -1181,7 +1183,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Top = 168
   end
   object frxReport1: TfrxReport
-    Version = '6.6.15'
+    Version = '2022.1.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -1253,6 +1255,10 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
       MirrorMode = []
       object MasterData1: TfrxMasterData
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 90.204700000000000000
         Top = 192.756030000000000000
@@ -1396,6 +1402,10 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 22.677180000000000000
         Top = 389.291590000000000000
@@ -1422,6 +1432,10 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
       end
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 113.385900000000000000
         Top = 18.897650000000000000
@@ -1480,6 +1494,10 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
       end
       object Footer1: TfrxFooter
         FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
         Frame.Typ = []
         Height = 22.677180000000000000
         Top = 306.141930000000000000
@@ -1583,15 +1601,8 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     UserName = 'frxDBDataset1'
     CloseDataSource = False
     BCDToCurrency = False
+    DataSetOptions = []
     Left = 736
-    Top = 112
-  end
-  object frxADOComponents1: TfrxADOComponents
-    Left = 781
-    Top = 112
-  end
-  object frxIBXComponents1: TfrxIBXComponents
-    Left = 803
     Top = 112
   end
   object frxDBXComponents1: TfrxDBXComponents
@@ -1602,12 +1613,12 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Left = 848
     Top = 112
   end
-  object SqlPlanilhaDinamica: TSQLQuery
-    MaxBlobSize = -1
+  object SqlPlanilhaDinamica: TFDQuery
+
     Params = <>
     SQL.Strings = (
       'SELECT * FROM PLANILHA_DINAMICA')
-    SQLConnection = DM.SQLConnect
+    Connection = DM.SQLConnect
     Left = 616
     Top = 296
   end

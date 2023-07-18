@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, Mask,
-  DBCtrls, jpeg, Buttons;
+  DBCtrls, jpeg, Buttons,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroSolario = class(TFrmModeloCadastro)
@@ -276,7 +279,7 @@ end;
 
 procedure TFrmCadastroSolario.BitBtn1Click(Sender: TObject);
 var
- SqlFind : TSqlQuery;
+ SqlFind : TFDQuery;
  Texto : String;
 begin
   inherited;
@@ -288,8 +291,8 @@ begin
   DSREcursos.DataSet.FieldByName('OBSERVACAO').AsString := Edit2.Text;
   try
     Texto := comboBox1.Text;
-    sqlfind:= TSqlQuery.Create(nil);
-    sqlfind.SQLConnection := DM.SQLConnect;
+    sqlfind:= TFDQuery.Create(nil);
+    sqlfind.Connection := DM.SQLConnect;
     sqlfind.SQL.Text := 'SELECT ID_VESTIMENTAS, VESTIMENTAS FROM VESTIMENTAS WHERE VESTIMENTAS = :vest;';
     Sqlfind.ParamByName('vest').AsString := Texto;
       //SqlFind.PrepareStatement;

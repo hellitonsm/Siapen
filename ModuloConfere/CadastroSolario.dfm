@@ -1,33 +1,35 @@
 inherited FrmCadastroSolario: TFrmCadastroSolario
   Left = 401
   Top = 274
-  Width = 895
-  Height = 433
   Caption = 'Cadastro de Solario'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 355
+    ExplicitHeight = 355
     inherited ToolBarModeloCadastro: TToolBar
       Height = 337
+      ExplicitHeight = 337
     end
     inherited DBNavigator1: TDBNavigator
       Top = 337
       Hints.Strings = ()
+      ExplicitTop = 337
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 772
-    Height = 355
+    ExplicitWidth = 772
+    ExplicitHeight = 355
+    inherited Image2: TImage
+      Width = 887
+      ExplicitWidth = 887
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 772
-      Height = 355
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 772
+      ExplicitHeight = 355
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 764
-          Height = 327
+          ExplicitWidth = 764
+          ExplicitHeight = 327
           object PageControl1: TPageControl
             Left = 0
             Top = 0
@@ -251,7 +253,6 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
                 Top = 32
                 Width = 145
                 Height = 21
-                ItemHeight = 13
                 TabOrder = 3
               end
               object Edit2: TEdit
@@ -268,10 +269,13 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
           Width = 764
+          ExplicitWidth = 764
         end
         inherited PanelConsulta: TPanel
           Width = 764
           Height = 293
+          ExplicitWidth = 764
+          ExplicitHeight = 293
           inherited DBGridConsulta: TDBGrid
             Width = 762
             Height = 291
@@ -300,23 +304,13 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 887
-    inherited Image2: TImage
-      Width = 887
-    end
+    ExplicitWidth = 887
   end
   inherited StatusBar1: TStatusBar
-    Top = 387
-    Width = 887
+    ExplicitTop = 387
+    ExplicitWidth = 887
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM SOLARIO'
@@ -325,6 +319,13 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
       'WHERE PAVILHAO.id_pavilhao=SOLARIO.idpavilhao'
       'AND PAVILHAO.ID_UP = :ID_UP)'
       'ORDER BY SOLARIO')
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   object SqlPavilhao: TSQLQuery
     MaxBlobSize = -1

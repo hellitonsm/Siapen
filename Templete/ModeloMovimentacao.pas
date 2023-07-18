@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
   FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, DBCtrls,
-  adpDBDateTimePicker, System.ImageList;
+  adpDBDateTimePicker, System.ImageList,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmModeloMovimentacao = class(TForm)
@@ -391,7 +394,7 @@ begin
   begin
     IniciaTransMovimento;
     try
-      DM.SQLConnect.ExecuteDirect('update conexao set tela_momento = ' + qs(Self.Caption)
+      DM.SQLConnect.ExecSQl('update conexao set tela_momento = ' + qs(Self.Caption)
         + ' where idconexao=' + IntToStr(GLOBAL_IDCONEXAO));
     except
     end;
@@ -420,7 +423,7 @@ begin
 
     if (Components[iComp] is TSQLQuery) then
       if not assigned(TSQLQuery(Components[iComp]).SQLConnection) then
-        TSQLQuery(Components[iComp]).SQLConnection := DM.SQLConnect;
+        TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
     if (Components[iComp] is TadpDBDateTimePicker) then
       TadpDBDateTimePicker(Components[iComp]).Time := 0;
@@ -507,8 +510,8 @@ begin
   try
     TD.TransactionID := 0;
     TD.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD);
-    DM.SQLConnect.ExecuteDirect('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+    DM.SQLConnect.StartTransaction();
+    DM.SQLConnect.ExecSQL('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
   except //se der erro para abrir uma TransCadastro
   end;
 end;
@@ -519,7 +522,7 @@ begin
     FinalizaTransCadastro;
     TD.TransactionID := TD.TransactionID + 1;
     TD.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD);
+    DM.SQLConnect.StartTransaction();
   except
   end;
 end;
@@ -529,7 +532,7 @@ begin
   try
     Result := False;
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Commit(TD);
+      DM.SQLConnect.Commit();
     Result := True;
   except
   end;
@@ -539,7 +542,7 @@ function TFrmModeloMovimentacao.CancelaTransCadastro: Boolean;
 begin
   try
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Rollback(TD);
+      DM.SQLConnect.Rollback();
   except
   end;
 
@@ -551,7 +554,7 @@ begin
     TD_Filho.GlobalID := TD_Filho.TransactionID;
     TD_Filho.TransactionID := TD.TransactionID + 1;
     TD_Filho.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD_Filho);
+    DM.SQLConnect.StartTransaction();
   except //se der erro para abrir uma TransFilhoCadastro
   end;
 end;
@@ -563,7 +566,7 @@ begin
     TD_Filho.GlobalID := TD_Filho.TransactionID;
     TD_Filho.TransactionID := TD_Filho.TransactionID + 1;
     TD_Filho.IsolationLevel := xilREADCOMMITTED;
-    DM.SQLConnect.StartTransaction(TD_Filho);
+    DM.SQLConnect.StartTransaction();
   except
   end;
 end;
@@ -573,7 +576,7 @@ begin
   try
     Result := False;
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Commit(TD_Filho);
+      DM.SQLConnect.Commit();
     Result := True;
   except
   end;
@@ -583,7 +586,7 @@ function TFrmModeloMovimentacao.CancelaTransFilhoCadastro: Boolean;
 begin
   try
     if DM.SQLConnect.InTransaction then
-      DM.SQLConnect.Rollback(TD_Filho);
+      DM.SQLConnect.Rollback();
   except
   end;
 
@@ -618,7 +621,7 @@ begin
 
     CloseFile(arquivo);
 
-    Action := raAbort;
+   // Action := raAbort;
 
     ShowMessage('Inconsistência nos dados:' + TrataExceptionErro(e.Message));
   except
@@ -649,7 +652,7 @@ begin
 
     CloseFile(arquivo);
 
-    Action := raAbort;
+   // Action := raAbort;
 
     ShowMessage('Inconsistência nos dados:' + TrataExceptionErro(e.Message));
 

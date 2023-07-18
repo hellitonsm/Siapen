@@ -4,7 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, DB, FMTBcd, SqlExpr, ComCtrls;
+  Dialogs, StdCtrls, DB, FMTBcd, SqlExpr, ComCtrls,FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TTpCampo = (pInteiro, pString, pDate);
@@ -39,7 +42,7 @@ type
     procedure cbNoPartialCompareClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox2Change(Sender: TObject);
-    procedure Initialize(Ds: TDataSource; SqlT: TSQLQuery; Frm: TForm; vCaption: Boolean = False);
+    procedure Initialize(Ds: TDataSource; SqlT: TFDQuery; Frm: TForm; vCaption: Boolean = False);
     procedure ListBox2DblClick(Sender: TObject);
     procedure ListBox3DblClick(Sender: TObject);
     procedure ListBoxOperDblClick(Sender: TObject);
@@ -65,7 +68,7 @@ var
   DsMain: TDataSource;
   FrmMain: TForm;
   MudaCaption: Boolean;
-  SqlMain: TSQLQuery;
+  SqlMain: TFDQuery;
   sSqlOriginal: string;
 
 implementation
@@ -74,7 +77,7 @@ uses Lib;
 
 {$R *.dfm}
 
-procedure TFrmFiltros.Initialize(Ds: TDataSource; SqlT: TSQLQuery; Frm: TForm; vCaption: Boolean = False);
+procedure TFrmFiltros.Initialize(Ds: TDataSource; SqlT: TFDQuery; Frm: TForm; vCaption: Boolean = False);
 var
   I: Integer;
 begin

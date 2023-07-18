@@ -10,8 +10,6 @@ object FrmSalvarProgressbar: TFrmSalvarProgressbar
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
-  PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 16
@@ -65,38 +63,6 @@ object FrmSalvarProgressbar: TFrmSalvarProgressbar
     Caption = 'Copiar'
     TabOrder = 3
     OnClick = Button1Click
-  end
-  object IBBackupService1: TIBBackupService
-    TraceFlags = []
-    ServerType = 'IBServer'
-    BlockingFactor = 0
-    Options = []
-    PreAllocate = 0
-    Left = 208
-    Top = 352
-  end
-  object IBConfigService1: TIBConfigService
-    TraceFlags = []
-    ServerType = 'IBServer'
-    Left = 448
-    Top = 128
-  end
-  object IBDatabase1: TIBDatabase
-    ServerType = 'IBServer'
-    Left = 464
-    Top = 64
-  end
-  object IBDatabaseInfo1: TIBDatabaseInfo
-    Left = 488
-    Top = 88
-  end
-  object IBDataSet1: TIBDataSet
-    BufferChunks = 1000
-    CachedUpdates = False
-    ParamCheck = True
-    UniDirectional = False
-    Left = 560
-    Top = 88
   end
   object OpenDialog1: TOpenDialog
     Filter = '*.*'

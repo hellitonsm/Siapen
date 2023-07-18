@@ -4,13 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, DBCtrls, FMTBcd, DB, DBClient, Provider, SqlExpr, Grids,
+  Dialogs, StdCtrls, DBCtrls, FMTBcd, DB, DBClient, Provider , Grids,
    Buttons, ExtCtrls, jpeg, styles, System.ImageList,
-  Vcl.ImgList, Vcl.Imaging.pngimage;
+  Vcl.ImgList, Vcl.Imaging.pngimage, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.DApt;
 
 type
   TTelaLogin = class(TForm)
-    Sqlservidor: TSQLQuery;
+    Sqlservidor: TFDQuery;
     Dspservidor: TDataSetProvider;
     Cdsservidor: TClientDataSet;
     Dsservidor: TDataSource;
@@ -25,26 +27,9 @@ type
     Label2: TLabel;
     Edit1: TEdit;
     Edit2: TEdit;
-    SqlUP: TSQLQuery;
-    DspUP: TDataSetProvider;
-    CdsUP: TClientDataSet;
-    CdsUPID_UP: TIntegerField;
-    CdsUPNOME_UP: TStringField;
-    CdsUPENDERECO: TStringField;
-    CdsUPNUMERO: TStringField;
-    CdsUPBAIRRO: TStringField;
-    CdsUPCOMPLEMENTO: TStringField;
-    CdsUPCEP: TStringField;
-    CdsUPID_CIDADE: TIntegerField;
-    CdsUPFONE: TStringField;
-    CdsUPFAX: TStringField;
-    CdsUPCONTATO: TStringField;
-    CdsUPFOTO: TStringField;
-    CdsUPCAPITAL: TStringField;
-    CdsUPREGIAO: TStringField;
-    CdsUPSIGLA: TStringField;
-    DsUP: TDataSource;
     Image3: TImage;
+    DataSource1: TDataSource;
+    SqlUP: TFDQuery;
 //    procedure Button1Click(Sender: TObject);
     procedure Edit1Exit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -215,8 +200,10 @@ begin
       Sqlservidor.sql.text := 'select * from funcionario left join perfil_usuario '
         + ' on (perfil_usuario.id_perfil_usuario = funcionario.id_perfil_usuario) '
         + ' where login=' + Qs(LOGIN_CONECTADO);
-      Dsservidor.dataset.close;
-      Dsservidor.dataset.open;
+
+        Dsservidor.dataset.close;
+        Dsservidor.dataset.open;
+
 
       if Dsservidor.dataset.recordcount > 0 then
       begin
@@ -294,8 +281,11 @@ end;
 procedure TTelaLogin.FormCreate(Sender: TObject);
 begin
 
-  DsUP.DataSet.Close;
-  DsUP.DataSet.open;
+
+  Datasource1.DataSet.Close;
+
+  DataSource1.DataSet.open;
+
 
   GroupBoxLocal.Caption := GLOBAL_LOCAL;
   LabelNome.Caption := GLOBAL_NOME;
@@ -307,7 +297,7 @@ end;
 procedure TTelaLogin.DBLookupComboBox1Click(Sender: TObject);
 begin
   GLOBAL_ID_UP := DBLookupComboBox1.KeyValue;
-  UP_Logado := DsUP.DataSet.FieldByName('SIGLA').AsString;
+  UP_Logado := DataSource1.DataSet.FieldByName('SIGLA').AsString;
 end;
 
 procedure TTelaLogin.FormKeyDown(Sender: TObject; var Key: Word;
@@ -387,8 +377,8 @@ procedure TTelaLogin.SpeedButton1Click(Sender: TObject);
 begin
 
   Dsservidor.DataSet.Filtered := false;
-  UP_Logado := Dsup.DataSet.FieldByName('sigla').Asstring;
-  GLOBAL_NOME_UP := Dsup.DataSet.FieldByName('NOME_UP').Asstring;
+  UP_Logado := DataSource1.DataSet.FieldByName('sigla').Asstring;
+  GLOBAL_NOME_UP := DataSource1.DataSet.FieldByName('NOME_UP').Asstring;
   LOGIN_CONECTADO := '';
   LOGIN_CONECTADO := Edit1.Text;
   liberado := False;

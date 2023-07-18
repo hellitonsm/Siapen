@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls,IBX.IBHeader, IBX.IBBlob, IBX.IBIntf, IBX.IB, IBX.IBErrorcodes,
-  IBX.IBCustomDataSet, IBX.IBDatabaseInfo, DB, IBX.IBDatabase, IBX.IBServices, DBClient
+  Dialogs, ComCtrls, StdCtrls,
+  DB,  DBClient
   ;
 
 type
@@ -15,11 +15,6 @@ type
   TFrmSalvarProgressbar = class(TForm)
     ProgressBar1: TProgressBar;
     Label1: TLabel;
-    IBBackupService1: TIBBackupService;
-    IBConfigService1: TIBConfigService;
-    IBDatabase1: TIBDatabase;
-    IBDatabaseInfo1: TIBDatabaseInfo;
-    IBDataSet1: TIBDataSet;
     Edit1: TEdit;
     Edit2: TEdit;
     Button1: TButton;

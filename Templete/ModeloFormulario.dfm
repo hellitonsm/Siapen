@@ -2,8 +2,8 @@ object FrmModeloFormulario: TFrmModeloFormulario
   Left = 206
   Top = 281
   Caption = 'Formulario Auxiliar'
-  ClientHeight = 212
-  ClientWidth = 428
+  ClientHeight = 211
+  ClientWidth = 424
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,17 +16,15 @@ object FrmModeloFormulario: TFrmModeloFormulario
   object PanelGeral: TPanel
     Left = 0
     Top = 41
-    Width = 428
-    Height = 171
+    Width = 424
+    Height = 170
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 424
-    ExplicitHeight = 170
   end
   object PanelTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 428
+    Width = 424
     Height = 41
     Align = alTop
     Caption = 'Formulario Auxiliar'
@@ -39,7 +37,6 @@ object FrmModeloFormulario: TFrmModeloFormulario
     ParentFont = False
     ShowCaption = False
     TabOrder = 1
-    ExplicitWidth = 424
     object Image2: TImage
       Left = 1
       Top = 1
