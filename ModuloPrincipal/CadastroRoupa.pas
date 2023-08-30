@@ -6,14 +6,16 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, adpDBDateTimePicker, Mask, Buttons, System.ImageList;
+  ToolWin, adpDBDateTimePicker, Mask, Buttons, System.ImageList,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmRoupa = class(TFrmModeloCadastro)
     Label3: TLabel;
     Label4: TLabel;
     DBEditCodigo: TDBEdit;
-    SQLRoupasInterno: TSQLQuery;
     CDSRoupasInterno: TClientDataSet;
     DSRoupasInterno: TDataSource;
     DSPRoupasInterno: TDataSetProvider;
@@ -35,9 +37,7 @@ type
     DBGrid1: TDBGrid;
     Label2: TLabel;
     Button1: TButton;
-    SqlSelectRoupaInterno: TSQLQuery;
     DBGrid2: TDBGrid;
-    SqlConsulta: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -49,6 +49,9 @@ type
     CdsConsultaID_ROUPAS: TIntegerField;
     DBEdit1: TDBEdit;
     Timer1: TTimer;
+    SQLRoupasInterno: TFDQuery;
+    SqlSelectRoupaInterno: TFDQuery;
+    SqlConsulta: TFDQuery;
     procedure EditprontuarioExit(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure NovoClick(Sender: TObject);

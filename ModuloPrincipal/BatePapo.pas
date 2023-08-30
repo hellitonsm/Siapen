@@ -7,7 +7,10 @@ uses
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, Grids, DBGrids,
   FMTBcd, SqlExpr, DB, DBClient, Provider, DBCtrls, ComCtrls, ToolWin,
   ActnMan, ActnCtrls, StdActns, BandActn, ExtActns, ActnList,
-  StdStyleActnCtrls, ImgList, System.Actions, System.ImageList;
+  StdStyleActnCtrls, ImgList, System.Actions, System.ImageList,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmBatePapo = class(TFrmModeloFormulario)
@@ -15,14 +18,9 @@ type
     Panel1: TPanel;
     Button1: TButton;
     RadioGroupDialogo: TRadioGroup;
-    DspFuncionario: TDataSetProvider;
-    CdsFuncionario: TClientDataSet;
     DsFuncionario: TDataSource;
-    SqlFuncionario: TSQLQuery;
     DBText1: TDBText;
-    SqlExecute: TSQLQuery;
     Timer1: TTimer;
-    SqlLeitura: TSQLQuery;
     ImageList1: TImageList;
     ActionManager1: TActionManager;
     EditCut1: TEditCut;
@@ -55,6 +53,9 @@ type
     MemoHistorico: TRichEdit;
     ActionToolBar1: TActionToolBar;
     MemoMensagem: TRichEdit;
+    SqlFuncionario: TFDQuery;
+    SqlExecute: TFDQuery;
+    SqlLeitura: TFDQuery;
     procedure RadioGroupDialogoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);

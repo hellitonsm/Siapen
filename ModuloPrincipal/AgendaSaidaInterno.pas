@@ -14,7 +14,6 @@ uses
 type
   TFrmAgendaSaidaInterno = class(TFrmModeloInterno)
     TabSheet1: TTabSheet;
-    SqlAgenda: TSQLQuery;
     DspAgenda: TDataSetProvider;
     CdsAgenda: TClientDataSet;
     DsAgenda: TDataSource;
@@ -56,7 +55,6 @@ type
     DBComboBox7: TDBComboBox;
     DBComboBox8: TDBComboBox;
     DBGridAgenda: TDBGrid;
-    SqlConsultaAgenda: TSQLQuery;
     DspConsultaAgenda: TDataSetProvider;
     CdsConsultaAgenda: TClientDataSet;
     DsConsultaAgenda: TDataSource;
@@ -69,7 +67,6 @@ type
     DsDestino: TDataSource;
     CdsDestino: TClientDataSet;
     DspDestino: TDataSetProvider;
-    SqlDestino: TSQLQuery;
     CdsConsultaAgendaIDAGENDA_ATENDIMENTO: TIntegerField;
     CdsConsultaAgendaID_INTERNO: TIntegerField;
     CdsConsultaAgendaDATA_AGENDA: TSQLTimeStampField;
@@ -118,6 +115,9 @@ type
     CdsAgendaCARGO_AUTORIZOU: TStringField;
     DBEdit15: TDBEdit;
     DBEdit22: TDBEdit;
+    SqlAgenda: TFDQuery;
+    SqlConsultaAgenda: TFDQuery;
+    SqlDestino: TFDQuery;
     procedure BtnNovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnConcluirClick(Sender: TObject);

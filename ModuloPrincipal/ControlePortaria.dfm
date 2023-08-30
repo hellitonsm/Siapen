@@ -2,15 +2,15 @@ inherited FrmControlePortaria: TFrmControlePortaria
   Left = 645
   Top = 222
   Caption = 'Controle Portaria'
-  ClientHeight = 548
+  ClientHeight = 568
   ClientWidth = 810
   ExplicitWidth = 822
-  ExplicitHeight = 586
+  ExplicitHeight = 606
   TextHeight = 13
   inherited PanelBotoes: TPanel
     Width = 810
     Height = 89
-    ExplicitWidth = 695
+    ExplicitWidth = 806
     ExplicitHeight = 89
     inherited ToolBarModeloCadastro: TToolBar
       Top = 42
@@ -18,6 +18,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
       Height = 47
       ButtonWidth = 185
       ExplicitTop = 42
+      ExplicitWidth = 806
       ExplicitHeight = 47
       inherited Novo: TToolButton
         Caption = '&Cadastrar'
@@ -73,7 +74,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     inherited PanelLocalizaConsulta: TPanel
       Width = 810
       Height = 41
-      ExplicitWidth = 695
+      ExplicitWidth = 806
       ExplicitHeight = 41
       inherited Label1: TLabel
         Left = 7
@@ -90,7 +91,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
         Width = 490
         OnChange = EditLocalizarChange
         ExplicitLeft = 312
-        ExplicitWidth = 375
+        ExplicitWidth = 486
       end
       object RadioGroupPessoa: TRadioGroup
         Left = 64
@@ -111,14 +112,16 @@ inherited FrmControlePortaria: TFrmControlePortaria
   inherited PanelModeloCadastro: TPanel
     Top = 89
     Width = 810
-    Height = 440
+    Height = 460
     ExplicitTop = 89
-    ExplicitHeight = 352
+    ExplicitWidth = 806
+    ExplicitHeight = 439
     inherited PageControlModeloCadastro: TPageControl
       Width = 810
       Height = 217
       ActivePage = TabSheetAdvogado
       OnChange = PageControlModeloCadastroChange
+      ExplicitWidth = 806
       ExplicitHeight = 217
       inherited TabSheetCadastro: TTabSheet
         Caption = 'Indiv'#237'duos'
@@ -720,16 +723,17 @@ inherited FrmControlePortaria: TFrmControlePortaria
     inherited PageControlConsulta: TPageControl
       Top = 217
       Width = 810
-      Height = 223
+      Height = 243
       ExplicitTop = 217
-      ExplicitHeight = 135
+      ExplicitWidth = 806
+      ExplicitHeight = 222
       inherited TabSheetConsulta: TTabSheet
         Caption = 'Indiv'#237'duos em movimento'
         ExplicitWidth = 802
-        ExplicitHeight = 195
+        ExplicitHeight = 215
         inherited DBGridConsulta: TDBGrid
           Width = 802
-          Height = 195
+          Height = 215
           DataSource = dsGrid
           Columns = <
             item
@@ -782,10 +786,10 @@ inherited FrmControlePortaria: TFrmControlePortaria
       inherited TabSheetMovimentacao: TTabSheet
         Caption = 'Advogados em movimento'
         ExplicitWidth = 802
-        ExplicitHeight = 195
+        ExplicitHeight = 215
         inherited DBGrid1: TDBGrid
           Width = 802
-          Height = 195
+          Height = 215
           DataSource = DsConsulta
         end
       end
@@ -804,14 +808,57 @@ inherited FrmControlePortaria: TFrmControlePortaria
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 529
+    Top = 549
     Width = 810
+    ExplicitTop = 528
+    ExplicitWidth = 806
   end
   inherited ImageListCadastro: TImageList
     Left = 624
     Top = 128
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited DspCadastro: TDataSetProvider
+    Left = 596
+    Top = 456
+  end
+  inherited CdsCadastro: TClientDataSet
+    PacketRecords = 100
+    Left = 624
+    Top = 456
+  end
+  inherited DsCadastro: TDataSource
+    Left = 652
+    Top = 456
+  end
+  inherited DspMovimento: TDataSetProvider
+    Left = 168
+    Top = 448
+  end
+  inherited CdsMovimento: TClientDataSet
+    PacketRecords = 100
+    ProviderName = 'DspMovimento'
+    Left = 196
+    Top = 448
+  end
+  inherited DsMovimento: TDataSource
+    Left = 224
+    Top = 448
+  end
+  inherited DspConsulta: TDataSetProvider
+    Left = 564
+    Top = 408
+  end
+  inherited CdsConsulta: TClientDataSet
+    PacketRecords = 100
+    Left = 592
+    Top = 408
+  end
+  inherited DsConsulta: TDataSource
+    OnDataChange = DsConsultaDataChange
+    Left = 620
+    Top = 408
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM VISITANTE')
@@ -876,54 +923,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
       FieldName = 'ID_UP'
     end
   end
-  inherited DspCadastro: TDataSetProvider
-    Left = 596
-    Top = 456
-  end
-  inherited CdsCadastro: TClientDataSet
-    PacketRecords = 100
-    Left = 624
-    Top = 456
-  end
-  inherited DsCadastro: TDataSource
-    Left = 652
-    Top = 456
-  end
-  inherited SqlMovimento: TSQLQuery
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_up'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id_individuo'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'select first 1 *'
-      
-        ' from movimento where id_up = :id_up and id_individuo = :id_indi' +
-        'viduo')
-    Left = 140
-    Top = 448
-  end
-  inherited DspMovimento: TDataSetProvider
-    Left = 168
-    Top = 448
-  end
-  inherited CdsMovimento: TClientDataSet
-    PacketRecords = 100
-    ProviderName = 'DspMovimento'
-    Left = 196
-    Top = 448
-  end
-  inherited DsMovimento: TDataSource
-    Left = 224
-    Top = 448
-  end
-  inherited SqlConsulta: TSQLQuery
+  inherited SqlConsulta: TFDQuery
     SQL.Strings = (
       
         'SELECT ID_VISITANTE, VISITANTE, NUMERO_CARTEIRINHA,DATA_CADASTRO' +
@@ -932,26 +932,28 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Left = 536
     Top = 408
   end
-  inherited DspConsulta: TDataSetProvider
-    Left = 564
-    Top = 408
-  end
-  inherited CdsConsulta: TClientDataSet
-    PacketRecords = 100
-    Left = 592
-    Top = 408
-  end
-  inherited DsConsulta: TDataSource
-    OnDataChange = DsConsultaDataChange
-    Left = 620
-    Top = 408
+  inherited SqlMovimento: TFDQuery
+    SQL.Strings = (
+      'select first 1 *'
+      
+        ' from movimento where id_up = :id_up and id_individuo = :id_indi' +
+        'viduo')
+    Left = 140
+    Top = 448
+    ParamData = <
+      item
+        Name = 'id_up'
+      end
+      item
+        Name = 'id_individuo'
+      end>
   end
   object OpenDialogFOTO: TOpenDialog
     Filter = 'Imagens (*.jpg)|*.jpg'
     Left = 712
     Top = 128
   end
-  object SqlSelectVisitante: TSQLQuery
+  object SqlSelectVisitanteold: TSQLQuery
     Params = <>
     SQL.Strings = (
       
@@ -961,7 +963,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Left = 584
     Top = 356
   end
-  object SQLdeficiencia: TSQLQuery
+  object SQLdeficienciaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -971,7 +973,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Top = 504
   end
   object dspdeficiencia: TDataSetProvider
-    DataSet = SQLdeficiencia
+    DataSet = SQLdeficienciaold
     Left = 560
     Top = 504
   end
@@ -1058,7 +1060,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
       Size = 100
     end
   end
-  object SQLAdvogado: TSQLQuery
+  object SQLAdvogadoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1068,7 +1070,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Top = 104
   end
   object DSPadvogado: TDataSetProvider
-    DataSet = SQLAdvogado
+    DataSet = SQLAdvogadoold
     Left = 196
     Top = 104
   end
@@ -1084,7 +1086,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Left = 380
     Top = 100
   end
-  object SQLautoridade: TSQLQuery
+  object SQLautoridadeold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1094,13 +1096,13 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Top = 100
   end
   object DSPautoridade: TDataSetProvider
-    DataSet = SQLautoridade
+    DataSet = SQLautoridadeold
     Constraints = False
     Left = 356
     Top = 100
   end
   object DSPoutros: TDataSetProvider
-    DataSet = SQLoutros
+    DataSet = SQLoutrosold
     Left = 60
     Top = 104
   end
@@ -1116,7 +1118,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Left = 108
     Top = 104
   end
-  object SQLoutros: TSQLQuery
+  object SQLoutrosold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1125,7 +1127,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Left = 36
     Top = 104
   end
-  object SQLGrid: TSQLQuery
+  object SQLGridold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = DM.SQLConnect
@@ -1133,7 +1135,7 @@ inherited FrmControlePortaria: TFrmControlePortaria
     Top = 398
   end
   object dspGrid: TDataSetProvider
-    DataSet = SQLGrid
+    DataSet = SQLGridold
     Left = 172
     Top = 398
   end
@@ -1148,5 +1150,54 @@ inherited FrmControlePortaria: TFrmControlePortaria
     DataSet = cdsGrid
     Left = 228
     Top = 398
+  end
+  object SQLoutros: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from individuo'
+      '')
+    Left = 36
+    Top = 153
+  end
+  object SQLAdvogado: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from advogado'
+      '')
+    Left = 172
+    Top = 161
+  end
+  object SQLautoridade: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from autoridade'
+      '')
+    Left = 332
+    Top = 153
+  end
+  object SqlSelectVisitante: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT ID_VISITANTE, VISITANTE, NUMERO_CARTEIRINHA,DATA_CADASTRO' +
+        ', CPF, RG, '
+      'ORGAO_EXPEDIDOR, SEXO FROM VISITANTE'
+      '')
+    Left = 668
+    Top = 354
+  end
+  object SQLdeficiencia: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from deficiencia'
+      'order by deficiencia'
+      '')
+    Left = 492
+    Top = 506
+  end
+  object SQLGrid: TFDQuery
+    Connection = DM.SQLConnect
+    Left = 100
+    Top = 394
   end
 end

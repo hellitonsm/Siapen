@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, Buttons, Menus, adpDBDateTimePicker;
+  ToolWin, Mask, Buttons, Menus, adpDBDateTimePicker, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmSaidao = class(TFrmModeloCadastro)
@@ -35,7 +38,6 @@ type
     DSPvinc_saidao: TDataSetProvider;
     cdsvinc_saidao: TClientDataSet;
     dsvinc_saidao: TDataSource;
-    SQLvinc_saidao: TSQLQuery;
     cdsvinc_saidaoID_VINC_SAIDAO: TIntegerField;
     cdsvinc_saidaoID_SAIDAO: TIntegerField;
     cdsvinc_saidaoID_INTERNO: TIntegerField;
@@ -56,6 +58,7 @@ type
     Button1: TButton;
     Btnincluir: TBitBtn;
     BitBtn2: TBitBtn;
+    SQLvinc_saidao: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure EditprontuarioExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);

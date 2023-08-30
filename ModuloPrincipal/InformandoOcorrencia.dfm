@@ -5,21 +5,21 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
   BorderStyle = bsDialog
   Caption = 'Informa'#231#245'es da Ocorrencia'
   ClientHeight = 325
-  ClientWidth = 684
+  ClientWidth = 812
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
-  ExplicitWidth = 700
-  ExplicitHeight = 364
+  ExplicitWidth = 824
+  ExplicitHeight = 363
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 684
+    Width = 812
     Height = 284
-    ExplicitWidth = 684
-    ExplicitHeight = 284
+    ExplicitWidth = 680
+    ExplicitHeight = 283
     object DBGrid1: TDBGrid
       Left = 26
       Top = 1
-      Width = 657
+      Width = 785
       Height = 47
       Cursor = crHandPoint
       Align = alClient
@@ -54,7 +54,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     object PageControlResposta: TPageControl
       Left = 1
       Top = 48
-      Width = 682
+      Width = 810
       Height = 194
       ActivePage = TabSheetPreDefinido
       Align = alBottom
@@ -67,12 +67,14 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
       ParentFont = False
       TabOrder = 1
       TabPosition = tpLeft
+      ExplicitTop = 47
+      ExplicitWidth = 678
       object TabSheetPreDefinido: TTabSheet
         Caption = 'Pr'#233' Definido'
         object DBText1: TDBText
           Left = 0
           Top = 0
-          Width = 636
+          Width = 764
           Height = 17
           Align = alTop
           Alignment = taCenter
@@ -84,17 +86,19 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
           ParentFont = False
+          ExplicitWidth = 636
         end
         object DBRadioGroupPreDefinido: TDBRadioGroup
           Left = 0
           Top = 17
-          Width = 636
+          Width = 764
           Height = 169
           Align = alClient
           Columns = 5
           DataField = 'RESPOSTA'
           DataSource = DsMovOcorrenciaQuest
           TabOrder = 0
+          ExplicitWidth = 632
         end
       end
       object TabSheetTextoCurto: TTabSheet
@@ -103,7 +107,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
         object DBText2: TDBText
           Left = 0
           Top = 0
-          Width = 636
+          Width = 764
           Height = 17
           Align = alTop
           Alignment = taCenter
@@ -115,14 +119,16 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
           ParentFont = False
+          ExplicitWidth = 636
         end
         object GroupBox1: TGroupBox
           Left = 0
           Top = 17
-          Width = 636
+          Width = 764
           Height = 169
           Align = alClient
           TabOrder = 0
+          ExplicitWidth = 632
           object DBEdit1: TDBEdit
             Left = 8
             Top = 16
@@ -140,7 +146,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
         object DBText3: TDBText
           Left = 0
           Top = 0
-          Width = 636
+          Width = 764
           Height = 17
           Align = alTop
           Alignment = taCenter
@@ -152,16 +158,18 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
           ParentFont = False
+          ExplicitWidth = 636
         end
         object DBMemo1: TDBMemo
           Left = 0
           Top = 17
-          Width = 636
+          Width = 764
           Height = 169
           Align = alClient
           DataField = 'RESPOSTA'
           DataSource = DsMovOcorrenciaQuest
           TabOrder = 0
+          ExplicitWidth = 632
         end
       end
       object TabSheetPessoas: TTabSheet
@@ -170,7 +178,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
         object PageControlPrincipal: TPageControl
           Left = 0
           Top = 0
-          Width = 636
+          Width = 764
           Height = 186
           ActivePage = TabSheetInterno
           Align = alClient
@@ -183,12 +191,13 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
           Style = tsButtons
           TabOrder = 0
           TabWidth = 100
+          ExplicitWidth = 632
           object TabSheetInterno: TTabSheet
             Caption = 'Interno(a)'
             object DBGridInterno: TDBGrid
               Left = 0
               Top = 25
-              Width = 628
+              Width = 756
               Height = 127
               Align = alClient
               DataSource = DsMovInt
@@ -211,11 +220,12 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
             object Panel2: TPanel
               Left = 0
               Top = 0
-              Width = 628
+              Width = 756
               Height = 25
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
+              ExplicitWidth = 624
               object DBLookupComboBoxInterno: TDBLookupComboBox
                 Left = 8
                 Top = 0
@@ -252,7 +262,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
             object DBGrid2: TDBGrid
               Left = 0
               Top = 25
-              Width = 628
+              Width = 756
               Height = 127
               Align = alClient
               DataSource = DsMovAdv
@@ -275,11 +285,12 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
             object Panel3: TPanel
               Left = 0
               Top = 0
-              Width = 628
+              Width = 756
               Height = 25
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
+              ExplicitWidth = 624
               object DBLookupComboBoxAdvogado: TDBLookupComboBox
                 Left = 8
                 Top = 0
@@ -316,7 +327,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
             object DBGrid3: TDBGrid
               Left = 0
               Top = 25
-              Width = 628
+              Width = 756
               Height = 127
               Align = alClient
               DataSource = DsMovFunc
@@ -338,11 +349,12 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
             object Panel4: TPanel
               Left = 0
               Top = 0
-              Width = 628
+              Width = 756
               Height = 25
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
+              ExplicitWidth = 624
               object DBLookupComboBoxFuncionario: TDBLookupComboBox
                 Left = 8
                 Top = 0
@@ -379,7 +391,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
             object DBGrid4: TDBGrid
               Left = 0
               Top = 25
-              Width = 628
+              Width = 756
               Height = 127
               Align = alClient
               DataSource = DsMovVis
@@ -401,11 +413,12 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
             object Panel5: TPanel
               Left = 0
               Top = 0
-              Width = 628
+              Width = 756
               Height = 25
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 1
+              ExplicitWidth = 624
               object DBLookupComboBoxVisitante: TDBLookupComboBox
                 Left = 8
                 Top = 0
@@ -442,10 +455,12 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     object Panel1: TPanel
       Left = 1
       Top = 242
-      Width = 682
+      Width = 810
       Height = 41
       Align = alBottom
       TabOrder = 2
+      ExplicitTop = 241
+      ExplicitWidth = 678
       object BitBtnConfirma: TBitBtn
         Left = 273
         Top = 9
@@ -523,13 +538,14 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
         'Cancel edit'
         'Refresh data')
       TabOrder = 3
+      ExplicitHeight = 46
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 684
-    ExplicitWidth = 684
+    Width = 812
+    ExplicitWidth = 680
     inherited Image2: TImage
-      Width = 682
+      Width = 810
       ExplicitWidth = 682
     end
   end
@@ -585,7 +601,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     Left = 216
     Top = 9
   end
-  object SqlMovOcorrenciaQuest: TSQLQuery
+  object SqlMovOcorrenciaQuestold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -602,7 +618,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     Left = 40
     Top = 9
   end
-  object SqlMovVis: TSQLQuery
+  object SqlMovVisold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -699,7 +715,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     Left = 684
     Top = 96
   end
-  object SqlMovInt: TSQLQuery
+  object SqlMovIntold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -716,7 +732,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     Left = 656
     Top = 96
   end
-  object SqlMovFunc: TSQLQuery
+  object SqlMovFuncold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -813,7 +829,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     Left = 684
     Top = 8
   end
-  object SqlMovAdv: TSQLQuery
+  object SqlMovAdvold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -830,7 +846,7 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     Left = 656
     Top = 8
   end
-  object SqlQuestionamento: TSQLQuery
+  object SqlQuestionamentoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -856,5 +872,79 @@ inherited FrmInformandoOcorrencia: TFrmInformandoOcorrencia
     DataSet = CdsQuestionamento
     Left = 488
     Top = 1
+  end
+  object SqlMovAdv: TFDQuery
+    Connection = DM.SQLConnect
+    Left = 584
+    Top = 8
+  end
+  object SqlMovFunc: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_OCORRENCIA_FUNC'
+      'WHERE IDMOV_OCORRENCIA=:IDMOV_OCORRENCIA'
+      '')
+    Left = 592
+    Top = 57
+    ParamData = <
+      item
+        Name = 'IDMOV_OCORRENCIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMovInt: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_OCORRENCIA_INT'
+      'WHERE IDMOV_OCORRENCIA=:IDMOV_OCORRENCIA'
+      '')
+    Left = 595
+    Top = 108
+    ParamData = <
+      item
+        Name = 'IDMOV_OCORRENCIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMovVis: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_OCORRENCIA_VIS'
+      'WHERE IDMOV_OCORRENCIA=:IDMOV_OCORRENCIA'
+      '')
+    Left = 591
+    Top = 154
+    ParamData = <
+      item
+        Name = 'IDMOV_OCORRENCIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlQuestionamento: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT *'
+      'FROM questionamento'
+      '')
+    Left = 384
+    Top = 177
+  end
+  object SqlMovOcorrenciaQuest: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_OCORRENCIA_QUEST'
+      'WHERE IDMOV_OCORRENCIA = :IDMOV_OCORRENCIA'
+      '')
+    Left = 48
+    Top = 65
+    ParamData = <
+      item
+        Name = 'IDMOV_OCORRENCIA'
+        ParamType = ptInput
+      end>
   end
 end

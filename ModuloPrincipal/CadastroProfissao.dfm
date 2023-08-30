@@ -1,7 +1,7 @@
 inherited FrmCadastroProfissao: TFrmCadastroProfissao
   Caption = 'Cadastro Profissao'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -50,7 +50,7 @@ inherited FrmCadastroProfissao: TFrmCadastroProfissao
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM profissao')

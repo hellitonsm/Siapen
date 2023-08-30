@@ -1,19 +1,17 @@
 object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
   Left = 422
   Top = 231
-  Width = 395
-  Height = 155
   Caption = 'Selecione Autos'
+  ClientHeight = 116
+  ClientWidth = 379
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poMainFormCenter
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object Label51: TLabel
     Left = 27
@@ -49,10 +47,6 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
     Font.Height = -19
     Font.Name = 'Times New Roman'
     Font.Style = []
-    ParentFont = False
-    TabOrder = 1
-    TabStop = False
-    OnClick = BitBtn1Click
     Glyph.Data = {
       36100000424D3610000000000000360000002800000020000000200000000100
       2000000000000010000000000000000000000000000000000000FF00FF00FF00
@@ -184,9 +178,13 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+    ParentFont = False
     Style = bsWin31
+    TabOrder = 1
+    TabStop = False
+    OnClick = BitBtn1Click
   end
-  object SQLfiltroautos: TSQLQuery
+  object SQLfiltroautosold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -214,7 +212,7 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
     DataSet = cdsfiltroautos
     Left = 160
   end
-  object SQLimprmir: TSQLQuery
+  object SQLimprmirold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -240,11 +238,13 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
     CloseDataSource = False
-    DataSet = SQLimprmir
+    DataSet = SQLimprmirold
+    BCDToCurrency = False
+    DataSetOptions = []
     Left = 320
   end
   object frxReport1: TfrxReport
-    Version = '4.3.6'
+    Version = '2022.1.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -285,6 +285,9 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
       object Sqlscaner: TfrxDBXQuery
         UserName = 'Sqlscaner'
         CloseDataSource = True
+        BCDToCurrency = False
+        DataSetOptions = []
+        IgnoreDupParams = False
         Params = <
           item
             Name = 'ID_CONTROLE_PERMANENCIA'
@@ -313,6 +316,46 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
         GetDriverFunc = 'getSQLDriverINTERBASE'
         LibraryName = 'dbexpint.dll'
         LoginPrompt = False
+        Params.Strings = (
+          'DriverUnit=Data.DBXInterBase'
+          
+            'DriverPackageLoader=TDBXDynalinkDriverLoader,DbxCommonDriver280.' +
+            'bpl'
+          
+            'DriverAssemblyLoader=Borland.Data.TDBXDynalinkDriverLoader,Borla' +
+            'nd.Data.DbxCommonDriver,Version=24.0.0.0,Culture=neutral,PublicK' +
+            'eyToken=91d62ebb5b0d1b1b'
+          
+            'MetaDataPackageLoader=TDBXInterbaseMetaDataCommandFactory,DbxInt' +
+            'erBaseDriver280.bpl'
+          
+            'MetaDataAssemblyLoader=Borland.Data.TDBXInterbaseMetaDataCommand' +
+            'Factory,Borland.Data.DbxInterBaseDriver,Version=24.0.0.0,Culture' +
+            '=neutral,PublicKeyToken=91d62ebb5b0d1b1b'
+          'GetDriverFunc=getSQLDriverINTERBASE'
+          'LibraryName=dbxint.dll'
+          'LibraryNameOsx=libsqlib.dylib'
+          'VendorLib=GDS32.DLL'
+          'VendorLibWin64=ibclient64.dll'
+          'VendorLibOsx=libgds.dylib'
+          'Database=database.gdb'
+          'User_Name=sysdba'
+          'Password=masterkey'
+          'Role=RoleName'
+          'MaxBlobSize=-1'
+          'LocaleCode=0000'
+          'IsolationLevel=ReadCommitted'
+          'SQLDialect=3'
+          'CommitRetain=False'
+          'WaitOnLocks=True'
+          'TrimChar=False'
+          'DisplayDriverName=InterBase Server'
+          'BlobSize=-1'
+          'ErrorResourceFile='
+          'RoleName=RoleName'
+          'ServerCharSet='
+          'Trim Char=False'
+          'SEP=')
         VendorLib = 'fbclient.dll'
         pLeft = 104
         pTop = 104
@@ -331,8 +374,16 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
       ColumnWidth = 211.900000000000000000
       ColumnPositions.Strings = (
         '0')
+      Frame.Typ = []
+      MirrorMode = []
       OnBeforePrint = 'Page1OnBeforePrint'
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        FillGap.Top = 0
+        FillGap.Left = 0
+        FillGap.Bottom = 0
+        FillGap.Right = 0
+        Frame.Typ = []
         Height = 1099.843230000000000000
         Top = 16.000000000000000000
         Width = 793.701300000000000000
@@ -341,14 +392,20 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
         RowCount = 0
         object Picture1: TfrxPictureView
           Align = baBottom
+          AllowVectorExport = True
           Top = 37.795300000000000000
           Width = 793.701300000000000000
           Height = 1062.047930000000000000
           DataField = 'DOC_SCANER'
           DataSet = frxReport1.Sqlscaner
           DataSetName = 'Sqlscaner'
+          Frame.Typ = []
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
         end
         object SqlscanerDESCRICAO_PERMANENCIA: TfrxMemoView
+          AllowVectorExport = True
           Left = 3.779530000000000000
           Top = 7.559060000000000000
           Width = 801.260360000000000000
@@ -361,14 +418,15 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
           Font.Height = -13
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Frame.Typ = []
+          Memo.UTF8W = (
             '[Sqlscaner."DESCRICAO_PERMANENCIA"]')
           ParentFont = False
         end
       end
     end
   end
-  object SqlCadastro: TSQLQuery
+  object SqlCadastroold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -413,5 +471,42 @@ object FrmSelecionarAutosPermanencia: TFrmSelecionarAutosPermanencia
     DataSet = CdsCadastro
     Left = 84
     Top = 64
+  end
+  object SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from permanencia_scaner'
+      'where id_controle_permanencia = :id_controle_permanencia'
+      '')
+    Left = 320
+    Top = 56
+    ParamData = <
+      item
+        Name = 'ID_CONTROLE_PERMANENCIA'
+        ParamType = ptInput
+      end>
+  end
+  object SQLimprmir: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM rdb$database'
+      '')
+    Left = 256
+    Top = 56
+  end
+  object SQLfiltroautos: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select id_controle_permanencia, nautos from controle_permanencia'
+      'where id_interno = :id_interno'
+      '')
+    Left = 200
+    Top = 56
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

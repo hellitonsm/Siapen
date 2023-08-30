@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, Mask,
-  DBCtrls, jpeg;
+  DBCtrls, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 type
   TFrmCadastroCela = class(TFrmModeloCadastro)
@@ -32,11 +35,11 @@ type
     CdsCadastroLIMITE_POR_CELA: TIntegerField;
     CdsCadastroEM_MANUTENCAO: TStringField;
     CdsCadastroMOTIVO_MANUTENCAO: TStringField;
-    SqlConsulta: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
-    SqlSelectcela: TSQLQuery;
+    SqlSelectcelaold: TSQLQuery;
     CdsConsultaID_CELA: TIntegerField;
     CdsConsultaCELA: TStringField;
     CdsConsultaIDSOLARIO: TIntegerField;
@@ -55,18 +58,23 @@ type
     DBLookupComboBoxGaleria: TDBLookupComboBox;
     LabelSolario: TLabel;
     DBLookupComboBoxSolario: TDBLookupComboBox;
-    SqlPavilhao: TSQLQuery;
+    SqlPavilhaoold: TSQLQuery;
     DspPavilhao: TDataSetProvider;
     CdsPavilhao: TClientDataSet;
     DsPavilhao: TDataSource;
     DsGaleria: TDataSource;
     CdsGaleria: TClientDataSet;
     DspGaleria: TDataSetProvider;
-    SqlGaleria: TSQLQuery;
-    SqlSolario: TSQLQuery;
+    SqlGaleriaold: TSQLQuery;
+    SqlSolarioold: TSQLQuery;
     DspSolario: TDataSetProvider;
     CdsSolario: TClientDataSet;
     DsSolario: TDataSource;
+    SqlPavilhao: TFDQuery;
+    SqlGaleria: TFDQuery;
+    SqlSolario: TFDQuery;
+    SqlSelectcela: TFDQuery;
+    SqlConsulta: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure EditLocalizarChange(Sender: TObject);
     procedure DBLookupComboBoxPavilhaoClick(Sender: TObject);

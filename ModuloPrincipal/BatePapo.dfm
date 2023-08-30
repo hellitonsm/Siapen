@@ -5,8 +5,8 @@ inherited FrmBatePapo: TFrmBatePapo
   ClientHeight = 553
   ClientWidth = 969
   OnShow = FormShow
-  ExplicitWidth = 985
-  ExplicitHeight = 592
+  ExplicitWidth = 981
+  ExplicitHeight = 591
   TextHeight = 13
   inherited PanelGeral: TPanel
     Top = 42
@@ -14,8 +14,8 @@ inherited FrmBatePapo: TFrmBatePapo
     Height = 511
     TabOrder = 1
     ExplicitTop = 42
-    ExplicitWidth = 969
-    ExplicitHeight = 511
+    ExplicitWidth = 965
+    ExplicitHeight = 510
     object DBGridListaConexao: TDBGrid
       Left = 636
       Top = 1
@@ -60,6 +60,8 @@ inherited FrmBatePapo: TFrmBatePapo
       Align = alBottom
       Caption = 'Panel1'
       TabOrder = 2
+      ExplicitTop = 321
+      ExplicitWidth = 963
       object Button1: TButton
         Left = 56
         Top = 144
@@ -102,6 +104,7 @@ inherited FrmBatePapo: TFrmBatePapo
         Font.Style = []
         ParentFont = False
         Spacing = 0
+        ExplicitWidth = 961
       end
       object MemoMensagem: TRichEdit
         Left = 1
@@ -116,6 +119,7 @@ inherited FrmBatePapo: TFrmBatePapo
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 961
       end
     end
     object MemoHistorico: TRichEdit
@@ -131,16 +135,18 @@ inherited FrmBatePapo: TFrmBatePapo
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 631
+      ExplicitHeight = 320
     end
   end
   inherited PanelTitulo: TPanel
     Width = 969
     Height = 42
     TabOrder = 0
-    ExplicitWidth = 973
+    ExplicitWidth = 965
     ExplicitHeight = 42
     inherited Image2: TImage
-      Width = 971
+      Width = 967
       Height = 40
       ExplicitWidth = 864
       ExplicitHeight = 40
@@ -168,48 +174,15 @@ inherited FrmBatePapo: TFrmBatePapo
       Transparent = True
     end
   end
-  object DspFuncionario: TDataSetProvider
-    DataSet = SqlFuncionario
-    Left = 632
-    Top = 105
-  end
-  object CdsFuncionario: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'DspFuncionario'
-    Left = 663
-    Top = 105
-  end
   object DsFuncionario: TDataSource
-    DataSet = CdsFuncionario
+    DataSet = SqlFuncionario
     Left = 694
     Top = 105
-  end
-  object SqlFuncionario: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = DM.SQLConnect
-    Left = 601
-    Top = 105
-  end
-  object SqlExecute: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = DM.SQLConnect
-    Left = 601
-    Top = 209
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
     Left = 712
     Top = 16
-  end
-  object SqlLeitura: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = DM.SQLConnect
-    Left = 705
-    Top = 209
   end
   object ImageList1: TImageList
     Left = 50
@@ -2340,5 +2313,20 @@ inherited FrmBatePapo: TFrmBatePapo
       Dialog.PageWidth = 8500
       Dialog.PageHeight = 11000
     end
+  end
+  object SqlFuncionario: TFDQuery
+    Connection = DM.SQLConnect
+    Left = 560
+    Top = 106
+  end
+  object SqlExecute: TFDQuery
+    Connection = DM.SQLConnect
+    Left = 552
+    Top = 210
+  end
+  object SqlLeitura: TFDQuery
+    Connection = DM.SQLConnect
+    Left = 760
+    Top = 210
   end
 end

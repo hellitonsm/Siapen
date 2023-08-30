@@ -1,32 +1,40 @@
 inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
   Left = 203
   Top = 138
-  Width = 795
-  Height = 439
   Caption = 'Cadastro de Visitantes envolvidos com Tr'#225'fico'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 350
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 332
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 332
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 664
-    Height = 350
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 779
+      ExplicitWidth = 779
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 664
-      Height = 350
+      Width = 825
+      Height = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 656
-          Height = 322
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 8
             Top = 8
@@ -135,8 +143,8 @@ inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
             Top = 24
             Width = 137
             Height = 21
-            Date = 41220.644300439820000000
-            Time = 41220.644300439820000000
+            Date = 41220.000000000000000000
+            Time = 0.644300439817016000
             TabOrder = 1
             DataField = 'DATA'
             DataSource = DsCadastro
@@ -220,35 +228,33 @@ inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 667
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 667
-          Height = 277
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 665
-            Height = 275
+            Width = 815
+            Height = 468
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 779
-    inherited Image2: TImage
-      Width = 779
-    end
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 382
-    Width = 779
+    Top = 564
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'select * from visitante_trafico'
       'order by ID_VISITANTE_TRAFICO desc ')
-    SQLConnection = DM.SQLConnect
     Left = 520
   end
   inherited DspCadastro: TDataSetProvider
@@ -288,30 +294,6 @@ inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
   inherited DsCadastro: TDataSource
     Top = 64
   end
-  object SqlOcorrencia: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_UP'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'SELECT o.id_ocorrencia_plantao, o.id_ocorrencia_plantao||'#39': Natu' +
-        'reza:'#39'||n.natureza_ocorrencia as "Ocorrencia"'
-      'FROM ocorrencia_plantao o'
-      
-        'inner join natureza_ocorrencia n on (o.id_natureza_ocorrencia = ' +
-        'n.id_natureza_ocorrencia)'
-      'WHERE ID_UP = :ID_UP'
-      'and coalesce(assunto,'#39#39')<>'#39#39
-      'order by o.id_ocorrencia_plantao desc'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 631
-    Top = 200
-  end
   object DspOcorrencia: TDataSetProvider
     DataSet = SqlOcorrencia
     Left = 663
@@ -329,26 +311,6 @@ inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
     Left = 727
     Top = 200
   end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT id_interno, nome_interno||'#39': MAE:'#39'||MAE as "nome_interno"'
-      'FROM INTERNO'
-      'WHERE ID_UP = :ID_UP'
-      'and coalesce(nome_interno,'#39#39')<>'#39#39
-      'AND ST = '#39'A'#39
-      'ORDER BY NOME_INTERNO')
-    SQLConnection = DM.SQLConnect
-    Left = 786
-    Top = 153
-  end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
     Left = 813
@@ -365,15 +327,6 @@ inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
     DataSet = CdsInterno
     Left = 869
     Top = 152
-  end
-  object SqlVisitanteInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from visitante_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 799
-    Top = 224
   end
   object DspVisitanteInterno: TDataSetProvider
     DataSet = SqlVisitanteInterno
@@ -408,21 +361,6 @@ inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
     Left = 897
     Top = 279
   end
-  object SqlVisitante: TSQLQuery
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_visitante'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'select '
-      'v.id_visitante, v.visitante, v.status, v.motivo_inativo'
-      'from visitante v'
-      'where id_visitante=:id_visitante')
-    Left = 775
-    Top = 104
-  end
   object DspVisitante: TDataSetProvider
     DataSet = SqlVisitante
     Left = 815
@@ -439,5 +377,70 @@ inherited FrmVisitanteTrafico: TFrmVisitanteTrafico
     DataSet = CdsVisitante
     Left = 895
     Top = 104
+  end
+  object SqlOcorrencia: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT o.id_ocorrencia_plantao, o.id_ocorrencia_plantao||'#39': Natu' +
+        'reza:'#39'||n.natureza_ocorrencia as "Ocorrencia"'
+      'FROM ocorrencia_plantao o'
+      
+        'inner join natureza_ocorrencia n on (o.id_natureza_ocorrencia = ' +
+        'n.id_natureza_ocorrencia)'
+      'WHERE ID_UP = :ID_UP'
+      'and coalesce(assunto,'#39#39')<>'#39#39
+      'order by o.id_ocorrencia_plantao desc'
+      '')
+    Left = 631
+    Top = 200
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno||'#39': MAE:'#39'||MAE as "nome_interno"'
+      'FROM INTERNO'
+      'WHERE ID_UP = :ID_UP'
+      'and coalesce(nome_interno,'#39#39')<>'#39#39
+      'AND ST = '#39'A'#39
+      'ORDER BY NOME_INTERNO')
+    Left = 786
+    Top = 153
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlVisitanteInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from visitante_interno')
+    Left = 799
+    Top = 224
+  end
+  object SqlVisitante: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select '
+      'v.id_visitante, v.visitante, v.status, v.motivo_inativo'
+      'from visitante v'
+      'where id_visitante=:id_visitante')
+    Left = 775
+    Top = 104
+    ParamData = <
+      item
+        Name = 'ID_VISITANTE'
+        ParamType = ptInput
+      end>
   end
 end

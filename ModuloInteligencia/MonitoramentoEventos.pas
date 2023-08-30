@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, FMTBcd, SqlExpr, DB,
-  DBClient, Provider, Grids, DBGrids, DBCtrls, Buttons, ComCtrls;
+  DBClient, Provider, Grids, DBGrids, DBCtrls, Buttons, ComCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMonitoramentoEventos = class(TFrmModeloFormulario)
@@ -13,15 +16,12 @@ type
     DspMovEventos: TDataSetProvider;
     CdsMovEventos: TClientDataSet;
     DsMovEventos: TDataSource;
-    SqlMovEventos: TSQLQuery;
-    SqlEventos: TSQLQuery;
     DspEventos: TDataSetProvider;
     CdsEventos: TClientDataSet;
     DsEventos: TDataSource;
     DsSubEventos: TDataSource;
     CdsSubEventos: TClientDataSet;
     DspSubEventos: TDataSetProvider;
-    SqlSubEventos: TSQLQuery;
     CdsMovEventosIDMOV_EVENTOS: TIntegerField;
     CdsMovEventosIDFUNCIONARIO: TIntegerField;
     CdsMovEventosIDPOSTO_TRABALHO: TIntegerField;
@@ -52,6 +52,9 @@ type
     OpenDialog1: TOpenDialog;
     lbl7: TLabel;
     DBLookupComboBoxFuncionario: TDBLookupComboBox;
+    SqlMovEventos: TFDQuery;
+    SqlEventos: TFDQuery;
+    SqlSubEventos: TFDQuery;
     procedure CdsMovEventosAfterInsert(DataSet: TDataSet);
     procedure BtnAtualizarEscalaDiaClick(Sender: TObject);
     procedure CdsMovEventosAfterPost(DataSet: TDataSet);

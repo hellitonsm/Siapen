@@ -1,28 +1,42 @@
 inherited FrmMunicoes: TFrmMunicoes
-  Left = 281
   Top = 237
-  Height = 498
   Caption = 'Cadastro de Muni'#231#245'es'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 409
+    Height = 531
+    ExplicitHeight = 531
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 391
+      Height = 513
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 391
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 409
+    Width = 821
+    Height = 531
+    ExplicitWidth = 821
+    ExplicitHeight = 531
     inherited PageControlModeloCadastro: TPageControl
-      Height = 409
+      Width = 821
+      Height = 531
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Height = 381
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label3: TLabel
             Left = 16
             Top = 13
@@ -166,7 +180,6 @@ inherited FrmMunicoes: TFrmMunicoes
             Top = 232
             Width = 180
             Height = 19
-            ItemHeight = 13
             ListWidth = 0
             Sorted = True
             TabOrder = 8
@@ -201,7 +214,6 @@ inherited FrmMunicoes: TFrmMunicoes
             Top = 232
             Width = 180
             Height = 19
-            ItemHeight = 13
             ListWidth = 0
             Sorted = True
             TabOrder = 9
@@ -261,10 +273,20 @@ inherited FrmMunicoes: TFrmMunicoes
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 813
+        end
         inherited PanelConsulta: TPanel
-          Height = 347
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
-            Height = 345
+            Width = 811
+            Height = 467
             Columns = <
               item
                 Expanded = False
@@ -288,33 +310,29 @@ inherited FrmMunicoes: TFrmMunicoes
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 441
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 936
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_UP'
-        ParamType = ptUnknown
-      end>
+  inherited StatusBar1: TStatusBar
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PATRIMONIO'
       'WHERE TIPO_BASE='#39'MUNI'#199#213'ES'#39
       'AND  ID_UP = :ID_UP')
+    ParamData = <
+      item
+        Name = 'ID_UP'
+      end>
   end
   inherited CdsCadastro: TClientDataSet
     BeforePost = CdsCadastroBeforePost
-  end
-  object SqlLista: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT MARCAS '
-      'FROM PATRIMONIO')
-    SQLConnection = DM.SQLConnect
-    Left = 304
   end
   object DspLista: TDataSetProvider
     DataSet = SqlLista
@@ -331,5 +349,13 @@ inherited FrmMunicoes: TFrmMunicoes
     DataSet = CdsLista
     OnDataChange = DsCadastroDataChange
     Left = 388
+  end
+  object SqlLista: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT MARCAS '
+      'FROM PATRIMONIO')
+    Left = 304
   end
 end

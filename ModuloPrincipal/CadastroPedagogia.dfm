@@ -1,35 +1,58 @@
 inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
   Left = 338
   Top = 102
-  Width = 918
-  Height = 626
   Caption = 'Cadastro Pedagogia'
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 510
+    Height = 525
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 492
+      Height = 506
+      ExplicitHeight = 505
+      inherited Novo: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Editar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Cancelar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Salvar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Excluir: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Fechar: TToolButton
+        ExplicitWidth = 99
+      end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 492
+      Top = 506
       Hints.Strings = ()
+      ExplicitTop = 505
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 787
-    Height = 510
+    Height = 525
+    ExplicitHeight = 525
+    inherited Image2: TImage
+      Width = 902
+      ExplicitWidth = 902
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 787
-      Height = 510
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 817
+      ExplicitHeight = 523
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 779
-          Height = 482
+          ExplicitWidth = 809
+          ExplicitHeight = 495
           inherited PageControlPrincipal: TPageControl
-            Width = 777
-            Height = 480
+            ExplicitWidth = 807
+            ExplicitHeight = 493
             inherited TabSheetDadosGerais: TTabSheet
               inherited Label23: TLabel
                 Enabled = True
@@ -59,7 +82,6 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
                 Top = 33
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -201,7 +223,6 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
                 Top = 33
                 Width = 154
                 Height = 21
-                Date = 0.302563541663403200
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -298,46 +319,45 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
       end
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
-          Width = 779
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 650
+            Left = 684
             TabOrder = 3
+            ExplicitLeft = 684
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 779
-          Height = 440
+          ExplicitWidth = 813
+          ExplicitHeight = 454
           inherited DBGridConsulta: TDBGrid
-            Width = 777
-            Height = 438
+            Width = 811
+            Height = 452
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 777
-            Height = 438
-            PanelHeight = 87
-            PanelWidth = 760
+            Width = 811
+            Height = 452
+            PanelWidth = 794
+            ExplicitWidth = 811
+            ExplicitHeight = 452
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 902
-    inherited Image2: TImage
-      Width = 902
-    end
+    ExplicitWidth = 932
   end
   inherited StatusBar1: TStatusBar
-    Top = 542
-    Width = 902
+    Top = 557
+    ExplicitTop = 556
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     Left = 636
     Top = 192
   end
@@ -356,7 +376,7 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
   inherited MainMenu1: TMainMenu
     Left = 203
   end
-  object SQLPedagogia: TSQLQuery
+  object SQLPedagogiaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -422,7 +442,7 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
     Left = 732
     Top = 8
   end
-  object SQLlivrointerno: TSQLQuery
+  object SQLlivrointernoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -438,23 +458,23 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
     SQLConnection = DM.SQLConnect
     Left = 408
     Top = 8
-    object SQLlivrointernoID_LIVRO_INTERNO: TIntegerField
+    object SQLlivrointernooldID_LIVRO_INTERNO: TIntegerField
       FieldName = 'ID_LIVRO_INTERNO'
       Required = True
     end
-    object SQLlivrointernoID_LIVRO: TIntegerField
+    object SQLlivrointernooldID_LIVRO: TIntegerField
       FieldName = 'ID_LIVRO'
     end
-    object SQLlivrointernoID_INTERNO: TIntegerField
+    object SQLlivrointernooldID_INTERNO: TIntegerField
       FieldName = 'ID_INTERNO'
     end
-    object SQLlivrointernoDATA_ENTREGA: TSQLTimeStampField
+    object SQLlivrointernooldDATA_ENTREGA: TSQLTimeStampField
       FieldName = 'DATA_ENTREGA'
     end
-    object SQLlivrointernoDATA: TSQLTimeStampField
+    object SQLlivrointernooldDATA: TSQLTimeStampField
       FieldName = 'DATA'
     end
-    object SQLlivrointernoOBS: TStringField
+    object SQLlivrointernooldOBS: TStringField
       FieldName = 'OBS'
       Size = 8192
     end
@@ -520,7 +540,7 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
     Left = 492
     Top = 8
   end
-  object SQLLivro: TSQLQuery
+  object SQLLivroold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -553,5 +573,52 @@ inherited FrmCadastroPedagogia: TFrmCadastroPedagogia
     DataSet = cdsLivro
     Left = 636
     Top = 105
+  end
+  object SQLlivrointerno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM livro_interno'
+      'where id_interno = :id_interno'
+      'order by data'
+      '')
+    Left = 404
+    Top = 97
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLPedagogia: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM historico_pedagogia'
+      'WHERE ID_INTERNO = :ID_INTERNO'
+      'order by data desc'
+      '')
+    Left = 579
+    Top = 40
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLLivro: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from livro '
+      'where utilizado < numero_exemplares and id_up = :id_up'
+      'order by livro'
+      '')
+    Left = 548
+    Top = 161
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
   end
 end

@@ -1,36 +1,42 @@
 inherited FrmRelacionamentoInterno: TFrmRelacionamentoInterno
   Left = 225
   Top = 145
-  Width = 843
-  Height = 583
   Caption = 'Vis'#227'o Grafica de Relacionamento'
-  OldCreateOrder = True
+  ClientHeight = 534
+  ClientWidth = 889
   OnCloseQuery = FormCloseQuery
-  PixelsPerInch = 96
+  ExplicitWidth = 901
+  ExplicitHeight = 572
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 827
-    Height = 504
+    Width = 889
+    Height = 493
     TabOrder = 1
+    ExplicitWidth = 412
+    ExplicitHeight = 167
     object PageControl1: TPageControl
       Left = 1
       Top = 1
-      Width = 825
-      Height = 502
+      Width = 887
+      Height = 491
       ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
       TabWidth = 100
+      ExplicitWidth = 410
+      ExplicitHeight = 165
       object TabSheet1: TTabSheet
         Caption = 'Sele'#231#227'o'
         object Image1: TImage
           Left = 0
-          Top = 48
-          Width = 817
+          Top = 37
+          Width = 879
           Height = 426
           Align = alBottom
           Proportional = True
           Stretch = True
+          ExplicitTop = 48
+          ExplicitWidth = 817
         end
         object Label33: TLabel
           Left = 8
@@ -96,8 +102,8 @@ inherited FrmRelacionamentoInterno: TFrmRelacionamentoInterno
         object Memo1: TMemo
           Left = 0
           Top = 0
-          Width = 817
-          Height = 474
+          Width = 879
+          Height = 463
           Align = alClient
           TabOrder = 0
           WantReturns = False
@@ -122,20 +128,13 @@ inherited FrmRelacionamentoInterno: TFrmRelacionamentoInterno
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 827
+    Width = 889
     TabOrder = 0
+    ExplicitWidth = 412
     inherited Image2: TImage
-      Width = 825
+      Width = 887
+      ExplicitWidth = 825
     end
-  end
-  object SqlRelacionamento: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * FROM SP_RELACIONAMENTO_INTERNO (1032)')
-    SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 145
   end
   object Blocos: TClientDataSet
     Aggregates = <>
@@ -152,26 +151,6 @@ inherited FrmRelacionamentoInterno: TFrmRelacionamentoInterno
     object Blocosnivel: TStringField
       FieldName = 'nivel'
     end
-  end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT id_interno, nome_interno'
-      'FROM INTERNO'
-      'WHERE ID_UP = :ID_UP'
-      'and coalesce(nome_interno,'#39#39')<>'#39#39
-      'AND ST = '#39'A'#39
-      'ORDER BY NOME_INTERNO')
-    SQLConnection = DM.SQLConnect
-    Left = 16
-    Top = 272
   end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
@@ -190,16 +169,6 @@ inherited FrmRelacionamentoInterno: TFrmRelacionamentoInterno
     Left = 100
     Top = 272
   end
-  object SqlListaInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT id_interno, foto'
-      'FROM INTERNO')
-    SQLConnection = DM.SQLConnect
-    Left = 24
-    Top = 328
-  end
   object DspListaInterno: TDataSetProvider
     DataSet = SqlListaInterno
     Left = 52
@@ -215,6 +184,41 @@ inherited FrmRelacionamentoInterno: TFrmRelacionamentoInterno
   object DsListaInterno: TDataSource
     DataSet = CdsListaInterno
     Left = 108
+    Top = 328
+  end
+  object SqlRelacionamento: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM SP_RELACIONAMENTO_INTERNO (1032)')
+    Left = 672
+    Top = 145
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno'
+      'FROM INTERNO'
+      'WHERE ID_UP = :ID_UP'
+      'and coalesce(nome_interno,'#39#39')<>'#39#39
+      'AND ST = '#39'A'#39
+      'ORDER BY NOME_INTERNO')
+    Left = 16
+    Top = 272
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlListaInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT id_interno, foto'
+      'FROM INTERNO')
+    Left = 24
     Top = 328
   end
 end

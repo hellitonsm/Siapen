@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, ExtCtrls, ComCtrls, Buttons, DBCtrls, StdCtrls,
-  FMTBcd, DB, SqlExpr, Vcl.Imaging.jpeg;
+  FMTBcd, DB, SqlExpr, Vcl.Imaging.jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmNovaEscala = class(TFrmModeloFormulario)
@@ -15,7 +18,8 @@ type
     DateTimePickerEscala: TDateTimePicker;
     Label1: TLabel;
     Button1: TButton;
-    SqlExecute: TSQLQuery;
+    SqlExecuteold: TSQLQuery;
+    SqlExecute: TFDQuery;
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);

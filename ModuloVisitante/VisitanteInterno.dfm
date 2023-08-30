@@ -1,14 +1,10 @@
 inherited FrmVisitanteInterno: TFrmVisitanteInterno
-  Width = 693
-  Height = 242
   Caption = 'Associar Interno ao Visitante'
-  OldCreateOrder = True
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 677
-    Height = 163
+    ExplicitWidth = 416
+    ExplicitHeight = 168
     object Label33: TLabel
       Left = 200
       Top = 10
@@ -56,8 +52,9 @@ inherited FrmVisitanteInterno: TFrmVisitanteInterno
       Height = 25
       Caption = 'Conf&irma'
       Enabled = False
-      TabOrder = 2
       Kind = bkOK
+      NumGlyphs = 2
+      TabOrder = 2
     end
     object BitBtnCancela: TBitBtn
       Left = 336
@@ -65,8 +62,9 @@ inherited FrmVisitanteInterno: TFrmVisitanteInterno
       Width = 150
       Height = 25
       Caption = 'Ca&ncela'
-      TabOrder = 3
       Kind = bkAbort
+      NumGlyphs = 2
+      TabOrder = 3
     end
     object DBLookupComboBoxParentesco: TDBLookupComboBox
       Left = 200
@@ -98,12 +96,13 @@ inherited FrmVisitanteInterno: TFrmVisitanteInterno
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 677
+    ExplicitWidth = 416
     inherited Image2: TImage
-      Width = 675
+      Width = 414
+      ExplicitWidth = 675
     end
   end
-  object SqlInterno: TSQLQuery
+  object SqlInternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -138,5 +137,23 @@ inherited FrmVisitanteInterno: TFrmVisitanteInterno
     DataSet = CdsInterno
     Left = 140
     Top = 96
+  end
+  object SqlInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno, rgi'
+      'FROM INTERNO'
+      'WHERE ID_UP = :ID_UP'
+      'and coalesce(nome_interno,'#39#39')<>'#39#39
+      'AND ST = '#39'A'#39
+      'ORDER BY NOME_INTERNO'
+      '')
+    Left = 24
+    Top = 97
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
   end
 end

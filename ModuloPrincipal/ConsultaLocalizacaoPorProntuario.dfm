@@ -1,22 +1,20 @@
 object FrmConsultaLocalizacaoPorProntuario: TFrmConsultaLocalizacaoPorProntuario
   Left = 145
   Top = 186
-  Width = 1115
-  Height = 510
   Caption = 'Movimenta'#231#227'o Geral do Interno'
+  ClientHeight = 471
+  ClientWidth = 1099
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
     1099
-    472)
-  PixelsPerInch = 96
+    471)
   TextHeight = 13
   object Label4: TLabel
     Left = 5
@@ -261,9 +259,6 @@ object FrmConsultaLocalizacaoPorProntuario: TFrmConsultaLocalizacaoPorProntuario
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 5
-    OnClick = BitBtn2Click
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -282,6 +277,9 @@ object FrmConsultaLocalizacaoPorProntuario: TFrmConsultaLocalizacaoPorProntuario
       33333333333333833F3333330000333333336663333333333333333888333333
       0000}
     NumGlyphs = 2
+    ParentFont = False
+    TabOrder = 5
+    OnClick = BitBtn2Click
   end
   object DBLookupComboBoxInterno: TDBLookupComboBox
     Left = 140
@@ -310,45 +308,6 @@ object FrmConsultaLocalizacaoPorProntuario: TFrmConsultaLocalizacaoPorProntuario
     DataSet = SqlVinc_Mudanca_Cela
     Left = 719
     Top = 141
-  end
-  object SqlVinc_Mudanca_Cela: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'SELECT i.rgi, i.nome_interno, up.id_up, up.nome_up, vmc.id_pavil' +
-        'hao_antes,'
-      ' vmc.id_galeria_antes, g1.galeria,'
-      ' vmc.id_solario_antes, s1.solario,'
-      ' vmc.id_cela_antes, c1.cela,'
-      ' vmc.id_pavilhao_novo,'
-      ' vmc.id_galeria_novo, g2.galeria,'
-      ' vmc.id_solario_novo, s2.solario,'
-      ' vmc.id_cela_novo, c2.cela,'
-      ' mc.data'
-      'from vinc_mudanca_cela vmc'
-      'inner join interno i on (vmc.id_interno = i.id_interno)'
-      
-        'inner join mudanca_cela mc on (vmc.id_mudanca_cela = mc.id_mudan' +
-        'ca_cela)'
-      'left outer join unidade_penal up on (mc.id_up = up.id_up)'
-      
-        'left outer join solario s1 on (vmc.id_solario_antes = s1.id_sola' +
-        'rio)'
-      
-        'left outer join galeria g1 on (vmc.id_galeria_antes = g1.id_gale' +
-        'ria)'
-      'left outer join cela c1 on (vmc.id_cela_antes = c1.id_cela)'
-      
-        'left outer join solario s2 on (vmc.id_solario_novo = s2.id_solar' +
-        'io)'
-      
-        'left outer join galeria g2 on (vmc.id_galeria_novo = g2.id_galer' +
-        'ia)'
-      'left outer join cela c2 on (vmc.id_cela_novo = c2.id_cela)')
-    SQLConnection = DM.SQLConnect
-    Left = 714
-    Top = 95
   end
   object CdsVinc_Mudanca_Cela: TClientDataSet
     Aggregates = <>
@@ -433,64 +392,6 @@ object FrmConsultaLocalizacaoPorProntuario: TFrmConsultaLocalizacaoPorProntuario
     Left = 641
     Top = 254
   end
-  object Sqlvinc_transferencia_interno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select i.rgi, i.nome_interno,'
-      
-        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UO.NOME_UP) ORIG' +
-        'EM,'
-      
-        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UP.NOME_UP) DEST' +
-        'INO,'
-      
-        'ti.data ,ti.tipo_documento, ti.motivo_movimentacao, ti.liberada,' +
-        ' ti.recebida'
-      'from vinc_transferencia_interno vti'
-      'inner join interno i on (vti.id_interno = i.id_interno)'
-      
-        'inner join transferencia_interno ti on (vti.id_transferencia_int' +
-        'erno = ti.id_transferencia_interno)'
-      'LEFT OUTER JOIN DESTINO D ON (D.ID_DESTINO = ti.ID_DESTINO)'
-      
-        'LEFT OUTER JOIN UNIDADE_PENAL UP ON (ti.ID_UP_DESTINO = UP.ID_UP' +
-        ')'
-      'LEFT OUTER JOIN UNIDADE_PENAL UO ON (ti.id_origem = UO.ID_UP)'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 641
-    Top = 207
-  end
-  object SqlExecute: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select i.rgi, i.nome_interno,'
-      
-        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UO.NOME_UP) ORIG' +
-        'EM,'
-      
-        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UP.NOME_UP) DEST' +
-        'INO,'
-      
-        'ti.data ,ti.tipo_documento, ti.motivo_movimentacao, ti.liberada,' +
-        ' ti.recebida'
-      'from vinc_transferencia_interno vti'
-      'inner join interno i on (vti.id_interno = i.id_interno)'
-      
-        'inner join transferencia_interno ti on (vti.id_transferencia_int' +
-        'erno = ti.id_transferencia_interno)'
-      'LEFT OUTER JOIN DESTINO D ON (D.ID_DESTINO = ti.ID_DESTINO)'
-      
-        'LEFT OUTER JOIN UNIDADE_PENAL UP ON (ti.ID_UP_DESTINO = UP.ID_UP' +
-        ')'
-      'LEFT OUTER JOIN UNIDADE_PENAL UO ON (ti.id_origem = UO.ID_UP)'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 489
-    Top = 207
-  end
   object Cdsvinc_transferencia_interno: TClientDataSet
     Aggregates = <>
     Params = <>
@@ -533,9 +434,103 @@ object FrmConsultaLocalizacaoPorProntuario: TFrmConsultaLocalizacaoPorProntuario
       Size = 1
     end
   end
-  object SqlExecute2: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlVinc_Mudanca_Cela: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT i.rgi, i.nome_interno, up.id_up, up.nome_up, vmc.id_pavil' +
+        'hao_antes,'
+      ' vmc.id_galeria_antes, g1.galeria,'
+      ' vmc.id_solario_antes, s1.solario,'
+      ' vmc.id_cela_antes, c1.cela,'
+      ' vmc.id_pavilhao_novo,'
+      ' vmc.id_galeria_novo, g2.galeria,'
+      ' vmc.id_solario_novo, s2.solario,'
+      ' vmc.id_cela_novo, c2.cela,'
+      ' mc.data'
+      'from vinc_mudanca_cela vmc'
+      'inner join interno i on (vmc.id_interno = i.id_interno)'
+      
+        'inner join mudanca_cela mc on (vmc.id_mudanca_cela = mc.id_mudan' +
+        'ca_cela)'
+      'left outer join unidade_penal up on (mc.id_up = up.id_up)'
+      
+        'left outer join solario s1 on (vmc.id_solario_antes = s1.id_sola' +
+        'rio)'
+      
+        'left outer join galeria g1 on (vmc.id_galeria_antes = g1.id_gale' +
+        'ria)'
+      'left outer join cela c1 on (vmc.id_cela_antes = c1.id_cela)'
+      
+        'left outer join solario s2 on (vmc.id_solario_novo = s2.id_solar' +
+        'io)'
+      
+        'left outer join galeria g2 on (vmc.id_galeria_novo = g2.id_galer' +
+        'ia)'
+      'left outer join cela c2 on (vmc.id_cela_novo = c2.id_cela)')
+    Left = 714
+    Top = 95
+  end
+  object Sqlvinc_transferencia_interno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select i.rgi, i.nome_interno,'
+      
+        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UO.NOME_UP) ORIG' +
+        'EM,'
+      
+        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UP.NOME_UP) DEST' +
+        'INO,'
+      
+        'ti.data ,ti.tipo_documento, ti.motivo_movimentacao, ti.liberada,' +
+        ' ti.recebida'
+      'from vinc_transferencia_interno vti'
+      'inner join interno i on (vti.id_interno = i.id_interno)'
+      
+        'inner join transferencia_interno ti on (vti.id_transferencia_int' +
+        'erno = ti.id_transferencia_interno)'
+      'LEFT OUTER JOIN DESTINO D ON (D.ID_DESTINO = ti.ID_DESTINO)'
+      
+        'LEFT OUTER JOIN UNIDADE_PENAL UP ON (ti.ID_UP_DESTINO = UP.ID_UP' +
+        ')'
+      'LEFT OUTER JOIN UNIDADE_PENAL UO ON (ti.id_origem = UO.ID_UP)'
+      '')
+    Left = 641
+    Top = 207
+  end
+  object SqlExecute: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select i.rgi, i.nome_interno,'
+      
+        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UO.NOME_UP) ORIG' +
+        'EM,'
+      
+        'IIF(ti.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, UP.NOME_UP) DEST' +
+        'INO,'
+      
+        'ti.data ,ti.tipo_documento, ti.motivo_movimentacao, ti.liberada,' +
+        ' ti.recebida'
+      'from vinc_transferencia_interno vti'
+      'inner join interno i on (vti.id_interno = i.id_interno)'
+      
+        'inner join transferencia_interno ti on (vti.id_transferencia_int' +
+        'erno = ti.id_transferencia_interno)'
+      'LEFT OUTER JOIN DESTINO D ON (D.ID_DESTINO = ti.ID_DESTINO)'
+      
+        'LEFT OUTER JOIN UNIDADE_PENAL UP ON (ti.ID_UP_DESTINO = UP.ID_UP' +
+        ')'
+      'LEFT OUTER JOIN UNIDADE_PENAL UO ON (ti.id_origem = UO.ID_UP)'
+      '')
+    Left = 489
+    Top = 207
+  end
+  object SqlExecute2: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       
         'SELECT i.rgi, i.nome_interno, up.id_up, up.nome_up, vmc.id_pavil' +

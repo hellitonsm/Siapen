@@ -2,16 +2,16 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
   Left = 205
   Top = 58
   Caption = 'Entrada de Visitantes'
-  ClientHeight = 593
-  ClientWidth = 1046
+  ClientHeight = 592
+  ClientWidth = 1042
   KeyPreview = True
-  ExplicitWidth = 1062
-  ExplicitHeight = 632
+  ExplicitWidth = 1058
+  ExplicitHeight = 631
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 1046
+    Width = 1042
     Height = 126
-    ExplicitWidth = 1046
+    ExplicitWidth = 1042
     ExplicitHeight = 126
     inherited PanelLocalizaConsulta: TPanel [0]
       Top = 39
@@ -80,11 +80,11 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     end
     inherited ToolBarModeloCadastro: TToolBar [1]
       Top = 74
-      Width = 1046
+      Width = 1042
       ButtonWidth = 145
       TabOrder = 2
       ExplicitTop = 74
-      ExplicitWidth = 1046
+      ExplicitWidth = 1042
       inherited Novo: TToolButton
         AllowAllUp = True
         AutoSize = True
@@ -136,7 +136,7 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     object PanelTitulo: TPanel
       Left = 0
       Top = 0
-      Width = 1046
+      Width = 1042
       Height = 40
       Align = alTop
       BevelOuter = bvLowered
@@ -193,11 +193,11 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
   end
   inherited PanelModeloCadastro: TPanel
     Top = 126
-    Width = 1046
-    Height = 448
+    Width = 1042
+    Height = 447
     ExplicitTop = 126
-    ExplicitWidth = 1046
-    ExplicitHeight = 448
+    ExplicitWidth = 1042
+    ExplicitHeight = 447
     object Label4: TLabel [0]
       Left = 463
       Top = 1
@@ -213,13 +213,13 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
       Caption = 'Label8'
     end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 1046
+      Width = 1042
       Height = 250
-      ExplicitWidth = 1046
+      ExplicitWidth = 1042
       ExplicitHeight = 250
       inherited TabSheetCadastro: TTabSheet
         Caption = 'Visitante'
-        ExplicitWidth = 1038
+        ExplicitWidth = 1034
         ExplicitHeight = 222
         object Label2: TLabel
           Left = 111
@@ -972,8 +972,8 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     end
     inherited PageControlConsulta: TPageControl
       Top = 250
-      Width = 1046
-      Height = 198
+      Width = 1042
+      Height = 197
       Font.Style = [fsBold]
       ParentFont = False
       TabHeight = 30
@@ -981,26 +981,26 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
       TabWidth = 200
       OnChange = PageControlConsultaChange
       ExplicitTop = 250
-      ExplicitWidth = 1046
-      ExplicitHeight = 198
+      ExplicitWidth = 1042
+      ExplicitHeight = 197
       inherited TabSheetMovimentacao: TTabSheet [0]
         Caption = 'Visitantes do Dia de Hoje'
         Font.Style = [fsBold]
         ParentFont = False
         ExplicitTop = 36
-        ExplicitWidth = 1038
-        ExplicitHeight = 158
+        ExplicitWidth = 1034
+        ExplicitHeight = 157
         object Panel1: TPanel [0]
           Left = 0
           Top = 0
-          Width = 1000
+          Width = 1034
           Height = 30
           Align = alTop
           TabOrder = 0
           object LabelTotalVisitante: TLabel
             Left = 1
             Top = 1
-            Width = 122
+            Width = 1032
             Height = 16
             Align = alTop
             Caption = 'Total de visitantes: 0'
@@ -1010,6 +1010,7 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
+            ExplicitWidth = 122
           end
           object LabelVisualizando: TLabel
             Left = 424
@@ -1294,8 +1295,8 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
       inherited TabSheetConsulta: TTabSheet [1]
         Caption = 'Informa'#231#227'o Geral de Visitantes'
         ExplicitTop = 36
-        ExplicitWidth = 1038
-        ExplicitHeight = 158
+        ExplicitWidth = 1034
+        ExplicitHeight = 157
         inherited DBGridConsulta: TDBGrid
           Left = 826
           Top = 110
@@ -1613,27 +1614,13 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 574
-    Width = 1046
-    ExplicitTop = 574
-    ExplicitWidth = 1046
+    Top = 573
+    Width = 1042
+    ExplicitTop = 573
+    ExplicitWidth = 1042
   end
   inherited ImageListCadastro: TImageList
     Left = 880
-  end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_VISITANTE'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT  *'
-      'FROM VISITANTE '
-      'WHERE ID_VISITANTE=:ID_VISITANTE')
-    Left = 768
   end
   inherited DspCadastro: TDataSetProvider
     Left = 796
@@ -1647,44 +1634,6 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
   end
   inherited DsCadastro: TDataSource
     Left = 852
-  end
-  inherited SqlMovimento: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_up'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select '
-      'm.id_mov_diario_visitantes, '
-      'm.id_visitante,'
-      'i.id_interno,'
-      'm.cancelado,'
-      'm.ordem_visita, '
-      'm.nome_visitante, '
-      'm.numero_carteirinha, '
-      'm.cpf, '
-      'm.rg, '
-      'm.orgao_expedidor, '
-      'm.sexo, '
-      'm.impresso, '
-      'm.sacola, '
-      'm.dinheiro, '
-      'm.data_visita,'
-      'm.hora_visita,'
-      'coalesce(i.nome_interno,v.tipo_visitante) as nome_interno'
-      'from mov_diario_visitantes m'
-      'inner join visitante v on v.id_visitante=m.id_visitante'
-      'left join interno i on i.id_interno=m.id_interno'
-      'where'
-      'm.data_visita =current_date and '
-      'm.cancelado is null and '
-      'm.id_up=:id_up'
-      'order by m.ordem_visita')
-    Left = 840
-    Top = 240
   end
   inherited DspMovimento: TDataSetProvider
     Left = 868
@@ -1767,7 +1716,34 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     Left = 924
     Top = 240
   end
-  inherited SqlConsulta: TSQLQuery
+  inherited DspConsulta: TDataSetProvider
+    Left = 868
+    Top = 192
+  end
+  inherited CdsConsulta: TClientDataSet
+    PacketRecords = 50
+    Left = 896
+    Top = 192
+  end
+  inherited DsConsulta: TDataSource
+    Left = 924
+    Top = 192
+  end
+  inherited SqlCadastro: TFDQuery
+    SQL.Strings = (
+      'SELECT  *'
+      'FROM VISITANTE '
+      'WHERE ID_VISITANTE=:ID_VISITANTE')
+    Left = 768
+    ParamData = <
+      item
+        Name = 'ID_VISITANTE'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
+  end
+  inherited SqlConsulta: TFDQuery
     SQL.Strings = (
       'SELECT FIRST 20'
       'V.ID_VISITANTE,'
@@ -1792,34 +1768,43 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     Left = 840
     Top = 192
   end
-  inherited DspConsulta: TDataSetProvider
-    Left = 868
-    Top = 192
-  end
-  inherited CdsConsulta: TClientDataSet
-    PacketRecords = 50
-    Left = 896
-    Top = 192
-  end
-  inherited DsConsulta: TDataSource
-    Left = 924
-    Top = 192
-  end
-  object SqlVisitanteInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_visitante'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlMovimento: TFDQuery
     SQL.Strings = (
-      'select * from visitante_interno'
-      'where id_visitante=:id_visitante')
-    SQLConnection = DM.SQLConnect
+      'select '
+      'm.id_mov_diario_visitantes, '
+      'm.id_visitante,'
+      'i.id_interno,'
+      'm.cancelado,'
+      'm.ordem_visita, '
+      'm.nome_visitante, '
+      'm.numero_carteirinha, '
+      'm.cpf, '
+      'm.rg, '
+      'm.orgao_expedidor, '
+      'm.sexo, '
+      'm.impresso, '
+      'm.sacola, '
+      'm.dinheiro, '
+      'm.data_visita,'
+      'm.hora_visita,'
+      'coalesce(i.nome_interno,v.tipo_visitante) as nome_interno'
+      'from mov_diario_visitantes m'
+      'inner join visitante v on v.id_visitante=m.id_visitante'
+      'left join interno i on i.id_interno=m.id_interno'
+      'where'
+      'm.data_visita =current_date and '
+      'm.cancelado is null and '
+      'm.id_up=:id_up'
+      'order by m.ordem_visita')
     Left = 840
-    Top = 80
+    Top = 240
+    ParamData = <
+      item
+        Name = 'id_up'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   object DspVisitanteInterno: TDataSetProvider
     DataSet = SqlVisitanteInterno
@@ -1894,56 +1879,10 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     Left = 924
     Top = 80
   end
-  object SqlSelectVisitante: TSQLQuery
-    Params = <>
-    SQL.Strings = (
-      'SELECT FIRST 50'
-      'V.ID_VISITANTE,'
-      'V.VISITANTE,'
-      'V.NUMERO_CARTEIRINHA,'
-      'V.DATA_CADASTRO,'
-      'V.CPF,'
-      'V.RG,'
-      'V.ORGAO_EXPEDIDOR,'
-      'V.SEXO,'
-      'G.GRAU_PARENTESCO,'
-      'I.ID_INTERNO,'
-      'I.NOME_INTERNO,'
-      'I.RGI,'
-      'I.ID_UP,'
-      'I.ST'
-      'FROM VISITANTE V'
-      
-        'INNER JOIN VISITANTE_INTERNO VI ON (V.ID_VISITANTE=VI.ID_VISITAN' +
-        'TE)'
-      'INNER JOIN INTERNO I ON (VI.ID_INTERNO=I.ID_INTERNO)'
-      
-        'INNER JOIN GRAU_PARENTESCO G ON (VI.ID_GRAU_PARENTESCO=G.ID_GRAU' +
-        '_PARENTESCO)')
-    Left = 736
-    Top = 252
-  end
   object OpenDialogFOTO: TOpenDialog
     Filter = 'Imagens (*.jpg)|*.jpg'
     Left = 912
     Top = 9
-  end
-  object SqlMenores: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_visitante'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM menores'
-      'where id_visitante=:id_visitante')
-    SQLConnection = DM.SQLConnect
-    Left = 840
-    Top = 152
   end
   object DspMenores: TDataSetProvider
     DataSet = SqlMenores
@@ -1966,11 +1905,6 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     Left = 924
     Top = 152
   end
-  object SqlMov_Diario_Visitantes: TSQLQuery
-    Params = <>
-    Left = 841
-    Top = 287
-  end
   object DspMov_Diario_Visitantes: TDataSetProvider
     DataSet = SqlMov_Diario_Visitantes
     Left = 869
@@ -1987,24 +1921,6 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     DataSet = CdsMov_Diario_Visitantes
     Left = 925
     Top = 287
-  end
-  object SqlRegraVisita: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM REGRA_VISITA'
-      'WHERE DIA_SEMANA = EXTRACT(WEEKDAY FROM CURRENT_TIMESTAMP)'
-      'AND ID_UP=:ID_UP'
-      'ORDER BY DESCRICAO')
-    SQLConnection = DM.SQLConnect
-    Left = 488
   end
   object DspRegraVisita: TDataSetProvider
     DataSet = SqlRegraVisita
@@ -2035,14 +1951,161 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     DataSet = SQLconspadrao
     Left = 276
   end
-  object SQLconspadrao: TSQLQuery
-    MaxBlobSize = -1
+  object DspValidaRegra: TDataSetProvider
+    DataSet = SqlValidaRegra
+    Left = 604
+    Top = 256
+  end
+  object CdsValidaRegra: TClientDataSet
+    Aggregates = <>
+    PacketRecords = 20
     Params = <>
-    SQLConnection = DM.SQLConnect
+    ProviderName = 'DspValidaRegra'
+    Left = 632
+    Top = 256
+  end
+  object DsValidaRegra: TDataSource
+    DataSet = CdsValidaRegra
+    OnDataChange = DsCadastroDataChange
+    Left = 660
+    Top = 256
+  end
+  object PopupMenuVisitante: TPopupMenu
+    Left = 871
+    Top = 333
+    object CarteiradeVisitante1: TMenuItem
+      Caption = 'Carteira de Visitante'
+      OnClick = CarteiradeVisitante1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object AlterarDadosFoto1: TMenuItem
+      Caption = 'Alterar Dados/Foto'
+      OnClick = AlterarDadosFoto1Click
+    end
+    object Seleo1: TMenuItem
+      Caption = 'Marcar Sele'#231#227'o'
+      OnClick = Seleo1Click
+    end
+    object Desmarcar1: TMenuItem
+      Caption = 'Recarregar'
+      OnClick = Desmarcar1Click
+    end
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 696
+  end
+  object CdsUltVisita: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DspUltVisita'
+    Left = 696
+    Top = 366
+    object CdsUltVisitaDATA_VISITA: TSQLTimeStampField
+      FieldName = 'DATA_VISITA'
+    end
+  end
+  object DspUltVisita: TDataSetProvider
+    DataSet = SqlUltVisita
+    Left = 632
+    Top = 366
+  end
+  object DsUltVisita: TDataSource
+    DataSet = CdsUltVisita
+    Left = 752
+    Top = 366
+  end
+  object SqlVisitanteInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from visitante_interno'
+      'where id_visitante=:id_visitante')
+    Left = 840
+    Top = 80
+    ParamData = <
+      item
+        Name = 'ID_VISITANTE'
+        ParamType = ptInput
+      end>
+  end
+  object SqlSelectVisitante: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT FIRST 50'
+      'V.ID_VISITANTE,'
+      'V.VISITANTE,'
+      'V.NUMERO_CARTEIRINHA,'
+      'V.DATA_CADASTRO,'
+      'V.CPF,'
+      'V.RG,'
+      'V.ORGAO_EXPEDIDOR,'
+      'V.SEXO,'
+      'G.GRAU_PARENTESCO,'
+      'I.ID_INTERNO,'
+      'I.NOME_INTERNO,'
+      'I.RGI,'
+      'I.ID_UP,'
+      'I.ST'
+      'FROM VISITANTE V'
+      
+        'INNER JOIN VISITANTE_INTERNO VI ON (V.ID_VISITANTE=VI.ID_VISITAN' +
+        'TE)'
+      'INNER JOIN INTERNO I ON (VI.ID_INTERNO=I.ID_INTERNO)'
+      
+        'INNER JOIN GRAU_PARENTESCO G ON (VI.ID_GRAU_PARENTESCO=G.ID_GRAU' +
+        '_PARENTESCO)')
+    Left = 736
+    Top = 252
+  end
+  object SqlMenores: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM menores'
+      'where id_visitante=:id_visitante')
+    Left = 840
+    Top = 152
+    ParamData = <
+      item
+        Name = 'ID_VISITANTE'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMov_Diario_Visitantes: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    Left = 841
+    Top = 287
+  end
+  object SqlRegraVisita: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM REGRA_VISITA'
+      'WHERE DIA_SEMANA = EXTRACT(WEEKDAY FROM CURRENT_TIMESTAMP)'
+      'AND ID_UP=:ID_UP'
+      'ORDER BY DESCRICAO')
+    Left = 488
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SQLconspadrao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     Left = 248
   end
-  object SqlTodosVisitantes: TSQLQuery
-    Params = <>
+  object SqlTodosVisitantes: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT FIRST 50'
       'V.ID_VISITANTE,'
@@ -2073,8 +2136,9 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     Left = 736
     Top = 156
   end
-  object SqlTodosInterno: TSQLQuery
-    Params = <>
+  object SqlTodosInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT FIRST 50'
       'V.ID_VISITANTE,'
@@ -2103,9 +2167,9 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     Left = 736
     Top = 204
   end
-  object SqlValidaRegra: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlValidaRegra: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT FIRST 20'
       'V.ID_VISITANTE,'
@@ -2128,65 +2192,22 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
       
         'INNER JOIN GRAU_PARENTESCO G ON (VI.ID_GRAU_PARENTESCO=G.ID_GRAU' +
         '_PARENTESCO)')
-    SQLConnection = DM.SQLConnect
     Left = 576
     Top = 256
   end
-  object DspValidaRegra: TDataSetProvider
-    DataSet = SqlValidaRegra
-    Left = 604
-    Top = 256
-  end
-  object CdsValidaRegra: TClientDataSet
-    Aggregates = <>
-    PacketRecords = 20
-    Params = <>
-    ProviderName = 'DspValidaRegra'
-    Left = 632
-    Top = 256
-  end
-  object DsValidaRegra: TDataSource
-    DataSet = CdsValidaRegra
-    OnDataChange = DsCadastroDataChange
-    Left = 660
-    Top = 256
-  end
-  object SqlExecute: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlExecute: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT id_interno, nome_interno, rgi'
       'FROM INTERNO'
       'ORDER BY NOME_INTERNO')
-    SQLConnection = DM.SQLConnect
     Left = 736
     Top = 304
   end
-  object PopupMenuVisitante: TPopupMenu
-    Left = 871
-    Top = 333
-    object CarteiradeVisitante1: TMenuItem
-      Caption = 'Carteira de Visitante'
-      OnClick = CarteiradeVisitante1Click
-    end
-    object N1: TMenuItem
-      Caption = '-'
-    end
-    object AlterarDadosFoto1: TMenuItem
-      Caption = 'Alterar Dados/Foto'
-      OnClick = AlterarDadosFoto1Click
-    end
-    object Seleo1: TMenuItem
-      Caption = 'Marcar Sele'#231#227'o'
-      OnClick = Seleo1Click
-    end
-    object Desmarcar1: TMenuItem
-      Caption = 'Recarregar'
-      OnClick = Desmarcar1Click
-    end
-  end
-  object SqlVisitaDia: TSQLQuery
-    Params = <>
+  object SqlVisitaDia: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT FIRST 50'
       'V.ID_VISITANTE,'
@@ -2214,38 +2235,13 @@ inherited FrmMovimentoVisitante: TFrmMovimentoVisitante
     Left = 624
     Top = 204
   end
-  object Timer1: TTimer
-    OnTimer = Timer1Timer
-    Left = 696
-  end
-  object SqlUltVisita: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlUltVisita: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select data_visita'
       'from mov_diario_visitantes')
-    SQLConnection = DM.SQLConnect
     Left = 576
-    Top = 366
-  end
-  object CdsUltVisita: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'DspUltVisita'
-    Left = 696
-    Top = 366
-    object CdsUltVisitaDATA_VISITA: TSQLTimeStampField
-      FieldName = 'DATA_VISITA'
-    end
-  end
-  object DspUltVisita: TDataSetProvider
-    DataSet = SqlUltVisita
-    Left = 632
-    Top = 366
-  end
-  object DsUltVisita: TDataSource
-    DataSet = CdsUltVisita
-    Left = 752
     Top = 366
   end
 end

@@ -75,8 +75,8 @@ type
     CompDBEdit: array of TDBEdit;
     CompClientDataSet: array of TClientDataSet;
   public
-    procedure FDClientDataSetReconcileError(DataSet: TFDMemTable;
-  E: EFDException; UpdateKind: TFDDatSRowState; var Action: TFDDAptReconcileAction);
+    procedure FDClientDataSetReconcileError(DataSet: TCustomClientDataset;
+  E: EReconcileError; UpdateKind: TUpdateKind; var Action: TReconcileAction);
     procedure CorNosCampos;
     function IniciaTransCadastro: Boolean;
     function FinalizaTransCadastro: Boolean;
@@ -136,7 +136,7 @@ procedure TFrmModeloCadastro.EditarClick(Sender: TObject);
 begin
   PanelCadastro.Enabled := true;
   PageControlModeloCadastro.ActivePageIndex := 0;
-  // IniciaTransCadastro;
+  IniciaTransCadastro;
   StatusBar1.Panels[1].Text := 'EDIÇÃO';
   Novo.Enabled := False;
   Editar.Enabled := False;
@@ -161,9 +161,15 @@ begin
   Cancelar.Enabled := False;
   if PageControlModeloCadastro.CanFocus then
     PageControlModeloCadastro.SetFocus;
-  DsCadastro.DataSet.Cancel;
+  for iComp := 0 to ComponentCount -1 do
+  begin
+    if(Components[iComp] is TDataSource) then
+      (Components[iComp] as TDataSource).DataSet.Cancel;
+  end;
+
+  //DsCadastro.DataSet.Cancel;
   StatusBar1.Panels[1].Text := '...';
-  CancelaTransCadastro;
+  //CancelaTransCadastro;
   CorNosCampos;
   PanelCadastro.Enabled := False;
 
@@ -209,6 +215,8 @@ begin
     erro_transacao := erro_transacao + TClientDataSet(DsCadastro.DataSet)
       .ApplyUpdates(0);
 
+    //SqlCadastro.CommitUpdates;
+
     if erro_transacao = 0 then
     begin
       for iComp := Low(CompClientDataSet) to High(CompClientDataSet) do
@@ -216,8 +224,8 @@ begin
         with (CompClientDataSet[iComp] as TClientDataSet) do
         begin
 
-         // TClientDataSet(CompClientDataSet[iComp]).OnReconcileError :=
-         //   FDClientDataSetReconcileError;
+         TClientDataSet(CompClientDataSet[iComp]).OnReconcileError :=
+         FDClientDataSetReconcileError;
 
           if Active then
           begin
@@ -670,6 +678,7 @@ end;
 
 procedure TFrmModeloCadastro.EditLocalizarChange(Sender: TObject);
 begin
+ // ShowMessage('foi A');
   TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
   if EditLocalizar.Text <> '' then
   begin
@@ -680,15 +689,21 @@ begin
         .Field.FieldKind in [fkData] then
       begin
 
-        TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
-        TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := true;
+       // TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
+       // TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := true;
+       // SqlCadastro.Filtered := False;
+       // SqlCadastro.Filtered := True;
+       DsCadastro.DataSet.Filtered := False;
+       DsCadastro.DataSet.Filtered := True;
 
       end;
 
     end;
   end
   else
-    TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
+    //TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
+    //SqlCadastro.Filtered := False;
+    DsCadastro.DataSet.Filtered := False;
 end;
 
 procedure TFrmModeloCadastro.FormActivate(Sender: TObject);
@@ -708,8 +723,8 @@ begin
 end;
 
 
-procedure TFrmModeloCadastro.FDClientDataSetReconcileError(DataSet: TFDMemTable;
-  E: EFDException; UpdateKind: TFDDatSRowState; var Action: TFDDAptReconcileAction);
+procedure TFrmModeloCadastro.FDClientDataSetReconcileError(DataSet: TCustomClientDataset;
+  E: EReconcileError; UpdateKind: TUpdateKind; var Action: TReconcileAction);
 var
   arquivo: TextFile;
   NomeArquivo: string;
@@ -728,7 +743,7 @@ begin
 
     CloseFile(arquivo);
 
-    Action := TFDDAptReconcileAction.raAbort;
+    Action := TReconcileAction.raAbort;
 
     ShowMessage('Inconsistência nos dados:' + TrataExceptionErro(E.Message));
 
@@ -778,6 +793,7 @@ begin
   // Se o usuário trocar para a aba de Consulta a edição ou inserção é cancelada.
   if PageControlModeloCadastro.ActivePageIndex = 1 then
   begin
+    //DsCadastro.DataSet.Open;
     CancelarClick(nil);
     if EditLocalizar.CanFocus then
     begin

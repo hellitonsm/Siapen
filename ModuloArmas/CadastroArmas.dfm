@@ -1,37 +1,52 @@
 inherited FrmCadastroArmas: TFrmCadastroArmas
   Left = 240
   Top = 72
-  Width = 802
-  Height = 576
   Caption = 'Cadastro de Armamento'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 487
+    Height = 531
+    ExplicitHeight = 531
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 469
+      Height = 513
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 469
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 671
-    Height = 487
+    Width = 821
+    Height = 531
+    ExplicitWidth = 821
+    ExplicitHeight = 531
+    inherited Image2: TImage
+      Width = 786
+      ExplicitWidth = 786
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 671
-      Height = 487
+      Width = 821
+      Height = 531
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Width = 663
-          Height = 459
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object PageControlArmas: TPageControl
             Left = 1
             Top = 1
-            Width = 661
-            Height = 457
+            Width = 811
+            Height = 501
             ActivePage = TabSheet1
             Align = alClient
             TabOrder = 0
@@ -442,7 +457,6 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
                 Top = 111
                 Width = 145
                 Height = 19
-                ItemHeight = 13
                 ListWidth = 0
                 Sorted = True
                 TabOrder = 14
@@ -462,7 +476,6 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
                 Top = 160
                 Width = 180
                 Height = 19
-                ItemHeight = 13
                 ListWidth = 0
                 Sorted = True
                 TabOrder = 15
@@ -473,7 +486,6 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
                 Top = 160
                 Width = 180
                 Height = 19
-                ItemHeight = 13
                 ListWidth = 0
                 Sorted = True
                 TabOrder = 16
@@ -702,8 +714,6 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
                     Width = 75
                     Height = 25
                     Caption = 'Inserir'
-                    TabOrder = 2
-                    OnClick = BitBtn1Click
                     Glyph.Data = {
                       76010000424D7601000000000000760000002800000020000000100000000100
                       04000000000000010000120B0000120B00001000000010000000000000000000
@@ -718,6 +728,8 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
                       33333333337F7F33333333333309033333333333337F7F333333333333090333
                       33333333337F7F33333333333300033333333333337773333333}
                     NumGlyphs = 2
+                    TabOrder = 2
+                    OnClick = BitBtn1Click
                   end
                   object Editqtde: TEdit
                     Left = 464
@@ -758,15 +770,20 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelLocalizaConsulta: TPanel
-          Width = 663
+          Width = 813
+          ExplicitWidth = 813
         end
         inherited PanelConsulta: TPanel
-          Width = 663
-          Height = 425
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
-            Width = 661
-            Height = 423
+            Width = 811
+            Height = 467
             Columns = <
               item
                 Expanded = False
@@ -791,28 +808,28 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 786
-    inherited Image2: TImage
-      Width = 786
-    end
+    Width = 936
+    ExplicitWidth = 936
   end
   inherited StatusBar1: TStatusBar
-    Top = 519
-    Width = 786
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PATRIMONIO'
       'WHERE TIPO_BASE='#39'ARMAMENTO'#39
       'AND  ID_UP = :ID_UP')
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   inherited CdsCadastro: TClientDataSet
     BeforePost = CdsCadastroBeforePost
@@ -832,15 +849,6 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
   object DspLista: TDataSetProvider
     DataSet = SqlLista
     Left = 332
-  end
-  object SqlLista: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT MARCAS '
-      'FROM PATRIMONIO')
-    SQLConnection = DM.SQLConnect
-    Left = 304
   end
   object dsitensacessorio: TDataSource
     DataSet = cdsitensacessorio
@@ -886,21 +894,27 @@ inherited FrmCadastroArmas: TFrmCadastroArmas
     Left = 488
     Top = 8
   end
-  object SQLitensacessorio: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDPATRIMONIO'
-        ParamType = ptInput
-        Value = 0
-      end>
+  object SqlLista: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT MARCAS '
+      'FROM PATRIMONIO')
+    Left = 304
+  end
+  object SQLitensacessorio: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM ITENS_PATRIMONIO'
       'WHERE ID_PATRIMONIO = :IDPATRIMONIO')
-    SQLConnection = DM.SQLConnect
     Left = 464
     Top = 8
+    ParamData = <
+      item
+        Name = 'IDPATRIMONIO'
+        ParamType = ptInput
+      end>
   end
 end

@@ -1,20 +1,22 @@
 inherited FrmMensagemBancoDados: TFrmMensagemBancoDados
-  Width = 1078
-  Height = 444
   Caption = 'Mensagem do Banco de Dados'
-  OldCreateOrder = True
+  ClientHeight = 208
+  ClientWidth = 412
   OnShow = FormShow
-  PixelsPerInch = 96
+  ExplicitWidth = 428
+  ExplicitHeight = 247
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 1062
-    Height = 365
+    Width = 412
+    Height = 167
     TabOrder = 1
+    ExplicitWidth = 412
+    ExplicitHeight = 167
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 1060
-      Height = 363
+      Width = 410
+      Height = 165
       Align = alClient
       DataSource = DsMensagemBancoDados
       TabOrder = 0
@@ -26,18 +28,19 @@ inherited FrmMensagemBancoDados: TFrmMensagemBancoDados
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 1062
+    Width = 412
     TabOrder = 0
+    ExplicitWidth = 412
     inherited Image2: TImage
-      Width = 1060
+      Width = 410
+      ExplicitWidth = 1060
     end
   end
-  object SqlMensagemBancoDados: TSQLQuery
+  object SqlMensagemBancoDadosold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       'select * from MENSAGEM_BANCO_DADOS')
-    SQLConnection = DM.SQLConnect
     Left = 48
     Top = 65
   end
@@ -57,5 +60,13 @@ inherited FrmMensagemBancoDados: TFrmMensagemBancoDados
     DataSet = CdsMensagemBancoDados
     Left = 144
     Top = 65
+  end
+  object SqlMensagemBancoDados: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from MENSAGEM_BANCO_DADOS'
+      '')
+    Left = 48
+    Top = 129
   end
 end

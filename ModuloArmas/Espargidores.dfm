@@ -1,28 +1,43 @@
 inherited FrmEspargidores: TFrmEspargidores
   Left = 270
   Top = 128
-  Height = 497
   Caption = 'Cadastro de Espargidores'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 408
+    Height = 531
+    ExplicitHeight = 531
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 390
+      Height = 513
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 390
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 408
+    Width = 821
+    Height = 531
+    ExplicitWidth = 821
+    ExplicitHeight = 531
     inherited PageControlModeloCadastro: TPageControl
-      Height = 408
+      Width = 821
+      Height = 531
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Height = 380
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label3: TLabel
             Left = 16
             Top = 13
@@ -193,7 +208,6 @@ inherited FrmEspargidores: TFrmEspargidores
             Top = 236
             Width = 244
             Height = 19
-            ItemHeight = 13
             ListWidth = 0
             Sorted = True
             TabOrder = 8
@@ -263,10 +277,20 @@ inherited FrmEspargidores: TFrmEspargidores
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 813
+        end
         inherited PanelConsulta: TPanel
-          Height = 346
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
-            Height = 344
+            Width = 811
+            Height = 467
             Columns = <
               item
                 Expanded = False
@@ -290,10 +314,17 @@ inherited FrmEspargidores: TFrmEspargidores
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 440
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 936
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited StatusBar1: TStatusBar
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PATRIMONIO'
@@ -302,15 +333,6 @@ inherited FrmEspargidores: TFrmEspargidores
   end
   inherited CdsCadastro: TClientDataSet
     BeforePost = CdsCadastroBeforePost
-  end
-  object SqlLista: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT MARCAS '
-      'FROM PATRIMONIO')
-    SQLConnection = DM.SQLConnect
-    Left = 304
   end
   object DspLista: TDataSetProvider
     DataSet = SqlLista
@@ -327,5 +349,13 @@ inherited FrmEspargidores: TFrmEspargidores
     DataSet = CdsLista
     OnDataChange = DsCadastroDataChange
     Left = 388
+  end
+  object SqlLista: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT MARCAS '
+      'FROM PATRIMONIO')
+    Left = 304
   end
 end

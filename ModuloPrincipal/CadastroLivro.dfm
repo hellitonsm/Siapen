@@ -2,11 +2,12 @@ inherited FrmCadastroLivro: TFrmCadastroLivro
   Left = 261
   Top = 162
   Caption = 'Cadastro Livro/Revista'
+  ClientHeight = 584
   ExplicitWidth = 952
-  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 531
+    Height = 533
+    ExplicitHeight = 533
     inherited ToolBarModeloCadastro: TToolBar
       Height = 514
       ExplicitHeight = 513
@@ -18,8 +19,8 @@ inherited FrmCadastroLivro: TFrmCadastroLivro
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 821
-    ExplicitHeight = 531
+    Height = 533
+    ExplicitHeight = 533
     inherited PageControlModeloCadastro: TPageControl
       Width = 825
       Height = 532
@@ -240,23 +241,21 @@ inherited FrmCadastroLivro: TFrmCadastroLivro
     ExplicitWidth = 936
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 563
-    ExplicitWidth = 936
+    Top = 565
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_up'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM livro where id_up = :id_up')
-    SQLConnection = DM.SQLConnect
     Left = 600
     Top = 200
+    ParamData = <
+      item
+        Name = 'id_up'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
     object SqlCadastroID_LIVRO: TIntegerField
       FieldName = 'ID_LIVRO'
       Required = True

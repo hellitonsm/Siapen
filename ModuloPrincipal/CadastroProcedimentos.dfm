@@ -1,29 +1,38 @@
 inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
   Left = 289
   Top = 115
-  Height = 536
   Caption = 'Cadastro de Procedimentos'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 584
+  ExplicitWidth = 952
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 447
+    Height = 533
+    ExplicitHeight = 533
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 429
+      Height = 514
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 429
+      Top = 514
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 447
+    Height = 533
+    ExplicitHeight = 533
     inherited PageControlModeloCadastro: TPageControl
-      Height = 447
+      Width = 825
+      Height = 532
       ActivePage = TabSheetCadastro
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Height = 419
+          Width = 817
+          Height = 504
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 20
             Top = 8
@@ -407,7 +416,6 @@ inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
                 Height = 21
                 DataField = 'FUNCAO_FUNCIONARIO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'ADMINISTRATIVO'
                   'AGENTE PENITENCI'#193'RIO'
@@ -491,10 +499,17 @@ inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 817
+        end
         inherited PanelConsulta: TPanel
-          Height = 385
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Height = 383
+            Width = 815
+            Height = 468
             Columns = <
               item
                 Expanded = False
@@ -565,9 +580,10 @@ inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 479
+    Top = 565
+    ExplicitTop = 565
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PROCEDIMENTOS')
@@ -613,7 +629,7 @@ inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
     DataSet = SqlProcedimentoPosto
     Left = 212
   end
-  object SqlProcedimentoPosto: TSQLQuery
+  object SqlProcedimentoPostoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -627,7 +643,8 @@ inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
       'FROM PROCEDIMENTO_POSTO'
       'WHERE IDPROCEDIMENTO =:IDPROCEDIMENTOS')
     SQLConnection = DM.SQLConnect
-    Left = 184
+    Left = 224
+    Top = 344
   end
   object DsOcorrenciaProcedimento: TDataSource
     DataSet = CdsOcorrenciaProcedimento
@@ -670,7 +687,7 @@ inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
     DataSet = SqlOcorrenciaProcedimento
     Left = 388
   end
-  object SqlOcorrenciaProcedimento: TSQLQuery
+  object SqlOcorrenciaProcedimentoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -685,5 +702,35 @@ inherited FrmCadastroProcedimentos: TFrmCadastroProcedimentos
       'WHERE IDPROCEDIMENTOS =:IDPROCEDIMENTOS')
     SQLConnection = DM.SQLConnect
     Left = 360
+  end
+  object SqlOcorrenciaProcedimento: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM OCORRENCIA_PROCEDIMENTOS'
+      'WHERE IDPROCEDIMENTOS =:IDPROCEDIMENTOS'
+      '')
+    Left = 367
+    Top = 64
+    ParamData = <
+      item
+        Name = 'IDPROCEDIMENTOS'
+        ParamType = ptInput
+      end>
+  end
+  object SqlProcedimentoPosto: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM PROCEDIMENTO_POSTO'
+      'WHERE IDPROCEDIMENTO =:IDPROCEDIMENTOS'
+      '')
+    Left = 191
+    Top = 64
+    ParamData = <
+      item
+        Name = 'IDPROCEDIMENTOS'
+        ParamType = ptInput
+      end>
   end
 end

@@ -25,6 +25,7 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 695
     object ToolBarModeloCadastro: TToolBar
       Left = 0
       Top = 36
@@ -93,6 +94,7 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
       Height = 34
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 695
       DesignSize = (
         699
         34)
@@ -184,8 +186,8 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
         object DBGrid1: TDBGrid
           Left = 0
           Top = 0
-          Width = 642
-          Height = 166
+          Width = 691
+          Height = 159
           Align = alClient
           DataSource = DsMovimento
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -7098,16 +7100,6 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
       FFFFFFFFFFFFFFFFFF9FFFFFFFF07FFF00000000000000000000000000000000
       000000000000}
   end
-  object SqlCadastro: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM SENHA')
-    SQLConnection = DM.SQLConnect
-    Left = 16
-    Top = 8
-  end
   object DspCadastro: TDataSetProvider
     DataSet = SqlCadastro
     Left = 44
@@ -7125,16 +7117,6 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
     DataSet = CdsCadastro
     OnDataChange = DsCadastroDataChange
     Left = 100
-    Top = 8
-  end
-  object SqlMovimento: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM SENHA')
-    SQLConnection = DM.SQLConnect
-    Left = 496
     Top = 8
   end
   object DspMovimento: TDataSetProvider
@@ -7155,16 +7137,6 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
     Left = 580
     Top = 8
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM SENHA')
-    SQLConnection = DM.SQLConnect
-    Left = 272
-    Top = 8
-  end
   object DspConsulta: TDataSetProvider
     DataSet = SqlConsulta
     Left = 300
@@ -7181,6 +7153,30 @@ object FrmModeloMovimentacao: TFrmModeloMovimentacao
     DataSet = CdsConsulta
     OnDataChange = DsCadastroDataChange
     Left = 356
+    Top = 8
+  end
+  object SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM SENHA')
+    Left = 12
+    Top = 8
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM SENHA')
+    Left = 268
+    Top = 8
+  end
+  object SqlMovimento: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM SENHA')
+    Left = 492
     Top = 8
   end
 end

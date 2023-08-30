@@ -6,15 +6,18 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, ExtCtrls, Grids, DBGrids, StdCtrls, ToolWin, DBCtrls,
-  Mask, Jpeg, FileCtrl, Buttons, System.ImageList;
+  Mask, Jpeg, FileCtrl, Buttons, System.ImageList, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmCadastroFuncionario = class(TFrmModeloCadastro)
-    SqlConsulta: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
-    SqlSelectFuncionario: TSQLQuery;
+    SqlSelectFuncionarioold: TSQLQuery;
     PageControlFuncionario: TPageControl;
     TabPrincipal: TTabSheet;
     DBImageFOTOFUNCIONARIO: TDBImage;
@@ -236,7 +239,7 @@ type
     chinseririnteligencia: TCheckBox;
     chrelatoriointeligencia: TCheckBox;
     chtodasinteligencia: TCheckBox;
-    SQLpermissaointeligencia: TSQLQuery;
+    SQLpermissaointeligenciaold: TSQLQuery;
     DSPpermissaointeligencia: TDataSetProvider;
     cdspermissaointeligencia: TClientDataSet;
     dspermissaointeligencia: TDataSource;
@@ -401,14 +404,14 @@ type
     DsPerfilUsuario: TDataSource;
     CdsPerfilUsuario: TClientDataSet;
     DspPerfilUsuario: TDataSetProvider;
-    SqlPerfilUsuario: TSQLQuery;
+    SqlPerfilUsuarioold: TSQLQuery;
     DBCbReligiao: TDBComboBox;
     DBEdit10: TDBEdit;
     Label42: TLabel;
     DsPerfilAtribui: TDataSource;
     CDsPerfilAtribui: TClientDataSet;
     DSpPerfilAtribui: TDataSetProvider;
-    SQLPerfilAtribui: TSQLQuery;
+    SQLPerfilAtribuiold: TSQLQuery;
     Label43: TLabel;
     BtnLimparPermissoes: TButton;
     DbrDefinePerfilUsuario: TDBRadioGroup;
@@ -710,6 +713,11 @@ type
     ChInserirMonitEventos: TCheckBox;
     ChRelatorioMonitEventos: TCheckBox;
     ChTodasMonitEventos: TCheckBox;
+    SQLPerfilAtribui: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SqlSelectFuncionario: TFDQuery;
+    SQLpermissaointeligencia: TFDQuery;
+    SqlPerfilUsuario: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure CHConsultarConfereClick(Sender: TObject);
     procedure CHEditarConfereClick(Sender: TObject);

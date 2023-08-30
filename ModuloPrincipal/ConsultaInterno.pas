@@ -5,18 +5,21 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, FMTBcd, DB, DBClient, SqlExpr, Provider, StdCtrls, Grids,
-  DBGrids, ExtCtrls, Buttons, DBCtrls, ComCtrls, ImgList, ToolWin;
+  DBGrids, ExtCtrls, Buttons, DBCtrls, ComCtrls, ImgList, ToolWin,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmConsultaInterno = class(TForm)
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
-    SqlConsulta: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
-    SqlSelectInterno: TSQLQuery;
+    SqlSelectInternoold: TSQLQuery;
     Label1: TLabel;
     RadioGroupStatus: TRadioGroup;
     DBGridConsulta: TDBGrid;
@@ -24,7 +27,7 @@ type
     Label2: TLabel;
     Editlocalizarvulgo: TEdit;
     DBGridVulgo: TDBGrid;
-    SQLvulgo: TSQLQuery;
+    SQLvulgoold: TSQLQuery;
     dspvulgo: TDataSetProvider;
     cdsvulgo: TClientDataSet;
     dsvulgo: TDataSource;
@@ -32,7 +35,7 @@ type
     Label3: TLabel;
     Editlocalizaoutronome: TEdit;
     DBGridOutroNome: TDBGrid;
-    SQLoutronome: TSQLQuery;
+    SQLoutronomeold: TSQLQuery;
     DSPOUTRONOME: TDataSetProvider;
     CDSOUTRONOME: TClientDataSet;
     DSOUTRONOEM: TDataSource;
@@ -45,14 +48,14 @@ type
     BitBtn4: TBitBtn;
     Editfiliacao: TEdit;
     RadioGroupfiliacao: TRadioGroup;
-    Sqlfiliacao: TSQLQuery;
+    Sqlfiliacaoold: TSQLQuery;
     Dspfiliacao: TDataSetProvider;
     Cdsfiliacao: TClientDataSet;
     Dsfiliacao: TDataSource;
     RadioGroupTipoLocalizar: TRadioGroup;
     PanelFoto: TPanel;
     DBImage1: TDBImage;
-    SqlCadastro: TSQLQuery;
+    SqlCadastroold: TSQLQuery;
     DspCadastro: TDataSetProvider;
     CdsCadastro: TClientDataSet;
     DsCadastro: TDataSource;
@@ -60,6 +63,12 @@ type
     ToolButtonJuridico: TToolButton;
     DBGrid1: TDBGrid;
     RadioGroupFiltro: TRadioGroup;
+    Sqlfiliacao: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SQLvulgo: TFDQuery;
+    SQLoutronome: TFDQuery;
+    SqlSelectInterno: TFDQuery;
+    SqlCadastro: TFDQuery;
     procedure EditLocalizarChange(Sender: TObject);
     procedure RadioGroupStatusClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

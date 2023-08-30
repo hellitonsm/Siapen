@@ -6,12 +6,15 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroTerapiaOcup = class(TFrmModeloInterno)
     TabSheet1: TTabSheet;
-    SQLterapiaocup: TSQLQuery;
+    SQLterapiaocupold: TSQLQuery;
     DSPterapiaocup: TDataSetProvider;
     CDSterapiaocup: TClientDataSet;
     DSterapiaocup: TDataSource;
@@ -27,6 +30,7 @@ type
     CDSterapiaocupID_FUNCIONARIO: TIntegerField;
     CDSterapiaocupID_INTERNO: TIntegerField;
     CDSterapiaocupFuncionario: TStringField;
+    SQLterapiaocup: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

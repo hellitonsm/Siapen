@@ -1,56 +1,79 @@
 inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
   Left = 199
   Top = 70
-  Width = 941
-  Height = 607
   Caption = 'FrmMovimentoPatrimonio'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 558
+  ClientWidth = 1037
+  ExplicitWidth = 1049
+  ExplicitHeight = 596
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 925
+    Width = 1037
     Height = 153
+    ExplicitWidth = 691
+    ExplicitHeight = 153
     inherited ToolBarModeloCadastro: TToolBar
       Top = 107
-      Width = 925
+      Width = 1037
       Height = 46
-      ButtonWidth = 114
+      ButtonWidth = 108
       TabOrder = 4
+      ExplicitTop = 107
+      ExplicitWidth = 691
+      ExplicitHeight = 46
       inherited Novo: TToolButton
         Caption = '&Inserir - F2'
+        ExplicitWidth = 108
       end
       inherited Editar: TToolButton
-        Left = 115
+        Left = 109
         Caption = '&NaoUsa'
         Visible = False
+        ExplicitLeft = 109
+        ExplicitWidth = 108
       end
       inherited Cancelar: TToolButton
-        Left = 229
+        Left = 217
         Caption = 'NaoUsa'
         Visible = False
+        ExplicitLeft = 217
+        ExplicitWidth = 108
       end
       inherited Salvar: TToolButton
-        Left = 343
+        Left = 325
         Caption = '&Finalizar - F10'
+        ExplicitLeft = 325
+        ExplicitWidth = 108
       end
       inherited Excluir: TToolButton
-        Left = 457
+        Left = 433
         Caption = 'N'#227'o usa'
         Visible = False
+        ExplicitLeft = 433
+        ExplicitWidth = 108
       end
       inherited Fechar: TToolButton
-        Left = 571
+        Left = 541
         Caption = 'Fechar - ESC'
+        ExplicitLeft = 541
+        ExplicitWidth = 108
       end
     end
     inherited PanelLocalizaConsulta: TPanel
       Top = 34
-      Width = 925
+      Width = 1037
       Height = 77
       Caption = #39
       TabOrder = 1
+      ExplicitTop = 34
+      ExplicitWidth = 691
+      ExplicitHeight = 77
+      DesignSize = (
+        1037
+        77)
       inherited Label1: TLabel
         Top = 48
+        ExplicitTop = 48
       end
       object Label44: TLabel [1]
         Left = 337
@@ -76,11 +99,14 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
       inherited EditLocalizar: TEdit
         Left = 216
         Top = 42
-        Width = 476
+        Width = 818
         TabOrder = 3
         OnChange = EditLocalizarChange
         OnKeyDown = EditLocalizarKeyDown
         OnKeyPress = EditLocalizarKeyPress
+        ExplicitLeft = 216
+        ExplicitTop = 42
+        ExplicitWidth = 472
       end
       object RadioGroupLocalizar: TRadioGroup
         Left = 54
@@ -137,7 +163,7 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
     object PanelTitulo: TPanel
       Left = 0
       Top = 0
-      Width = 925
+      Width = 1037
       Height = 34
       Align = alTop
       Caption = 
@@ -151,10 +177,11 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 691
       object Image2: TImage
         Left = 1
         Top = 1
-        Width = 923
+        Width = 1035
         Height = 32
         Align = alClient
         Picture.Data = {
@@ -169,16 +196,19 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
           000000000000000000000000FFC4001411010000000000000000000000000000
           0000FFDA000C03010002110311003F00DFD443700A9CB9FB720003FFD9}
         Stretch = True
+        ExplicitWidth = 923
       end
       object LabelTitulo: TLabel
         Left = 1
         Top = 1
-        Width = 923
+        Width = 1035
         Height = 32
         Align = alClient
         Alignment = taCenter
         Caption = 'LabelTitulo'
         Transparent = True
+        ExplicitWidth = 97
+        ExplicitHeight = 23
       end
       object Image3: TImage
         Left = 60
@@ -894,17 +924,24 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
   end
   inherited PanelModeloCadastro: TPanel
     Top = 153
-    Width = 925
-    Height = 397
+    Width = 1037
+    Height = 386
+    ExplicitTop = 153
+    ExplicitWidth = 691
+    ExplicitHeight = 287
     inherited PageControlModeloCadastro: TPageControl
-      Top = 396
-      Width = 925
+      Top = 385
+      Width = 1037
       Height = 1
       ActivePage = TabSheetMunicao1
       Align = alBottom
       Enabled = False
+      ExplicitTop = 286
+      ExplicitWidth = 691
+      ExplicitHeight = 1
       inherited TabSheetCadastro: TTabSheet
         Caption = 'Armamento'
+        ExplicitWidth = 1029
         object Label2: TLabel
           Left = 16
           Top = 9
@@ -1753,10 +1790,15 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
     end
     inherited PageControlConsulta: TPageControl
       Top = 0
-      Width = 925
-      Height = 396
+      Width = 1037
+      Height = 385
+      ExplicitTop = 0
+      ExplicitWidth = 691
+      ExplicitHeight = 286
       inherited TabSheetMovimentacao: TTabSheet [0]
         Caption = 'Itens do Documento'
+        ExplicitWidth = 1029
+        ExplicitHeight = 357
         inherited DBGrid1: TDBGrid
           Width = 684
           Height = 361
@@ -1786,8 +1828,6 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
           Width = 90
           Height = 25
           Caption = 'Excluir'
-          TabOrder = 1
-          OnClick = BitBtnCancelaEntradaClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -1807,13 +1847,17 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
             0000}
           NumGlyphs = 2
           Style = bsNew
+          TabOrder = 1
+          OnClick = BitBtnCancelaEntradaClick
         end
       end
       inherited TabSheetConsulta: TTabSheet [1]
         Caption = 'Consulta de Itens'
+        ExplicitWidth = 1029
+        ExplicitHeight = 357
         inherited DBGridConsulta: TDBGrid
-          Width = 917
-          Height = 95
+          Width = 1029
+          Height = 84
           OnDblClick = DBGridConsultaDblClick
           Columns = <
             item
@@ -1852,14 +1896,16 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
         end
         object PageControlConsultaItens: TPageControl
           Left = 0
-          Top = 95
-          Width = 917
+          Top = 84
+          Width = 1029
           Height = 273
           ActivePage = TabSheetArmamento
           Align = alBottom
           Enabled = False
           TabOrder = 1
           TabWidth = 150
+          ExplicitTop = -15
+          ExplicitWidth = 683
           object TabSheetArmamento: TTabSheet
             Caption = 'Armamento'
             object Label46: TLabel
@@ -2848,23 +2894,10 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 550
-    Width = 925
-  end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDPATRIMONIO'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM PATRIMONIO'
-      'WHERE IDPATRIMONIO=:IDPATRIMONIO')
-    Left = 640
-    Top = 96
+    Top = 539
+    Width = 1037
+    ExplicitTop = 440
+    ExplicitWidth = 691
   end
   inherited DspCadastro: TDataSetProvider
     Left = 668
@@ -2882,21 +2915,6 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
     Left = 724
     Top = 96
   end
-  inherited SqlMovimento: TSQLQuery
-    Params = <
-      item
-        DataType = ftString
-        Name = 'NUMERO_CAUTELA'
-        ParamType = ptInput
-        Value = #39'-1'#39
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM MOV_CAUTELA'
-      'WHERE NUMERO_CAUTELA = :NUMERO_CAUTELA')
-    Left = 208
-    Top = 0
-  end
   inherited DspMovimento: TDataSetProvider
     Left = 236
     Top = 0
@@ -2911,16 +2929,6 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
     Left = 292
     Top = 0
   end
-  inherited SqlConsulta: TSQLQuery
-    SQL.Strings = (
-      'SELECT P.*, T.POSTO_TRABALHO '
-      'FROM PATRIMONIO P'
-      
-        'LEFT JOIN POSTO_TRABALHO T ON (T.IDPOSTO_TRABALHO=P.IDPOSTO_TRAB' +
-        'ALHO)')
-    Left = 776
-    Top = 64
-  end
   inherited DspConsulta: TDataSetProvider
     Left = 804
     Top = 64
@@ -2934,12 +2942,45 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
     Left = 860
     Top = 64
   end
-  object SqlExecute: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = DM.SQLConnect
-    Left = 376
-    Top = 8
+  inherited SqlCadastro: TFDQuery
+    SQL.Strings = (
+      'SELECT * '
+      'FROM PATRIMONIO'
+      'WHERE IDPATRIMONIO=:IDPATRIMONIO')
+    Left = 640
+    Top = 96
+    ParamData = <
+      item
+        Name = 'IDPATRIMONIO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
+  end
+  inherited SqlConsulta: TFDQuery
+    SQL.Strings = (
+      'SELECT P.*, T.POSTO_TRABALHO '
+      'FROM PATRIMONIO P'
+      
+        'LEFT JOIN POSTO_TRABALHO T ON (T.IDPOSTO_TRABALHO=P.IDPOSTO_TRAB' +
+        'ALHO)')
+    Left = 776
+    Top = 64
+  end
+  inherited SqlMovimento: TFDQuery
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_CAUTELA'
+      'WHERE NUMERO_CAUTELA = :NUMERO_CAUTELA')
+    Left = 208
+    Top = 0
+    ParamData = <
+      item
+        Name = 'NUMERO_CAUTELA'
+        DataType = ftString
+        ParamType = ptInput
+        Value = #39'-1'#39
+      end>
   end
   object DspExecute: TDataSetProvider
     DataSet = SqlExecute
@@ -2956,6 +2997,12 @@ inherited FrmMovimentoPatrimonio: TFrmMovimentoPatrimonio
   object DsExecute: TDataSource
     DataSet = CdsExecute
     Left = 460
+    Top = 8
+  end
+  object SqlExecute: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    Left = 376
     Top = 8
   end
 end

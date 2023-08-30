@@ -2,38 +2,36 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
   Left = 290
   Top = 145
   Caption = 'Cadastro Padrao'
-  ExplicitWidth = 952
-  ExplicitHeight = 621
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 531
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
       Height = 514
-      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
       Top = 514
       Hints.Strings = ()
-      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 821
-    ExplicitHeight = 531
+    Width = 825
+    Height = 532
     inherited PageControlModeloCadastro: TPageControl
       Width = 825
       Height = 532
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 821
-      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 817
         ExplicitHeight = 504
         inherited PanelCadastro: TPanel
           Width = 817
           Height = 504
-          ExplicitWidth = 813
-          ExplicitHeight = 503
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 8
             Top = 8
@@ -264,18 +262,18 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 936
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 563
-    ExplicitWidth = 936
+    Top = 564
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM padrao')
   end
-  object SqlPavilhao: TSQLQuery
+  object SqlPavilhaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -288,8 +286,8 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
       'where id_up = :id_up'
       'order by pavilhao')
     SQLConnection = DM.SQLConnect
-    Left = 440
-    Top = 5
+    Left = 248
+    Top = 437
   end
   object DspPavilhao: TDataSetProvider
     DataSet = SqlPavilhao
@@ -308,7 +306,7 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
     Left = 536
     Top = 5
   end
-  object SqlGaleria: TSQLQuery
+  object SqlGaleriaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -322,8 +320,8 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
       'where idpavilhao=:id_pavilhao'
       'order by galeria')
     SQLConnection = DM.SQLConnect
-    Left = 440
-    Top = 48
+    Left = 368
+    Top = 432
   end
   object DspGaleria: TDataSetProvider
     DataSet = SqlGaleria
@@ -383,7 +381,7 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
     Left = 472
     Top = 96
   end
-  object SqlSolario: TSQLQuery
+  object SqlSolarioold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -398,9 +396,9 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
       'order by solario')
     SQLConnection = DM.SQLConnect
     Left = 440
-    Top = 96
+    Top = 432
   end
-  object SqlCela: TSQLQuery
+  object SqlCelaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -414,12 +412,64 @@ inherited FrmCadastroPadrao: TFrmCadastroPadrao
       'where idsolario=:id_solario'
       'order by cela')
     SQLConnection = DM.SQLConnect
-    Left = 440
-    Top = 144
+    Left = 504
+    Top = 424
   end
   object DspCela: TDataSetProvider
     DataSet = SqlCela
     Left = 472
     Top = 144
+  end
+  object SqlPavilhao: TFDQuery
+    SQL.Strings = (
+      'select * from pavilhao'
+      'where id_up = :id_up'
+      'order by pavilhao')
+    Left = 439
+    Top = 8
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlGaleria: TFDQuery
+    SQL.Strings = (
+      'select * from galeria'
+      'where idpavilhao=:id_pavilhao'
+      'order by galeria')
+    Left = 439
+    Top = 48
+    ParamData = <
+      item
+        Name = 'ID_PAVILHAO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlSolario: TFDQuery
+    SQL.Strings = (
+      'select * from solario'
+      'where idgaleria=:id_galeria'
+      'order by solario')
+    Left = 439
+    Top = 96
+    ParamData = <
+      item
+        Name = 'ID_GALERIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCela: TFDQuery
+    SQL.Strings = (
+      'select * from cela'
+      'where idsolario=:id_solario'
+      'order by cela')
+    Left = 439
+    Top = 144
+    ParamData = <
+      item
+        Name = 'ID_SOLARIO'
+        ParamType = ptInput
+      end>
   end
 end

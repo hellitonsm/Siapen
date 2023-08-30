@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, frxCtrls, jpeg;
+  Mask, frxCtrls, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmMunicoes = class(TFrmModeloCadastro)
@@ -23,7 +26,6 @@ type
     Label13: TLabel;
     Bevel2: TBevel;
     frxComboBoxMarca: TfrxComboBox;
-    SqlLista: TSQLQuery;
     DspLista: TDataSetProvider;
     CdsLista: TClientDataSet;
     DsLista: TDataSource;
@@ -38,6 +40,7 @@ type
     Label44: TLabel;
     Label29: TLabel;
     DBLookupComboBox2: TDBLookupComboBox;
+    SqlLista: TFDQuery;
     procedure CdsCadastroBeforePost(DataSet: TDataSet);
     procedure NovoClick(Sender: TObject);
     procedure EditarClick(Sender: TObject);

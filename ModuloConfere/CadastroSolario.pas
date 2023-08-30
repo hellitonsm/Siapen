@@ -13,14 +13,12 @@ uses
 
 type
   TFrmCadastroSolario = class(TFrmModeloCadastro)
-    SqlPavilhao: TSQLQuery;
     DspPavilhao: TDataSetProvider;
     CdsPavilhao: TClientDataSet;
     DsPavilhao: TDataSource;
     DsGaleria: TDataSource;
     CdsGaleria: TClientDataSet;
     DspGaleria: TDataSetProvider;
-    SqlGaleria: TSQLQuery;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     Label2: TLabel;
@@ -42,11 +40,13 @@ type
     Label4: TLabel;
     Edit2: TEdit;
     Label5: TLabel;
-    SqlRecursos: TSQLQuery;
     DSPRecursos: TDataSetProvider;
     CDSRecursos: TClientDataSet;
     DSRecursos: TDataSource;
     DBRadioGroup3: TDBRadioGroup;
+    SqlPavilhao: TFDQuery;
+    SqlGaleria: TFDQuery;
+    SqlRecursos: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure DBLookupComboBoxPavilhaoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

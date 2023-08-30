@@ -1,37 +1,51 @@
 inherited FrmCadastroProcesso: TFrmCadastroProcesso
   Left = 251
   Top = 84
-  Width = 934
-  Height = 601
   Caption = 'Inqu'#233'ritos / Processos / Condena'#231#245'es'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 581
+  ClientWidth = 932
+  ExplicitWidth = 944
+  ExplicitHeight = 619
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 512
+    Height = 530
+    ExplicitHeight = 529
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 494
+      Height = 512
+      ExplicitHeight = 511
       inherited Excluir: TToolButton
         Visible = True
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 494
+      Top = 512
       DataSource = DsConsulta
       Hints.Strings = ()
+      ExplicitTop = 511
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 803
-    Height = 512
+    Width = 817
+    Height = 530
+    ExplicitWidth = 813
+    ExplicitHeight = 529
+    inherited Image2: TImage
+      Width = 918
+      ExplicitWidth = 918
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 803
-      Height = 512
-      ActivePage = TabSheetCadastro
+      Width = 817
+      Height = 530
+      ExplicitWidth = 813
+      ExplicitHeight = 529
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 502
         inherited PanelCadastro: TPanel
-          Width = 795
-          Height = 484
+          Width = 809
+          Height = 502
+          ExplicitWidth = 809
+          ExplicitHeight = 502
           object Label2: TLabel
             Left = 10
             Top = 8
@@ -70,8 +84,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
           end
           object PageControlProcesso: TPageControl
             Left = 1
-            Top = 88
-            Width = 793
+            Top = 106
+            Width = 807
             Height = 395
             ActivePage = TabSheetInquerito
             Align = alBottom
@@ -244,7 +258,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                 Style = csDropDownList
                 DataField = 'MOTIVO_PRISAO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'CUMPRIMENTO DE SENTEN'#199'A'
                   'DECORRENTE DE SENTEN'#199'A DE PRON'#218'NCIA'
@@ -319,7 +332,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                 Style = csDropDownList
                 DataField = 'TIPO_CRIME'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   ''
                   'AMEA'#199'A (ART.147 CP)'
@@ -539,8 +551,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                     Width = 75
                     Height = 25
                     Caption = 'Inserir'
-                    TabOrder = 2
-                    OnClick = BitBtn1Click
                     Glyph.Data = {
                       76010000424D7601000000000000760000002800000020000000100000000100
                       04000000000000010000120B0000120B00001000000010000000000000000000
@@ -555,6 +565,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                       33333333337F7F33333333333309033333333333337F7F333333333333090333
                       33333333337F7F33333333333300033333333333337773333333}
                     NumGlyphs = 2
+                    TabOrder = 2
+                    OnClick = BitBtn1Click
                   end
                   object DBNavigator2: TDBNavigator
                     Left = 0
@@ -699,10 +711,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                     Font.Height = -13
                     Font.Name = 'Times New Roman'
                     Font.Style = []
-                    ParentFont = False
-                    TabOrder = 0
-                    TabStop = False
-                    OnClick = BtnIncluirDocDigitalizadoClick
                     Glyph.Data = {
                       36020000424D3602000000000000360100002800000010000000100000000100
                       08000000000000010000120B0000120B0000400000004000000000000000FFFF
@@ -722,7 +730,11 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                       133102050E0302291431020202020231153102060D03022D1631020202020202
                       31310208100302301E020202020202020202020A070402020202020202020202
                       0202020B09020202020202020202020202020208020202020202}
+                    ParentFont = False
                     Style = bsWin31
+                    TabOrder = 0
+                    TabStop = False
+                    OnClick = BtnIncluirDocDigitalizadoClick
                   end
                   object BtnVisuzalizarDocDigitalizador: TBitBtn
                     Left = 212
@@ -735,10 +747,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                     Font.Height = -13
                     Font.Name = 'Times New Roman'
                     Font.Style = []
-                    ParentFont = False
-                    TabOrder = 1
-                    TabStop = False
-                    OnClick = BtnVisuzalizarDocDigitalizadorClick
                     Glyph.Data = {
                       5E020000424D5E020000000000005E0100002800000010000000100000000100
                       08000000000000010000120B0000120B00004A0000004A00000000000000FFFF
@@ -760,7 +768,11 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                       0B290202020202290F0F183543150A0717020202020202021C010523391E110C
                       3202020202020202021B0910131113260202020202020202020229271E1F0202
                       0202}
+                    ParentFont = False
                     Style = bsWin31
+                    TabOrder = 1
+                    TabStop = False
+                    OnClick = BtnVisuzalizarDocDigitalizadorClick
                   end
                 end
                 object TabSheet6: TTabSheet
@@ -857,7 +869,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                 Style = csDropDownList
                 DataField = 'PRISAO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   ''
                   'CUMPRIMENTO DE SENTEN'#199'A'
@@ -878,7 +889,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                 Style = csDropDownList
                 DataField = 'TIPOJUSTICA'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   ''
                   'JUSTI'#199'A COMUM'
@@ -894,7 +904,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                 Style = csDropDownList
                 DataField = 'REU'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   ''
                   'PRIM'#193'RIO'
@@ -1108,8 +1117,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                         Top = 35
                         Width = 101
                         Height = 21
-                        Date = 41038.574410995370000000
-                        Time = 41038.574410995370000000
+                        Date = 41038.000000000000000000
+                        Time = 0.574410995366633900
                         TabOrder = 3
                         Visible = False
                         DataField = 'DATA_PROGRESSAO'
@@ -1234,8 +1243,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                         Top = 35
                         Width = 101
                         Height = 21
-                        Date = 41038.574410995370000000
-                        Time = 41038.574410995370000000
+                        Date = 41038.000000000000000000
+                        Time = 0.574410995366633900
                         TabOrder = 3
                         Visible = False
                         DataField = 'DATA_CONDICIONAL'
@@ -1347,10 +1356,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                         Font.Height = -11
                         Font.Name = 'Times New Roman'
                         Font.Style = []
-                        ParentFont = False
-                        TabOrder = 0
-                        TabStop = False
-                        OnClick = BtnDetrcaoClick
                         Glyph.Data = {
                           76060000424D7606000000000000360400002800000018000000180000000100
                           0800000000004002000000000000000000000001000000010000FF00FF002F1E
@@ -1404,7 +1409,11 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                           6E6B5A5A5A5A5B5AD08B0E27231E1B0000005ACB6F6E6F6E6A6A6CC85A7083D1
                           F7990E27231B000000005A63C8C8665A5A5A5A5A5ACEDEFDFFD60E271B000000
                           0000005A5A5A5A24242424242424242424240E1B000000000000}
+                        ParentFont = False
                         Style = bsWin31
+                        TabOrder = 0
+                        TabStop = False
+                        OnClick = BtnDetrcaoClick
                       end
                     end
                   end
@@ -1511,10 +1520,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                         Font.Height = -11
                         Font.Name = 'Times New Roman'
                         Font.Style = []
-                        ParentFont = False
-                        TabOrder = 0
-                        TabStop = False
-                        OnClick = BtnInterrupcaoClick
                         Glyph.Data = {
                           76060000424D7606000000000000360400002800000018000000180000000100
                           0800000000004002000000000000000000000001000000010000FF00FF002222
@@ -1568,7 +1573,11 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                           006870756E6259515049443F00000000000000000000000000006467685C5150
                           50483F0000000000000000000000000000000000504950444300000000000000
                           0000000000000000000000000000000000000000000000000000}
+                        ParentFont = False
                         Style = bsWin31
+                        TabOrder = 0
+                        TabStop = False
+                        OnClick = BtnInterrupcaoClick
                       end
                     end
                   end
@@ -1636,10 +1645,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                         Font.Height = -11
                         Font.Name = 'Times New Roman'
                         Font.Style = []
-                        ParentFont = False
-                        TabOrder = 0
-                        TabStop = False
-                        OnClick = BtnRemicaoClick
                         Glyph.Data = {
                           76050000424D7605000000000000360300002800000018000000180000000100
                           08000000000040020000120B0000120B0000C0000000C0000000FF00FF000A74
@@ -1685,7 +1690,11 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                           000000B4312F4541B4000000000000000000000000000000000000B45E272B6D
                           B400000000000000000000000000000000000000B4B4B4B40000000000000000
                           0000000000000000000000000000000000000000000000000000}
+                        ParentFont = False
                         Style = bsWin31
+                        TabOrder = 0
+                        TabStop = False
+                        OnClick = BtnRemicaoClick
                       end
                     end
                   end
@@ -1698,7 +1707,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                   Style = csDropDownList
                   DataField = 'TIPOCONDENACAO'
                   DataSource = DsCadastro
-                  ItemHeight = 13
                   Items.Strings = (
                     'DETEN'#199#195'O'
                     'PRIS'#195'O CIVIL'
@@ -1739,8 +1747,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                   Top = 25
                   Width = 101
                   Height = 21
-                  Date = 41038.574410995370000000
-                  Time = 41038.574410995370000000
+                  Date = 41038.000000000000000000
+                  Time = 0.574410995366633900
                   TabOrder = 2
                   DataField = 'DATA_INICIO_CONDENACAO'
                   DataSource = DsCadastro
@@ -1752,8 +1760,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                   Width = 199
                   Height = 25
                   Caption = 'Calcular'
-                  TabOrder = 9
-                  OnClick = BtnCalcularClick
                   Glyph.Data = {
                     A6030000424DA603000000000000A60200002800000010000000100000000100
                     08000000000000010000120B0000120B00009C0000009C00000000000000FFFF
@@ -1785,6 +1791,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                     3E1A891E2D2E2E2E141494980156535A4139881D141414141414940944010154
                     4B0D8C1414141414141414930B12777E088F141414141414141414148D020490
                     8B141414141414141414}
+                  TabOrder = 9
+                  OnClick = BtnCalcularClick
                 end
                 object DBComboBox2: TDBComboBox
                   Left = 220
@@ -1794,7 +1802,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                   Style = csDropDownList
                   DataField = 'TIPOREGIME'
                   DataSource = DsCadastro
-                  ItemHeight = 13
                   Items.Strings = (
                     'Aberto'
                     'Fechado'
@@ -1828,7 +1835,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                   Top = 316
                   Width = 166
                   Height = 13
-                  Font.Charset = DEFAULT_CHARSET
+                  Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
                   Font.Name = 'Lucida Console'
@@ -1845,8 +1852,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                   Top = 312
                   Width = 101
                   Height = 21
-                  Date = 41038.574410995370000000
-                  Time = 41038.574410995370000000
+                  Date = 41038.000000000000000000
+                  Time = 0.574410995366633900
                   Enabled = False
                   TabOrder = 12
                   Visible = False
@@ -1880,7 +1887,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
                   Style = csDropDownList
                   DataField = 'SITUACAO_CONDENACAO'
                   DataSource = DsCadastro
-                  ItemHeight = 13
                   Items.Strings = (
                     ''
                     'GUIA DE RECOLHIMENTO'
@@ -2019,7 +2025,6 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
             Style = csDropDownList
             DataField = 'SITUACAOJURIDICA'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'ABSOLVIDO'
               'CONDENADO'
@@ -2031,15 +2036,20 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 502
         inherited PanelLocalizaConsulta: TPanel
-          Width = 795
+          Width = 809
+          ExplicitWidth = 805
         end
         inherited PanelConsulta: TPanel
-          Width = 795
-          Height = 450
+          Width = 809
+          Height = 468
+          ExplicitWidth = 805
+          ExplicitHeight = 467
           inherited DBGridConsulta: TDBGrid
-            Width = 793
-            Height = 448
+            Width = 807
+            Height = 466
             DataSource = DsConsulta
             Columns = <
               item
@@ -2100,29 +2110,29 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 918
-    inherited Image2: TImage
-      Width = 918
-    end
+    Width = 932
+    ExplicitWidth = 928
   end
   inherited StatusBar1: TStatusBar
-    Top = 544
-    Width = 918
+    Top = 562
+    Width = 932
+    ExplicitTop = 561
+    ExplicitWidth = 928
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDPROCESSO'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM processo'
       'WHERE IDPROCESSO = :IDPROCESSO')
     Left = 480
     Top = 8
+    ParamData = <
+      item
+        Name = 'IDPROCESSO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 508
@@ -2181,11 +2191,11 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     end
   end
   object dspvincartigo: TDataSetProvider
-    DataSet = SQLvincartigo
+    DataSet = SQLVincartigo
     Left = 648
     Top = 8
   end
-  object SQLvincartigo: TSQLQuery
+  object SQLvincartigoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2197,18 +2207,17 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'SELECT * '
       'FROM vinc_artigo'
       'where id_processo = :idprocesso')
-    SQLConnection = DM.SQLConnect
-    Left = 624
-    Top = 8
+    Left = 200
+    Top = 304
   end
-  object SqlLista: TSQLQuery
+  object SqlListaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       'SELECT MARCAS '
       'FROM PATRIMONIO')
-    SQLConnection = DM.SQLConnect
-    Left = 304
+    Left = 112
+    Top = 304
   end
   object DspLista: TDataSetProvider
     DataSet = SqlLista
@@ -2226,7 +2235,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     OnDataChange = DsCadastroDataChange
     Left = 388
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2249,8 +2258,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'join interno i on p.idinterno = i.id_interno'
       'where i.id_up = :ID_UP'
       'order by i.nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 152
+    Left = 16
+    Top = 304
   end
   object DspConsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -2261,6 +2270,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Params = <>
     ProviderName = 'DspConsulta'
     BeforePost = CdsCadastroBeforePost
+    OnFilterRecord = CdsConsultaFilterRecord
     Left = 208
     object CdsConsultaNOME_INTERNO: TStringField
       FieldName = 'NOME_INTERNO'
@@ -2299,7 +2309,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     OnDataChange = DsCadastroDataChange
     Left = 236
   end
-  object SqlDocumentos: TSQLQuery
+  object SqlDocumentosold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2312,9 +2322,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'select * from DOCUMENTOS_PROCESSO'
       'where IDPROCESSO = :IDPROCESSO'
       '')
-    SQLConnection = DM.SQLConnect
-    Left = 664
-    Top = 72
+    Left = 440
+    Top = 304
   end
   object DspDocumentos: TDataSetProvider
     DataSet = SqlDocumentos
@@ -2346,7 +2355,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 656
     Top = 120
   end
-  object SqlEventos: TSQLQuery
+  object SqlEventosold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2359,9 +2368,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'select * from EVENTO_PROCESSO'
       'where IDPROCESSO = :IDPROCESSO'
       '')
-    SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 200
+    Left = 200
+    Top = 416
   end
   object DspEventos: TDataSetProvider
     DataSet = SqlEventos
@@ -2390,15 +2398,14 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 829
     Top = 280
   end
-  object SqlTipoEventos: TSQLQuery
+  object SqlTipoEventosold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       'SELECT * '
       'FROM TIPO_EVENTO_PROCESSO')
-    SQLConnection = DM.SQLConnect
-    Left = 744
-    Top = 280
+    Left = 296
+    Top = 416
   end
   object DspTipoEventos: TDataSetProvider
     DataSet = SqlTipoEventos
@@ -2420,7 +2427,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       Size = 100
     end
   end
-  object SqlComutacao: TSQLQuery
+  object SqlComutacaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2436,9 +2443,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'FROM COMUTACAO C'
       'JOIN VINC_COMUTACAO V ON (V.ID_COMUTACAO=C.ID_COMUTACAO)'
       'WHERE V.IDPROCESSO=:IDPROCESSO')
-    SQLConnection = DM.SQLConnect
-    Left = 744
-    Top = 328
+    Left = 408
+    Top = 416
   end
   object DspComutacao: TDataSetProvider
     DataSet = SqlComutacao
@@ -2468,7 +2474,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 463
     Top = 48
   end
-  object SqlDetracao: TSQLQuery
+  object SqlDetracaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2481,9 +2487,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'from detracao'
       'where id_interno=:id_interno'
       '')
-    SQLConnection = DM.SQLConnect
-    Left = 753
-    Top = 366
+    Left = 505
+    Top = 414
   end
   object DspDetracao: TDataSetProvider
     DataSet = SqlDetracao
@@ -2507,7 +2512,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 837
     Top = 366
   end
-  object SqlInterrupcao: TSQLQuery
+  object SqlInterrupcaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2520,8 +2525,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'from interrupcao'
       'where id_interno=:id_interno'
       '')
-    SQLConnection = DM.SQLConnect
-    Left = 753
+    Left = 601
     Top = 410
   end
   object DspInterrupcao: TDataSetProvider
@@ -2546,7 +2550,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 837
     Top = 410
   end
-  object SqlRemicao: TSQLQuery
+  object SqlRemicaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2559,9 +2563,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'from remicao'
       'where id_interno=:id_interno'
       '')
-    SQLConnection = DM.SQLConnect
-    Left = 753
-    Top = 453
+    Left = 625
+    Top = 309
   end
   object DspRemicao: TDataSetProvider
     DataSet = SqlRemicao
@@ -2585,7 +2588,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 837
     Top = 453
   end
-  object SqlDelegacia: TSQLQuery
+  object SqlDelegaciaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2599,9 +2602,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'FROM DESTINO'
       'where TIPO_DESTINO='#39'DELEGACIA'#39
       'AND IDCIDADE=:IDCIDADE')
-    SQLConnection = DM.SQLConnect
-    Left = 784
-    Top = 56
+    Left = 544
+    Top = 304
   end
   object DspDelegacia: TDataSetProvider
     DataSet = SqlDelegacia
@@ -2624,7 +2626,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 868
     Top = 56
   end
-  object SqlCidadeInquerito: TSQLQuery
+  object SqlCidadeInqueritoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -2632,8 +2634,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'FROM CIDADE'
       'where trim(coalesce(CIDADE ||'#39'-'#39'|| UF,'#39#39'))<>'#39#39
       'ORDER BY CIDADE ||'#39'-'#39'|| UF')
-    Left = 784
-    Top = 8
+    Left = 320
+    Top = 304
   end
   object DSpCidadeInquerito: TDataSetProvider
     DataSet = SqlCidadeInquerito
@@ -2652,7 +2654,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 868
     Top = 8
   end
-  object SqlCidadeVara: TSQLQuery
+  object SqlCidadeVaraold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -2660,8 +2662,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'FROM CIDADE'
       'where trim(coalesce(CIDADE ||'#39'-'#39'|| UF,'#39#39'))<>'#39#39
       'ORDER BY CIDADE ||'#39'-'#39'|| UF')
-    Left = 784
-    Top = 104
+    Left = 16
+    Top = 416
   end
   object DspCidadeVara: TDataSetProvider
     DataSet = SqlCidadeVara
@@ -2680,7 +2682,7 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     Left = 868
     Top = 104
   end
-  object SqlVara: TSQLQuery
+  object SqlVaraold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2694,9 +2696,8 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
       'FROM DESTINO'
       'where TIPO_DESTINO='#39'VARA'#39
       'AND IDCIDADE=:IDCIDADE')
-    SQLConnection = DM.SQLConnect
-    Left = 784
-    Top = 152
+    Left = 104
+    Top = 416
   end
   object DspVara: TDataSetProvider
     DataSet = SqlVara
@@ -2718,5 +2719,210 @@ inherited FrmCadastroProcesso: TFrmCadastroProcesso
     DataSet = CdsVara
     Left = 868
     Top = 152
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select'
+      'i.nome_interno,'
+      'p.nprocesso,'
+      'p.idprocesso,'
+      'p.SITUACAOJURIDICA,'
+      'p.NUMERO_INQUERITO,'
+      'p.IDINTERNO,'
+      'i.rgi,'
+      'p.data_liberacao'
+      'from processo p'
+      'join interno i on p.idinterno = i.id_interno'
+      'where i.id_up = :ID_UP'
+      'order by i.nome_interno'
+      '')
+    Left = 24
+    Top = 368
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlLista: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT MARCAS '
+      'FROM PATRIMONIO')
+    Left = 119
+    Top = 368
+  end
+  object SQLVincartigo: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM vinc_artigo'
+      'where id_processo = :idprocesso')
+    Left = 204
+    Top = 370
+    ParamData = <
+      item
+        Name = 'IDPROCESSO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCidadeInquerito: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT ID_CIDADE, CIDADE ||'#39'-'#39'|| UF AS CIDADE'
+      'FROM CIDADE'
+      'where trim(coalesce(CIDADE ||'#39'-'#39'|| UF,'#39#39'))<>'#39#39
+      'ORDER BY CIDADE ||'#39'-'#39'|| UF'
+      '')
+    Left = 308
+    Top = 370
+  end
+  object SqlDocumentos: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from DOCUMENTOS_PROCESSO'
+      'where IDPROCESSO = :IDPROCESSO'
+      ''
+      '')
+    Left = 412
+    Top = 370
+    ParamData = <
+      item
+        Name = 'IDPROCESSO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlDelegacia: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM DESTINO'
+      'where TIPO_DESTINO='#39'DELEGACIA'#39
+      'AND IDCIDADE=:IDCIDADE'
+      '')
+    Left = 516
+    Top = 370
+    ParamData = <
+      item
+        Name = 'IDCIDADE'
+        ParamType = ptInput
+      end>
+  end
+  object SqlRemicao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from remicao'
+      'where id_interno=:id_interno'
+      '')
+    Left = 612
+    Top = 370
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCidadeVara: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT ID_CIDADE, CIDADE ||'#39'-'#39'|| UF AS CIDADE'
+      'FROM CIDADE'
+      'where trim(coalesce(CIDADE ||'#39'-'#39'|| UF,'#39#39'))<>'#39#39
+      'ORDER BY CIDADE ||'#39'-'#39'|| UF'
+      '')
+    Left = 24
+    Top = 480
+  end
+  object SqlVara: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM DESTINO'
+      'where TIPO_DESTINO='#39'VARA'#39
+      'AND IDCIDADE=:IDCIDADE'
+      '')
+    Left = 115
+    Top = 480
+    ParamData = <
+      item
+        Name = 'IDCIDADE'
+        ParamType = ptInput
+      end>
+  end
+  object SqlEventos: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from EVENTO_PROCESSO'
+      'where IDPROCESSO = :IDPROCESSO'
+      ''
+      '')
+    Left = 204
+    Top = 474
+    ParamData = <
+      item
+        Name = 'IDPROCESSO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlTipoEventos: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM TIPO_EVENTO_PROCESSO'
+      '')
+    Left = 292
+    Top = 482
+  end
+  object SqlComutacao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT '
+      'V.IDPROCESSO,'
+      'C.DATA_LIBERACAO,C.TIPO_COMUTACAO,C.VARA'
+      'FROM COMUTACAO C'
+      'JOIN VINC_COMUTACAO V ON (V.ID_COMUTACAO=C.ID_COMUTACAO)'
+      'WHERE V.IDPROCESSO=:IDPROCESSO'
+      '')
+    Left = 396
+    Top = 482
+    ParamData = <
+      item
+        Name = 'IDPROCESSO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlDetracao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from detracao'
+      'where id_interno=:id_interno'
+      ''
+      '')
+    Left = 500
+    Top = 482
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlInterrupcao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from detracao'
+      'where id_interno=:id_interno'
+      ''
+      '')
+    Left = 604
+    Top = 482
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

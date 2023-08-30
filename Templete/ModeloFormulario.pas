@@ -37,7 +37,7 @@ var
   iComp: Integer;
 begin
   for iComp := 0 to Componentcount - 1 do
-    if (Components[iComp] is TSQLQuery) then
+    if (Components[iComp] is TFDQuery) then
       TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
 

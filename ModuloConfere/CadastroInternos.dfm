@@ -5,8 +5,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
   ClientHeight = 624
   ClientWidth = 924
   Menu = MainMenu1
-  ExplicitWidth = 940
-  ExplicitHeight = 683
+  ExplicitWidth = 936
+  ExplicitHeight = 682
   TextHeight = 13
   object Label59: TLabel [0]
     Left = 616
@@ -45,7 +45,6 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     inherited PageControlModeloCadastro: TPageControl
       Width = 809
       Height = 573
-      ActivePage = TabSheetCadastro
       ExplicitWidth = 805
       ExplicitHeight = 572
       inherited TabSheetCadastro: TTabSheet
@@ -54,8 +53,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
         inherited PanelCadastro: TPanel
           Width = 801
           Height = 545
-          ExplicitWidth = 797
-          ExplicitHeight = 544
+          ExplicitWidth = 801
+          ExplicitHeight = 545
           object SpeedButton3: TSpeedButton
             Left = 288
             Top = 136
@@ -73,13 +72,11 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
             Top = 1
             Width = 799
             Height = 543
-            ActivePage = TabSheet2
+            ActivePage = TabSheet5
             Align = alClient
             TabOrder = 0
             TabWidth = 80
             OnChange = PageControlInternoChange
-            ExplicitWidth = 795
-            ExplicitHeight = 542
             object TabSheet1: TTabSheet
               Caption = 'Principal'
               object Label2: TLabel
@@ -1986,7 +1983,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
                 Height = 120
                 DataSource = DsFoto
                 ReadOnly = True
-                TabOrder = 11
+                TabOrder = 8
                 TitleFont.Charset = DEFAULT_CHARSET
                 TitleFont.Color = clWindowText
                 TitleFont.Height = -11
@@ -2016,16 +2013,6 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
                 DataField = 'DESCRICAO'
                 DataSource = DsFoto
                 TabOrder = 9
-              end
-              object adpDBDateTimePicker1: TadpDBDateTimePicker
-                Left = 152
-                Top = 332
-                Width = 89
-                Height = 21
-                Date = 41096.000000000000000000
-                Time = 0.671558287038351400
-                TabOrder = 8
-                ReadOnly = False
               end
               object DBNavigator3: TDBNavigator
                 Left = 141
@@ -2194,7 +2181,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
             Left = 1
             Top = 1
             Width = 799
-            Height = 505
+            Height = 509
             Align = alClient
             DataSource = DsConsulta
             PanelHeight = 101
@@ -4012,8 +3999,15 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
   end
   object SqlConsulta: TFDQuery
     Connection = DM.SQLConnect
+    FetchOptions.AssignedValues = [evMode, evRowsetSize, evAutoClose, evRecordCountMode, evCursorKind, evAutoFetchAll]
+    FetchOptions.Mode = fmAll
+    FetchOptions.CursorKind = ckDynamic
+    FetchOptions.RowsetSize = 500
+    FetchOptions.AutoClose = False
+    FetchOptions.RecordCountMode = cmTotal
+    ResourceOptions.AssignedValues = [rvUnifyParams]
     SQL.Strings = (
-      'select '
+      'select first 100'
       '    interno.nome_interno,'
       '    interno.rgi,'
       '    INTERNO.VULGO,'
@@ -4035,27 +4029,38 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
       '    interno.em_transito,'
       
         '    PROCEDENCIA.PROEDENCIA||'#39'/'#39'||coalesce(PROCEDENCIA.UF,'#39'UF'#39') A' +
-        'S PROCEDENCIA'
+        'S PROCEDENCIA,'
+      
+        '    IIF(TRIM(COALESCE(estado.estado,'#39#39'))='#39#39','#39'N'#195'O INFORMADO'#39',esta' +
+        'do.estado) as ESTADO_SOLICITANTE'
       'from interno'
-      '  left join cela on (cela.id_cela = interno.idcela)'
+      '   left join cela on (cela.id_cela = interno.idcela)'
       
-        '  left join pavilhao on (interno.idpavilhao = pavilhao.id_pavilh' +
-        'ao)'
+        '   left join pavilhao on (interno.idpavilhao = pavilhao.id_pavil' +
+        'hao)'
       
-        '  left join unidade_penal on (pavilhao.id_up = unidade_penal.id_' +
-        'up)'
-      '  left  join galeria on (interno.idgaleria = galeria.id_galeria)'
-      '  left  join solario on (interno.idsolario = solario.id_solario)'
-      '  left join faccao on (interno.id_faccao = faccao.id_faccao)'
+        '   left join unidade_penal on (pavilhao.id_up = unidade_penal.id' +
+        '_up)'
+      '   left join galeria on (interno.idgaleria = galeria.id_galeria)'
+      '   left join solario on (interno.idsolario = solario.id_solario)'
+      '   left join faccao on (interno.id_faccao = faccao.id_faccao)'
       
         '   LEFT JOIN PROCEDENCIA ON (INTERNO.ID_PROCEDENCIA = PROCEDENCI' +
         'A.ID_PROCEDENCIA)'
-      'where coalesce(interno.nome_interno,'#39#39')<>'#39#39
-      'ORDER BY INTERNO.NOME_INTERNO'
-      ''
-      ' ')
-    Left = 41
+      
+        '   LEFT JOIN  CIDADE ON (INTERNO.ID_SOLICITANTE_VAGA = CIDADE.ID' +
+        '_CIDADE)'
+      '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
+      
+        'where coalesce(interno.nome_interno,'#39#39')<>'#39#39' and interno.id_up=:I' +
+        'D_UP  and interno.st= '#39'A'#39' order by interno.nome_interno ')
+    Left = 25
     Top = 295
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
   end
   object DspConsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -4071,7 +4076,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
     Top = 295
   end
   object DsConsulta: TDataSource
-    DataSet = CdsConsulta
+    DataSet = SqlConsulta
     OnDataChange = DsConsultaDataChange
     Left = 149
     Top = 295
@@ -4372,7 +4377,7 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
   object SqlConsultaBackup: TFDQuery
     Connection = DM.SQLConnect
     SQL.Strings = (
-      'select '
+      'select first 100'
       '    interno.nome_interno,'
       '    interno.rgi,'
       '    INTERNO.VULGO,'
@@ -4417,8 +4422,8 @@ inherited FrmCadastroInternos: TFrmCadastroInternos
         '_CIDADE)'
       '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
       'where coalesce(interno.nome_interno,'#39#39')<>'#39#39)
-    Left = 8
-    Top = 296
+    Left = 232
+    Top = 288
   end
   object MainMenu1: TMainMenu
     Left = 219

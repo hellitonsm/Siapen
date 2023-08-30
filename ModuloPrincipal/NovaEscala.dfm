@@ -1,9 +1,16 @@
 inherited FrmNovaEscala: TFrmNovaEscala
   Caption = 'Nova Escala'
+  ClientHeight = 208
+  ClientWidth = 412
   OnShow = FormShow
+  ExplicitWidth = 428
+  ExplicitHeight = 247
   TextHeight = 13
   inherited PanelGeral: TPanel
-    ExplicitHeight = 129
+    Width = 412
+    Height = 167
+    ExplicitWidth = 412
+    ExplicitHeight = 167
     object Label3: TLabel
       Left = 25
       Top = 8
@@ -56,13 +63,23 @@ inherited FrmNovaEscala: TFrmNovaEscala
     end
   end
   inherited PanelTitulo: TPanel
+    Width = 412
     Caption = 'Nova Escala'
+    ExplicitWidth = 412
+    inherited Image2: TImage
+      Width = 410
+    end
   end
-  object SqlExecute: TSQLQuery
+  object SqlExecuteold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = DM.SQLConnect
     Left = 32
+    Top = 129
+  end
+  object SqlExecute: TFDQuery
+    Connection = DM.SQLConnect
+    Left = 112
     Top = 129
   end
 end

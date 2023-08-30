@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, Grids, DBGrids,
-  ComCtrls, Mask, DBCtrls;
+  ComCtrls, Mask, DBCtrls, Data.DB;
 
 type
   TFrmConsultaProced = class(TFrmModeloFormulario)
@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses Dm_Proced, DB;
+uses Dm_Proced;
 
 {$R *.dfm}
 

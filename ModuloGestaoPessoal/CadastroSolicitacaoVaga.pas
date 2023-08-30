@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls, lib,
-  ToolWin, adpDBDateTimePicker, Mask, Buttons;
+  ToolWin, adpDBDateTimePicker, Mask, Buttons, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TfrmSolicitacaoVaga = class(TFrmModeloCadastro)
@@ -31,7 +34,6 @@ type
     edtQtdVagasSolicitadas: TDBEdit;
     Button1: TButton;
     cmdPesquisaInterno: TDBLookupComboBox;
-    SQLPesquisa: TSQLQuery;
     DspPesquisa: TDataSetProvider;
     cdsPesquisa: TClientDataSet;
     dsPesquisa: TDataSource;
@@ -45,7 +47,6 @@ type
     CdsCadastroOFICIO_DESC: TStringField;
     CdsCadastroQTD_VAGAS_SEM_EFEITO: TIntegerField;
     DBGrid1: TDBGrid;
-    SQLGrid: TSQLQuery;
     dspGrid: TDataSetProvider;
     cdsGrid: TClientDataSet;
     dsGrid: TDataSource;
@@ -66,6 +67,8 @@ type
     cdsGridID_SOLICITACAO_VAGA: TIntegerField;
     cdsGridSTATUS: TStringField;
     cdsGridNOME: TStringField;
+    SQLPesquisa: TFDQuery;
+    SQLGrid: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);

@@ -2,8 +2,8 @@ object FrmPrincipalArmas: TFrmPrincipalArmas
   Left = 231
   Top = 50
   Caption = 'SIAP - Gest'#227'o de Armamento'
-  ClientHeight = 0
-  ClientWidth = 120
+  ClientHeight = 553
+  ClientWidth = 871
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,12 +20,12 @@ object FrmPrincipalArmas: TFrmPrincipalArmas
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 120
-    Height = 0
+    Width = 871
+    Height = 553
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 844
-    ExplicitHeight = 598
+    ExplicitWidth = 120
+    ExplicitHeight = 0
     object Image1: TImage
       Left = 145
       Top = 56
@@ -37,15 +37,16 @@ object FrmPrincipalArmas: TFrmPrincipalArmas
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 842
+      Width = 869
       Height = 40
       Align = alTop
       Caption = 'Panel2'
       TabOrder = 0
+      ExplicitWidth = 118
       object Image2: TImage
         Left = 1
         Top = 1
-        Width = 840
+        Width = 867
         Height = 38
         Align = alClient
         Picture.Data = {
@@ -60,6 +61,7 @@ object FrmPrincipalArmas: TFrmPrincipalArmas
           000000000000000000000000FFC4001411010000000000000000000000000000
           0000FFDA000C03010002110311003F00DFD443700A9CB9FB720003FFD9}
         Stretch = True
+        ExplicitWidth = 840
       end
       object LabelTitulo: TLabel
         Left = 48

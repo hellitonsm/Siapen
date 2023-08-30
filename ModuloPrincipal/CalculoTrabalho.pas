@@ -38,7 +38,7 @@ type
     DBEdit9: TDBEdit;
     Label13: TLabel;
     DBLookupComboBox2: TDBLookupComboBox;
-    SQLcalc_trabalho_itens: TSQLQuery;
+    SQLcalc_trabalho_itensold: TSQLQuery;
     DSPcalc_trabalho_itens: TDataSetProvider;
     CDScalc_trabalho_itens: TClientDataSet;
     DScalc_trabalho_itens: TDataSource;
@@ -55,6 +55,7 @@ type
     CDScalc_trabalho_itensDIASREMIDO: TIntegerField;
     Button2: TButton;
     CDScalc_trabalho_itensSetorTrabalho: TStringField;
+    SQLcalc_trabalho_itens: TFDQuery;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure EditarClick(Sender: TObject);

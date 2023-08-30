@@ -1,7 +1,5 @@
 inherited FrmCadastroPavilhao: TFrmCadastroPavilhao
   Caption = 'Cadastro de Pavilh'#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -90,18 +88,18 @@ inherited FrmCadastroPavilhao: TFrmCadastroPavilhao
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PAVILHAO'
       'WHERE ID_UP=:ID_UP'
       'ORDER BY PAVILHAO')
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
 end

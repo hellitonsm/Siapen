@@ -2,8 +2,8 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   Left = 0
   Top = 113
   Caption = 'Monitoramento Eletr'#244'nico'
-  ClientHeight = 0
-  ClientWidth = 120
+  ClientHeight = 675
+  ClientWidth = 1011
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,20 +13,22 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   WindowState = wsMaximized
   OnShow = FormShow
   DesignSize = (
-    120
-    0)
+    1011
+    675)
   TextHeight = 13
   object WebBrowser1: TWebBrowser
     Left = 185
     Top = 212
-    Width = 823
-    Height = 297
+    Width = 826
+    Height = 444
     Align = alClient
     TabOrder = 5
     OnDownloadBegin = WebBrowser1DownloadBegin
     OnDownloadComplete = WebBrowser1DownloadComplete
+    ExplicitWidth = 823
+    ExplicitHeight = 297
     ControlData = {
-      4C0000000F550000B21E00000100000005000000000000000000000000000000
+      4C0000005F550000E42D00000100000005000000000000000000000000000000
       000000004C000000000000000000000001000000E0D057007335CF11AE690800
       2B2E12620A000000000000004C0000000114020000000000C000000000000046
       8000000000000000000000000000000000000000000000000000000000000000
@@ -35,27 +37,28 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   object PnlTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 120
+    Width = 1011
     Height = 72
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 1008
+    ExplicitWidth = 120
     object Image1: TImage
       Left = 1
       Top = 1
-      Width = 1006
+      Width = 1009
       Height = 70
       Align = alClient
+      ExplicitWidth = 1006
     end
   end
   object PnlDados: TPanel
     Left = 0
     Top = 72
-    Width = 120
+    Width = 1011
     Height = 140
     Align = alTop
     TabOrder = 1
-    ExplicitWidth = 1008
+    ExplicitWidth = 120
     object Label1: TLabel
       Left = 157
       Top = 2
@@ -340,13 +343,13 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   end
   object Panel3: TPanel
     Left = 0
-    Top = -19
-    Width = 120
+    Top = 656
+    Width = 1011
     Height = 19
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 509
-    ExplicitWidth = 1008
+    ExplicitTop = -19
+    ExplicitWidth = 120
     object BtnTelaCheia: TButton
       Left = 10
       Top = 3
@@ -369,9 +372,10 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
     Left = 0
     Top = 212
     Width = 185
-    Height = 297
+    Height = 444
     Align = alLeft
     TabOrder = 3
+    ExplicitHeight = 297
     object DBCtrlGrid1: TDBCtrlGrid
       Left = 1
       Top = 21
@@ -477,13 +481,11 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
   object PnlLegenda: TPanel
     Left = 184
     Top = 212
-    Width = -356
-    Height = -463
+    Width = 0
+    Height = 0
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clWhite
     TabOrder = 4
-    ExplicitWidth = 532
-    ExplicitHeight = 64
     object ImgLegenda: TImage
       Left = 1
       Top = 1
@@ -2103,31 +2105,6 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
       OnClick = ImgLegendaClick
     end
   end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select '
-      'i.id_interno, i.rgi,'
-      'i.nome_interno, foto, id_me,'
-      
-        'coalesce(i.endereco,'#39#39')||'#39', '#39'||coalesce(i.numero,'#39#39')||'#39' '#39'||coale' +
-        'sce(c.cidade,'#39#39')||'#39', '#39'||coalesce(c.uf,'#39#39') as "Endereco", FONE'
-      'from interno i'
-      'left join cidade c on (i.idcidade = c.id_cidade)'
-      
-        'where coalesce(nome_interno,'#39#39')<>'#39#39' and i.id_interno = :id_inter' +
-        'no'
-      'order by i.nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 248
-  end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
     Left = 764
@@ -2148,19 +2125,6 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
     DataSet = CdsInterno
     Left = 820
     Top = 248
-  end
-  object SqlLista: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select i.id_interno, i.rgi, i.nome_interno, foto, id_me, FONE'
-      'from interno i'
-      'where coalesce(nome_interno,'#39#39')<>'#39#39' '
-      'and coalesce(i.id_me,'#39#39') <>'#39#39
-      'order by i.nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 304
   end
   object DspLista: TDataSetProvider
     DataSet = SqlLista
@@ -2200,23 +2164,6 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
     Left = 756
     Top = 16
   end
-  object SQLHISTORICO_interno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select *'
-      'from historico_interno'
-      'where idinterno=:id_interno'
-      'order by data_hora desc')
-    SQLConnection = DM.SQLConnect
-    Left = 728
-    Top = 16
-  end
   object Timer1: TTimer
     Interval = 15000
     OnTimer = Timer1Timer
@@ -2247,5 +2194,57 @@ object FrmMonitoramento_Eletronico: TFrmMonitoramento_Eletronico
     HTTPOptions = [hoForceEncodeParams]
     Left = 912
     Top = 8
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select '
+      'i.id_interno, i.rgi,'
+      'i.nome_interno, foto, id_me,'
+      
+        'coalesce(i.endereco,'#39#39')||'#39', '#39'||coalesce(i.numero,'#39#39')||'#39' '#39'||coale' +
+        'sce(c.cidade,'#39#39')||'#39', '#39'||coalesce(c.uf,'#39#39') as "Endereco", FONE'
+      'from interno i'
+      'left join cidade c on (i.idcidade = c.id_cidade)'
+      
+        'where coalesce(nome_interno,'#39#39')<>'#39#39' and i.id_interno = :id_inter' +
+        'no'
+      'order by i.nome_interno')
+    Left = 736
+    Top = 248
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlLista: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select i.id_interno, i.rgi, i.nome_interno, foto, id_me, FONE'
+      'from interno i'
+      'where coalesce(nome_interno,'#39#39')<>'#39#39' '
+      'and coalesce(i.id_me,'#39#39') <>'#39#39
+      'order by i.nome_interno')
+    Left = 736
+    Top = 304
+  end
+  object SQLHISTORICO_interno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from historico_interno'
+      'where idinterno=:id_interno'
+      'order by data_hora desc')
+    Left = 728
+    Top = 16
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

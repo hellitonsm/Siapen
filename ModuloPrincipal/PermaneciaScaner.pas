@@ -6,20 +6,23 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
   FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, DBCtrls, jpeg,
-  Buttons, System.ImageList;
+  Buttons, System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmPermaneciaScaner = class(TForm)
     DBLookupComboBox1: TDBLookupComboBox;
     Label51: TLabel;
     OpenDialog1: TOpenDialog;
-    SQLpermanenciascaner: TSQLQuery;
+    SQLpermanenciascanerold: TSQLQuery;
     DSPpermanenciascaner: TDataSetProvider;
     CDSpermanenciascaner: TClientDataSet;
     DSpermanenciascaner: TDataSource;
     Image1: TImage;
     dsfiltroautos: TDataSource;
-    SQLfiltroautos: TSQLQuery;
+    SQLfiltroautosold: TSQLQuery;
     cdsfiltroautos: TClientDataSet;
     dspfiltroautos: TDataSetProvider;
     CDSpermanenciascanerID_PERMANENCIA_SCANER: TIntegerField;
@@ -31,6 +34,8 @@ type
     BitBtn1: TBitBtn;
     Label1: TLabel;
     Editdescricao: TEdit;
+    SQLfiltroautos: TFDQuery;
+    SQLpermanenciascaner: TFDQuery;
     procedure FormShow(Sender: TObject);
     procedure BitBtn15Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);

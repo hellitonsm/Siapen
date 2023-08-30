@@ -1,33 +1,41 @@
 inherited frmMemorando: TfrmMemorando
   Left = 210
   Top = 50
-  Width = 822
-  Height = 718
   Caption = 'Memorando'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 629
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 611
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 611
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 691
-    Height = 629
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 806
+      ExplicitWidth = 806
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 691
-      Height = 629
+      Width = 825
+      Height = 532
       ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 683
-          Height = 601
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 25
             Top = 5
@@ -160,8 +168,8 @@ inherited frmMemorando: TfrmMemorando
             Top = 130
             Width = 150
             Height = 21
-            Date = 41057.561576099540000000
-            Time = 41057.561576099540000000
+            Date = 41057.000000000000000000
+            Time = 0.561576099542435300
             TabOrder = 6
             DataField = 'DATA_INICIO'
             DataSource = DsCadastro
@@ -172,8 +180,8 @@ inherited frmMemorando: TfrmMemorando
             Top = 130
             Width = 150
             Height = 21
-            Date = 41057.563374074070000000
-            Time = 41057.563374074070000000
+            Date = 41057.000000000000000000
+            Time = 0.563374074066814500
             TabOrder = 7
             DataField = 'DATA_FIM'
             DataSource = DsCadastro
@@ -275,39 +283,40 @@ inherited frmMemorando: TfrmMemorando
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 683
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 683
-          Height = 567
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 681
-            Height = 565
+            Width = 815
+            Height = 468
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 806
-    inherited Image2: TImage
-      Width = 806
-    end
+    Width = 940
     inherited LabelTitulo: TLabel
       Width = 268
       Caption = 'Gest'#227'o de Pessoal - Memorando'
+      ExplicitWidth = 268
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 661
-    Width = 806
+    Top = 564
+    Width = 940
   end
   inherited ImageListCadastro: TImageList
     Left = 640
     Top = 0
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select * from memorando')
     Left = 720
@@ -383,16 +392,6 @@ inherited frmMemorando: TfrmMemorando
     Left = 812
     Top = 288
   end
-  object SQLFuncionario_Memo: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from funcionario_memo'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 355
-    Top = 436
-  end
   object dspFuncionario_Memo: TDataSetProvider
     DataSet = SQLFuncionario_Memo
     Left = 503
@@ -446,7 +445,7 @@ inherited frmMemorando: TfrmMemorando
     Left = 567
     Top = 432
   end
-  object SQLresp: TSQLQuery
+  object SQLrespold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -455,11 +454,11 @@ inherited frmMemorando: TfrmMemorando
     SQLConnection = DM.SQLConnect
     Left = 720
     Top = 248
-    object SQLrespID_FUNCIONARIO: TIntegerField
+    object SQLrespoldID_FUNCIONARIO: TIntegerField
       FieldName = 'ID_FUNCIONARIO'
       Required = True
     end
-    object SQLrespNOME_FUNCIONARIO: TStringField
+    object SQLrespoldNOME_FUNCIONARIO: TStringField
       FieldName = 'NOME_FUNCIONARIO'
       Size = 100
     end
@@ -489,17 +488,6 @@ inherited frmMemorando: TfrmMemorando
     OnDataChange = DsCadastroDataChange
     Left = 804
     Top = 248
-  end
-  object SQLflagautorizador: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM funcionario_autorizador'
-      'where descricao_autorizador = '#39'AUTORIZADOR'#39)
-    SQLConnection = DM.SQLConnect
-    Left = 612
-    Top = 36
   end
   object DSPflagautorizador: TDataSetProvider
     DataSet = SQLflagautorizador
@@ -540,5 +528,32 @@ inherited frmMemorando: TfrmMemorando
     OnDataChange = DsCadastroDataChange
     Left = 712
     Top = 36
+  end
+  object SQLFuncionario_Memo: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from funcionario_memo'
+      '')
+    Left = 355
+    Top = 436
+  end
+  object SQLflagautorizador: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM funcionario_autorizador'
+      'where descricao_autorizador = '#39'AUTORIZADOR'#39)
+    Left = 612
+    Top = 36
+  end
+  object SQLresp: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select id_funcionario, nome_funcionario from funcionario'
+      'order by nome_funcionario')
+    Left = 687
+    Top = 248
   end
 end

@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls, lib,
-  ToolWin, Mask, adpDBDateTimePicker, System.ImageList;
+  ToolWin, Mask, adpDBDateTimePicker, System.ImageList, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TfrmDocOficio = class(TFrmModeloCadastro)
@@ -51,7 +54,6 @@ type
     cmdSolicitacaoVaga: TDBLookupComboBox;
     Label11: TLabel;
     cmdDataDocAutorizador: TadpDBDateTimePicker;
-    SQLflagautorizador: TSQLQuery;
     DSPflagautorizador: TDataSetProvider;
     CDSflagautorizador: TClientDataSet;
     DSflagautorizador: TDataSource;
@@ -60,15 +62,12 @@ type
     CDSflagautorizadorID_FUNCIONARIO: TIntegerField;
     CDSflagautorizadorDESCRICAO_AUTORIZADOR: TStringField;
     DBGrid1: TDBGrid;
-    SQLGridInterno: TSQLQuery;
     DSPGridInterno: TDataSetProvider;
     cdsGridInterno: TClientDataSet;
     dsGridInterno: TDataSource;
     DSinterno: TDataSource;
     CDSinterno: TClientDataSet;
     DSPinterno: TDataSetProvider;
-    SQLinterno: TSQLQuery;
-    SQLinternoinclusao: TSQLQuery;
     dspinternoinclusao: TDataSetProvider;
     dsinternoinclusao: TDataSource;
     cdsinternoinclusao: TClientDataSet;
@@ -79,18 +78,17 @@ type
     DSoficiointerno: TDataSource;
     CDSoficiointerno: TClientDataSet;
     DSPoficiointerno: TDataSetProvider;
-    SQloficiointerno: TSQLQuery;
     DBRvalidacao: TDBRadioGroup;
-    SQLSolicitacaoVaga: TSQLQuery;
-    SQLSolicitacaoVagaID_SOLICITACAO_VAGA: TIntegerField;
-    SQLSolicitacaoVagaID_ORGAO: TIntegerField;
-    SQLSolicitacaoVagaID_UP: TIntegerField;
-    SQLSolicitacaoVagaQTD_VAGAS_SOLICITADAS: TIntegerField;
-    SQLSolicitacaoVagaQTD_VAGAS_AUTORIZADAS: TIntegerField;
-    SQLSolicitacaoVagaQTD_VAGAS_UTILIZADAS: TIntegerField;
-    SQLSolicitacaoVagaDATA_AUTORIZA_VAGAS: TSQLTimeStampField;
-    SQLSolicitacaoVagaOFICIO_DESC: TStringField;
-    SQLSolicitacaoVagaQTD_VAGAS_SEM_EFEITO: TIntegerField;
+    SQLSolicitacaoVagaold: TSQLQuery;
+    SQLSolicitacaoVagaoldID_SOLICITACAO_VAGA: TIntegerField;
+    SQLSolicitacaoVagaoldID_ORGAO: TIntegerField;
+    SQLSolicitacaoVagaoldID_UP: TIntegerField;
+    SQLSolicitacaoVagaoldQTD_VAGAS_SOLICITADAS: TIntegerField;
+    SQLSolicitacaoVagaoldQTD_VAGAS_AUTORIZADAS: TIntegerField;
+    SQLSolicitacaoVagaoldQTD_VAGAS_UTILIZADAS: TIntegerField;
+    SQLSolicitacaoVagaoldDATA_AUTORIZA_VAGAS: TSQLTimeStampField;
+    SQLSolicitacaoVagaoldOFICIO_DESC: TStringField;
+    SQLSolicitacaoVagaoldQTD_VAGAS_SEM_EFEITO: TIntegerField;
     dspSolicitacaoVaga: TDataSetProvider;
     cdsSolicitacaoVaga: TClientDataSet;
     cdsSolicitacaoVagaID_SOLICITACAO_VAGA: TIntegerField;
@@ -106,6 +104,12 @@ type
     Button1: TButton;
     Button2: TButton;
     cdsGridInternoNOME: TStringField;
+    SQLflagautorizador: TFDQuery;
+    SQLGridInterno: TFDQuery;
+    SQLinterno: TFDQuery;
+    SQLinternoinclusao: TFDQuery;
+    SQloficiointerno: TFDQuery;
+    SQLSolicitacaoVaga: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cmdSolicitacaoVagaClick(Sender: TObject);

@@ -1,7 +1,7 @@
 inherited FrmCadastroCondicaoInterno: TFrmCadastroCondicaoInterno
   Caption = 'Condi'#231#227'o Interno'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -53,7 +53,7 @@ inherited FrmCadastroCondicaoInterno: TFrmCadastroCondicaoInterno
   inherited ImageListCadastro: TImageList
     Left = 680
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM CONDICAO_INTERNO')

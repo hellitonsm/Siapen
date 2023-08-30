@@ -3,24 +3,24 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
   Left = 319
   Top = 134
   Caption = 'Cadastro Advogado'
-  ExplicitWidth = 952
-  ExplicitHeight = 621
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 531
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
       Height = 514
-      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
       Top = 514
       Hints.Strings = ()
-      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 821
-    ExplicitHeight = 531
+    Width = 825
+    Height = 532
     inherited Image2: TImage
       Width = 780
       ExplicitWidth = 793
@@ -29,16 +29,14 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
       Width = 825
       Height = 532
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 821
-      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 817
         ExplicitHeight = 504
         inherited PanelCadastro: TPanel
           Width = 817
           Height = 504
-          ExplicitWidth = 813
-          ExplicitHeight = 503
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 152
             Top = 10
@@ -355,16 +353,16 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 936
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 563
-    ExplicitWidth = 936
+    Top = 564
+    Width = 940
   end
   inherited ImageListCadastro: TImageList
     Left = 648
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM advogado'
@@ -384,26 +382,6 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
     Left = 612
     Top = 8
   end
-  object SqlSelectadvogado: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from advogado')
-    SQLConnection = DM.SQLConnect
-    Left = 40
-    Top = 388
-  end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select *'
-      'from advogado'
-      'where coalesce(advogado,'#39#39')<>'#39#39
-      'order by advogado')
-    SQLConnection = DM.SQLConnect
-    Top = 328
-  end
   object Dspconsulta: TDataSetProvider
     DataSet = SqlConsulta
     Left = 28
@@ -420,25 +398,6 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
     DataSet = CdsConsulta
     Left = 84
     Top = 328
-  end
-  object Sqlinternoadvogado: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'idadvogado'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'SELECT  i.nome_interno, u.sigla, ai.id_advogado'
-      'FROM advogados_internos ai'
-      'inner join interno i on (i.id_interno = ai.id_interno)'
-      'inner join unidade_penal u on (u.id_up = i.id_up)'
-      'where ai.id_advogado = :idadvogado and ai.status = '#39'A'#39
-      'order by u.sigla, i.nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 664
-    Top = 8
   end
   object Dspinternoadvogado: TDataSetProvider
     DataSet = Sqlinternoadvogado
@@ -465,5 +424,39 @@ inherited FrmCadastroAdvogado: TFrmCadastroAdvogado
     Filter = 'Imagens (*.jpg)|*.jpg'
     Left = 495
     Top = 8
+  end
+  object SqlSelectadvogado: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from advogado')
+    Left = 823
+    Top = 192
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from advogado'
+      'where coalesce(advogado,'#39#39')<>'#39#39
+      'order by advogado')
+    Left = 65535
+    Top = 328
+  end
+  object Sqlinternoadvogado: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT  i.nome_interno, u.sigla, ai.id_advogado'
+      'FROM advogados_internos ai'
+      'inner join interno i on (i.id_interno = ai.id_interno)'
+      'inner join unidade_penal u on (u.id_up = i.id_up)'
+      'where ai.id_advogado = :idadvogado and ai.status = '#39'A'#39
+      'order by u.sigla, i.nome_interno')
+    Left = 679
+    Top = 8
+    ParamData = <
+      item
+        Name = 'IDADVOGADO'
+        ParamType = ptInput
+      end>
   end
 end

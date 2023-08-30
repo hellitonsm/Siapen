@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, jpeg, System.ImageList;
+  Mask, jpeg, System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,DmPrincipal;
 
 type
   TFrmPadrao = class(TFrmModeloCadastro)
@@ -22,22 +25,18 @@ type
     DBEdit6: TDBEdit;
     Label8: TLabel;
     DBEdit7: TDBEdit;
-    SqlPavilhao: TSQLQuery;
     DspPavilhao: TDataSetProvider;
     CdsPavilhao: TClientDataSet;
     DsPavilhao: TDataSource;
     DsGaleria: TDataSource;
     CdsGaleria: TClientDataSet;
     DspGaleria: TDataSetProvider;
-    SqlGaleria: TSQLQuery;
-    SqlSolario: TSQLQuery;
     DspSolario: TDataSetProvider;
     CdsSolario: TClientDataSet;
     DsSolario: TDataSource;
     DsCela: TDataSource;
     CdsCela: TClientDataSet;
     DspCela: TDataSetProvider;
-    SqlCela: TSQLQuery;
     DBRadioGroup1: TDBRadioGroup;
     GroupBox1: TGroupBox;
     Label3: TLabel;
@@ -57,6 +56,10 @@ type
     DBLookupComboBoxPavilhao: TDBLookupComboBox;
     Label11: TLabel;
     DBRadioGroup3: TDBRadioGroup;
+    SqlPavilhao: TFDQuery;
+    SqlGaleria: TFDQuery;
+    SqlSolario: TFDQuery;
+    SqlCela: TFDQuery;
     procedure SalvarClick(Sender: TObject);
     procedure NovoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

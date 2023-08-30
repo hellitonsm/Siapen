@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroInternoSaude = class(TFrmModeloInterno)
@@ -34,7 +37,7 @@ type
     DBEdit110: TDBEdit;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
-    Sqlhistorico_saude: TSQLQuery;
+    Sqlhistorico_saudeold: TSQLQuery;
     Dsphistorico_saude: TDataSetProvider;
     Cdshistorico_saude: TClientDataSet;
     dshistorico_saude: TDataSource;
@@ -51,7 +54,7 @@ type
     Cdshistorico_saudeID_INTERNO: TIntegerField;
     Cdshistorico_saudeSETOR: TStringField;
     Cdshistorico_saudeFuncionrio: TStringField;
-    SQLdieta: TSQLQuery;
+    SQLdietaold: TSQLQuery;
     DSPdieta: TDataSetProvider;
     cdsdieta: TClientDataSet;
     dsdieta: TDataSource;
@@ -84,7 +87,7 @@ type
     cdsdietaMdico: TStringField;
     cdsdietaTipoDieta: TStringField;
     TabSheet4: TTabSheet;
-    SQLenfermidadeinterno: TSQLQuery;
+    SQLenfermidadeinternoold: TSQLQuery;
     DSPenfermidadeinterno: TDataSetProvider;
     CDSenfermidadeinterno: TClientDataSet;
     DSENFERMDIADE_INTERNO: TDataSource;
@@ -107,7 +110,7 @@ type
     Label50: TLabel;
     Memoenfermidade: TMemo;
     DBGrid4: TDBGrid;
-    SQLremedioenfermdiade: TSQLQuery;
+    SQLremedioenfermdiadeold: TSQLQuery;
     DSPremedioenfermdiade: TDataSetProvider;
     CDSremedioenfermdiade: TClientDataSet;
     dsremedioenfermidade: TDataSource;
@@ -130,7 +133,7 @@ type
     PopupMenuIsolamento: TPopupMenu;
     Liberar1: TMenuItem;
     TabSheet6: TTabSheet;
-    SQLdeficienciainterno: TSQLQuery;
+    SQLdeficienciainternoold: TSQLQuery;
     dspdeficienciainterno: TDataSetProvider;
     cdsdeficienciainterno: TClientDataSet;
     dsdeficienciainterno: TDataSource;
@@ -159,7 +162,7 @@ type
     cdsdeficienciainternoID_FUNCIONARIO: TIntegerField;
     cdsdeficienciainternoDeficincia: TStringField;
     TabSheet7: TTabSheet;
-    SQLvacinainterno: TSQLQuery;
+    SQLvacinainternoold: TSQLQuery;
     dspvacinainterno: TDataSetProvider;
     cdsvacinainterno: TClientDataSet;
     dsvacinainterno: TDataSource;
@@ -205,6 +208,12 @@ type
     DBEdit100: TDBEdit;
     DBEdit101: TDBEdit;
     DBEdit15: TDBEdit;
+    Sqlhistorico_saude: TFDQuery;
+    SQLdieta: TFDQuery;
+    SQLremedioenfermdiade: TFDQuery;
+    SQLenfermidadeinterno: TFDQuery;
+    SQLdeficienciainterno: TFDQuery;
+    SQLvacinainterno: TFDQuery;
     procedure EditarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DBComboBox27KeyPress(Sender: TObject; var Key: Char);

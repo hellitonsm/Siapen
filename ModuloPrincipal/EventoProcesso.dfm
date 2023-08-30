@@ -1,25 +1,34 @@
 inherited FrmEventoProcesso: TFrmEventoProcesso
-  Height = 439
   Caption = 'Evento do Processo'
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 350
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 332
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 332
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 350
+    Width = 825
+    Height = 532
     inherited PageControlModeloCadastro: TPageControl
-      Height = 350
+      Width = 825
+      Height = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Height = 322
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 24
             Top = 16
@@ -99,8 +108,8 @@ inherited FrmEventoProcesso: TFrmEventoProcesso
             Top = 72
             Width = 97
             Height = 21
-            Date = 41072.463762789350000000
-            Time = 41072.463762789350000000
+            Date = 41072.000000000000000000
+            Time = 0.463762789353495500
             TabOrder = 3
             DataField = 'DATA'
             DataSource = DsCadastro
@@ -155,30 +164,42 @@ inherited FrmEventoProcesso: TFrmEventoProcesso
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 817
+        end
         inherited PanelConsulta: TPanel
-          Height = 288
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Height = 286
+            Width = 815
+            Height = 468
           end
         end
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 382
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDPROCESSO'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited StatusBar1: TStatusBar
+    Top = 564
+    Width = 940
+  end
+  inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM EVENTO_PROCESSO'
       'WHERE IDPROCESSO=:IDPROCESSO')
+    ParamData = <
+      item
+        Name = 'IDPROCESSO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   inherited CdsCadastro: TClientDataSet
     object CdsCadastroIDEVENTO_PROCESSO: TIntegerField
@@ -212,16 +233,6 @@ inherited FrmEventoProcesso: TFrmEventoProcesso
       Size = 1
     end
   end
-  object SqlTipoEventoProcesso: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM TIPO_EVENTO_PROCESSO')
-    SQLConnection = DM.SQLConnect
-    Left = 592
-    Top = 200
-  end
   object DspTipoEventoProcesso: TDataSetProvider
     DataSet = SqlTipoEventoProcesso
     Left = 620
@@ -246,6 +257,15 @@ inherited FrmEventoProcesso: TFrmEventoProcesso
     DataSet = CdsTipoEventoProcesso
     OnDataChange = DsCadastroDataChange
     Left = 676
+    Top = 200
+  end
+  object SqlTipoEventoProcesso: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM TIPO_EVENTO_PROCESSO')
+    Left = 592
     Top = 200
   end
 end

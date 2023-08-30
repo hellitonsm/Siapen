@@ -1,9 +1,9 @@
 object FrmConsultaInterno: TFrmConsultaInterno
   Left = 302
   Top = 492
-  Width = 1126
-  Height = 405
   Caption = 'Consulta Interno'
+  ClientHeight = 367
+  ClientWidth = 1114
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,16 +11,14 @@ object FrmConsultaInterno: TFrmConsultaInterno
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   KeyPreview = True
-  OldCreateOrder = False
   Position = poMainFormCenter
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object PageControl1: TPageControl
     Left = 137
     Top = 0
-    Width = 981
-    Height = 378
+    Width = 977
+    Height = 367
     ActivePage = TabSheet4
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -33,6 +31,8 @@ object FrmConsultaInterno: TFrmConsultaInterno
     TabOrder = 1
     TabWidth = 120
     OnChange = PageControl1Change
+    ExplicitWidth = 973
+    ExplicitHeight = 366
     object TabSheet1: TTabSheet
       Caption = 'Nome'
       object Label1: TLabel
@@ -161,14 +161,15 @@ object FrmConsultaInterno: TFrmConsultaInterno
         Width = 75
         Height = 25
         Caption = '&Sair'
-        TabOrder = 4
         Kind = bkIgnore
+        NumGlyphs = 2
+        TabOrder = 4
       end
       object Editlocalizar: TEdit
         Left = 217
         Top = 15
         Width = 353
-        Height = 28
+        Height = 32
         CharCase = ecUpperCase
         Color = clBlack
         Font.Charset = DEFAULT_CHARSET
@@ -314,16 +315,17 @@ object FrmConsultaInterno: TFrmConsultaInterno
         Width = 75
         Height = 25
         Caption = '&Sair'
-        TabOrder = 2
         Kind = bkIgnore
+        NumGlyphs = 2
+        TabOrder = 2
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'Outro Nome'
       ImageIndex = 2
       DesignSize = (
-        973
-        338)
+        969
+        327)
       object Label3: TLabel
         Left = 10
         Top = 15
@@ -334,7 +336,7 @@ object FrmConsultaInterno: TFrmConsultaInterno
       object Editlocalizaoutronome: TEdit
         Left = 60
         Top = 15
-        Width = 689
+        Width = 693
         Height = 32
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
@@ -443,8 +445,9 @@ object FrmConsultaInterno: TFrmConsultaInterno
         Width = 75
         Height = 25
         Caption = '&Sair'
-        TabOrder = 2
         Kind = bkIgnore
+        NumGlyphs = 2
+        TabOrder = 2
       end
     end
     object TabSheet4: TTabSheet
@@ -563,14 +566,15 @@ object FrmConsultaInterno: TFrmConsultaInterno
         Width = 75
         Height = 25
         Caption = '&Sair'
-        TabOrder = 3
         Kind = bkIgnore
+        NumGlyphs = 2
+        TabOrder = 3
       end
       object Editfiliacao: TEdit
         Left = 60
         Top = 15
         Width = 500
-        Height = 28
+        Height = 32
         CharCase = ecUpperCase
         Color = clBlack
         Font.Charset = DEFAULT_CHARSET
@@ -615,9 +619,10 @@ object FrmConsultaInterno: TFrmConsultaInterno
     Left = 0
     Top = 0
     Width = 137
-    Height = 378
+    Height = 367
     Align = alLeft
     TabOrder = 0
+    ExplicitHeight = 366
     object DBImage1: TDBImage
       Left = 3
       Top = 101
@@ -630,19 +635,19 @@ object FrmConsultaInterno: TFrmConsultaInterno
     end
     object ToolBarSetores: TToolBar
       Left = 1
-      Top = 353
+      Top = 344
       Width = 135
-      Height = 24
+      Height = 22
       Align = alBottom
       AutoSize = True
-      ButtonWidth = 123
+      ButtonWidth = 119
       Caption = 'ToolBarSetores'
       Customizable = True
-      Flat = True
       Images = DM.ImageListNetworkI
       List = True
       ShowCaptions = True
       TabOrder = 2
+      ExplicitTop = 341
       object ToolButtonJuridico: TToolButton
         Left = 0
         Top = 0
@@ -666,7 +671,7 @@ object FrmConsultaInterno: TFrmConsultaInterno
       Visible = False
     end
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -713,7 +718,7 @@ object FrmConsultaInterno: TFrmConsultaInterno
     Left = 741
     Top = 46
   end
-  object SqlSelectInterno: TSQLQuery
+  object SqlSelectInternoold: TSQLQuery
     Params = <>
     SQL.Strings = (
       'select first 50'
@@ -749,7 +754,7 @@ object FrmConsultaInterno: TFrmConsultaInterno
     Left = 513
     Top = 162
   end
-  object SQLvulgo: TSQLQuery
+  object SQLvulgoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -794,7 +799,7 @@ object FrmConsultaInterno: TFrmConsultaInterno
     Left = 741
     Top = 142
   end
-  object SQLoutronome: TSQLQuery
+  object SQLoutronomeold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -840,7 +845,7 @@ object FrmConsultaInterno: TFrmConsultaInterno
     Left = 741
     Top = 190
   end
-  object Sqlfiliacao: TSQLQuery
+  object Sqlfiliacaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -872,7 +877,6 @@ object FrmConsultaInterno: TFrmConsultaInterno
     Top = 6
   end
   object Dspfiliacao: TDataSetProvider
-    DataSet = Sqlfiliacao
     Left = 685
     Top = 6
   end
@@ -885,11 +889,11 @@ object FrmConsultaInterno: TFrmConsultaInterno
     Top = 6
   end
   object Dsfiliacao: TDataSource
-    DataSet = Cdsfiliacao
+    DataSet = Sqlfiliacao
     Left = 741
     Top = 6
   end
-  object SqlCadastro: TSQLQuery
+  object SqlCadastroold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -927,5 +931,169 @@ object FrmConsultaInterno: TFrmConsultaInterno
     OnDataChange = DsCadastroDataChange
     Left = 308
     Top = 104
+  end
+  object Sqlfiliacao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select   interno.nome_interno,'
+      'interno.mae,'
+      'interno.pai,'
+      '  interno.outro_nome,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.st,'
+      '    interno.vulgo'
+      'from cela'
+      '   inner join interno on (cela.id_cela = interno.idcela)'
+      
+        '   inner join pavilhao on (interno.idpavilhao = pavilhao.id_pavi' +
+        'lhao)'
+      
+        '   inner join unidade_penal on (pavilhao.id_up = unidade_penal.i' +
+        'd_up)'
+      
+        '   inner join solario on (interno.idsolario = solario.id_solario' +
+        ')'
+      'WHERE ID_INTERNO = -1'
+      'order by nome_interno ')
+    Left = 613
+    Top = 4
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select   interno.nome_interno,'
+      '  interno.outro_nome,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.st,'
+      '    interno.vulgo, '
+      '    interno.numero_roupa,'
+      '    interno.em_transito'
+      'from cela'
+      '   left join interno on (cela.id_cela = interno.idcela)'
+      
+        '   left join pavilhao on (interno.idpavilhao = pavilhao.id_pavil' +
+        'hao)'
+      
+        '   left join unidade_penal on (pavilhao.id_up = unidade_penal.id' +
+        '_up)'
+      '   left join solario on (interno.idsolario = solario.id_solario)'
+      ' left join galeria on (interno.idgaleria = galeria.id_galeria)'
+      'WHERE ID_INTERNO = -1'
+      ' order by nome_interno '
+      '')
+    Left = 581
+    Top = 44
+  end
+  object SQLvulgo: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select   interno.nome_interno,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.st,'
+      '    interno.vulgo'
+      'from cela'
+      '   inner join interno on (cela.id_cela = interno.idcela)'
+      
+        '   inner join pavilhao on (interno.idpavilhao = pavilhao.id_pavi' +
+        'lhao)'
+      
+        '   inner join unidade_penal on (pavilhao.id_up = unidade_penal.i' +
+        'd_up)'
+      
+        '   inner join solario on (interno.idsolario = solario.id_solario' +
+        ')'
+      'WHERE ID_INTERNO = -1'
+      ' order by nome_interno '
+      '')
+    Left = 629
+    Top = 140
+  end
+  object SQLoutronome: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select   interno.nome_interno,'
+      '    interno.outro_nome,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.st,'
+      '    interno.vulgo'
+      'from cela'
+      '   inner join interno on (cela.id_cela = interno.idcela)'
+      
+        '   inner join pavilhao on (interno.idpavilhao = pavilhao.id_pavi' +
+        'lhao)'
+      
+        '   inner join unidade_penal on (pavilhao.id_up = unidade_penal.i' +
+        'd_up)'
+      
+        '   inner join solario on (interno.idsolario = solario.id_solario' +
+        ')'
+      'WHERE ID_INTERNO = -1'
+      ' order by nome_interno '
+      '')
+    Left = 629
+    Top = 188
+  end
+  object SqlSelectInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select first 50'
+      '    interno.nome_interno,'
+      '    interno.mae,'
+      '    interno.pai,'
+      '    unidade_penal.sigla,'
+      '    interno.outro_nome,'
+      '    interno.rgi,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    galeria.galeria,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    coalesce(interno.st,'#39'I'#39') as st,'
+      '    interno.vulgo,'
+      'interno.idpavilhao,'
+      'interno.idgaleria,'
+      'interno.idsolario,'
+      'COALESCE (interno.numero_roupa, '#39'N'#195'O TEM'#39') as numero_roupa,'
+      'COALESCE (interno.em_transito, '#39'N'#39') as em_transito'
+      'from interno'
+      '   left join cela on (cela.id_cela = interno.idcela)'
+      
+        '   left join pavilhao on (interno.idpavilhao = pavilhao.id_pavil' +
+        'hao)'
+      
+        '   left join unidade_penal on (pavilhao.id_up = unidade_penal.id' +
+        '_up)'
+      '   left join solario on (interno.idsolario = solario.id_solario)'
+      '   left join galeria on (interno.idgaleria = galeria.id_galeria)'
+      '   '
+      '')
+    Left = 469
+    Top = 156
+  end
+  object SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select ID_INTERNO,FOTO'
+      'from interno'
+      'where id_interno=:id_interno')
+    Left = 197
+    Top = 100
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

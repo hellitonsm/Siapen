@@ -2,55 +2,59 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
   Left = 334
   Top = 194
   Caption = 'Movimento SemiAberto'
-  ClientWidth = 1072
+  ClientWidth = 1068
   KeyPreview = True
   ExplicitWidth = 1084
-  ExplicitHeight = 498
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 1072
+    Width = 1068
     Height = 105
+    ExplicitWidth = 1068
     ExplicitHeight = 105
     inherited ToolBarModeloCadastro: TToolBar
       Top = 48
-      Width = 1072
+      Width = 1068
       Height = 57
       ButtonWidth = 171
       ExplicitTop = 48
+      ExplicitWidth = 1068
       ExplicitHeight = 57
       inherited Novo: TToolButton
         AutoSize = True
         Visible = False
+        ExplicitWidth = 73
       end
-      inherited Excluir: TToolButton [1]
+      inherited Editar: TToolButton
         Left = 74
-        AutoSize = True
         Visible = False
         ExplicitLeft = 74
+        ExplicitWidth = 171
+      end
+      inherited Cancelar: TToolButton
+        Left = 245
+        Visible = False
+        ExplicitLeft = 245
+        ExplicitWidth = 171
+      end
+      inherited Salvar: TToolButton
+        Left = 416
+        AutoSize = True
+        Visible = False
+        ExplicitLeft = 416
+        ExplicitWidth = 77
+      end
+      inherited Excluir: TToolButton
+        Left = 493
+        AutoSize = True
+        Visible = False
+        ExplicitLeft = 493
         ExplicitWidth = 78
       end
-      inherited Editar: TToolButton [2]
-        Left = 152
-        Visible = False
-        ExplicitLeft = 152
-      end
-      inherited Fechar: TToolButton [3]
-        Left = 323
+      inherited Fechar: TToolButton
+        Left = 571
         AutoSize = True
-        ExplicitLeft = 323
+        ExplicitLeft = 571
         ExplicitWidth = 80
-      end
-      inherited Cancelar: TToolButton [4]
-        Left = 403
-        Visible = False
-        ExplicitLeft = 403
-      end
-      inherited Salvar: TToolButton [5]
-        Left = 574
-        AutoSize = True
-        Visible = False
-        ExplicitLeft = 574
-        ExplicitWidth = 77
       end
       object tbInserir: TToolButton
         Left = 651
@@ -69,9 +73,13 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
       end
     end
     inherited PanelLocalizaConsulta: TPanel
-      Width = 1072
+      Width = 1068
       Height = 49
+      ExplicitWidth = 1068
       ExplicitHeight = 49
+      DesignSize = (
+        1068
+        49)
       inherited Label1: TLabel
         Top = 14
         ExplicitTop = 14
@@ -121,7 +129,7 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
       inherited EditLocalizar: TEdit
         Left = 288
         Top = 8
-        Width = 1085
+        Width = 1077
         CharCase = ecUpperCase
         TabOrder = 1
         OnChange = EditLocalizarChange
@@ -129,7 +137,7 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
         OnKeyDown = EditLocalizarKeyDown
         ExplicitLeft = 288
         ExplicitTop = 8
-        ExplicitWidth = 708
+        ExplicitWidth = 1077
       end
       object RadioGroupTipoLocalizar: TRadioGroup
         Left = 62
@@ -223,9 +231,10 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
   end
   inherited PanelModeloCadastro: TPanel
     Top = 105
-    Width = 1072
+    Width = 1068
     Height = 336
     ExplicitTop = 105
+    ExplicitWidth = 1068
     ExplicitHeight = 336
     object Label8: TLabel [0]
       Left = 352
@@ -235,11 +244,12 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
       Caption = 'Label8'
     end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 1072
+      Width = 1068
       Height = 217
+      ExplicitWidth = 1068
       ExplicitHeight = 217
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 1064
+        ExplicitWidth = 1060
         ExplicitHeight = 189
         object Label4: TLabel
           Left = 192
@@ -488,12 +498,13 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
     end
     inherited PageControlConsulta: TPageControl
       Top = 217
-      Width = 1072
+      Width = 1068
       Height = 119
       ExplicitTop = 217
+      ExplicitWidth = 1068
       ExplicitHeight = 119
       inherited TabSheetMovimentacao: TTabSheet [0]
-        ExplicitWidth = 1064
+        ExplicitWidth = 1060
         ExplicitHeight = 91
         inherited DBGrid1: TDBGrid
           Width = 712
@@ -578,10 +589,10 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
         end
       end
       inherited TabSheetConsulta: TTabSheet [1]
-        ExplicitWidth = 1064
+        ExplicitWidth = 1060
         ExplicitHeight = 91
         inherited DBGridConsulta: TDBGrid
-          Width = 1064
+          Width = 1060
           Height = 91
         end
       end
@@ -591,7 +602,7 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
         object DBGrid2: TDBGrid
           Left = 0
           Top = 0
-          Width = 1064
+          Width = 1060
           Height = 91
           Align = alClient
           DataSource = dsmovretorno
@@ -633,7 +644,8 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
     end
   end
   inherited StatusBar1: TStatusBar
-    Width = 1072
+    Width = 1068
+    ExplicitWidth = 1068
   end
   inherited ImageListCadastro: TImageList
     Left = 512
@@ -8038,49 +8050,6 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
       FFFFFFFFFFFFFFFFFF9FFFFFFFF07FFF00000000000000000000000000000000
       000000000000}
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_INTERNO'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'SELECT'
-      'I.ID_INTERNO, '
-      'I.NOME_INTERNO,'
-      'I.FOTO,'
-      'I.MAE,'
-      'I.PAI,'
-      'I.RGI,'
-      'I.HORARIO_SAIDA_SAIDAO,'
-      'I.HORARIO_ENTRADA_SAIDAO,'
-      'I.TURMA_SAIDAO,'
-      'I.CORTE,'
-      'I.HORARIO_SAIDA_SEMANAL,'
-      'I.HORARIO_ENTRADA_SEMANAL,'
-      'I.HORARIO_SAIDA_SABADO,'
-      'I.HORARIO_ENTRADA_SABADO,'
-      'I.HORARIO_SAIDA_DOMINGO,'
-      'I.HORARIO_ENTRADA_DOMINGO,'
-      'I.IDSETOR_TRABALHO,'
-      'I.HORARIO_SAIDA_SEG,'
-      'I.HORARIO_ENTRADA_SEG,'
-      'I.HORARIO_SAIDA_TER,'
-      'I.HORARIO_ENTRADA_TER,'
-      'I.HORARIO_SAIDA_QUA,'
-      'I.HORARIO_ENTRADA_QUA,'
-      'I.HORARIO_SAIDA_QUI,'
-      'I.HORARIO_ENTRADA_QUI,'
-      'I.HORARIO_SAIDA_SEX,'
-      'I.HORARIO_ENTRADA_SEX,'
-      'I.BLOQUEIO_TRABALHO'
-      ''
-      'FROM INTERNO I'
-      'WHERE ID_INTERNO= :ID_INTERNO')
-    Left = 744
-    Top = 104
-  end
   inherited DspCadastro: TDataSetProvider
     Left = 772
     Top = 104
@@ -8096,24 +8065,6 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
   inherited DsCadastro: TDataSource
     Left = 828
     Top = 104
-  end
-  inherited SqlMovimento: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_up'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM movimento_semiaberto'
-      'where id_up = :id_up'
-      'and '
-      '((data_movimento = current_date) or (HORA_ENTRADA is null))'
-      'order by hora_saida desc')
-    Left = 728
-    Top = 384
   end
   inherited DspMovimento: TDataSetProvider
     Left = 756
@@ -8199,11 +8150,6 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
     Left = 812
     Top = 384
   end
-  inherited SqlConsulta: TSQLQuery
-    SQL.Strings = ()
-    Left = 800
-    Top = 192
-  end
   inherited DspConsulta: TDataSetProvider
     Left = 828
     Top = 192
@@ -8215,6 +8161,72 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
   inherited DsConsulta: TDataSource
     Left = 884
     Top = 192
+  end
+  inherited SqlCadastro: TFDQuery
+    SQL.Strings = (
+      'SELECT'
+      'I.ID_INTERNO, '
+      'I.NOME_INTERNO,'
+      'I.FOTO,'
+      'I.MAE,'
+      'I.PAI,'
+      'I.RGI,'
+      'I.HORARIO_SAIDA_SAIDAO,'
+      'I.HORARIO_ENTRADA_SAIDAO,'
+      'I.TURMA_SAIDAO,'
+      'I.CORTE,'
+      'I.HORARIO_SAIDA_SEMANAL,'
+      'I.HORARIO_ENTRADA_SEMANAL,'
+      'I.HORARIO_SAIDA_SABADO,'
+      'I.HORARIO_ENTRADA_SABADO,'
+      'I.HORARIO_SAIDA_DOMINGO,'
+      'I.HORARIO_ENTRADA_DOMINGO,'
+      'I.IDSETOR_TRABALHO,'
+      'I.HORARIO_SAIDA_SEG,'
+      'I.HORARIO_ENTRADA_SEG,'
+      'I.HORARIO_SAIDA_TER,'
+      'I.HORARIO_ENTRADA_TER,'
+      'I.HORARIO_SAIDA_QUA,'
+      'I.HORARIO_ENTRADA_QUA,'
+      'I.HORARIO_SAIDA_QUI,'
+      'I.HORARIO_ENTRADA_QUI,'
+      'I.HORARIO_SAIDA_SEX,'
+      'I.HORARIO_ENTRADA_SEX,'
+      'I.BLOQUEIO_TRABALHO'
+      ''
+      'FROM INTERNO I'
+      'WHERE ID_INTERNO= :ID_INTERNO')
+    Left = 744
+    Top = 104
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  inherited SqlConsulta: TFDQuery
+    SQL.Strings = ()
+    Left = 800
+    Top = 192
+  end
+  inherited SqlMovimento: TFDQuery
+    SQL.Strings = (
+      'SELECT * '
+      'FROM movimento_semiaberto'
+      'where id_up = :id_up'
+      'and '
+      '((data_movimento = current_date) or (HORA_ENTRADA is null))'
+      'order by hora_saida desc')
+    Left = 728
+    Top = 384
+    ParamData = <
+      item
+        Name = 'id_up'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   object SqlConsultaTodos: TSQLQuery
     MaxBlobSize = -1
@@ -8237,13 +8249,6 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
     Left = 864
     Top = 64
   end
-  object SqlMov_Diario: TSQLQuery
-    Params = <>
-    SQL.Strings = (
-      't'#225' no fonte')
-    Left = 737
-    Top = 63
-  end
   object DspMov_Diario: TDataSetProvider
     DataSet = SqlMov_Diario
     Left = 765
@@ -8260,25 +8265,6 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
     DataSet = CdsMov_Diario
     Left = 821
     Top = 63
-  end
-  object SQLmovretorno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_up'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM movimento_semiaberto m'
-      'where m.id_up = :id_up'
-      'and coalesce(m.hora_entrada,'#39#39')='#39#39
-      'order by m.hora_saida desc')
-    SQLConnection = DM.SQLConnect
-    Left = 569
-    Top = 103
   end
   object dspmovretorno: TDataSetProvider
     DataSet = SQLmovretorno
@@ -8340,9 +8326,51 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
     Left = 653
     Top = 103
   end
-  object SqlDigital: TSQLQuery
-    MaxBlobSize = -1
+  object DspDigital: TDataSetProvider
+    DataSet = SqlDigital
+    Left = 592
+    Top = 56
+  end
+  object CdsDigital: TClientDataSet
+    Aggregates = <>
     Params = <>
+    ProviderName = 'dspDigital'
+    Left = 624
+    Top = 56
+  end
+  object DsDigital: TDataSource
+    DataSet = CdsDigital
+    Left = 656
+    Top = 56
+  end
+  object SqlMov_Diario: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      't'#225' no fonte')
+    Left = 737
+    Top = 63
+  end
+  object SQLmovretorno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM movimento_semiaberto m'
+      'where m.id_up = :id_up'
+      'and coalesce(m.hora_entrada,'#39#39')='#39#39
+      'order by m.hora_saida desc')
+    Left = 569
+    Top = 103
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlDigital: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       
         'select b.id_biometria, b.id_interno, b.id_visitante, b.chave_pol' +
@@ -8359,25 +8387,7 @@ inherited FrmMovimentoSemiAberto: TFrmMovimentoSemiAberto
       'from biometria b'
       'where coalesce(id_interno,'#39#39')<>'#39#39
       '')
-    SQLConnection = DM.SQLConnect
     Left = 560
-    Top = 56
-  end
-  object DspDigital: TDataSetProvider
-    DataSet = SqlDigital
-    Left = 592
-    Top = 56
-  end
-  object CdsDigital: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspDigital'
-    Left = 624
-    Top = 56
-  end
-  object DsDigital: TDataSource
-    DataSet = CdsDigital
-    Left = 656
     Top = 56
   end
 end

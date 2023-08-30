@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, Buttons, adpDBDateTimePicker;
+  ToolWin, Mask, Buttons, adpDBDateTimePicker, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmFuncBancoHoras = class(TFrmModeloCadastro)
@@ -52,7 +55,6 @@ type
     CdsCadastroSOMA: TAggregateField;
     SqlCadastroFuncionario: TStringField;
     CdsCadastrofunc: TStringField;
-    SQLSomaCredito: TSQLQuery;
     dspSomaCredito: TDataSetProvider;
     cdsSomaCredito: TClientDataSet;
     dsSomaCredito: TDataSource;
@@ -68,7 +70,6 @@ type
     cdsSomaCreditosoma: TAggregateField;
     edtCredito: TDBEdit;
     edtDebito: TDBEdit;
-    SQLSomaDebito: TSQLQuery;
     dspSomaDebito: TDataSetProvider;
     cdsSomaDebito: TClientDataSet;
     dsSomadebito: TDataSource;
@@ -86,6 +87,8 @@ type
     Label7: TLabel;
     edtSoma: TEdit;
     Label8: TLabel;
+    SQLSomaCredito: TFDQuery;
+    SQLSomaDebito: TFDQuery;
     procedure btn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure NovoClick(Sender: TObject);

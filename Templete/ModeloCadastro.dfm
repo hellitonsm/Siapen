@@ -7864,6 +7864,7 @@ object FrmModeloCadastro: TFrmModeloCadastro
       000000000000}
   end
   object SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM SENHA')

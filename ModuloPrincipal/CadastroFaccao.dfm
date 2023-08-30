@@ -1,32 +1,23 @@
 inherited FrmCadastroFaccao: TFrmCadastroFaccao
   Left = 272
   Top = 245
-  Width = 676
-  Height = 361
   Caption = 'Cadastro de Fac'#231#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 272
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 254
-    end
     inherited DBNavigator1: TDBNavigator
-      Top = 254
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 545
-    Height = 272
+    inherited Image2: TImage
+      Width = 660
+      ExplicitWidth = 660
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 545
-      Height = 272
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 537
-          Height = 244
           object Label2: TLabel
             Left = 24
             Top = 24
@@ -93,38 +84,14 @@ inherited FrmCadastroFaccao: TFrmCadastroFaccao
             Width = 225
             Height = 22
             Style = csOwnerDrawFixed
-            ItemHeight = 16
             TabOrder = 3
             OnDrawItem = CBCorFaccaoDrawItem
           end
         end
       end
-      inherited TabSheetConsulta: TTabSheet
-        inherited PanelLocalizaConsulta: TPanel
-          Width = 537
-        end
-        inherited PanelConsulta: TPanel
-          Width = 537
-          Height = 210
-          inherited DBGridConsulta: TDBGrid
-            Width = 535
-            Height = 208
-          end
-        end
-      end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    Width = 660
-    inherited Image2: TImage
-      Width = 660
-    end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 304
-    Width = 660
-  end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM FACCAO')

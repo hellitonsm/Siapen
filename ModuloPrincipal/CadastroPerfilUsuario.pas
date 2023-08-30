@@ -6,11 +6,13 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, ExtCtrls, Grids, DBGrids, StdCtrls, ToolWin, DBCtrls,
-  Mask, Jpeg, FileCtrl, Buttons, System.ImageList;
+  Mask, Jpeg, FileCtrl, Buttons, System.ImageList, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmCadastroPerfilUsuario = class(TFrmModeloCadastro)
-    SqlConsulta: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -606,6 +608,7 @@ type
     ChTodasMonitEventos: TCheckBox;
     Label9: TLabel;
     Label10: TLabel;
+    SqlConsulta: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure CHConsultarConfereClick(Sender: TObject);
     procedure CHEditarConfereClick(Sender: TObject);

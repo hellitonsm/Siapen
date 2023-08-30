@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, Buttons, jpeg;
+  Mask, Buttons, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroProcedimentos = class(TFrmModeloCadastro)
@@ -43,7 +46,7 @@ type
     DsProcedimentoPosto: TDataSource;
     CdsProcedimentoPosto: TClientDataSet;
     DspProcedimentoPosto: TDataSetProvider;
-    SqlProcedimentoPosto: TSQLQuery;
+    SqlProcedimentoPostoold: TSQLQuery;
     CdsProcedimentoPostoIDPROCEDIMENTO_POSTO: TIntegerField;
     CdsProcedimentoPostoIDPOSTO_TRABALHO: TIntegerField;
     CdsProcedimentoPostoIDPROCEDIMENTO: TIntegerField;
@@ -59,7 +62,7 @@ type
     DsOcorrenciaProcedimento: TDataSource;
     CdsOcorrenciaProcedimento: TClientDataSet;
     DspOcorrenciaProcedimento: TDataSetProvider;
-    SqlOcorrenciaProcedimento: TSQLQuery;
+    SqlOcorrenciaProcedimentoold: TSQLQuery;
     CdsOcorrenciaProcedimentoIDOCORRENCIA_PROCEDIMENTOS: TIntegerField;
     CdsOcorrenciaProcedimentoIDOCORRENCIA: TIntegerField;
     CdsOcorrenciaProcedimentoIDPROCEDIMENTOS: TIntegerField;
@@ -68,6 +71,8 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     SpeedButton4: TSpeedButton;
     Label9: TLabel;
+    SqlOcorrenciaProcedimento: TFDQuery;
+    SqlProcedimentoPosto: TFDQuery;
     procedure SpeedButton1Click(Sender: TObject);
     procedure NovoClick(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);

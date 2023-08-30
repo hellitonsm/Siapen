@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, jpeg, System.ImageList;
+  Mask, jpeg, System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmCadastroPadrao = class(TFrmModeloCadastro)
@@ -34,11 +37,11 @@ type
     DBLookupComboBoxSolario: TDBLookupComboBox;
     LabelCela: TLabel;
     DBLookupComboBoxCela: TDBLookupComboBox;
-    SqlPavilhao: TSQLQuery;
+    SqlPavilhaoold: TSQLQuery;
     DspPavilhao: TDataSetProvider;
     CdsPavilhao: TClientDataSet;
     DsPavilhao: TDataSource;
-    SqlGaleria: TSQLQuery;
+    SqlGaleriaold: TSQLQuery;
     DspGaleria: TDataSetProvider;
     CdsGaleria: TClientDataSet;
     DsGaleria: TDataSource;
@@ -47,9 +50,13 @@ type
     CdsCela: TClientDataSet;
     CdsSolario: TClientDataSet;
     DspSolario: TDataSetProvider;
-    SqlSolario: TSQLQuery;
-    SqlCela: TSQLQuery;
+    SqlSolarioold: TSQLQuery;
+    SqlCelaold: TSQLQuery;
     DspCela: TDataSetProvider;
+    SqlPavilhao: TFDQuery;
+    SqlGaleria: TFDQuery;
+    SqlSolario: TFDQuery;
+    SqlCela: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private

@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, Mask,
-  DBCtrls, jpeg, Buttons, System.ImageList;
+  DBCtrls, jpeg, Buttons, System.ImageList, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmCadastroAdvogado = class(TFrmModeloCadastro)
@@ -16,15 +19,12 @@ type
     dbedtADVOGADO: TDBEdit;
     Label4: TLabel;
     dbedtOAB: TDBEdit;
-    SqlSelectadvogado: TSQLQuery;
-    SqlConsulta: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     DBGrid1: TDBGrid;
-    Sqlinternoadvogado: TSQLQuery;
     Dspinternoadvogado: TDataSetProvider;
     Cdsinternoadvogado: TClientDataSet;
     Dsinternoadvogado: TDataSource;
@@ -52,6 +52,9 @@ type
     Label14: TLabel;
     DBEdit9: TDBEdit;
     OpenDialog1: TOpenDialog;
+    SqlSelectadvogado: TFDQuery;
+    SqlConsulta: TFDQuery;
+    Sqlinternoadvogado: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure EditLocalizarChange(Sender: TObject);
     procedure DBGridConsultaDblClick(Sender: TObject);

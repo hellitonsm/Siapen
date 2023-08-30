@@ -1570,6 +1570,7 @@ object TelaLogin: TTelaLogin
       Enabled = False
       KeyField = 'ID_UP'
       ListField = 'NOME_UP'
+      ListSource = DataSource1
       TabOrder = 0
       OnClick = DBLookupComboBox1Click
     end

@@ -6,14 +6,18 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, dbcgrids, jpeg, OleCtrls, SHDocVw, Menus, OleCtnrs;
+  ToolWin, dbcgrids, jpeg, OleCtrls, SHDocVw, Menus, OleCtnrs,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 const
   OffsetMemoryStream: Int64 = 0;
 
 type
   TFrmCadastroInteligencia = class(TFrmModeloInterno)
-    SQLinteligencia: TSQLQuery;
+    SQLinteligenciaold: TSQLQuery;
     DSPinteligencia: TDataSetProvider;
     CDSinteligencia: TClientDataSet;
     DSinteligencia: TDataSource;
@@ -25,7 +29,7 @@ type
     CDSinteligenciaFuncionrio: TStringField;
     TabSheet2: TTabSheet;
     TabSheet1: TTabSheet;
-    SqlArquivos: TSQLQuery;
+    SqlArquivosold: TSQLQuery;
     DspArquivos: TDataSetProvider;
     CdsArquivos: TClientDataSet;
     DsArquivos: TDataSource;
@@ -72,7 +76,7 @@ type
     DsUP: TDataSource;
     CdsUP: TClientDataSet;
     DspUP: TDataSetProvider;
-    SqlUP: TSQLQuery;
+    SqlUPold: TSQLQuery;
     lbl11: TLabel;
     DBLookupComboBoxID_UP: TDBLookupComboBox;
     CheckBoxVisivel: TCheckBox;
@@ -81,6 +85,9 @@ type
     ComboBoxdecisaoparecer: TComboBox;
     Label14: TLabel;
     CDSinteligenciaDECISAO_PARECER: TStringField;
+    SqlArquivos: TFDQuery;
+    SQLinteligencia: TFDQuery;
+    SqlUP: TFDQuery;
     procedure SalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure CDSinteligenciaAfterInsert(DataSet: TDataSet);

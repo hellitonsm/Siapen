@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask;
+  ToolWin, Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 type
   TFrmCadastroCorrespondencia = class(TFrmModeloCadastro)
@@ -29,24 +32,24 @@ type
     DBEditEstado: TDBEdit;
     EditBuscar: TEdit;
     DBLookupComboBoxInterno: TDBLookupComboBox;
-    SQLCorrespondente: TSQLQuery;
     dspCorrespondente: TDataSetProvider;
     cdsCorrespondente: TClientDataSet;
     dsCorrespondente: TDataSource;
     DBMemoObs: TDBMemo;
-    SQLBusca: TSQLQuery;
     dspBusca: TDataSetProvider;
     cdsBusca: TClientDataSet;
     dsBusca: TDataSource;
     RadioGroupEnviarReceber: TRadioGroup;
     OpenDialogDoc: TOpenDialog;
     ButtonAdicionarDocumento: TButton;
-    SQLGrid: TSQLQuery;
     dspGrid: TDataSetProvider;
     cdsGrid: TClientDataSet;
     dsGrid: TDataSource;
     ButtonVisualizarDocumento: TButton;
     EditInterno: TEdit;
+    SQLCorrespondente: TFDQuery;
+    SQLBusca: TFDQuery;
+    SQLGrid: TFDQuery;
     procedure ButtonBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SalvarClick(Sender: TObject);

@@ -1,32 +1,40 @@
 inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
   Left = 295
   Top = 121
-  Width = 1020
-  Height = 650
   Caption = 'Cadastro de Eventos'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 561
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 543
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 543
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 889
-    Height = 561
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 1004
+      ExplicitWidth = 1004
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 889
-      Height = 561
+      Width = 825
+      Height = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 881
-          Height = 533
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label4: TLabel
             Left = 136
             Top = 16
@@ -235,7 +243,6 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
             Style = csDropDownList
             DataField = 'PLANTAO_OCORRENCIA'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'ALFA'
               'BRAVO'
@@ -258,11 +265,15 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 881
+          Width = 817
           Height = 70
+          ExplicitHeight = 70
           inherited Label1: TLabel
             Top = 48
+            ExplicitTop = 48
           end
           object Label2: TLabel [1]
             Left = 8
@@ -301,14 +312,16 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
             Top = 44
             Width = 478
             TabOrder = 4
+            ExplicitTop = 44
+            ExplicitWidth = 478
           end
           object DtpDataInicial: TDateTimePicker
             Left = 64
             Top = 17
             Width = 89
             Height = 21
-            Date = 41646.722573449070000000
-            Time = 41646.722573449070000000
+            Date = 41646.000000000000000000
+            Time = 0.722573449071205700
             TabOrder = 0
           end
           object DtpDataFinal: TDateTimePicker
@@ -316,8 +329,8 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
             Top = 17
             Width = 89
             Height = 21
-            Date = 41646.722715011570000000
-            Time = 41646.722715011570000000
+            Date = 41646.000000000000000000
+            Time = 0.722715011572290700
             TabOrder = 1
           end
           object BtnAtualizarBusca: TBitBtn
@@ -326,8 +339,6 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
             Width = 75
             Height = 25
             Caption = 'Atualizar '
-            TabOrder = 3
-            OnClick = BtnAtualizarBuscaClick
             Glyph.Data = {
               DE010000424DDE01000000000000760000002800000024000000120000000100
               0400000000006801000000000000000000001000000000000000000000000000
@@ -346,6 +357,8 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
               3333333333338888883333330000333333333333333333333333333333333333
               0000}
             NumGlyphs = 2
+            TabOrder = 3
+            OnClick = BtnAtualizarBuscaClick
           end
           object CkTodasUnidades: TCheckBox
             Left = 312
@@ -360,11 +373,13 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
         end
         inherited PanelConsulta: TPanel
           Top = 70
-          Width = 881
-          Height = 463
+          Width = 817
+          Height = 434
+          ExplicitTop = 70
+          ExplicitHeight = 434
           inherited DBGridConsulta: TDBGrid
-            Width = 879
-            Height = 461
+            Width = 815
+            Height = 432
             DataSource = DsConsulta
             Columns = <
               item
@@ -446,20 +461,17 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 1004
-    inherited Image2: TImage
-      Width = 1004
-    end
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 593
-    Width = 1004
+    Top = 564
+    Width = 940
   end
   inherited ImageListCadastro: TImageList
     Left = 688
     Top = 32
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'select * from monitoramento_eventos')
     Left = 760
@@ -499,52 +511,6 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
     Left = 28
     Top = 328
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftDate
-        Name = 'DATA1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DATA2'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
-        'o, up_oco.sigla as up_ocorrencia, f.nome_funcionario as funciona' +
-        'rio_monitor,'
-      
-        'e.codigo || '#39' - '#39' || e.descricao_evento as evento, sb.codigo_sub' +
-        '_evento || '#39' - '#39' || sb.descricao_eventos as sub_evento,'
-      
-        'me.plantao_ocorrencia, me.data_evento, me.hora_evento, me.arquiv' +
-        'o_relacionado, me.observacao, me.id_up_lancamento'
-      'from monitoramento_eventos me'
-      
-        'left join unidade_penal up_lan on (up_lan.id_up = me.id_up_lanca' +
-        'mento)'
-      
-        'left join unidade_penal up_oco on (up_oco.id_up = me.id_up_ocorr' +
-        'encia)'
-      
-        'left join funcionario f on (f.id_funcionario = me.id_funcionario' +
-        '_monitor)'
-      'left join eventos e on (e.id_eventos = me.id_eventos)'
-      
-        'left join sub_eventos sb on (sb.id_sub_eventos = me.id_sub_event' +
-        'os)'
-      'where me.data_evento between :data1 and :data2'
-      ''
-      
-        'order by me.data_evento, me.hora_evento, e.codigo || '#39' - '#39' || e.' +
-        'descricao_evento')
-    SQLConnection = DM.SQLConnect
-    Top = 328
-  end
   object DsEventos: TDataSource
     DataSet = CdsEventos
     Left = 639
@@ -560,19 +526,6 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
   object DspEventos: TDataSetProvider
     DataSet = SqlEventos
     Left = 581
-    Top = 16
-  end
-  object SqlEventos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'SELECT ID_EVENTOS, CODIGO || '#39' - '#39' || DESCRICAO_EVENTO AS DESCRI' +
-        'CAO_EVENTO, CODIGO, SUB_EVENTOS FROM EVENTOS'
-      'WHERE TIPO_EVENTO = '#39'1'#39
-      'ORDER BY CODIGO || '#39' - '#39' || DESCRICAO_EVENTO')
-    SQLConnection = DM.SQLConnect
-    Left = 551
     Top = 16
   end
   object OpenDialogArquivo: TOpenDialog
@@ -613,29 +566,65 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
     Left = 975
     Top = 8
   end
-  object SqlConsultaUnidade: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
+        'o, up_oco.sigla as up_ocorrencia, f.nome_funcionario as funciona' +
+        'rio_monitor,'
+      
+        'e.codigo || '#39' - '#39' || e.descricao_evento as evento, sb.codigo_sub' +
+        '_evento || '#39' - '#39' || sb.descricao_eventos as sub_evento,'
+      
+        'me.plantao_ocorrencia, me.data_evento, me.hora_evento, me.arquiv' +
+        'o_relacionado, me.observacao, me.id_up_lancamento'
+      'from monitoramento_eventos me'
+      
+        'left join unidade_penal up_lan on (up_lan.id_up = me.id_up_lanca' +
+        'mento)'
+      
+        'left join unidade_penal up_oco on (up_oco.id_up = me.id_up_ocorr' +
+        'encia)'
+      
+        'left join funcionario f on (f.id_funcionario = me.id_funcionario' +
+        '_monitor)'
+      'left join eventos e on (e.id_eventos = me.id_eventos)'
+      
+        'left join sub_eventos sb on (sb.id_sub_eventos = me.id_sub_event' +
+        'os)'
+      'where me.data_evento between :data1 and :data2'
+      ''
+      
+        'order by me.data_evento, me.hora_evento, e.codigo || '#39' - '#39' || e.' +
+        'descricao_evento')
+    Top = 328
+    ParamData = <
       item
-        DataType = ftDate
         Name = 'DATA1'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
         Name = 'DATA2'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID_UP_LANCAMENTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'id_up_lancamento'
-        ParamType = ptInput
       end>
+  end
+  object SqlEventos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT ID_EVENTOS, CODIGO || '#39' - '#39' || DESCRICAO_EVENTO AS DESCRI' +
+        'CAO_EVENTO, CODIGO, SUB_EVENTOS FROM EVENTOS'
+      'WHERE TIPO_EVENTO = '#39'1'#39
+      'ORDER BY CODIGO || '#39' - '#39' || DESCRICAO_EVENTO')
+    Left = 551
+    Top = 16
+  end
+  object SqlConsultaUnidade: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       
         'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
@@ -668,32 +657,24 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
       
         'order by me.data_evento, me.hora_evento, e.codigo || '#39' - '#39' || e.' +
         'descricao_evento')
-    SQLConnection = DM.SQLConnect
     Top = 360
-  end
-  object SQLConsultaUnidadeTodas: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
+    ParamData = <
       item
-        DataType = ftDate
         Name = 'DATA1'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
         Name = 'DATA2'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
         Name = 'ID_UP_LANCAMENTO'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'id_up_lancamento'
-        ParamType = ptInput
       end>
+  end
+  object SQLConsultaUnidadeTodas: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       
         'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
@@ -726,7 +707,19 @@ inherited FrmCadastroMonitoramentoEventos: TFrmCadastroMonitoramentoEventos
       
         'order by me.data_evento, me.hora_evento, e.codigo || '#39' - '#39' || e.' +
         'descricao_evento')
-    SQLConnection = DM.SQLConnect
     Top = 392
+    ParamData = <
+      item
+        Name = 'DATA1'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        ParamType = ptInput
+      end
+      item
+        Name = 'ID_UP_LANCAMENTO'
+        ParamType = ptInput
+      end>
   end
 end

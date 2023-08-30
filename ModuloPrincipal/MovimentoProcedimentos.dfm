@@ -1,30 +1,45 @@
 inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
   Left = 236
   Top = 133
-  Height = 480
   Caption = 'Programa'#231#227'o dos Procedimentos'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 391
+    Height = 531
+    ExplicitHeight = 531
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 373
+      Height = 513
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 373
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 391
+    Width = 821
+    Height = 531
+    ExplicitWidth = 821
+    ExplicitHeight = 531
     inherited PageControlModeloCadastro: TPageControl
-      Height = 391
+      Width = 821
+      Height = 531
       ActivePage = TabSheetCadastro
       MultiLine = True
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Height = 363
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label8: TLabel
             Left = 6
             Top = 52
@@ -62,8 +77,8 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
             Top = 32
             Width = 89
             Height = 21
-            Date = 40872.449145567130000000
-            Time = 40872.449145567130000000
+            Date = 40872.000000000000000000
+            Time = 0.449145567130472000
             TabOrder = 0
           end
           object PageControlPrincipal: TPageControl
@@ -385,40 +400,57 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 813
+        end
         inherited PanelConsulta: TPanel
-          Height = 329
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
-            Height = 327
+            Width = 811
+            Height = 467
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
+    Width = 936
     Font.Height = -21
+    ExplicitWidth = 936
   end
   inherited StatusBar1: TStatusBar
-    Top = 423
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDPROCEDIMENTOS'
-        ParamType = ptInput
-        Value = 0
-      end
-      item
-        DataType = ftString
-        Name = 'IDMOV_PROCEDIMENTOS'
-        ParamType = ptInput
-        Value = '-1'
-      end>
+  inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM MOV_PROCEDIMENTOS'
       'WHERE IDPROCEDIMENTOS=:IDPROCEDIMENTOS'
       'AND IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS')
+    Left = 552
+    ParamData = <
+      item
+        Name = 'IDPROCEDIMENTOS'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        Name = 'IDMOV_PROCEDIMENTOS'
+        DataType = ftString
+        ParamType = ptInput
+        Value = '-1'
+      end>
   end
   object DsMovAdv: TDataSource
     DataSet = CdsMovAdv
@@ -460,11 +492,11 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
     end
   end
   object DspMovAdv: TDataSetProvider
-    DataSet = SqlMovAdv
+    DataSet = SqlMovAdvold
     Left = 684
     Top = 8
   end
-  object SqlMovAdv: TSQLQuery
+  object SqlMovAdvold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -477,11 +509,10 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
       'SELECT * '
       'FROM MOV_PROCEDIMENTOS_ADV'
       'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS')
-    SQLConnection = DM.SQLConnect
     Left = 656
     Top = 8
   end
-  object SqlMovFunc: TSQLQuery
+  object SqlMovFuncold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -494,12 +525,11 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
       'SELECT * '
       'FROM MOV_PROCEDIMENTOS_FUNC'
       'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS')
-    SQLConnection = DM.SQLConnect
     Left = 656
     Top = 48
   end
   object DspMovFunc: TDataSetProvider
-    DataSet = SqlMovFunc
+    DataSet = SqlMovFuncold
     Left = 684
     Top = 48
   end
@@ -542,7 +572,7 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
     Left = 740
     Top = 48
   end
-  object SqlMovInt: TSQLQuery
+  object SqlMovIntold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -555,12 +585,11 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
       'SELECT * '
       'FROM MOV_PROCEDIMENTOS_INT'
       'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS')
-    SQLConnection = DM.SQLConnect
     Left = 656
     Top = 96
   end
   object DspMovInt: TDataSetProvider
-    DataSet = SqlMovInt
+    DataSet = SqlMovIntold
     Left = 684
     Top = 96
   end
@@ -603,7 +632,7 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
     Left = 740
     Top = 96
   end
-  object SqlMovVis: TSQLQuery
+  object SqlMovVisold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -616,12 +645,11 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
       'SELECT * '
       'FROM MOV_PROCEDIMENTOS_VIS'
       'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS')
-    SQLConnection = DM.SQLConnect
-    Left = 656
-    Top = 144
+    Left = 632
+    Top = 288
   end
   object DspMovVis: TDataSetProvider
-    DataSet = SqlMovVis
+    DataSet = SqlMovVisold
     Left = 684
     Top = 144
   end
@@ -663,5 +691,65 @@ inherited FrmMovimentoProcedimentos: TFrmMovimentoProcedimentos
     DataSet = CdsMovVis
     Left = 740
     Top = 144
+  end
+  object SqlMovInt: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_PROCEDIMENTOS_INT'
+      'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS'
+      '')
+    Left = 567
+    Top = 104
+    ParamData = <
+      item
+        Name = 'IDMOV_PROCEDIMENTOS'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMovFunc: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_PROCEDIMENTOS_FUNC'
+      'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS'
+      '')
+    Left = 559
+    Top = 56
+    ParamData = <
+      item
+        Name = 'IDMOV_PROCEDIMENTOS'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMovAdv: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_PROCEDIMENTOS_ADV'
+      'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS'
+      '')
+    Left = 560
+    Top = 16
+    ParamData = <
+      item
+        Name = 'IDMOV_PROCEDIMENTOS'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMovVis: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM MOV_PROCEDIMENTOS_VIS'
+      'WHERE IDMOV_PROCEDIMENTOS=:IDMOV_PROCEDIMENTOS'
+      '')
+    Left = 476
+    Top = 284
+    ParamData = <
+      item
+        Name = 'IDMOV_PROCEDIMENTOS'
+        ParamType = ptInput
+      end>
   end
 end

@@ -3,8 +3,8 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
   Top = 95
   ActiveControl = Editlocalizar
   Caption = 'Hist'#243'rico / Ficha Disciplinar'
-  ClientHeight = 579
-  ClientWidth = 751
+  ClientHeight = 578
+  ClientWidth = 747
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 751
+    Width = 747
     Height = 149
     ActivePage = TabSheet1
     Align = alTop
@@ -122,13 +122,12 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
   object PanelPrincipal: TPanel
     Left = 0
     Top = 149
-    Width = 751
-    Height = 430
+    Width = 747
+    Height = 429
     Align = alClient
     Caption = 'PanelPrincipal'
     Enabled = False
     TabOrder = 1
-    ExplicitHeight = 431
     object Label53: TLabel
       Left = 18
       Top = 16
@@ -148,6 +147,7 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
       Top = 33
       Width = 91
       Height = 21
+      Date = 45153.000000000000000000
       Time = 0.302563541663403200
       TabOrder = 0
     end
@@ -235,8 +235,8 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
   end
   object DSHISTORICO_interno: TDataSource
     DataSet = CDSHISTORICO_interno
-    Left = 403
-    Top = 203
+    Left = 443
+    Top = 163
   end
   object CDSHISTORICO_interno: TClientDataSet
     Aggregates = <>
@@ -254,7 +254,7 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
     Left = 347
     Top = 203
   end
-  object SQLHISTORICO_interno: TSQLQuery
+  object SQLHISTORICO_internoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -274,22 +274,22 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
   object DsConsulta: TDataSource
     DataSet = CdsConsulta
     OnDataChange = DsConsultaDataChange
-    Left = 573
+    Left = 525
     Top = 199
   end
   object CdsConsulta: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'Dspconsulta'
-    Left = 545
-    Top = 199
+    Left = 569
+    Top = 175
   end
   object Dspconsulta: TDataSetProvider
     DataSet = SqlConsulta
-    Left = 517
-    Top = 199
+    Left = 613
+    Top = 167
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -321,10 +321,10 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
       'WHERE INTERNO.ID_INTERNO = -1'
       ' order by interno.nome_interno ')
     SQLConnection = DM.SQLConnect
-    Left = 489
+    Left = 473
     Top = 199
   end
-  object SqlSelectInterno: TSQLQuery
+  object SqlSelectInternoold: TSQLQuery
     Params = <>
     SQL.Strings = (
       'select '
@@ -354,5 +354,87 @@ object FrmHistoricoInterno: TFrmHistoricoInterno
       '  inner join cela on (cela.id_cela = interno.idcela)')
     Left = 640
     Top = 202
+  end
+  object SQLHISTORICO_interno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from historico_interno'
+      'where idinterno=:id_interno'
+      'order by data_hora desc'
+      '')
+    Left = 304
+    Top = 261
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select '
+      '    interno.nome_interno,'
+      '    interno.mae,'
+      '    interno.pai,'
+      '    unidade_penal.sigla,'
+      '    interno.outro_nome,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    coalesce(interno.st,'#39'I'#39') as st,'
+      '    interno.vulgo,'
+      'interno.idpavilhao,'
+      'interno.idgaleria,'
+      'interno.idsolario'
+      'from interno'
+      
+        '  inner join unidade_penal on (unidade_penal.id_up = interno.id_' +
+        'up)'
+      
+        '  inner join pavilhao on (pavilhao.id_pavilhao = interno.idpavil' +
+        'hao)'
+      '  inner join galeria on (galeria.id_galeria = interno.idgaleria)'
+      '  inner join solario on (solario.id_solario = interno.idsolario)'
+      '  inner join cela on (cela.id_cela = interno.idcela)'
+      'WHERE INTERNO.ID_INTERNO = -1'
+      ' order by interno.nome_interno '
+      '')
+    Left = 496
+    Top = 261
+  end
+  object SqlSelectInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select '
+      '    interno.nome_interno,'
+      '    interno.mae,'
+      '    interno.pai,'
+      '    unidade_penal.sigla,'
+      '    interno.outro_nome,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    coalesce(interno.st,'#39'I'#39') as st,'
+      '    interno.vulgo,'
+      'interno.idpavilhao,'
+      'interno.idgaleria,'
+      'interno.idsolario'
+      'from interno'
+      
+        '  inner join unidade_penal on (unidade_penal.id_up = interno.id_' +
+        'up)'
+      
+        '  inner join pavilhao on (pavilhao.id_pavilhao = interno.idpavil' +
+        'hao)'
+      '  inner join galeria on (galeria.id_galeria = interno.idgaleria)'
+      '  inner join solario on (solario.id_solario = interno.idsolario)'
+      '  inner join cela on (cela.id_cela = interno.idcela)'
+      '')
+    Left = 640
+    Top = 269
   end
 end

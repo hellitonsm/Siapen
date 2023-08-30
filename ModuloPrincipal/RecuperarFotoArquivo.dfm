@@ -1,17 +1,15 @@
 object FrmRecuperarFotoArquivo: TFrmRecuperarFotoArquivo
   Left = 280
   Top = 257
-  Width = 712
-  Height = 286
   Caption = 'Recuperar Fotos de Arquivo'
+  ClientHeight = 247
+  ClientWidth = 696
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
-  PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 40
@@ -75,23 +73,6 @@ object FrmRecuperarFotoArquivo: TFrmRecuperarFotoArquivo
     DataSet = SqlExecute
     Left = 460
   end
-  object SqlExecute: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_INTERNO'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT ID_INTERNO,'
-      'FOTO'
-      'FROM INTERNO'
-      'WHERE ID_INTERNO=:ID_INTERNO')
-    SQLConnection = DM.SQLConnect
-    Left = 432
-  end
   object DsInterno: TDataSource
     DataSet = CdsInterno
     Left = 356
@@ -106,15 +87,29 @@ object FrmRecuperarFotoArquivo: TFrmRecuperarFotoArquivo
     DataSet = SqlInterno
     Left = 300
   end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlExecute: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT ID_INTERNO,'
+      'FOTO'
+      'FROM INTERNO'
+      'WHERE ID_INTERNO=:ID_INTERNO')
+    Left = 432
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT id_interno, rgi, st'
       'FROM INTERNO'
       'WHERE FOTO IS NULL'
       'order by st')
-    SQLConnection = DM.SQLConnect
     Left = 272
   end
 end

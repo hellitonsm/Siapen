@@ -1,28 +1,43 @@
 inherited FrmOcorrencias: TFrmOcorrencias
   Left = 194
   Top = 118
-  Height = 543
   Caption = 'Ocorrencias'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 454
+    Height = 531
+    ExplicitHeight = 531
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 436
+      Height = 513
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 436
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 454
+    Width = 821
+    Height = 531
+    ExplicitWidth = 821
+    ExplicitHeight = 531
     inherited PageControlModeloCadastro: TPageControl
-      Height = 454
+      Width = 821
+      Height = 531
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Height = 426
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 22
             Top = 16
@@ -145,7 +160,6 @@ inherited FrmOcorrencias: TFrmOcorrencias
                 Top = 24
                 Width = 145
                 Height = 21
-                ItemHeight = 13
                 TabOrder = 1
                 OnChange = ComboBoxTipoChange
                 OnKeyPress = ComboBoxTipoKeyPress
@@ -281,24 +295,41 @@ inherited FrmOcorrencias: TFrmOcorrencias
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 813
+        end
         inherited PanelConsulta: TPanel
-          Height = 392
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
-            Height = 390
+            Width = 811
+            Height = 467
           end
         end
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 486
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 936
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited StatusBar1: TStatusBar
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM OCORRENCIA')
   end
-  object SqlQuestionamento: TSQLQuery
+  object SqlQuestionamentoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -352,5 +383,20 @@ inherited FrmOcorrencias: TFrmOcorrencias
     DataSet = CdsQuestionamento
     OnDataChange = DsCadastroDataChange
     Left = 572
+  end
+  object SqlQuestionamento: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM QUESTIONAMENTO'
+      'WHERE IDOCORRENCIA = :IDOCORRENCIA'
+      '')
+    Left = 424
+    Top = 8
+    ParamData = <
+      item
+        Name = 'IDOCORRENCIA'
+        ParamType = ptInput
+      end>
   end
 end

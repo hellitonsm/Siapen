@@ -1,14 +1,10 @@
 inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
   Left = 199
   Caption = 'Agenda de Saida do Interno'
-  ExplicitWidth = 956
-  ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 526
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 511
-      ExplicitHeight = 511
+      Height = 507
       inherited Novo: TToolButton
         ExplicitWidth = 99
       end
@@ -31,40 +27,31 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 511
+      Top = 507
       Hints.Strings = ()
-      ExplicitTop = 511
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 829
-    ExplicitHeight = 527
     inherited Image2: TImage
       Width = 873
       ExplicitWidth = 873
     end
     inherited PageControlModeloCadastro: TPageControl
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 829
-      ExplicitHeight = 527
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          ExplicitHeight = 499
           inherited PageControlPrincipal: TPageControl
             ActivePage = TabSheet1
-            ExplicitWidth = 819
-            ExplicitHeight = 497
             object TabSheet1: TTabSheet [0]
               Caption = 'Agenda de Sa'#237'da'
               ImageIndex = 2
               object PanelAgenda: TPanel
                 Left = 0
                 Top = 0
-                Width = 811
-                Height = 468
+                Width = 807
+                Height = 467
                 Align = alClient
                 TabOrder = 0
-                ExplicitHeight = 469
                 object lbl8: TLabel
                   Left = 24
                   Top = 314
@@ -649,52 +636,44 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
       end
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
-          Width = 750
-          ExplicitWidth = 750
+          Width = 817
+          ExplicitWidth = 817
+          DesignSize = (
+            817
+            42)
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 621
+            Left = 688
             TabOrder = 3
-            ExplicitLeft = 621
+            ExplicitLeft = 688
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 750
-          Height = 459
-          ExplicitWidth = 750
-          ExplicitHeight = 459
+          Width = 817
+          Height = 455
           inherited DBGridConsulta: TDBGrid
-            Width = 748
-            Height = 457
+            Width = 815
+            Height = 453
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 748
-            Height = 457
-            PanelHeight = 91
-            PanelWidth = 731
-            ExplicitWidth = 748
-            ExplicitHeight = 457
+            Width = 815
+            Height = 453
+            PanelWidth = 798
           end
         end
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 873
-  end
-  inherited StatusBar1: TStatusBar
-    ExplicitTop = 558
-    ExplicitWidth = 944
-  end
   inherited ImageListCadastro: TImageList
     Left = 640
   end
   inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     Left = 720
     Top = 96
   end
@@ -712,23 +691,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
   end
   inherited MainMenu1: TMainMenu
     Left = 547
-  end
-  object SqlAgenda: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDAGENDA_ATENDIMENTO'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM AGENDA_ATENDIMENTO'
-      'WHERE IDAGENDA_ATENDIMENTO =:IDAGENDA_ATENDIMENTO')
-    SQLConnection = DM.SQLConnect
-    Left = 720
-    Top = 184
   end
   object DspAgenda: TDataSetProvider
     DataSet = SqlAgenda
@@ -884,34 +846,6 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
     Left = 804
     Top = 184
   end
-  object SqlConsultaAgenda: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_INTERNO'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT'
-      '    A.IDAGENDA_ATENDIMENTO,'
-      '    A.ID_INTERNO,'
-      '    A.DATA_AGENDA,'
-      '    A.HORA_AGENDA,'
-      '    A.TIPO_DOCUMENTO_SOLICITACAO,'
-      '    A.NUMERO_DOC_SOLICITACAO,'
-      '    D.DESTINO,'
-      '    A.MOTIVO_SAIDA,'
-      '    A.OBSERVACAO'
-      'FROM AGENDA_ATENDIMENTO A'
-      'LEFT JOIN DESTINO D ON (A.IDDESTINO=D.ID_DESTINO)'
-      'WHERE ID_INTERNO=:ID_INTERNO'
-      'ORDER BY A.DATA_AGENDA, A.HORA_AGENDA')
-    SQLConnection = DM.SQLConnect
-    Left = 720
-    Top = 144
-  end
   object DspConsultaAgenda: TDataSetProvider
     DataSet = SqlConsultaAgenda
     Left = 748
@@ -981,15 +915,55 @@ inherited FrmAgendaSaidaInterno: TFrmAgendaSaidaInterno
     DataSet = SqlDestino
     Left = 732
   end
-  object SqlDestino: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlAgenda: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM AGENDA_ATENDIMENTO'
+      'WHERE IDAGENDA_ATENDIMENTO =:IDAGENDA_ATENDIMENTO')
+    Left = 720
+    Top = 184
+    ParamData = <
+      item
+        Name = 'IDAGENDA_ATENDIMENTO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsultaAgenda: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT'
+      '    A.IDAGENDA_ATENDIMENTO,'
+      '    A.ID_INTERNO,'
+      '    A.DATA_AGENDA,'
+      '    A.HORA_AGENDA,'
+      '    A.TIPO_DOCUMENTO_SOLICITACAO,'
+      '    A.NUMERO_DOC_SOLICITACAO,'
+      '    D.DESTINO,'
+      '    A.MOTIVO_SAIDA,'
+      '    A.OBSERVACAO'
+      'FROM AGENDA_ATENDIMENTO A'
+      'LEFT JOIN DESTINO D ON (A.IDDESTINO=D.ID_DESTINO)'
+      'WHERE ID_INTERNO=:ID_INTERNO'
+      'ORDER BY A.DATA_AGENDA, A.HORA_AGENDA')
+    Left = 720
+    Top = 144
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlDestino: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT C.CIDADE||'#39' / '#39'||C.UF AS CIDADE, D.* '
       'FROM DESTINO D'
       'LEFT JOIN CIDADE C ON (C.ID_CIDADE=D.IDCIDADE)'
       'ORDER BY D.DESTINO')
-    SQLConnection = DM.SQLConnect
     Left = 704
   end
 end

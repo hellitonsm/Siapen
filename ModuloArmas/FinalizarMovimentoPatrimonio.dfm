@@ -1,16 +1,18 @@
 inherited FrmFinalizarMovimentoPatrimonio: TFrmFinalizarMovimentoPatrimonio
   Left = 312
   Top = 204
-  Width = 598
-  Height = 441
   ActiveControl = EditSenha
   Caption = 'Finalizar o Movimento'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 208
+  ClientWidth = 412
+  ExplicitWidth = 428
+  ExplicitHeight = 247
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 582
-    Height = 362
+    Width = 412
+    Height = 167
+    ExplicitWidth = 412
+    ExplicitHeight = 167
     object Bevel1: TBevel
       Left = 8
       Top = 159
@@ -134,8 +136,9 @@ inherited FrmFinalizarMovimentoPatrimonio: TFrmFinalizarMovimentoPatrimonio
       Height = 25
       Caption = 'Conf&irma'
       Enabled = False
-      TabOrder = 5
       Kind = bkOK
+      NumGlyphs = 2
+      TabOrder = 5
     end
     object BitBtnCancela: TBitBtn
       Left = 304
@@ -143,8 +146,9 @@ inherited FrmFinalizarMovimentoPatrimonio: TFrmFinalizarMovimentoPatrimonio
       Width = 150
       Height = 25
       Caption = 'Ca&ncela'
-      TabOrder = 6
       Kind = bkAbort
+      NumGlyphs = 2
+      TabOrder = 6
     end
     object BtnAutoriza: TButton
       Left = 246
@@ -190,17 +194,12 @@ inherited FrmFinalizarMovimentoPatrimonio: TFrmFinalizarMovimentoPatrimonio
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 582
+    Width = 412
+    ExplicitWidth = 412
     inherited Image2: TImage
-      Width = 580
+      Width = 410
+      ExplicitWidth = 580
     end
-  end
-  object SqlExecute: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = DM.SQLConnect
-    Left = 376
-    Top = 8
   end
   object DspExecute: TDataSetProvider
     DataSet = SqlExecute
@@ -217,6 +216,12 @@ inherited FrmFinalizarMovimentoPatrimonio: TFrmFinalizarMovimentoPatrimonio
   object DsExecute: TDataSource
     DataSet = CdsExecute
     Left = 460
+    Top = 8
+  end
+  object SqlExecute: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    Left = 376
     Top = 8
   end
 end

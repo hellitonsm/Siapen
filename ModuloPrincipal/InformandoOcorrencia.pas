@@ -6,7 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, ExtCtrls, ComCtrls, Grids, DBGrids, FMTBcd,
   SqlExpr, DB, DBClient, Provider, StdCtrls, DBCtrls, Mask, Buttons, StrUtils,
-  jpeg;
+  jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmInformandoOcorrencia = class(TFrmModeloFormulario)
@@ -18,7 +20,7 @@ type
     DspMovOcorrenciaQuest: TDataSetProvider;
     CdsMovOcorrenciaQuest: TClientDataSet;
     DsMovOcorrenciaQuest: TDataSource;
-    SqlMovOcorrenciaQuest: TSQLQuery;
+    SqlMovOcorrenciaQuestold: TSQLQuery;
     DBRadioGroupPreDefinido: TDBRadioGroup;
     GroupBox1: TGroupBox;
     DBEdit1: TDBEdit;
@@ -29,7 +31,7 @@ type
     BitBtnConfirma: TBitBtn;
     DBNavigator1: TDBNavigator;
     DBMemo1: TDBMemo;
-    SqlMovVis: TSQLQuery;
+    SqlMovVisold: TSQLQuery;
     DspMovVis: TDataSetProvider;
     CdsMovVis: TClientDataSet;
     CdsMovVisIDMOV_PROCEDIMENTOS_VIS: TIntegerField;
@@ -44,8 +46,8 @@ type
     CdsMovIntIDINTERNO: TIntegerField;
     CdsMovIntINTERNO: TStringField;
     DspMovInt: TDataSetProvider;
-    SqlMovInt: TSQLQuery;
-    SqlMovFunc: TSQLQuery;
+    SqlMovIntold: TSQLQuery;
+    SqlMovFuncold: TSQLQuery;
     DspMovFunc: TDataSetProvider;
     CdsMovFunc: TClientDataSet;
     CdsMovFuncIDMOV_PROCEDIMENTOS_FUNC: TIntegerField;
@@ -60,7 +62,7 @@ type
     CdsMovAdvIDADVOGADO: TIntegerField;
     CdsMovAdvADVOGADO: TStringField;
     DspMovAdv: TDataSetProvider;
-    SqlMovAdv: TSQLQuery;
+    SqlMovAdvold: TSQLQuery;
     TabSheetPessoas: TTabSheet;
     PageControlPrincipal: TPageControl;
     TabSheetInterno: TTabSheet;
@@ -95,11 +97,17 @@ type
     CdsMovOcorrenciaQuestRESPOSTA: TStringField;
     CdsMovOcorrenciaQuestRESPOSTA_DEFAULT: TStringField;
     CdsMovOcorrenciaQuestVISIVEL: TStringField;
-    SqlQuestionamento: TSQLQuery;
+    SqlQuestionamentoold: TSQLQuery;
     DspQuestionamento: TDataSetProvider;
     CdsQuestionamento: TClientDataSet;
     DsQuestionamento: TDataSource;
     BitBtnCancela: TBitBtn;
+    SqlMovAdv: TFDQuery;
+    SqlMovFunc: TFDQuery;
+    SqlMovInt: TFDQuery;
+    SqlMovVis: TFDQuery;
+    SqlQuestionamento: TFDQuery;
+    SqlMovOcorrenciaQuest: TFDQuery;
     procedure DsMovOcorrenciaQuestDataChange(Sender: TObject;
       Field: TField);
     procedure FormCreate(Sender: TObject);

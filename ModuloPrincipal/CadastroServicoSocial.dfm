@@ -1,100 +1,77 @@
 inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
   Left = 225
   Top = 123
-  Width = 852
-  Height = 604
   Caption = 'Cadastro Servi'#231'o Social'
-  PixelsPerInch = 96
+  ClientHeight = 581
+  ClientWidth = 932
+  ExplicitWidth = 948
+  ExplicitHeight = 640
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 488
+    Height = 523
+    ExplicitHeight = 523
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 470
+      Height = 505
+      ExplicitHeight = 505
+      inherited Novo: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Editar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Cancelar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Salvar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Excluir: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Fechar: TToolButton
+        ExplicitWidth = 99
+      end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 470
+      Top = 505
       Hints.Strings = ()
+      ExplicitTop = 505
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 721
-    Height = 488
+    Width = 817
+    Height = 523
+    ExplicitWidth = 817
+    ExplicitHeight = 523
+    inherited Image2: TImage
+      Width = 836
+      ExplicitWidth = 836
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 721
-      Height = 488
+      Width = 817
+      Height = 523
+      ExplicitWidth = 817
+      ExplicitHeight = 523
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelCadastro: TPanel
-          Width = 713
-          Height = 460
+          Width = 809
+          Height = 495
+          ExplicitWidth = 809
+          ExplicitHeight = 495
           inherited PageControlPrincipal: TPageControl
-            Width = 711
-            Height = 458
+            Width = 807
+            Height = 493
+            ExplicitWidth = 807
+            ExplicitHeight = 493
             inherited TabSheetPrincipal: TTabSheet
-              inherited DBEdit3: TDBEdit
-                TabOrder = 4
-              end
-              inherited DBEditID_PROCEDENCIA: TDBEdit
-                TabOrder = 19
-              end
-              inherited DBLookupComboBoxID_PROCEDENCIA: TDBLookupComboBox
-                TabOrder = 20
-              end
-              inherited DBRadioGroup1: TDBRadioGroup
-                TabOrder = 6
-              end
-              inherited DBRadioGroup2: TDBRadioGroup
-                TabOrder = 18
-              end
-              inherited DBEdit7: TDBEdit
-                TabOrder = 16
-              end
-              inherited DBLookupComboBox2: TDBLookupComboBox
-                TabOrder = 17
-              end
-              inherited DBComboBox3: TDBComboBox
-                TabOrder = 15
-              end
-              inherited DBEdit86: TDBEdit
-                TabOrder = 3
-              end
-              inherited dbrgrpST: TDBRadioGroup
-                TabOrder = 5
-              end
-              inherited DBEdit4: TDBEdit
-                TabOrder = 9
-              end
-              inherited DBEdit20: TDBEdit
-                TabOrder = 10
-              end
-              inherited DBEdit29: TDBEdit
-                TabOrder = 12
-              end
-              inherited DBComboBox2: TDBComboBox
-                TabOrder = 13
-              end
-              inherited DBEditpermanencia: TDBEdit
-                TabOrder = 11
-              end
-              inherited DBLookupComboBoxFACCAO: TDBLookupComboBox
-                TabOrder = 21
-              end
-              inherited DBEdit8: TDBEdit
-                TabOrder = 24
-              end
-              inherited DBEdit31: TDBEdit
-                TabOrder = 25
-              end
-              inherited DBEdit33: TDBEdit
-                TabOrder = 26
-              end
-              inherited DBComboBox5: TDBComboBox
-                TabOrder = 27
-              end
-              inherited DBComboBox4: TDBComboBox
-                TabOrder = 28
-              end
+              ExplicitWidth = 799
+              ExplicitHeight = 465
             end
             inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
               inherited Label37: TLabel
                 Enabled = True
               end
@@ -186,7 +163,6 @@ inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
                 Top = 33
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -257,52 +233,61 @@ inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelLocalizaConsulta: TPanel
-          Width = 713
+          Width = 809
+          ExplicitWidth = 809
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 602
+            Left = 698
             Width = 110
             TabOrder = 3
+            ExplicitLeft = 698
+            ExplicitWidth = 110
           end
           inherited chkSoundex: TCheckBox
             Width = 60
             TabOrder = 2
+            ExplicitWidth = 60
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 713
-          Height = 418
+          Width = 809
+          Height = 453
+          ExplicitWidth = 809
+          ExplicitHeight = 453
           inherited DBGridConsulta: TDBGrid
-            Width = 711
-            Height = 416
+            Width = 807
+            Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 711
-            Height = 416
-            PanelHeight = 83
-            PanelWidth = 694
+            Width = 807
+            Height = 451
+            PanelWidth = 790
+            ExplicitWidth = 807
+            ExplicitHeight = 451
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 836
-    inherited Image2: TImage
-      Width = 836
-    end
+    Width = 932
+    ExplicitWidth = 932
   end
   inherited StatusBar1: TStatusBar
-    Top = 520
-    Width = 836
+    Top = 555
+    Width = 932
+    ExplicitTop = 555
+    ExplicitWidth = 932
   end
   inherited OpenDialogCapturarFoto: TOpenDialog
     Left = 711
   end
-  object SQLServicoSocial: TSQLQuery
+  object SQLServicoSocialold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -369,5 +354,21 @@ inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
     OnDataChange = DsCadastroDataChange
     Left = 668
     Top = 8
+  end
+  object SQLServicoSocial: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM calc_setor_trabalho'
+      'where id_interno = :id_interno'
+      'order by data_inicial desc'
+      '')
+    Left = 536
+    Top = 16
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

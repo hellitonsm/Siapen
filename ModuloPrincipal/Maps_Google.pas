@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, MSHTML, ActiveX, OleCtrls, SHDocVw, StdCtrls, DBCtrls, ExtCtrls,
-  FMTBcd, DB, DBClient, Provider, SqlExpr;
+  FMTBcd, DB, DBClient, Provider, SqlExpr, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMapas_Google = class(TForm)
@@ -15,10 +18,10 @@ type
     Label1: TLabel;
     Button1: TButton;
     Memoendereco: TMemo;
-    SqlInterno: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
+    SqlInterno: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);

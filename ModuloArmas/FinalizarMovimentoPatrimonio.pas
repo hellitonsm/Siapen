@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, ExtCtrls, StdCtrls, Grids, DBGrids, Buttons,
-  FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, jpeg;
+  FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, jpeg, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmFinalizarMovimentoPatrimonio = class(TFrmModeloFormulario)
@@ -24,7 +27,6 @@ type
     BitBtnConfirma: TBitBtn;
     BitBtnCancela: TBitBtn;
     BtnAutoriza: TButton;
-    SqlExecute: TSQLQuery;
     DspExecute: TDataSetProvider;
     CdsExecute: TClientDataSet;
     DsExecute: TDataSource;
@@ -33,6 +35,7 @@ type
     PanelDataDev: TPanel;
     Label2: TLabel;
     MaskEditData: TMaskEdit;
+    SqlExecute: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure EditSenhaChange(Sender: TObject);
     procedure BtnAutorizaClick(Sender: TObject);

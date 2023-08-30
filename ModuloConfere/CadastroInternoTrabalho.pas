@@ -21,7 +21,7 @@ type
     Button1: TButton;
     DBGrid1: TDBGrid;
     DBMemo1: TDBMemo;
-    SQLHISTORICO_interno: TSQLQuery;
+    SQLHISTORICO_internoold: TSQLQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     DSHISTORICO_interno: TDataSource;
@@ -32,10 +32,10 @@ type
     dscalc_trabalho: TDataSource;
     cdscalc_trabalho: TClientDataSet;
     dspcalc_trabalho: TDataSetProvider;
-    SQLcalc_trabalho: TSQLQuery;
+    SQLcalc_trabalhoold: TSQLQuery;
     PopupMenuIsolamento: TPopupMenu;
     Liberar1: TMenuItem;
-    SQLhistorico_trabalho: TSQLQuery;
+    SQLhistorico_trabalhoold: TSQLQuery;
     dsphistorico_trabalho: TDataSetProvider;
     cdshistorico_trabalho: TClientDataSet;
     dshistorico_trabalho: TDataSource;
@@ -86,7 +86,7 @@ type
     dscertidao_trabalho: TDataSource;
     cdscertidao_trabalho: TClientDataSet;
     dspcertidao_trabalho: TDataSetProvider;
-    SQLcertidao_trabalho: TSQLQuery;
+    SQLcertidao_trabalhoold: TSQLQuery;
     DBGrid4: TDBGrid;
     adpDBDateTimePickerdtfinalcertidao: TadpDBDateTimePicker;
     BitBtn2: TBitBtn;
@@ -159,6 +159,10 @@ type
     DBEdit42: TDBEdit;
     BtnCopiar: TButton;
     DeletarRegistro1: TMenuItem;
+    SQLcertidao_trabalho: TFDQuery;
+    SQLHISTORICO_interno: TFDQuery;
+    SQLcalc_trabalho: TFDQuery;
+    SQLhistorico_trabalho: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SalvarClick(Sender: TObject);

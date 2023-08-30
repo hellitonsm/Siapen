@@ -4,24 +4,24 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Qual Ocorrencia:'
-  ClientHeight = 121
-  ClientWidth = 684
+  ClientHeight = 120
+  ClientWidth = 680
   OnShow = FormShow
-  ExplicitWidth = 700
-  ExplicitHeight = 160
+  ExplicitWidth = 696
+  ExplicitHeight = 159
   TextHeight = 13
   inherited PanelGeral: TPanel
     Top = 40
-    Width = 684
-    Height = 81
+    Width = 680
+    Height = 80
     ExplicitTop = 40
-    ExplicitWidth = 684
-    ExplicitHeight = 81
+    ExplicitWidth = 680
+    ExplicitHeight = 80
     object DBGridOcorrencia: TDBGrid
       Left = 1
       Top = 1
-      Width = 682
-      Height = 38
+      Width = 678
+      Height = 37
       Cursor = crHandPoint
       Align = alClient
       BorderStyle = bsNone
@@ -61,8 +61,8 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
     end
     object Panel1: TPanel
       Left = 1
-      Top = 39
-      Width = 682
+      Top = 38
+      Width = 678
       Height = 41
       Align = alBottom
       TabOrder = 1
@@ -125,12 +125,12 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 684
+    Width = 680
     Height = 40
-    ExplicitWidth = 684
+    ExplicitWidth = 680
     ExplicitHeight = 40
     inherited Image2: TImage
-      Width = 682
+      Width = 678
       Height = 38
       ExplicitWidth = 682
       ExplicitHeight = 38
@@ -157,7 +157,7 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
     Left = 184
     Top = 1
   end
-  object SqlOcorrencia: TSQLQuery
+  object SqlOcorrenciaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -174,7 +174,7 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
     Left = 152
     Top = 1
   end
-  object SqlQuestionamento: TSQLQuery
+  object SqlQuestionamentoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -200,5 +200,30 @@ inherited FrmQualOcorrencia: TFrmQualOcorrencia
     DataSet = CdsQuestionamento
     Left = 488
     Top = 1
+  end
+  object SqlOcorrencia: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT O.*'
+      'FROM OCORRENCIA_PROCEDIMENTOS OP'
+      'JOIN OCORRENCIA O ON OP.IDOCORRENCIA=O.IDOCORRENCIA'
+      'WHERE IDPROCEDIMENTOS = :IDPROCEDIMENTOS'
+      '')
+    Left = 160
+    Top = 48
+    ParamData = <
+      item
+        Name = 'IDPROCEDIMENTOS'
+        ParamType = ptInput
+      end>
+  end
+  object SqlQuestionamento: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT *'
+      'FROM questionamento'
+      '')
+    Left = 392
+    Top = 56
   end
 end

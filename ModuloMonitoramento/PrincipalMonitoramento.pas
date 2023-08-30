@@ -6,7 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, jpeg, ExtCtrls, Menus, ImgList, FMTBcd, DB, DBClient,
   Provider, SqlExpr, dbcgrids, DBCtrls, Buttons, ComCtrls, Grids, DBGrids, ShellAPI,
-  System.ImageList;
+  System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmPrincipalMonitoramento = class(TForm)
@@ -40,8 +42,6 @@ type
     CkDEPEN: TCheckBox;
     DBGridEventos: TDBGrid;
     Panel3: TPanel;
-    SqlMonitoramentoEventos: TSQLQuery;
-    SqlMonitoramentoEventosBackup: TSQLQuery;
     LbTotalEventos: TLabel;
     TimerEventos: TTimer;
     Label1: TLabel;
@@ -51,6 +51,8 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label2: TLabel;
+    SqlMonitoramentoEventosBackup: TFDQuery;
+    SqlMonitoramentoEventos: TFDQuery;
     procedure Eventos1Click(Sender: TObject);
     procedure SubEventos1Click(Sender: TObject);
     procedure Sair1Click(Sender: TObject);

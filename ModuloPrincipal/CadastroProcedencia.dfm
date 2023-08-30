@@ -2,8 +2,8 @@ inherited FrmCadastroProcedencia: TFrmCadastroProcedencia
   Left = 250
   Top = 132
   Caption = 'Cadastro Proced'#234'ncia'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -85,7 +85,7 @@ inherited FrmCadastroProcedencia: TFrmCadastroProcedencia
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PROCEDENCIA')

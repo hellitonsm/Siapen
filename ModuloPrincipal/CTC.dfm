@@ -1,37 +1,28 @@
 inherited FrmCTC: TFrmCTC
   Left = 209
   Top = 123
-  Width = 965
-  Height = 642
   Caption = 'CTC - Comiss'#227'o T'#233'cnica de Classifica'#231#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 553
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 535
-    end
     inherited DBNavigator1: TDBNavigator
-      Top = 535
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 834
-    Height = 553
+    inherited Image2: TImage
+      Width = 949
+      ExplicitWidth = 949
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 834
-      Height = 553
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 826
-          Height = 525
           object PageControlPrincipal: TPageControl
             Left = 1
             Top = 1
-            Width = 824
-            Height = 523
+            Width = 819
+            Height = 503
             ActivePage = TabSheetPrincipal
             Align = alClient
             MultiLine = True
@@ -384,7 +375,6 @@ inherited FrmCTC: TFrmCTC
                 Height = 21
                 DataField = 'ORIENTACAO_SEXUAL'
                 DataSource = DsInterno
-                ItemHeight = 13
                 Items.Strings = (
                   'HOMOSEXUAL'
                   'BISEXUAL'
@@ -398,7 +388,6 @@ inherited FrmCTC: TFrmCTC
                 Height = 21
                 DataField = 'IDENTIDADE_GENERO'
                 DataSource = DsInterno
-                ItemHeight = 13
                 Items.Strings = (
                   'FEMININO'
                   'MASCULINO')
@@ -484,7 +473,6 @@ inherited FrmCTC: TFrmCTC
                 Height = 21
                 DataField = 'TIPOREGIME'
                 DataSource = DsInterno
-                ItemHeight = 13
                 Items.Strings = (
                   'Aberto'
                   'Fechado'
@@ -852,7 +840,6 @@ inherited FrmCTC: TFrmCTC
                 Height = 21
                 DataField = 'ESTADO_CIVIL'
                 DataSource = DsInterno
-                ItemHeight = 13
                 Items.Strings = (
                   'Amasiado'
                   'Casado'
@@ -1121,7 +1108,6 @@ inherited FrmCTC: TFrmCTC
                 Top = 380
                 Width = 30
                 Height = 25
-                TabOrder = 7
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1140,6 +1126,7 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 7
               end
             end
             object TabSheet2: TTabSheet
@@ -1200,7 +1187,6 @@ inherited FrmCTC: TFrmCTC
                 Top = 94
                 Width = 30
                 Height = 25
-                TabOrder = 3
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1219,13 +1205,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 3
               end
               object BtnMotivacaoInclusao: TBitBtn
                 Left = 767
                 Top = 208
                 Width = 30
                 Height = 25
-                TabOrder = 4
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1244,13 +1230,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 4
               end
               object BtnCondutaDentroUnidade: TBitBtn
                 Left = 767
                 Top = 328
                 Width = 30
                 Height = 25
-                TabOrder = 5
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1269,6 +1255,7 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 5
               end
             end
             object TabSheet3: TTabSheet
@@ -1330,7 +1317,6 @@ inherited FrmCTC: TFrmCTC
                 Top = 97
                 Width = 30
                 Height = 25
-                TabOrder = 3
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1349,13 +1335,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 3
               end
               object Btnenfermagem: TBitBtn
                 Left = 767
                 Top = 208
                 Width = 30
                 Height = 25
-                TabOrder = 4
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1374,13 +1360,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 4
               end
               object BtnFarmacia: TBitBtn
                 Left = 767
                 Top = 322
                 Width = 30
                 Height = 25
-                TabOrder = 5
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1399,6 +1385,7 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 5
               end
             end
             object TabSheet4: TTabSheet
@@ -1460,7 +1447,6 @@ inherited FrmCTC: TFrmCTC
                 Top = 318
                 Width = 30
                 Height = 25
-                TabOrder = 3
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1479,13 +1465,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 3
               end
               object BtnPsiquiatria: TBitBtn
                 Left = 767
                 Top = 204
                 Width = 30
                 Height = 25
-                TabOrder = 4
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1504,13 +1490,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 4
               end
               object BtnClinicaMedica: TBitBtn
                 Left = 767
                 Top = 94
                 Width = 30
                 Height = 25
-                TabOrder = 5
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1529,6 +1515,7 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 5
               end
             end
             object TabSheet5: TTabSheet
@@ -1590,7 +1577,6 @@ inherited FrmCTC: TFrmCTC
                 Top = 311
                 Width = 30
                 Height = 25
-                TabOrder = 3
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1609,13 +1595,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 3
               end
               object BtnTerapiaOcupacional: TBitBtn
                 Left = 767
                 Top = 197
                 Width = 30
                 Height = 25
-                TabOrder = 4
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1634,13 +1620,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 4
               end
               object BtnPsicologia: TBitBtn
                 Left = 767
                 Top = 87
                 Width = 30
                 Height = 25
-                TabOrder = 5
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1659,6 +1645,7 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 5
               end
             end
             object TabSheet6: TTabSheet
@@ -1717,7 +1704,6 @@ inherited FrmCTC: TFrmCTC
                 Top = 318
                 Width = 30
                 Height = 25
-                TabOrder = 3
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1736,13 +1722,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 3
               end
               object BtnAssistenciaMaterial: TBitBtn
                 Left = 767
                 Top = 204
                 Width = 30
                 Height = 25
-                TabOrder = 4
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1761,13 +1747,13 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 4
               end
               object BtnAssistenciaReligiosa: TBitBtn
                 Left = 767
                 Top = 94
                 Width = 30
                 Height = 25
-                TabOrder = 5
                 Glyph.Data = {
                   F2010000424DF201000000000000760000002800000024000000130000000100
                   0400000000007C01000000000000000000001000000000000000000000000000
@@ -1786,6 +1772,7 @@ inherited FrmCTC: TFrmCTC
                   A224333333333333338F38F300003333333333333A223333333333333338F8F3
                   000033333333333333A3333333333333333383330000}
                 NumGlyphs = 2
+                TabOrder = 5
               end
             end
             object TabSheet8: TTabSheet
@@ -1834,15 +1821,8 @@ inherited FrmCTC: TFrmCTC
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        inherited PanelLocalizaConsulta: TPanel
-          Width = 826
-        end
         inherited PanelConsulta: TPanel
-          Width = 826
-          Height = 491
           inherited DBGridConsulta: TDBGrid
-            Width = 824
-            Height = 489
             Columns = <
               item
                 Expanded = False
@@ -1876,39 +1856,13 @@ inherited FrmCTC: TFrmCTC
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    Width = 949
-    inherited Image2: TImage
-      Width = 949
-    end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 585
-    Width = 949
-  end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM CTC')
   end
   inherited CdsCadastro: TClientDataSet
     AfterInsert = CdsCadastroAfterInsert
-  end
-  object SqInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select * from interno'
-      'where id_interno=:id_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 480
-    Top = 10
   end
   object DspInterno: TDataSetProvider
     DataSet = SqInterno
@@ -1930,5 +1884,18 @@ inherited FrmCTC: TFrmCTC
     DataSet = CDSInterno
     Left = 565
     Top = 10
+  end
+  object SqInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from interno'
+      'where id_interno=:id_interno')
+    Left = 464
+    Top = 8
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

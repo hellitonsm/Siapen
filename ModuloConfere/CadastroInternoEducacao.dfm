@@ -2,11 +2,17 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
   Left = 458
   Top = 249
   Caption = 'Cadastro da Educa'#231#227'o'
-  ClientWidth = 1068
-  ExplicitWidth = 1084
+  ClientHeight = 580
+  ClientWidth = 1060
+  ExplicitWidth = 1076
+  ExplicitHeight = 639
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 522
+    ExplicitHeight = 522
     inherited ToolBarModeloCadastro: TToolBar
+      Height = 504
+      ExplicitHeight = 504
       inherited Novo: TToolButton
         ExplicitWidth = 99
       end
@@ -27,37 +33,48 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
       end
     end
     inherited DBNavigator1: TDBNavigator
+      Top = 504
       Hints.Strings = ()
+      ExplicitTop = 504
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 953
-    ExplicitWidth = 949
+    Width = 945
+    Height = 522
+    ExplicitWidth = 945
+    ExplicitHeight = 522
     inherited Image2: TImage
       Width = 858
       ExplicitWidth = 858
     end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 953
+      Width = 945
+      Height = 522
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 949
+      ExplicitWidth = 945
+      ExplicitHeight = 522
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 945
+        ExplicitWidth = 937
+        ExplicitHeight = 494
         inherited PanelCadastro: TPanel
-          Width = 945
-          ExplicitWidth = 945
-          ExplicitHeight = 498
+          Width = 937
+          Height = 494
+          ExplicitWidth = 937
+          ExplicitHeight = 494
           inherited PageControlPrincipal: TPageControl
-            Width = 943
+            Width = 935
+            Height = 492
             ActivePage = TabSheet3
             OnChange = PageControlPrincipalChange
-            ExplicitWidth = 943
-            ExplicitHeight = 496
+            ExplicitWidth = 935
+            ExplicitHeight = 492
             inherited TabSheetPrincipal: TTabSheet
-              ExplicitWidth = 935
+              ExplicitWidth = 927
+              ExplicitHeight = 464
             end
             inherited TabSheetDadosGerais: TTabSheet
-              ExplicitWidth = 935
+              ExplicitWidth = 927
+              ExplicitHeight = 464
               inherited Label23: TLabel
                 Enabled = True
               end
@@ -255,8 +272,8 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
               object PageControl1: TPageControl
                 Left = 0
                 Top = 0
-                Width = 935
-                Height = 468
+                Width = 927
+                Height = 464
                 ActivePage = TabSheet8
                 Align = alClient
                 TabOrder = 0
@@ -1042,50 +1059,57 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitWidth = 945
+        ExplicitWidth = 937
+        ExplicitHeight = 494
         inherited PanelLocalizaConsulta: TPanel
-          Width = 945
-          ExplicitWidth = 941
+          Width = 937
+          ExplicitWidth = 937
+          DesignSize = (
+            937
+            42)
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 648
+            Left = 640
             TabOrder = 3
-            ExplicitLeft = 644
+            ExplicitLeft = 640
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 945
-          ExplicitWidth = 945
-          ExplicitHeight = 456
+          Width = 937
+          Height = 452
+          ExplicitWidth = 937
+          ExplicitHeight = 452
           inherited DBGridConsulta: TDBGrid
-            Width = 943
-            Height = 455
+            Width = 935
+            Height = 450
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 943
-            Height = 455
-            PanelHeight = 91
-            PanelWidth = 926
-            ExplicitWidth = 939
+            Width = 935
+            PanelWidth = 918
+            ExplicitWidth = 935
+            ExplicitHeight = 450
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 1068
-    ExplicitWidth = 1064
+    Width = 1060
+    ExplicitWidth = 1060
   end
   inherited StatusBar1: TStatusBar
-    Width = 1068
-    ExplicitWidth = 1064
+    Top = 554
+    Width = 1060
+    ExplicitTop = 554
+    ExplicitWidth = 1060
   end
   inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     Left = 728
     Top = 0
   end
@@ -1102,6 +1126,7 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
     Top = 0
   end
   inherited SqlFaccao: TFDQuery
+    Connection = DM.SQLConnect
     Left = 48
     Top = 0
   end
@@ -1179,39 +1204,6 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
     Left = 469
     Top = 8
   end
-  object SQLHISTORICOEDUCACAO: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select *'
-      'from historico_estudo h'
-      'where h.id_interno=:id_interno and coalesce(h.historico,'#39#39')<>'#39#39
-      'order by h.data_historico desc')
-    SQLConnection = DM.SQLConnect
-    Left = 441
-    Top = 8
-  end
-  object SQLremissao_estudo: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from horas_aula'
-      'where id_interno = :id_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 716
-    Top = 49
-  end
   object DSPremissao_estudo: TDataSetProvider
     DataSet = SQLremissao_estudo
     Left = 756
@@ -1232,22 +1224,6 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
     DataSet = CDSremissao_estudo
     Left = 812
     Top = 49
-  end
-  object SQLcertidao_estudo: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'idinterno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select * from atestado_estudo'
-      'where id_interno = :idinterno'
-      'order by data_inicial desc')
-    SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 272
   end
   object dspcertidao_estudo: TDataSetProvider
     DataSet = SQLcertidao_estudo
@@ -1286,22 +1262,6 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
       OnClick = ExcluirRegistro2Click
     end
   end
-  object SQLDiasLivro: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select * from dias_leitura'
-      'where id_interno = :id_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 692
-    Top = 177
-  end
   object dspDiasLivro: TDataSetProvider
     DataSet = SQLDiasLivro
     Left = 720
@@ -1323,11 +1283,6 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
     Left = 776
     Top = 177
   end
-  object SQLQuery1: TSQLQuery
-    Params = <>
-    Left = 696
-    Top = 225
-  end
   object DataSetProvider1: TDataSetProvider
     Left = 724
     Top = 225
@@ -1341,22 +1296,6 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
   object DataSource1: TDataSource
     Left = 780
     Top = 225
-  end
-  object SqlPortaria: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select * from portaria_educacao'
-      'where id_interno = :id_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 129
   end
   object dspportaria: TDataSetProvider
     DataSet = SqlPortaria
@@ -1391,7 +1330,7 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
       OnClick = ExcluirPortaria1Click
     end
   end
-  object SQLPortariaAluno: TSQLQuery
+  object SQLPortariaAlunoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1405,31 +1344,31 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
       'where id_interno = :id_interno'
       'order by data_entrada desc')
     SQLConnection = DM.SQLConnect
-    Left = 672
+    Left = 648
     Top = 385
-    object SQLPortariaAlunoTURMA: TStringField
+    object SQLPortariaAlunooldTURMA: TStringField
       FieldName = 'TURMA'
     end
-    object SQLPortariaAlunoID_PORTARIA_EDUCACAO: TIntegerField
+    object SQLPortariaAlunooldID_PORTARIA_EDUCACAO: TIntegerField
       FieldName = 'ID_PORTARIA_EDUCACAO'
     end
-    object SQLPortariaAlunoID_INTERNO: TIntegerField
+    object SQLPortariaAlunooldID_INTERNO: TIntegerField
       FieldName = 'ID_INTERNO'
     end
-    object SQLPortariaAlunoDATA_ENTRADA: TSQLTimeStampField
+    object SQLPortariaAlunooldDATA_ENTRADA: TSQLTimeStampField
       FieldName = 'DATA_ENTRADA'
     end
-    object SQLPortariaAlunoID_FUNCIONARIO: TIntegerField
+    object SQLPortariaAlunooldID_FUNCIONARIO: TIntegerField
       FieldName = 'ID_FUNCIONARIO'
     end
-    object SQLPortariaAlunoOBS: TStringField
+    object SQLPortariaAlunooldOBS: TStringField
       FieldName = 'OBS'
       Size = 200
     end
-    object SQLPortariaAlunoDATA_FINAL: TSQLTimeStampField
+    object SQLPortariaAlunooldDATA_FINAL: TSQLTimeStampField
       FieldName = 'DATA_FINAL'
     end
-    object SQLPortariaAlunoPORTARIA: TStringField
+    object SQLPortariaAlunooldPORTARIA: TStringField
       FieldName = 'PORTARIA'
       Size = 10
     end
@@ -1443,13 +1382,106 @@ inherited FrmCadastroInternoEducacao: TFrmCadastroInternoEducacao
     Top = 385
   end
   object dsportariaaluno: TDataSource
-    DataSet = SQLPortariaAluno
+    DataSet = SQLPortariaAlunoold
     Left = 784
     Top = 385
   end
   object dspportariaaluno: TDataSetProvider
-    DataSet = cdsportariaaluno
-    Left = 712
+    DataSet = SQLPortariaAluno
+    Left = 688
     Top = 385
+  end
+  object SQLHISTORICOEDUCACAO: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from historico_estudo h'
+      'where h.id_interno=:id_interno and coalesce(h.historico,'#39#39')<>'#39#39
+      'order by h.data_historico desc')
+    Left = 441
+    Top = 8
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLremissao_estudo: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from horas_aula'
+      'where id_interno = :id_interno')
+    Left = 716
+    Top = 49
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLcertidao_estudo: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from atestado_estudo'
+      'where id_interno = :idinterno'
+      'order by data_inicial desc')
+    Left = 672
+    Top = 272
+    ParamData = <
+      item
+        Name = 'IDINTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLDiasLivro: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from dias_leitura'
+      'where id_interno = :id_interno')
+    Left = 692
+    Top = 177
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLQuery1: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    Left = 696
+    Top = 225
+  end
+  object SqlPortaria: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from portaria_educacao'
+      'where id_interno = :id_interno')
+    Left = 672
+    Top = 129
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLPortariaAluno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from portaria_educacao'
+      'where id_interno = :id_interno'
+      'order by data_entrada desc')
+    Left = 624
+    Top = 385
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

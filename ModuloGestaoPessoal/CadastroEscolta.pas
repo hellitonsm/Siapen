@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, Mask, DBCtrls, DB, DBClient, Provider,
   SqlExpr, ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, lib,
-  ToolWin, adpDBDateTimePicker;
+  ToolWin, adpDBDateTimePicker, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TfrmCadastroEscolta = class(TFrmModeloCadastro)
@@ -40,7 +43,6 @@ type
     dspInterno: TDataSetProvider;
     cdsInterno: TClientDataSet;
     dsInterno: TDataSource;
-    SQLInterno: TSQLQuery;
     Label2: TLabel;
     edtIdEscolta: TDBEdit;
     Label3: TLabel;
@@ -75,20 +77,20 @@ type
     Label21: TLabel;
     DBGrid2: TDBGrid;
     BtnIncluir: TButton;
-    SQLItinerario: TSQLQuery;
+    SQLItinerarioold: TSQLQuery;
     dspItinerario: TDataSetProvider;
     cdsItinerario: TClientDataSet;
     dsItinerario: TDataSource;
-    SQLItinerarioID_ITINERARIO_ESCOLTA: TIntegerField;
-    SQLItinerarioID_ESCOLTA: TIntegerField;
-    SQLItinerarioID_MEIO_TRANSPORTE: TIntegerField;
-    SQLItinerarioID_ITINERARIO_DESTINO: TIntegerField;
-    SQLItinerarioID_ITINERARIO_ORIGEM: TIntegerField;
-    SQLItinerarioITINERARIO_NUMERO: TStringField;
-    SQLItinerarioITINERARIO_DATA_INICIAL: TSQLTimeStampField;
-    SQLItinerarioITINERARIO_DATA_FINAL: TSQLTimeStampField;
-    SQLItinerarioITINERARIO_HORA_INICIAL: TTimeField;
-    SQLItinerarioITINERARIO_HORA_FINAL: TTimeField;
+    SQLItinerariooldID_ITINERARIO_ESCOLTA: TIntegerField;
+    SQLItinerariooldID_ESCOLTA: TIntegerField;
+    SQLItinerariooldID_MEIO_TRANSPORTE: TIntegerField;
+    SQLItinerariooldID_ITINERARIO_DESTINO: TIntegerField;
+    SQLItinerariooldID_ITINERARIO_ORIGEM: TIntegerField;
+    SQLItinerariooldITINERARIO_NUMERO: TStringField;
+    SQLItinerariooldITINERARIO_DATA_INICIAL: TSQLTimeStampField;
+    SQLItinerariooldITINERARIO_DATA_FINAL: TSQLTimeStampField;
+    SQLItinerariooldITINERARIO_HORA_INICIAL: TTimeField;
+    SQLItinerariooldITINERARIO_HORA_FINAL: TTimeField;
     cdsItinerarioID_ITINERARIO_ESCOLTA: TIntegerField;
     cdsItinerarioID_ESCOLTA: TIntegerField;
     cdsItinerarioID_MEIO_TRANSPORTE: TIntegerField;
@@ -109,20 +111,20 @@ type
     rdbSim: TRadioButton;
     rdbNao: TRadioButton;
     CmdIdFuncionario: TDBLookupComboBox;
-    SQLEscoltaFuncionarios: TSQLQuery;
+    SQLEscoltaFuncionariosold: TSQLQuery;
     dspEscoltaFuncionarios: TDataSetProvider;
     edtNumeroItinerario: TClientDataSet;
     dsEscoltaFuncionarios: TDataSource;
     edtPcdpDataScdp: TMaskEdit;
-    SQLEscoltaFuncionariosID_ESCOLTA_FUNCIONARIO: TIntegerField;
-    SQLEscoltaFuncionariosID_FUNCIONARIO: TIntegerField;
-    SQLEscoltaFuncionariosID_ESCOLTA: TIntegerField;
-    SQLEscoltaFuncionariosPCDP_NUMERO: TIntegerField;
-    SQLEscoltaFuncionariosPCDP_DATA_SCDP: TSQLTimeStampField;
-    SQLEscoltaFuncionariosPCDP_VALOR_PAS_IDA: TFloatField;
-    SQLEscoltaFuncionariosPCDP_VALOR_PAS_RETORNO: TFloatField;
-    SQLEscoltaFuncionariosPCDP_VALOR_DIARIAS: TFloatField;
-    SQLEscoltaFuncionariosPCDP_SERVIDOR_CHEFE_MISSAO: TStringField;
+    SQLEscoltaFuncionariosoldID_ESCOLTA_FUNCIONARIO: TIntegerField;
+    SQLEscoltaFuncionariosoldID_FUNCIONARIO: TIntegerField;
+    SQLEscoltaFuncionariosoldID_ESCOLTA: TIntegerField;
+    SQLEscoltaFuncionariosoldPCDP_NUMERO: TIntegerField;
+    SQLEscoltaFuncionariosoldPCDP_DATA_SCDP: TSQLTimeStampField;
+    SQLEscoltaFuncionariosoldPCDP_VALOR_PAS_IDA: TFloatField;
+    SQLEscoltaFuncionariosoldPCDP_VALOR_PAS_RETORNO: TFloatField;
+    SQLEscoltaFuncionariosoldPCDP_VALOR_DIARIAS: TFloatField;
+    SQLEscoltaFuncionariosoldPCDP_SERVIDOR_CHEFE_MISSAO: TStringField;
     edtIdEscoltaInterno: TEdit;
     EdtIdEscoltaInternoInclusao: TEdit;
     Label33: TLabel;
@@ -138,7 +140,6 @@ type
     Label22: TLabel;
     DBGrid1: TDBGrid;
     Label37: TLabel;
-    SQLEscoltaInterno: TSQLQuery;
     dspEscoltaInterno: TDataSetProvider;
     cdsEscoltaInterno: TClientDataSet;
     dsEscoltaInterno: TDataSource;
@@ -166,7 +167,7 @@ type
     edtDataInicial: TMaskEdit;
     Button1: TButton;
     btnExcluirItinerario: TButton;
-    SQLItinerarioATIVO: TStringField;
+    SQLItinerariooldATIVO: TStringField;
     edtNumeroItinerarioID_ESCOLTA_FUNCIONARIO: TIntegerField;
     edtNumeroItinerarioID_FUNCIONARIO: TIntegerField;
     edtNumeroItinerarioID_ESCOLTA: TIntegerField;
@@ -181,6 +182,10 @@ type
     Button2: TButton;
     DBComboBox1: TDBComboBox;
     Button3: TButton;
+    SQLInterno: TFDQuery;
+    SQLEscoltaInterno: TFDQuery;
+    SQLEscoltaFuncionarios: TFDQuery;
+    SQLItinerario: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnIncluirClick(Sender: TObject);

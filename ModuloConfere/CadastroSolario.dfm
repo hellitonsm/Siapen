@@ -2,34 +2,40 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
   Left = 401
   Top = 274
   Caption = 'Cadastro de Solario'
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 355
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 337
-      ExplicitHeight = 337
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 337
+      Top = 514
       Hints.Strings = ()
-      ExplicitTop = 337
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 772
-    ExplicitHeight = 355
+    Width = 825
+    Height = 532
     inherited Image2: TImage
       Width = 887
       ExplicitWidth = 887
     end
     inherited PageControlModeloCadastro: TPageControl
+      Width = 825
+      Height = 532
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 772
-      ExplicitHeight = 355
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          ExplicitWidth = 764
-          ExplicitHeight = 327
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object PageControl1: TPageControl
             Left = 0
             Top = 0
@@ -267,18 +273,17 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 764
-          ExplicitWidth = 764
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 764
-          Height = 293
-          ExplicitWidth = 764
-          ExplicitHeight = 293
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 762
-            Height = 291
+            Width = 815
+            Height = 468
             Columns = <
               item
                 Expanded = False
@@ -304,11 +309,11 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 887
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 387
-    ExplicitWidth = 887
+    Top = 564
+    Width = 940
   end
   inherited SqlCadastro: TFDQuery
     SQL.Strings = (
@@ -326,15 +331,6 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
         ParamType = ptInput
         Value = 0
       end>
-  end
-  object SqlPavilhao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from pavilhao order by pavilhao')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 197
   end
   object DspPavilhao: TDataSetProvider
     DataSet = SqlPavilhao
@@ -374,38 +370,6 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
     Left = 616
     Top = 240
   end
-  object SqlGaleria: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_pavilhao'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from galeria'
-      'where idpavilhao=:id_pavilhao'
-      'order by galeria')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 240
-  end
-  object SqlRecursos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_SOLARIO'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'SELECT * FROM RECURSOS_ALA'
-      'WHERE ID_SOLARIO = :ID_SOLARIO')
-    SQLConnection = DM.SQLConnect
-    Left = 587
-    Top = 280
-  end
   object DSPRecursos: TDataSetProvider
     DataSet = SqlRecursos
     Left = 619
@@ -422,5 +386,40 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
     DataSet = CDSRecursos
     Left = 683
     Top = 280
+  end
+  object SqlPavilhao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from pavilhao order by pavilhao')
+    Left = 591
+    Top = 200
+  end
+  object SqlGaleria: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from galeria'
+      'where idpavilhao=:id_pavilhao'
+      'order by galeria')
+    Left = 591
+    Top = 240
+    ParamData = <
+      item
+        Name = 'ID_PAVILHAO'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object SqlRecursos: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM RECURSOS_ALA'
+      'WHERE ID_SOLARIO = :ID_SOLARIO')
+    Left = 591
+    Top = 280
+    ParamData = <
+      item
+        Name = 'ID_SOLARIO'
+        ParamType = ptInput
+      end>
   end
 end

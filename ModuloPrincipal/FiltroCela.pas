@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, Buttons, DBCtrls,
-  FMTBcd, DB, DBClient, Provider, SqlExpr;
+  FMTBcd, DB, DBClient, Provider, SqlExpr, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmFiltroCela = class(TFrmModeloFormulario)
@@ -20,23 +23,18 @@ type
     DBLookupComboBoxSolario: TDBLookupComboBox;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    SqlPavilhao: TSQLQuery;
     DspPavilhao: TDataSetProvider;
     CdsPavilhao: TClientDataSet;
     DsPavilhao: TDataSource;
     DsGaleria: TDataSource;
     CdsGaleria: TClientDataSet;
     DspGaleria: TDataSetProvider;
-    SqlGaleria: TSQLQuery;
-    SqlSolario: TSQLQuery;
     DspSolario: TDataSetProvider;
     CdsSolario: TClientDataSet;
     DsSolario: TDataSource;
     DsCela: TDataSource;
     CdsCela: TClientDataSet;
     DspCela: TDataSetProvider;
-    SqlCela: TSQLQuery;
-    SQLconspadrao: TSQLQuery;
     Dspconspadrao: TDataSetProvider;
     Cdsconspadrao: TClientDataSet;
     Dsconspadrao: TDataSource;
@@ -44,6 +42,11 @@ type
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
+    SqlPavilhao: TFDQuery;
+    SqlGaleria: TFDQuery;
+    SqlSolario: TFDQuery;
+    SqlCela: TFDQuery;
+    SQLconspadrao: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure DBLookupComboBoxPavilhaoClick(Sender: TObject);
     procedure DBLookupComboBoxGaleriaClick(Sender: TObject);

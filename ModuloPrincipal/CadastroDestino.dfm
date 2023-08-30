@@ -1,10 +1,9 @@
 inherited FrmCadastroDestino: TFrmCadastroDestino
   Left = 230
   Top = 145
-  Width = 902
   Caption = 'Cadastro Destino'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -12,12 +11,15 @@ inherited FrmCadastroDestino: TFrmCadastroDestino
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 771
+    inherited Image2: TImage
+      Width = 886
+      ExplicitWidth = 886
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 771
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 763
+          Height = 506
+          ExplicitHeight = 506
           object Label2: TLabel
             Left = 30
             Top = 74
@@ -255,7 +257,6 @@ inherited FrmCadastroDestino: TFrmCadastroDestino
             Height = 21
             DataField = 'CARGO_SOLICITANTE'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'Comandante da 3'#170' CPMind'
               'Comandante do 4'#186' BPM'
@@ -283,7 +284,6 @@ inherited FrmCadastroDestino: TFrmCadastroDestino
             Height = 21
             DataField = 'VOCATIVO_SOLICITANTE'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'Ilustrimimo(a)'
               'Merit'#237'ssimo(a) Juiz(a)'
@@ -307,7 +307,6 @@ inherited FrmCadastroDestino: TFrmCadastroDestino
             Height = 21
             DataField = 'FORMA_DE_TRATAMENTO'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'Excelent'#237'ssimo(a) Senhor(a)'
               'Excelent'#237'ssimo(a) Senhor(a)'
@@ -379,13 +378,8 @@ inherited FrmCadastroDestino: TFrmCadastroDestino
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        inherited PanelLocalizaConsulta: TPanel
-          Width = 763
-        end
         inherited PanelConsulta: TPanel
-          Width = 763
           inherited DBGridConsulta: TDBGrid
-            Width = 761
             Columns = <
               item
                 Expanded = False
@@ -412,16 +406,7 @@ inherited FrmCadastroDestino: TFrmCadastroDestino
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    Width = 886
-    inherited Image2: TImage
-      Width = 886
-    end
-  end
-  inherited StatusBar1: TStatusBar
-    Width = 886
-  end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM destino')

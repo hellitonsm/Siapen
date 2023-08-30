@@ -2,15 +2,17 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
   Left = 329
   Top = 56
   Caption = 'Cadastro de Ocorr'#234'ncias Plant'#227'o (Vers. 2013.1)'
+  ClientHeight = 583
+  ClientWidth = 940
   Menu = MainMenu1
   ExplicitWidth = 956
   ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 531
+    Height = 530
     ExplicitHeight = 530
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 513
+      Height = 512
       ExplicitHeight = 512
       inherited Fechar: TToolButton
         Wrap = True
@@ -25,26 +27,31 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 513
+      Top = 512
       Hints.Strings = ()
       ExplicitTop = 512
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 531
+    Width = 825
+    Height = 530
     ExplicitHeight = 530
     inherited Image2: TImage
       Width = 728
       ExplicitWidth = 728
     end
     inherited PageControlModeloCadastro: TPageControl
-      Height = 531
+      Width = 825
+      Height = 530
       ExplicitHeight = 530
       inherited TabSheetCadastro: TTabSheet
-        ExplicitHeight = 503
+        ExplicitWidth = 817
+        ExplicitHeight = 502
         inherited PanelCadastro: TPanel
-          Height = 503
-          ExplicitHeight = 503
+          Width = 817
+          Height = 502
+          ExplicitWidth = 817
+          ExplicitHeight = 502
           object Label9: TLabel
             Left = 7
             Top = 101
@@ -402,8 +409,10 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitHeight = 503
+        ExplicitWidth = 817
+        ExplicitHeight = 502
         inherited PanelLocalizaConsulta: TPanel
+          Width = 817
           Height = 57
           ExplicitHeight = 57
           inherited Label1: TLabel
@@ -458,7 +467,8 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         end
         inherited PanelConsulta: TPanel
           Top = 57
-          Height = 446
+          Width = 817
+          Height = 445
           ExplicitTop = 57
           ExplicitHeight = 445
           inherited DBGridConsulta: TDBGrid
@@ -475,8 +485,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
   end
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 940
+  end
   inherited StatusBar1: TStatusBar
-    Top = 563
+    Top = 562
+    Width = 940
     Height = 21
     ExplicitTop = 562
     ExplicitHeight = 21
@@ -485,7 +499,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     Left = 776
     Top = 0
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       
         'SELECT ID_OCORRENCIA_PLANTAO, ASSUNTO, OCORRENCIA, DATA_INICIO, ' +
@@ -548,24 +562,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     Left = 708
     Top = 0
   end
-  object SqlHistOcoInt: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_ocorrencia'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'SELECT ho.id_hist_oc, ho.id_interno, ho.id_ocorrencia_plantao, h' +
-        'o.data, i.rgi'
-      'FROM HISTORICO_OCORRENCIA_INTERNO ho'
-      'INNER JOIN INTERNO I ON (ho.id_interno = i.id_interno)'
-      'where id_ocorrencia_plantao = :id_ocorrencia')
-    Left = 478
-    Top = 388
-  end
   object CdsHistOcoInt: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'id_ocorrencia_plantao'
@@ -626,17 +622,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     Left = 647
     Top = 403
   end
-  object SqlNaturezaOcorrencia: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'Select *'
-      'from NATUREZA_OCORRENCIA'
-      'order by natureza_ocorrencia')
-    SQLConnection = DM.SQLConnect
-    Left = 160
-    Top = 397
-  end
   object CdsNaturezaOcorrencia: TClientDataSet
     Aggregates = <>
     Params = <>
@@ -672,19 +657,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         OnClick = Especficos1Click
       end
     end
-  end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'select id_ocorrencia_plantao, assunto, ocorrencia, data_inicio, ' +
-        'data_final'
-      'from ocorrencia_plantao'
-      ' ')
-    SQLConnection = DM.SQLConnect
-    Left = 521
-    Top = 175
   end
   object DspConsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -1667,25 +1639,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
   end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT id_interno, nome_interno, rgi'
-      'FROM INTERNO'
-      'WHERE ID_UP = :ID_UP'
-      'and coalesce(nome_interno,'#39#39')<>'#39#39
-      'AND ST = '#39'A'#39
-      'ORDER BY NOME_INTERNO')
-    Left = 280
-    Top = 296
-  end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
     Left = 308
@@ -1714,5 +1667,63 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     DataSet = CdsInterno
     Left = 364
     Top = 296
+  end
+  object SqlHistOcoInt: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT ho.id_hist_oc, ho.id_interno, ho.id_ocorrencia_plantao, h' +
+        'o.data, i.rgi'
+      'FROM HISTORICO_OCORRENCIA_INTERNO ho'
+      'INNER JOIN INTERNO I ON (ho.id_interno = i.id_interno)'
+      'where id_ocorrencia_plantao = :id_ocorrencia')
+    Left = 478
+    Top = 388
+    ParamData = <
+      item
+        Name = 'ID_OCORRENCIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlNaturezaOcorrencia: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'Select *'
+      'from NATUREZA_OCORRENCIA'
+      'order by natureza_ocorrencia')
+    Left = 160
+    Top = 397
+  end
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select id_ocorrencia_plantao, assunto, ocorrencia, data_inicio, ' +
+        'data_final'
+      'from ocorrencia_plantao'
+      ' ')
+    Left = 521
+    Top = 175
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno, rgi'
+      'FROM INTERNO'
+      'WHERE ID_UP = :ID_UP'
+      'and coalesce(nome_interno,'#39#39')<>'#39#39
+      'AND ST = '#39'A'#39
+      'ORDER BY NOME_INTERNO')
+    Left = 280
+    Top = 296
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
   end
 end

@@ -1,10 +1,10 @@
 inherited FrmCadastroNacionalidade: TFrmCadastroNacionalidade
   Caption = 'Cadastro Nacionalidade'
-  ExplicitWidth = 952
-  ExplicitHeight = 621
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 531
+    ExplicitHeight = 533
     inherited ToolBarModeloCadastro: TToolBar
       Height = 514
       ExplicitHeight = 513
@@ -16,16 +16,12 @@ inherited FrmCadastroNacionalidade: TFrmCadastroNacionalidade
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 821
-    ExplicitHeight = 531
+    ExplicitWidth = 829
+    ExplicitHeight = 533
     inherited PageControlModeloCadastro: TPageControl
-      Width = 825
-      Height = 532
       ExplicitWidth = 821
       ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 817
-        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
           Width = 817
           Height = 504
@@ -69,8 +65,6 @@ inherited FrmCadastroNacionalidade: TFrmCadastroNacionalidade
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitWidth = 817
-        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
           Width = 817
           ExplicitWidth = 813
@@ -92,10 +86,10 @@ inherited FrmCadastroNacionalidade: TFrmCadastroNacionalidade
     ExplicitWidth = 936
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 563
-    ExplicitWidth = 936
+    ExplicitTop = 565
+    ExplicitWidth = 944
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM NACIONALIDADE')

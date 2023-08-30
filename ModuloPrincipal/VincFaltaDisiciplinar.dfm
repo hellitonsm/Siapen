@@ -1,12 +1,12 @@
 inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
   Left = 342
   Top = 170
-  Width = 1024
-  Height = 576
   Caption = 'Faltas do Interno'
-  OldCreateOrder = True
+  ClientHeight = 583
+  ClientWidth = 940
   OnClose = FormClose
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   object Label27: TLabel [0]
     Left = 868
@@ -16,25 +16,30 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
     Caption = 'Data Condena'#231#227'o'
   end
   inherited PanelBotoes: TPanel
-    Height = 488
+    ExplicitHeight = 533
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 470
+      ExplicitHeight = 515
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 470
       Hints.Strings = ()
+      ExplicitTop = 515
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 893
-    Height = 488
+    Width = 825
+    ExplicitHeight = 533
+    inherited Image2: TImage
+      Width = 1008
+      ExplicitWidth = 1008
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 893
-      Height = 488
+      Width = 825
+      ExplicitHeight = 533
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
         inherited PanelCadastro: TPanel
-          Width = 885
-          Height = 460
+          Width = 817
+          ExplicitWidth = 817
           object Label15: TLabel
             Left = 24
             Top = 56
@@ -347,7 +352,6 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
             Hint = 'Resultado do PDI'
             DataField = 'RESULTADO'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               ''
               'ARQUIVADO'
@@ -366,7 +370,6 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
             Hint = 'Tipo de san'#231#227'o disciplinar a ser aplicada ao interno'
             DataField = 'TIPO_SANCAO'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               ''
               'ADVERT'#202'NCIA VERBAL'
@@ -384,7 +387,6 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
             Height = 21
             DataField = 'classificacao_conduta'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               ''
               #211'TIMA'
@@ -437,7 +439,6 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
               Height = 21
               DataField = 'DECISAO_RECURSO'
               DataSource = DsCadastro
-              ItemHeight = 13
               Items.Strings = (
                 ''
                 'IMPROCEDENTE'
@@ -473,7 +474,6 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
             Style = csDropDownList
             DataField = 'CONCLUSAOCD'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'ANDAMENTO'
               'CONCLUIDO/ARQUIVADO'
@@ -618,7 +618,6 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
             Height = 21
             DataField = 'tipo'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               ''
               #211'TIMA'
@@ -664,45 +663,42 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
         inherited PanelLocalizaConsulta: TPanel
-          Width = 926
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 926
-          Height = 426
+          Width = 817
+          ExplicitHeight = 471
           inherited DBGridConsulta: TDBGrid
-            Width = 924
-            Height = 424
+            Width = 815
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 1008
-    inherited Image2: TImage
-      Width = 1008
-    end
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 520
-    Width = 1008
+    Width = 940
     Height = 18
+    ExplicitTop = 565
+    ExplicitHeight = 18
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'falta'
-        ParamType = ptInput
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM vinc_falta_disciplinar'
       'where id_vinc_falta_disciplinar = :falta')
-    SQLConnection = DM.SQLConnect
     Left = 496
     Top = 16
+    ParamData = <
+      item
+        Name = 'falta'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 524
@@ -715,19 +711,6 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
   inherited DsCadastro: TDataSource
     Left = 580
     Top = 16
-  end
-  object Sqlfaltadisciplinar: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'SELECT  first 44 f.falta_disciplinar, f.id_falta_disciplinar, f.' +
-        'tipofalta'
-      'FROM falta_disciplinar f'
-      'order by f.id_falta_disciplinar')
-    SQLConnection = DM.SQLConnect
-    Left = 336
-    Top = 24
   end
   object Dspfaltadisciplinar: TDataSetProvider
     DataSet = Sqlfaltadisciplinar
@@ -745,6 +728,18 @@ inherited FrmVincFaltaDisiciplinar: TFrmVincFaltaDisiciplinar
   object Dsfaltadisciplinar: TDataSource
     DataSet = Cdsfaltadisciplinar
     Left = 420
+    Top = 24
+  end
+  object Sqlfaltadisciplinar: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT  first 44 f.falta_disciplinar, f.id_falta_disciplinar, f.' +
+        'tipofalta'
+      'FROM falta_disciplinar f'
+      'order by f.id_falta_disciplinar')
+    Left = 336
     Top = 24
   end
 end

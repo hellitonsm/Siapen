@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, Menus, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, DBCtrls, dbcgrids, Grids, DBGrids,
-  StdCtrls, Mask, Buttons, DateUtils, ToolWin;
+  StdCtrls, Mask, Buttons, DateUtils, ToolWin, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TfrmConselhoDisciplinar = class(TFrmModeloInterno)
@@ -50,7 +53,6 @@ type
     Dsvincfaltadisciplinar: TDataSource;
     Cdsvincfaltadisciplinar: TClientDataSet;
     Dspvincfaltadisciplinar: TDataSetProvider;
-    Sqlfaltadisciplinar: TSQLQuery;
     Dspfaltadisciplinar: TDataSetProvider;
     Cdsfaltadisciplinar: TClientDataSet;
     Dsfaltadisciplinar: TDataSource;
@@ -86,7 +88,6 @@ type
     DBGrid1: TDBGrid;
     DBMemo1: TDBMemo;
     Editdtincidencia: TEdit;
-    SQLhistorico_interno: TSQLQuery;
     dsphistorico_interno: TDataSetProvider;
     cdshistorico_interno: TClientDataSet;
     dshistorico_interno: TDataSource;
@@ -102,11 +103,13 @@ type
     cdshistorico_internoID_FUNCIONARIO: TIntegerField;
     cdshistorico_internoTIPO_HISTORICO: TStringField;
     Memo1: TMemo;
-    SqlFaltaDelete: TSQLQuery;
     DspFaltaDelete: TDataSetProvider;
     CdsFaltaDelete: TClientDataSet;
     DsFaltaDelete: TDataSource;
-    Sqlvincfaltadisciplinar: TSQLQuery;
+    Sqlfaltadisciplinar: TFDQuery;
+    SQLhistorico_interno: TFDQuery;
+    SqlFaltaDelete: TFDQuery;
+    Sqlvincfaltadisciplinar: TFDQuery;
     procedure BitBtnIncluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EditarClick(Sender: TObject);

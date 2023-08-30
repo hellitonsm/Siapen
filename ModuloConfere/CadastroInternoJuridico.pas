@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, jpeg, dbcgrids, adpDBDateTimePicker, Menus;
+  ToolWin, jpeg, dbcgrids, adpDBDateTimePicker, Menus, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroInternoJuridico = class(TFrmModeloInterno)
@@ -14,7 +17,6 @@ type
     DBRadioGroup3: TDBRadioGroup;
     SpeedButton3: TSpeedButton;
     TabSheet1: TTabSheet;
-    SQLHISTORICO_interno: TSQLQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     CDSHISTORICO_internoIDHISTORICO_INTERNO: TIntegerField;
@@ -30,11 +32,9 @@ type
     DSHISTORICO_interno: TDataSource;
     PageControl1: TPageControl;
     TabSheet2: TTabSheet;
-    SqlDsControlePermanencia: TSQLQuery;
     DspDsControlePermanencia: TDataSetProvider;
     CdsDsControlePermanencia: TClientDataSet;
     DsControlePermanencia: TDataSource;
-    SqlPermanenciaScaner: TSQLQuery;
     DspPermanenciaScaner: TDataSetProvider;
     CdsPermanenciaScaner: TClientDataSet;
     DsPermanenciaScaner: TDataSource;
@@ -92,7 +92,6 @@ type
     DsCalculoPena: TDataSource;
     CdsCalculoPena: TClientDataSet;
     DspCalculoPena: TDataSetProvider;
-    SqlCalculoPena: TSQLQuery;
     Label60: TLabel;
     TabSheet5: TTabSheet;
     Editconcedido: TEdit;
@@ -105,7 +104,6 @@ type
     DateTimePickerdtbeneficio: TDateTimePicker;
     DBGrid4: TDBGrid;
     Button1: TButton;
-    SQLbeneficio: TSQLQuery;
     DSPbeneficio: TDataSetProvider;
     cdsbeneficio: TClientDataSet;
     dsbeneficio: TDataSource;
@@ -134,28 +132,23 @@ type
     TabSheet8: TTabSheet;
     TabSheet10: TTabSheet;
     TabSheet11: TTabSheet;
-    SqlCondenacao: TSQLQuery;
     DspCondenacao: TDataSetProvider;
     CdsCondenacao: TClientDataSet;
     DsCondenacao: TDataSource;
     DBGrid6: TDBGrid;
-    SqlDetracao: TSQLQuery;
     DspDetracao: TDataSetProvider;
     CdsDetracao: TClientDataSet;
     DsDetracao: TDataSource;
     DBGrid7: TDBGrid;
-    SqlInterrupcao: TSQLQuery;
     DspInterrupcao: TDataSetProvider;
     CdsInterrupcao: TClientDataSet;
     DsInterrupcao: TDataSource;
     DBGrid8: TDBGrid;
     DBGrid9: TDBGrid;
-    SqlRemicao: TSQLQuery;
     DspRemicao: TDataSetProvider;
     CdsRemicao: TClientDataSet;
     DsRemicao: TDataSource;
     TabSheet12: TTabSheet;
-    SqlLinhaTempo: TSQLQuery;
     DspLinhaTempo: TDataSetProvider;
     CdsLinhaTempo: TClientDataSet;
     DsLinhaTempo: TDataSource;
@@ -179,7 +172,6 @@ type
     DsComutacao: TDataSource;
     CdsComutacao: TClientDataSet;
     DspComutacao: TDataSetProvider;
-    SqlComutacao: TSQLQuery;
     DBGrid10: TDBGrid;
     RadioGroupVerLinha: TRadioGroup;
     DBEditMES: TDBEdit;
@@ -214,6 +206,17 @@ type
     LbNumOficioPrazo: TLabel;
     DbRgEnviadoOficioPrazo: TDBRadioGroup;
     GbOficioPrazo: TGroupBox;
+    SQLHISTORICO_interno: TFDQuery;
+    SqlDsControlePermanencia: TFDQuery;
+    SqlPermanenciaScaner: TFDQuery;
+    SqlCalculoPena: TFDQuery;
+    SQLbeneficio: TFDQuery;
+    SqlCondenacao: TFDQuery;
+    SqlDetracao: TFDQuery;
+    SqlInterrupcao: TFDQuery;
+    SqlRemicao: TFDQuery;
+    SqlLinhaTempo: TFDQuery;
+    SqlComutacao: TFDQuery;
     procedure SpeedButton3Click(Sender: TObject);
     procedure cbbJusticaKeyPress(Sender: TObject; var Key: Char);
     procedure ComboBoxsituacaojuridicaKeyPress(Sender: TObject;

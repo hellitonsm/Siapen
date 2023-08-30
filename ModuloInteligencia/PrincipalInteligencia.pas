@@ -35,7 +35,6 @@ type
     Eventos1: TMenuItem;
     SubEventos1: TMenuItem;
     Panel1: TPanel;
-    SqlArquivos: TSQLQuery;
     DspArquivos: TDataSetProvider;
     CdsArquivos: TClientDataSet;
     DsArquivos: TDataSource;
@@ -48,13 +47,13 @@ type
     DBCtrlGrid1: TDBCtrlGrid;
     TabSheet2: TTabSheet;
     DBGrid1: TDBGrid;
-    SqlConcorrenciaFuncionario: TSQLQuery;
+    SqlConcorrenciaFuncionarioold: TSQLQuery;
     DspConcorrenciaFuncionario: TDataSetProvider;
     CdsConcorrenciaFuncionario: TClientDataSet;
     DsConcorrenciaFuncionario: TDataSource;
     TabSheet3: TTabSheet;
     DBGrid2: TDBGrid;
-    SqlConcorrenciaPenitenciaria: TSQLQuery;
+    SqlConcorrenciaPenitenciariaold: TSQLQuery;
     DspConcorrenciaPenitenciaria: TDataSetProvider;
     CdsConcorrenciaPenitenciaria: TClientDataSet;
     DsConcorrenciaPenitenciaria: TDataSource;
@@ -75,6 +74,9 @@ type
     VisoGrficadeRelacionamentos1: TMenuItem;
     LocalizadordeEndereonoMapa1: TMenuItem;
     N4: TMenuItem;
+    SqlConcorrenciaFuncionario: TFDQuery;
+    SqlConcorrenciaPenitenciaria: TFDQuery;
+    SqlArquivos: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure ObservaesdoInterno1Click(Sender: TObject);
     procedure Funcionrios1Click(Sender: TObject);

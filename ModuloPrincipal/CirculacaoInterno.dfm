@@ -1,33 +1,41 @@
 inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
   Left = 119
   Top = 42
-  Width = 984
-  Height = 656
   Caption = 'Circula'#231#227'o Interno'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 567
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 549
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 549
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 853
-    Height = 567
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 968
+      ExplicitWidth = 968
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 853
-      Height = 567
+      Width = 825
+      Height = 532
       ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 845
-          Height = 539
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 24
             Top = 16
@@ -65,8 +73,8 @@ inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
             Top = 32
             Width = 97
             Height = 21
-            Date = 41085.499540023150000000
-            Time = 41085.499540023150000000
+            Date = 41085.000000000000000000
+            Time = 0.499540023149165800
             TabOrder = 1
             DataField = 'DATA'
             DataSource = DsCadastro
@@ -204,9 +212,6 @@ inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
                 Font.Height = -13
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 5
-                OnClick = BtnincluirClick
                 Glyph.Data = {
                   DE010000424DDE01000000000000760000002800000024000000120000000100
                   0400000000006801000000000000000000001000000000000000000000000000
@@ -225,6 +230,9 @@ inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
                   333A333333333333333338330000333333333333333333333333333333333333
                   0000}
                 NumGlyphs = 2
+                ParentFont = False
+                TabOrder = 5
+                OnClick = BtnincluirClick
               end
               object PageControl2: TPageControl
                 Left = 8
@@ -361,31 +369,30 @@ inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 845
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 845
-          Height = 505
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 843
-            Height = 503
+            Width = 815
+            Height = 468
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 968
-    inherited Image2: TImage
-      Width = 968
-    end
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 599
-    Width = 968
+    Top = 564
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM circulacao_preso')
@@ -402,24 +409,6 @@ inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
   end
   inherited DsCadastro: TDataSource
     Left = 468
-    Top = 8
-  end
-  object SQLvinccirculacaopreso: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'idcirculacao'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select v.*, i.nome_interno from vinc_circulacao_preso v'
-      'inner join interno i on (i.id_interno=v.id_interno)'
-      'where id_circulacao_preso = :idcirculacao'
-      'and coalesce(hora_entrada,'#39#39')='#39#39' '
-      'order by nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 504
     Top = 8
   end
   object dspvinccirculacaopreso: TDataSetProvider
@@ -501,23 +490,6 @@ inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
       OnClick = Liberar1Click
     end
   end
-  object SQLvincgeral: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'idcirculacao'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select  v.*, i.nome_interno  from vinc_circulacao_preso v'
-      'inner join interno i on (i.id_interno=v.id_interno)'
-      'where id_circulacao_preso = :idcirculacao'
-      'order by nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 800
-    Top = 72
-  end
   object dspvincgeral: TDataSetProvider
     DataSet = SQLvincgeral
     Left = 832
@@ -588,5 +560,38 @@ inherited FrmCirculacaoInterno: TFrmCirculacaoInterno
     DataSet = cdsvincgeral
     Left = 896
     Top = 72
+  end
+  object SQLvinccirculacaopreso: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select v.*, i.nome_interno from vinc_circulacao_preso v'
+      'inner join interno i on (i.id_interno=v.id_interno)'
+      'where id_circulacao_preso = :idcirculacao'
+      'and coalesce(hora_entrada,'#39#39')='#39#39' '
+      'order by nome_interno')
+    Left = 504
+    Top = 8
+    ParamData = <
+      item
+        Name = 'IDCIRCULACAO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLvincgeral: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select  v.*, i.nome_interno  from vinc_circulacao_preso v'
+      'inner join interno i on (i.id_interno=v.id_interno)'
+      'where id_circulacao_preso = :idcirculacao'
+      'order by nome_interno')
+    Left = 800
+    Top = 72
+    ParamData = <
+      item
+        Name = 'IDCIRCULACAO'
+        ParamType = ptInput
+      end>
   end
 end

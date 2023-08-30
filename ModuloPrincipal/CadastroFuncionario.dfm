@@ -2,28 +2,28 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
   Left = 356
   Top = 127
   Caption = 'Cadastro Funcion'#225'rio'
-  ClientHeight = 622
-  ClientWidth = 1005
+  ClientHeight = 621
+  ClientWidth = 1001
   ExplicitWidth = 1017
   ExplicitHeight = 660
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 571
+    Height = 570
     ExplicitHeight = 570
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 553
+      Height = 552
       ExplicitHeight = 552
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 553
+      Top = 552
       Hints.Strings = ()
       OnClick = DBNavigator1Click
       ExplicitTop = 552
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 890
-    Height = 571
+    Width = 886
+    Height = 570
     ExplicitWidth = 886
     ExplicitHeight = 570
     inherited Image2: TImage
@@ -31,29 +31,27 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
       ExplicitWidth = 941
     end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 890
-      Height = 571
+      Width = 886
+      Height = 570
       ActivePage = TabSheetCadastro
       ExplicitWidth = 886
       ExplicitHeight = 570
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 882
-        ExplicitHeight = 543
+        ExplicitWidth = 878
+        ExplicitHeight = 542
         inherited PanelCadastro: TPanel
-          Width = 882
-          Height = 543
+          Width = 878
+          Height = 542
           ExplicitWidth = 878
           ExplicitHeight = 542
           object PageControlFuncionario: TPageControl
             Left = 1
             Top = 1
-            Width = 880
-            Height = 541
+            Width = 876
+            Height = 540
             ActivePage = TabPrincipal
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 876
-            ExplicitHeight = 540
             object TabPrincipal: TTabSheet
               Caption = 'Principal'
               object Label2: TLabel
@@ -6256,20 +6254,20 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitWidth = 882
-        ExplicitHeight = 543
+        ExplicitWidth = 878
+        ExplicitHeight = 542
         inherited PanelLocalizaConsulta: TPanel
-          Width = 882
-          ExplicitWidth = 882
+          Width = 878
+          ExplicitWidth = 878
         end
         inherited PanelConsulta: TPanel
-          Width = 882
-          Height = 509
-          ExplicitWidth = 882
-          ExplicitHeight = 509
+          Width = 878
+          Height = 508
+          ExplicitWidth = 878
+          ExplicitHeight = 508
           inherited DBGridConsulta: TDBGrid
-            Width = 880
-            Height = 507
+            Width = 876
+            Height = 506
             DataSource = DsConsulta
           end
         end
@@ -6277,29 +6275,29 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 1005
+    Width = 1001
     ExplicitWidth = 1001
   end
   inherited StatusBar1: TStatusBar
-    Top = 603
-    Width = 1005
+    Top = 602
+    Width = 1001
     ExplicitTop = 602
     ExplicitWidth = 1001
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_FUNCIONARIO'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM FUNCIONARIO'
       'WHERE ID_FUNCIONARIO = :ID_FUNCIONARIO')
     Left = 520
     Top = 0
+    ParamData = <
+      item
+        Name = 'ID_FUNCIONARIO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 548
@@ -6313,7 +6311,7 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
     Left = 604
     Top = 0
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -6322,7 +6320,8 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
         'from funcionario'
       'order by nome_funcionario collate win_ptbr')
     SQLConnection = DM.SQLConnect
-    Top = 376
+    Left = 224
+    Top = 504
   end
   object Dspconsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -6362,16 +6361,16 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
     Left = 84
     Top = 376
   end
-  object SqlSelectFuncionario: TSQLQuery
+  object SqlSelectFuncionarioold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       'select * from funcionario')
     SQLConnection = DM.SQLConnect
-    Left = 40
-    Top = 436
+    Left = 328
+    Top = 508
   end
-  object SQLpermissaointeligencia: TSQLQuery
+  object SQLpermissaointeligenciaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -6388,8 +6387,8 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
         'where id_funcionario= :id_funcionario and ( (p.posto_trabalho li' +
         'ke '#39'%INTELIG%'#39') or (p.posto_trabalho = '#39'CGIN'#39') )')
     SQLConnection = DM.SQLConnect
-    Left = 200
-    Top = 8
+    Left = 432
+    Top = 504
   end
   object DSPpermissaointeligencia: TDataSetProvider
     DataSet = SQLpermissaointeligencia
@@ -6430,7 +6429,7 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
     Left = 844
     Top = 8
   end
-  object SqlPerfilUsuario: TSQLQuery
+  object SqlPerfilUsuarioold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -6438,8 +6437,8 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
       'FROM PERFIL_USUARIO'
       'ORDER BY PERFIL')
     SQLConnection = DM.SQLConnect
-    Left = 816
-    Top = 8
+    Left = 560
+    Top = 504
   end
   object DsPerfilAtribui: TDataSource
     DataSet = CDsPerfilAtribui
@@ -6458,7 +6457,7 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
     Left = 732
     Top = 40
   end
-  object SQLPerfilAtribui: TSQLQuery
+  object SQLPerfilAtribuiold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -6471,7 +6470,70 @@ inherited FrmCadastroFuncionario: TFrmCadastroFuncionario
         'select * from perfil_usuario where perfil_usuario.id_perfil_usua' +
         'rio = :id_perfil')
     SQLConnection = DM.SQLConnect
-    Left = 704
-    Top = 40
+    Left = 152
+    Top = 504
+  end
+  object SQLPerfilAtribui: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select * from perfil_usuario where perfil_usuario.id_perfil_usua' +
+        'rio = :id_perfil'
+      '')
+    Left = 163
+    Top = 456
+    ParamData = <
+      item
+        Name = 'ID_PERFIL'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select  ID_FUNCIONARIO, nome_funcionario, matricula, login, cpf ' +
+        'from funcionario'
+      'order by nome_funcionario collate win_ptbr'
+      '')
+    Left = 235
+    Top = 456
+  end
+  object SqlSelectFuncionario: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from funcionario'
+      '')
+    Left = 325
+    Top = 449
+  end
+  object SQLpermissaointeligencia: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from funcionario f'
+      
+        'inner join posto_trabalho p on (f.idposto_trabalho = p.idposto_t' +
+        'rabalho)'
+      
+        'where id_funcionario= :id_funcionario and ( (p.posto_trabalho li' +
+        'ke '#39'%INTELIG%'#39') or (p.posto_trabalho = '#39'CGIN'#39') )'
+      '')
+    Left = 431
+    Top = 441
+    ParamData = <
+      item
+        Name = 'ID_FUNCIONARIO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlPerfilUsuario: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT ID_PERFIL_USUARIO, PERFIL'
+      'FROM PERFIL_USUARIO'
+      'ORDER BY PERFIL'
+      '')
+    Left = 564
+    Top = 449
   end
 end

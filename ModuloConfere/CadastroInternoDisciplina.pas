@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, jpeg, dbcgrids, Menus, adpDBDateTimePicker;
+  ToolWin, jpeg, dbcgrids, Menus, adpDBDateTimePicker, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroInternoDisciplina = class(TFrmModeloInterno)
@@ -28,16 +31,13 @@ type
     CdsvincfaltadisciplinarDATA_REABILITACAO: TSQLTimeStampField;
     CdsvincfaltadisciplinarOBS: TStringField;
     Dspvincpfaltadisciplinar: TDataSetProvider;
-    Sqlvincfaltadisciplinar: TSQLQuery;
+    Sqlvincfaltadisciplinarold: TSQLQuery;
     dsvincartigoperfil: TDataSource;
     cdsvincartigoperfil: TClientDataSet;
     DSPvincartigoperfil: TDataSetProvider;
-    SQLvincartigoperfil: TSQLQuery;
-    SQLcalcfaltadisciplinar: TSQLQuery;
     DSPcalcfaltadisciplinar: TDataSetProvider;
     CDScalcfaltadisciplinar: TClientDataSet;
     DScalcfaltadisciplinar: TDataSource;
-    SQLHISTORICO_interno: TSQLQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     CDSHISTORICO_internoIDHISTORICO_INTERNO: TIntegerField;
@@ -65,7 +65,6 @@ type
     Excluir1: TMenuItem;
     CdsvincfaltadisciplinarID_UP: TIntegerField;
     CDSHISTORICO_internoTIPO_HISTORICO: TStringField;
-    SQLhistoricoelogio: TSQLQuery;
     dsphistoricoelogio: TDataSetProvider;
     cdshistoricoelogio: TClientDataSet;
     IntegerField1: TIntegerField;
@@ -101,8 +100,6 @@ type
     Dsfaltadisciplinar: TDataSource;
     Cdsfaltadisciplinar: TClientDataSet;
     Dspfaltadisciplinar: TDataSetProvider;
-    Sqlfaltadisciplinar: TSQLQuery;
-    SqlExecute: TSQLQuery;
     TabSheet1: TTabSheet;
     DBComboBox6: TDBComboBox;
     Label70: TLabel;
@@ -150,26 +147,26 @@ type
     DBEdit38: TDBEdit;
     EditDataInstPortaria: TEdit;
     Label61: TLabel;
-    SqlvincfaltadisciplinarID_VINC_FALTA_DISCIPLINAR: TIntegerField;
-    SqlvincfaltadisciplinarID_FALTA_DISCIPLINAR: TIntegerField;
-    SqlvincfaltadisciplinarID_INTERNO: TIntegerField;
-    SqlvincfaltadisciplinarDATA_INCIDENCIA: TSQLTimeStampField;
-    SqlvincfaltadisciplinarDATA_REABILITACAO: TSQLTimeStampField;
-    SqlvincfaltadisciplinarOBS: TStringField;
-    SqlvincfaltadisciplinarCONCLUSAOCD: TStringField;
-    SqlvincfaltadisciplinarNUMERO_PDI: TStringField;
-    SqlvincfaltadisciplinarDATA_CONDENACAO: TSQLTimeStampField;
-    SqlvincfaltadisciplinarRESULTADO: TStringField;
-    SqlvincfaltadisciplinarDATA_RESULTADO: TSQLTimeStampField;
-    SqlvincfaltadisciplinarDT_INICIO_ISOLAMENTO: TSQLTimeStampField;
-    SqlvincfaltadisciplinarDT_FIM_ISOLAMENTO: TSQLTimeStampField;
-    SqlvincfaltadisciplinarQTDE_DIAS_ISOLAMENTO: TIntegerField;
-    SqlvincfaltadisciplinarSTATUS: TStringField;
-    SqlvincfaltadisciplinarID_UP: TIntegerField;
-    SqlvincfaltadisciplinarNUMERO: TStringField;
-    SqlvincfaltadisciplinarDATA_INSTAURACAO: TSQLTimeStampField;
-    SqlvincfaltadisciplinarTIPO: TStringField;
-    SqlvincfaltadisciplinarDATA_INST_PORTARIA: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldID_VINC_FALTA_DISCIPLINAR: TIntegerField;
+    SqlvincfaltadisciplinaroldID_FALTA_DISCIPLINAR: TIntegerField;
+    SqlvincfaltadisciplinaroldID_INTERNO: TIntegerField;
+    SqlvincfaltadisciplinaroldDATA_INCIDENCIA: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldDATA_REABILITACAO: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldOBS: TStringField;
+    SqlvincfaltadisciplinaroldCONCLUSAOCD: TStringField;
+    SqlvincfaltadisciplinaroldNUMERO_PDI: TStringField;
+    SqlvincfaltadisciplinaroldDATA_CONDENACAO: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldRESULTADO: TStringField;
+    SqlvincfaltadisciplinaroldDATA_RESULTADO: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldDT_INICIO_ISOLAMENTO: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldDT_FIM_ISOLAMENTO: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldQTDE_DIAS_ISOLAMENTO: TIntegerField;
+    SqlvincfaltadisciplinaroldSTATUS: TStringField;
+    SqlvincfaltadisciplinaroldID_UP: TIntegerField;
+    SqlvincfaltadisciplinaroldNUMERO: TStringField;
+    SqlvincfaltadisciplinaroldDATA_INSTAURACAO: TSQLTimeStampField;
+    SqlvincfaltadisciplinaroldTIPO: TStringField;
+    SqlvincfaltadisciplinaroldDATA_INST_PORTARIA: TSQLTimeStampField;
     CdsvincfaltadisciplinarDATA_INST_PORTARIA: TSQLTimeStampField;
     ComboBoxNatureza: TComboBox;
     Label62: TLabel;
@@ -178,6 +175,13 @@ type
     Editfimisolamento: TEdit;
     Label67: TLabel;
     Label68: TLabel;
+    SQLvincartigoperfil: TFDQuery;
+    SQLcalcfaltadisciplinar: TFDQuery;
+    SQLHISTORICO_interno: TFDQuery;
+    SQLhistoricoelogio: TFDQuery;
+    Sqlfaltadisciplinar: TFDQuery;
+    SqlExecute: TFDQuery;
+    Sqlvincfaltadisciplinar: TFDQuery;
     procedure Button4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure EditarClick(Sender: TObject);
