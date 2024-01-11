@@ -2,8 +2,6 @@ inherited FrmCadastroSerieEstudo: TFrmCadastroSerieEstudo
   Left = 339
   Top = 172
   Caption = 'Cadastro Serie Estudo'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -12,7 +10,6 @@ inherited FrmCadastroSerieEstudo: TFrmCadastroSerieEstudo
   end
   inherited PanelModeloCadastro: TPanel
     inherited PageControlModeloCadastro: TPageControl
-      ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
           object Label2: TLabel
@@ -70,7 +67,7 @@ inherited FrmCadastroSerieEstudo: TFrmCadastroSerieEstudo
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM SERIE_ESTUDO')

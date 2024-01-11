@@ -1,28 +1,36 @@
 inherited FrmTipoPatrimonio: TFrmTipoPatrimonio
   Left = 228
   Top = 172
-  Height = 375
   Caption = 'Tipo de Patrim'#244'nio'
-  PixelsPerInch = 96
+  ExplicitWidth = 948
+  ExplicitHeight = 620
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 268
+    ExplicitHeight = 530
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 249
+      Height = 513
+      ExplicitHeight = 512
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 249
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 512
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 268
+    ExplicitHeight = 530
     inherited PageControlModeloCadastro: TPageControl
-      Height = 268
+      Width = 821
+      Height = 531
       ActivePage = TabSheetCadastro
+      ExplicitHeight = 530
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Height = 240
+          Width = 813
+          Height = 503
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 24
             Top = 24
@@ -61,8 +69,11 @@ inherited FrmTipoPatrimonio: TFrmTipoPatrimonio
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelConsulta: TPanel
           Height = 206
+          ExplicitHeight = 206
           inherited DBGridConsulta: TDBGrid
             Height = 204
           end
@@ -71,9 +82,9 @@ inherited FrmTipoPatrimonio: TFrmTipoPatrimonio
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 318
+    ExplicitTop = 562
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM TIPO_PATRIMONIO')

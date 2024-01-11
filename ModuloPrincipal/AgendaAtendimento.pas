@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Buttons, Mask, jpeg, Lib, Menus, adpDBDateTimePicker;
+  Buttons, Mask, jpeg, Lib, Menus, adpDBDateTimePicker, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmAgendaAtendimento = class(TFrmModeloCadastro)
@@ -34,7 +37,6 @@ type
     lbl11: TLabel;
     DBLookupComboBoxID_FUNCIONARIO: TDBLookupComboBox;
     lbl12: TLabel;
-    SqlConsulta: TSQLQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -57,13 +59,11 @@ type
     DateTimePickerInicial: TDateTimePicker;
     DateTimePickerFinal: TDateTimePicker;
     Label3: TLabel;
-    SqlInterno: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
     DBEdit1: TDBEdit;
     Label4: TLabel;
-    SqlMenores: TSQLQuery;
     DspMenores: TDataSetProvider;
     CdsMenores: TClientDataSet;
     DsMenores: TDataSource;
@@ -106,7 +106,6 @@ type
     DBEdit33: TDBEdit;
     Label51: TLabel;
     DBEditcidade: TDBEdit;
-    SqlDestino: TSQLQuery;
     Button6: TButton;
     Label17: TLabel;
     DBComboBoxTipoDoc: TDBComboBox;
@@ -115,18 +114,15 @@ type
     Label6: TLabel;
     adpDBDateTimePicker1: TadpDBDateTimePicker;
     Button7: TButton;
-    SqlVisitante: TSQLQuery;
     DspVisitante: TDataSetProvider;
     CdsVisitante: TClientDataSet;
     DsVisitante: TDataSource;
     adpDBDateTimePickerdataagenda: TadpDBDateTimePicker;
     Label9: TLabel;
     EditRGI: TEdit;
-    SQLAdvogado: TSQLQuery;
     dspAdvogado: TDataSetProvider;
     cdsAdvogado: TClientDataSet;
     dsAdvogado: TDataSource;
-    SQLComboVisitante: TSQLQuery;
     dspComboVisitante: TDataSetProvider;
     cdsComboVisitante: TClientDataSet;
     dsComboVisitante: TDataSource;
@@ -136,6 +132,13 @@ type
     Label12: TLabel;
     GroupBox1: TGroupBox;
     Label13: TLabel;
+    SqlConsulta: TFDQuery;
+    SqlInterno: TFDQuery;
+    SqlMenores: TFDQuery;
+    SqlDestino: TFDQuery;
+    SqlVisitante: TFDQuery;
+    SQLAdvogado: TFDQuery;
+    SQLComboVisitante: TFDQuery;
     procedure btn1Click(Sender: TObject);
     procedure btn6Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
@@ -322,7 +325,7 @@ begin
     FreeAndNil(FrmAgendaAtendimento);
 
   tipo_pesquisa := '';
-  DBLookupComboBoxIDAGENDA_SITUACAO.KeyValue := DM.DsSituacao.DataSet.fieldbyname('IDAGENDA_SITUACAO').AsString;
+  //DBLookupComboBoxIDAGENDA_SITUACAO.KeyValue := DM.DsSituacao.DataSet.fieldbyname('IDAGENDA_SITUACAO').AsString;
 
   if not (filtropostotrabalho > 0) then
     DBLookupComboBoxPostoTrabalhoConsulta.KeyValue := DM.DsPostoTrabalho.DataSet.fieldbyname('IDPOSTO_TRABALHO').AsString;

@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, ExtCtrls, FMTBcd, SqlExpr, Provider, DB,
-  DBClient, Grids, DBGrids, StdCtrls, Buttons, jpeg;
+  DBClient, Grids, DBGrids, StdCtrls, Buttons, jpeg, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmQualOcorrencia = class(TFrmModeloFormulario)
@@ -13,14 +16,16 @@ type
     DsOcorrencia: TDataSource;
     CdsOcorrencia: TClientDataSet;
     DspOcorrencia: TDataSetProvider;
-    SqlOcorrencia: TSQLQuery;
-    SqlQuestionamento: TSQLQuery;
+    SqlOcorrenciaold: TSQLQuery;
+    SqlQuestionamentoold: TSQLQuery;
     DspQuestionamento: TDataSetProvider;
     CdsQuestionamento: TClientDataSet;
     DsQuestionamento: TDataSource;
     Panel1: TPanel;
     BitBtnConfirma: TBitBtn;
     BitBtnCancela: TBitBtn;
+    SqlOcorrencia: TFDQuery;
+    SqlQuestionamento: TFDQuery;
     procedure FormShow(Sender: TObject);
     procedure DBGridOcorrenciaDblClick(Sender: TObject);
     procedure BitBtnCancelaClick(Sender: TObject);

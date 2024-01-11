@@ -2,8 +2,8 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
   Left = 529
   Top = 294
   Caption = 'Menu de Relat'#243'rios'
-  ClientHeight = 403
-  ClientWidth = 639
+  ClientHeight = 402
+  ClientWidth = 635
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
   OnCreate = FormCreate
   OnShow = FormShow
   DesignSize = (
-    639
-    403)
+    635
+    402)
   TextHeight = 13
   object Label1: TLabel
     Left = 8
@@ -32,22 +32,20 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     ParentFont = False
   end
   object Button1: TButton
-    Left = 235
-    Top = 366
+    Left = 231
+    Top = 365
     Width = 97
     Height = 25
     Anchors = [akBottom]
     Caption = 'Visualizar'
     TabOrder = 5
     OnClick = Button1Click
-    ExplicitLeft = 233
-    ExplicitTop = 365
   end
   object ListBox1: TListBox
     Left = 568
     Top = 368
-    Width = 35
-    Height = 25
+    Width = 27
+    Height = 24
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clBtnFace
     Font.Charset = DEFAULT_CHARSET
@@ -89,8 +87,8 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
   object FileListBox2: TFileListBox
     Left = 216
     Top = 28
-    Width = 403
-    Height = 323
+    Width = 395
+    Height = 322
     Anchors = [akLeft, akTop, akRight, akBottom]
     Color = clWhite
     Ctl3D = False
@@ -105,7 +103,7 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
   object FileEdit: TEdit
     Left = 216
     Top = 5
-    Width = 403
+    Width = 395
     Height = 19
     Anchors = [akLeft, akTop, akRight]
     Ctl3D = False
@@ -501,20 +499,19 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     Left = 548
     Top = 152
   end
-  object SqlCadastro: TSQLQuery
+  object SqlCadastroold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       'SELECT * '
       'FROM rdb$database')
-    SQLConnection = DM.SQLConnect
-    Left = 520
-    Top = 152
+    Left = 464
+    Top = 48
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
     CloseDataSource = False
-    DataSet = SqlCadastro
+    DataSet = SqlCadastroold
     BCDToCurrency = False
     DataSetOptions = []
     Left = 496
@@ -556,5 +553,14 @@ object FrmMenuRelatorio: TFrmMenuRelatorio
     PictureType = gpPNG
     Left = 352
     Top = 152
+  end
+  object SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM rdb$database'
+      '')
+    Left = 360
+    Top = 32
   end
 end

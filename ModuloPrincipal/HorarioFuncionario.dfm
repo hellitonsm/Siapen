@@ -2,18 +2,24 @@ inherited FrmHorarioFuncionario: TFrmHorarioFuncionario
   Left = 362
   Top = 150
   Caption = 'Hor'#225'rio do Funcion'#225'rio'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 532
     inherited DBNavigator1: TDBNavigator
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Height = 532
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
       ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
           object Label2: TLabel
             Left = 24
@@ -173,9 +179,16 @@ inherited FrmHorarioFuncionario: TFrmHorarioFuncionario
           end
         end
       end
+      inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+      end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited StatusBar1: TStatusBar
+    Top = 564
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM HORARIO_FUNCIONARIO')

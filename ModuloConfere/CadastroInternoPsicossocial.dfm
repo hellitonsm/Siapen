@@ -1,26 +1,60 @@
 inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
   Left = 220
   Top = 70
-  Width = 860
   Caption = 'Cadastro do Psicossocial'
-  PixelsPerInch = 96
+  ClientHeight = 581
+  ClientWidth = 932
+  ExplicitWidth = 944
+  ExplicitHeight = 639
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 523
+    ExplicitHeight = 522
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 505
+      ExplicitHeight = 504
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 505
       Hints.Strings = ()
+      ExplicitTop = 504
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 729
+    Width = 817
+    Height = 523
+    ExplicitWidth = 813
+    ExplicitHeight = 522
+    inherited Image2: TImage
+      Width = 844
+      ExplicitWidth = 844
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 729
+      Width = 817
+      Height = 523
+      ExplicitWidth = 813
+      ExplicitHeight = 522
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelCadastro: TPanel
-          Width = 721
+          Width = 809
+          Height = 495
+          ExplicitWidth = 809
+          ExplicitHeight = 495
           inherited PageControlPrincipal: TPageControl
-            Width = 719
+            Width = 807
+            Height = 493
             ActivePage = TabSheet1
+            ExplicitWidth = 807
+            ExplicitHeight = 493
+            inherited TabSheetPrincipal: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
+            end
             inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
               inherited Label28: TLabel
                 Enabled = True
               end
@@ -82,8 +116,8 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
               object PageControlPsicossocial: TPageControl
                 Left = 0
                 Top = 0
-                Width = 711
-                Height = 463
+                Width = 799
+                Height = 465
                 ActivePage = TabSheet13
                 Align = alClient
                 TabOrder = 0
@@ -171,7 +205,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Height = 21
                     DataField = 'MOTIVODELITO'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'N'#195'O COMETEU'
                       'VINGAN'#199'A'
@@ -193,7 +226,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'MAIORPERDA'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'FICAR LONGE DA FAM'#205'LIA'
                       'FICAR LONGE DOS AMIGOS'
@@ -232,7 +264,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'SITUACAOCIVIL'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'Amasiado'
                       'Casado'
@@ -454,7 +485,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'QUEMCRIOU'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'AV'#211'S PATERNOS'
                       'AV'#211'S MATERNOS'
@@ -476,7 +506,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'MORADIA'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'ALVEN'#193'RIA'
                       'ALUGADA'
@@ -495,7 +524,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'REPRESENTACAOPAIS'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'AUSENTES'
                       'FORAM PESSOAS FUNDAMENTAIS'
@@ -514,7 +542,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'EDUCACAORECEBIDA'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'R'#205'GIDA'
                       'MUITO R'#205'GIDA'
@@ -531,7 +558,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'MUDANCAFAMILIA'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'NENHUMA VEZ'
                       'UMA VEZ'
@@ -556,7 +582,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'CONDICOESCRIACAO'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       #211'TIMAS CONDI'#199#213'ES'
                       'BOAS CONDI'#199#213'ES'
@@ -573,7 +598,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'INSTITUICAOASSISTENCIAL'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'N'#195'O'
                       'SIM COMO CARENTE'
@@ -588,7 +612,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'VIOLENCIADOMESTICA'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'N'#195'O'
                       'SIM, VIOL'#202'NCIA F'#205'SICA'
@@ -695,7 +718,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'RELIGIAO'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'Adventista'
                       'Ateu'
@@ -726,7 +748,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'MORADIAANTESPRESO'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'AMIGOS'
                       'AV'#211'S'
@@ -748,7 +769,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'RESIDENCIAFAMILIAR'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'IMOV'#201'L PR'#211'PRIO'
                       'IMOV'#201'L ALUGADO'
@@ -802,7 +822,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'FILHOSVIVEM'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'M'#195'E'
                       'PAI'
@@ -826,7 +845,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'FILHOADOCAO'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'N'#195'O SEI'
                       'N'#195'O'
@@ -843,7 +861,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'RENDIMENTOFAMILIAR'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       '0 A 1/2 SAL'#193'RIO M'#205'NIMO'
                       'ACIMA DE 1/2 AT'#201' 2 SAL'#193'RIOS M'#205'NIMOS'
@@ -1319,7 +1336,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     Style = csDropDownList
                     DataField = 'DATADEPENDENCIA'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'INF'#194'NCIA'
                       'ADOLESC'#202'NCIA'
@@ -1336,7 +1352,6 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
                     DataField = 'DROGASCOMCRIME'
                     DataSource = DsCadastro
                     ImeMode = imDisable
-                    ItemHeight = 13
                     Items.Strings = (
                       'N'#195'O'
                       'SIM, PARA USO DE DROGAS'
@@ -1793,36 +1808,47 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelLocalizaConsulta: TPanel
-          Width = 721
+          Width = 809
+          ExplicitWidth = 805
           inherited RadioGroupStatus: TRadioGroup
-            Left = 592
+            Left = 680
+            ExplicitLeft = 676
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 721
+          Width = 809
+          Height = 453
+          ExplicitWidth = 805
+          ExplicitHeight = 452
           inherited DBGridConsulta: TDBGrid
-            Width = 719
+            Width = 807
+            Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 719
-            Height = 445
-            PanelWidth = 702
+            Width = 807
+            Height = 451
+            PanelWidth = 790
+            ExplicitWidth = 803
+            ExplicitHeight = 450
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 844
-    inherited Image2: TImage
-      Width = 844
-    end
+    Width = 932
+    ExplicitWidth = 928
   end
   inherited StatusBar1: TStatusBar
-    Width = 844
+    Top = 555
+    Width = 932
+    ExplicitTop = 555
+    ExplicitWidth = 932
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     Left = 744
     Top = 288
   end
@@ -1838,7 +1864,7 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
     Left = 828
     Top = 288
   end
-  inherited SqlFaccao: TSQLQuery
+  inherited SqlFaccao: TFDQuery
     Left = 48
     Top = 0
   end
@@ -1905,7 +1931,7 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
     Left = 501
     Top = 5
   end
-  object SQLATENDIMENTO: TSQLQuery
+  object SQLATENDIMENTOold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1921,5 +1947,20 @@ inherited FrmCadastroInternoPsicossocial: TFrmCadastroInternoPsicossocial
     SQLConnection = DM.SQLConnect
     Left = 473
     Top = 5
+  end
+  object SQLATENDIMENTO: TFDQuery
+    SQL.Strings = (
+      'select *'
+      'from atendimento_psicossocial'
+      'where idinterno=:id_interno'
+      'order by dataatendimento desc'
+      '')
+    Left = 472
+    Top = 171
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

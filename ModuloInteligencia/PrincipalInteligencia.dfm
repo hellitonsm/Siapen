@@ -2,8 +2,8 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
   Left = 128
   Top = 10
   Caption = 'M'#243'dulo Principal da Inteligencia'
-  ClientHeight = 0
-  ClientWidth = 120
+  ClientHeight = 437
+  ClientWidth = 870
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,26 +19,28 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
   object Image1: TImage
     Left = 340
     Top = 40
-    Width = 572
-    Height = 618
+    Width = 530
+    Height = 397
     Align = alClient
     Center = True
     IncrementalDisplay = True
     Stretch = True
+    ExplicitWidth = 572
+    ExplicitHeight = 618
   end
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 120
+    Width = 870
     Height = 40
     Align = alTop
     Caption = 'Panel2'
     TabOrder = 0
-    ExplicitWidth = 912
+    ExplicitWidth = 120
     object Image2: TImage
       Left = 1
       Top = 1
-      Width = 910
+      Width = 868
       Height = 38
       Align = alClient
       Picture.Data = {
@@ -53,6 +55,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
         000000000000000000000000FFC4001411010000000000000000000000000000
         0000FFDA000C03010002110311003F00DFD443700A9CB9FB720003FFD9}
       Stretch = True
+      ExplicitWidth = 910
     end
     object LabelTitulo: TLabel
       Left = 48
@@ -784,10 +787,11 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
     Left = 0
     Top = 40
     Width = 340
-    Height = 618
+    Height = 397
     Align = alLeft
     Caption = 'Panel1'
     TabOrder = 1
+    ExplicitHeight = 618
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -852,17 +856,18 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
       Left = 1
       Top = 57
       Width = 338
-      Height = 560
+      Height = 339
       ActivePage = TabSheet3
       Align = alClient
       TabOrder = 1
+      ExplicitHeight = 560
       object TabSheet1: TTabSheet
         Caption = 'Arquivos'
         object DBCtrlGrid1: TDBCtrlGrid
           Left = 0
           Top = 0
           Width = 330
-          Height = 528
+          Height = 311
           Align = alClient
           DataSource = DsArquivos
           Font.Charset = DEFAULT_CHARSET
@@ -870,7 +875,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
           Font.Height = -8
           Font.Name = 'MS Sans Serif'
           Font.Style = []
-          PanelHeight = 66
+          PanelHeight = 38
           PanelWidth = 313
           ParentFont = False
           TabOrder = 0
@@ -880,18 +885,20 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
             Left = 0
             Top = 0
             Width = 313
-            Height = 66
+            Height = 38
             Align = alClient
+            ExplicitHeight = 66
           end
           object Label8: TLabel
             Left = 0
             Top = 0
             Width = 313
-            Height = 66
+            Height = 38
             Align = alClient
             AutoSize = False
             Transparent = True
             OnDblClick = DBText5DblClick
+            ExplicitHeight = 66
           end
           object Label1: TLabel
             Left = 40
@@ -1033,7 +1040,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
           Left = 0
           Top = 0
           Width = 330
-          Height = 532
+          Height = 311
           Align = alClient
           DataSource = DsConcorrenciaFuncionario
           TabOrder = 0
@@ -1067,7 +1074,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
           Left = 0
           Top = 0
           Width = 330
-          Height = 532
+          Height = 311
           Align = alClient
           DataSource = DsConcorrenciaPenitenciaria
           TabOrder = 0
@@ -2119,31 +2126,6 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
       FFF8C003D0038001FFF0C003C007800100000000000000000000000000000000
       000000000000}
   end
-  object SqlArquivos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftDateTime
-        Name = 'DATA'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'SELECT A.IDARQUIVOS, A.DATA, A.DESCRICAO, A.HISTORICO, A.ID_FUNC' +
-        'IONARIO,'
-      
-        'F.NOME_FUNCIONARIO,F.NOME_FUNCIONARIO "Funcion'#225'rio",I.NOME_INTER' +
-        'NO, U.SIGLA'
-      'FROM ARQUIVOS A'
-      'JOIN INTERNO I ON (A.ID_INTERNO=I.ID_INTERNO)'
-      'JOIN FUNCIONARIO F ON (A.ID_FUNCIONARIO=F.ID_FUNCIONARIO)'
-      'JOIN UNIDADE_PENAL U ON (U.ID_UP=F.ID_UP)'
-      'WHERE A.DATA >=:DATA'
-      'ORDER BY A.DATA DESC'
-      ' ')
-    Left = 336
-    Top = 58
-  end
   object DspArquivos: TDataSetProvider
     DataSet = SqlArquivos
     Left = 364
@@ -2161,7 +2143,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
     Left = 420
     Top = 58
   end
-  object SqlConcorrenciaFuncionario: TSQLQuery
+  object SqlConcorrenciaFuncionarioold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2185,7 +2167,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
     Top = 98
   end
   object DspConcorrenciaFuncionario: TDataSetProvider
-    DataSet = SqlConcorrenciaFuncionario
+    DataSet = SqlConcorrenciaFuncionarioold
     Left = 364
     Top = 98
   end
@@ -2201,7 +2183,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
     Left = 420
     Top = 98
   end
-  object SqlConcorrenciaPenitenciaria: TSQLQuery
+  object SqlConcorrenciaPenitenciariaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -2225,7 +2207,7 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
     Top = 141
   end
   object DspConcorrenciaPenitenciaria: TDataSetProvider
-    DataSet = SqlConcorrenciaPenitenciaria
+    DataSet = SqlConcorrenciaPenitenciariaold
     Left = 364
     Top = 141
   end
@@ -2240,5 +2222,76 @@ object FrmPrincipalInteligencia: TFrmPrincipalInteligencia
     DataSet = CdsConcorrenciaPenitenciaria
     Left = 420
     Top = 141
+  end
+  object SqlConcorrenciaFuncionario: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM'
+      '('
+      'SELECT F.NOME_FUNCIONARIO, count(*) TOTAL_LANCADO'
+      'FROM ARQUIVOS A'
+      'JOIN INTERNO I ON (A.ID_INTERNO=I.ID_INTERNO)'
+      'JOIN FUNCIONARIO F ON (A.ID_FUNCIONARIO=F.ID_FUNCIONARIO)'
+      'JOIN UNIDADE_PENAL U ON (U.ID_UP=F.ID_UP)'
+      'WHERE A.DATA >=:DATA'
+      'GROUP BY F.NOME_FUNCIONARIO'
+      ')'
+      'ORDER BY 2 DESC'
+      '')
+    Left = 288
+    Top = 104
+    ParamData = <
+      item
+        Name = 'DATA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConcorrenciaPenitenciaria: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM'
+      '('
+      'SELECT U.SIGLA, COUNT(*) TOTAL_LANCADO'
+      'FROM ARQUIVOS A'
+      'JOIN INTERNO I ON (A.ID_INTERNO=I.ID_INTERNO)'
+      'JOIN FUNCIONARIO F ON (A.ID_FUNCIONARIO=F.ID_FUNCIONARIO)'
+      'JOIN UNIDADE_PENAL U ON (U.ID_UP=F.ID_UP)'
+      'WHERE A.DATA >=:DATA'
+      'GROUP BY U.SIGLA'
+      ')'
+      'ORDER BY 2 DESC'
+      '')
+    Left = 285
+    Top = 153
+    ParamData = <
+      item
+        Name = 'DATA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlArquivos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT A.IDARQUIVOS, A.DATA, A.DESCRICAO, A.HISTORICO, A.ID_FUNC' +
+        'IONARIO,'
+      
+        'F.NOME_FUNCIONARIO,F.NOME_FUNCIONARIO "Funcion'#225'rio",I.NOME_INTER' +
+        'NO, U.SIGLA'
+      'FROM ARQUIVOS A'
+      'JOIN INTERNO I ON (A.ID_INTERNO=I.ID_INTERNO)'
+      'JOIN FUNCIONARIO F ON (A.ID_FUNCIONARIO=F.ID_FUNCIONARIO)'
+      'JOIN UNIDADE_PENAL U ON (U.ID_UP=F.ID_UP)'
+      'WHERE A.DATA >=:DATA'
+      'ORDER BY A.DATA DESC'
+      ' ')
+    Left = 312
+    Top = 72
+    ParamData = <
+      item
+        Name = 'DATA'
+        ParamType = ptInput
+      end>
   end
 end

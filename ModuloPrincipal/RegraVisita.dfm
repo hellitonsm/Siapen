@@ -1,33 +1,43 @@
 inherited FrmRegraVisita: TFrmRegraVisita
   Left = 205
   Top = 129
-  Width = 927
-  Height = 557
   Caption = 'Regras de Visita'#231#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 948
+  ExplicitHeight = 620
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 468
+    ExplicitHeight = 530
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 450
+      Height = 513
+      ExplicitHeight = 512
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 450
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 512
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 796
-    Height = 468
+    ExplicitWidth = 817
+    ExplicitHeight = 530
+    inherited Image2: TImage
+      Width = 911
+      ExplicitWidth = 911
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 796
-      Height = 468
+      Width = 821
+      Height = 531
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 817
+      ExplicitHeight = 530
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Width = 788
-          Height = 440
+          Width = 813
+          Height = 503
+          ExplicitWidth = 809
+          ExplicitHeight = 502
           object Label2: TLabel
             Left = 32
             Top = 24
@@ -135,12 +145,17 @@ inherited FrmRegraVisita: TFrmRegraVisita
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelLocalizaConsulta: TPanel
           Width = 788
+          ExplicitWidth = 788
         end
         inherited PanelConsulta: TPanel
           Width = 788
           Height = 406
+          ExplicitWidth = 788
+          ExplicitHeight = 406
           inherited DBGridConsulta: TDBGrid
             Width = 786
             Height = 404
@@ -150,29 +165,26 @@ inherited FrmRegraVisita: TFrmRegraVisita
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 911
-    inherited Image2: TImage
-      Width = 911
-    end
+    ExplicitWidth = 932
   end
   inherited StatusBar1: TStatusBar
-    Top = 500
-    Width = 911
+    ExplicitTop = 562
+    ExplicitWidth = 932
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM REGRA_VISITA'
       'WHERE ID_UP=:ID_UP')
     Left = 584
     Top = 96
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 612

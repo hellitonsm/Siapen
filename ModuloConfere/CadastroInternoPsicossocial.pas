@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, jpeg, dbcgrids, Menus, Lib;
+  ToolWin, jpeg, dbcgrids, Menus, Lib, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroInternoPsicossocial = class(TFrmModeloInterno)
@@ -135,7 +138,7 @@ type
     CDSATENDIMENTODESCRICAO_ATENDIMENTO: TStringField;
     CDSATENDIMENTOTCNICOA: TStringField;
     DSPATENDIMENTO: TDataSetProvider;
-    SQLATENDIMENTO: TSQLQuery;
+    SQLATENDIMENTOold: TSQLQuery;
     Label8: TLabel;
     Label14: TLabel;
     Label15: TLabel;
@@ -193,6 +196,7 @@ type
     DBRadioGroup8: TDBRadioGroup;
     DBRadioGroup7: TDBRadioGroup;
     DBRadioGroup6: TDBRadioGroup;
+    SQLATENDIMENTO: TFDQuery;
     procedure Button3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
@@ -200,6 +204,7 @@ type
     procedure DsCadastroDataChange(Sender: TObject; Field: TField);
     procedure CancelarClick(Sender: TObject);
     procedure PageControlModeloCadastroChange(Sender: TObject);
+    procedure EditLocalizarChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -219,7 +224,7 @@ procedure TFrmCadastroInternoPsicossocial.Button3Click(Sender: TObject);
 begin
   inherited;
   DSATENDIMENTO.DataSet.Append;
-  DSATENDIMENTO.DataSet.fieldbyname('id_atendimento').AsInteger := 0;
+  DSATENDIMENTO.DataSet.fieldbyname('id_atendimento').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idatendiemnto_psicosocial,1) FROM RDB$DATABASE');
   DSATENDIMENTO.DataSet.fieldbyname('idinterno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSATENDIMENTO.DataSet.fieldbyname('dataatendimento').AsString := MaskEdit3.Text;
@@ -442,6 +447,35 @@ begin
   begin
     Novo.Visible := False;
     Excluir.Visible := False;
+  end;
+
+end;
+
+procedure TFrmCadastroInternoPsicossocial.EditLocalizarChange(Sender: TObject);
+begin
+  if RadioGroupTipoLocalizar.ItemIndex = 1 then
+  begin
+    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or
+      (EditLocalizar.Text = ' ') then
+    begin
+      //showmessage('foi');
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'NOME_INTERNO LIKE ''%' + EditLocalizar.Text + '%''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
+  end
+  else
+  begin
+    if EditLocalizar.Text <> '' then
+    begin
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'RGI = ''' + EditLocalizar.Text + '''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
   end;
 
 end;

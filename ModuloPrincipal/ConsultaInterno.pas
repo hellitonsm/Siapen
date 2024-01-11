@@ -5,18 +5,20 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, FMTBcd, DB, DBClient, SqlExpr, Provider, StdCtrls, Grids,
-  DBGrids, ExtCtrls, Buttons, DBCtrls, ComCtrls, ImgList, ToolWin;
+  DBGrids, ExtCtrls, Buttons, DBCtrls, ComCtrls, ImgList, ToolWin,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Vcl.CheckLst;
 
 type
   TFrmConsultaInterno = class(TForm)
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
-    SqlConsulta: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
-    SqlSelectInterno: TSQLQuery;
     Label1: TLabel;
     RadioGroupStatus: TRadioGroup;
     DBGridConsulta: TDBGrid;
@@ -24,7 +26,6 @@ type
     Label2: TLabel;
     Editlocalizarvulgo: TEdit;
     DBGridVulgo: TDBGrid;
-    SQLvulgo: TSQLQuery;
     dspvulgo: TDataSetProvider;
     cdsvulgo: TClientDataSet;
     dsvulgo: TDataSource;
@@ -32,7 +33,6 @@ type
     Label3: TLabel;
     Editlocalizaoutronome: TEdit;
     DBGridOutroNome: TDBGrid;
-    SQLoutronome: TSQLQuery;
     DSPOUTRONOME: TDataSetProvider;
     CDSOUTRONOME: TClientDataSet;
     DSOUTRONOEM: TDataSource;
@@ -45,14 +45,12 @@ type
     BitBtn4: TBitBtn;
     Editfiliacao: TEdit;
     RadioGroupfiliacao: TRadioGroup;
-    Sqlfiliacao: TSQLQuery;
     Dspfiliacao: TDataSetProvider;
     Cdsfiliacao: TClientDataSet;
     Dsfiliacao: TDataSource;
     RadioGroupTipoLocalizar: TRadioGroup;
     PanelFoto: TPanel;
     DBImage1: TDBImage;
-    SqlCadastro: TSQLQuery;
     DspCadastro: TDataSetProvider;
     CdsCadastro: TClientDataSet;
     DsCadastro: TDataSource;
@@ -60,6 +58,13 @@ type
     ToolButtonJuridico: TToolButton;
     DBGrid1: TDBGrid;
     RadioGroupFiltro: TRadioGroup;
+    Sqlfiliacao: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SQLvulgo: TFDQuery;
+    SQLoutronome: TFDQuery;
+    SqlSelectInterno: TFDQuery;
+    SqlCadastro: TFDQuery;
+    RadioGroupUnidade: TCheckListBox;
     procedure EditLocalizarChange(Sender: TObject);
     procedure RadioGroupStatusClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -68,9 +73,8 @@ type
     procedure EditfiliacaoChange(Sender: TObject);
     procedure RadioGroupfiliacaoClick(Sender: TObject);
     procedure TabSheet4Show(Sender: TObject);
-    procedure DBGridConsultaDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridConsultaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridVulgoDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridOutroNomeDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -81,8 +85,10 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure DsCadastroDataChange(Sender: TObject; Field: TField);
     procedure RadioGroupTipoLocalizarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
+    function TemItemMarcado(): boolean;
   public
     { Public declarations }
   end;
@@ -98,11 +104,12 @@ uses Lib, DmPrincipal, MenuRelatorio;
 
 procedure TFrmConsultaInterno.EditLocalizarChange(Sender: TObject);
 begin
-  //   if length(TEdit(sender).Text)<3 then
-  //     Exit;
+  // if length(TEdit(sender).Text)<3 then
+  // Exit;
 
-  SQLoutronome.sql.text := SqlSelectInterno.SQL.Text + ' where upper(OUTRO_NOME) like upper('
-    + qs(Editlocalizaoutronome.text + '%') + ') order by nome_interno';
+  SQLoutronome.sql.text := SqlSelectInterno.sql.text +
+    ' where upper(OUTRO_NOME) like upper(' +
+    qs(Editlocalizaoutronome.text + '%') + ') order by nome_interno';
 
   DSOUTRONOEM.DataSet.Close;
   DSOUTRONOEM.DataSet.Open;
@@ -112,11 +119,25 @@ end;
 procedure TFrmConsultaInterno.RadioGroupStatusClick(Sender: TObject);
 begin
 
-  //O evendo onChange do editLocalizar está chamando o evento Edit1Change() ao inves do EditLocalizarChange()
+  // O evendo onChange do editLocalizar está chamando o evento Edit1Change() ao inves do EditLocalizarChange()
   Edit1Change(nil);
-  if EditLocalizar.CanFocus then
-    EditLocalizar.SetFocus;
+  if Editlocalizar.CanFocus then
+    Editlocalizar.SetFocus;
 
+end;
+
+procedure TFrmConsultaInterno.FormCreate(Sender: TObject);
+var
+  Sigla: Variant;
+begin
+  Sigla := Dm.SQLConnect.ExecSQLScalar
+    ('SELECT u.sigla from unidade_penal u where u.nome_up = ''' +
+    GLOBAL_NOME_UP + '''');
+  RadioGroupUnidade.Items.Clear;
+  if not VarIsNull(Sigla) then
+    RadioGroupUnidade.Items.Add(VarToStr(Sigla))
+  else
+    RadioGroupUnidade.Items.Add('Na unidade');
 end;
 
 procedure TFrmConsultaInterno.FormShow(Sender: TObject);
@@ -145,17 +166,18 @@ begin
   Edit1Change(nil);
   DsCadastro.DataSet.Close;
   DsCadastro.DataSet.Open;
-  EditLocalizar.SetFocus;
+  Editlocalizar.SetFocus;
 
 end;
 
 procedure TFrmConsultaInterno.EditlocalizarvulgoChange(Sender: TObject);
 begin
-  //   if length(TEdit(sender).Text)<3 then
-  //     Exit;
+  // if length(TEdit(sender).Text)<3 then
+  // Exit;
 
-  SQLvulgo.sql.text := SqlSelectInterno.SQL.Text + ' where upper(vulgo) like upper('
-    + qs(Editlocalizarvulgo.text + '%') + ') order by nome_interno';
+  SQLvulgo.sql.text := SqlSelectInterno.sql.text +
+    ' where upper(vulgo) like upper(' + qs(Editlocalizarvulgo.text + '%') +
+    ') order by nome_interno';
 
   dsvulgo.DataSet.Close;
   dsvulgo.DataSet.Open;
@@ -168,27 +190,41 @@ var
 begin
 
   case RadioGroupStatus.ItemIndex of
-    0: Status := ' interno.st = ''A'' ';
-    1: Status := ' 1 = 1 ';
+    0:
+      status := ' interno.st = ''A'' ';
+    1:
+      status := ' 1 = 1 ';
   end;
 
   case RadioGroupTipoLocalizar.ItemIndex of
-    0: Campo := 'RGI';
-    1: Campo := 'NOME_INTERNO';
+    0:
+      Campo := 'RGI';
+    1:
+      Campo := 'NOME_INTERNO';
   end;
 
   if RadioGroupTipoLocalizar.ItemIndex = 0 then
   begin
-    SqlConsulta.sql.text := SqlSelectInterno.SQL.Text + ' where ' + Status
-      + ' and interno.' + campo + ' = ' + qs(EditLocalizar.text)
-      + ' order by interno.nome_interno ';
+    if TemItemMarcado() then
+      SqlConsulta.sql.text := SqlSelectInterno.sql.text + ' where ' + status +
+        ' and interno.' + Campo + ' = ' + qs(Editlocalizar.text) + ' and unidade_penal.nome_up ='+ qs(GLOBAL_NOME_UP) +
+        ' order by interno.nome_interno '
+    else
+      SqlConsulta.sql.text := SqlSelectInterno.sql.text + ' where ' + status +
+        ' and interno.' + Campo + ' = ' + qs(Editlocalizar.text) +
+        ' order by interno.nome_interno ';
   end;
 
   if RadioGroupTipoLocalizar.ItemIndex = 1 then
   begin
-    SqlConsulta.sql.text := SqlSelectInterno.SQL.Text + ' where ' + Status
-      + ' and interno.' + campo + ' like ' + qs(EditLocalizar.text + '%')
-      + ' order by interno.nome_interno ';
+    if TemItemMarcado() then
+      SqlConsulta.sql.text := SqlSelectInterno.sql.text + ' where ' + status +
+        ' and interno.' + Campo + ' like ' + qs(Editlocalizar.text + '%') +  ' and unidade_penal.nome_up ='+ qs(GLOBAL_NOME_UP) +
+        ' order by interno.nome_interno '
+    else
+      SqlConsulta.sql.text := SqlSelectInterno.sql.text + ' where ' + status +
+        ' and interno.' + Campo + ' like ' + qs(Editlocalizar.text + '%') +
+        ' order by interno.nome_interno ';
   end;
 
   DsConsulta.DataSet.Close;
@@ -202,43 +238,56 @@ var
   filtro: string;
 begin
 
-  //   if length(TEdit(sender).Text)<3 then
-  //     Exit;
+  // if length(TEdit(sender).Text)<3 then
+  // Exit;
 
   case RadioGroupfiliacao.ItemIndex of
-    0: Status := 'mae';
-    1: Status := 'pai';
+    0:
+      status := 'mae';
+    1:
+      status := 'pai';
   end;
 
   case RadioGroupFiltro.ItemIndex of
-    0: filtro := 'A';
-    1: filtro := 'I';
+    0:
+      filtro := 'A';
+    1:
+      filtro := 'I';
   end;
 
-  if Status = 'mae' then
+  if status = 'mae' then
   begin
 
     if filtro = 'A' then
     begin
-      Sqlfiliacao.sql.text := SqlSelectInterno.SQL.Text + ' where upper(interno.mae) like upper('
-        + qs(Editfiliacao.text + '%') + ') And interno.st=''A'' AND interno.id_up = ''' + IntTOStr(GLOBAL_ID_UP)  + ''' order by interno.mae, interno.nome_interno ';
-    end else
+      Sqlfiliacao.sql.text := SqlSelectInterno.sql.text +
+        ' where upper(interno.mae) like upper(' + qs(Editfiliacao.text + '%') +
+        ') And interno.st=''A'' AND interno.id_up = ''' + IntTOStr(GLOBAL_ID_UP)
+        + ''' order by interno.mae, interno.nome_interno ';
+    end
+    else
     begin
-      Sqlfiliacao.sql.text := SqlSelectInterno.SQL.Text + ' where upper(interno.mae) like upper('
-        + qs(Editfiliacao.text + '%') + ') order by interno.mae, interno.nome_interno ';
+      Sqlfiliacao.sql.text := SqlSelectInterno.sql.text +
+        ' where upper(interno.mae) like upper(' + qs(Editfiliacao.text + '%') +
+        ') order by interno.mae, interno.nome_interno ';
     end;
 
-  end else
+  end
+  else
   begin
 
     if filtro = 'A' then
     begin
-      Sqlfiliacao.sql.text := SqlSelectInterno.SQL.Text + ' where upper(interno.pai) like upper('
-      + qs(Editfiliacao.text + '%') + ') and interno.st=''A'' AND interno.id_up = ''' + IntTOStr(GLOBAL_ID_UP)  + ''' order by interno.pai, interno.nome_interno ';
-    end else
+      Sqlfiliacao.sql.text := SqlSelectInterno.sql.text +
+        ' where upper(interno.pai) like upper(' + qs(Editfiliacao.text + '%') +
+        ') and interno.st=''A'' AND interno.id_up = ''' + IntTOStr(GLOBAL_ID_UP)
+        + ''' order by interno.pai, interno.nome_interno ';
+    end
+    else
     begin
-      Sqlfiliacao.sql.text := SqlSelectInterno.SQL.Text + ' where upper(interno.pai) like upper('
-      + qs(Editfiliacao.text + '%') + ') order by interno.pai, interno.nome_interno ';
+      Sqlfiliacao.sql.text := SqlSelectInterno.sql.text +
+        ' where upper(interno.pai) like upper(' + qs(Editfiliacao.text + '%') +
+        ') order by interno.pai, interno.nome_interno ';
     end;
 
   end;
@@ -250,7 +299,7 @@ end;
 
 procedure TFrmConsultaInterno.RadioGroupfiliacaoClick(Sender: TObject);
 begin
-  Editfiliacao.Text := '';
+  Editfiliacao.text := '';
   EditfiliacaoChange(nil);
   if Editfiliacao.CanFocus then
     Editfiliacao.SetFocus;
@@ -262,8 +311,7 @@ begin
 end;
 
 procedure TFrmConsultaInterno.DBGridConsultaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if (State <> [gdSelected]) and (State <> [gdSelected, gdFocused]) then
   begin
@@ -272,30 +320,29 @@ begin
 
     if odd(TDBGrid(Sender).DataSource.DataSet.Recno) then
     begin
-      TDBGrid(Sender).Canvas.Brush.color := cl3DLight;
+      TDBGrid(Sender).Canvas.Brush.Color := cl3DLight;
     end
     else
     begin
-      TDBGrid(Sender).Canvas.Brush.color := clWhite;
+      TDBGrid(Sender).Canvas.Brush.Color := clWhite;
     end;
 
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
 
   end
   else
   begin
-    TDBGrid(Sender).Canvas.Brush.color := $00854F3F;
+    TDBGrid(Sender).Canvas.Brush.Color := $00854F3F;
     TDBGrid(Sender).Canvas.Font.Color := clWhite;
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
   end;
 
 end;
 
 procedure TFrmConsultaInterno.DBGridVulgoDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if (State <> [gdSelected]) and (State <> [gdSelected, gdFocused]) then
   begin
@@ -304,30 +351,29 @@ begin
 
     if odd(TDBGrid(Sender).DataSource.DataSet.Recno) then
     begin
-      TDBGrid(Sender).Canvas.Brush.color := cl3DLight;
+      TDBGrid(Sender).Canvas.Brush.Color := cl3DLight;
     end
     else
     begin
-      TDBGrid(Sender).Canvas.Brush.color := clWhite;
+      TDBGrid(Sender).Canvas.Brush.Color := clWhite;
     end;
 
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
 
   end
   else
   begin
-    TDBGrid(Sender).Canvas.Brush.color := $00854F3F;
+    TDBGrid(Sender).Canvas.Brush.Color := $00854F3F;
     TDBGrid(Sender).Canvas.Font.Color := clWhite;
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
   end;
 
 end;
 
 procedure TFrmConsultaInterno.DBGridOutroNomeDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if (State <> [gdSelected]) and (State <> [gdSelected, gdFocused]) then
   begin
@@ -336,30 +382,29 @@ begin
 
     if odd(TDBGrid(Sender).DataSource.DataSet.Recno) then
     begin
-      TDBGrid(Sender).Canvas.Brush.color := cl3DLight;
+      TDBGrid(Sender).Canvas.Brush.Color := cl3DLight;
     end
     else
     begin
-      TDBGrid(Sender).Canvas.Brush.color := clWhite;
+      TDBGrid(Sender).Canvas.Brush.Color := clWhite;
     end;
 
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
 
   end
   else
   begin
-    TDBGrid(Sender).Canvas.Brush.color := $00854F3F;
+    TDBGrid(Sender).Canvas.Brush.Color := $00854F3F;
     TDBGrid(Sender).Canvas.Font.Color := clWhite;
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
   end;
 
 end;
 
 procedure TFrmConsultaInterno.DBGridFiliacaoDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   if (State <> [gdSelected]) and (State <> [gdSelected, gdFocused]) then
   begin
@@ -368,22 +413,22 @@ begin
 
     if odd(TDBGrid(Sender).DataSource.DataSet.Recno) then
     begin
-      TDBGrid(Sender).Canvas.Brush.color := cl3DLight;
+      TDBGrid(Sender).Canvas.Brush.Color := cl3DLight;
     end
     else
     begin
-      TDBGrid(Sender).Canvas.Brush.color := clWhite;
+      TDBGrid(Sender).Canvas.Brush.Color := clWhite;
     end;
 
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
 
   end
   else
   begin
-    TDBGrid(Sender).Canvas.Brush.color := $00854F3F;
+    TDBGrid(Sender).Canvas.Brush.Color := $00854F3F;
     TDBGrid(Sender).Canvas.Font.Color := clWhite;
-    TDBGrid(Sender).Canvas.FillRect(rect);
+    TDBGrid(Sender).Canvas.FillRect(Rect);
     TDBGrid(Sender).DefaultDrawDataCell(Rect, Column.Field, State);
   end;
 
@@ -404,15 +449,19 @@ begin
     begin
       frxReport1.LoadFromFile(rel1);
       frxReport1.Variables.DeleteVariable('GLOBAL_ID_INTERNO');
-      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_ID_INTERNO', GLOBAL_ID_INTERNO);
+      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_ID_INTERNO',
+        GLOBAL_ID_INTERNO);
       frxReport1.Variables.DeleteVariable('ID_UP');
       frxReport1.Variables.AddVariable('SIAP', 'ID_UP', GLOBAL_ID_UP);
       frxReport1.Variables.DeleteVariable('GLOBAL_ORGAO');
-      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_ORGAO', QS(GLOBAL_ORGAO));
+      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_ORGAO',
+        qs(GLOBAL_ORGAO));
       frxReport1.Variables.DeleteVariable('GLOBAL_DEPARTAMENTO');
-      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_DEPARTAMENTO', Qs(GLOBAL_DEPARTAMENTO));
+      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_DEPARTAMENTO',
+        qs(GLOBAL_DEPARTAMENTO));
       frxReport1.Variables.DeleteVariable('GLOBAL_DIRETORIA');
-      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_DIRETORIA', Qs(GLOBAL_DIRETORIA));
+      frxReport1.Variables.AddVariable('SIAP', 'GLOBAL_DIRETORIA',
+        qs(GLOBAL_DIRETORIA));
       frxReport1.ShowReport();
     end;
 
@@ -425,7 +474,7 @@ end;
 
 procedure TFrmConsultaInterno.PageControl1Change(Sender: TObject);
 begin
-  DsCadastro.dataset.close;
+  DsCadastro.DataSet.Close;
   if PageControl1.ActivePageIndex = 0 then
     CdsCadastro.MasterSource := DsConsulta;
   if PageControl1.ActivePageIndex = 1 then
@@ -434,7 +483,7 @@ begin
     CdsCadastro.MasterSource := DSOUTRONOEM;
   if PageControl1.ActivePageIndex = 3 then
     CdsCadastro.MasterSource := Dsfiliacao;
-  DsCadastro.dataset.open;
+  DsCadastro.DataSet.Open;
 
 end;
 
@@ -442,7 +491,7 @@ procedure TFrmConsultaInterno.DsCadastroDataChange(Sender: TObject;
   Field: TField);
 begin
 
-  with DsCadastro.dataset do
+  with DsCadastro.DataSet do
   begin
     GLOBAL_ID_INTERNO := -1;
 
@@ -458,15 +507,26 @@ begin
 
 end;
 
-procedure TFrmConsultaInterno.RadioGroupTipoLocalizarClick(
-  Sender: TObject);
+procedure TFrmConsultaInterno.RadioGroupTipoLocalizarClick(Sender: TObject);
 begin
-  if EditLocalizar.CanFocus then
+  if Editlocalizar.CanFocus then
   begin
-    EditLocalizar.SetFocus;
-    EditLocalizar.Text := '';
+    Editlocalizar.SetFocus;
+    Editlocalizar.text := '';
   end;
 end;
 
-end.
+function TFrmConsultaInterno.TemItemMarcado(): boolean;
+var
+  i: Integer;
+begin
+  for i := 0 to FrmConsultaInterno.RadioGroupUnidade.Count - 1 do
+    if FrmConsultaInterno.RadioGroupUnidade.Checked[i] then
+    begin
+      Result := True;
+      exit; // sai do loop assim que encontrar um item marcado
+    end;
+  Result := False; // nenhum item marcado
+end;
 
+end.

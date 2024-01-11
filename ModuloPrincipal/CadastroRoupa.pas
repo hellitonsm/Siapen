@@ -6,14 +6,16 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, adpDBDateTimePicker, Mask, Buttons, System.ImageList;
+  ToolWin, adpDBDateTimePicker, Mask, Buttons, System.ImageList,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmRoupa = class(TFrmModeloCadastro)
     Label3: TLabel;
     Label4: TLabel;
     DBEditCodigo: TDBEdit;
-    SQLRoupasInterno: TSQLQuery;
     CDSRoupasInterno: TClientDataSet;
     DSRoupasInterno: TDataSource;
     DSPRoupasInterno: TDataSetProvider;
@@ -35,9 +37,7 @@ type
     DBGrid1: TDBGrid;
     Label2: TLabel;
     Button1: TButton;
-    SqlSelectRoupaInterno: TSQLQuery;
     DBGrid2: TDBGrid;
-    SqlConsulta: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -49,6 +49,9 @@ type
     CdsConsultaID_ROUPAS: TIntegerField;
     DBEdit1: TDBEdit;
     Timer1: TTimer;
+    SQLRoupasInterno: TFDQuery;
+    SqlSelectRoupaInterno: TFDQuery;
+    SqlConsulta: TFDQuery;
     procedure EditprontuarioExit(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure NovoClick(Sender: TObject);
@@ -127,6 +130,8 @@ begin
   dsroupasinterno.DataSet.Open;
 
   Editprontuario.Text := '';
+
+  dsConsulta.DataSet.Open;
 end;
 
 procedure TFrmRoupa.NovoClick(Sender: TObject);
@@ -142,14 +147,13 @@ end;
 procedure TFrmRoupa.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-  inherited;
   if dscadastro.DataSet.State in [dsedit] then
   begin
     showmessage('Não é possível inserir novos registros em modo de edição!!');
     exit;
   end;
   dsroupasinterno.DataSet.Append;
-  dsroupasinterno.DataSet.FieldByName('id_roupas_interno').AsInteger := 0;
+  dsroupasinterno.DataSet.FieldByName('id_roupas_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_roupas_interno,1) FROM RDB$DATABASE');
   dsroupasinterno.DataSet.FieldByName('id_roupa').AsInteger := DsCadastro.DataSet.FieldByName('id_roupas').AsInteger;
   dsroupasinterno.DataSet.FieldByName('qtde').AsString := Edit1.text;
   dsroupasinterno.DataSet.FieldByName('id_vestimentas').AsInteger := DBLookupComboBox1.KeyValue;
@@ -167,6 +171,8 @@ begin
   dsroupasinterno.DataSet.Close;
   dsroupasinterno.DataSet.Open;
   DsCadastro.DataSet.Last;
+  DsConsulta.DataSet.Close;
+  DsConsulta.DataSet.Open;
 end;
 
 procedure TFrmRoupa.SpeedButton1Click(Sender: TObject);
@@ -221,6 +227,8 @@ end;
 
 procedure TFrmRoupa.FormCreate(Sender: TObject);
 begin
+
+  SqlConsulta.sql.text := SqlConsulta.sql.text + ' where i.id_up=' + inttostr(GLOBAL_ID_UP) + ' ORDER BY r.data desc, r.id_roupas desc ';
   inherited;
 
   {Verifica as permissões que o usuário possui para esta tela
@@ -296,6 +304,8 @@ begin
     Novo.Visible := False;
     Excluir.Visible := False;
   end;
+
+
 end;
 
 procedure TFrmRoupa.DsCadastroDataChange(Sender: TObject; Field: TField);

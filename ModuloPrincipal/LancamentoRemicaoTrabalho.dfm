@@ -1,28 +1,32 @@
 inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
   Left = 257
   Top = 131
-  Height = 582
   Caption = 'Lan'#231'amento Remi'#231#227'o Trabalho'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 493
+    ExplicitHeight = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 475
+      Height = 515
+      ExplicitHeight = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 475
+      Top = 515
       Hints.Strings = ()
+      ExplicitTop = 514
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 493
+    ExplicitWidth = 825
+    ExplicitHeight = 532
     inherited PageControlModeloCadastro: TPageControl
-      Height = 493
+      ExplicitWidth = 825
+      ExplicitHeight = 532
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Height = 465
+          Width = 821
+          Height = 505
+          ExplicitWidth = 821
+          ExplicitHeight = 505
           object Label2: TLabel
             Left = 24
             Top = 16
@@ -67,8 +71,8 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
             Top = 32
             Width = 97
             Height = 21
-            Date = 41106.299291168980000000
-            Time = 41106.299291168980000000
+            Date = 41106.000000000000000000
+            Time = 0.299291168979834800
             TabOrder = 1
             ReadOnly = False
           end
@@ -147,8 +151,8 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
                 Top = 88
                 Width = 97
                 Height = 21
-                Date = 41058.395588993060000000
-                Time = 41058.395588993060000000
+                Date = 41058.000000000000000000
+                Time = 0.395588993058481700
                 TabOrder = 2
               end
               object DateTimePickerdatafinal: TDateTimePicker
@@ -156,8 +160,8 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
                 Top = 88
                 Width = 97
                 Height = 21
-                Date = 41058.395606736110000000
-                Time = 41058.395606736110000000
+                Date = 41058.000000000000000000
+                Time = 0.395606736106856300
                 TabOrder = 3
               end
               object Editdiastrabalhado: TEdit
@@ -220,9 +224,6 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
                 Font.Height = -13
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 5
-                OnClick = BitBtn1Click
                 Glyph.Data = {
                   DE010000424DDE01000000000000760000002800000024000000120000000100
                   0400000000006801000000000000000000001000000000000000000000000000
@@ -241,6 +242,9 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
                   333A333333333333333338330000333333333333333333333333333333333333
                   0000}
                 NumGlyphs = 2
+                ParentFont = False
+                TabOrder = 5
+                OnClick = BitBtn1Click
               end
               object DBLookupComboBoxinterno: TDBLookupComboBox
                 Left = 136
@@ -265,19 +269,27 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 821
+          ExplicitWidth = 817
+        end
         inherited PanelConsulta: TPanel
-          Height = 431
+          Width = 821
+          Height = 471
+          ExplicitWidth = 817
+          ExplicitHeight = 470
           inherited DBGridConsulta: TDBGrid
-            Height = 429
+            Width = 819
+            Height = 469
           end
         end
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    Top = 525
+  inherited PanelTituloModeloCadastro: TPanel
+    ExplicitWidth = 940
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM lancamento_remicao_trabalho'
@@ -296,26 +308,6 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
   inherited DsCadastro: TDataSource
     Left = 604
     Top = 8
-  end
-  object SQLcalc_trabalho: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_LANCAMENTO_REMICAO_TRABALHO'
-        ParamType = ptUnknown
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM calc_setor_trabalho'
-      
-        'where ID_LANCAMENTO_REMICAO_TRABALHO = :ID_LANCAMENTO_REMICAO_TR' +
-        'ABALHO'
-      'order by data_inicial desc')
-    SQLConnection = DM.SQLConnect
-    Left = 636
-    Top = 121
   end
   object dspcalc_trabalho: TDataSetProvider
     DataSet = SQLcalc_trabalho
@@ -389,5 +381,23 @@ inherited FrmLancamentoRemicaoTrabalho: TFrmLancamentoRemicaoTrabalho
     DataSet = cdscalc_trabalho
     Left = 716
     Top = 121
+  end
+  object SQLcalc_trabalho: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM CALC_SETOR_TRABALHO'
+      
+        'where ID_LANCAMENTO_REMICAO_TRABALHO = :ID_LANCAMENTO_REMICAO_TR' +
+        'ABALHO'
+      'order by data_inicial desc')
+    Left = 636
+    Top = 121
+    ParamData = <
+      item
+        Name = 'ID_LANCAMENTO_REMICAO_TRABALHO'
+        ParamType = ptInput
+      end>
   end
 end

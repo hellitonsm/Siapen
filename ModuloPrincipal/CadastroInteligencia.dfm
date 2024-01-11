@@ -1,37 +1,75 @@
 inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
   Left = 351
   Top = 113
-  Width = 877
-  Height = 613
   Caption = 'Intelig'#234'ncia / Hist'#243'ricos / Parecer / Documentos'
-  PixelsPerInch = 96
+  ClientHeight = 581
+  ClientWidth = 932
+  ExplicitWidth = 948
+  ExplicitHeight = 640
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 497
+    Height = 523
+    ExplicitHeight = 523
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 479
+      Height = 505
+      ExplicitHeight = 505
+      inherited Novo: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Editar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Cancelar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Salvar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Excluir: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Fechar: TToolButton
+        ExplicitWidth = 99
+      end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 479
+      Top = 505
       Hints.Strings = ()
+      ExplicitTop = 505
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 746
-    Height = 497
+    Width = 817
+    Height = 523
+    ExplicitWidth = 817
+    ExplicitHeight = 523
+    inherited Image2: TImage
+      Width = 861
+      ExplicitWidth = 861
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 746
-      Height = 497
+      Width = 817
+      Height = 523
+      ExplicitWidth = 817
+      ExplicitHeight = 523
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelCadastro: TPanel
-          Width = 738
-          Height = 469
+          Width = 809
+          Height = 495
+          ExplicitWidth = 809
+          ExplicitHeight = 495
           inherited PageControlPrincipal: TPageControl
-            Width = 736
-            Height = 467
+            Width = 807
+            Height = 493
             ActivePage = TabSheet2
+            ExplicitWidth = 807
+            ExplicitHeight = 493
             inherited TabSheetPrincipal: TTabSheet
               Enabled = True
+              ExplicitWidth = 799
+              ExplicitHeight = 465
               inherited Label2: TLabel
                 Enabled = True
               end
@@ -202,6 +240,8 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
               end
             end
             inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
               inherited Label11: TLabel
                 Enabled = True
               end
@@ -416,7 +456,6 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
                 Top = 148
                 Width = 120
                 Height = 21
-                Date = 0.302563541663403200
                 Time = 0.302563541663403200
                 TabOrder = 3
               end
@@ -551,7 +590,6 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
                 Width = 135
                 Height = 21
                 Style = csDropDownList
-                ItemHeight = 13
                 TabOrder = 4
                 Items.Strings = (
                   'DEFERIDO'
@@ -730,48 +768,56 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelLocalizaConsulta: TPanel
-          Width = 738
+          Width = 809
+          ExplicitWidth = 809
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 609
+            Left = 680
             TabOrder = 3
+            ExplicitLeft = 680
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 738
-          Height = 427
+          Width = 809
+          Height = 453
+          ExplicitWidth = 809
+          ExplicitHeight = 453
           inherited DBGridConsulta: TDBGrid
-            Width = 736
-            Height = 425
+            Width = 807
+            Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 736
-            Height = 425
-            PanelHeight = 85
-            PanelWidth = 719
+            Width = 807
+            Height = 451
+            PanelWidth = 790
+            ExplicitLeft = 2
+            ExplicitWidth = 807
+            ExplicitHeight = 451
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 861
-    inherited Image2: TImage
-      Width = 861
-    end
+    Width = 932
+    ExplicitWidth = 932
   end
   inherited StatusBar1: TStatusBar
-    Top = 529
-    Width = 861
+    Top = 555
+    Width = 932
+    ExplicitTop = 555
+    ExplicitWidth = 932
   end
-  inherited SqlCadastro: TSQLQuery
-    Left = 680
+  inherited SqlCadastro: TFDQuery
+    Left = 672
     Top = 16
   end
   inherited DspCadastro: TDataSetProvider
@@ -795,13 +841,14 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
   inherited DspConsulta: TDataSetProvider
     Top = 65523
   end
-  inherited SqlConsulta: TSQLQuery
+  inherited SqlConsulta: TFDQuery
     Top = 65523
   end
   inherited OpenDialogCapturarFoto: TOpenDialog
     Left = 687
+    Top = 65520
   end
-  object SQLinteligencia: TSQLQuery
+  object SQLinteligenciaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -819,7 +866,7 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
     Top = 8
   end
   object DSPinteligencia: TDataSetProvider
-    DataSet = SQLinteligencia
+    DataSet = SQLinteligenciaold
     Left = 524
     Top = 8
   end
@@ -892,7 +939,7 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
     Left = 580
     Top = 8
   end
-  object SqlArquivos: TSQLQuery
+  object SqlArquivosold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -909,7 +956,7 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
     Left = 120
   end
   object DspArquivos: TDataSetProvider
-    DataSet = SqlArquivos
+    DataSet = SqlArquivosold
     Left = 148
   end
   object CdsArquivos: TClientDataSet
@@ -1003,11 +1050,11 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
     Top = 64
   end
   object DspUP: TDataSetProvider
-    DataSet = SqlUP
+    DataSet = SqlUPold
     Left = 724
     Top = 64
   end
-  object SqlUP: TSQLQuery
+  object SqlUPold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1016,5 +1063,46 @@ inherited FrmCadastroInteligencia: TFrmCadastroInteligencia
     SQLConnection = DM.SQLConnect
     Left = 696
     Top = 64
+  end
+  object SqlArquivos: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM arquivos'
+      'WHERE ID_INTERNO = :ID_INTERNO'
+      ''
+      '')
+    Left = 135
+    Top = 210
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLinteligencia: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM inteligencia'
+      'WHERE ID_INTERNO = :ID_INTERNO'
+      'order by data desc'
+      '')
+    Left = 496
+    Top = 147
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlUP: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM UNIDADE_PENAL'
+      'order by nome_up'
+      '')
+    Left = 704
+    Top = 139
   end
 end

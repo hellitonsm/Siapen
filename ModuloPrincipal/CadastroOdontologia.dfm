@@ -1,90 +1,61 @@
 inherited FrmCadastroOdontologia: TFrmCadastroOdontologia
   Left = 191
   Top = 51
-  Width = 902
   Caption = 'Cadastro Odontologia'
-  PixelsPerInch = 96
+  ClientHeight = 580
+  ClientWidth = 928
+  ExplicitWidth = 944
+  ExplicitHeight = 639
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 522
+    ExplicitHeight = 523
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 505
+      ExplicitHeight = 505
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 505
       Hints.Strings = ()
+      ExplicitTop = 505
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 771
+    Width = 813
+    Height = 522
+    ExplicitWidth = 813
+    ExplicitHeight = 522
+    inherited Image2: TImage
+      Width = 886
+      ExplicitWidth = 886
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 771
+      Width = 813
+      Height = 522
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 813
+      ExplicitHeight = 522
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 805
+        ExplicitHeight = 494
         inherited PanelCadastro: TPanel
-          Width = 763
+          Width = 805
+          Height = 494
+          ExplicitWidth = 805
+          ExplicitHeight = 494
           inherited PageControlPrincipal: TPageControl
-            Width = 761
+            Width = 803
+            Height = 492
             ActivePage = TabSheet1
+            ExplicitWidth = 803
+            ExplicitHeight = 492
             inherited TabSheetPrincipal: TTabSheet
-              inherited DBEdit3: TDBEdit
-                TabOrder = 4
-              end
-              inherited DBEditID_PROCEDENCIA: TDBEdit
-                TabOrder = 19
-              end
-              inherited DBLookupComboBoxID_PROCEDENCIA: TDBLookupComboBox
-                TabOrder = 20
-              end
-              inherited DBRadioGroup1: TDBRadioGroup
-                TabOrder = 6
-              end
-              inherited DBRadioGroup2: TDBRadioGroup
-                TabOrder = 18
-              end
-              inherited DBEdit7: TDBEdit
-                TabOrder = 16
-              end
-              inherited DBLookupComboBox2: TDBLookupComboBox
-                TabOrder = 17
-              end
-              inherited DBComboBox3: TDBComboBox
-                TabOrder = 15
-              end
-              inherited DBEdit86: TDBEdit
-                TabOrder = 3
-              end
-              inherited dbrgrpST: TDBRadioGroup
-                TabOrder = 5
-              end
-              inherited DBEdit4: TDBEdit
-                TabOrder = 9
-              end
-              inherited DBEdit20: TDBEdit
-                TabOrder = 10
-              end
-              inherited DBEdit29: TDBEdit
-                TabOrder = 12
-              end
-              inherited DBComboBox2: TDBComboBox
-                TabOrder = 13
-              end
-              inherited DBEditpermanencia: TDBEdit
-                TabOrder = 11
-              end
-              inherited DBLookupComboBoxFACCAO: TDBLookupComboBox
-                TabOrder = 21
-              end
-              inherited DBEdit8: TDBEdit
-                TabOrder = 24
-              end
-              inherited DBEdit31: TDBEdit
-                TabOrder = 25
-              end
-              inherited DBEdit33: TDBEdit
-                TabOrder = 26
-              end
-              inherited DBComboBox5: TDBComboBox
-                TabOrder = 27
-              end
-              inherited DBComboBox4: TDBComboBox
-                TabOrder = 28
-              end
+              ExplicitWidth = 795
+              ExplicitHeight = 464
+            end
+            inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 795
+              ExplicitHeight = 464
             end
             object TabSheet1: TTabSheet
               Caption = 'Odontologia'
@@ -101,7 +72,7 @@ inherited FrmCadastroOdontologia: TFrmCadastroOdontologia
                 Top = 33
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
+                Date = 45258.000000000000000000
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -173,45 +144,57 @@ inherited FrmCadastroOdontologia: TFrmCadastroOdontologia
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 805
+        ExplicitHeight = 494
         inherited PanelLocalizaConsulta: TPanel
-          Width = 763
+          Width = 809
+          ExplicitWidth = 809
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 634
+            Left = 680
             TabOrder = 3
+            ExplicitLeft = 680
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 763
+          Width = 809
+          Height = 453
+          ExplicitWidth = 809
+          ExplicitHeight = 453
           inherited DBGridConsulta: TDBGrid
-            Width = 761
+            Width = 807
+            Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 761
-            PanelWidth = 744
+            Width = 807
+            Height = 451
+            PanelWidth = 790
+            ExplicitWidth = 807
+            ExplicitHeight = 451
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 886
-    inherited Image2: TImage
-      Width = 886
-    end
+    Width = 928
+    ExplicitWidth = 932
   end
   inherited StatusBar1: TStatusBar
-    Width = 886
+    Top = 554
+    Width = 928
+    ExplicitTop = 555
+    ExplicitWidth = 932
   end
   inherited MainMenu1: TMainMenu
     Left = 211
   end
-  object SQLodontologia: TSQLQuery
+  object SQLodontologiaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -276,5 +259,20 @@ inherited FrmCadastroOdontologia: TFrmCadastroOdontologia
     OnDataChange = DsCadastroDataChange
     Left = 796
     Top = 8
+  end
+  object SQLodontologia: TFDQuery
+    SQL.Strings = (
+      'SELECT * '
+      'FROM historico_odontologia'
+      'WHERE ID_INTERNO = :ID_INTERNO'
+      'order by data desc'
+      '')
+    Left = 679
+    Top = 72
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

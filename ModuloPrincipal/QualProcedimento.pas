@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, ExtCtrls, StdCtrls, Buttons, Grids, DBGrids,
   FMTBcd, DB, DBClient, Provider, SqlExpr, ComCtrls, DBCtrls, mshtml,
-  OleCtrls, SHDocVw, jpeg;
+  OleCtrls, SHDocVw, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmQualProcedimento = class(TFrmModeloFormulario)
@@ -14,7 +17,7 @@ type
     Panel1: TPanel;
     BitBtnConfirma: TBitBtn;
     BitBtnCancela: TBitBtn;
-    SqlMovProcDetalhado: TSQLQuery;
+    SqlMovProcDetalhadoold: TSQLQuery;
     DspMovProcDetalhado: TDataSetProvider;
     CdsMovProcDetalhado: TClientDataSet;
     DsMovProcDetalhado: TDataSource;
@@ -39,6 +42,7 @@ type
     Label1: TLabel;
     DBRichEdit1: TDBRichEdit;
     CdsMovProcDetalhadoOCORRENCIA_HORA: TMemoField;
+    SqlMovProcDetalhado: TFDQuery;
     procedure Timer1Timer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DBGridOcorrenciaDblClick(Sender: TObject);

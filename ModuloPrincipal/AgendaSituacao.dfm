@@ -2,6 +2,8 @@ inherited FrmAgendaSituacao: TFrmAgendaSituacao
   Left = 316
   Top = 175
   Caption = 'Situa'#231#227'o'
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -12,8 +14,6 @@ inherited FrmAgendaSituacao: TFrmAgendaSituacao
     inherited PageControlModeloCadastro: TPageControl
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Height = 371
-          ExplicitHeight = 371
           object Label2: TLabel
             Left = 20
             Top = 18
@@ -53,10 +53,7 @@ inherited FrmAgendaSituacao: TFrmAgendaSituacao
       end
     end
   end
-  inherited StatusBar1: TStatusBar
-    ExplicitTop = 564
-  end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM AGENDA_SITUACAO')

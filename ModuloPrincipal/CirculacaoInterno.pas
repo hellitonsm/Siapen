@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, adpDBDateTimePicker, Mask, Buttons, Menus;
+  ToolWin, adpDBDateTimePicker, Mask, Buttons, Menus, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCirculacaoInterno = class(TFrmModeloCadastro)
@@ -18,7 +21,6 @@ type
     DBLookupComboBoxup: TDBLookupComboBox;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
-    SQLvinccirculacaopreso: TSQLQuery;
     dspvinccirculacaopreso: TDataSetProvider;
     cdsvinccirculacaopreso: TClientDataSet;
     dsvinccirculacaopreso: TDataSource;
@@ -34,7 +36,6 @@ type
     Label8: TLabel;
     SpeedButton3: TSpeedButton;
     Label10: TLabel;
-    DBLookupComboBoxinterno: TDBLookupComboBox;
     Button1: TButton;
     lbl12: TLabel;
     DBLookupComboBoxID_FUNCIONARIO: TDBLookupComboBox;
@@ -52,7 +53,6 @@ type
     PopupMenuIsolamento: TPopupMenu;
     Liberar1: TMenuItem;
     DBGrid2: TDBGrid;
-    SQLvincgeral: TSQLQuery;
     dspvincgeral: TDataSetProvider;
     cdsvincgeral: TClientDataSet;
     IntegerField1: TIntegerField;
@@ -68,6 +68,9 @@ type
     dsvincgeral: TDataSource;
     cdsvinccirculacaopresoNOME_INTERNO: TStringField;
     cdsvincgeralNOME_INTERNO: TStringField;
+    SQLvinccirculacaopreso: TFDQuery;
+    SQLvincgeral: TFDQuery;
+    DBLookupComboBoxinterno: TDBLookupComboBox;
     procedure Button1Click(Sender: TObject);
     procedure BtnincluirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -161,7 +164,7 @@ begin
   else
   begin
     dsvinccirculacaopreso.DataSet.Append;
-    dsvinccirculacaopreso.DataSet.fieldbyname('ID_VINC_CIRCULACAO_PRESO').AsInteger := 0;
+    dsvinccirculacaopreso.DataSet.fieldbyname('ID_VINC_CIRCULACAO_PRESO').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_vinc_circulacao_preso,1) FROM RDB$DATABASE');
     dsvinccirculacaopreso.DataSet.fieldbyname('ID_CIRCULACAO_PRESO').AsInteger :=
       DsCadastro.DataSet.fieldbyname('ID_CIRCULACAO_PRESO').AsInteger;
     dsvinccirculacaopreso.DataSet.fieldbyname('hora_saida').AsString := FormatDateTime('hh:mm', now);

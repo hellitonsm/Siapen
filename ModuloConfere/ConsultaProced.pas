@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, Grids, DBGrids,
-  ComCtrls, Mask, DBCtrls;
+  ComCtrls, Mask, DBCtrls, Data.DB;
 
 type
   TFrmConsultaProced = class(TFrmModeloFormulario)
@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses Dm_Proced, DB;
+uses Dm_Proced;
 
 {$R *.dfm}
 
@@ -51,7 +51,7 @@ var
 begin
   inherited;
 
-  DmProced.Proced.Connected := false;
+{  DmProced.Proced.Connected := false;
   DmProced.SpBuscaEnvolvido.close;
   DmProced.Proced.Connected := true;
   DmProced.SpBuscaEnvolvido.Parameters[1].Value := Null;
@@ -69,7 +69,8 @@ begin
     DmProced.SpAntecedentesCriminais.Parameters[2].Value := 1; //;
     DmProced.SpAntecedentesCriminais.Open;
   end;
-
+   }
+   iCod := 0;
 end;
 
 procedure TFrmConsultaProced.Button1Click(Sender: TObject);
@@ -77,7 +78,7 @@ var
   iCod: integer;
 begin
   inherited;
-  DmProced.Proced.Connected := false;
+ { DmProced.Proced.Connected := false;
   DmProced.Proced.Connected := true;
 
   DmProced.SpAntecedentesCriminais.close;
@@ -85,33 +86,34 @@ begin
   DmProced.SpAntecedentesCriminais.Parameters[1].Value := icod; //;
   DmProced.SpAntecedentesCriminais.Parameters[2].Value := 1; //;
   DmProced.SpAntecedentesCriminais.Open;
-
+ }
+ iCod := 0;
 end;
 
 procedure TFrmConsultaProced.EditNumeroProcedKeyPress(Sender: TObject;
   var Key: Char);
 begin
   inherited;
-  if not (key in ['0'..'9']) then
-    key := #0;
+ { if not (key in ['0'..'9']) then
+    key := #0;       }
 end;
 
 procedure TFrmConsultaProced.FormCreate(Sender: TObject);
 begin
   inherited;
-  DmProced.Proced.Connected := false;
+  {DmProced.Proced.Connected := false;
   DmProced.SpAntecedentesCriminais.close;
-  DmProced.SpAntecedentesCriminais.close;
+  DmProced.SpAntecedentesCriminais.close;  }
 end;
 
 procedure TFrmConsultaProced.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
-  DmProced.Proced.Connected := false;
+ { DmProced.Proced.Connected := false;
   DmProced.SpAntecedentesCriminais.close;
   DmProced.SpAntecedentesCriminais.close;
-
+  }
 end;
 
 end.

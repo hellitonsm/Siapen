@@ -2,8 +2,8 @@ object FrmModeloCadastro: TFrmModeloCadastro
   Left = 281
   Top = 226
   Caption = 'Modelo de Cadastro'
-  ClientHeight = 584
-  ClientWidth = 944
+  ClientHeight = 583
+  ClientWidth = 940
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,16 +23,16 @@ object FrmModeloCadastro: TFrmModeloCadastro
     Left = 0
     Top = 32
     Width = 115
-    Height = 533
+    Height = 532
     Align = alLeft
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitHeight = 532
+    ExplicitHeight = 531
     object ToolBarModeloCadastro: TToolBar
       Left = 0
       Top = 0
       Width = 115
-      Height = 515
+      Height = 514
       Align = alClient
       ButtonHeight = 38
       ButtonWidth = 107
@@ -51,7 +51,7 @@ object FrmModeloCadastro: TFrmModeloCadastro
       ShowCaptions = True
       TabOrder = 0
       Transparent = False
-      ExplicitHeight = 514
+      ExplicitHeight = 513
       object Novo: TToolButton
         Left = 6
         Top = 0
@@ -103,27 +103,27 @@ object FrmModeloCadastro: TFrmModeloCadastro
     end
     object DBNavigator1: TDBNavigator
       Left = 0
-      Top = 515
+      Top = 514
       Width = 115
       Height = 18
       DataSource = DsCadastro
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alBottom
       TabOrder = 1
-      ExplicitTop = 514
+      ExplicitTop = 513
     end
   end
   object PanelModeloCadastro: TPanel
     Left = 115
     Top = 32
-    Width = 829
-    Height = 533
+    Width = 825
+    Height = 532
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PanelModeloCadastro'
     TabOrder = 2
-    ExplicitWidth = 825
-    ExplicitHeight = 532
+    ExplicitWidth = 821
+    ExplicitHeight = 531
     object Image2: TImage
       Left = 504
       Top = 6
@@ -133,24 +133,26 @@ object FrmModeloCadastro: TFrmModeloCadastro
     object PageControlModeloCadastro: TPageControl
       Left = 0
       Top = 0
-      Width = 829
-      Height = 533
-      ActivePage = TabSheetConsulta
+      Width = 825
+      Height = 532
+      ActivePage = TabSheetCadastro
       Align = alClient
       TabOrder = 0
       TabWidth = 150
       OnChange = PageControlModeloCadastroChange
-      ExplicitWidth = 825
-      ExplicitHeight = 532
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       object TabSheetCadastro: TTabSheet
         Caption = 'Cadastro'
         object PanelCadastro: TPanel
           Left = 0
           Top = 0
-          Width = 821
-          Height = 505
+          Width = 817
+          Height = 504
           Align = alClient
           TabOrder = 0
+          ExplicitWidth = 813
+          ExplicitHeight = 503
         end
       end
       object TabSheetConsulta: TTabSheet
@@ -159,11 +161,10 @@ object FrmModeloCadastro: TFrmModeloCadastro
         object PanelLocalizaConsulta: TPanel
           Left = 0
           Top = 0
-          Width = 821
+          Width = 817
           Height = 34
           Align = alTop
           TabOrder = 0
-          ExplicitWidth = 817
           object Label1: TLabel
             Left = 8
             Top = 8
@@ -192,18 +193,16 @@ object FrmModeloCadastro: TFrmModeloCadastro
         object PanelConsulta: TPanel
           Left = 0
           Top = 34
-          Width = 821
-          Height = 471
+          Width = 817
+          Height = 470
           Align = alClient
           TabOrder = 1
           OnDblClick = CancelarClick
-          ExplicitWidth = 817
-          ExplicitHeight = 470
           object DBGridConsulta: TDBGrid
             Left = 1
             Top = 1
-            Width = 819
-            Height = 469
+            Width = 815
+            Height = 468
             Align = alClient
             DataSource = DsCadastro
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -226,7 +225,7 @@ object FrmModeloCadastro: TFrmModeloCadastro
   object PanelTituloModeloCadastro: TPanel
     Left = 0
     Top = 0
-    Width = 944
+    Width = 940
     Height = 32
     Align = alTop
     BevelOuter = bvNone
@@ -239,7 +238,7 @@ object FrmModeloCadastro: TFrmModeloCadastro
     ParentFont = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 940
+    ExplicitWidth = 936
     object Image3: TImage
       Left = 12
       Top = -1
@@ -969,8 +968,8 @@ object FrmModeloCadastro: TFrmModeloCadastro
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 565
-    Width = 944
+    Top = 564
+    Width = 940
     Height = 19
     Panels = <
       item
@@ -983,8 +982,6 @@ object FrmModeloCadastro: TFrmModeloCadastro
       item
         Width = 200
       end>
-    ExplicitTop = 564
-    ExplicitWidth = 940
   end
   object ImageListCadastro: TImageList
     Height = 32
@@ -7864,6 +7861,7 @@ object FrmModeloCadastro: TFrmModeloCadastro
       000000000000}
   end
   object SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM SENHA')

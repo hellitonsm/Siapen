@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ModeloFormulario, ExtCtrls, StdCtrls, Grids, DBGrids;
+  Dialogs, ModeloFormulario, ExtCtrls, StdCtrls, Grids, DBGrids, Data.DB,
+  Vcl.Imaging.jpeg;
 
 type
   TFrmInventarioPatrimonio = class(TFrmModeloFormulario)

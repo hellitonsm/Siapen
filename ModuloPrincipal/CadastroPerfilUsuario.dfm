@@ -2,28 +2,28 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
   Left = 322
   Top = 142
   Caption = 'Cadastro de Perfil de Usu'#225'rio'
-  ClientHeight = 651
-  ClientWidth = 950
+  ClientHeight = 650
+  ClientWidth = 946
   ExplicitWidth = 962
   ExplicitHeight = 689
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 600
+    Height = 599
     ExplicitHeight = 599
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 582
+      Height = 581
       ExplicitHeight = 581
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 582
+      Top = 581
       Enabled = False
       Hints.Strings = ()
       ExplicitTop = 581
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 835
-    Height = 600
+    Width = 831
+    Height = 599
     ExplicitWidth = 831
     ExplicitHeight = 599
     inherited Image2: TImage
@@ -31,29 +31,27 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
       ExplicitWidth = 940
     end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 835
-      Height = 600
+      Width = 831
+      Height = 599
       ActivePage = TabSheetCadastro
       ExplicitWidth = 831
       ExplicitHeight = 599
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 827
-        ExplicitHeight = 572
+        ExplicitWidth = 823
+        ExplicitHeight = 571
         inherited PanelCadastro: TPanel
-          Width = 827
-          Height = 572
+          Width = 823
+          Height = 571
           ExplicitWidth = 823
           ExplicitHeight = 571
           object PageControlFuncionario: TPageControl
             Left = 1
             Top = 1
-            Width = 825
-            Height = 570
+            Width = 821
+            Height = 569
             ActivePage = TabSheetPermissao
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 821
-            ExplicitHeight = 569
             object TabSheetPermissao: TTabSheet
               Caption = 'Permiss'#245'es do Perfil'
               ImageIndex = 2
@@ -5345,20 +5343,20 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitWidth = 827
-        ExplicitHeight = 572
+        ExplicitWidth = 823
+        ExplicitHeight = 571
         inherited PanelLocalizaConsulta: TPanel
-          Width = 827
-          ExplicitWidth = 827
+          Width = 823
+          ExplicitWidth = 823
         end
         inherited PanelConsulta: TPanel
-          Width = 827
-          Height = 538
-          ExplicitWidth = 827
-          ExplicitHeight = 538
+          Width = 823
+          Height = 537
+          ExplicitWidth = 823
+          ExplicitHeight = 537
           inherited DBGridConsulta: TDBGrid
-            Width = 825
-            Height = 536
+            Width = 821
+            Height = 535
             DataSource = DsConsulta
           end
         end
@@ -5366,12 +5364,12 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 950
+    Width = 946
     ExplicitWidth = 946
   end
   inherited StatusBar1: TStatusBar
-    Top = 632
-    Width = 950
+    Top = 631
+    Width = 946
     ExplicitTop = 631
     ExplicitWidth = 946
   end
@@ -5379,20 +5377,20 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
     Left = 760
     Top = 48
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_PERFIL_USUARIO'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PERFIL_USUARIO'
       'WHERE ID_PERFIL_USUARIO = :ID_PERFIL_USUARIO')
     Left = 392
     Top = 80
+    ParamData = <
+      item
+        Name = 'ID_PERFIL_USUARIO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 420
@@ -5405,16 +5403,6 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
   inherited DsCadastro: TDataSource
     Left = 476
     Top = 80
-  end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select  ID_PERFIL_USUARIO, PERFIL from PERFIL_USUARIO'
-      'order by PERFIL collate win_ptbr')
-    SQLConnection = DM.SQLConnect
-    Left = 640
-    Top = 40
   end
   object Dspconsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -5451,5 +5439,14 @@ inherited FrmCadastroPerfilUsuario: TFrmCadastroPerfilUsuario
     SQLConnection = DM.SQLConnect
     Left = 808
     Top = 52
+  end
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select  ID_PERFIL_USUARIO, PERFIL from PERFIL_USUARIO'
+      'order by PERFIL collate win_ptbr')
+    Left = 640
+    Top = 40
   end
 end

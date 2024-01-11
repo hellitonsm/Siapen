@@ -1,55 +1,71 @@
 inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
   Left = 581
   Top = 226
-  Width = 964
-  Height = 663
   Caption = 'Cadastro Jur'#237'dico'
-  WindowState = wsMaximized
-  PixelsPerInch = 96
+  ClientHeight = 633
+  ExplicitHeight = 692
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 956
+    Width = 940
     Height = 40
     Align = alTop
+    ExplicitWidth = 940
+    ExplicitHeight = 40
     inherited ToolBarModeloCadastro: TToolBar
-      Width = 876
+      Width = 864
       Height = 40
+      ExplicitWidth = 860
+      ExplicitHeight = 40
       inherited Novo: TToolButton
         Wrap = False
       end
       inherited Editar: TToolButton
-        Left = 114
+        Left = 105
         Top = 0
         Wrap = False
+        ExplicitLeft = 105
+        ExplicitTop = 0
       end
       inherited Cancelar: TToolButton
-        Left = 222
+        Left = 204
         Top = 0
         Wrap = False
+        ExplicitLeft = 204
+        ExplicitTop = 0
       end
       inherited Salvar: TToolButton
-        Left = 330
+        Left = 303
         Top = 0
         Wrap = False
+        ExplicitLeft = 303
+        ExplicitTop = 0
       end
       inherited Excluir: TToolButton
-        Left = 438
+        Left = 402
         Top = 0
         Wrap = False
+        ExplicitLeft = 402
+        ExplicitTop = 0
       end
       inherited Fechar: TToolButton
-        Left = 546
+        Left = 501
         Top = 0
+        ExplicitLeft = 501
+        ExplicitTop = 0
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Left = 876
+      Left = 864
       Top = 0
       Width = 80
       Height = 40
       Align = alRight
       Hints.Strings = ()
       TabOrder = 1
+      ExplicitLeft = 860
+      ExplicitTop = 0
+      ExplicitWidth = 80
+      ExplicitHeight = 40
     end
     inherited DBImage1: TDBImage
       TabOrder = 3
@@ -70,22 +86,40 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
   inherited PanelModeloCadastro: TPanel
     Left = 0
     Top = 72
-    Width = 956
-    Height = 519
-    inherited PageControlModeloCadastro: TPageControl
+    Width = 940
+    Height = 535
+    ExplicitLeft = 0
+    ExplicitTop = 72
+    ExplicitWidth = 940
+    ExplicitHeight = 535
+    inherited Image2: TImage
       Width = 956
-      Height = 519
+      ExplicitWidth = 956
+    end
+    inherited PageControlModeloCadastro: TPageControl
+      Width = 940
+      Height = 535
+      ExplicitWidth = 940
+      ExplicitHeight = 535
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 932
+        ExplicitHeight = 507
         inherited PanelCadastro: TPanel
-          Width = 948
-          Height = 491
+          Width = 932
+          Height = 507
+          ExplicitWidth = 932
+          ExplicitHeight = 507
           inherited PageControlPrincipal: TPageControl
-            Width = 946
-            Height = 489
+            Width = 930
+            Height = 505
             ActivePage = TabSheetjuridico
             OnChange = PageControlPrincipalChange
+            ExplicitWidth = 930
+            ExplicitHeight = 505
             inherited TabSheetPrincipal: TTabSheet
               Enabled = True
+              ExplicitWidth = 922
+              ExplicitHeight = 477
               inherited Label2: TLabel
                 Enabled = True
               end
@@ -149,6 +183,7 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
               inherited Label82: TLabel
                 Left = 220
                 Enabled = True
+                ExplicitLeft = 220
               end
               inherited Label83: TLabel
                 Enabled = True
@@ -206,6 +241,7 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
               end
               inherited DBComboBox2: TDBComboBox
                 Top = 220
+                ExplicitTop = 220
               end
               inherited DBLookupComboBoxFACCAO: TDBLookupComboBox
                 Enabled = True
@@ -235,192 +271,239 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   'Semi-Aberto Com Trabalho Externo e Sa'#237'da'
                   'Semi-Aberto Com Saida'
                   'Tempor'#225'rio')
+                ExplicitLeft = 221
+                ExplicitTop = 394
               end
               inherited DBComboBox4: TDBComboBox
                 Enabled = True
               end
             end
             inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 922
+              ExplicitHeight = 477
               inherited Label11: TLabel
                 Top = 64
                 Enabled = True
+                ExplicitTop = 64
               end
               inherited Label19: TLabel
                 Top = 47
                 Enabled = True
+                ExplicitTop = 47
               end
               inherited Label21: TLabel
                 Top = 87
                 Enabled = True
+                ExplicitTop = 87
               end
               inherited Label22: TLabel
                 Top = 143
                 Enabled = True
+                ExplicitTop = 143
               end
               inherited Label23: TLabel
                 Top = 165
                 Enabled = True
+                ExplicitTop = 165
               end
               inherited Label20: TLabel
                 Top = 87
                 Enabled = True
+                ExplicitTop = 87
               end
               inherited Label37: TLabel
                 Top = 203
                 Enabled = True
+                ExplicitTop = 203
               end
               inherited Label13: TLabel
                 Top = 204
                 Enabled = True
+                ExplicitTop = 204
               end
               inherited SpeedButton4: TSpeedButton
                 Top = 102
                 Enabled = True
                 OnClick = SpeedButton4Click
+                ExplicitTop = 102
               end
               inherited SpeedButton5: TSpeedButton
                 Top = 102
                 Enabled = True
                 OnClick = SpeedButton5Click
+                ExplicitTop = 102
               end
               inherited SpeedButton6: TSpeedButton
                 Top = 142
                 Enabled = True
                 OnClick = SpeedButton6Click
+                ExplicitTop = 142
               end
               inherited SpeedButton7: TSpeedButton
                 Top = 181
                 Enabled = True
                 OnClick = SpeedButton7Click
+                ExplicitTop = 181
               end
               inherited SpeedButton9: TSpeedButton
                 Top = 217
                 Enabled = True
                 OnClick = SpeedButton9Click
+                ExplicitTop = 217
               end
               inherited Label5: TLabel
                 Top = 7
                 Enabled = True
+                ExplicitTop = 7
               end
               inherited Label24: TLabel
                 Top = 7
                 Enabled = True
+                ExplicitTop = 7
               end
               inherited Label25: TLabel
                 Top = 7
                 Enabled = True
+                ExplicitTop = 7
               end
               inherited Label39: TLabel
                 Top = 7
                 Enabled = True
+                ExplicitTop = 7
               end
               inherited Label47: TLabel
                 Top = 7
                 Enabled = True
+                ExplicitTop = 7
               end
               inherited Label52: TLabel
                 Top = 7
                 Enabled = True
+                ExplicitTop = 7
               end
               inherited Label63: TLabel
                 Top = 127
                 Enabled = True
+                ExplicitTop = 127
               end
               inherited Label64: TLabel
                 Top = 126
                 Enabled = True
+                ExplicitTop = 126
               end
               inherited Label28: TLabel
                 Top = 240
                 Enabled = True
+                ExplicitTop = 240
               end
               inherited Label30: TLabel
                 Top = 280
                 Enabled = True
+                ExplicitTop = 280
               end
               inherited Label31: TLabel
                 Top = 321
                 Enabled = True
+                ExplicitTop = 321
               end
               inherited Label32: TLabel
                 Top = 321
                 Enabled = True
+                ExplicitTop = 321
               end
               inherited Label33: TLabel
                 Top = 359
                 Enabled = True
+                ExplicitTop = 359
               end
               inherited Label34: TLabel
                 Top = 359
                 Enabled = True
+                ExplicitTop = 359
               end
               inherited Label35: TLabel
                 Top = 399
                 Enabled = True
+                ExplicitTop = 399
               end
               inherited SpeedButton11: TSpeedButton
                 Top = 373
                 Enabled = True
                 OnClick = SpeedButton11Click
+                ExplicitTop = 373
               end
               inherited lbl2: TLabel
                 Top = 399
                 Enabled = True
+                ExplicitTop = 399
               end
               inherited btn1: TSpeedButton
                 Top = 414
                 Enabled = True
                 OnClick = btn1Click
+                ExplicitTop = 414
               end
               inherited Label6: TLabel
                 Top = 280
                 Enabled = True
+                ExplicitTop = 280
               end
               inherited Label7: TLabel
                 Top = 127
                 Enabled = True
+                ExplicitTop = 127
               end
               inherited Label9: TLabel
                 Top = 48
                 Enabled = True
+                ExplicitTop = 48
               end
               inherited DBEdit1: TDBEdit
                 Top = 63
                 Enabled = True
+                ExplicitTop = 63
               end
               inherited DBEdit5: TDBEdit
                 Top = 63
                 Enabled = True
+                ExplicitTop = 63
               end
               inherited DBLookupComboBoxIDNATURALIDADE: TDBLookupComboBox
                 Top = 103
                 Enabled = True
+                ExplicitTop = 103
               end
               inherited DBLookupComboBoxIDNACIONALIDADE: TDBLookupComboBox
                 Top = 103
                 Enabled = True
+                ExplicitTop = 103
               end
               inherited DBLookupComboBoxIDRACA: TDBLookupComboBox
                 Top = 142
                 Enabled = True
+                ExplicitTop = 142
               end
               inherited DBLookupComboBoxIDESCOLARIDADE: TDBLookupComboBox
                 Top = 181
                 Enabled = True
+                ExplicitTop = 181
               end
               inherited DBLookupComboBoxIDPROFISSAO: TDBLookupComboBox
                 Top = 220
                 Enabled = True
                 TabOrder = 24
+                ExplicitTop = 220
               end
               inherited DBEdit9: TDBEdit
                 Top = 23
                 Enabled = True
+                ExplicitTop = 23
               end
               inherited DBEdit19: TDBEdit
                 Top = 23
                 Enabled = True
                 OnExit = DBEdit19Exit
+                ExplicitTop = 23
               end
               inherited DBComboBox1: TDBComboBox
                 Top = 23
@@ -434,76 +517,92 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   'Viuvo'
                   'Uni'#227'o Estavel'
                   'N'#227'o Declarado')
+                ExplicitTop = 23
               end
               inherited DBEdit26: TDBEdit
                 Top = 23
                 Enabled = True
+                ExplicitTop = 23
               end
               inherited DBEdit27: TDBEdit
                 Top = 23
                 Enabled = True
+                ExplicitTop = 23
               end
               inherited DBEdit28: TDBEdit
                 Top = 23
                 Enabled = True
+                ExplicitTop = 23
               end
               inherited DBEdit32: TDBEdit
                 Top = 142
                 Enabled = True
+                ExplicitTop = 142
               end
               inherited DBEdit34: TDBEdit
                 Top = 142
                 Enabled = True
+                ExplicitTop = 142
               end
               inherited DBEdit10: TDBEdit
                 Top = 256
                 Enabled = True
                 TabOrder = 14
+                ExplicitTop = 256
               end
               inherited DBEdit11: TDBEdit
                 Top = 296
                 Enabled = True
                 TabOrder = 15
+                ExplicitTop = 296
               end
               inherited DBEdit12: TDBEdit
                 Top = 296
                 Enabled = True
                 TabOrder = 16
+                ExplicitTop = 296
               end
               inherited DBEdit13: TDBEdit
                 Top = 337
                 Enabled = True
                 TabOrder = 17
+                ExplicitTop = 337
               end
               inherited DBEdit14: TDBEdit
                 Top = 337
                 Enabled = True
                 TabOrder = 18
+                ExplicitTop = 337
               end
               inherited DBEdit16: TDBEdit
                 Top = 375
                 Enabled = True
                 TabOrder = 20
+                ExplicitTop = 375
               end
               inherited DBEdit17: TDBEdit
                 Top = 415
                 Enabled = True
                 TabOrder = 22
+                ExplicitTop = 415
               end
               inherited DBLookupComboBoxIDCIDADE: TDBLookupComboBox
                 Top = 375
                 Enabled = True
                 TabOrder = 19
+                ExplicitTop = 375
               end
               inherited DBLookupComboBoxIDNACIONALIDADE1: TDBLookupComboBox
                 Top = 415
                 Enabled = True
                 TabOrder = 21
+                ExplicitTop = 415
               end
               inherited DBComboBoxReligiao1: TDBComboBox
                 Top = 220
                 Enabled = True
                 TabOrder = 23
+                ExplicitTop = 220
               end
             end
             object TabSheetjuridico: TTabSheet
@@ -653,10 +752,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                     Font.Height = -13
                     Font.Name = 'Times New Roman'
                     Font.Style = []
-                    ParentFont = False
-                    TabOrder = 13
-                    TabStop = False
-                    OnClick = BtnIncluirDocDigitalizadoClick
                     Glyph.Data = {
                       36020000424D3602000000000000360100002800000010000000100000000100
                       08000000000000010000120B0000120B0000400000004000000000000000FFFF
@@ -676,7 +771,11 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                       133102050E0302291431020202020231153102060D03022D1631020202020202
                       31310208100302301E020202020202020202020A070402020202020202020202
                       0202020B09020202020202020202020202020208020202020202}
+                    ParentFont = False
                     Style = bsWin31
+                    TabOrder = 13
+                    TabStop = False
+                    OnClick = BtnIncluirDocDigitalizadoClick
                   end
                   object BtnVisuzalizarDocDigitalizador: TBitBtn
                     Left = 56
@@ -689,10 +788,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                     Font.Height = -13
                     Font.Name = 'Times New Roman'
                     Font.Style = []
-                    ParentFont = False
-                    TabOrder = 14
-                    TabStop = False
-                    OnClick = BtnVisuzalizarDocDigitalizadorClick
                     Glyph.Data = {
                       5E020000424D5E020000000000005E0100002800000010000000100000000100
                       08000000000000010000120B0000120B00004A0000004A00000000000000FFFF
@@ -714,7 +809,11 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                       0B290202020202290F0F183543150A0717020202020202021C010523391E110C
                       3202020202020202021B0910131113260202020202020202020229271E1F0202
                       0202}
+                    ParentFont = False
                     Style = bsWin31
+                    TabOrder = 14
+                    TabStop = False
+                    OnClick = BtnVisuzalizarDocDigitalizadorClick
                   end
                   object DBNavigator2: TDBNavigator
                     Left = -1
@@ -1128,8 +1227,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                         Width = 75
                         Height = 25
                         Caption = 'Inserir'
-                        TabOrder = 13
-                        OnClick = BtnVisuzalizarDocDigitalizadorClick
                         Glyph.Data = {
                           76010000424D7601000000000000760000002800000020000000100000000100
                           04000000000000010000120B0000120B00001000000010000000000000000000
@@ -1144,6 +1241,8 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                           33333333337F7F33333333333309033333333333337F7F333333333333090333
                           33333333337F7F33333333333300033333333333337773333333}
                         NumGlyphs = 2
+                        TabOrder = 13
+                        OnClick = BtnVisuzalizarDocDigitalizadorClick
                       end
                       object BitBtn3: TBitBtn
                         Left = 264
@@ -1151,7 +1250,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                         Width = 75
                         Height = 25
                         Caption = 'Deletar'
-                        TabOrder = 14
                         Glyph.Data = {
                           76010000424D7601000000000000760000002800000020000000100000000100
                           04000000000000010000120B0000120B00001000000010000000000000000000
@@ -1166,6 +1264,7 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                           33333333337F7F33333333333309033333333333337373333333333333303333
                           333333333337F333333333333330333333333333333733333333}
                         NumGlyphs = 2
+                        TabOrder = 14
                       end
                       object DBGrid2: TDBGrid
                         Left = 16
@@ -1316,7 +1415,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                         Top = 54
                         Width = 273
                         Height = 21
-                        ItemHeight = 13
                         TabOrder = 3
                         Items.Strings = (
                           'Flagrante'
@@ -1329,7 +1427,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                         Top = 54
                         Width = 154
                         Height = 21
-                        ItemHeight = 13
                         TabOrder = 4
                         Items.Strings = (
                           'Prim'#225'rio'
@@ -1348,7 +1445,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                         Top = 91
                         Width = 271
                         Height = 21
-                        ItemHeight = 13
                         ItemIndex = 0
                         TabOrder = 7
                         Text = 'Condenado'
@@ -1361,7 +1457,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                         Top = 16
                         Width = 157
                         Height = 21
-                        ItemHeight = 13
                         TabOrder = 2
                         Text = 'cbbJustica'
                         Items.Strings = (
@@ -1416,7 +1511,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Style = csDropDownList
                 DataField = 'TIPOPROCESSO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'CONDENADO'
                   'PROVISORIO')
@@ -1445,7 +1539,7 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Top = 33
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
+                Date = 45254.000000000000000000
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -1468,9 +1562,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Font.Height = -13
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 2
-                OnClick = BitBtn6Click
                 Glyph.Data = {
                   DE010000424DDE01000000000000760000002800000024000000120000000100
                   0400000000006801000000000000000000001000000000000000000000000000
@@ -1489,6 +1580,9 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   333A333333333333333338330000333333333333333333333333333333333333
                   0000}
                 NumGlyphs = 2
+                ParentFont = False
+                TabOrder = 2
+                OnClick = BitBtn6Click
               end
               object DBGrid5: TDBGrid
                 Left = 40
@@ -1550,7 +1644,7 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
               object Label60: TLabel
                 Left = 24
                 Top = 2
-                Width = 304
+                Width = 305
                 Height = 13
                 Caption = 'M'#233'todo da calculadora do CNJ: http://www.cnj.jus.br'
                 Font.Charset = DEFAULT_CHARSET
@@ -1571,10 +1665,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Font.Height = -19
                 Font.Name = 'Times New Roman'
                 Font.Style = []
-                ParentFont = False
-                TabOrder = 0
-                TabStop = False
-                OnClick = BitBtn15Click
                 Glyph.Data = {
                   76060000424D7606000000000000360400002800000018000000180000000100
                   08000000000040020000120B0000120B0000000100000000000000000000FFFF
@@ -1628,7 +1718,11 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   01014763110A2C2B12C7C8CADE020202020202D32401010101010101080A3313
                   020202020202020202020202241A1A1B1B212121080A10020202020202020202
                   02020202241D1D1D1D1D1D1D1D0A020202020202020202020202}
+                ParentFont = False
                 Style = bsWin31
+                TabOrder = 0
+                TabStop = False
+                OnClick = BitBtn15Click
               end
               object BitBtn1: TBitBtn
                 Left = 196
@@ -1641,10 +1735,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Font.Height = -19
                 Font.Name = 'Times New Roman'
                 Font.Style = []
-                ParentFont = False
-                TabOrder = 1
-                TabStop = False
-                OnClick = BitBtn1Click
                 Glyph.Data = {
                   76060000424D7606000000000000360400002800000018000000180000000100
                   0800000000004002000000000000000000000001000000010000FF00FF002F1E
@@ -1698,7 +1788,11 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   6E6B5A5A5A5A5B5AD08B0E27231E1B0000005ACB6F6E6F6E6A6A6CC85A7083D1
                   F7990E27231B000000005A63C8C8665A5A5A5A5A5ACEDEFDFFD60E271B000000
                   0000005A5A5A5A24242424242424242424240E1B000000000000}
+                ParentFont = False
                 Style = bsWin31
+                TabOrder = 1
+                TabStop = False
+                OnClick = BitBtn1Click
               end
               object BitBtn4: TBitBtn
                 Left = 378
@@ -1711,10 +1805,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Font.Height = -19
                 Font.Name = 'Times New Roman'
                 Font.Style = []
-                ParentFont = False
-                TabOrder = 2
-                TabStop = False
-                OnClick = BitBtn4Click
                 Glyph.Data = {
                   76060000424D7606000000000000360400002800000018000000180000000100
                   0800000000004002000000000000000000000001000000010000FF00FF002222
@@ -1768,7 +1858,11 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   006870756E6259515049443F00000000000000000000000000006467685C5150
                   50483F0000000000000000000000000000000000504950444300000000000000
                   0000000000000000000000000000000000000000000000000000}
+                ParentFont = False
                 Style = bsWin31
+                TabOrder = 2
+                TabStop = False
+                OnClick = BitBtn4Click
               end
               object BitBtn5: TBitBtn
                 Left = 560
@@ -1781,10 +1875,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Font.Height = -19
                 Font.Name = 'Times New Roman'
                 Font.Style = []
-                ParentFont = False
-                TabOrder = 3
-                TabStop = False
-                OnClick = BitBtn5Click
                 Glyph.Data = {
                   76060000424D7606000000000000360400002800000018000000180000000100
                   0800000000004002000000000000000000000001000000010000FF00FF001A34
@@ -1838,7 +1928,11 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   0000000000008D8E8C7D72003B3B3B303B380000000000000000000000000000
                   0000000000000030303000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
+                ParentFont = False
                 Style = bsWin31
+                TabOrder = 3
+                TabStop = False
+                OnClick = BitBtn5Click
               end
               object PageControlCalculo: TPageControl
                 Left = 8
@@ -1895,8 +1989,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                       Width = 175
                       Height = 33
                       Caption = 'Calcular'
-                      TabOrder = 0
-                      OnClick = BtnCalcularClick
                       Glyph.Data = {
                         76060000424D7606000000000000360400002800000018000000180000000100
                         0800000000004002000000000000000000000001000000010000FF00FF003277
@@ -1950,6 +2042,8 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                         5C5C5C5C57575755555353514D4D4A080000000000275C5C5C5C5C5C5C5C5757
                         5755535353514D08000000000023232323232323232323232323232323232308
                         0000000000000000000000000000000000000000000000000000}
+                      TabOrder = 0
+                      OnClick = BtnCalcularClick
                     end
                     object DBEditANO: TDBEdit
                       Left = 187
@@ -1999,8 +2093,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                       Caption = 'Calculo Manual'
                       DataSource = DsCadastro
                       TabOrder = 4
-                      ValueChecked = 'True'
-                      ValueUnchecked = 'False'
                       Visible = False
                     end
                   end
@@ -2437,7 +2529,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                     Style = csDropDownList
                     DataField = 'REGIME_ATUAL'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'Fechado'
                       'Semi-Aberto Sem Saida'
@@ -2500,10 +2591,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Font.Height = -19
                 Font.Name = 'Times New Roman'
                 Font.Style = []
-                ParentFont = False
-                TabOrder = 4
-                TabStop = False
-                OnClick = BitBtn7Click
                 Glyph.Data = {
                   76060000424D7606000000000000360400002800000018000000180000000100
                   0800000000004002000000000000000000000001000000010000FF00FF000066
@@ -2557,7 +2644,11 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                   15151515151515151522180B23180F1B0D090009090909090909090909090909
                   0909090909090909090000000000000000000000000000000000000000000000
                   0000000000000000000000000000000000000000000000000000}
+                ParentFont = False
                 Style = bsWin31
+                TabOrder = 4
+                TabStop = False
+                OnClick = BitBtn7Click
               end
             end
             object TabSheet5: TTabSheet
@@ -2594,7 +2685,7 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
               object Label77: TLabel
                 Left = 288
                 Top = 410
-                Width = 356
+                Width = 357
                 Height = 20
                 Caption = 'DUPLO CLIQUE PARA EDITAR BENEF'#205'CIO'
                 Font.Charset = DEFAULT_CHARSET
@@ -2626,7 +2717,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Width = 273
                 Height = 21
                 Style = csDropDownList
-                ItemHeight = 13
                 TabOrder = 1
                 Items.Strings = (
                   'Livramento Condicional'
@@ -2643,8 +2733,8 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
                 Top = 40
                 Width = 129
                 Height = 21
-                Date = 41072.458390775460000000
-                Time = 41072.458390775460000000
+                Date = 41072.000000000000000000
+                Time = 0.458390775456791700
                 TabOrder = 0
               end
               object DBGrid4: TDBGrid
@@ -2732,51 +2822,60 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 932
+        ExplicitHeight = 507
         inherited PanelLocalizaConsulta: TPanel
-          Width = 948
+          Width = 932
+          ExplicitWidth = 932
+          DesignSize = (
+            932
+            42)
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 811
+            Left = 795
             TabOrder = 3
+            ExplicitLeft = 795
           end
           inherited chkSoundex: TCheckBox
             TabOrder = 2
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 948
-          Height = 449
+          Width = 932
+          Height = 465
+          ExplicitWidth = 932
+          ExplicitHeight = 465
           inherited DBGridConsulta: TDBGrid
-            Width = 938
-            Height = 435
+            Width = 934
+            Height = 464
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 937
-            Height = 435
-            PanelHeight = 87
-            PanelWidth = 921
+            Width = 934
+            Height = 464
+            PanelHeight = 92
+            PanelWidth = 917
+            ExplicitWidth = 930
+            ExplicitHeight = 463
           end
         end
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    Width = 956
-    inherited Image2: TImage
-      Width = 956
-    end
-  end
   inherited StatusBar1: TStatusBar
-    Top = 591
-    Width = 956
+    Top = 607
+    ExplicitTop = 607
   end
   inherited ImageListCadastro: TImageList
     Left = 608
     Top = 65528
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
+    SQL.Strings = (
+      'select *'
+      'from INTERNO'
+      'where id_interno=:id_interno')
     Left = 448
     Top = 0
   end
@@ -2801,27 +2900,106 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
   inherited DspConsulta: TDataSetProvider
     Left = 765
   end
-  inherited SqlConsulta: TSQLQuery
+  inherited SqlConsulta: TFDQuery
+    SQL.Strings = (
+      'select'
+      '    interno.nome_interno,'
+      '    interno.rgi,'
+      '    INTERNO.VULGO,'
+      '    FACCAO.FACCAO,'
+      '    '#39#39' as  nome_interno_soundex,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    galeria.galeria,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    interno.id_up,'
+      '    interno.idpavilhao,'
+      '    interno.idgaleria,'
+      '    interno.idsolario,'
+      '    coalesce(interno.st,'#39#39') as st,'
+      '    interno.numero_roupa,'
+      '    iif(interno.st='#39'A'#39','#39'ATIVO'#39', '#39'INATIVO'#39') status,'
+      '    interno.em_transito,'
+      
+        '    PROCEDENCIA.PROEDENCIA||'#39'/'#39'||coalesce(PROCEDENCIA.UF,'#39'UF'#39') A' +
+        'S PROCEDENCIA,'
+      
+        '   IIF(TRIM(COALESCE(estado.estado,'#39#39'))='#39#39','#39'N'#195'O INFORMADO'#39',estad' +
+        'o.estado) as ESTADO_SOLICITANTE'
+      'from INTERNO'
+      '   left join cela on (cela.id_cela = interno.idcela)'
+      
+        '   left join pavilhao on (interno.idpavilhao = pavilhao.id_pavil' +
+        'hao)'
+      
+        '   left join unidade_penal on (pavilhao.id_up = unidade_penal.id' +
+        '_up)'
+      '   left join galeria on (interno.idgaleria = galeria.id_galeria)'
+      '   left join solario on (interno.idsolario = solario.id_solario)'
+      '   left join faccao on (interno.id_faccao = faccao.id_faccao)'
+      
+        '   LEFT JOIN PROCEDENCIA ON (INTERNO.ID_PROCEDENCIA = PROCEDENCI' +
+        'A.ID_PROCEDENCIA)'
+      
+        '   LEFT JOIN  CIDADE ON (INTERNO.ID_SOLICITANTE_VAGA = CIDADE.ID' +
+        '_CIDADE)'
+      '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
+      'where coalesce(interno.nome_interno,'#39#39')<>'#39#39
+      'ORDER BY INTERNO.NOME_INTERNO collate win_ptbr')
     Left = 737
   end
-  object SQLHISTORICO_interno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
+  inherited SqlConsultaBackup: TFDQuery
     SQL.Strings = (
-      'select *'
-      'from historico_interno'
-      'where idinterno=:id_interno '
-      'and coalesce(tipo_historico,'#39#39')='#39#39' '
-      'and (setor = '#39'Jur'#237'dico'#39' or setor like '#39'Monitor%'#39')'
-      'order by data_hora desc')
-    SQLConnection = DM.SQLConnect
-    Left = 585
-    Top = 465
+      'select '
+      '    interno.nome_interno,'
+      '    interno.rgi,'
+      '    INTERNO.VULGO,'
+      '    FACCAO.FACCAO,'
+      '    '#39#39' as  nome_interno_soundex,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    galeria.galeria,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    interno.id_up,'
+      '    interno.idpavilhao,'
+      '    interno.idgaleria,'
+      '    interno.idsolario,'
+      '    coalesce(interno.st,'#39#39') as st,'
+      '    interno.numero_roupa,'
+      '    iif(interno.st='#39'A'#39','#39'ATIVO'#39', '#39'INATIVO'#39') status,'
+      '    interno.em_transito,'
+      
+        '    PROCEDENCIA.PROEDENCIA||'#39'/'#39'||coalesce(PROCEDENCIA.UF,'#39'UF'#39') A' +
+        'S PROCEDENCIA,'
+      
+        '   IIF(TRIM(COALESCE(estado.estado,'#39#39'))='#39#39','#39'N'#195'O INFORMADO'#39',estad' +
+        'o.estado) as ESTADO_SOLICITANTE'
+      'from INTERNO'
+      '   left join cela on (cela.id_cela = interno.idcela)'
+      
+        '   left join pavilhao on (interno.idpavilhao = pavilhao.id_pavil' +
+        'hao)'
+      
+        '   left join unidade_penal on (pavilhao.id_up = unidade_penal.id' +
+        '_up)'
+      '   left join galeria on (interno.idgaleria = galeria.id_galeria)'
+      '   left join solario on (interno.idsolario = solario.id_solario)'
+      '   left join faccao on (interno.id_faccao = faccao.id_faccao)'
+      
+        '   LEFT JOIN PROCEDENCIA ON (INTERNO.ID_PROCEDENCIA = PROCEDENCI' +
+        'A.ID_PROCEDENCIA)'
+      
+        '   LEFT JOIN  CIDADE ON (INTERNO.ID_SOLICITANTE_VAGA = CIDADE.ID' +
+        '_CIDADE)'
+      '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
+      'where coalesce(interno.nome_interno,'#39#39')<>'#39#39)
+  end
+  inherited SqlFaccao: TFDQuery
+    Connection = DM.SQLConnect
   end
   object DSPHISTORICO_interno: TDataSetProvider
     DataSet = SQLHISTORICO_interno
@@ -2898,40 +3076,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     Left = 669
     Top = 465
   end
-  object SqlDsControlePermanencia: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'SELECT'
-      ''
-      'ID_CONTROLE_PERMANENCIA,'
-      'DATA_INICIAL,'
-      'DATA_FINAL,'
-      'AUTORIZACAO,'
-      'OBS,'
-      'ID_INTERNO,'
-      'DIASAUTORIZADOS,'
-      'NAUTOS,'
-      'AVISADO,'
-      'CONFLITO_COMPETENCIA,'
-      'NUM_CONFLITO_COMPETENCIA,'
-      'OBS_CONFLITO_COMPETENCIA,'
-      'CONFLITO_STATUS,'
-      'OFICIO_PRAZO,'
-      'NUM_OFICIO_PRAZO'
-      ''
-      'from controle_permanencia'
-      'where id_interno = :id_interno'
-      'order by data_final desc')
-    SQLConnection = DM.SQLConnect
-    Left = 16
-    Top = 368
-  end
   object DspDsControlePermanencia: TDataSetProvider
     DataSet = SqlDsControlePermanencia
     Left = 44
@@ -2955,22 +3099,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     OnDataChange = DsControlePermanenciaDataChange
     Left = 100
     Top = 368
-  end
-  object SqlPermanenciaScaner: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_controle_permanencia'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select * from permanencia_scaner'
-      'where id_controle_permanencia = :id_controle_permanencia'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 152
-    Top = 336
   end
   object DspPermanenciaScaner: TDataSetProvider
     DataSet = SqlPermanenciaScaner
@@ -3027,58 +3155,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     Left = 848
     Top = 128
   end
-  object SqlCalculoPena: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_INTERNO'
-        ParamType = ptInput
-        Value = 0
-      end
-      item
-        DataType = ftDateTime
-        Name = 'DATA_PRISAO'
-        ParamType = ptInput
-        Value = 0d
-      end
-      item
-        DataType = ftDateTime
-        Name = 'data_base_p'
-        ParamType = ptInput
-        Value = 0d
-      end
-      item
-        DataType = ftDateTime
-        Name = 'data_base_c'
-        ParamType = ptInput
-        Value = 0d
-      end>
-    SQL.Strings = (
-      
-        'select * from SP_CALCULO_EXECUCAO_PENAL (:ID_INTERNO,:DATA_PRISA' +
-        'O,:data_base_p,:data_base_c)')
-    SQLConnection = DM.SQLConnect
-    Left = 816
-    Top = 128
-  end
-  object SQLbeneficio: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from beneficio'
-      'where id_interno = :id'
-      'order by data_beneficio desc')
-    SQLConnection = DM.SQLConnect
-    Left = 632
-    Top = 128
-  end
   object DSPbeneficio: TDataSetProvider
     DataSet = SQLbeneficio
     Left = 664
@@ -3129,24 +3205,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     Left = 728
     Top = 128
   end
-  object SqlCondenacao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'idinterno'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select *'
-      'from processo'
-      'where idinterno=:idinterno'
-      'and upper(SITUACAOJURIDICA) like '#39'COND%'#39)
-    SQLConnection = DM.SQLConnect
-    Left = 281
-    Top = 371
-  end
   object DspCondenacao: TDataSetProvider
     DataSet = SqlCondenacao
     Left = 309
@@ -3169,23 +3227,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     OnDataChange = DsCadastroDataChange
     Left = 365
     Top = 371
-  end
-  object SqlDetracao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select *'
-      'from detracao'
-      'where id_interno=:id_interno'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 385
-    Top = 334
   end
   object DspDetracao: TDataSetProvider
     DataSet = SqlDetracao
@@ -3210,23 +3251,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     Left = 469
     Top = 334
   end
-  object SqlInterrupcao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select *'
-      'from interrupcao'
-      'where id_interno=:id_interno'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 297
-    Top = 474
-  end
   object DspInterrupcao: TDataSetProvider
     DataSet = SqlInterrupcao
     Left = 325
@@ -3250,23 +3274,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     Left = 381
     Top = 474
   end
-  object SqlRemicao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select *'
-      'from remicao'
-      'where id_interno=:id_interno'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 433
-    Top = 477
-  end
   object DspRemicao: TDataSetProvider
     DataSet = SqlRemicao
     Left = 461
@@ -3289,29 +3296,6 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     OnDataChange = DsCadastroDataChange
     Left = 517
     Top = 477
-  end
-  object SqlLinhaTempo: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftString
-        Name = 'ver_linha'
-        ParamType = ptUnknown
-        Value = 'N'
-      end>
-    SQL.Strings = (
-      'select *'
-      'from sp_linha_tempo(:id_interno,:ver_linha)'
-      ''
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 729
-    Top = 61
   end
   object DspLinhaTempo: TDataSetProvider
     DataSet = SqlLinhaTempo
@@ -3352,15 +3336,200 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
     Left = 608
     Top = 56
   end
-  object SqlComutacao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
+  object SQLHISTORICO_interno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from HISTORICO_INTERNO'
+      'where idinterno=:id_interno '
+      'and coalesce(tipo_historico,'#39#39')='#39#39' '
+      'and (setor = '#39'Jur'#237'dico'#39' or setor like '#39'Monitor%'#39')'
+      'order by data_hora desc')
+    Left = 584
+    Top = 456
+    ParamData = <
       item
-        DataType = ftInteger
         Name = 'ID_INTERNO'
         ParamType = ptInput
-        Value = 0
       end>
+  end
+  object SqlDsControlePermanencia: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT'
+      ''
+      'ID_CONTROLE_PERMANENCIA,'
+      'DATA_INICIAL,'
+      'DATA_FINAL,'
+      'AUTORIZACAO,'
+      'OBS,'
+      'ID_INTERNO,'
+      'DIASAUTORIZADOS,'
+      'NAUTOS,'
+      'AVISADO,'
+      'CONFLITO_COMPETENCIA,'
+      'NUM_CONFLITO_COMPETENCIA,'
+      'OBS_CONFLITO_COMPETENCIA,'
+      'CONFLITO_STATUS,'
+      'OFICIO_PRAZO,'
+      'NUM_OFICIO_PRAZO'
+      ''
+      'from CONTROLE_PERMANENCIA'
+      'where id_interno = :id_interno'
+      'order by data_final desc')
+    Left = 16
+    Top = 368
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlPermanenciaScaner: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from PERMANENCIA_SCANER'
+      'where id_controle_permanencia = :id_controle_permanencia'
+      '')
+    Left = 152
+    Top = 336
+    ParamData = <
+      item
+        Name = 'ID_CONTROLE_PERMANENCIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCalculoPena: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select * from SP_CALCULO_EXECUCAO_PENAL (:ID_INTERNO,:DATA_PRISA' +
+        'O,:data_base_p,:data_base_c)')
+    Left = 800
+    Top = 128
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA_PRISAO'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA_BASE_P'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA_BASE_C'
+        ParamType = ptInput
+      end>
+  end
+  object SQLbeneficio: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from BENEFICIO'
+      'where id_interno = :id'
+      'order by data_beneficio desc')
+    Left = 632
+    Top = 128
+    ParamData = <
+      item
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCondenacao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from processo'
+      'where idinterno=:idinterno'
+      'and upper(SITUACAOJURIDICA) like '#39'COND%'#39)
+    Left = 281
+    Top = 371
+    ParamData = <
+      item
+        Name = 'IDINTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlDetracao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from detracao'
+      'where id_interno=:id_interno'
+      '')
+    Left = 385
+    Top = 334
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlInterrupcao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from INTERRUPCAO'
+      'where id_interno=:id_interno'
+      '')
+    Left = 297
+    Top = 474
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlRemicao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from REMICAO'
+      'where id_interno=:id_interno'
+      '')
+    Left = 433
+    Top = 477
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlLinhaTempo: TFDQuery
+    ObjectView = False
+    SQL.Strings = (
+      'select *'
+      'from sp_linha_tempo(:id_interno,:ver_linha)'
+      ''
+      '')
+    Left = 720
+    Top = 56
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end
+      item
+        Name = 'VER_LINHA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlComutacao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT '
       'V.IDPROCESSO,'
@@ -3369,8 +3538,12 @@ inherited FrmCadastroInternoJuridico: TFrmCadastroInternoJuridico
       'FROM COMUTACAO C'
       'JOIN VINC_COMUTACAO V ON (V.ID_COMUTACAO=C.ID_COMUTACAO)'
       'WHERE C.ID_INTERNO=:ID_INTERNO')
-    SQLConnection = DM.SQLConnect
     Left = 576
     Top = 56
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

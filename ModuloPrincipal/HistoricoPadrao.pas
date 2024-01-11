@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, FMTBcd, SqlExpr, Provider, DB, DBClient, DBCtrls, StdCtrls,
-  ComCtrls, ExtCtrls, Grids, DBGrids;
+  ComCtrls, ExtCtrls, Grids, DBGrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmhistoricopadrao = class(TForm)
@@ -26,12 +29,15 @@ type
     DSHISTORICO_interno: TDataSource;
     CDSHISTORICO_interno: TClientDataSet;
     DSPHISTORICO_interno: TDataSetProvider;
-    SQLHISTORICO_interno: TSQLQuery;
+    SQLHISTORICO_internoold: TSQLQuery;
     DsConsulta: TDataSource;
     CdsConsulta: TClientDataSet;
     Dspconsulta: TDataSetProvider;
-    SqlConsulta: TSQLQuery;
-    SqlSelectInterno: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
+    SqlSelectInternoold: TSQLQuery;
+    SQLHISTORICO_interno: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SqlSelectInterno: TFDQuery;
     procedure EditlocalizarChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);

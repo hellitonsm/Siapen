@@ -2,29 +2,47 @@ inherited FrmPatrimonio: TFrmPatrimonio
   Left = 499
   Top = 185
   Caption = 'Patrim'#244'nio'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 948
+  ExplicitHeight = 620
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    ExplicitHeight = 530
     inherited ToolBarModeloCadastro: TToolBar
+      Height = 513
+      ExplicitHeight = 512
       inherited Excluir: TToolButton
         Visible = True
       end
     end
     inherited DBNavigator1: TDBNavigator
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 512
     end
   end
   inherited PanelModeloCadastro: TPanel
+    ExplicitWidth = 817
+    ExplicitHeight = 530
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
+      ActivePage = TabSheetCadastro
+      ExplicitWidth = 817
+      ExplicitHeight = 530
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object PageControlPatrimonio: TPageControl
             Left = 1
             Top = 1
-            Width = 667
-            Height = 354
-            ActivePage = TabSheet1
+            Width = 811
+            Height = 501
+            ActivePage = TabSheet4
             Align = alClient
             TabOrder = 0
             TabWidth = 100
@@ -565,9 +583,34 @@ inherited FrmPatrimonio: TFrmPatrimonio
           end
         end
       end
+      inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 809
+        end
+        inherited PanelConsulta: TPanel
+          Width = 813
+          Height = 469
+          ExplicitWidth = 809
+          ExplicitHeight = 468
+          inherited DBGridConsulta: TDBGrid
+            Width = 811
+            Height = 467
+          end
+        end
+      end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited PanelTituloModeloCadastro: TPanel
+    ExplicitWidth = 932
+  end
+  inherited StatusBar1: TStatusBar
+    ExplicitTop = 562
+    ExplicitWidth = 932
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM PATRIMONIO')

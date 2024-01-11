@@ -6,12 +6,15 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloMovimentacao, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, jpeg, Menus, System.ImageList;
+  Mask, jpeg, Menus, System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmControlePortaria = class(TFrmModeloMovimentacao)
     OpenDialogFOTO: TOpenDialog;
-    SqlSelectVisitante: TSQLQuery;
+    SqlSelectVisitanteold: TSQLQuery;
     ToolButtonmovimentar: TToolButton;
     SqlCadastroID_VISITANTE: TIntegerField;
     SqlCadastroVISITANTE: TStringField;
@@ -54,13 +57,13 @@ type
     Label17: TLabel;
     DBEdit27: TDBEdit;
     Label28: TLabel;
-    SQLdeficiencia: TSQLQuery;
+    SQLdeficienciaold: TSQLQuery;
     dspdeficiencia: TDataSetProvider;
     cdsdeficiencia: TClientDataSet;
     dsdeficiencia: TDataSource;
     DSadvogado: TDataSource;
     CDSadvogado: TClientDataSet;
-    SQLAdvogado: TSQLQuery;
+    SQLAdvogadoold: TSQLQuery;
     DSPadvogado: TDataSetProvider;
     TabSheetAutoridade: TTabSheet;
     Label29: TLabel;
@@ -88,7 +91,7 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     DSautoridade: TDataSource;
     CDSautoridade: TClientDataSet;
-    SQLautoridade: TSQLQuery;
+    SQLautoridadeold: TSQLQuery;
     DSPautoridade: TDataSetProvider;
     DBEdit11: TDBEdit;
     Label41: TLabel;
@@ -96,7 +99,7 @@ type
     DSPoutros: TDataSetProvider;
     CDSoutros: TClientDataSet;
     DSoutros: TDataSource;
-    SQLoutros: TSQLQuery;
+    SQLoutrosold: TSQLQuery;
     Label18: TLabel;
     DBEdit17: TDBEdit;
     DBEditCPF: TDBEdit;
@@ -120,7 +123,7 @@ type
     Label25: TLabel;
     RadioGroupPessoa: TRadioGroup;
     TabSheet1: TTabSheet;
-    SQLGrid: TSQLQuery;
+    SQLGridold: TSQLQuery;
     dspGrid: TDataSetProvider;
     cdsGrid: TClientDataSet;
     dsGrid: TDataSource;
@@ -141,6 +144,12 @@ type
     CDSadvogadoEXPEDIDOR: TStringField;
     //CDSadvogadoSTATUS: TStringField;
     DBNavigator1: TDBNavigator;
+    SQLoutros: TFDQuery;
+    SQLAdvogado: TFDQuery;
+    SQLautoridade: TFDQuery;
+    SqlSelectVisitante: TFDQuery;
+    SQLdeficiencia: TFDQuery;
+    SQLGrid: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure EditLocalizarChange(Sender: TObject);

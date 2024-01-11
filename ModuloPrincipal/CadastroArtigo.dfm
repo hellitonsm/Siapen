@@ -1,32 +1,36 @@
 inherited FrmCadastroArtigo: TFrmCadastroArtigo
   Left = 277
   Top = 124
-  Width = 741
-  Height = 367
   Caption = 'Artigos do C'#243'digo Penal Brasileiro'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 289
+    ExplicitHeight = 532
     inherited ToolBarModeloCadastro: TToolBar
       Height = 271
+      ExplicitHeight = 271
     end
     inherited DBNavigator1: TDBNavigator
       Top = 271
       Hints.Strings = ()
+      ExplicitTop = 271
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 618
-    Height = 289
+    ExplicitWidth = 825
+    ExplicitHeight = 532
+    inherited Image2: TImage
+      Width = 733
+      ExplicitWidth = 733
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 618
-      Height = 289
+      ExplicitWidth = 618
+      ExplicitHeight = 289
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
           Width = 610
           Height = 261
+          ExplicitWidth = 610
+          ExplicitHeight = 261
           object Label2: TLabel
             Left = 8
             Top = 8
@@ -66,10 +70,13 @@ inherited FrmCadastroArtigo: TFrmCadastroArtigo
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
           Width = 610
+          ExplicitWidth = 610
         end
         inherited PanelConsulta: TPanel
           Width = 610
           Height = 227
+          ExplicitWidth = 610
+          ExplicitHeight = 227
           inherited DBGridConsulta: TDBGrid
             Width = 608
             Height = 225
@@ -79,16 +86,9 @@ inherited FrmCadastroArtigo: TFrmCadastroArtigo
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 733
-    inherited Image2: TImage
-      Width = 733
-    end
+    ExplicitWidth = 733
   end
-  inherited StatusBar1: TStatusBar
-    Top = 321
-    Width = 733
-  end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM artigo')

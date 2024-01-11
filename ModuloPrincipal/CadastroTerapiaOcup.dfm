@@ -1,90 +1,61 @@
 inherited FrmCadastroTerapiaOcup: TFrmCadastroTerapiaOcup
   Left = 248
   Top = 48
-  Width = 856
   Caption = 'CadastroTerapia Ocupacional'
-  PixelsPerInch = 96
+  ClientHeight = 581
+  ClientWidth = 932
+  ExplicitWidth = 944
+  ExplicitHeight = 639
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 523
+    ExplicitHeight = 522
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 505
+      ExplicitHeight = 504
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 505
       Hints.Strings = ()
+      ExplicitTop = 504
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 725
+    Width = 817
+    Height = 523
+    ExplicitWidth = 813
+    ExplicitHeight = 522
+    inherited Image2: TImage
+      Width = 840
+      ExplicitWidth = 840
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 725
+      Width = 817
+      Height = 523
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 813
+      ExplicitHeight = 522
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelCadastro: TPanel
-          Width = 717
+          Width = 809
+          Height = 495
+          ExplicitWidth = 805
+          ExplicitHeight = 494
           inherited PageControlPrincipal: TPageControl
-            Width = 715
+            Width = 807
+            Height = 493
             ActivePage = TabSheet1
+            ExplicitWidth = 803
+            ExplicitHeight = 492
             inherited TabSheetPrincipal: TTabSheet
-              inherited DBEdit3: TDBEdit
-                TabOrder = 4
-              end
-              inherited DBEditID_PROCEDENCIA: TDBEdit
-                TabOrder = 19
-              end
-              inherited DBLookupComboBoxID_PROCEDENCIA: TDBLookupComboBox
-                TabOrder = 20
-              end
-              inherited DBRadioGroup1: TDBRadioGroup
-                TabOrder = 6
-              end
-              inherited DBRadioGroup2: TDBRadioGroup
-                TabOrder = 18
-              end
-              inherited DBEdit7: TDBEdit
-                TabOrder = 16
-              end
-              inherited DBLookupComboBox2: TDBLookupComboBox
-                TabOrder = 17
-              end
-              inherited DBComboBox3: TDBComboBox
-                TabOrder = 15
-              end
-              inherited DBEdit86: TDBEdit
-                TabOrder = 3
-              end
-              inherited dbrgrpST: TDBRadioGroup
-                TabOrder = 5
-              end
-              inherited DBEdit4: TDBEdit
-                TabOrder = 9
-              end
-              inherited DBEdit20: TDBEdit
-                TabOrder = 10
-              end
-              inherited DBEdit29: TDBEdit
-                TabOrder = 12
-              end
-              inherited DBComboBox2: TDBComboBox
-                TabOrder = 13
-              end
-              inherited DBEditpermanencia: TDBEdit
-                TabOrder = 11
-              end
-              inherited DBLookupComboBoxFACCAO: TDBLookupComboBox
-                TabOrder = 21
-              end
-              inherited DBEdit8: TDBEdit
-                TabOrder = 24
-              end
-              inherited DBEdit31: TDBEdit
-                TabOrder = 25
-              end
-              inherited DBEdit33: TDBEdit
-                TabOrder = 26
-              end
-              inherited DBComboBox5: TDBComboBox
-                TabOrder = 27
-              end
-              inherited DBComboBox4: TDBComboBox
-                TabOrder = 28
-              end
+              ExplicitWidth = 799
+              ExplicitHeight = 465
+            end
+            inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
             end
             object TabSheet1: TTabSheet
               Caption = 'Terapia Ocupacional'
@@ -101,7 +72,7 @@ inherited FrmCadastroTerapiaOcup: TFrmCadastroTerapiaOcup
                 Top = 33
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
+                Date = 45258.000000000000000000
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -173,47 +144,61 @@ inherited FrmCadastroTerapiaOcup: TFrmCadastroTerapiaOcup
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelLocalizaConsulta: TPanel
-          Width = 717
+          Width = 809
+          ExplicitWidth = 809
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 602
+            Left = 694
             Width = 114
             TabOrder = 3
+            ExplicitLeft = 694
+            ExplicitWidth = 114
           end
           inherited chkSoundex: TCheckBox
             Width = 60
             TabOrder = 2
+            ExplicitWidth = 60
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 717
+          Width = 809
+          Height = 453
+          ExplicitWidth = 809
+          ExplicitHeight = 453
           inherited DBGridConsulta: TDBGrid
-            Width = 715
+            Width = 807
+            Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 715
-            PanelWidth = 698
+            Width = 807
+            Height = 451
+            PanelWidth = 790
+            ExplicitWidth = 807
+            ExplicitHeight = 451
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 840
-    inherited Image2: TImage
-      Width = 840
-    end
+    Width = 932
+    ExplicitWidth = 928
   end
   inherited StatusBar1: TStatusBar
-    Width = 840
+    Top = 555
+    Width = 932
+    ExplicitTop = 555
+    ExplicitWidth = 932
   end
   inherited MainMenu1: TMainMenu
     Left = 211
   end
-  object SQLterapiaocup: TSQLQuery
+  object SQLterapiaocupold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -227,8 +212,8 @@ inherited FrmCadastroTerapiaOcup: TFrmCadastroTerapiaOcup
       'WHERE ID_INTERNO = :ID_INTERNO'
       'order by data desc')
     SQLConnection = DM.SQLConnect
-    Left = 616
-    Top = 8
+    Left = 688
+    Top = 80
   end
   object DSPterapiaocup: TDataSetProvider
     DataSet = SQLterapiaocup
@@ -278,5 +263,21 @@ inherited FrmCadastroTerapiaOcup: TFrmCadastroTerapiaOcup
     OnDataChange = DsCadastroDataChange
     Left = 700
     Top = 8
+  end
+  object SQLterapiaocup: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM historico_terapia_ocup'
+      'WHERE ID_INTERNO = :ID_INTERNO'
+      'order by data desc'
+      '')
+    Left = 612
+    Top = 1
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

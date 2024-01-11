@@ -1,100 +1,61 @@
 inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
   Left = 225
   Top = 123
-  Width = 852
-  Height = 604
   Caption = 'Cadastro Servi'#231'o Social'
-  PixelsPerInch = 96
+  ClientHeight = 581
+  ClientWidth = 932
+  ExplicitWidth = 944
+  ExplicitHeight = 639
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 488
+    Height = 523
+    ExplicitHeight = 522
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 470
+      Height = 505
+      ExplicitHeight = 504
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 470
+      Top = 505
       Hints.Strings = ()
+      ExplicitTop = 504
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 721
-    Height = 488
+    Width = 817
+    Height = 523
+    ExplicitWidth = 813
+    ExplicitHeight = 522
+    inherited Image2: TImage
+      Width = 836
+      ExplicitWidth = 836
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 721
-      Height = 488
+      Width = 817
+      Height = 523
+      ActivePage = TabSheetCadastro
+      ExplicitWidth = 813
+      ExplicitHeight = 522
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelCadastro: TPanel
-          Width = 713
-          Height = 460
+          Width = 809
+          Height = 495
+          ExplicitWidth = 809
+          ExplicitHeight = 495
           inherited PageControlPrincipal: TPageControl
-            Width = 711
-            Height = 458
+            Width = 807
+            Height = 493
+            ActivePage = TabSheet1
+            ExplicitWidth = 807
+            ExplicitHeight = 493
             inherited TabSheetPrincipal: TTabSheet
-              inherited DBEdit3: TDBEdit
-                TabOrder = 4
-              end
-              inherited DBEditID_PROCEDENCIA: TDBEdit
-                TabOrder = 19
-              end
-              inherited DBLookupComboBoxID_PROCEDENCIA: TDBLookupComboBox
-                TabOrder = 20
-              end
-              inherited DBRadioGroup1: TDBRadioGroup
-                TabOrder = 6
-              end
-              inherited DBRadioGroup2: TDBRadioGroup
-                TabOrder = 18
-              end
-              inherited DBEdit7: TDBEdit
-                TabOrder = 16
-              end
-              inherited DBLookupComboBox2: TDBLookupComboBox
-                TabOrder = 17
-              end
-              inherited DBComboBox3: TDBComboBox
-                TabOrder = 15
-              end
-              inherited DBEdit86: TDBEdit
-                TabOrder = 3
-              end
-              inherited dbrgrpST: TDBRadioGroup
-                TabOrder = 5
-              end
-              inherited DBEdit4: TDBEdit
-                TabOrder = 9
-              end
-              inherited DBEdit20: TDBEdit
-                TabOrder = 10
-              end
-              inherited DBEdit29: TDBEdit
-                TabOrder = 12
-              end
-              inherited DBComboBox2: TDBComboBox
-                TabOrder = 13
-              end
-              inherited DBEditpermanencia: TDBEdit
-                TabOrder = 11
-              end
-              inherited DBLookupComboBoxFACCAO: TDBLookupComboBox
-                TabOrder = 21
-              end
-              inherited DBEdit8: TDBEdit
-                TabOrder = 24
-              end
-              inherited DBEdit31: TDBEdit
-                TabOrder = 25
-              end
-              inherited DBEdit33: TDBEdit
-                TabOrder = 26
-              end
-              inherited DBComboBox5: TDBComboBox
-                TabOrder = 27
-              end
-              inherited DBComboBox4: TDBComboBox
-                TabOrder = 28
-              end
+              ExplicitWidth = 799
+              ExplicitHeight = 465
             end
             inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
               inherited Label37: TLabel
                 Enabled = True
               end
@@ -182,11 +143,11 @@ inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
                 Caption = 'Data do Fato'
               end
               object DateTimePickerHistorico: TDateTimePicker
-                Left = 7
-                Top = 33
+                Left = 11
+                Top = 35
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
+                Date = 45258.000000000000000000
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -257,52 +218,164 @@ inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelLocalizaConsulta: TPanel
-          Width = 713
+          Width = 809
+          ExplicitWidth = 805
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 602
+            Left = 698
             Width = 110
             TabOrder = 3
+            ExplicitLeft = 694
+            ExplicitWidth = 110
           end
           inherited chkSoundex: TCheckBox
             Width = 60
             TabOrder = 2
+            ExplicitWidth = 60
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 713
-          Height = 418
+          Width = 809
+          Height = 453
+          ExplicitWidth = 805
+          ExplicitHeight = 452
           inherited DBGridConsulta: TDBGrid
-            Width = 711
-            Height = 416
+            Width = 807
+            Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 711
-            Height = 416
-            PanelHeight = 83
-            PanelWidth = 694
+            Width = 807
+            Height = 451
+            PanelWidth = 790
+            ExplicitWidth = 803
+            ExplicitHeight = 450
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 836
-    inherited Image2: TImage
-      Width = 836
-    end
+    Width = 932
+    ExplicitWidth = 928
   end
   inherited StatusBar1: TStatusBar
-    Top = 520
-    Width = 836
+    Top = 555
+    Width = 932
+    ExplicitTop = 555
+    ExplicitWidth = 932
+  end
+  inherited SqlCadastro: TFDQuery
+    SQL.Strings = (
+      'select *'
+      'from INTERNO'
+      'where id_interno=:id_interno')
+  end
+  inherited SqlConsulta: TFDQuery
+    SQL.Strings = (
+      'select'
+      '    interno.nome_interno,'
+      '    interno.rgi,'
+      '    INTERNO.VULGO,'
+      '    FACCAO.FACCAO,'
+      '    '#39#39' as  nome_interno_soundex,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    galeria.galeria,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    interno.id_up,'
+      '    interno.idpavilhao,'
+      '    interno.idgaleria,'
+      '    interno.idsolario,'
+      '    coalesce(interno.st,'#39#39') as st,'
+      '    interno.numero_roupa,'
+      '    iif(interno.st='#39'A'#39','#39'ATIVO'#39', '#39'INATIVO'#39') status,'
+      '    interno.em_transito,'
+      
+        '    PROCEDENCIA.PROEDENCIA||'#39'/'#39'||coalesce(PROCEDENCIA.UF,'#39'UF'#39') A' +
+        'S PROCEDENCIA,'
+      
+        '   IIF(TRIM(COALESCE(estado.estado,'#39#39'))='#39#39','#39'N'#195'O INFORMADO'#39',estad' +
+        'o.estado) as ESTADO_SOLICITANTE'
+      'from INTERNO'
+      '   left join cela on (cela.id_cela = interno.idcela)'
+      
+        '   left join pavilhao on (interno.idpavilhao = pavilhao.id_pavil' +
+        'hao)'
+      
+        '   left join unidade_penal on (pavilhao.id_up = unidade_penal.id' +
+        '_up)'
+      '   left join galeria on (interno.idgaleria = galeria.id_galeria)'
+      '   left join solario on (interno.idsolario = solario.id_solario)'
+      '   left join faccao on (interno.id_faccao = faccao.id_faccao)'
+      
+        '   LEFT JOIN PROCEDENCIA ON (INTERNO.ID_PROCEDENCIA = PROCEDENCI' +
+        'A.ID_PROCEDENCIA)'
+      
+        '   LEFT JOIN  CIDADE ON (INTERNO.ID_SOLICITANTE_VAGA = CIDADE.ID' +
+        '_CIDADE)'
+      '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
+      'where coalesce(interno.nome_interno,'#39#39')<>'#39#39
+      'ORDER BY INTERNO.NOME_INTERNO collate win_ptbr')
+  end
+  inherited SqlConsultaBackup: TFDQuery
+    SQL.Strings = (
+      'select '
+      '    interno.nome_interno,'
+      '    interno.rgi,'
+      '    INTERNO.VULGO,'
+      '    FACCAO.FACCAO,'
+      '    '#39#39' as  nome_interno_soundex,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    galeria.galeria,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    interno.id_up,'
+      '    interno.idpavilhao,'
+      '    interno.idgaleria,'
+      '    interno.idsolario,'
+      '    coalesce(interno.st,'#39#39') as st,'
+      '    interno.numero_roupa,'
+      '    iif(interno.st='#39'A'#39','#39'ATIVO'#39', '#39'INATIVO'#39') status,'
+      '    interno.em_transito,'
+      
+        '    PROCEDENCIA.PROEDENCIA||'#39'/'#39'||coalesce(PROCEDENCIA.UF,'#39'UF'#39') A' +
+        'S PROCEDENCIA,'
+      
+        '   IIF(TRIM(COALESCE(estado.estado,'#39#39'))='#39#39','#39'N'#195'O INFORMADO'#39',estad' +
+        'o.estado) as ESTADO_SOLICITANTE'
+      'from INTERNO'
+      '   left join cela on (cela.id_cela = interno.idcela)'
+      
+        '   left join pavilhao on (interno.idpavilhao = pavilhao.id_pavil' +
+        'hao)'
+      
+        '   left join unidade_penal on (pavilhao.id_up = unidade_penal.id' +
+        '_up)'
+      '   left join galeria on (interno.idgaleria = galeria.id_galeria)'
+      '   left join solario on (interno.idsolario = solario.id_solario)'
+      '   left join faccao on (interno.id_faccao = faccao.id_faccao)'
+      
+        '   LEFT JOIN PROCEDENCIA ON (INTERNO.ID_PROCEDENCIA = PROCEDENCI' +
+        'A.ID_PROCEDENCIA)'
+      
+        '   LEFT JOIN  CIDADE ON (INTERNO.ID_SOLICITANTE_VAGA = CIDADE.ID' +
+        '_CIDADE)'
+      '   LEFT JOIN ESTADO ON (CIDADE.UF = ESTADO.UF)'
+      'where coalesce(interno.nome_interno,'#39#39')<>'#39#39)
   end
   inherited OpenDialogCapturarFoto: TOpenDialog
     Left = 711
   end
-  object SQLServicoSocial: TSQLQuery
+  object SQLServicoSocialold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -316,8 +389,8 @@ inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
       'WHERE ID_INTERNO = :ID_INTERNO'
       'order by data desc')
     SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 8
+    Left = 576
+    Top = 64
   end
   object DSPServicoSocial: TDataSetProvider
     DataSet = SQLServicoSocial
@@ -369,5 +442,21 @@ inherited FrmCadastroServicoSocial: TFrmCadastroServicoSocial
     OnDataChange = DsCadastroDataChange
     Left = 668
     Top = 8
+  end
+  object SQLServicoSocial: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM HISTORICO_SERVICO_SOCIAL'
+      'WHERE ID_INTERNO = :ID_INTERNO'
+      'order by data desc'
+      '')
+    Left = 576
+    Top = 8
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

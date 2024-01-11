@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, adpDBDateTimePicker, Mask;
+  ToolWin, adpDBDateTimePicker, Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmVisitanteTrafico = class(TFrmModeloCadastro)
@@ -24,7 +27,6 @@ type
     CdsCadastroID_UP: TIntegerField;
     Label7: TLabel;
     DBLookupComboBox2: TDBLookupComboBox;
-    SqlOcorrencia: TSQLQuery;
     DspOcorrencia: TDataSetProvider;
     CdsOcorrencia: TClientDataSet;
     DsOcorrencia: TDataSource;
@@ -35,11 +37,9 @@ type
     Button7: TButton;
     DBLookupComboBoxInterno: TDBLookupComboBox;
     Button1: TButton;
-    SqlInterno: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
-    SqlVisitanteInterno: TSQLQuery;
     DspVisitanteInterno: TDataSetProvider;
     CdsVisitanteInterno: TClientDataSet;
     CdsVisitanteInternoID_VISITANTE_INTERNO: TIntegerField;
@@ -50,10 +50,13 @@ type
     DBLookupComboBox1: TDBLookupComboBox;
     Label3: TLabel;
     Label4: TLabel;
-    SqlVisitante: TSQLQuery;
     DspVisitante: TDataSetProvider;
     CdsVisitante: TClientDataSet;
     DsVisitante: TDataSource;
+    SqlOcorrencia: TFDQuery;
+    SqlInterno: TFDQuery;
+    SqlVisitanteInterno: TFDQuery;
+    SqlVisitante: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);

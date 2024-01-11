@@ -1,23 +1,21 @@
 object FrmMotivoDispensaTrabalho: TFrmMotivoDispensaTrabalho
   Left = 208
   Top = 150
-  Width = 356
-  Height = 298
   Caption = 'Motivo Dispensa Trabalho'
+  ClientHeight = 294
+  ClientWidth = 361
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
     Left = 16
     Top = 83
-    Width = 52
+    Width = 53
     Height = 20
     Caption = 'Motivo'
     Font.Charset = DEFAULT_CHARSET
@@ -30,7 +28,7 @@ object FrmMotivoDispensaTrabalho: TFrmMotivoDispensaTrabalho
   object Label2: TLabel
     Left = 16
     Top = 27
-    Width = 92
+    Width = 93
     Height = 20
     Caption = 'Documento'
     Font.Charset = DEFAULT_CHARSET
@@ -43,7 +41,7 @@ object FrmMotivoDispensaTrabalho: TFrmMotivoDispensaTrabalho
   object Label3: TLabel
     Left = 184
     Top = 27
-    Width = 39
+    Width = 40
     Height = 20
     Caption = 'Data'
     Font.Charset = DEFAULT_CHARSET
@@ -72,9 +70,6 @@ object FrmMotivoDispensaTrabalho: TFrmMotivoDispensaTrabalho
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
-    ModalResult = 1
-    ParentFont = False
-    TabOrder = 3
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -92,7 +87,10 @@ object FrmMotivoDispensaTrabalho: TFrmMotivoDispensaTrabalho
       3338F38F000033333333333333A223333333333333338F830000333333333333
       333A333333333333333338330000333333333333333333333333333333333333
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    ParentFont = False
+    TabOrder = 3
   end
   object Editdocumento: TEdit
     Left = 16
@@ -106,8 +104,8 @@ object FrmMotivoDispensaTrabalho: TFrmMotivoDispensaTrabalho
     Top = 48
     Width = 129
     Height = 21
-    Date = 41093.750985312500000000
-    Time = 41093.750985312500000000
+    Date = 41093.000000000000000000
+    Time = 0.750985312501143200
     TabOrder = 1
     ReadOnly = False
   end

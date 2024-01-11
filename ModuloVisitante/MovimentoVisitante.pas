@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloMovimentacao, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, Buttons, Jpeg, Menus, System.ImageList;
+  Mask, Buttons, Jpeg, Menus, System.ImageList, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMovimentoVisitante = class(TFrmModeloMovimentacao)
@@ -19,12 +22,10 @@ type
     Label7: TLabel;
     DBEdit6: TDBEdit;
     DBRadioGroup1: TDBRadioGroup;
-    SqlVisitanteInterno: TSQLQuery;
     DspVisitanteInterno: TDataSetProvider;
     CdsVisitanteInterno: TClientDataSet;
     DsVisitanteInterno: TDataSource;
     RadioGroupStatus: TRadioGroup;
-    SqlSelectVisitante: TSQLQuery;
     OpenDialogFOTO: TOpenDialog;
     TbMovimentar: TToolButton;
     DBRadioGroup2: TDBRadioGroup;
@@ -37,7 +38,6 @@ type
     DBGrid4: TDBGrid;
     ButtonNovoMenor: TButton;
     Button6: TButton;
-    SqlMenores: TSQLQuery;
     DspMenores: TDataSetProvider;
     CdsMenores: TClientDataSet;
     DsMenores: TDataSource;
@@ -46,7 +46,6 @@ type
     Label3: TLabel;
     PanelTitulo: TPanel;
     BitBtnCancelaEntrada: TBitBtn;
-    Label4: TLabel;
     Label8: TLabel;
     TabSheet1: TTabSheet;
     Label28: TLabel;
@@ -67,7 +66,6 @@ type
     DBLookupComboBoxIDCIDADE: TDBLookupComboBox;
     DBEdit16: TDBEdit;
     BtnImprimir: TBitBtn;
-    SqlMov_Diario_Visitantes: TSQLQuery;
     DspMov_Diario_Visitantes: TDataSetProvider;
     CdsMov_Diario_Visitantes: TClientDataSet;
     DsMov_Diario_Visitantes: TDataSource;
@@ -80,14 +78,12 @@ type
     DBGridVisita: TDBGrid;
     RadioGroupTipoVisita: TRadioGroup;
     DBLookupComboBoxRegra: TDBLookupComboBox;
-    SqlRegraVisita: TSQLQuery;
     DspRegraVisita: TDataSetProvider;
     CdsRegraVisita: TClientDataSet;
     DsRegraVisita: TDataSource;
     Dsconspadrao: TDataSource;
     Cdsconspadrao: TClientDataSet;
     Dspconspadrao: TDataSetProvider;
-    SQLconspadrao: TSQLQuery;
     GroupBox1: TGroupBox;
     Label9: TLabel;
     Label10: TLabel;
@@ -110,9 +106,6 @@ type
     CdsMovimentoDINHEIRO: TFloatField;
     CdsMovimentoDATA_VISITA: TSQLTimeStampField;
     CdsMovimentoNOME_INTERNO: TStringField;
-    SqlTodosVisitantes: TSQLQuery;
-    SqlTodosInterno: TSQLQuery;
-    SqlValidaRegra: TSQLQuery;
     DspValidaRegra: TDataSetProvider;
     CdsValidaRegra: TClientDataSet;
     DsValidaRegra: TDataSource;
@@ -126,7 +119,6 @@ type
     CdsVisitanteInternoSOLARIO: TStringField;
     CdsVisitanteInternoCELA: TStringField;
     CdsVisitanteInternoNOME_INTERNO: TStringField;
-    SqlExecute: TSQLQuery;
     CdsVisitanteInternoISOLAMENTO: TStringField;
     Label18: TLabel;
     DBEdit18: TDBEdit;
@@ -140,7 +132,6 @@ type
     CarteiradeVisitante1: TMenuItem;
     N1: TMenuItem;
     AlterarDadosFoto1: TMenuItem;
-    SqlVisitaDia: TSQLQuery;
     Panel1: TPanel;
     BitBtn1: TBitBtn;
     LabelTotalVisitante: TLabel;
@@ -176,7 +167,6 @@ type
     LabelDATA_HORA: TLabel;
     Timer1: TTimer;
     DBEdit21: TDBEdit;
-    SqlUltVisita: TSQLQuery;
     CdsUltVisita: TClientDataSet;
     DspUltVisita: TDataSetProvider;
     DsUltVisita: TDataSource;
@@ -184,6 +174,18 @@ type
     DBLookupComboBoxParentesco: TDBLookupComboBox;
     Label26: TLabel;
     Label27: TLabel;
+    SqlVisitanteInterno: TFDQuery;
+    SqlSelectVisitante: TFDQuery;
+    SqlMenores: TFDQuery;
+    SqlMov_Diario_Visitantes: TFDQuery;
+    SqlRegraVisita: TFDQuery;
+    SQLconspadrao: TFDQuery;
+    SqlTodosVisitantes: TFDQuery;
+    SqlTodosInterno: TFDQuery;
+    SqlValidaRegra: TFDQuery;
+    SqlExecute: TFDQuery;
+    SqlVisitaDia: TFDQuery;
+    SqlUltVisita: TFDQuery;
     procedure ButtonNovoInternoClick(Sender: TObject);
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -320,7 +322,7 @@ begin
     begin
 
       CdsVisitanteInterno.Append;
-      CdsVisitanteInterno.FieldByName('ID_VISITANTE_INTERNO').AsInteger := 0;
+      CdsVisitanteInterno.FieldByName('ID_VISITANTE_INTERNO').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(ID_VISITANTE_INTERNO,1) FROM RDB$DATABASE');;
       CdsVisitanteInterno.FieldByName('ID_VISITANTE').AsInteger :=
         dscadastro.DataSet.fieldbyname('ID_VISITANTE').AsInteger;
       CdsVisitanteInterno.FieldByName('ID_INTERNO').AsInteger :=
@@ -719,7 +721,7 @@ end;
 
 procedure TFrmMovimentoVisitante.TbMovimentarClick(Sender: TObject);
 var
-  sQuantidade_Menor, sDinheiro, sSacola, sSql: string;
+  sQuantidade_Menor, sDinheiro, sSacola, sSql, scalar: string;
 begin
   inherited;
 
@@ -1037,11 +1039,11 @@ begin
       end;
       DsVisitanteInterno.DataSet.next;
     end;
-
+    scalar := DM.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (id_mov_diario_visitante, 1) FROM RDB$DATABASE');
     if not (state in [dsinsert]) then
     begin
       sSql := 'insert into mov_diario_visitantes (id_mov_diario_visitantes, id_visitante, id_interno, quantidade_menor, nome_visitante, numero_carteirinha, cpf, rg, orgao_expedidor, sexo, data_visita, hora_visita, ordem_visita, id_up, dinheiro,sacola) '
-        + ' values (0, '
+        + ' values (' + scalar + ', '
         + DsCadastro.DataSet.FieldByName('id_visitante').AsString + ', '
         + DsConsulta.DataSet.fieldbyname('ID_INTERNO').asstring + ', '
         + sQuantidade_Menor + ', '
@@ -1059,7 +1061,7 @@ begin
     else
     begin
       sSql := 'insert into mov_diario_visitantes (id_mov_diario_visitantes, id_visitante, id_interno, quantidade_menor, nome_visitante, numero_carteirinha, cpf, rg, orgao_expedidor, sexo, data_visita, hora_visita, ordem_visita, id_up, dinheiro,sacola) '
-        + ' values (0, '
+        + ' values (' + scalar + ', '
         + DsCadastro.DataSet.FieldByName('id_visitante').AsString + ', '
         + DsVisitanteInterno.DataSet.fieldbyname('ID_INTERNO').asstring + ', '
         + sQuantidade_Menor + ', '
@@ -1150,7 +1152,7 @@ begin
   if FrmVisitanteMenores.ShowModal = mrok then
   begin
     DsMenores.DataSet.Append;
-    DsMenores.DataSet.fieldbyname('ID_MENORES').AsInteger := 0;
+    DsMenores.DataSet.fieldbyname('ID_MENORES').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_menores,1) FROM RDB$DATABASE');
     DsMenores.DataSet.fieldbyname('ID_VISITANTE').AsInteger := DsCadastro.DataSet.fieldbyname('ID_VISITANTE').AsInteger;
     DsMenores.DataSet.fieldbyname('NOME_MENORES').AsString := FrmVisitanteMenores.EditMenor.Text;
     DsMenores.DataSet.Post;
@@ -1447,7 +1449,7 @@ end;
 procedure TFrmMovimentoVisitante.OrdenarMovimento();
 begin
 
-  SqlMov_Diario_Visitantes.SQL.Text := 'select ID_MOV_DIARIO_VISITANTES,ordem_visita from mov_diario_visitantes '
+  SqlMov_Diario_Visitantes.SQL.Text := 'select ID_MOV_DIARIO_VISITANTES, ordem_visita from MOV_DIARIO_VISITANTES '
     + ' where data_visita = current_date and id_up= ' +
     inttostr(GLOBAL_ID_UP) + ' order by ID_MOV_DIARIO_VISITANTES';
 
@@ -1720,11 +1722,10 @@ begin
       begin
         ShowMessage(
           NomeVisitantes + #10 + #13 +
-          ' Já entrou com dinheiro: ' + formatfloat('####0.00', InternoDinheiro) + ' ao total será:' + formatfloat('####0.00',
+          ' Limite de dinheiro permitido atingido: ' + formatfloat('####0.00', InternoDinheiro) + ' ao total será:' + formatfloat('####0.00',
           (StrToFloatDef(sDinheiro, 0) + InternoDinheiro)));
         sDinheiro := '0';
       end;
-
     end;
 
     if StrToFloatDef(sDinheiro, 0) = 0 then
@@ -1789,25 +1790,25 @@ begin
 
     if RadioGroupTipoLocalizar.ItemIndex = 0 then
     begin
-      sqlconsulta.sql.text := SqlTodosVisitantes.SQL.Text + ' WHERE ' + Campo + ' = ' + qs(EditLocalizar.text)
+      sqlconsulta.sql.text := SqlTodosVisitantes.SQL.Text + ' WHERE ' + Campo + ' = ' + qs(EditLocalizar.text)  + ' AND I.ID_UP  = '+ IntToStr(GLOBAL_ID_UP)
         + ' ORDER BY I.ST, V.VISITANTE, I.NOME_INTERNO, V.status ';
     end;
 
     if RadioGroupTipoLocalizar.ItemIndex = 1 then
     begin
-      sqlconsulta.sql.text := SqlTodosVisitantes.SQL.Text + ' WHERE ' + Campo + ' LIKE ' + qs(EditLocalizar.text + '%')
+      sqlconsulta.sql.text := SqlTodosVisitantes.SQL.Text + ' WHERE ' + Campo + ' LIKE ' + qs(EditLocalizar.text + '%')  + ' AND I.ID_UP  = '+ IntToStr(GLOBAL_ID_UP)
         + ' ORDER BY I.ST, V.VISITANTE, I.NOME_INTERNO, V.status ';
     end;
 
     if RadioGroupTipoLocalizar.ItemIndex = 2 then
     begin
-      sqlconsulta.sql.text := SqlTodosInterno.SQL.Text + ' WHERE ' + Campo + ' LIKE ' + qs(EditLocalizar.text + '%')
+      sqlconsulta.sql.text := SqlTodosInterno.SQL.Text + ' WHERE ' + Campo + ' LIKE ' + qs(EditLocalizar.text + '%')  + ' AND I.ID_UP  = '+ IntToStr(GLOBAL_ID_UP)
         + ' ORDER BY I.ST, I.NOME_INTERNO, V.VISITANTE, V.status ';
     end;
 
     if RadioGroupTipoLocalizar.ItemIndex = 3 then
     begin
-      sqlconsulta.sql.text := SqlTodosInterno.SQL.Text + ' WHERE ' + Campo + ' = ' + qs(EditLocalizar.text)
+      sqlconsulta.sql.text := SqlTodosInterno.SQL.Text + ' WHERE ' + Campo + ' = ' + qs(EditLocalizar.text)  + ' AND I.ID_UP  = '+ IntToStr(GLOBAL_ID_UP)
         + ' ORDER BY I.ST, I.NOME_INTERNO, V.VISITANTE, V.status ';
     end;
 

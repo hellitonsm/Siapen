@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloMovimentacao, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  adpDBDateTimePicker, Mask, Buttons, unCompBio, System.ImageList;
+  adpDBDateTimePicker, Mask, Buttons, unCompBio, System.ImageList,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMovimentoSemiAberto = class(TFrmModeloMovimentacao)
@@ -16,7 +19,6 @@ type
     SqlConsultaTodos: TSQLQuery;
     DBEdit1: TDBEdit;
     tbInserir: TToolButton;
-    SqlMov_Diario: TSQLQuery;
     DspMov_Diario: TDataSetProvider;
     CdsMov_Diario: TClientDataSet;
     DsMov_Diario: TDataSource;
@@ -38,7 +40,6 @@ type
     Label7: TLabel;
     CdsMovimentoProntuario: TStringField;
     TabSheet1: TTabSheet;
-    SQLmovretorno: TSQLQuery;
     dspmovretorno: TDataSetProvider;
     cdsmovretorno: TClientDataSet;
     dsmovretorno: TDataSource;
@@ -77,7 +78,6 @@ type
     DBEdit41: TDBEdit;
     Tverificardigital: TToolButton;
     Label8: TLabel;
-    SqlDigital: TSQLQuery;
     DspDigital: TDataSetProvider;
     CdsDigital: TClientDataSet;
     DsDigital: TDataSource;
@@ -93,6 +93,9 @@ type
     CdsMovimentoJUSTIFICA_HORA_ENTRADA: TStringField;
     CdsMovimentoDATA_ENTRADA: TSQLTimeStampField;
     CdsMovimentoIDSETOR_TRABALHO: TIntegerField;
+    SqlMov_Diario: TFDQuery;
+    SQLmovretorno: TFDQuery;
+    SqlDigital: TFDQuery;
     procedure EditLocalizarChange(Sender: TObject);
     procedure tbInserirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

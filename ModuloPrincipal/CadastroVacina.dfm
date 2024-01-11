@@ -2,15 +2,16 @@ inherited FrmCadastroVacina: TFrmCadastroVacina
   Left = 211
   Top = 142
   Caption = 'Cadastro Vacina'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 584
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 533
     inherited DBNavigator1: TDBNavigator
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Height = 533
     inherited PageControlModeloCadastro: TPageControl
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
@@ -53,7 +54,10 @@ inherited FrmCadastroVacina: TFrmCadastroVacina
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited StatusBar1: TStatusBar
+    Top = 565
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM vacina')

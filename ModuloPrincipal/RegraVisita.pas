@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, StdCtrls, DBCtrls, Mask, DB, DBClient,
   Provider, SqlExpr, ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids,
-  ToolWin;
+  ToolWin, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 type
   TFrmRegraVisita = class(TFrmModeloCadastro)

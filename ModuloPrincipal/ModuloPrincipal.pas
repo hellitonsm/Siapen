@@ -151,7 +151,6 @@ type
     Livro1: TMenuItem;
     Remdio1: TMenuItem;
     Fornecedor1: TMenuItem;
-    SqlMovProcDetalhado: TSQLQuery;
     DspMovProcDetalhado: TDataSetProvider;
     CdsMovProcDetalhado: TClientDataSet;
     DsMovProcDetalhado: TDataSource;
@@ -190,7 +189,6 @@ type
     CadastrodePatrimonio1: TMenuItem;
     N13: TMenuItem;
     ipodePatrimnio1: TMenuItem;
-    SqlEscalaPlantao: TSQLQuery;
     DspEscalaPlantao: TDataSetProvider;
     CdsEscalaPlantao: TClientDataSet;
     DsEscalaPlantao: TDataSource;
@@ -220,7 +218,6 @@ type
     DsUP: TDataSource;
     CdsUP: TClientDataSet;
     DspUP: TDataSetProvider;
-    SqlUP: TSQLQuery;
     ControledePortaria1: TMenuItem;
     N15: TMenuItem;
     MduloGestodeArmas1: TMenuItem;
@@ -249,7 +246,6 @@ type
     N25: TMenuItem;
     RecebimentodeTransferncia1: TMenuItem;
     Identificacao: TTabSheet;
-    SQLfuncionario: TSQLQuery;
     dspfuncionario: TDataSetProvider;
     cdsfuncionario: TClientDataSet;
     DsFuncionario: TDataSource;
@@ -261,7 +257,6 @@ type
     DBText4: TDBText;
     OpenDialog1: TOpenDialog;
     DBText1: TDBText;
-    SqlUltimosLogs: TSQLQuery;
     DspUltimosLogs: TDataSetProvider;
     CdsUltimosLogs: TClientDataSet;
     DsUltimosLogs: TDataSource;
@@ -319,6 +314,11 @@ type
     CargaHorria1: TMenuItem;
     RoundedPanel1: TRoundedPanel;
     verlogs: TButton;
+    SqlUltimosLogs: TFDQuery;
+    SQLfuncionario: TFDQuery;
+    SqlEscalaPlantao: TFDQuery;
+    SqlMovProcDetalhado: TFDQuery;
+    SqlUP: TFDQuery;
     procedure CadastrodeInternos1Click(Sender: TObject);
     procedure Cela1Click(Sender: TObject);
     procedure Galeria1Click(Sender: TObject);
@@ -2525,7 +2525,7 @@ begin
   // self.Caption := self.Caption + ' - ' + GetBuildInfo(Application.ExeName) + ' (DEV)';
   Self.Caption := 'SIAPEN' + ' - ' + GetBuildInfo + ' - Data/Hora da versão: ' +
     FormatDateTime('dd/MM/yyy hh:mm',
-    FileDateToDateTime(FileAge(Application.ExeName)));
+    TFile.GetLastWriteTime(Application.ExeName));
   // Self.Caption := 'SIAPEN em Desenvolvimento';
   // Arrendodar TPanel
 
@@ -3240,7 +3240,7 @@ begin
       GLOBAL_PATCH_RELATORIO := GLOBAL_PATCH_SISTEMA + '..\Sem Relatório';
     end;
 
-    DM.AbreConexao;
+    DM.reAbreConexao;
 
     tmr1.Enabled := True;
 
@@ -3747,18 +3747,19 @@ begin
     if DirectoryExists(GLOBAL_PASTA_SPF) then
     begin
 
-      while DM.SQLConnect.Connected do
+     { while DM.SQLConnect.Connected do
       begin
         try
-          DM.SQLConnect.Connected := False;
+          DM.SQLConnect.Close;
         except
         end;
       end;
+      }
 
       GLOBAL_PATCH_SISTEMA := GLOBAL_PASTA_SPF;
       GLOBAL_ID_FUNCIONARIO := -1;
 
-      DM.AbreConexao;
+      DM.reAbreConexao;
 
       DsUP.DataSet.close;
       DsUP.DataSet.Open;
@@ -3842,7 +3843,7 @@ begin
       GLOBAL_PATCH_SISTEMA := GLOBAL_PASTA_DF;
       GLOBAL_ID_FUNCIONARIO := -1;
 
-      DM.AbreConexao;
+      DM.reAbreConexao;
 
       DsUP.DataSet.close;
       DsUP.DataSet.Open;
@@ -3930,7 +3931,7 @@ begin
       GLOBAL_PATCH_SISTEMA := GLOBAL_PASTA_MA;
       GLOBAL_ID_FUNCIONARIO := -1;
 
-      DM.AbreConexao;
+      DM.reAbreConexao;
 
       DsUP.DataSet.close;
       DsUP.DataSet.Open;
@@ -4018,7 +4019,7 @@ begin
       GLOBAL_PATCH_SISTEMA := GLOBAL_PASTA_MS;
       GLOBAL_ID_FUNCIONARIO := -1;
 
-      DM.AbreConexao;
+      DM.reAbreConexao;
 
       DsUP.DataSet.close;
       DsUP.DataSet.Open;
@@ -4106,7 +4107,7 @@ begin
       GLOBAL_PATCH_SISTEMA := GLOBAL_PASTA_MT;
       GLOBAL_ID_FUNCIONARIO := -1;
 
-      DM.AbreConexao;
+      DM.reAbreConexao;
 
       DsUP.DataSet.close;
       DsUP.DataSet.Open;
@@ -4194,7 +4195,7 @@ begin
       GLOBAL_PATCH_SISTEMA := GLOBAL_PASTA_PB;
       GLOBAL_ID_FUNCIONARIO := -1;
 
-      DM.AbreConexao;
+      DM.reAbreConexao;
 
       DsUP.DataSet.close;
       DsUP.DataSet.Open;

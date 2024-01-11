@@ -1,33 +1,22 @@
 inherited FrmCadastroFaltasDisciplinares: TFrmCadastroFaltasDisciplinares
   Left = 310
   Top = 250
-  Width = 835
-  Height = 472
   Caption = 'Cadastro Faltas Disciplinares'
-  OldCreateOrder = True
   OnClose = FormClose
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 383
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 365
-    end
     inherited DBNavigator1: TDBNavigator
-      Top = 365
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 704
-    Height = 383
+    inherited Image2: TImage
+      Width = 819
+      ExplicitWidth = 819
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 704
-      Height = 383
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 696
-          Height = 355
           object Label2: TLabel
             Left = 16
             Top = 16
@@ -95,7 +84,6 @@ inherited FrmCadastroFaltasDisciplinares: TFrmCadastroFaltasDisciplinares
             Height = 21
             DataField = 'TIPOFALTA'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'LEVE'
               'M'#201'DIA'
@@ -104,29 +92,31 @@ inherited FrmCadastroFaltasDisciplinares: TFrmCadastroFaltasDisciplinares
           end
         end
       end
-      inherited TabSheetConsulta: TTabSheet
-        inherited PanelConsulta: TPanel
-          Height = 426
-          inherited DBGridConsulta: TDBGrid
-            Height = 424
-          end
-        end
-      end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    Width = 819
-    inherited Image2: TImage
-      Width = 819
-    end
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 415
-    Width = 819
-  end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
-      'FROM falta_disciplinar')
+      'FROM FALTA_DISCIPLINAR')
+    object SqlCadastroID_FALTA_DISCIPLINAR: TIntegerField
+      FieldName = 'ID_FALTA_DISCIPLINAR'
+      Origin = 'ID_FALTA_DISCIPLINAR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object SqlCadastroFALTA_DISCIPLINAR: TStringField
+      FieldName = 'FALTA_DISCIPLINAR'
+      Origin = 'FALTA_DISCIPLINAR'
+      Size = 8192
+    end
+    object SqlCadastroTEMPOREABILITACAO: TIntegerField
+      FieldName = 'TEMPOREABILITACAO'
+      Origin = 'TEMPOREABILITACAO'
+    end
+    object SqlCadastroTIPOFALTA: TStringField
+      FieldName = 'TIPOFALTA'
+      Origin = 'TIPOFALTA'
+      Size = 50
+    end
   end
 end

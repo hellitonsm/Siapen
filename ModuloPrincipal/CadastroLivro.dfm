@@ -2,37 +2,33 @@ inherited FrmCadastroLivro: TFrmCadastroLivro
   Left = 261
   Top = 162
   Caption = 'Cadastro Livro/Revista'
-  ExplicitWidth = 952
-  ExplicitHeight = 621
+  ClientHeight = 584
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 531
+    Height = 533
+    ExplicitHeight = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 514
-      ExplicitHeight = 513
+      Height = 515
+      ExplicitHeight = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 514
+      Top = 515
       Hints.Strings = ()
-      ExplicitTop = 513
+      ExplicitTop = 514
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 821
-    ExplicitHeight = 531
+    Height = 533
+    ExplicitHeight = 532
     inherited PageControlModeloCadastro: TPageControl
-      Width = 825
-      Height = 532
-      ExplicitWidth = 821
-      ExplicitHeight = 531
+      Height = 533
+      ExplicitHeight = 532
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 817
-        ExplicitHeight = 504
+        ExplicitHeight = 505
         inherited PanelCadastro: TPanel
-          Width = 817
-          Height = 504
-          ExplicitWidth = 817
-          ExplicitHeight = 504
+          Height = 505
+          ExplicitHeight = 505
           object Label2: TLabel
             Left = 16
             Top = 16
@@ -217,46 +213,34 @@ inherited FrmCadastroLivro: TFrmCadastroLivro
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitWidth = 817
-        ExplicitHeight = 504
-        inherited PanelLocalizaConsulta: TPanel
-          Width = 817
-          ExplicitWidth = 813
-        end
+        ExplicitHeight = 505
         inherited PanelConsulta: TPanel
-          Width = 817
-          Height = 470
-          ExplicitWidth = 813
-          ExplicitHeight = 469
+          Height = 471
+          ExplicitHeight = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 815
-            Height = 468
+            Height = 469
           end
         end
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 936
-  end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 563
-    ExplicitWidth = 936
+    Top = 565
+    ExplicitTop = 564
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
+  inherited SqlCadastro: TFDQuery
+    SQL.Strings = (
+      'SELECT * '
+      'FROM LIVRO where id_up = :id_up')
+    Left = 600
+    Top = 200
+    ParamData = <
       item
-        DataType = ftInteger
         Name = 'id_up'
+        DataType = ftInteger
         ParamType = ptInput
         Value = 0
       end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM livro where id_up = :id_up')
-    SQLConnection = DM.SQLConnect
-    Left = 600
-    Top = 200
     object SqlCadastroID_LIVRO: TIntegerField
       FieldName = 'ID_LIVRO'
       Required = True

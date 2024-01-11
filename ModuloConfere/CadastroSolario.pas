@@ -13,14 +13,6 @@ uses
 
 type
   TFrmCadastroSolario = class(TFrmModeloCadastro)
-    SqlPavilhao: TSQLQuery;
-    DspPavilhao: TDataSetProvider;
-    CdsPavilhao: TClientDataSet;
-    DsPavilhao: TDataSource;
-    DsGaleria: TDataSource;
-    CdsGaleria: TClientDataSet;
-    DspGaleria: TDataSetProvider;
-    SqlGaleria: TSQLQuery;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     Label2: TLabel;
@@ -42,11 +34,25 @@ type
     Label4: TLabel;
     Edit2: TEdit;
     Label5: TLabel;
-    SqlRecursos: TSQLQuery;
     DSPRecursos: TDataSetProvider;
     CDSRecursos: TClientDataSet;
     DSRecursos: TDataSource;
     DBRadioGroup3: TDBRadioGroup;
+    SqlRecursos: TFDQuery;
+    CdsCadastroID_SOLARIO: TIntegerField;
+    CdsCadastroSOLARIO: TStringField;
+    CdsCadastroIDGALERIA: TIntegerField;
+    CdsCadastroIDPAVILHAO: TIntegerField;
+    CdsCadastroDIA_VISITA: TStringField;
+    CdsCadastroPERIODO_VISITA: TStringField;
+    CdsCadastroCHAVE_MIGRACAO: TStringField;
+    CdsCadastroALA_DE_ESTUDO: TStringField;
+    CdsCadastroGALERIA: TStringField;
+    CdsCadastroPAVILHAO: TStringField;
+    SqlPavilhao: TFDQuery;
+    dsPavilhao: TDataSource;
+    SqlGaleria: TFDQuery;
+    dsGaleria: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure DBLookupComboBoxPavilhaoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -172,7 +178,7 @@ procedure TFrmCadastroSolario.DBLookupComboBoxPavilhaoClick(
   Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxGaleria.KeyValue := null;
+ // DBLookupComboBoxGaleria.keyValue = null;
 
 end;
 
@@ -284,7 +290,7 @@ var
 begin
   inherited;
   DSRecursos.DataSet.Append;
-  DSRecursos.DataSet.fieldbyname('id_recurso_ala').AsInteger := 0;
+  DSRecursos.DataSet.fieldbyname('id_recurso_ala').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idrecurso_ala,1) FROM RDB$DATABASE');;;
   DSRecursos.DataSet.fieldbyname('id_solario').AsInteger := DsCadastro.DataSet.fieldbyname('id_solario').AsInteger;
   DSRecursos.DataSet.FieldByName('data').AsString := FormatDateTime('dd/mm/yyyy', now);
   DSRecursos.DataSet.FieldByName('descricao').AsString := Edit1.Text;

@@ -29,11 +29,9 @@ type
     CDSHISTORICOEDUCACAOID_INTERNO: TIntegerField;
     CDSHISTORICOEDUCACAOHISTORICO: TStringField;
     DSPHISTORICOEDUCACAO: TDataSetProvider;
-    SQLHISTORICOEDUCACAO: TSQLQuery;
     DBComboBoxdeficiencia: TDBComboBox;
     Label8: TLabel;
     TabSheet3: TTabSheet;
-    SQLremissao_estudo: TSQLQuery;
     DSPremissao_estudo: TDataSetProvider;
     CDSremissao_estudo: TClientDataSet;
     DSremissao_estudo: TDataSource;
@@ -66,7 +64,6 @@ type
     BitBtn3: TBitBtn;
     TabSheet4: TTabSheet;
     DBGrid1: TDBGrid;
-    SQLcertidao_estudo: TSQLQuery;
     dspcertidao_estudo: TDataSetProvider;
     cdscertidao_estudo: TClientDataSet;
     dscertidao_estudo: TDataSource;
@@ -93,7 +90,6 @@ type
     PopupMenuexcluiratestado: TPopupMenu;
     ExcluirRegistro2: TMenuItem;
     TabSheet6: TTabSheet;
-    SQLDiasLivro: TSQLQuery;
     dspDiasLivro: TDataSetProvider;
     cdsDiasLivro: TClientDataSet;
     dsDiasLivro: TDataSource;
@@ -117,10 +113,6 @@ type
     BitBtnCalcularLivro: TBitBtn;
     BitBtnInserirAtestadoLivro: TBitBtn;
     DBGrid3: TDBGrid;
-    SQLQuery1: TSQLQuery;
-    DataSetProvider1: TDataSetProvider;
-    ClientDataSet1: TClientDataSet;
-    DataSource1: TDataSource;
     TabSheet8: TTabSheet;
     adpDBDateTimePicker1: TadpDBDateTimePicker;
     Label73: TLabel;
@@ -128,7 +120,6 @@ type
     BitBtn1: TBitBtn;
     DBGrid5: TDBGrid;
     ComboTurma: TComboBox;
-    SqlPortaria: TSQLQuery;
     dspportaria: TDataSetProvider;
     cdsportaria: TClientDataSet;
     dsportaria: TDataSource;
@@ -138,19 +129,16 @@ type
     Encerrar_portaria: TMenuItem;
     ExcluirPortaria1: TMenuItem;
     Portaria: TLabel;
-    SQLPortariaAluno: TSQLQuery;
     cdsportariaaluno: TClientDataSet;
     dsportariaaluno: TDataSource;
     dspportariaaluno: TDataSetProvider;
-    SQLPortariaAlunoTURMA: TStringField;
-    SQLPortariaAlunoID_PORTARIA_EDUCACAO: TIntegerField;
-    SQLPortariaAlunoID_INTERNO: TIntegerField;
-    SQLPortariaAlunoDATA_ENTRADA: TSQLTimeStampField;
-    SQLPortariaAlunoID_FUNCIONARIO: TIntegerField;
-    SQLPortariaAlunoOBS: TStringField;
-    SQLPortariaAlunoDATA_FINAL: TSQLTimeStampField;
-    SQLPortariaAlunoPORTARIA: TStringField;
     ComboSalas: TComboBox;
+    SQLHISTORICOEDUCACAO: TFDQuery;
+    SQLremissao_estudo: TFDQuery;
+    SQLcertidao_estudo: TFDQuery;
+    SQLDiasLivro: TFDQuery;
+    SqlPortaria: TFDQuery;
+    SQLPortariaAluno: TFDQuery;
     procedure Button2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
@@ -175,10 +163,11 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure Encerrar_portariaClick(Sender: TObject);
     procedure ExcluirPortaria1Click(Sender: TObject);
+    procedure EditLocalizarChange(Sender: TObject);
   private
     { Private declarations }
     steducacao: string;
-    diasRemidos, qtdeLivros : integer;
+    diasRemidos, qtdeLivros: integer;
   public
     { Public declarations }
   end;
@@ -196,7 +185,7 @@ procedure TFrmCadastroInternoEducacao.Button2Click(Sender: TObject);
 begin
   inherited;
   DSHISTORICOEDUCACAO.DataSet.Append;
-  DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_historico_estudo').AsInteger := 0;
+  DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_historico_estudo').AsInteger := Dm.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (idhistorico_estudo, 1) FROM RDB$DATABASE');
   DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSHISTORICOEDUCACAO.DataSet.fieldbyname('data_historico').AsString := MaskEdit2.Text;
@@ -234,7 +223,7 @@ begin
 
   dsportariaaluno.DataSet.Close;
   dsportariaaluno.DataSet.Open;
-
+  //qt := 0;
 end;
 
 procedure TFrmCadastroInternoEducacao.SalvarClick(Sender: TObject);
@@ -263,7 +252,7 @@ begin
     end;
 
     DSHISTORICOEDUCACAO.DataSet.Append;
-    DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_historico_estudo').AsInteger := 0;
+    DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_historico_estudo').AsInteger := Dm.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (idhistorico_estudo, 1) FROM RDB$DATABASE');
     DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
     DSHISTORICOEDUCACAO.DataSet.fieldbyname('data_historico').AsString := DsCadastro.DataSet.fieldbyname('data_matricula').AsString;
     DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;
@@ -281,7 +270,7 @@ begin
       DSHISTORICOEDUCACAO.DataSet.fieldbyname('historico').AsString := 'Matrículou-se na Série: ' + DBLookupComboBoxserie.Text
       + ' Turma: ' + DsCadastro.DataSet.fieldbyname('turma').AsString + ' Período: ' + DsCadastro.DataSet.fieldbyname('periodo').AsString +'. OBS: '+DBEditobseducacao.text;
     end;
-    DSHISTORICOEDUCACAO.DataSet.Post;
+   // DSHISTORICOEDUCACAO.DataSet.Post;
 
   end;
 
@@ -402,6 +391,36 @@ begin
 
 end;
 
+procedure TFrmCadastroInternoEducacao.EditLocalizarChange(Sender: TObject);
+begin
+ if RadioGroupTipoLocalizar.ItemIndex = 1 then
+  begin
+    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or
+      (EditLocalizar.Text = ' ') then
+    begin
+      //showmessage('foi');
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'NOME_INTERNO LIKE ''%' + EditLocalizar.Text + '%''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
+  end
+  else
+  begin
+    if EditLocalizar.Text <> '' then
+    begin
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'RGI = ''' + EditLocalizar.Text + '''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
+  end;
+
+
+end;
+
 procedure TFrmCadastroInternoEducacao.DBGridConsultaDblClick(
   Sender: TObject);
 begin
@@ -479,7 +498,7 @@ begin
     DSHISTORICOEDUCACAO.DataSet.Post;
 
     DSHISTORICOEDUCACAO.DataSet.Append;
-    DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_historico_estudo').AsInteger := 0;
+    DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_historico_estudo').AsInteger := Dm.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (idhistorico_estudo, 1) FROM RDB$DATABASE');;
     DSHISTORICOEDUCACAO.DataSet.fieldbyname('id_interno').AsString := DsCadastro.DataSet.fieldbyname('id_interno').asstring;
     DSHISTORICOEDUCACAO.DataSet.fieldbyname('data_historico').AsDateTime := date-1;
     DSHISTORICOEDUCACAO.DataSet.FieldByName('historico').AsString := 'Matrícula Cancelada. Série: ' + DBLookupComboBoxserie.Text
@@ -590,7 +609,7 @@ begin
   end;
 
   DSremissao_estudo.DataSet.Append;
-  DSremissao_estudo.DataSet.fieldbyname('id_hora_aula').AsInteger := 0;
+  DSremissao_estudo.DataSet.fieldbyname('id_hora_aula').AsInteger := Dm.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(ID_HORA_AULA,1) FROM RDB$DATABASE');
   DSremissao_estudo.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSremissao_estudo.DataSet.fieldbyname('data_inicial').AsString := FormatDateTime('dd/mm/yyyy', adpDBDateTimePickerdtinicial.date);
   DSremissao_estudo.DataSet.fieldbyname('data_final').Asstring := FormatDateTime('dd/mm/yyyy', adpDBDateTimePickerdtfinalremicao.date);
@@ -705,7 +724,7 @@ begin
   end;
 
   dscertidao_estudo.DataSet.Append;
-  dscertidao_estudo.DataSet.fieldbyname('id_atestado_estudo').AsInteger := 0;
+  dscertidao_estudo.DataSet.fieldbyname('id_atestado_estudo').AsInteger :=  Dm.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (id_atestado_ESTUDO, 1) FROM RDB$DATABASE');
   dscertidao_estudo.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dscertidao_estudo.DataSet.fieldbyname('data_inicial').AsString := formatdatetime('dd/mm/yyyy', DateTimePickerdtinicialcertidao.date);
   dscertidao_estudo.DataSet.fieldbyname('data_final').AsString := formatdatetime('dd/mm/yyyy', adpDBDateTimePickerdtfinalcertidao.date);
@@ -964,7 +983,7 @@ begin
   end;
 
   dsDiasLivro.DataSet.Append;
-  dsDiasLivro.DataSet.fieldbyname('id_dias_leitura').AsInteger := 0;
+  dsDiasLivro.DataSet.fieldbyname('id_dias_leitura').AsInteger :=  Dm.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (id_dias_leitura, 1) FROM RDB$DATABASE');;
   dsDiasLivro.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dsDiasLivro.DataSet.fieldbyname('data_inicial').AsString := FormatDateTime('dd/mm/yyyy', adpDBDateTimePickerLivroInicial.date);
   dsDiasLivro.DataSet.fieldbyname('data_final').Asstring := FormatDateTime('dd/mm/yyyy', adpDBDateTimePickerLivrosFinal.date);
@@ -1036,16 +1055,16 @@ begin
           end;
     DsPortaria.DataSet.Next;
   end;
-  DSportaria.DataSet.Append;
-  DSportaria.DataSet.fieldbyname('id_portaria_educacao').AsInteger := 0;
-  DSportaria.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
-  DSportaria.DataSet.fieldbyname('data_entrada').AsString := FormatDateTime('dd/mm/yyyy', adpDBDateTimePicker1.date);
+  cDSportaria.Append;
+  cDSportaria.fieldbyname('id_portaria_educacao').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(ID_PORTARIA_EDUCACAO, 1) FROM RDB$DATABASE');
+  cDSportaria.fieldbyname('id_interno').AsInteger := cDsCadastro.fieldbyname('id_interno').AsInteger;
+  cDSportaria.fieldbyname('data_entrada').AsString := FormatDateTime('dd/mm/yyyy', adpDBDateTimePicker1.date);
 
  // showmessage(FormatDateTime('dd/mm/yyyy', adpDBDateTimePickerdtinicial.date));
-  DSportaria.DataSet.fieldbyname('turma').Asstring := ComboTurma.Text;
-  DSportaria.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;
-  DSportaria.DataSet.FieldByName('Portaria').Asstring := EditPortaria.Text;
-  DSportaria.DataSet.Post;
+  cDSportaria.fieldbyname('turma').Asstring := ComboTurma.Text;
+  cDSportaria.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;
+  cDSportaria.FieldByName('Portaria').Asstring := EditPortaria.Text;
+  cDSportaria.Post;
 
  // EditPortaria.Text := '';
 end;

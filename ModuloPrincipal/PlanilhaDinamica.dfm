@@ -2,8 +2,8 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
   Left = 228
   Top = 116
   Caption = 'Planilha Din'#226'mica - Relat'#243'rio R'#225'pido e F'#225'cil'
-  ClientHeight = 573
-  ClientWidth = 982
+  ClientHeight = 601
+  ClientWidth = 1002
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,8 +17,8 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
   object DBGrdConsulta: TDBGrid
     Left = 0
     Top = 41
-    Width = 982
-    Height = 372
+    Width = 1002
+    Height = 400
     Align = alClient
     DataSource = DsPrincipal
     TabOrder = 0
@@ -32,8 +32,8 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
   end
   object PnlConfig: TPanel
     Left = 0
-    Top = 413
-    Width = 982
+    Top = 441
+    Width = 1002
     Height = 160
     Align = alBottom
     TabOrder = 1
@@ -42,7 +42,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     object Panel1: TPanel
       Left = 585
       Top = 1
-      Width = 396
+      Width = 416
       Height = 158
       Align = alClient
       Caption = 'Panel1'
@@ -51,7 +51,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
       object DBGrid1: TDBGrid
         Left = 1
         Top = 1
-        Width = 394
+        Width = 414
         Height = 127
         Align = alClient
         DataSource = DsPlanilhaDinamica
@@ -81,7 +81,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
       object Panel2: TPanel
         Left = 1
         Top = 128
-        Width = 394
+        Width = 414
         Height = 29
         Align = alBottom
         TabOrder = 1
@@ -202,7 +202,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
   object PanelTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 982
+    Width = 1002
     Height = 41
     Align = alTop
     Caption = 'Formulario Auxiliar'
@@ -218,7 +218,7 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     object Image2: TImage
       Left = 1
       Top = 1
-      Width = 980
+      Width = 1000
       Height = 39
       Align = alClient
       Picture.Data = {
@@ -979,11 +979,9 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Top = 64
   end
   object SqlPrincipal: TFDQuery
-
-    Params = <>
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * FROM VW_INTERNO')
-    Connection = DM.SQLConnect
     Left = 64
     Top = 64
   end
@@ -1614,11 +1612,9 @@ object FrmPlanilhaDinamica: TFrmPlanilhaDinamica
     Top = 112
   end
   object SqlPlanilhaDinamica: TFDQuery
-
-    Params = <>
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * FROM PLANILHA_DINAMICA')
-    Connection = DM.SQLConnect
     Left = 616
     Top = 296
   end

@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, Mask, DBCtrls, DB, DBClient, Provider,
   SqlExpr, ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls,
-  Buttons, jpeg;
+  Buttons, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 type
   TFrmPatrimonio = class(TFrmModeloCadastro)
@@ -154,7 +157,7 @@ procedure TFrmPatrimonio.NovoClick(Sender: TObject);
 begin
   inherited;
 
-  DsCadastro.DataSet.FieldByName('IDPATRIMONIO').AsInteger := 0;
+  DsCadastro.DataSet.FieldByName('IDPATRIMONIO').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(IDPATRIMONIO,1) FROM RDB$DATABASE');
   DsCadastro.DataSet.FieldByName('ID_UP').AsInteger := GLOBAL_ID_UP;
   DsCadastro.DataSet.FieldByName('IDFUNCIONARIO_CADASTROU').AsInteger := GLOBAL_ID_FUNCIONARIO;
   DsCadastro.DataSet.FieldByName('DATA_CADASTRO').AsDateTime := Date;

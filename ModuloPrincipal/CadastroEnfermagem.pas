@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, jpeg, Menus, dbcgrids;
+  ToolWin, jpeg, Menus, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroEnfermagem = class(TFrmModeloInterno)
@@ -17,7 +20,7 @@ type
     Button1: TButton;
     DBGrid1: TDBGrid;
     DBMemo1: TDBMemo;
-    SQLEnfermagem: TSQLQuery;
+    SQLEnfermagemold: TSQLQuery;
     DSPEnfermagem: TDataSetProvider;
     CDSEnfermageml: TClientDataSet;
     DSEnfermagem: TDataSource;
@@ -36,7 +39,7 @@ type
     DateTimePickerdata: TDateTimePicker;
     Memomedicacao: TMemo;
     DBGrid2: TDBGrid;
-    SQLmedicacaointerno: TSQLQuery;
+    SQLmedicacaointernoold: TSQLQuery;
     DSPmedicacaointerno: TDataSetProvider;
     CDSmedicacaointerno: TClientDataSet;
     DSmedicacaointerno: TDataSource;
@@ -50,6 +53,8 @@ type
     Button2: TButton;
     CDSmedicacaointernoID_FUNCIONARIO: TIntegerField;
     CDSmedicacaointernoFuncionrioa: TStringField;
+    SQLmedicacaointerno: TFDQuery;
+    SQLEnfermagem: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -78,7 +83,7 @@ procedure TFrmCadastroEnfermagem.Button1Click(Sender: TObject);
 begin
   inherited;
   DSEnfermagem.DataSet.Append;
-  DSEnfermagem.DataSet.fieldbyname('id_historico_enfermagem').AsInteger := 0;
+  DSEnfermagem.DataSet.fieldbyname('id_historico_enfermagem').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idenfermagem,1) FROM RDB$DATABASE');
   DSEnfermagem.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSEnfermagem.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;

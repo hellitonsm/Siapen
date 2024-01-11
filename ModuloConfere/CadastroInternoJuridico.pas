@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, jpeg, dbcgrids, adpDBDateTimePicker, Menus;
+  ToolWin, jpeg, dbcgrids, adpDBDateTimePicker, Menus, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroInternoJuridico = class(TFrmModeloInterno)
@@ -14,7 +17,6 @@ type
     DBRadioGroup3: TDBRadioGroup;
     SpeedButton3: TSpeedButton;
     TabSheet1: TTabSheet;
-    SQLHISTORICO_interno: TSQLQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     CDSHISTORICO_internoIDHISTORICO_INTERNO: TIntegerField;
@@ -30,11 +32,9 @@ type
     DSHISTORICO_interno: TDataSource;
     PageControl1: TPageControl;
     TabSheet2: TTabSheet;
-    SqlDsControlePermanencia: TSQLQuery;
     DspDsControlePermanencia: TDataSetProvider;
     CdsDsControlePermanencia: TClientDataSet;
     DsControlePermanencia: TDataSource;
-    SqlPermanenciaScaner: TSQLQuery;
     DspPermanenciaScaner: TDataSetProvider;
     CdsPermanenciaScaner: TClientDataSet;
     DsPermanenciaScaner: TDataSource;
@@ -92,7 +92,6 @@ type
     DsCalculoPena: TDataSource;
     CdsCalculoPena: TClientDataSet;
     DspCalculoPena: TDataSetProvider;
-    SqlCalculoPena: TSQLQuery;
     Label60: TLabel;
     TabSheet5: TTabSheet;
     Editconcedido: TEdit;
@@ -105,7 +104,6 @@ type
     DateTimePickerdtbeneficio: TDateTimePicker;
     DBGrid4: TDBGrid;
     Button1: TButton;
-    SQLbeneficio: TSQLQuery;
     DSPbeneficio: TDataSetProvider;
     cdsbeneficio: TClientDataSet;
     dsbeneficio: TDataSource;
@@ -134,28 +132,23 @@ type
     TabSheet8: TTabSheet;
     TabSheet10: TTabSheet;
     TabSheet11: TTabSheet;
-    SqlCondenacao: TSQLQuery;
     DspCondenacao: TDataSetProvider;
     CdsCondenacao: TClientDataSet;
     DsCondenacao: TDataSource;
     DBGrid6: TDBGrid;
-    SqlDetracao: TSQLQuery;
     DspDetracao: TDataSetProvider;
     CdsDetracao: TClientDataSet;
     DsDetracao: TDataSource;
     DBGrid7: TDBGrid;
-    SqlInterrupcao: TSQLQuery;
     DspInterrupcao: TDataSetProvider;
     CdsInterrupcao: TClientDataSet;
     DsInterrupcao: TDataSource;
     DBGrid8: TDBGrid;
     DBGrid9: TDBGrid;
-    SqlRemicao: TSQLQuery;
     DspRemicao: TDataSetProvider;
     CdsRemicao: TClientDataSet;
     DsRemicao: TDataSource;
     TabSheet12: TTabSheet;
-    SqlLinhaTempo: TSQLQuery;
     DspLinhaTempo: TDataSetProvider;
     CdsLinhaTempo: TClientDataSet;
     DsLinhaTempo: TDataSource;
@@ -179,7 +172,6 @@ type
     DsComutacao: TDataSource;
     CdsComutacao: TClientDataSet;
     DspComutacao: TDataSetProvider;
-    SqlComutacao: TSQLQuery;
     DBGrid10: TDBGrid;
     RadioGroupVerLinha: TRadioGroup;
     DBEditMES: TDBEdit;
@@ -214,6 +206,17 @@ type
     LbNumOficioPrazo: TLabel;
     DbRgEnviadoOficioPrazo: TDBRadioGroup;
     GbOficioPrazo: TGroupBox;
+    SQLHISTORICO_interno: TFDQuery;
+    SqlDsControlePermanencia: TFDQuery;
+    SqlPermanenciaScaner: TFDQuery;
+    SqlCalculoPena: TFDQuery;
+    SQLbeneficio: TFDQuery;
+    SqlCondenacao: TFDQuery;
+    SqlDetracao: TFDQuery;
+    SqlInterrupcao: TFDQuery;
+    SqlRemicao: TFDQuery;
+    SqlLinhaTempo: TFDQuery;
+    SqlComutacao: TFDQuery;
     procedure SpeedButton3Click(Sender: TObject);
     procedure cbbJusticaKeyPress(Sender: TObject; var Key: Char);
     procedure ComboBoxsituacaojuridicaKeyPress(Sender: TObject;
@@ -273,6 +276,7 @@ type
     procedure DBEditDataFimKeyPress(Sender: TObject; var Key: Char);
     procedure DbRgEnviadoOficioPrazoChange(Sender: TObject);
     procedure DbRgEnviadoOficioPrazoClick(Sender: TObject);
+    procedure EditLocalizarChange(Sender: TObject);
   private
 
     { Private declarations }
@@ -681,7 +685,7 @@ procedure TFrmCadastroInternoJuridico.CDSHISTORICO_internoAfterInsert(
 begin
   inherited;
 
-  DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+  DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idhistorico_interno,1) FROM RDB$DATABASE');
   DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime := date;
@@ -838,7 +842,7 @@ procedure TFrmCadastroInternoJuridico.Button1Click(Sender: TObject);
 begin
   inherited;
   dsbeneficio.DataSet.Append;
-  dsbeneficio.DataSet.fieldbyname('ID_BENEFICIOS').AsInteger := 0;
+  dsbeneficio.DataSet.fieldbyname('ID_BENEFICIOS').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(ID_BENEFICIOS,1) FROM RDB$DATABASE');;
   dsbeneficio.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dsbeneficio.DataSet.fieldbyname('beneficio').AsString := ComboBoxbeneficio.text;
@@ -858,6 +862,35 @@ begin
   inherited;
   DateTimePickerdtbeneficio.Date := Date;
   DateTimePickhistorico.Date := Date;
+end;
+
+procedure TFrmCadastroInternoJuridico.EditLocalizarChange(Sender: TObject);
+begin
+  if RadioGroupTipoLocalizar.ItemIndex = 1 then
+  begin
+    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or
+      (EditLocalizar.Text = ' ') then
+    begin
+      //showmessage('foi');
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'NOME_INTERNO LIKE ''%' + EditLocalizar.Text + '%''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
+  end
+  else
+  begin
+    if EditLocalizar.Text <> '' then
+    begin
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'RGI = ''' + EditLocalizar.Text + '''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
+  end;
+
 end;
 
 procedure TFrmCadastroInternoJuridico.DBGrid4DblClick(Sender: TObject);
@@ -901,7 +934,7 @@ procedure TFrmCadastroInternoJuridico.BitBtn6Click(Sender: TObject);
 begin
   inherited;
   DSHISTORICO_interno.DataSet.Append;
-  DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+  DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idhistorico_interno,1) FROM RDB$DATABASE');
   DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsString :=

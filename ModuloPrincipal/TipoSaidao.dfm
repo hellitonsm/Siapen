@@ -1,27 +1,33 @@
 inherited FrmTipoSaidao: TFrmTipoSaidao
-  Height = 316
   Caption = 'Tipo Said'#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 948
+  ExplicitHeight = 620
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 227
+    ExplicitHeight = 530
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 209
+      Height = 513
+      ExplicitHeight = 512
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 209
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 512
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 227
+    ExplicitHeight = 530
     inherited PageControlModeloCadastro: TPageControl
-      Height = 227
-      ActivePage = TabSheetCadastro
+      Width = 821
+      Height = 531
+      ExplicitHeight = 530
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Height = 199
+          Width = 813
+          Height = 503
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 16
             Top = 16
@@ -60,19 +66,29 @@ inherited FrmTipoSaidao: TFrmTipoSaidao
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 813
+        end
         inherited PanelConsulta: TPanel
-          Height = 165
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
-            Height = 163
+            Width = 811
+            Height = 467
           end
         end
       end
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 259
+    ExplicitTop = 563
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM TIPO_SAIDAO')

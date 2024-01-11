@@ -1,32 +1,26 @@
 inherited FrmRoupas: TFrmRoupas
   Left = 220
   Top = 97
-  Width = 944
-  Height = 529
   Caption = 'FrmRoupas'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 440
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 422
-    end
+    Height = 532
     inherited DBNavigator1: TDBNavigator
-      Top = 422
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 813
-    Height = 440
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 928
+      ExplicitWidth = 928
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 813
-      Height = 440
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 805
-          Height = 412
           object Label2: TLabel
             Left = 16
             Top = 24
@@ -71,8 +65,8 @@ inherited FrmRoupas: TFrmRoupas
             Top = 68
             Width = 97
             Height = 21
-            Date = 41113.625926932870000000
-            Time = 41113.625926932870000000
+            Date = 41113.000000000000000000
+            Time = 0.625926932872971500
             TabOrder = 1
             ReadOnly = False
           end
@@ -166,9 +160,6 @@ inherited FrmRoupas: TFrmRoupas
                 Font.Height = -13
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 2
-                OnClick = BitBtn1Click
                 Glyph.Data = {
                   DE010000424DDE01000000000000760000002800000024000000120000000100
                   0400000000006801000000000000000000001000000000000000000000000000
@@ -187,6 +178,9 @@ inherited FrmRoupas: TFrmRoupas
                   333A333333333333333338330000333333333333333333333333333333333333
                   0000}
                 NumGlyphs = 2
+                ParentFont = False
+                TabOrder = 2
+                OnClick = BitBtn1Click
               end
             end
           end
@@ -229,15 +223,8 @@ inherited FrmRoupas: TFrmRoupas
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        inherited PanelLocalizaConsulta: TPanel
-          Width = 805
-        end
         inherited PanelConsulta: TPanel
-          Width = 805
-          Height = 378
           inherited DBGridConsulta: TDBGrid
-            Width = 803
-            Height = 376
             DataSource = DsConsulta
           end
         end
@@ -245,29 +232,25 @@ inherited FrmRoupas: TFrmRoupas
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 928
-    inherited Image2: TImage
-      Width = 928
-    end
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 472
-    Width = 928
+    Top = 564
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_roupas'
-        ParamType = ptInput
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM roupas'
       'where id_roupas = :id_roupas')
-    SQLConnection = DM.SQLConnect
     Left = 552
     Top = 16
+    ParamData = <
+      item
+        Name = 'id_roupas'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 580
@@ -290,21 +273,6 @@ inherited FrmRoupas: TFrmRoupas
   inherited DsCadastro: TDataSource
     Left = 636
     Top = 16
-  end
-  object SQLroupasinternos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_roupas'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select * from roupas_interno'
-      'where id_roupa = :id_roupas')
-    SQLConnection = DM.SQLConnect
-    Left = 552
-    Top = 120
   end
   object dsproupasinternos: TDataSetProvider
     DataSet = SQLroupasinternos
@@ -350,19 +318,6 @@ inherited FrmRoupas: TFrmRoupas
     Left = 648
     Top = 120
   end
-  object SqlSelectRoupaInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select r.id_roupas, i.nome_interno'
-      'from roupas r'
-      'inner join interno i on (r.id_interno = i.id_interno)'
-      ''
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 216
-    Top = 412
-  end
   object DsConsulta: TDataSource
     DataSet = CdsConsulta
     Left = 260
@@ -388,15 +343,40 @@ inherited FrmRoupas: TFrmRoupas
     Left = 204
     Top = 352
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SQLroupasinternos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from roupas_interno'
+      'where id_roupa = :id_roupas')
+    Left = 552
+    Top = 120
+    ParamData = <
+      item
+        Name = 'ID_ROUPAS'
+        ParamType = ptInput
+      end>
+  end
+  object SqlSelectRoupaInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select r.id_roupas, i.nome_interno'
+      'from roupas r'
+      'inner join interno i on (r.id_interno = i.id_interno)'
+      ''
+      '')
+    Left = 216
+    Top = 412
+  end
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select r.id_roupas, i.nome_interno'
       'from roupas r'
       'inner join interno i on (r.id_interno = i.id_interno)'
       '')
-    SQLConnection = DM.SQLConnect
     Left = 168
     Top = 352
   end

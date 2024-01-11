@@ -25,7 +25,6 @@ type
     PanelModeloCadastro: TPanel;
     PageControlModeloCadastro: TPageControl;
     TabSheetCadastro: TTabSheet;
-    SqlCadastro: TSQLQuery;
     DspCadastro: TDataSetProvider;
     CdsCadastro: TClientDataSet;
     DsCadastro: TDataSource;
@@ -36,16 +35,17 @@ type
     Label1: TLabel;
     EditLocalizar: TEdit;
     DBGridConsulta: TDBGrid;
-    SqlMovimento: TSQLQuery;
     DspMovimento: TDataSetProvider;
     CdsMovimento: TClientDataSet;
     DsMovimento: TDataSource;
     TabSheetMovimentacao: TTabSheet;
     DBGrid1: TDBGrid;
-    SqlConsulta: TSQLQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
+    SqlCadastro: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SqlMovimento: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure EditarClick(Sender: TObject);
     procedure CancelarClick(Sender: TObject);
@@ -379,6 +379,7 @@ begin
       'Confirme.', mb_YesNo + Mb_IconQuestion) = mrYes then
     begin
       CanClose := True;
+      DM.SQLConnect.Commit;
       Active := false;
     end;
   end;
@@ -421,8 +422,8 @@ begin
       (Components[iComp] as TDBLookupComboBox).Color := CorCompInativo;
     end;
 
-    if (Components[iComp] is TSQLQuery) then
-      if not assigned(TSQLQuery(Components[iComp]).SQLConnection) then
+    if (Components[iComp] is TFDQuery) then
+      if not assigned(TFDQuery(Components[iComp]).Connection) then
         TFDQuery(Components[iComp]).Connection := DM.SQLConnect;
 
     if (Components[iComp] is TadpDBDateTimePicker) then

@@ -1,28 +1,30 @@
 inherited FrmCadastroRemedio: TFrmCadastroRemedio
   Left = 208
   Top = 196
-  Height = 553
   Caption = 'Cadastro Rem'#233'dio'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 584
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 464
+    Height = 533
+    ExplicitHeight = 532
     inherited ToolBarModeloCadastro: TToolBar
       Height = 446
+      ExplicitHeight = 446
     end
     inherited DBNavigator1: TDBNavigator
       Top = 446
       Hints.Strings = ()
+      ExplicitTop = 446
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 464
+    Height = 533
+    ExplicitHeight = 532
     inherited PageControlModeloCadastro: TPageControl
-      Height = 464
+      ExplicitHeight = 464
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Height = 436
+          ExplicitHeight = 436
           object Label2: TLabel
             Left = 16
             Top = 16
@@ -137,7 +139,6 @@ inherited FrmCadastroRemedio: TFrmCadastroRemedio
             Height = 21
             DataField = 'tipo_remedio'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               ''
               'Controlado')
@@ -146,8 +147,10 @@ inherited FrmCadastroRemedio: TFrmCadastroRemedio
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitHeight = 505
         inherited PanelConsulta: TPanel
           Height = 402
+          ExplicitHeight = 402
           inherited DBGridConsulta: TDBGrid
             Height = 400
           end
@@ -156,9 +159,9 @@ inherited FrmCadastroRemedio: TFrmCadastroRemedio
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 496
+    Top = 565
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM remedio')

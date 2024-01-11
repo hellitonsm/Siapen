@@ -3,8 +3,8 @@ object TelaLogin: TTelaLogin
   Top = 554
   BorderStyle = bsDialog
   Caption = 'SIAPEN - Sistema Integrado de Administra'#231#227'o Penitenci'#225'ria'
-  ClientHeight = 205
-  ClientWidth = 654
+  ClientHeight = 204
+  ClientWidth = 650
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -1570,6 +1570,7 @@ object TelaLogin: TTelaLogin
       Enabled = False
       KeyField = 'ID_UP'
       ListField = 'NOME_UP'
+      ListSource = DataSource1
       TabOrder = 0
       OnClick = DBLookupComboBox1Click
     end

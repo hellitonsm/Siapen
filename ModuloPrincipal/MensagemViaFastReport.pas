@@ -10,7 +10,10 @@ uses
   frxExportImage, frxExportCSV, frxExportRTF, frxExportText, frxExportHTML,
   frxExportXLS, frxExportXML, frxExportPDF, frxExportODF, frxChart,
   frxDBSet, frxDBXComponents, frxDesgn, FMTBcd, SqlExpr,
-  Provider, DB, DBClient, frxExportBaseDialog;
+  Provider, DB, DBClient, frxExportBaseDialog, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMensagemViaFastReport = class(TFrmModeloFormulario)
@@ -55,7 +58,7 @@ type
     DsExecute: TDataSource;
     CdsExecute: TClientDataSet;
     DspExecute: TDataSetProvider;
-    SqlExecute: TSQLQuery;
+    SqlExecute: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

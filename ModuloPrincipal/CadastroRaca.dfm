@@ -1,7 +1,7 @@
 inherited FrmCadastroRaca: TFrmCadastroRaca
   Caption = 'Cadastro Ra'#231'a'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -54,7 +54,7 @@ inherited FrmCadastroRaca: TFrmCadastroRaca
   inherited ImageListCadastro: TImageList
     Left = 624
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM RACA')

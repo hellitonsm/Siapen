@@ -6,11 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastropsicologia = class(TFrmModeloInterno)
-    SQLPsicologia: TSQLQuery;
+    SQLPsicologiaold: TSQLQuery;
     DSPPsicologia: TDataSetProvider;
     CDSPsicologia: TClientDataSet;
     DSPsicologia: TDataSource;
@@ -27,6 +30,7 @@ type
     CDSPsicologiaID_FUNCIONARIO: TIntegerField;
     CDSPsicologiaID_INTERNO: TIntegerField;
     CDSPsicologiaFuncionrioa: TStringField;
+    SQLPsicologia: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -53,7 +57,7 @@ procedure TFrmCadastropsicologia.Button1Click(Sender: TObject);
 begin
   inherited;
   dspsicologia.DataSet.Append;
-  dspsicologia.DataSet.fieldbyname('id_historico_psicologia').AsInteger := 0;
+  dspsicologia.DataSet.fieldbyname('id_historico_psicologia').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idpsicologia,1) FROM RDB$DATABASE');
   dspsicologia.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dspsicologia.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;

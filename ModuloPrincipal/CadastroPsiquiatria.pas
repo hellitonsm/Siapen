@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroPsiquiatria = class(TFrmModeloInterno)
@@ -17,7 +20,7 @@ type
     Button1: TButton;
     DBGrid1: TDBGrid;
     DBMemo1: TDBMemo;
-    SQLPsiquiatria: TSQLQuery;
+    SQLPsiquiatriaold: TSQLQuery;
     DSPpsiquiatria: TDataSetProvider;
     CDSpsiquiatria: TClientDataSet;
     DSpsiquiatria: TDataSource;
@@ -27,6 +30,7 @@ type
     CDSpsiquiatriaID_FUNCIONARIO: TIntegerField;
     CDSpsiquiatriaID_INTERNO: TIntegerField;
     CDSpsiquiatriaFuncionrioa: TStringField;
+    SQLPsiquiatria: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -53,7 +57,7 @@ procedure TFrmCadastroPsiquiatria.Button1Click(Sender: TObject);
 begin
   inherited;
   dspsiquiatria.DataSet.Append;
-  dspsiquiatria.DataSet.fieldbyname('id_historico_psiquiatria').AsInteger := 0;
+  dspsiquiatria.DataSet.fieldbyname('id_historico_psiquiatria').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idpsiquiatria,1) FROM RDB$DATABASE');
   dspsiquiatria.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dspsiquiatria.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;

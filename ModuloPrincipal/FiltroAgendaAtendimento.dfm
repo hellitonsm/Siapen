@@ -1,18 +1,19 @@
 inherited FrmFiltroAgendaAtendimento: TFrmFiltroAgendaAtendimento
   Left = 360
   Top = 242
-  VertScrollBar.Range = 0
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Filtrar o Posto/Local de Trabalho'
   ClientHeight = 138
   ClientWidth = 438
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 438
+  ExplicitHeight = 138
   TextHeight = 13
   inherited PanelGeral: TPanel
     Width = 438
     Height = 97
+    ExplicitWidth = 438
+    ExplicitHeight = 97
     object Label8: TLabel
       Left = 40
       Top = 6
@@ -86,8 +87,10 @@ inherited FrmFiltroAgendaAtendimento: TFrmFiltroAgendaAtendimento
   inherited PanelTitulo: TPanel
     Width = 438
     Caption = 'Filtro da Agenda Atendimento'
+    ExplicitWidth = 438
     inherited Image2: TImage
       Width = 436
+      ExplicitWidth = 436
     end
   end
 end

@@ -2,8 +2,8 @@ object FrmFiltros: TFrmFiltros
   Left = 172
   Top = 68
   Caption = 'Filtros'
-  ClientHeight = 370
-  ClientWidth = 376
+  ClientHeight = 397
+  ClientWidth = 443
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,8 +16,8 @@ object FrmFiltros: TFrmFiltros
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 376
-    Height = 370
+    Width = 443
+    Height = 397
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0

@@ -1,7 +1,7 @@
 inherited FrmCadastroGaleria: TFrmCadastroGaleria
   Caption = 'Cadastro de Galeria'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -10,6 +10,7 @@ inherited FrmCadastroGaleria: TFrmCadastroGaleria
   end
   inherited PanelModeloCadastro: TPanel
     inherited PageControlModeloCadastro: TPageControl
+      ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
           object Label2: TLabel
@@ -113,14 +114,7 @@ inherited FrmCadastroGaleria: TFrmCadastroGaleria
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM GALERIA'
@@ -129,5 +123,12 @@ inherited FrmCadastroGaleria: TFrmCadastroGaleria
       'WHERE PAVILHAO.ID_PAVILHAO=GALERIA.IDPAVILHAO'
       'AND PAVILHAO.ID_UP = :ID_UP)'
       'ORDER BY GALERIA')
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
 end

@@ -2,15 +2,16 @@ inherited FrmCadastroCurso: TFrmCadastroCurso
   Left = 235
   Top = 154
   Caption = 'Cadastro de Cursos'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 585
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 534
     inherited DBNavigator1: TDBNavigator
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Height = 534
     inherited PageControlModeloCadastro: TPageControl
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
@@ -53,10 +54,13 @@ inherited FrmCadastroCurso: TFrmCadastroCurso
       end
     end
   end
+  inherited StatusBar1: TStatusBar
+    Top = 566
+  end
   inherited ImageListCadastro: TImageList
     Left = 608
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM curso')

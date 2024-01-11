@@ -1,7 +1,7 @@
 inherited FrmCadastroFuncaoInterno: TFrmCadastroFuncaoInterno
   Caption = 'Cadastro Fun'#231#227'o Interno'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 948
+  ExplicitHeight = 620
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -10,7 +10,11 @@ inherited FrmCadastroFuncaoInterno: TFrmCadastroFuncaoInterno
   end
   inherited PanelModeloCadastro: TPanel
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
           object Label2: TLabel
             Left = 16
@@ -49,9 +53,13 @@ inherited FrmCadastroFuncaoInterno: TFrmCadastroFuncaoInterno
           end
         end
       end
+      inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+      end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM funcao_interno')

@@ -1,20 +1,18 @@
 object FrmConsultaVisitante: TFrmConsultaVisitante
   Left = 191
   Top = 227
-  Width = 953
-  Height = 351
   Caption = 'Consulta Visitante'
+  ClientHeight = 312
+  ClientWidth = 937
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   DesignSize = (
     937
-    313)
-  PixelsPerInch = 96
+    312)
   TextHeight = 13
   object Label1: TLabel
     Left = 10
@@ -127,8 +125,9 @@ object FrmConsultaVisitante: TFrmConsultaVisitante
     Width = 75
     Height = 25
     Caption = '&Sair'
-    TabOrder = 6
     Kind = bkIgnore
+    NumGlyphs = 2
+    TabOrder = 6
   end
   object DBGrid1: TDBGrid
     Left = 12
@@ -263,7 +262,7 @@ object FrmConsultaVisitante: TFrmConsultaVisitante
     TabOrder = 1
     OnClick = btnBuscarClick
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -365,7 +364,7 @@ object FrmConsultaVisitante: TFrmConsultaVisitante
     Left = 260
     Top = 256
   end
-  object SQLCONSULTAINTERNO: TSQLQuery
+  object SQLCONSULTAINTERNOold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -385,33 +384,33 @@ object FrmConsultaVisitante: TFrmConsultaVisitante
     SQLConnection = DM.SQLConnect
     Left = 232
     Top = 260
-    object SQLCONSULTAINTERNONOME_INTERNO: TStringField
+    object SQLCONSULTAINTERNOoldNOME_INTERNO: TStringField
       FieldName = 'NOME_INTERNO'
       Size = 100
     end
-    object SQLCONSULTAINTERNOVISITANTE: TStringField
+    object SQLCONSULTAINTERNOoldVISITANTE: TStringField
       FieldName = 'VISITANTE'
       Size = 50
     end
-    object SQLCONSULTAINTERNOGRAU_PARENTESCO: TStringField
+    object SQLCONSULTAINTERNOoldGRAU_PARENTESCO: TStringField
       FieldName = 'GRAU_PARENTESCO'
       Size = 50
     end
-    object SQLCONSULTAINTERNOSEXO: TStringField
+    object SQLCONSULTAINTERNOoldSEXO: TStringField
       FieldName = 'SEXO'
       Size = 50
     end
-    object SQLCONSULTAINTERNOID_UP: TIntegerField
+    object SQLCONSULTAINTERNOoldID_UP: TIntegerField
       FieldName = 'ID_UP'
     end
-    object SQLCONSULTAINTERNODATA_ULT_VISITA: TSQLTimeStampField
+    object SQLCONSULTAINTERNOoldDATA_ULT_VISITA: TSQLTimeStampField
       FieldName = 'DATA_ULT_VISITA'
     end
-    object SQLCONSULTAINTERNORGI: TStringField
+    object SQLCONSULTAINTERNOoldRGI: TStringField
       FieldName = 'RGI'
       Size = 30
     end
-    object SQLCONSULTAINTERNOSTATUS: TStringField
+    object SQLCONSULTAINTERNOoldSTATUS: TStringField
       FieldName = 'STATUS'
       Size = 1
     end
@@ -488,7 +487,7 @@ object FrmConsultaVisitante: TFrmConsultaVisitante
     Left = 351
     Top = 257
   end
-  object SQLvisitante: TSQLQuery
+  object SQLvisitanteold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -508,30 +507,30 @@ object FrmConsultaVisitante: TFrmConsultaVisitante
     SQLConnection = DM.SQLConnect
     Left = 680
     Top = 256
-    object SQLvisitanteNOME_INTERNO: TStringField
+    object SQLvisitanteoldNOME_INTERNO: TStringField
       FieldName = 'NOME_INTERNO'
       Size = 100
     end
-    object SQLvisitanteVISITANTE: TStringField
+    object SQLvisitanteoldVISITANTE: TStringField
       FieldName = 'VISITANTE'
       Size = 50
     end
-    object SQLvisitanteGRAU_PARENTESCO: TStringField
+    object SQLvisitanteoldGRAU_PARENTESCO: TStringField
       FieldName = 'GRAU_PARENTESCO'
       Size = 50
     end
-    object SQLvisitanteNUMERO_CARTEIRINHA: TStringField
+    object SQLvisitanteoldNUMERO_CARTEIRINHA: TStringField
       FieldName = 'NUMERO_CARTEIRINHA'
       Size = 30
     end
-    object SQLvisitanteSEXO: TStringField
+    object SQLvisitanteoldSEXO: TStringField
       FieldName = 'SEXO'
       Size = 50
     end
-    object SQLvisitanteID_UP: TIntegerField
+    object SQLvisitanteoldID_UP: TIntegerField
       FieldName = 'ID_UP'
     end
-    object SQLvisitanteSTATUS: TStringField
+    object SQLvisitanteoldSTATUS: TStringField
       FieldName = 'STATUS'
       Size = 1
     end
@@ -608,5 +607,64 @@ object FrmConsultaVisitante: TFrmConsultaVisitante
       ' inner join interno i on (i.id_interno = vi.id_interno)')
     Left = 808
     Top = 256
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select fist 50 i.nome_interno, nome_visitante, g.grau_parentesco' +
+        ', m.numero_carteirinha, m.data_visita, m.sexo, i.id_up'
+      'from mov_diario_visitantes m'
+      
+        ' inner join visitante_interno v on (m.id_visitante = v.id_visita' +
+        'nte)'
+      
+        ' inner join grau_parentesco g on (g.id_grau_parentesco = v.id_gr' +
+        'au_parentesco)'
+      ' inner join interno i on (i.id_interno = v.id_interno)'
+      'order by nome_interno'
+      '')
+    Left = 32
+    Top = 192
+  end
+  object SQLCONSULTAINTERNO: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select first 50 i.nome_interno, v.visitante, g.grau_parentesco, ' +
+        'v.sexo,'
+      ' i.id_up, v.data_ult_visita, i.rgi, v.status'
+      'from visitante v'
+      
+        ' inner join visitante_interno vi on (vi.id_visitante = v.id_visi' +
+        'tante)'
+      
+        ' inner join grau_parentesco g on (g.id_grau_parentesco = vi.id_g' +
+        'rau_parentesco)'
+      ' inner join interno i on (i.id_interno = vi.id_interno)'
+      'order by visitante '
+      '')
+    Left = 240
+    Top = 176
+  end
+  object SQLvisitante: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select first 50'
+      
+        'i.nome_interno, v.visitante, g.grau_parentesco, v.numero_carteir' +
+        'inha,'
+      'v.sexo, I.id_up, v.status'
+      'from visitante v'
+      
+        ' inner join visitante_interno vi on (v.id_visitante = vi.id_visi' +
+        'tante)'
+      
+        ' inner join grau_parentesco g on (g.id_grau_parentesco = vi.id_g' +
+        'rau_parentesco)'
+      ' inner join interno i on (i.id_interno = vi.id_interno)'
+      '')
+    Left = 688
+    Top = 192
   end
 end

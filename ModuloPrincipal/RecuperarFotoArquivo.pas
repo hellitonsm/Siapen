@@ -4,7 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, FMTBcd, SqlExpr, Provider, DB, DBClient, Jpeg, DBCtrls;
+  Dialogs, StdCtrls, FMTBcd, SqlExpr, Provider, DB, DBClient, Jpeg, DBCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmRecuperarFotoArquivo = class(TForm)
@@ -14,14 +17,14 @@ type
     DsExecute: TDataSource;
     CdsExecute: TClientDataSet;
     DspExecute: TDataSetProvider;
-    SqlExecute: TSQLQuery;
     DsInterno: TDataSource;
     CdsInterno: TClientDataSet;
     DspInterno: TDataSetProvider;
-    SqlInterno: TSQLQuery;
     DBImageFOTO: TDBImage;
     CheckBox1: TCheckBox;
     Label2: TLabel;
+    SqlExecute: TFDQuery;
+    SqlInterno: TFDQuery;
     procedure Button1Click(Sender: TObject);
   private
     { Private declarations }

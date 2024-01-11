@@ -6,7 +6,11 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, Mask, DBCtrls, DB, DBClient, Provider,
   SqlExpr, ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls,
-  ToolWin, adpDBDateTimePicker, Buttons, frxClass, Menus, System.ImageList;
+  ToolWin, adpDBDateTimePicker, Buttons, frxClass, Menus, System.ImageList,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  frxDBXComponents;
 
 type
   TFrmCadastroOcorrenciaPlantao = class(TFrmModeloCadastro)
@@ -31,12 +35,10 @@ type
     Label4: TLabel;
     DBGrid1: TDBGrid;
     DBLookupComboBox2: TDBLookupComboBox;
-    SqlHistOcoInt: TSQLQuery;
     EditProntuario: TEdit;
     CdsHistOcoInt: TClientDataSet;
     DspHistOcoInt: TDataSetProvider;
     DSHistOcoInt: TDataSource;
-    SqlNaturezaOcorrencia: TSQLQuery;
     CdsNaturezaOcorrencia: TClientDataSet;
     DspNaturezaOcorrencia: TDataSetProvider;
     DSNaturezaOcorrencia: TDataSource;
@@ -53,7 +55,6 @@ type
     Especficos1: TMenuItem;
     Imprimir: TToolButton;
     RadioGroupTipoLocalizar: TRadioGroup;
-    SqlConsulta: TSQLQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -71,7 +72,6 @@ type
     CdsCadastroID_NATUREZA_OCORRENCIA: TIntegerField;
     ButtonInserir: TButton;
     FrxOcorrrenciaPlantao: TfrxReport;
-    SqlInterno: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
@@ -84,6 +84,11 @@ type
     CdsInternoID_INTERNO: TIntegerField;
     CdsInternoNOME_INTERNO: TStringField;
     CdsInternoRGI: TStringField;
+    SqlHistOcoInt: TFDQuery;
+    SqlNaturezaOcorrencia: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SqlInterno: TFDQuery;
+    frxDBXComponents1: TfrxDBXComponents;
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure EditProntuarioExit(Sender: TObject);

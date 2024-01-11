@@ -2,8 +2,8 @@ object FrmPermaneciaScaner: TFrmPermaneciaScaner
   Left = 327
   Top = 253
   Caption = 'Inserir Documento Scaneado'
-  ClientHeight = 125
-  ClientWidth = 532
+  ClientHeight = 124
+  ClientWidth = 528
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -101,7 +101,7 @@ object FrmPermaneciaScaner: TFrmPermaneciaScaner
     Filter = 'Imagens (*.jpg)|*.jpg'
     Left = 311
   end
-  object SQLpermanenciascaner: TSQLQuery
+  object SQLpermanenciascanerold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -110,7 +110,7 @@ object FrmPermaneciaScaner: TFrmPermaneciaScaner
       '')
     SQLConnection = DM.SQLConnect
     Left = 168
-    Top = 104
+    Top = 64
   end
   object DSPpermanenciascaner: TDataSetProvider
     DataSet = SQLpermanenciascaner
@@ -149,7 +149,7 @@ object FrmPermaneciaScaner: TFrmPermaneciaScaner
     DataSet = cdsfiltroautos
     Left = 264
   end
-  object SQLfiltroautos: TSQLQuery
+  object SQLfiltroautosold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -161,7 +161,8 @@ object FrmPermaneciaScaner: TFrmPermaneciaScaner
       'select id_controle_permanencia, nautos from controle_permanencia'
       'where id_interno = :id_interno')
     SQLConnection = DM.SQLConnect
-    Left = 168
+    Left = 136
+    Top = 8
   end
   object cdsfiltroautos: TClientDataSet
     Aggregates = <>
@@ -1370,5 +1371,27 @@ object FrmPermaneciaScaner: TFrmPermaneciaScaner
       FF03F00FE000E000FF81F00FE000E000FFC0E007FFFFE000FFE0C003FFFFE000
       FFF8C003FFFFE000FFF0C003FFFFE00000000000000000000000000000000000
       000000000000}
+  end
+  object SQLfiltroautos: TFDQuery
+    SQL.Strings = (
+      'select id_controle_permanencia, nautos from controle_permanencia'
+      'where id_interno = :id_interno'
+      '')
+    Left = 40
+    Top = 8
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLpermanenciascaner: TFDQuery
+    SQL.Strings = (
+      'select * from permanencia_scaner'
+      ''
+      ''
+      '')
+    Left = 32
+    Top = 72
   end
 end

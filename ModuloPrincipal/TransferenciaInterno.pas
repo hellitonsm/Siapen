@@ -14,7 +14,7 @@ uses
 type
   TFrmTransferenciaInterno = class(TFrmModeloCadastro)
     PageControlTransferencia: TPageControl;
-    Sqlvinc_transferencia_interno: TSQLQuery;
+    Sqlvinc_transferencia_internoold: TSQLQuery;
     Dspvinc_transferencia_interno: TDataSetProvider;
     Cdsvinc_transferencia_interno: TClientDataSet;
     Dsvinc_transferencia_interno: TDataSource;
@@ -28,14 +28,14 @@ type
     Cdsvinc_transferencia_internoDATA_CANCELAMENTO: TSQLTimeStampField;
     Cdsvinc_transferencia_internoMOTIVO_CANCELAMENTO: TStringField;
     Cdsvinc_transferencia_internoFuncionrio: TStringField;
-    SQLHISTORICO_interno: TSQLQuery;
+    SQLHISTORICO_internoold: TSQLQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     DSHISTORICO_interno: TDataSource;
     DsInterno: TDataSource;
     CdsInterno: TClientDataSet;
     DspInterno: TDataSetProvider;
-    SqlInterno: TSQLQuery;
+    SqlInternoold: TSQLQuery;
     TabSheetTransferencia: TTabSheet;
     Label2: TLabel;
     Label3: TLabel;
@@ -56,11 +56,11 @@ type
     DBLookupComboBoxdestino: TDBLookupComboBox;
     TabSheetUnidade: TTabSheet;
     DBLookupComboBoxUPDestino: TDBLookupComboBox;
-    SqlExecute: TSQLQuery;
+    SqlExecuteold: TSQLQuery;
     MainMenu1: TMainMenu;
     Relatorios1: TMenuItem;
     Especifico1: TMenuItem;
-    SqlConsulta: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -80,16 +80,16 @@ type
     DsUP: TDataSource;
     CdsUP: TClientDataSet;
     DspUP: TDataSetProvider;
-    SqlUP: TSQLQuery;
+    SqlUPold: TSQLQuery;
     Dsconspadrao: TDataSource;
     Cdsconspadrao: TClientDataSet;
     Dspconspadrao: TDataSetProvider;
-    SQLconspadrao: TSQLQuery;
-    SQLhistorico_trabalho: TSQLQuery;
+    SQLconspadraoold: TSQLQuery;
+    SQLhistorico_trabalhoold: TSQLQuery;
     dsphistorico_trabalho: TDataSetProvider;
     cdshistorico_trabalho: TClientDataSet;
     dshistorico_trabalho: TDataSource;
-    SQLhistorico_estudo: TSQLQuery;
+    SQLhistorico_estudoold: TSQLQuery;
     dsphistorico_estudo: TDataSetProvider;
     cdshistorico_estudo: TClientDataSet;
     dshistorico_estudo: TDataSource;
@@ -98,7 +98,17 @@ type
     DsDestino: TDataSource;
     DspDestino: TDataSetProvider;
     CdsDestino: TClientDataSet;
-    SqlDestino: TSQLQuery;
+    SqlDestinoold: TSQLQuery;
+    SqlUP: TFDQuery;
+    SqlDestino: TFDQuery;
+    SqlExecute: TFDQuery;
+    SQLhistorico_trabalho: TFDQuery;
+    SqlInterno: TFDQuery;
+    SQLhistorico_estudo: TFDQuery;
+    SQLHISTORICO_interno: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SQLconspadrao: TFDQuery;
+    Sqlvinc_transferencia_interno: TFDQuery;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure BtnincluirClick(Sender: TObject);
@@ -275,13 +285,13 @@ begin
 
     if DBLookupComboBoxinterno.KeyValue < 0 then
     begin
-      DM.SqlExecute.sql.text := 'select id_interno, nome_interno from interno where rgi =' + Qs(Editprontuario.Text)
-        + ' and id_up = ' + IntToStr(GLOBAL_ID_UP) + 'and st = ''A''';
+      DM.SqlExecute.sql.text := 'select ID_INTERNO, NOME_INTERNO from INTERNO where RGI =' + Qs(Editprontuario.Text)
+        + ' and ID_UP = ' + IntToStr(GLOBAL_ID_UP) + 'and ST = ''A''';
       DM.DsExecute.dataset.close;
       DM.DsExecute.dataset.open;
 
       if DM.DsExecute.dataset.recordcount > 0 then
-        DBLookupComboBoxinterno.KeyValue := DM.DsExecute.DataSet.fieldbyname('id_interno').Asfloat;
+        DBLookupComboBoxinterno.KeyValue := DM.DsExecute.DataSet.fieldbyname('ID_INTERNO').Asfloat;
 
     end;
 
@@ -322,10 +332,10 @@ begin
 
     {Lançando Preso na tabela de transferencia}
     Dsvinc_transferencia_interno.DataSet.Append;
-    Dsvinc_transferencia_interno.DataSet.fieldbyname('ID_vinc_transferencia_interno').AsInteger := 0;
+    Dsvinc_transferencia_interno.DataSet.fieldbyname('ID_vinc_transferencia_interno').AsInteger := Dm.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_vinc_transferencia_interno,1) FROM RDB$DATABASE');
     Dsvinc_transferencia_interno.DataSet.fieldbyname('id_transferencia_interno').AsInteger :=
       DsCadastro.DataSet.fieldbyname('ID_TRANSFERENCIA_INTERNO').AsInteger;
-    Dsvinc_transferencia_interno.DataSet.fieldbyname('id_interno').AsInteger := DBLookupComboBoxinterno.KeyValue;
+    Dsvinc_transferencia_interno.DataSet.fieldbyname('ID_INTERNO').AsInteger := DBLookupComboBoxinterno.KeyValue;
     Dsvinc_transferencia_interno.DataSet.Post;
 
     DBLookupComboBoxinterno.KeyValue := null;
@@ -457,7 +467,7 @@ begin
   if Editprontuario.Text <> '' then
   begin
 
-    DM.SqlExecute.sql.text := 'select id_interno, nome_interno from interno where rgi =' + Qs(Editprontuario.Text)
+    DM.SqlExecute.sql.text := 'select id_interno, nome_interno from INTERNO where rgi =' + Qs(Editprontuario.Text)
       + ' and id_up = ' + IntToStr(GLOBAL_ID_UP) + 'and st = ''A''';
     DM.DsExecute.dataset.close;
     DM.DsExecute.dataset.open;
@@ -1104,16 +1114,16 @@ begin
     exit;
   try
     FrmFiltroCela := TFrmFiltroCela.Create(Application);
-    FrmFiltroCela.DBLookupComboBoxCela.KeyValue := null;
-    while FrmFiltroCela.DBLookupComboBoxCela.KeyValue = null do
+  //  FrmFiltroCela.DBLookupComboBoxCela.KeyValue := null;
+   { while FrmFiltroCela.DBLookupComboBoxCela.KeyValue = null do
     begin
       if FrmFiltroCela.ShowModal <> mrok then
         break;
-    end;
+    end; }
     if FrmFiltroCela.ShowModal = mrok then
     begin
-      SqlInterno.SQL.Text := 'select id_interno, rgi from interno where st=''A'' and nome_interno<>'''' and idcela=' +
-        inttostr(FrmFiltroCela.DBLookupComboBoxCela.KeyValue);
+     { SqlInterno.SQL.Text := 'select id_interno, rgi from interno where st=''A'' and nome_interno<>'''' and idcela=' +
+        inttostr(FrmFiltroCela.DBLookupComboBoxCela.KeyValue); }
 
       with DsInterno.DataSet do
       begin
@@ -1213,7 +1223,7 @@ begin
 
             {LANÇANDO SAIDA DO INTERNO NO HISTÓRICO}
             DSHISTORICO_interno.DataSet.Append;
-            DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+            DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT gen_id(cod_up,0)||gen_id(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
             DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
               fieldbyname('id_interno').AsInteger;
             DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsString := formatdatetime('dd/mm/yyy', strtodate(DBEditdata.text));
@@ -1264,7 +1274,7 @@ begin
               + ' WHERE ID_INTERNO = ' + fieldbyname('id_interno').Asstring);
 
             DSHISTORICO_interno.DataSet.Append;
-            DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+            DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT gen_id(cod_up,0)||gen_id(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
             DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
               fieldbyname('id_interno').AsInteger;
             DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsString := formatdatetime('dd/mm/yyy', strtodate(DBEditdata.text));
@@ -1308,7 +1318,7 @@ begin
               dshistorico_estudo.DataSet.post;
 
               dshistorico_estudo.DataSet.Append;
-              dshistorico_estudo.DataSet.fieldbyname('id_historico_estudo').AsInteger := 0;
+              dshistorico_estudo.DataSet.fieldbyname('id_historico_estudo').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (idhistorico_estudo, 1) FROM RDB$DATABASE');
               dshistorico_estudo.DataSet.fieldbyname('id_interno').AsString := fieldbyname('id_interno').asstring;
               dshistorico_estudo.DataSet.fieldbyname('data_historico').AsDateTime :=
                 DsCadastro.DataSet.fieldbyname('data').AsDateTime;
@@ -1405,7 +1415,7 @@ begin
 
             {lANÇANDO SAIDA DO INTERNO NO HISTÓRICO}
             DSHISTORICO_interno.DataSet.Append;
-            DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+            DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT gen_id(cod_up,0)||gen_id(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
             DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
               fieldbyname('id_interno').AsInteger;
             DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime := DsCadastro.DataSet.fieldbyname('data').AsDateTime;
@@ -1470,7 +1480,7 @@ begin
               dshistorico_estudo.DataSet.post;
 
               dshistorico_estudo.DataSet.Append;
-              dshistorico_estudo.DataSet.fieldbyname('id_historico_estudo').AsInteger := 0;
+              dshistorico_estudo.DataSet.fieldbyname('id_historico_estudo').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT gen_id (cod_up, 0) || gen_id (idhistorico_estudo, 1) FROM RDB$DATABASE');
               dshistorico_estudo.DataSet.fieldbyname('id_interno').AsString := fieldbyname('id_interno').asstring;
               dshistorico_estudo.DataSet.fieldbyname('data_historico').AsDateTime := DsCadastro.DataSet.fieldbyname('data').AsDateTime;
               dshistorico_estudo.DataSet.FieldByName('historico').AsString := 'Cancelamento de Matrícula. Saida do Presidio';

@@ -9,7 +9,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, frxCtrls, Buttons, jpeg;
+  Mask, frxCtrls, Buttons, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroArmas = class(TFrmModeloCadastro)
@@ -62,7 +65,6 @@ type
     DsLista: TDataSource;
     CdsLista: TClientDataSet;
     DspLista: TDataSetProvider;
-    SqlLista: TSQLQuery;
     frxComboBoxEspecie: TfrxComboBox;
     Label11: TLabel;
     DBEdit9: TDBEdit;
@@ -97,12 +99,13 @@ type
     dsitensacessorio: TDataSource;
     cdsitensacessorio: TClientDataSet;
     dspitensacessorio: TDataSetProvider;
-    SQLitensacessorio: TSQLQuery;
     cdsitensacessorioID_ITENS_PATRIMONIO: TIntegerField;
     cdsitensacessorioID_PATRIMONIO: TIntegerField;
     cdsitensacessorioID_ACESSORIOS: TIntegerField;
     cdsitensacessorioQTDE: TIntegerField;
     cdsitensacessorioAcessrio: TStringField;
+    SqlLista: TFDQuery;
+    SQLitensacessorio: TFDQuery;
     procedure DBRadioGroup6Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure NovoClick(Sender: TObject);

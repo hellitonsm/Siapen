@@ -6,11 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroServicoSocial = class(TFrmModeloInterno)
-    SQLServicoSocial: TSQLQuery;
+    SQLServicoSocialold: TSQLQuery;
     DSPServicoSocial: TDataSetProvider;
     CDSServicoSocial: TClientDataSet;
     DSServicoSocial: TDataSource;
@@ -27,6 +30,7 @@ type
     CDSServicoSocialID_FUNCIONARIO: TIntegerField;
     CDSServicoSocialID_INTERNO: TIntegerField;
     CDSServicoSocialFuncionrio: TStringField;
+    SQLServicoSocial: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -53,7 +57,7 @@ procedure TFrmCadastroServicoSocial.Button1Click(Sender: TObject);
 begin
   inherited;
   DSServicoSocial.DataSet.Append;
-  DSServicoSocial.DataSet.fieldbyname('id_historico_servico_social').AsInteger := 0;
+  DSServicoSocial.DataSet.fieldbyname('id_historico_servico_social').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idhistorico_servico_social,1) FROM RDB$DATABASE');
   DSServicoSocial.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSServicoSocial.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;

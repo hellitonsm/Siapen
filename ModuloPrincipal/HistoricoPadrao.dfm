@@ -2,8 +2,8 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
   Left = 248
   Top = 72
   Caption = 'Frmhistoricopadrao'
-  ClientHeight = 588
-  ClientWidth = 778
+  ClientHeight = 587
+  ClientWidth = 774
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 778
+    Width = 774
     Height = 149
     ActivePage = TabSheet1
     Align = alTop
@@ -122,13 +122,12 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
   object PanelPrincipal: TPanel
     Left = 0
     Top = 149
-    Width = 778
-    Height = 439
+    Width = 774
+    Height = 438
     Align = alClient
     Caption = 'PanelPrincipal'
     Enabled = False
     TabOrder = 1
-    ExplicitHeight = 440
     object Label53: TLabel
       Left = 10
       Top = 16
@@ -148,6 +147,7 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
       Top = 33
       Width = 91
       Height = 21
+      Date = 45153.000000000000000000
       Time = 0.302563541663403200
       TabOrder = 0
     end
@@ -242,7 +242,7 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
     Left = 347
     Top = 203
   end
-  object SQLHISTORICO_interno: TSQLQuery
+  object SQLHISTORICO_internoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -277,7 +277,7 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
     Left = 517
     Top = 199
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -305,7 +305,7 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
     Left = 489
     Top = 199
   end
-  object SqlSelectInterno: TSQLQuery
+  object SqlSelectInternoold: TSQLQuery
     Params = <>
     SQL.Strings = (
       'select '
@@ -337,5 +337,82 @@ object Frmhistoricopadrao: TFrmhistoricopadrao
         ')   ')
     Left = 656
     Top = 202
+  end
+  object SQLHISTORICO_interno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from historico_interno'
+      'where idinterno=:id_interno'
+      'order by data_hora desc'
+      '')
+    Left = 312
+    Top = 149
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select '
+      '    interno.nome_interno,'
+      '    unidade_penal.sigla,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    interno.id_up,'
+      '    interno.idpavilhao,'
+      '    interno.idgaleria,'
+      '    interno.idsolario,'
+      '    interno.st,'
+      '    iif(interno.st='#39'A'#39','#39'ATIVO'#39', '#39'INATIVO'#39') status'
+      'from interno'
+      '   join cela on (cela.id_cela = interno.idcela)'
+      '   join pavilhao on (interno.idpavilhao = pavilhao.id_pavilhao)'
+      '   join unidade_penal on (pavilhao.id_up = unidade_penal.id_up)'
+      '   join solario on (interno.idsolario = solario.id_solario)'
+      'where interno.nome_interno is not null '
+      'order by interno.nome_interno'
+      '')
+    Left = 496
+    Top = 149
+  end
+  object SqlSelectInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select '
+      '    interno.nome_interno,'
+      '    interno.mae,'
+      '    interno.pai,'
+      '    unidade_penal.sigla,'
+      '    interno.outro_nome,'
+      '    pavilhao.pavilhao,'
+      '    solario.solario,'
+      '    cela.cela,'
+      '    interno.id_interno,'
+      '    interno.st,'
+      '    interno.vulgo,'
+      '   interno.id_up,'
+      'interno.idpavilhao,'
+      'interno.idgaleria,'
+      'interno.idsolario'
+      'from cela'
+      '   inner join interno on (cela.id_cela = interno.idcela)'
+      
+        '   inner join pavilhao on (interno.idpavilhao = pavilhao.id_pavi' +
+        'lhao)'
+      
+        '   inner join unidade_penal on (pavilhao.id_up = unidade_penal.i' +
+        'd_up)'
+      
+        '   inner join solario on (interno.idsolario = solario.id_solario' +
+        ')   '
+      '')
+    Left = 648
+    Top = 144
   end
 end

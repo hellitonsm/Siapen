@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, Buttons, jpeg;
+  Mask, Buttons, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmMovimentoProcedimentos = class(TFrmModeloCadastro)
@@ -14,16 +17,16 @@ type
     DsMovAdv: TDataSource;
     CdsMovAdv: TClientDataSet;
     DspMovAdv: TDataSetProvider;
-    SqlMovAdv: TSQLQuery;
-    SqlMovFunc: TSQLQuery;
+    SqlMovAdvold: TSQLQuery;
+    SqlMovFuncold: TSQLQuery;
     DspMovFunc: TDataSetProvider;
     CdsMovFunc: TClientDataSet;
     DsMovFunc: TDataSource;
-    SqlMovInt: TSQLQuery;
+    SqlMovIntold: TSQLQuery;
     DspMovInt: TDataSetProvider;
     CdsMovInt: TClientDataSet;
     DsMovInt: TDataSource;
-    SqlMovVis: TSQLQuery;
+    SqlMovVisold: TSQLQuery;
     DspMovVis: TDataSetProvider;
     CdsMovVis: TClientDataSet;
     DsMovVis: TDataSource;
@@ -79,6 +82,10 @@ type
     DBMemo1: TDBMemo;
     Label8: TLabel;
     CheckBoxData: TCheckBox;
+    SqlMovInt: TFDQuery;
+    SqlMovFunc: TFDQuery;
+    SqlMovAdv: TFDQuery;
+    SqlMovVis: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure DsCadastroDataChange(Sender: TObject; Field: TField);
     procedure SalvarClick(Sender: TObject);

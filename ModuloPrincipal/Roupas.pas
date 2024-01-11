@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Buttons, adpDBDateTimePicker, Mask;
+  ToolWin, Buttons, adpDBDateTimePicker, Mask, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmRoupas = class(TFrmModeloCadastro)
@@ -25,7 +28,6 @@ type
     SpeedButton1: TSpeedButton;
     BitBtn1: TBitBtn;
     DBLookupComboBoxInterno: TDBLookupComboBox;
-    SQLroupasinternos: TSQLQuery;
     dsproupasinternos: TDataSetProvider;
     cdsroupasinternos: TClientDataSet;
     dsroupasinternos: TDataSource;
@@ -34,11 +36,9 @@ type
     cdsroupasinternosQTDE: TIntegerField;
     cdsroupasinternosID_VESTIMENTAS: TIntegerField;
     cdsroupasinternosRoupa: TStringField;
-    SqlSelectRoupaInterno: TSQLQuery;
     DsConsulta: TDataSource;
     CdsConsulta: TClientDataSet;
     Dspconsulta: TDataSetProvider;
-    SqlConsulta: TSQLQuery;
     CdsCadastroID_ROUPAS: TIntegerField;
     CdsCadastroID_INTERNO: TIntegerField;
     CdsCadastroDATA: TSQLTimeStampField;
@@ -47,6 +47,9 @@ type
     Button1: TButton;
     Editprontuario: TEdit;
     Label7: TLabel;
+    SQLroupasinternos: TFDQuery;
+    SqlSelectRoupaInterno: TFDQuery;
+    SqlConsulta: TFDQuery;
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure NovoClick(Sender: TObject);
@@ -118,7 +121,7 @@ begin
   exit;
   end;
   dsroupasinternos.DataSet.Append;
-  dsroupasinternos.DataSet.FieldByName('id_roupas_interno').AsInteger := 0;
+  dsroupasinternos.DataSet.FieldByName('id_roupas_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_roupas_interno,1) FROM RDB$DATABASE');
   dsroupasinternos.DataSet.FieldByName('id_roupa').AsInteger := DsCadastro.DataSet.FieldByName('id_roupas').AsInteger;
   dsroupasinternos.DataSet.FieldByName('qtde').AsString := Edit1.text;
   dsroupasinternos.DataSet.FieldByName('id_vestimentas').AsInteger := DBLookupComboBox1.KeyValue;

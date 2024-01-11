@@ -2,46 +2,47 @@ inherited FrmCalculoTrabalho: TFrmCalculoTrabalho
   Left = 122
   Top = 128
   Caption = 'C'#225'lculo Dias Trabalhado'
-  ClientHeight = 554
-  ClientWidth = 812
-  ExplicitWidth = 828
-  ExplicitHeight = 593
+  ClientHeight = 553
+  ClientWidth = 808
+  ExplicitWidth = 820
+  ExplicitHeight = 591
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 503
-    ExplicitHeight = 504
+    Height = 502
+    ExplicitHeight = 501
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 486
-      ExplicitHeight = 486
+      Height = 484
+      ExplicitHeight = 483
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 486
+      Top = 484
       Hints.Strings = ()
-      ExplicitTop = 486
+      ExplicitTop = 483
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 697
-    Height = 503
-    ExplicitWidth = 697
-    ExplicitHeight = 504
+    Width = 693
+    Height = 502
+    ExplicitWidth = 689
+    ExplicitHeight = 501
     inherited Image2: TImage
       Width = 812
       ExplicitWidth = 812
     end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 697
-      Height = 503
-      ExplicitWidth = 697
-      ExplicitHeight = 504
+      Width = 693
+      Height = 502
+      ActivePage = TabSheetCadastro
+      ExplicitWidth = 689
+      ExplicitHeight = 501
       inherited TabSheetCadastro: TTabSheet
-        ExplicitWidth = 689
-        ExplicitHeight = 475
+        ExplicitWidth = 685
+        ExplicitHeight = 474
         inherited PanelCadastro: TPanel
-          Width = 689
-          Height = 475
-          ExplicitWidth = 689
-          ExplicitHeight = 476
+          Width = 685
+          Height = 474
+          ExplicitWidth = 681
+          ExplicitHeight = 473
           object Label2: TLabel
             Left = 16
             Top = 16
@@ -309,13 +310,13 @@ inherited FrmCalculoTrabalho: TFrmCalculoTrabalho
                   end
                   item
                     Expanded = False
-                    FieldName = 'Dias Trabalhado'
+                    FieldName = 'DiasTrabalhado'
                     Width = 93
                     Visible = True
                   end
                   item
                     Expanded = False
-                    FieldName = 'Dias Remido'
+                    FieldName = 'DiasRemido'
                     Width = 81
                     Visible = True
                   end>
@@ -340,34 +341,34 @@ inherited FrmCalculoTrabalho: TFrmCalculoTrabalho
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitWidth = 689
-        ExplicitHeight = 475
+        ExplicitWidth = 685
+        ExplicitHeight = 474
         inherited PanelLocalizaConsulta: TPanel
-          Width = 689
-          ExplicitWidth = 689
+          Width = 685
+          ExplicitWidth = 685
         end
         inherited PanelConsulta: TPanel
-          Width = 689
-          Height = 442
-          ExplicitWidth = 689
-          ExplicitHeight = 442
+          Width = 685
+          Height = 440
+          ExplicitWidth = 685
+          ExplicitHeight = 440
           inherited DBGridConsulta: TDBGrid
-            Width = 687
-            Height = 440
+            Width = 683
+            Height = 438
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 812
-    ExplicitWidth = 812
+    Width = 808
+    ExplicitWidth = 804
   end
   inherited StatusBar1: TStatusBar
-    Top = 535
-    Width = 812
-    ExplicitTop = 536
-    ExplicitWidth = 812
+    Top = 534
+    Width = 808
+    ExplicitTop = 534
+    ExplicitWidth = 808
   end
   inherited SqlCadastro: TFDQuery
     SQL.Strings = (
@@ -388,7 +389,7 @@ inherited FrmCalculoTrabalho: TFrmCalculoTrabalho
     Left = 668
     Top = 64
   end
-  object SQLcalc_trabalho_itens: TSQLQuery
+  object SQLcalc_trabalho_itensold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -432,10 +433,10 @@ inherited FrmCalculoTrabalho: TFrmCalculoTrabalho
       FieldName = 'ID_SETOR_TRABALHO'
     end
     object CDScalc_trabalho_itensDIASTRABALHADO: TIntegerField
-      FieldName = 'Dias Trabalhado'
+      FieldName = 'DiasTrabalhado'
     end
     object CDScalc_trabalho_itensDIASREMIDO: TIntegerField
-      FieldName = 'Dias Remido'
+      FieldName = 'DiasRemido'
     end
     object CDScalc_trabalho_itensSetorTrabalho: TStringField
       FieldKind = fkLookup
@@ -453,5 +454,14 @@ inherited FrmCalculoTrabalho: TFrmCalculoTrabalho
     OnDataChange = DsCadastroDataChange
     Left = 540
     Top = 16
+  end
+  object SQLcalc_trabalho_itens: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM CALC_TRABALHO_ITENS'
+      'WHERE CALC_TRABALHO_ITENS.ID_SETOR_TRABALHO <> NULL')
+    Left = 351
+    Top = 130
   end
 end

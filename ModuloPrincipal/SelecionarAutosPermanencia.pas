@@ -5,24 +5,27 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, FMTBcd, DB, DBClient, Provider, SqlExpr, DBCtrls, StdCtrls,
-  Buttons, frxClass, frxDBSet;
+  Buttons, frxClass, frxDBSet, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmSelecionarAutosPermanencia = class(TForm)
     Label51: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
-    SQLfiltroautos: TSQLQuery;
+    SQLfiltroautosold: TSQLQuery;
     dspfiltroautos: TDataSetProvider;
     cdsfiltroautos: TClientDataSet;
     dsfiltroautos: TDataSource;
     BitBtn1: TBitBtn;
-    SQLimprmir: TSQLQuery;
+    SQLimprmirold: TSQLQuery;
     dspimprmir: TDataSetProvider;
     cdsimprmir: TClientDataSet;
     dsimprmir: TDataSource;
     frxDBDataset1: TfrxDBDataset;
     frxReport1: TfrxReport;
-    SqlCadastro: TSQLQuery;
+    SqlCadastroold: TSQLQuery;
     DspCadastro: TDataSetProvider;
     CdsCadastro: TClientDataSet;
     CdsCadastroID_PERMANENCIA_SCANER: TIntegerField;
@@ -30,6 +33,9 @@ type
     CdsCadastroDOC_SCANER: TBlobField;
     CdsCadastroID_CONTROLE_PERMANENCIA: TIntegerField;
     DsCadastro: TDataSource;
+    SqlCadastro: TFDQuery;
+    SQLimprmir: TFDQuery;
+    SQLfiltroautos: TFDQuery;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private

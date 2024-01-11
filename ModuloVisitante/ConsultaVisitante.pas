@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, FMTBcd, DB, DBClient, Provider, SqlExpr, StdCtrls, Buttons,
-  Grids, DBGrids, ExtCtrls;
+  Grids, DBGrids, ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmConsultaVisitante = class(TForm)
@@ -14,7 +17,7 @@ type
     RadioGroupStatus: TRadioGroup;
     DBGridConsulta: TDBGrid;
     BitBtn1: TBitBtn;
-    SqlConsulta: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -26,7 +29,7 @@ type
     CdsConsultaSEXO: TStringField;
     CdsConsultaNOME_INTERNO: TStringField;
     DSPCONSULTAINTERNO: TDataSetProvider;
-    SQLCONSULTAINTERNO: TSQLQuery;
+    SQLCONSULTAINTERNOold: TSQLQuery;
     CDSinterno: TClientDataSet;
     DSCONSULTAINTERNO: TDataSource;
     SqlSelectInterno: TSQLQuery;
@@ -39,7 +42,7 @@ type
     CDSinternoSigla: TStringField;
     CdsConsultaID_UP: TIntegerField;
     CdsConsultaSigla: TStringField;
-    SQLvisitante: TSQLQuery;
+    SQLvisitanteold: TSQLQuery;
     dspvisitante: TDataSetProvider;
     cdsvisitante: TClientDataSet;
     dsvisitante: TDataSource;
@@ -53,25 +56,28 @@ type
     cdsvisitanteSEXO: TStringField;
     cdsvisitanteID_UP: TIntegerField;
     cdsvisitanteSTATUS: TStringField;
-    SQLCONSULTAINTERNONOME_INTERNO: TStringField;
-    SQLCONSULTAINTERNOVISITANTE: TStringField;
-    SQLCONSULTAINTERNOGRAU_PARENTESCO: TStringField;
-    SQLCONSULTAINTERNOSEXO: TStringField;
-    SQLCONSULTAINTERNOID_UP: TIntegerField;
-    SQLCONSULTAINTERNODATA_ULT_VISITA: TSQLTimeStampField;
+    SQLCONSULTAINTERNOoldNOME_INTERNO: TStringField;
+    SQLCONSULTAINTERNOoldVISITANTE: TStringField;
+    SQLCONSULTAINTERNOoldGRAU_PARENTESCO: TStringField;
+    SQLCONSULTAINTERNOoldSEXO: TStringField;
+    SQLCONSULTAINTERNOoldID_UP: TIntegerField;
+    SQLCONSULTAINTERNOoldDATA_ULT_VISITA: TSQLTimeStampField;
     CDSinternoDATA_ULT_VISITA: TSQLTimeStampField;
-    SQLCONSULTAINTERNORGI: TStringField;
+    SQLCONSULTAINTERNOoldRGI: TStringField;
     CDSinternoRGI: TStringField;
-    SQLvisitanteNOME_INTERNO: TStringField;
-    SQLvisitanteVISITANTE: TStringField;
-    SQLvisitanteGRAU_PARENTESCO: TStringField;
-    SQLvisitanteNUMERO_CARTEIRINHA: TStringField;
-    SQLvisitanteSEXO: TStringField;
-    SQLvisitanteID_UP: TIntegerField;
-    SQLvisitanteSTATUS: TStringField;
-    SQLCONSULTAINTERNOSTATUS: TStringField;
+    SQLvisitanteoldNOME_INTERNO: TStringField;
+    SQLvisitanteoldVISITANTE: TStringField;
+    SQLvisitanteoldGRAU_PARENTESCO: TStringField;
+    SQLvisitanteoldNUMERO_CARTEIRINHA: TStringField;
+    SQLvisitanteoldSEXO: TStringField;
+    SQLvisitanteoldID_UP: TIntegerField;
+    SQLvisitanteoldSTATUS: TStringField;
+    SQLCONSULTAINTERNOoldSTATUS: TStringField;
     CDSinternoSTATUS: TStringField;
     btnBuscar: TButton;
+    SqlConsulta: TFDQuery;
+    SQLCONSULTAINTERNO: TFDQuery;
+    SQLvisitante: TFDQuery;
     procedure RadioGroupStatusClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
   private

@@ -3,33 +3,35 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
   Top = 18
   BorderStyle = bsNone
   Caption = 'Mensagem'
-  ClientHeight = 331
-  ClientWidth = 325
+  ClientHeight = 602
+  ClientWidth = 714
   FormStyle = fsStayOnTop
   Position = poDefaultPosOnly
   OnClose = FormClose
-  ExplicitWidth = 325
-  ExplicitHeight = 331
+  ExplicitWidth = 714
+  ExplicitHeight = 602
   TextHeight = 13
   inherited PanelGeral: TPanel
     Top = 18
-    Width = 325
-    Height = 313
+    Width = 714
+    Height = 584
     ExplicitTop = 18
     ExplicitWidth = 325
     ExplicitHeight = 313
     object Panel1: TPanel
       Left = 1
       Top = 60
-      Width = 323
-      Height = 252
+      Width = 712
+      Height = 523
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 323
+      ExplicitHeight = 252
       object frxPreview1: TfrxPreview
         Left = 1
         Top = 1
-        Width = 321
-        Height = 250
+        Width = 710
+        Height = 521
         Align = alClient
         BorderStyle = bsNone
         OutlineVisible = True
@@ -39,12 +41,14 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
         UseReportHints = True
         OutlineTreeSortType = dtsUnsorted
         HideScrolls = False
+        ExplicitWidth = 321
+        ExplicitHeight = 250
       end
     end
     object RadioGroupTipo: TRadioGroup
       Left = 1
       Top = 1
-      Width = 323
+      Width = 712
       Height = 59
       Align = alTop
       Caption = 'Mensagens para:'
@@ -55,6 +59,7 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
         'Unidade de Lota'#231#227'o')
       TabOrder = 1
       OnClick = RadioGroupTipoClick
+      ExplicitWidth = 323
     end
     object BitBtn1: TBitBtn
       Left = 176
@@ -69,12 +74,15 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 325
+    Width = 714
     Height = 18
     ExplicitWidth = 325
     ExplicitHeight = 18
+    DesignSize = (
+      714
+      18)
     inherited Image2: TImage
-      Width = 323
+      Width = 712
       Height = 16
       ExplicitWidth = 323
       ExplicitHeight = 16
@@ -103,7 +111,7 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
       ExplicitHeight = 28
     end
     object ToolBar1: TToolBar
-      Left = 203
+      Left = 592
       Top = -6
       Width = 29
       Height = 22
@@ -115,6 +123,7 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
       Images = DM.ImageListCorel2
       TabOrder = 0
       Transparent = True
+      ExplicitLeft = 203
       object ToolButtonAlerta: TToolButton
         Left = 0
         Top = 0
@@ -534,9 +543,9 @@ inherited FrmMensagemViaFastReport: TFrmMensagemViaFastReport
     Left = 60
     Top = 136
   end
-  object SqlExecute: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlExecute: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     Left = 32
     Top = 136
   end

@@ -2,9 +2,11 @@ inherited FrmCadastroFuncaoFuncionario: TFrmCadastroFuncaoFuncionario
   Left = 196
   Top = 87
   Caption = 'Cadastro Fun'#231#227'o Funcion'#225'rio'
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 372
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
       ExplicitHeight = 348
     end
@@ -14,10 +16,14 @@ inherited FrmCadastroFuncaoFuncionario: TFrmCadastroFuncaoFuncionario
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitHeight = 372
+    Height = 532
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
       ExplicitHeight = 366
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
           Height = 253
           ExplicitHeight = 253
@@ -59,6 +65,8 @@ inherited FrmCadastroFuncaoFuncionario: TFrmCadastroFuncaoFuncionario
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelConsulta: TPanel
           ExplicitHeight = 304
         end
@@ -66,9 +74,10 @@ inherited FrmCadastroFuncaoFuncionario: TFrmCadastroFuncaoFuncionario
     end
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 404
+    Top = 564
+    ExplicitTop = 563
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM FUNCAO_FUNCIONARIO')

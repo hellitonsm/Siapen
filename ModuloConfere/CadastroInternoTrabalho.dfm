@@ -2,57 +2,62 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
   Left = 432
   Top = 264
   Caption = 'Cadastro de Trabalho'
+  ClientHeight = 584
+  ClientWidth = 944
+  ExplicitWidth = 956
+  ExplicitHeight = 642
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 535
+    Height = 526
+    ExplicitHeight = 525
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 517
-      ExplicitHeight = 517
-      inherited Novo: TToolButton
-        ExplicitWidth = 99
-      end
-      inherited Editar: TToolButton
-        ExplicitWidth = 99
-      end
-      inherited Cancelar: TToolButton
-        ExplicitWidth = 99
-      end
-      inherited Salvar: TToolButton
-        ExplicitWidth = 99
-      end
-      inherited Excluir: TToolButton
-        ExplicitWidth = 99
-      end
-      inherited Fechar: TToolButton
-        ExplicitWidth = 99
-      end
+      Height = 508
+      ExplicitHeight = 507
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 517
+      Top = 508
       Hints.Strings = ()
-      ExplicitTop = 517
+      ExplicitTop = 507
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 754
-    ExplicitHeight = 535
+    Width = 829
+    Height = 526
+    ExplicitWidth = 825
+    ExplicitHeight = 525
     inherited Image2: TImage
       Width = 869
       ExplicitWidth = 869
     end
     inherited PageControlModeloCadastro: TPageControl
-      ExplicitWidth = 754
-      ExplicitHeight = 535
+      Width = 829
+      Height = 526
+      ActivePage = TabSheetCadastro
+      ExplicitWidth = 825
+      ExplicitHeight = 525
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 821
+        ExplicitHeight = 498
         inherited PanelCadastro: TPanel
-          ExplicitWidth = 746
-          ExplicitHeight = 507
+          Width = 821
+          Height = 498
+          ExplicitHeight = 497
           inherited PageControlPrincipal: TPageControl
-            ActivePage = TabSheet1
+            Width = 819
+            Height = 496
+            ActivePage = TabSheet3
             TabWidth = 100
             OnChange = PageControlPrincipalChange
-            ExplicitWidth = 744
-            ExplicitHeight = 505
+            ExplicitWidth = 815
+            ExplicitHeight = 495
+            inherited TabSheetPrincipal: TTabSheet
+              ExplicitWidth = 811
+              ExplicitHeight = 468
+            end
+            inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 811
+              ExplicitHeight = 468
+            end
             object TabSheet1: TTabSheet
               Caption = 'Trabalho'
               ImageIndex = 2
@@ -65,8 +70,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                 ActivePage = TabSheet5
                 Align = alClient
                 TabOrder = 0
-                ExplicitWidth = 736
-                ExplicitHeight = 477
+                ExplicitWidth = 807
+                ExplicitHeight = 467
                 object TabSheet5: TTabSheet
                   Caption = 'Lan'#231'amento'
                   object Label48: TLabel
@@ -677,8 +682,6 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                 Align = alClient
                 TabOrder = 0
                 TabWidth = 100
-                ExplicitWidth = 736
-                ExplicitHeight = 477
                 object TabSheet4: TTabSheet
                   Caption = 'Dados'
                   object Label16: TLabel
@@ -1084,6 +1087,7 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
                 Top = 33
                 Width = 91
                 Height = 21
+                Date = 45153.000000000000000000
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -1158,16 +1162,18 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 821
+        ExplicitHeight = 498
         inherited PanelLocalizaConsulta: TPanel
-          Width = 746
-          ExplicitWidth = 746
+          Width = 821
+          ExplicitWidth = 821
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 612
+            Left = 691
             TabOrder = 3
-            ExplicitLeft = 612
+            ExplicitLeft = 691
           end
           inherited chkSoundex: TCheckBox
             Width = 60
@@ -1176,30 +1182,34 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 746
-          Height = 465
-          ExplicitWidth = 746
-          ExplicitHeight = 465
+          Width = 821
+          Height = 456
+          ExplicitWidth = 821
+          ExplicitHeight = 456
           inherited DBGridConsulta: TDBGrid
-            Width = 736
-            Height = 451
+            Width = 819
+            Height = 454
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 736
-            PanelWidth = 719
-            ExplicitWidth = 735
-            ExplicitHeight = 450
+            Width = 819
+            Height = 454
+            PanelWidth = 802
+            ExplicitWidth = 819
+            ExplicitHeight = 454
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 869
+    Width = 944
+    ExplicitWidth = 940
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 567
-    ExplicitWidth = 869
+    Top = 558
+    Width = 944
+    ExplicitTop = 558
+    ExplicitWidth = 944
   end
   inherited SqlCadastro: TFDQuery
     Left = 704
@@ -1237,7 +1247,7 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
     Left = 132
     Top = 0
   end
-  object SQLHISTORICO_interno: TSQLQuery
+  object SQLHISTORICO_internoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1251,8 +1261,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
       'where idinterno=:id_interno and setor like '#39'Trabalho'#39
       'order by data_hora desc')
     SQLConnection = DM.SQLConnect
-    Left = 529
-    Top = 9
+    Left = 361
+    Top = 225
   end
   object DSPHISTORICO_interno: TDataSetProvider
     DataSet = SQLHISTORICO_interno
@@ -1297,7 +1307,7 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
     Left = 708
     Top = 113
   end
-  object SQLcalc_trabalho: TSQLQuery
+  object SQLcalc_trabalhoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1312,8 +1322,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
       'where id_interno = :id_interno'
       'order by data_inicial desc')
     SQLConnection = DM.SQLConnect
-    Left = 684
-    Top = 113
+    Left = 468
+    Top = 217
   end
   object PopupMenuIsolamento: TPopupMenu
     Left = 812
@@ -1331,7 +1341,7 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
       OnClick = DeletarRegistro1Click
     end
   end
-  object SQLhistorico_trabalho: TSQLQuery
+  object SQLhistorico_trabalhoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1345,8 +1355,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
       'where id_interno=:id_interno '
       'order by data desc')
     SQLConnection = DM.SQLConnect
-    Left = 679
-    Top = 208
+    Left = 575
+    Top = 216
   end
   object dsphistorico_trabalho: TDataSetProvider
     DataSet = SQLhistorico_trabalho
@@ -1465,7 +1475,7 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
     Left = 296
     Top = 72
   end
-  object SQLcertidao_trabalho: TSQLQuery
+  object SQLcertidao_trabalhoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1477,8 +1487,8 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
       'select * from atestado_trabalho'
       'where id_interno = :idinterno')
     SQLConnection = DM.SQLConnect
-    Left = 264
-    Top = 72
+    Left = 256
+    Top = 232
   end
   object PopupMenuexcluirremissao: TPopupMenu
     Left = 612
@@ -1495,5 +1505,66 @@ inherited FrmCadastroInternoTrabalho: TFrmCadastroInternoTrabalho
       Caption = 'Excluir Registro'
       OnClick = ExcluirRegistro2Click
     end
+  end
+  object SQLcertidao_trabalho: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from atestado_trabalho'
+      'where id_interno = :idinterno'
+      '')
+    Left = 247
+    Top = 290
+    ParamData = <
+      item
+        Name = 'IDINTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLHISTORICO_interno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from historico_interno'
+      'where idinterno=:id_interno and setor like '#39'Trabalho'#39
+      'order by data_hora desc'
+      '')
+    Left = 367
+    Top = 290
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLcalc_trabalho: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM calc_setor_trabalho'
+      'where id_interno = :id_interno'
+      'order by data_inicial desc'
+      '')
+    Left = 479
+    Top = 290
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLhistorico_trabalho: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from HISTORICO_TRABALHO'
+      'where id_interno=:id_interno '
+      'order by data desc')
+    Left = 591
+    Top = 290
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

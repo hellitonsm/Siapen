@@ -4,32 +4,32 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
   Caption = 'Cadastro de Solario'
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    ExplicitHeight = 355
+    ExplicitHeight = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 337
-      ExplicitHeight = 337
+      Height = 515
+      ExplicitHeight = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 337
+      Top = 515
       Hints.Strings = ()
-      ExplicitTop = 337
+      ExplicitTop = 514
     end
   end
   inherited PanelModeloCadastro: TPanel
-    ExplicitWidth = 772
-    ExplicitHeight = 355
+    ExplicitWidth = 825
+    ExplicitHeight = 532
     inherited Image2: TImage
       Width = 887
       ExplicitWidth = 887
     end
     inherited PageControlModeloCadastro: TPageControl
-      ActivePage = TabSheetCadastro
-      ExplicitWidth = 772
-      ExplicitHeight = 355
+      ExplicitWidth = 825
+      ExplicitHeight = 532
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          ExplicitWidth = 764
-          ExplicitHeight = 327
+          Width = 821
+          Height = 505
+          Caption = 'DM.CdsPavilhao'
           object PageControl1: TPageControl
             Left = 0
             Top = 0
@@ -79,15 +79,15 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
                 TabOrder = 0
               end
               object DBLookupComboBoxPavilhao: TDBLookupComboBox
-                Left = 16
-                Top = 74
+                Left = 15
+                Top = 71
                 Width = 300
                 Height = 21
                 DataField = 'IDPAVILHAO'
                 DataSource = DsCadastro
-                KeyField = 'id_pavilhao'
-                ListField = 'pavilhao'
-                ListSource = DsPavilhao
+                KeyField = 'ID_PAVILHAO'
+                ListField = 'PAVILHAO'
+                ListSource = dsPavilhao
                 TabOrder = 1
                 OnClick = DBLookupComboBoxPavilhaoClick
               end
@@ -100,7 +100,7 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
                 DataSource = DsCadastro
                 KeyField = 'ID_GALERIA'
                 ListField = 'GALERIA'
-                ListSource = DsGaleria
+                ListSource = dsGaleria
                 TabOrder = 2
               end
               object DBEdit2: TDBEdit
@@ -268,17 +268,17 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
       end
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
-          Width = 764
-          ExplicitWidth = 764
+          Width = 821
+          ExplicitWidth = 821
         end
         inherited PanelConsulta: TPanel
-          Width = 764
-          Height = 293
-          ExplicitWidth = 764
-          ExplicitHeight = 293
+          Width = 821
+          Height = 471
+          ExplicitWidth = 821
+          ExplicitHeight = 471
           inherited DBGridConsulta: TDBGrid
-            Width = 762
-            Height = 291
+            Width = 819
+            Height = 469
             Columns = <
               item
                 Expanded = False
@@ -288,8 +288,8 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
               end
               item
                 Expanded = False
-                FieldName = 'SOLARIO'
-                Title.Caption = 'Descri'#231#227'o'
+                FieldName = 'PAVILHAO'
+                Width = 113
                 Visible = True
               end
               item
@@ -297,6 +297,17 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
                 FieldName = 'IDPAVILHAO'
                 Title.Caption = 'IdMestre'
                 Visible = False
+              end
+              item
+                Expanded = False
+                FieldName = 'GALERIA'
+                Width = 139
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SOLARIO'
+                Visible = True
               end>
           end
         end
@@ -304,11 +315,11 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 887
+    ExplicitWidth = 940
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 387
-    ExplicitWidth = 887
+    ExplicitTop = 565
+    ExplicitWidth = 944
   end
   inherited SqlCadastro: TFDQuery
     SQL.Strings = (
@@ -327,84 +338,55 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
         Value = 0
       end>
   end
-  object SqlPavilhao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from pavilhao order by pavilhao')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 197
-  end
-  object DspPavilhao: TDataSetProvider
-    DataSet = SqlPavilhao
-    Left = 616
-    Top = 197
-  end
-  object CdsPavilhao: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'DspPavilhao'
-    Left = 648
-    Top = 197
-  end
-  object DsPavilhao: TDataSource
-    DataSet = CdsPavilhao
-    Left = 680
-    Top = 197
-  end
-  object DsGaleria: TDataSource
-    DataSet = CdsGaleria
-    Left = 680
-    Top = 240
-  end
-  object CdsGaleria: TClientDataSet
-    Aggregates = <>
-    IndexFieldNames = 'idpavilhao'
-    MasterFields = 'id_pavilhao'
-    MasterSource = DsPavilhao
-    PacketRecords = 0
-    Params = <>
-    ProviderName = 'DspGaleria'
-    Left = 648
-    Top = 240
-  end
-  object DspGaleria: TDataSetProvider
-    DataSet = SqlGaleria
-    Left = 616
-    Top = 240
-  end
-  object SqlGaleria: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_pavilhao'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from galeria'
-      'where idpavilhao=:id_pavilhao'
-      'order by galeria')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 240
-  end
-  object SqlRecursos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID_SOLARIO'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'SELECT * FROM RECURSOS_ALA'
-      'WHERE ID_SOLARIO = :ID_SOLARIO')
-    SQLConnection = DM.SQLConnect
-    Left = 587
-    Top = 280
+  inherited CdsCadastro: TClientDataSet
+    object CdsCadastroID_SOLARIO: TIntegerField
+      FieldName = 'ID_SOLARIO'
+      Required = True
+    end
+    object CdsCadastroSOLARIO: TStringField
+      FieldName = 'SOLARIO'
+      Size = 50
+    end
+    object CdsCadastroIDGALERIA: TIntegerField
+      FieldName = 'IDGALERIA'
+    end
+    object CdsCadastroIDPAVILHAO: TIntegerField
+      FieldName = 'IDPAVILHAO'
+    end
+    object CdsCadastroDIA_VISITA: TStringField
+      FieldName = 'DIA_VISITA'
+      Size = 1
+    end
+    object CdsCadastroPERIODO_VISITA: TStringField
+      FieldName = 'PERIODO_VISITA'
+      Size = 1
+    end
+    object CdsCadastroCHAVE_MIGRACAO: TStringField
+      FieldName = 'CHAVE_MIGRACAO'
+      Size = 100
+    end
+    object CdsCadastroALA_DE_ESTUDO: TStringField
+      FieldName = 'ALA_DE_ESTUDO'
+      Size = 1
+    end
+    object CdsCadastroGALERIA: TStringField
+      FieldKind = fkLookup
+      FieldName = 'GALERIA'
+      LookupDataSet = DM.CdsGaleria
+      LookupKeyFields = 'ID_GALERIA'
+      LookupResultField = 'GALERIA'
+      KeyFields = 'IDGALERIA'
+      Lookup = True
+    end
+    object CdsCadastroPAVILHAO: TStringField
+      FieldKind = fkLookup
+      FieldName = 'PAVILHAO'
+      LookupDataSet = DM.CdsPavilhao
+      LookupKeyFields = 'ID_PAVILHAO'
+      LookupResultField = 'PAVILHAO'
+      KeyFields = 'IDPAVILHAO'
+      Lookup = True
+    end
   end
   object DSPRecursos: TDataSetProvider
     DataSet = SqlRecursos
@@ -422,5 +404,52 @@ inherited FrmCadastroSolario: TFrmCadastroSolario
     DataSet = CDSRecursos
     Left = 683
     Top = 280
+  end
+  object SqlRecursos: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM RECURSOS_ALA'
+      'WHERE ID_SOLARIO = :ID_SOLARIO')
+    Left = 591
+    Top = 280
+    ParamData = <
+      item
+        Name = 'ID_SOLARIO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlPavilhao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from pavilhao order by pavilhao')
+    Left = 595
+    Top = 200
+  end
+  object dsPavilhao: TDataSource
+    DataSet = SqlPavilhao
+    Left = 635
+    Top = 200
+  end
+  object SqlGaleria: TFDQuery
+    MasterSource = dsPavilhao
+    MasterFields = 'ID_PAVILHAO'
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from galeria'
+      'where idpavilhao=:ID_PAVILHAO'
+      'order by galeria')
+    Left = 595
+    Top = 240
+    ParamData = <
+      item
+        Name = 'ID_PAVILHAO'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object dsGaleria: TDataSource
+    DataSet = SqlGaleria
+    Left = 635
+    Top = 240
   end
 end

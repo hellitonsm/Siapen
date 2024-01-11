@@ -1,23 +1,40 @@
 inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
   Left = 485
   Top = 317
-  Width = 771
   Caption = 'Banco de Horas de Funcion'#225'rios'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 532
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 514
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 640
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 755
+      ExplicitWidth = 755
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 640
+      Width = 825
+      Height = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 632
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 32
             Top = 24
@@ -211,20 +228,25 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 632
+          Width = 817
           inherited Label1: TLabel
             Top = 12
             Visible = False
+            ExplicitTop = 12
           end
           inherited EditLocalizar: TEdit
             Visible = False
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 632
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 630
+            Width = 815
+            Height = 468
             Columns = <
               item
                 Expanded = False
@@ -259,21 +281,18 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 755
-    inherited Image2: TImage
-      Width = 755
-    end
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    Width = 755
+    Top = 564
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM FUNC_BANCO_HORA'
       'order by idfunc_banco_hora'
       'desc')
-    SQLConnection = DM.SQLConnect
     Top = 156
     object SqlCadastroIDFUNC_BANCO_HORA: TIntegerField
       FieldName = 'IDFUNC_BANCO_HORA'
@@ -359,6 +378,7 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
     end
     object CdsCadastroSOMA: TAggregateField
       FieldName = 'SOMA'
+      DisplayName = ''
       Expression = 'SUM(quantidade)'
     end
   end
@@ -398,23 +418,6 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
     OnDataChange = DsCadastroDataChange
     Left = 676
     Top = 200
-  end
-  object SQLSomaCredito: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_FUNCIONARIO'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT * FROM FUNC_BANCO_HORA'
-      'WHERE CONTABILIZA = '#39'C'#39' AND ID_FUNCIONARIO = :ID_FUNCIONARIO'
-      'order by idfunc_banco_hora desc')
-    SQLConnection = DM.SQLConnect
-    Left = 583
-    Top = 352
   end
   object dspSomaCredito: TDataSetProvider
     DataSet = SQLSomaCredito
@@ -467,6 +470,7 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
     object cdsSomaCreditosoma: TAggregateField
       FieldName = 'soma'
       Active = True
+      DisplayName = ''
       Expression = 'sum(quantidade)'
     end
   end
@@ -474,23 +478,6 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
     DataSet = cdsSomaCredito
     Left = 667
     Top = 352
-  end
-  object SQLSomaDebito: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'idfuncionario'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT * FROM FUNC_BANCO_HORA'
-      'WHERE CONTABILIZA = '#39'D'#39' AND ID_FUNCIONARIO = :idfuncionario'
-      'order by idfunc_banco_hora desc')
-    SQLConnection = DM.SQLConnect
-    Left = 583
-    Top = 380
   end
   object dspSomaDebito: TDataSetProvider
     DataSet = SQLSomaDebito
@@ -543,6 +530,7 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
     object cdsSomaDebitosomaDedito: TAggregateField
       FieldName = 'somaDedito'
       Active = True
+      DisplayName = ''
       Expression = 'sum (quantidade) '
     end
   end
@@ -550,5 +538,35 @@ inherited FrmFuncBancoHoras: TFrmFuncBancoHoras
     DataSet = cdsSomaDebito
     Left = 667
     Top = 380
+  end
+  object SQLSomaCredito: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM FUNC_BANCO_HORA'
+      'WHERE CONTABILIZA = '#39'C'#39' AND ID_FUNCIONARIO = :ID_FUNCIONARIO'
+      'order by idfunc_banco_hora desc')
+    Left = 583
+    Top = 352
+    ParamData = <
+      item
+        Name = 'ID_FUNCIONARIO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLSomaDebito: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM FUNC_BANCO_HORA'
+      'WHERE CONTABILIZA = '#39'D'#39' AND ID_FUNCIONARIO = :idfuncionario'
+      'order by idfunc_banco_hora desc')
+    Left = 583
+    Top = 380
+    ParamData = <
+      item
+        Name = 'IDFUNCIONARIO'
+        ParamType = ptInput
+      end>
   end
 end

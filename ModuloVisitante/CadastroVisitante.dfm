@@ -1,41 +1,51 @@
 inherited FrmCadastroVisitante: TFrmCadastroVisitante
   Left = 207
   Top = 105
-  Width = 925
-  Height = 632
   Caption = 'Cadastro Visitante'
+  ClientHeight = 583
+  ClientWidth = 932
   KeyPreview = True
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 948
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 543
+    Height = 532
+    ExplicitHeight = 533
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 525
+      ExplicitHeight = 515
       inherited Excluir: TToolButton
         Visible = True
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 525
       Hints.Strings = ()
+      ExplicitTop = 515
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 794
-    Height = 543
+    Width = 817
+    Height = 532
+    ExplicitHeight = 533
+    inherited Image2: TImage
+      Width = 909
+      ExplicitWidth = 909
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 794
-      Height = 543
+      Width = 821
+      Height = 533
+      ExplicitHeight = 533
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 505
         inherited PanelCadastro: TPanel
-          Width = 786
-          Height = 515
+          Width = 813
+          Height = 505
+          ExplicitWidth = 813
           object PageControl1: TPageControl
             Left = 1
             Top = 1
-            Width = 784
-            Height = 513
+            Width = 811
+            Height = 503
             ActivePage = TabSheet1
             Align = alClient
             TabOrder = 0
@@ -371,8 +381,6 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
                     Width = 75
                     Height = 25
                     Caption = 'Inserir'
-                    TabOrder = 2
-                    OnClick = BitBtn1Click
                     Glyph.Data = {
                       76010000424D7601000000000000760000002800000020000000100000000100
                       04000000000000010000120B0000120B00001000000010000000000000000000
@@ -387,6 +395,8 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
                       33333333337F7F33333333333309033333333333337F7F333333333333090333
                       33333333337F7F33333333333300033333333333337773333333}
                     NumGlyphs = 2
+                    TabOrder = 2
+                    OnClick = BitBtn1Click
                   end
                   object Button2: TButton
                     Left = 325
@@ -419,7 +429,7 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
                   TabVisible = False
                   object DBGrid4: TDBGrid
                     Left = 0
-                    Top = 32
+                    Top = 67
                     Width = 657
                     Height = 79
                     Align = alBottom
@@ -626,7 +636,6 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
                 Height = 21
                 DataField = 'TIPO_VISITANTE'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   ''
                   'Autorizado(a)'
@@ -665,9 +674,6 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
                 Font.Height = -13
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 22
-                OnClick = BitBtn2Click
                 Glyph.Data = {
                   E60C0000424DE60C0000000000003600000028000000260000001C0000000100
                   180000000000B00C0000130B0000130B00000000000000000000CCCCCCCCCCCC
@@ -773,6 +779,9 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
                   090909CDCDCDCACACACCCCCCD2D2D2CACACAD3D3D3D1D1D1CCCCCCCCCCCCCCCC
                   CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
                   CCCCCCCCCCCCCCCC0000}
+                ParentFont = False
+                TabOrder = 22
+                OnClick = BitBtn2Click
               end
             end
             object TabSheet2: TTabSheet
@@ -1023,15 +1032,20 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
         inherited PanelLocalizaConsulta: TPanel
-          Width = 786
+          Width = 813
           Height = 77
+          ExplicitHeight = 77
           inherited EditLocalizar: TEdit
             Top = 43
             Width = 433
             Height = 25
             TabOrder = 2
             OnKeyPress = EditLocalizarKeyPress
+            ExplicitTop = 43
+            ExplicitWidth = 433
+            ExplicitHeight = 25
           end
           object Button1: TButton
             Left = 584
@@ -1070,11 +1084,13 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
         end
         inherited PanelConsulta: TPanel
           Top = 77
-          Width = 786
-          Height = 438
+          Width = 813
+          Height = 428
+          ExplicitTop = 77
+          ExplicitHeight = 428
           inherited DBGridConsulta: TDBGrid
-            Width = 784
-            Height = 436
+            Width = 811
+            Height = 426
             DataSource = DsConsulta
             PopupMenu = PopupMenuVisitante
             Columns = <
@@ -1205,30 +1221,28 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 909
-    inherited Image2: TImage
-      Width = 909
-    end
+    Width = 932
   end
   inherited StatusBar1: TStatusBar
-    Top = 575
-    Width = 909
+    Top = 564
+    Width = 932
+    ExplicitTop = 565
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_visitante'
-        ParamType = ptInput
-        Value = -1
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT  * '
       'FROM VISITANTE'
       'WHERE ID_visitante = :ID_visitante')
-    SQLConnection = DM.SQLConnect
     Left = 536
     Top = 8
+    ParamData = <
+      item
+        Name = 'ID_visitante'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = -1
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 564
@@ -1246,7 +1260,7 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
     Left = 620
     Top = 8
   end
-  object SqlVisitanteInterno: TSQLQuery
+  object SqlVisitanteInternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1260,7 +1274,8 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
       'from visitante_interno'
       'where id_visitante=:id_visitante')
     SQLConnection = DM.SQLConnect
-    Left = 152
+    Left = 232
+    Top = 272
   end
   object DspVisitanteInterno: TDataSetProvider
     DataSet = SqlVisitanteInterno
@@ -1321,7 +1336,7 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
     Left = 912
     Top = 9
   end
-  object SqlMenores: TSQLQuery
+  object SqlMenoresold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1335,8 +1350,8 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
       'FROM menores'
       'where id_visitante=:id_visitante')
     SQLConnection = DM.SQLConnect
-    Left = 640
-    Top = 32
+    Left = 752
+    Top = 296
   end
   object DspMenores: TDataSetProvider
     DataSet = SqlMenores
@@ -1391,13 +1406,14 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
     Left = 724
     Top = 32
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       'ta no fonte')
     SQLConnection = DM.SQLConnect
-    Left = 368
+    Left = 384
+    Top = 288
   end
   object Dspconsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -1414,7 +1430,7 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
     DataSet = CdsConsulta
     Left = 452
   end
-  object SqlSelectvisitante: TSQLQuery
+  object SqlSelectvisitanteold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1426,10 +1442,10 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
       'V.MAE'
       'FROM VISITANTE V')
     SQLConnection = DM.SQLConnect
-    Left = 40
-    Top = 436
+    Left = 160
+    Top = 508
   end
-  object SqlInterno: TSQLQuery
+  object SqlInternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -1438,8 +1454,8 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
       'WHERE coalesce(nome_interno,'#39#39')<>'#39#39
       'ORDER BY NOME_INTERNO')
     SQLConnection = DM.SQLConnect
-    Left = 8
-    Top = 328
+    Left = 160
+    Top = 440
   end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
@@ -1458,7 +1474,7 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
     Left = 92
     Top = 328
   end
-  object SqlTodosInterno: TSQLQuery
+  object SqlTodosInternoold: TSQLQuery
     Params = <>
     SQL.Strings = (
       'SELECT FIRST 50'
@@ -1489,10 +1505,10 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
       'INNER JOIN GALERIA GA ON (GA.id_galeria=I.idgaleria)'
       'INNER JOIN SOLARIO S ON (S.id_solario=I.idsolario)'
       'INNER JOIN CELA C ON (C.id_cela=I.idcela)')
-    Left = 704
-    Top = 4
+    Left = 632
+    Top = 292
   end
-  object SqlTodosVisitantes: TSQLQuery
+  object SqlTodosVisitantesold: TSQLQuery
     Params = <>
     SQL.Strings = (
       'SELECT FIRST 50'
@@ -1525,8 +1541,8 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
       'LEFT JOIN GALERIA GA ON (GA.id_galeria=I.idgaleria)'
       'LEFT JOIN SOLARIO S ON (S.id_solario=I.idsolario)'
       'LEFT JOIN CELA C ON (C.id_cela=I.idcela)')
-    Left = 824
-    Top = 52
+    Left = 848
+    Top = 300
   end
   object PopupMenuVisitante: TPopupMenu
     Left = 519
@@ -1551,10 +1567,151 @@ inherited FrmCadastroVisitante: TFrmCadastroVisitante
     DataSet = SQLconspadrao
     Left = 788
   end
-  object SQLconspadrao: TSQLQuery
+  object SQLconspadraoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = DM.SQLConnect
-    Left = 760
+    Left = 528
+    Top = 288
+  end
+  object SQLconspadrao: TFDQuery
+    Connection = DM.SQLConnect
+    Left = 527
+    Top = 341
+  end
+  object SqlVisitanteInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from visitante_interno'
+      'where id_visitante=:id_visitante'
+      '')
+    Left = 239
+    Top = 365
+    ParamData = <
+      item
+        Name = 'ID_VISITANTE'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'ta no fonte'
+      '')
+    Left = 391
+    Top = 365
+  end
+  object SqlTodosInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT FIRST 50'
+      'V.ID_VISITANTE,'
+      'V.VISITANTE,'
+      'V.NUMERO_CARTEIRINHA,'
+      'V.DATA_CADASTRO,'
+      'V.CPF,'
+      'V.RG,'
+      'V.ORGAO_EXPEDIDOR,'
+      'V.SEXO,'
+      'G.GRAU_PARENTESCO,'
+      'I.NOME_INTERNO,'
+      'I.RGI,'
+      'I.ST,'
+      'V.status,'
+      'U.SIGLA,'
+      'I.ID_UP,'
+      'GA.galeria || '#39' - '#39' || S.solario ||'#39' - '#39'|| C.cela AS localizacao'
+      'FROM INTERNO I'
+      'LEFT JOIN UNIDADE_PENAL U ON (U.ID_UP=I.ID_UP)'
+      'LEFT JOIN VISITANTE_INTERNO VI ON (VI.ID_INTERNO=I.ID_INTERNO)'
+      
+        'LEFT JOIN GRAU_PARENTESCO G ON (VI.ID_GRAU_PARENTESCO=G.ID_GRAU_' +
+        'PARENTESCO)'
+      'LEFT JOIN VISITANTE V ON (V.ID_VISITANTE=VI.ID_VISITANTE)'
+      'INNER JOIN pavilhao P ON (P.id_pavilhao=I.idpavilhao)'
+      'INNER JOIN GALERIA GA ON (GA.id_galeria=I.idgaleria)'
+      'INNER JOIN SOLARIO S ON (S.id_solario=I.idsolario)'
+      'INNER JOIN CELA C ON (C.id_cela=I.idcela)'
+      '')
+    Left = 639
+    Top = 373
+  end
+  object SqlMenores: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM menores'
+      'where id_visitante=:id_visitante'
+      '')
+    Left = 759
+    Top = 381
+    ParamData = <
+      item
+        Name = 'ID_VISITANTE'
+        ParamType = ptInput
+      end>
+  end
+  object SqlTodosVisitantes: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT FIRST 50'
+      'V.ID_VISITANTE,'
+      'V.VISITANTE,'
+      'V.NUMERO_CARTEIRINHA,'
+      'V.DATA_CADASTRO,'
+      'V.CPF,'
+      'V.RG,'
+      'V.ORGAO_EXPEDIDOR,'
+      'V.SEXO,'
+      'V.STATUS,'
+      'G.GRAU_PARENTESCO,'
+      'I.NOME_INTERNO,'
+      'I.RGI,'
+      'I.ST,'
+      'U.SIGLA,'
+      'I.ID_UP,'
+      'GA.galeria || '#39' - '#39' || S.solario ||'#39' - '#39'|| C.cela AS localizacao'
+      'FROM VISITANTE V'
+      
+        'LEFT JOIN VISITANTE_INTERNO VI ON (V.ID_VISITANTE=VI.ID_VISITANT' +
+        'E)'
+      
+        'LEFT JOIN GRAU_PARENTESCO G ON (VI.ID_GRAU_PARENTESCO=G.ID_GRAU_' +
+        'PARENTESCO)'
+      'LEFT JOIN INTERNO I ON (VI.ID_INTERNO=I.ID_INTERNO)'
+      'LEFT JOIN UNIDADE_PENAL U ON (U.ID_UP=I.ID_UP)'
+      'LEFT JOIN pavilhao P ON (P.id_pavilhao=I.idpavilhao)'
+      'LEFT JOIN GALERIA GA ON (GA.id_galeria=I.idgaleria)'
+      'LEFT JOIN SOLARIO S ON (S.id_solario=I.idsolario)'
+      'LEFT JOIN CELA C ON (C.id_cela=I.idcela)'
+      '')
+    Left = 855
+    Top = 389
+  end
+  object SqlInterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno, rgi'
+      'FROM INTERNO'
+      'WHERE coalesce(nome_interno,'#39#39')<>'#39#39
+      'ORDER BY NOME_INTERNO'
+      '')
+    Left = 255
+    Top = 445
+  end
+  object SqlSelectvisitante: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT FIRST 20'
+      'V.ID_VISITANTE,'
+      'V.VISITANTE,'
+      'V.CPF,'
+      'V.RG,'
+      'V.MAE'
+      'FROM VISITANTE V'
+      '')
+    Left = 287
+    Top = 517
   end
 end

@@ -1,19 +1,17 @@
 object FrmCancelarSaidao: TFrmCancelarSaidao
   Left = 430
   Top = 230
-  Width = 424
-  Height = 277
   Caption = 'Cancelar Said'#227'o'
+  ClientHeight = 299
+  ClientWidth = 458
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poMainFormCenter
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object Label17: TLabel
     Left = 8
@@ -74,8 +72,8 @@ object FrmCancelarSaidao: TFrmCancelarSaidao
     Top = 37
     Width = 96
     Height = 21
-    Date = 40942.555919768520000000
-    Time = 40942.555919768520000000
+    Date = 40942.000000000000000000
+    Time = 0.555919768521562200
     TabOrder = 3
   end
 end

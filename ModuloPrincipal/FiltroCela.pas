@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, Buttons, DBCtrls,
-  FMTBcd, DB, DBClient, Provider, SqlExpr;
+  FMTBcd, DB, DBClient, Provider, SqlExpr, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmFiltroCela = class(TFrmModeloFormulario)
@@ -14,29 +17,20 @@ type
     LabelGaleria: TLabel;
     LabelCela: TLabel;
     LabelSolario: TLabel;
-    DBLookupComboBoxPavilhao: TDBLookupComboBox;
-    DBLookupComboBoxGaleria: TDBLookupComboBox;
-    DBLookupComboBoxCela: TDBLookupComboBox;
-    DBLookupComboBoxSolario: TDBLookupComboBox;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    SqlPavilhao: TSQLQuery;
     DspPavilhao: TDataSetProvider;
     CdsPavilhao: TClientDataSet;
     DsPavilhao: TDataSource;
     DsGaleria: TDataSource;
     CdsGaleria: TClientDataSet;
     DspGaleria: TDataSetProvider;
-    SqlGaleria: TSQLQuery;
-    SqlSolario: TSQLQuery;
     DspSolario: TDataSetProvider;
     CdsSolario: TClientDataSet;
     DsSolario: TDataSource;
     DsCela: TDataSource;
     CdsCela: TClientDataSet;
     DspCela: TDataSetProvider;
-    SqlCela: TSQLQuery;
-    SQLconspadrao: TSQLQuery;
     Dspconspadrao: TDataSetProvider;
     Cdsconspadrao: TClientDataSet;
     Dsconspadrao: TDataSource;
@@ -44,16 +38,30 @@ type
     SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     SpeedButton4: TSpeedButton;
+    SqlPavilhao: TFDQuery;
+    SqlGaleria: TFDQuery;
+    SqlSolario: TFDQuery;
+    SqlCela: TFDQuery;
+    SQLconspadrao: TFDQuery;
+    DBLookupComboBoxCela: TComboBox;
+    DBLookupComboBoxSolario: TComboBox;
+    DBLookupComboBoxPavilhao: TComboBox;
+    DBLookupComboBoxGaleria: TComboBox;
     procedure FormCreate(Sender: TObject);
-    procedure DBLookupComboBoxPavilhaoClick(Sender: TObject);
     procedure DBLookupComboBoxGaleriaClick(Sender: TObject);
     procedure DBLookupComboBoxSolarioClick(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
-    procedure SpeedButton4Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure DBLookupComboBoxGaleriaEnter(Sender: TObject);
+    procedure SqlPavilhaoBeforeExecute(DataSet: TFDDataSet);
+    procedure DsPavilhaoUpdateData(Sender: TObject);
+    procedure DsPavilhaoStateChange(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DBLookupComboBoxPavilhaoChange(Sender: TObject);
+    procedure DBLookupComboBoxGaleriaChange(Sender: TObject);
+    procedure DBLookupComboBoxSolarioChange(Sender: TObject);
   private
     { Private declarations }
+    escolhido: String;
   public
     { Public declarations }
   end;
@@ -95,68 +103,126 @@ begin
   dsconspadrao.dataset.close;
   dsconspadrao.dataset.open;
 
-  DBLookupComboBoxPavilhao.KeyValue := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
-  DBLookupComboBoxGaleria.KeyValue := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
-  DBLookupComboBoxSolario.KeyValue := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
-  DBLookupComboBoxCela.KeyValue := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
-
+  //DBLookupComboBoxPavilhao.KeyValue := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
+  //DBLookupComboBoxGaleria.KeyValue := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
+  //DBLookupComboBoxSolario.KeyValue := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
+ // DBLookupComboBoxCela.KeyValue := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
+  escolhido := '';
 
 end;
 
-procedure TFrmFiltroCela.DBLookupComboBoxPavilhaoClick(Sender: TObject);
+procedure TFrmFiltroCela.FormShow(Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxGaleria.KeyValue := null;
-  DBLookupComboBoxSolario.KeyValue := null;
-  DBLookupComboBoxCela.KeyValue := null;
+  //
+  SqlPavilhao.Close;
+  SqlPavilhao.Open;
+  DBLookupComboBoxPavilhao.Items.Clear;
+  while not SqlPavilhao.Eof do
+  begin
+    DBLookupComboBoxPavilhao.Items.Add(SqlPAvilhao.FieldByName('PAVILHAO').AsString);
+    SqlPavilhao.Next;
+  end;
+end;
+
+procedure TFrmFiltroCela.DBLookupComboBoxGaleriaEnter(Sender: TObject);
+begin
+  inherited;
+  //SqlPavilhao.Close;
+end;
+
+procedure TFrmFiltroCela.DBLookupComboBoxPavilhaoChange(Sender: TObject);
+begin
+  inherited;
+  SqlGaleria.Close;
+  SqlGaleria.SQL.Text:= 'Select * from galeria g inner join pavilhao p on (p.id_pavilhao = g.idpavilhao) where p.pavilhao=:pavilhao order by g.galeria';
+  SqlGaleria.ParamByName('pavilhao').AsString := DBLookupComboBoxPavilhao.Text;
+  SqlGaleria.Open;
+  DBLookupComboBoxGaleria.Items.Clear;
+
+  while not SqlGaleria.Eof do
+  Begin
+    DBLookupComboBoxGaleria.Items.Add(SqlGaleria.FieldByName('galeria').AsString);
+    SqlGaleria.Next;
+  End;
+
+end;
+
+procedure TFrmFiltroCela.DBLookupComboBoxGaleriaChange(Sender: TObject);
+begin
+  inherited;
+  SqlSolario.Close;
+  SqlSolario.SQL.Text := 'select * from solario s inner join galeria g on (s.idgaleria = g.id_galeria) inner join pavilhao p on (s.idpavilhao = p.id_pavilhao) where g.galeria=:galeria and p.pavilhao=:pavilhao  order by s.solario';
+  SqlSolario.ParamByName('galeria').AsString := DBLookupComboBoxGaleria.Text;
+  SqlSolario.ParamByName('pavilhao').AsString := DBLookupComboBoxPAvilhao.Text;
+  SqlSolario.Open;
+  DBLookupComboBoxSolario.Items.Clear;
+  while not SqlSolario.EOF do
+  begin
+    DBLookupComboBoxSolario.Items.Add(SqlSolario.FieldByName('Solario').AsString);
+    SqlSolario.Next;
+  end;
 
 end;
 
 procedure TFrmFiltroCela.DBLookupComboBoxGaleriaClick(Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxSolario.KeyValue := null;
-  DBLookupComboBoxCela.KeyValue := null;
+ // DBLookupComboBoxSolario.KeyValue := null;
+  //DBLookupComboBoxCela.KeyValue := null;
+
+end;
+
+procedure TFrmFiltroCela.DBLookupComboBoxSolarioChange(Sender: TObject);
+begin
+  inherited;
+  SqlCela.Close;
+  SqlCela.SQL.Text := 'select * from cela c inner join solario s on(s.id_solario = c.idsolario) inner join galeria g on (g.id_galeria = c.idgaleria) where s.solario=:solario and g.galeria=:galeria order by c.cela';
+  SqlCela.ParamByName('solario').AsString := DBLookupComboBoxSolario.Text;
+  SqlCela.ParamByName('galeria').AsString := DBLookupComboBoxGaleria.Text;
+  SqlCela.Open;
+  DBLookupComboBoxCela.Items.Clear;
+  while not SqlCela.EOF do
+  begin
+    DBLookupComboBoxCela.Items.Add(SqlCela.FieldByName('Cela').AsString);
+    SqlCela.Next;
+  end;
 
 end;
 
 procedure TFrmFiltroCela.DBLookupComboBoxSolarioClick(Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxCela.KeyValue := null;
+  //DBLookupComboBoxCela.KeyValue := null;
 
 end;
 
-procedure TFrmFiltroCela.SpeedButton1Click(Sender: TObject);
+
+
+procedure TFrmFiltroCela.DsPavilhaoStateChange(Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxPavilhao.KeyValue := -1;
-  DBLookupComboBoxGaleria.KeyValue := null;
-  DBLookupComboBoxSolario.KeyValue := null;
-  DBLookupComboBoxCela.KeyValue := null;
+  //showmessage('mario');
 end;
 
-procedure TFrmFiltroCela.SpeedButton3Click(Sender: TObject);
+procedure TFrmFiltroCela.DsPavilhaoUpdateData(Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxSolario.KeyValue := -1;
-  DBLookupComboBoxCela.KeyValue := null;
-
+  Showmessage('ola');
 end;
 
-procedure TFrmFiltroCela.SpeedButton4Click(Sender: TObject);
+procedure TFrmFiltroCela.SqlPavilhaoBeforeExecute(DataSet: TFDDataSet);
 begin
   inherited;
-  DBLookupComboBoxCela.KeyValue := -1;
-
+  //Showmessage('Aqui');
 end;
 
 procedure TFrmFiltroCela.SpeedButton2Click(Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxGaleria.KeyValue := -1;
-  DBLookupComboBoxSolario.KeyValue := null;
-  DBLookupComboBoxCela.KeyValue := null;
+ // DBLookupComboBoxGaleria.KeyValue := -1;
+ // DBLookupComboBoxSolario.KeyValue := null;
+ // DBLookupComboBoxCela.KeyValue := null;
 
 end;
 

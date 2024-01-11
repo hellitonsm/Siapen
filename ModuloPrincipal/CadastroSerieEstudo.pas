@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, jpeg, Lib;
+  Mask, jpeg, Lib, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 type
   TFrmCadastroSerieEstudo = class(TFrmModeloCadastro)
@@ -191,6 +194,7 @@ begin
       Salvar.Visible := False;
   end;
 
+ 
   if not ContemValor('I', PERMISSAO_SERIEFASEESTUDO)
     and ContemValor('E', PERMISSAO_SERIEFASEESTUDO)
     and not ContemValor('D', PERMISSAO_SERIEFASEESTUDO) then

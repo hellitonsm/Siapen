@@ -1,23 +1,27 @@
 inherited FrmConsultaProced: TFrmConsultaProced
   Top = 62
-  Width = 826
-  Height = 598
   Caption = 'Consulta ao Proced'
-  OldCreateOrder = True
+  ClientHeight = 638
+  ClientWidth = 860
   OnClose = FormClose
-  PixelsPerInch = 96
+  ExplicitWidth = 876
+  ExplicitHeight = 677
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 810
-    Height = 519
+    Width = 860
+    Height = 597
+    ExplicitWidth = 412
+    ExplicitHeight = 167
     object PageControl1: TPageControl
       Left = 1
       Top = 1
-      Width = 808
-      Height = 517
+      Width = 862
+      Height = 596
       ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 410
+      ExplicitHeight = 165
       object TabSheet1: TTabSheet
         Caption = 'Individuo'
         object Label1: TLabel
@@ -98,8 +102,8 @@ inherited FrmConsultaProced: TFrmConsultaProced
         end
         object DBGrid3: TDBGrid
           Left = 0
-          Top = 266
-          Width = 800
+          Top = 347
+          Width = 862
           Height = 134
           Align = alBottom
           DataSource = DmProced.DsAntecedentesCriminais
@@ -220,25 +224,35 @@ inherited FrmConsultaProced: TFrmConsultaProced
         end
         object DBRichEdit1: TDBRichEdit
           Left = 0
-          Top = 400
-          Width = 800
+          Top = 481
+          Width = 862
           Height = 89
           Align = alBottom
           DataField = 'DE_PENA_SENTENCA'
           DataSource = DmProced.DsAntecedentesCriminais
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
           TabOrder = 7
+          ExplicitTop = 48
+          ExplicitWidth = 402
         end
       end
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 810
+    Width = 860
+    ExplicitWidth = 412
     inherited Image2: TImage
-      Width = 808
+      Width = 870
+      ExplicitWidth = 808
     end
     inherited LabelTitulo: TLabel
       Width = 163
       Caption = 'Consulta ao Proced'
+      ExplicitWidth = 163
     end
   end
 end

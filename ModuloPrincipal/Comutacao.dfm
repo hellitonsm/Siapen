@@ -2,16 +2,35 @@ inherited FrmComutacao: TFrmComutacao
   Left = 223
   Top = 143
   Caption = 'Comuta'#231#227'o'
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 532
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 514
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Width = 825
+    Height = 532
     inherited PageControlModeloCadastro: TPageControl
+      Width = 825
+      Height = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 16
             Top = 11
@@ -329,9 +348,32 @@ inherited FrmComutacao: TFrmComutacao
           end
         end
       end
+      inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 817
+        end
+        inherited PanelConsulta: TPanel
+          Width = 817
+          Height = 470
+          inherited DBGridConsulta: TDBGrid
+            Width = 815
+            Height = 468
+          end
+        end
+      end
     end
   end
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 940
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 564
+    Width = 940
+  end
   inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM COMUTACAO'
@@ -343,35 +385,6 @@ inherited FrmComutacao: TFrmComutacao
         ParamType = ptInput
         Value = 0
       end>
-  end
-  object SqlProcesso: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_COMUTACAO'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'SELECT'
-      'V.ID_VINC_COMUTACAO,'
-      'V.ID_COMUTACAO,'
-      'P.IDPROCESSO CODIGO,'
-      'P.NPROCESSO,'
-      'P.VARA,'
-      'P.DATA_INICIO_CONDENACAO,'
-      'UPPER(P.SITUACAOJURIDICA) SITUACAOJURIDICA,'
-      'P.TOTAL_PENA_ANO,'
-      'P.TOTAL_PENA_MES,'
-      'P.TOTAL_PENA_DIA'
-      'FROM PROCESSO P'
-      'JOIN VINC_COMUTACAO V ON (V.IDPROCESSO=P.IDPROCESSO)'
-      'WHERE COALESCE(P.SITUACAOJURIDICA,'#39'INQ'#39') NOT LIKE '#39'INQ%'#39
-      'AND V.ID_COMUTACAO=:ID_COMUTACAO')
-    SQLConnection = DM.SQLConnect
-    Left = 551
-    Top = 336
   end
   object DspProcesso: TDataSetProvider
     DataSet = SqlProcesso
@@ -394,17 +407,6 @@ inherited FrmComutacao: TFrmComutacao
     OnDataChange = DsCadastroDataChange
     Left = 635
     Top = 336
-  end
-  object SqlCidadeVara: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT ID_CIDADE, CIDADE ||'#39'-'#39'|| UF AS CIDADE'
-      'FROM CIDADE'
-      'where trim(coalesce(CIDADE ||'#39'-'#39'|| UF,'#39#39'))<>'#39#39
-      'ORDER BY CIDADE ||'#39'-'#39'|| UF')
-    Left = 584
-    Top = 8
   end
   object DspCidadeVara: TDataSetProvider
     DataSet = SqlCidadeVara
@@ -444,22 +446,58 @@ inherited FrmComutacao: TFrmComutacao
     Left = 612
     Top = 56
   end
-  object SqlVara: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
+  object SqlProcesso: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT'
+      'V.ID_VINC_COMUTACAO,'
+      'V.ID_COMUTACAO,'
+      'P.IDPROCESSO CODIGO,'
+      'P.NPROCESSO,'
+      'P.VARA,'
+      'P.DATA_INICIO_CONDENACAO,'
+      'UPPER(P.SITUACAOJURIDICA) SITUACAOJURIDICA,'
+      'P.TOTAL_PENA_ANO,'
+      'P.TOTAL_PENA_MES,'
+      'P.TOTAL_PENA_DIA'
+      'FROM PROCESSO P'
+      'JOIN VINC_COMUTACAO V ON (V.IDPROCESSO=P.IDPROCESSO)'
+      'WHERE COALESCE(P.SITUACAOJURIDICA,'#39'INQ'#39') NOT LIKE '#39'INQ%'#39
+      'AND V.ID_COMUTACAO=:ID_COMUTACAO')
+    Left = 551
+    Top = 336
+    ParamData = <
       item
-        DataType = ftInteger
-        Name = 'IDCIDADE'
+        Name = 'ID_COMUTACAO'
         ParamType = ptInput
-        Value = 0
       end>
+  end
+  object SqlCidadeVara: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT ID_CIDADE, CIDADE ||'#39'-'#39'|| UF AS CIDADE'
+      'FROM CIDADE'
+      'where trim(coalesce(CIDADE ||'#39'-'#39'|| UF,'#39#39'))<>'#39#39
+      'ORDER BY CIDADE ||'#39'-'#39'|| UF')
+    Left = 584
+    Top = 8
+  end
+  object SqlVara: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM DESTINO'
       'where TIPO_DESTINO='#39'VARA'#39
       'AND IDCIDADE=:IDCIDADE')
-    SQLConnection = DM.SQLConnect
     Left = 584
     Top = 56
+    ParamData = <
+      item
+        Name = 'IDCIDADE'
+        ParamType = ptInput
+      end>
   end
 end

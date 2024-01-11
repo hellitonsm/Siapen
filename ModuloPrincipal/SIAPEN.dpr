@@ -230,7 +230,7 @@ var
  // SourcePath: String;
   DestinationPath: String;
  // FileName : String;
-  IsFileFound: Boolean;
+ // IsFileFound: Boolean;
   ShortDateFormat:String;
 begin
   PastaUsuario := GetEnvironmentVariable('APPDATA');

@@ -1,18 +1,42 @@
 inherited FrmInterrupcao: TFrmInterrupcao
   Caption = 'Interrup'#231#245'es da Execu'#231#227'o Penal'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 531
+    ExplicitHeight = 531
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 513
+      ExplicitHeight = 513
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 513
       DataSource = DsConsulta
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Width = 821
+    Height = 531
+    ExplicitWidth = 821
+    ExplicitHeight = 531
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 22
             Top = 12
@@ -141,8 +165,8 @@ inherited FrmInterrupcao: TFrmInterrupcao
             Top = 28
             Width = 106
             Height = 21
-            Date = 41038.574410995370000000
-            Time = 41038.574410995370000000
+            Date = 41038.000000000000000000
+            Time = 0.574410995366633900
             Enabled = False
             TabOrder = 2
             DataField = 'DATA_LANCAMENTO'
@@ -245,10 +269,6 @@ inherited FrmInterrupcao: TFrmInterrupcao
             Font.Height = -13
             Font.Name = 'Times New Roman'
             Font.Style = []
-            ParentFont = False
-            TabOrder = 13
-            TabStop = False
-            OnClick = BtnVisuzalizarDocDigitalizadorClick
             Glyph.Data = {
               5E020000424D5E020000000000005E0100002800000010000000100000000100
               08000000000000010000120B0000120B00004A0000004A00000000000000FFFF
@@ -270,7 +290,11 @@ inherited FrmInterrupcao: TFrmInterrupcao
               0B290202020202290F0F183543150A0717020202020202021C010523391E110C
               3202020202020202021B0910131113260202020202020202020229271E1F0202
               0202}
+            ParentFont = False
             Style = bsWin31
+            TabOrder = 13
+            TabStop = False
+            OnClick = BtnVisuzalizarDocDigitalizadorClick
           end
           object BtnIncluirDocDigitalizado: TBitBtn
             Left = 24
@@ -283,10 +307,6 @@ inherited FrmInterrupcao: TFrmInterrupcao
             Font.Height = -13
             Font.Name = 'Times New Roman'
             Font.Style = []
-            ParentFont = False
-            TabOrder = 12
-            TabStop = False
-            OnClick = BtnIncluirDocDigitalizadoClick
             Glyph.Data = {
               36020000424D3602000000000000360100002800000010000000100000000100
               08000000000000010000120B0000120B0000400000004000000000000000FFFF
@@ -306,7 +326,11 @@ inherited FrmInterrupcao: TFrmInterrupcao
               133102050E0302291431020202020231153102060D03022D1631020202020202
               31310208100302301E020202020202020202020A070402020202020202020202
               0202020B09020202020202020202020202020208020202020202}
+            ParentFont = False
             Style = bsWin31
+            TabOrder = 12
+            TabStop = False
+            OnClick = BtnIncluirDocDigitalizadoClick
           end
           object Button1: TButton
             Left = 24
@@ -320,26 +344,48 @@ inherited FrmInterrupcao: TFrmInterrupcao
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 813
+        end
         inherited PanelConsulta: TPanel
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
+            Width = 811
+            Height = 467
             DataSource = DsConsulta
           end
         end
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDINTERRUPCAO'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 936
+    ExplicitWidth = 936
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM INTERRUPCAO'
       'WHERE IDINTERRUPCAO = :IDINTERRUPCAO')
+    ParamData = <
+      item
+        Name = 'IDINTERRUPCAO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   inherited CdsCadastro: TClientDataSet
     IndexFieldNames = 'IDINTERRUPCAO'
@@ -363,15 +409,17 @@ inherited FrmInterrupcao: TFrmInterrupcao
     DataSet = SqlConsulta
     Left = 180
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = 0
-      end>
+  object SaveDialogDoc: TSaveDialog
+    Left = 456
+    Top = 56
+  end
+  object OpenDialogDoc: TOpenDialog
+    Left = 511
+    Top = 56
+  end
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select'
       'i.nome_interno,'
@@ -383,13 +431,10 @@ inherited FrmInterrupcao: TFrmInterrupcao
       'where i.id_up = :ID_UP'
       'order by i.nome_interno')
     Left = 152
-  end
-  object SaveDialogDoc: TSaveDialog
-    Left = 456
-    Top = 56
-  end
-  object OpenDialogDoc: TOpenDialog
-    Left = 511
-    Top = 56
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
   end
 end

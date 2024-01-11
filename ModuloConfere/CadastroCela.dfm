@@ -1,32 +1,33 @@
 inherited FrmCadastroCela: TFrmCadastroCela
   Left = 261
-  Width = 778
-  Height = 409
   Caption = 'Cadastro de Cela'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 331
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 313
-    end
+    Height = 532
     inherited DBNavigator1: TDBNavigator
-      Top = 313
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 655
-    Height = 331
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 770
+      ExplicitWidth = 770
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 655
-      Height = 331
-      ActivePage = TabSheetCadastro
+      Width = 825
+      Height = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 647
-          Height = 303
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 24
             Top = 16
@@ -152,13 +153,13 @@ inherited FrmCadastroCela: TFrmCadastroCela
           end
           object DBLookupComboBoxPavilhao: TDBLookupComboBox
             Left = 24
-            Top = 74
+            Top = 71
             Width = 300
             Height = 21
             DataField = 'IDPAVILHAO'
             DataSource = DsCadastro
-            KeyField = 'id_pavilhao'
-            ListField = 'pavilhao'
+            KeyField = 'ID_PAVILHAO'
+            ListField = 'PAVILHAO'
             ListSource = DsPavilhao
             TabOrder = 3
             OnClick = DBLookupComboBoxPavilhaoClick
@@ -191,15 +192,15 @@ inherited FrmCadastroCela: TFrmCadastroCela
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 647
+          ExplicitWidth = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 647
-          Height = 269
+          ExplicitWidth = 817
+          ExplicitHeight = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 645
-            Height = 267
             Columns = <
               item
                 Expanded = False
@@ -231,23 +232,13 @@ inherited FrmCadastroCela: TFrmCadastroCela
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 770
-    inherited Image2: TImage
-      Width = 770
-    end
+    Width = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 363
-    Width = 770
+    Top = 564
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = 11
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM CELA'
@@ -256,6 +247,13 @@ inherited FrmCadastroCela: TFrmCadastroCela
       'WHERE PAVILHAO.ID_PAVILHAO=CELA.IDPAVILHAO'
       'AND PAVILHAO.ID_UP = :ID_UP)'
       'ORDER BY id_cela')
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 11
+      end>
   end
   inherited CdsCadastro: TClientDataSet
     object CdsCadastroID_CELA: TIntegerField
@@ -327,15 +325,6 @@ inherited FrmCadastroCela: TFrmCadastroCela
       FieldName = 'MOTIVO_MANUTENCAO'
       Size = 100
     end
-  end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from cela'
-      'where id_cela = -1')
-    SQLConnection = DM.SQLConnect
-    Top = 312
   end
   object Dspconsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -413,34 +402,6 @@ inherited FrmCadastroCela: TFrmCadastroCela
     Left = 84
     Top = 312
   end
-  object SqlSelectcela: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM CELA c'
-      'inner join pavilhao p on (p.id_pavilhao = c.idpavilhao)'
-      'inner join unidade_penal u on (p.id_up = u.id_up)'
-      'WHERE p.id_up = :ID_UP'
-      'ORDER BY id_cela')
-    SQLConnection = DM.SQLConnect
-    Left = 40
-    Top = 372
-  end
-  object SqlPavilhao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from pavilhao order by pavilhao')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 197
-  end
   object DspPavilhao: TDataSetProvider
     DataSet = SqlPavilhao
     Left = 616
@@ -454,12 +415,12 @@ inherited FrmCadastroCela: TFrmCadastroCela
     Top = 197
   end
   object DsPavilhao: TDataSource
-    DataSet = CdsPavilhao
+    DataSet = SqlPavilhao
     Left = 680
     Top = 197
   end
   object DsGaleria: TDataSource
-    DataSet = CdsGaleria
+    DataSet = SqlGaleria
     Left = 680
     Top = 240
   end
@@ -479,40 +440,6 @@ inherited FrmCadastroCela: TFrmCadastroCela
     Left = 616
     Top = 240
   end
-  object SqlGaleria: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_pavilhao'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from galeria'
-      'where idpavilhao=:id_pavilhao'
-      'order by galeria')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 240
-  end
-  object SqlSolario: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_galeria'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from solario'
-      'where idgaleria=:id_galeria'
-      'order by solario')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-    Top = 288
-  end
   object DspSolario: TDataSetProvider
     DataSet = SqlSolario
     Left = 616
@@ -530,8 +457,75 @@ inherited FrmCadastroCela: TFrmCadastroCela
     Top = 288
   end
   object DsSolario: TDataSource
-    DataSet = CdsSolario
+    DataSet = SqlSolario
     Left = 680
     Top = 288
+  end
+  object SqlPavilhao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from pavilhao order by pavilhao')
+    Left = 591
+    Top = 200
+  end
+  object SqlGaleria: TFDQuery
+    MasterSource = DsPavilhao
+    MasterFields = 'ID_PAVILHAO'
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from GALERIA'
+      'where IDPAVILHAO=:ID_PAVILHAO'
+      'order by GALERIA')
+    Left = 591
+    Top = 240
+    ParamData = <
+      item
+        Name = 'ID_PAVILHAO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
+  end
+  object SqlSolario: TFDQuery
+    MasterSource = DsGaleria
+    MasterFields = 'ID_GALERIA'
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from SOLARIO'
+      'where IDGALERIA=:ID_GALERIA'
+      'order by SOLARIO')
+    Left = 583
+    Top = 288
+    ParamData = <
+      item
+        Name = 'ID_GALERIA'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object SqlSelectcela: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM CELA c'
+      'inner join pavilhao p on (p.id_pavilhao = c.idpavilhao)'
+      'inner join unidade_penal u on (p.id_up = u.id_up)'
+      'WHERE p.id_up = :ID_UP'
+      'ORDER BY id_cela')
+    Left = 719
+    Top = 360
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsulta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from cela'
+      'where id_cela = -1')
+    Left = 65535
+    Top = 312
   end
 end

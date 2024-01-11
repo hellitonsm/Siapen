@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroFarmacia = class(TFrmModeloInterno)
@@ -17,7 +20,7 @@ type
     Button1: TButton;
     DBGrid1: TDBGrid;
     DBMemo1: TDBMemo;
-    SQLfarmacia: TSQLQuery;
+    SQLfarmaciaold: TSQLQuery;
     DSPfarmacia: TDataSetProvider;
     CDSfarmacia: TClientDataSet;
     DSfarmacia: TDataSource;
@@ -38,7 +41,7 @@ type
     DBGrid2: TDBGrid;
     DBMemo2: TDBMemo;
     Button2: TButton;
-    SQLmedicacaointerno: TSQLQuery;
+    SQLmedicacaointernoold: TSQLQuery;
     DSPmedicacaointerno: TDataSetProvider;
     CDSmedicacaointerno: TClientDataSet;
     CDSmedicacaointernoID_REMEDIO_INTERNO: TIntegerField;
@@ -50,6 +53,8 @@ type
     DSmedicacaointerno: TDataSource;
     CDSmedicacaointernoID_FUNCIONARIO: TIntegerField;
     CDSmedicacaointernoFuncionrioa: TStringField;
+    SQLfarmacia: TFDQuery;
+    SQLmedicacaointerno: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -78,7 +83,7 @@ procedure TFrmCadastroFarmacia.Button1Click(Sender: TObject);
 begin
   inherited;
   DSfarmacia.DataSet.Append;
-  DSfarmacia.DataSet.fieldbyname('id_historico_farmacia').AsInteger := 0;
+  DSfarmacia.DataSet.fieldbyname('id_historico_farmacia').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idfarmacia,1) FROM RDB$DATABASE');
   DSfarmacia.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSfarmacia.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;
@@ -153,7 +158,7 @@ procedure TFrmCadastroFarmacia.Button2Click(Sender: TObject);
 begin
   inherited;
   DSmedicacaointerno.DataSet.Append;
-  DSmedicacaointerno.DataSet.fieldbyname('id_remedio_interno').AsInteger := 0;
+  DSmedicacaointerno.DataSet.fieldbyname('id_remedio_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idremediointerno,1) FROM RDB$DATABASE');;
   DSmedicacaointerno.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSmedicacaointerno.DataSet.fieldbyname('id_remedio').AsInteger := DBLookupComboBoxremedio.KeyValue;

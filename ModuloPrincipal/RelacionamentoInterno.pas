@@ -5,11 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, StdCtrls, jpeg, ExtCtrls, ComCtrls, FMTBcd,
-  DB, SqlExpr, DBClient, DBCtrls, Provider, pngextra, pngimage;
+  DB, SqlExpr, DBClient, DBCtrls, Provider, pngextra, pngimage,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmRelacionamentoInterno = class(TFrmModeloFormulario)
-    SqlRelacionamento: TSQLQuery;
     Blocos: TClientDataSet;
     Blocosnome: TStringField;
     Blocoscaption: TStringField;
@@ -26,15 +28,16 @@ type
     Button2: TButton;
     ProgressBar1: TProgressBar;
     DBImageFOTOInterno: TDBImage;
-    SqlInterno: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
     Image4: TImage;
-    SqlListaInterno: TSQLQuery;
     DspListaInterno: TDataSetProvider;
     CdsListaInterno: TClientDataSet;
     DsListaInterno: TDataSource;
+    SqlRelacionamento: TFDQuery;
+    SqlInterno: TFDQuery;
+    SqlListaInterno: TFDQuery;
     procedure BtnVisualizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);

@@ -1,32 +1,41 @@
 inherited FrmCadastroUnidadePenal: TFrmCadastroUnidadePenal
   Left = 204
   Top = 187
-  Width = 829
-  Height = 498
   Caption = 'Cadastro Unidade Penal'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 409
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
       Height = 391
+      ExplicitHeight = 391
     end
     inherited DBNavigator1: TDBNavigator
       Top = 391
       Hints.Strings = ()
+      ExplicitTop = 391
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 698
-    Height = 409
+    Height = 532
+    inherited Image2: TImage
+      Width = 813
+      ExplicitWidth = 813
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 698
-      Height = 409
+      Width = 821
+      Height = 531
+      ExplicitWidth = 698
+      ExplicitHeight = 409
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Width = 690
-          Height = 381
+          Width = 813
+          Height = 503
+          ExplicitWidth = 690
+          ExplicitHeight = 381
           object Label2: TLabel
             Left = 8
             Top = 8
@@ -342,12 +351,17 @@ inherited FrmCadastroUnidadePenal: TFrmCadastroUnidadePenal
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelLocalizaConsulta: TPanel
           Width = 690
+          ExplicitWidth = 690
         end
         inherited PanelConsulta: TPanel
           Width = 690
           Height = 347
+          ExplicitWidth = 690
+          ExplicitHeight = 347
           inherited DBGridConsulta: TDBGrid
             Width = 688
             Height = 345
@@ -357,16 +371,14 @@ inherited FrmCadastroUnidadePenal: TFrmCadastroUnidadePenal
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 813
-    inherited Image2: TImage
-      Width = 813
-    end
+    ExplicitWidth = 813
   end
   inherited StatusBar1: TStatusBar
-    Top = 441
-    Width = 813
+    Top = 564
+    ExplicitTop = 563
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM UNIDADE_PENAL')

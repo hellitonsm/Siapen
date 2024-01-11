@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, jpeg, Lib;
+  Mask, jpeg, Lib, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 type
   TFrmCadastroSubEvento = class(TFrmModeloCadastro)
@@ -24,10 +27,10 @@ type
     DsEventos: TDataSource;
     CdsEventos: TClientDataSet;
     DspEventos: TDataSetProvider;
-    SqlEventos: TSQLQuery;
     CdsCadastroID_EVENTOS: TIntegerField;
     CbTipoEvento: TComboBox;
     Label6: TLabel;
+    SqlEventos: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure CbTipoEventoChange(Sender: TObject);

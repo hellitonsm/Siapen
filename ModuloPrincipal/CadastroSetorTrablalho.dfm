@@ -1,7 +1,7 @@
 inherited FrmCadastroSetorTrabalho: TFrmCadastroSetorTrabalho
   Caption = 'Cadastro Setor Trabalho'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ExplicitWidth = 948
+  ExplicitHeight = 620
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -10,8 +10,15 @@ inherited FrmCadastroSetorTrabalho: TFrmCadastroSetorTrabalho
   end
   inherited PanelModeloCadastro: TPanel
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
+      ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
+          Width = 813
+          Height = 503
           object Label2: TLabel
             Left = 16
             Top = 16
@@ -184,21 +191,12 @@ inherited FrmCadastroSetorTrabalho: TFrmCadastroSetorTrabalho
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        inherited PanelLocalizaConsulta: TPanel
-          Width = 669
-        end
-        inherited PanelConsulta: TPanel
-          Width = 669
-          Height = 322
-          inherited DBGridConsulta: TDBGrid
-            Width = 667
-            Height = 320
-          end
-        end
+        ExplicitWidth = 813
+        ExplicitHeight = 503
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM Setor_trabalho')

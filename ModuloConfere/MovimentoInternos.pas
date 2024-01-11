@@ -7,7 +7,10 @@ uses
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
   FMTBcd, DB, DBClient, Provider, SqlExpr, Mask, DBCtrls,
   ModeloCadastro, Jpeg, Buttons, ModeloMovimentacao, frxClass, frxPreview,
-  frxDBSet, adpDBDateTimePicker, Menus, pngimage, System.ImageList;
+  frxDBSet, adpDBDateTimePicker, Menus, pngimage, System.ImageList,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMovimentoInternos = class(TFrmModeloMovimentacao)
@@ -15,7 +18,7 @@ type
     DBEditNome: TDBEdit;
     Label2: TLabel;
     Label8: TLabel;
-    SqlSelectInterno: TSQLQuery;
+    SqlSelectInternoOLD: TSQLQuery;
     RadioGroupStatus: TRadioGroup;
     DBRadioGroupStatus: TDBRadioGroup;
     PageControlDadosInterno: TPageControl;
@@ -47,7 +50,7 @@ type
     CDSHISTORICO_internoDATA_HORA: TSQLTimeStampField;
     CDSHISTORICO_internoIDINTERNO: TIntegerField;
     DSPHISTORICO_interno: TDataSetProvider;
-    SQLHISTORICO_interno: TSQLQuery;
+    SQLHISTORICO_internoOLD: TSQLQuery;
     Label9: TLabel;
     DBEditDocSaida: TDBEdit;
     Label10: TLabel;
@@ -55,14 +58,14 @@ type
     Label11: TLabel;
     DBEdit7: TDBEdit;
     SpeedButton1: TSpeedButton;
-    SqlSelectInternoInativo: TSQLQuery;
+    SqlSelectInternoInativoOLD: TSQLQuery;
     CDSHISTORICO_internoSTATUS: TStringField;
     CDSHISTORICO_internoMOTIVO_SAIDA: TStringField;
     CDSHISTORICO_internoIDPROCEDENCIA: TIntegerField;
     CDSHISTORICO_internoIDUP: TIntegerField;
     DBRadioGroup1: TDBRadioGroup;
     chkSoundex: TCheckBox;
-    SqlSoundex: TSQLQuery;
+    SqlSoundexOLD: TSQLQuery;
     DBEdit9: TDBEdit;
     Label13: TLabel;
     Label62: TLabel;
@@ -75,40 +78,36 @@ type
     TabSheetGaleria: TTabSheet;
     DBRadioGroupGaleria: TDBRadioGroup;
     DBRadioGroupPavilhao: TDBRadioGroup;
-    SqlPavilhao: TSQLQuery;
+    SqlPavilhaoOLD: TSQLQuery;
     DspPavilhao: TDataSetProvider;
     CdsPavilhao: TClientDataSet;
     DsPavilhao: TDataSource;
     DsGaleria: TDataSource;
     CdsGaleria: TClientDataSet;
     DspGaleria: TDataSetProvider;
-    SqlGaleria: TSQLQuery;
-    SqlSolario: TSQLQuery;
+    SqlGaleriaOLD: TSQLQuery;
+    SqlSolarioOLD: TSQLQuery;
     DspSolario: TDataSetProvider;
     CdsSolario: TClientDataSet;
     DsSolario: TDataSource;
     DsCela: TDataSource;
     CdsCela: TClientDataSet;
     DspCela: TDataSetProvider;
-    SqlCela: TSQLQuery;
+    SqlCelaOLD: TSQLQuery;
     Label14: TLabel;
-    SqlConsultaBackup: TSQLQuery;
+    SqlConsultaBackupOLD: TSQLQuery;
     RadioGroupTipoLocalizar: TRadioGroup;
     TabSheetMovimentacaoExterna: TTabSheet;
     DBGrid2: TDBGrid;
-    SqlMovimentacaoExterna: TSQLQuery;
+    SqlMovimentacaoExternaOLD: TSQLQuery;
     DspMovimentacaoExterna: TDataSetProvider;
     CdsMovimentacaoExterna: TClientDataSet;
     DsMovimentacaoExterna: TDataSource;
     DataSaida: TadpDBDateTimePicker;
     DataEntrada: TadpDBDateTimePicker;
-    DBLookupComboBoxCela: TDBLookupComboBox;
     LabelCela: TLabel;
-    DBLookupComboBoxSolario: TDBLookupComboBox;
     LabelSolario: TLabel;
-    DBLookupComboBoxGaleria: TDBLookupComboBox;
     LabelGaleria: TLabel;
-    DBLookupComboBoxPavilhao: TDBLookupComboBox;
     LabelPavilhao: TLabel;
     TabSheet5: TTabSheet;
     BtnIncluirDocDigitalizado: TBitBtn;
@@ -117,7 +116,7 @@ type
     DsDocumentos: TDataSource;
     CdsDocumentos: TClientDataSet;
     DspDocumentos: TDataSetProvider;
-    SqlDocumentos: TSQLQuery;
+    SqlDocumentosOLD: TSQLQuery;
     OpenDialogDoc: TOpenDialog;
     SaveDialogDoc: TSaveDialog;
     ImageList1: TImageList;
@@ -130,7 +129,7 @@ type
     LabelTotal: TLabel;
     ToolButtonInteligencia: TToolButton;
     TabSheetMudancaCela: TTabSheet;
-    SqlList_Mudanca_Cela: TSQLQuery;
+    SqlList_Mudanca_CelaOLD: TSQLQuery;
     DspList_Mudanca_Cela: TDataSetProvider;
     DsList_Mudanca_Cela: TDataSource;
     DBGridMudanca: TDBGrid;
@@ -156,37 +155,37 @@ type
     CdsList_Mudanca_CelaID_CELA_NOVO: TIntegerField;
     CdsList_Mudanca_CelaINTERNO: TStringField;
     CdsList_Mudanca_CelaRGI: TStringField;
-    SqlPavAntes: TSQLQuery;
+    SqlPavAntesOLD: TSQLQuery;
     DspPavAntes: TDataSetProvider;
     CdsPavAntes: TClientDataSet;
     DsPavAntes: TDataSource;
     DsGalAntes: TDataSource;
     CdsGalAntes: TClientDataSet;
     DspGalAntes: TDataSetProvider;
-    SqlGalAntes: TSQLQuery;
-    SqlSolAntes: TSQLQuery;
+    SqlGalAntesOLD: TSQLQuery;
+    SqlSolAntesOLD: TSQLQuery;
     DspSolAntes: TDataSetProvider;
     CdsSolAntes: TClientDataSet;
     DsSolAntes: TDataSource;
     DsCelaAntes: TDataSource;
     CdsCelaAntes: TClientDataSet;
     DspCelaAntes: TDataSetProvider;
-    SqlCelaAntes: TSQLQuery;
+    SqlCelaAntesOLD: TSQLQuery;
     CdsList_Mudanca_CelaCONFIRMADA: TStringField;
     BitBtn1: TBitBtn;
-    SQLhistorico_trabalho: TSQLQuery;
+    SQLhistorico_trabalhoOLD: TSQLQuery;
     dsphistorico_trabalho: TDataSetProvider;
     cdshistorico_trabalho: TClientDataSet;
     dshistorico_trabalho: TDataSource;
-    SQLhistorico_estudo: TSQLQuery;
+    SQLhistorico_estudoOLD: TSQLQuery;
     dsphistorico_estudo: TDataSetProvider;
     cdshistorico_estudo: TClientDataSet;
     dshistorico_estudo: TDataSource;
     Dsconspadrao: TDataSource;
     Cdsconspadrao: TClientDataSet;
     Dspconspadrao: TDataSetProvider;
-    SQLconspadrao: TSQLQuery;
-    SqlConsultaTodos: TSQLQuery;
+    SQLconspadraoOLD: TSQLQuery;
+    SqlConsultaTodosOLD: TSQLQuery;
     DBComboBox2: TDBComboBox;
     DBEditMotivoMudancaCela: TDBEdit;
     Label15: TLabel;
@@ -195,18 +194,18 @@ type
     CdsVinc_Mudanca_Cela: TClientDataSet;
     DsVinc_Mudanca_Cela: TDataSource;
     DspVinc_Mudanca_Cela: TDataSetProvider;
-    SqlVinc_Mudanca_Cela: TSQLQuery;
+    SqlVinc_Mudanca_CelaOLD: TSQLQuery;
     DsMudancaCela: TDataSource;
     CdsMudancaCela: TClientDataSet;
     DspMudancaCela: TDataSetProvider;
-    SqlMudancaCela: TSQLQuery;
+    SqlMudancaCelaOLD: TSQLQuery;
     DBEditDataMudanca: TDBEdit;
     Label17: TLabel;
     CdsList_Mudanca_CelaMOTIVO_MOVIMENTACAO: TStringField;
     CdsList_Mudanca_CelaDATA: TSQLTimeStampField;
     Label18: TLabel;
     DBComboBox3: TDBComboBox;
-    SqlTransferenciaInterno: TSQLQuery;
+    SqlTransferenciaInternoOLD: TSQLQuery;
     DspTransferenciaInterno: TDataSetProvider;
     CdsTransferenciaInterno: TClientDataSet;
     DsTransferenciaInterno: TDataSource;
@@ -223,13 +222,13 @@ type
     Cdsvinc_transferencia_internoMOTIVO_CANCELAMENTO: TStringField;
     Cdsvinc_transferencia_internoFuncionrio: TStringField;
     Dspvinc_transferencia_interno: TDataSetProvider;
-    Sqlvinc_transferencia_interno: TSQLQuery;
+    Sqlvinc_transferencia_internoOLD: TSQLQuery;
     PageControlDestino: TPageControl;
     TabSheetDestino: TTabSheet;
     TabSheetUnidade: TTabSheet;
     DBLookupComboBoxUPDestino: TDBLookupComboBox;
-    SqlUP: TSQLQuery;
-    DspUP: TDataSetProvider;
+    SqlUPOLD: TSQLQuery;
+    DspUp: TDataSetProvider;
     CdsUP: TClientDataSet;
     DsUP: TDataSource;
     DBLookupComboBoxDestino: TDBLookupComboBox;
@@ -240,7 +239,7 @@ type
     Dsdigital: TDataSource;
     CDSdigital: TClientDataSet;
     DSPdigital: TDataSetProvider;
-    SQLdigital: TSQLQuery;
+    SQLdigitalOLD: TSQLQuery;
     ToolButton2: TToolButton;
     DBLookupComboBoxSolicitanteVaga: TDBLookupComboBox;
     Label19: TLabel;
@@ -467,6 +466,36 @@ type
     SqlCadastroHORARIO_ENTRADA_SEX: TTimeField;
     SqlCadastroCOLABORADOR: TStringField;
     SqlCadastroBLOQUEIO_TRABALHO: TStringField;
+    SqlSelectInterno: TFDQuery;
+    SqlUP: TFDQuery;
+    SqlConsultaBackup: TFDQuery;
+    Sqlvinc_transferencia_interno: TFDQuery;
+    SqlConsultaTodos: TFDQuery;
+    SqlSoundex: TFDQuery;
+    SqlSelectInternoInativo: TFDQuery;
+    SqlTransferenciaInterno: TFDQuery;
+    SQLhistorico_trabalho: TFDQuery;
+    SqlMovimentacaoExterna: TFDQuery;
+    SqlDocumentos: TFDQuery;
+    SQLconspadrao: TFDQuery;
+    SQLHISTORICO_interno: TFDQuery;
+    SqlGaleria: TFDQuery;
+    SqlList_Mudanca_Cela: TFDQuery;
+    SqlSolario: TFDQuery;
+    SqlPavAntes: TFDQuery;
+    SQLdigital: TFDQuery;
+    SqlCela: TFDQuery;
+    SqlPavilhao: TFDQuery;
+    SqlMudancaCela: TFDQuery;
+    SqlVinc_Mudanca_Cela: TFDQuery;
+    SqlGalAntes: TFDQuery;
+    SqlSolAntes: TFDQuery;
+    SqlCelaAntes: TFDQuery;
+    SQLhistorico_estudo: TFDQuery;
+    DBLookupComboBoxCela: TComboBox;
+    DBLookupComboBoxSolario: TComboBox;
+    DBLookupComboBoxGaleria: TComboBox;
+    DBLookupComboBoxPavilhao: TComboBox;
     procedure EditLocalizarChange(Sender: TObject);
     procedure DBRadioGroupPavilhaoChange(Sender: TObject);
     procedure DBRadioGroupGaleriaChange(Sender: TObject);
@@ -517,6 +546,9 @@ type
     procedure ImagepolegaresquerdoClick(Sender: TObject);
     procedure ToolButton2Click(Sender: TObject);
     procedure PageControlDadosInternoChange(Sender: TObject);
+    procedure DBLookupComboBoxPavilhaoChange(Sender: TObject);
+    procedure DBLookupComboBoxGaleriaChange(Sender: TObject);
+    procedure DBLookupComboBoxSolarioChange(Sender: TObject);
 
   private
     sFiltroCela: string;
@@ -872,7 +904,7 @@ begin
   DsCela.DataSet.Close;
   DsCela.DataSet.Open;
 
-  SqlPavAntes.SQL.Text := ' select * from pavilhao where id_up=' + inttostr(GLOBAL_ID_UP) + ' order by pavilhao';
+  SqlPavAntes.SQL.Text := ' select * from pavilhao where id_up = ' + inttostr(GLOBAL_ID_UP) + ' order by pavilhao';
 
   DsPavAntes.DataSet.Close;
   DsPavAntes.DataSet.Open;
@@ -888,7 +920,10 @@ begin
 
   DataEntrada.MaxDate := date;
   DataSaida.MaxDate := date;
+  dsConsulta.DataSet.Close;
   SqlConsulta.sql.text := SqlConsultaBackup.sql.text + ' and interno.id_up=' + inttostr(GLOBAL_ID_UP) + ' order by interno.nome_interno ';
+  //showMessage(SqlConsulta.SQL.Text);
+  dsConsulta.DataSet.Open;
   MontaPavilhao(IntToStr(GLOBAL_ID_UP), DBRadioGroupPavilhao);
   PageControlEndereco.ActivePageIndex := 0;
   inherited;
@@ -912,6 +947,7 @@ begin
   DsGaleria.DataSet.Open;
 
   DsSolario.DataSet.Close;
+  //DsSolario.clo
   DsSolario.DataSet.Open;
 
   DsCela.DataSet.Close;
@@ -1177,6 +1213,16 @@ begin
   InterageTelaAguarde();
 
   FinalizaTelaAguarde;
+  SqlPavilhao.Close;
+  SqlPavilhao.Open;
+  while not SqlPavilhao.Eof do
+  begin
+    DBLookupComboBoxPavilhao.Items.Add(SqlPAvilhao.FieldByName('PAVILHAO').AsString);
+    SqlPavilhao.Next;
+  end;
+
+  DBLookupComboBoxPavilhao.ItemIndex := 1;
+  DBLookupComboBoxPavilhao.OnChange(nil);
 
   //  DBEdit1.Field.EditMask := '99\/99\/9999;1;_';
   //  DBEdit2.Field.EditMask := '99\/99\/9999;1;_';
@@ -1212,6 +1258,7 @@ procedure TFrmMovimentoInternos.SalvarClick(Sender: TObject);
 var
   sMovimento, disciplinar, sSqlExecute, MotivoSaida: string;
   iErro, LIMITE_POR_CELA: integer;
+  cela:integer;
 begin
 
   if DBEditNome.CanFocus then
@@ -1288,7 +1335,7 @@ begin
       Exit;
     end;
 
-    if DBLookupComboBoxPavilhao.KeyValue = null then
+    if DBLookupComboBoxPavilhao.Text = '' then
     begin
       PageControlDadosInterno.ActivePageIndex := 1;
       ShowMessage('Informe o ' + GLOBAL_NIVEL_1 + '!');
@@ -1297,7 +1344,7 @@ begin
       Exit;
     end;
 
-    if DBLookupComboBoxGaleria.KeyValue = null then
+    if DBLookupComboBoxGaleria.Text = '' then
     begin
       PageControlDadosInterno.ActivePageIndex := 1;
       ShowMessage('Informe o ' + GLOBAL_NIVEL_2 + '!');
@@ -1306,7 +1353,7 @@ begin
       Exit;
     end;
 
-    if DBLookupComboBoxSolario.KeyValue = null then
+    if DBLookupComboBoxSolario.Text = '' then
     begin
       PageControlDadosInterno.ActivePageIndex := 1;
       ShowMessage('Informe o ' + GLOBAL_NIVEL_3 + '!');
@@ -1315,7 +1362,7 @@ begin
       Exit;
     end;
 
-    if DBLookupComboBoxCela.KeyValue = null then
+    if DBLookupComboBoxCela.Text = '' then
     begin
       PageControlDadosInterno.ActivePageIndex := 1;
       ShowMessage('Informe o ' + GLOBAL_NIVEL_4 + '!');
@@ -1444,7 +1491,7 @@ begin
 
       {lANÇANDO A SAIDA DO INTERNO NO HISTÓRICO}
       DSHISTORICO_interno.DataSet.Append;
-      DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+      DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
       DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
         DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
       DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime :=
@@ -1507,7 +1554,7 @@ begin
         dshistorico_estudo.DataSet.FieldByName('motivo_saida').AsString := 'Saida do Presídio';
         dshistorico_estudo.DataSet.post;
         dshistorico_estudo.DataSet.Append;
-        dshistorico_estudo.DataSet.fieldbyname('id_historico_estudo').AsInteger := 0;
+        dshistorico_estudo.DataSet.fieldbyname('id_historico_estudo').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idhistorico_estudo,1) FROM RDB$DATABASE');
         dshistorico_estudo.DataSet.fieldbyname('id_interno').AsString := DsCadastro.DataSet.fieldbyname('id_interno').asstring;
         dshistorico_estudo.DataSet.fieldbyname('data_historico').AsDateTime := date;
         dshistorico_estudo.DataSet.FieldByName('historico').AsString := 'Cancelamento de Matrícula. Saida do Presidio';
@@ -1543,7 +1590,7 @@ begin
         DsTransferenciaInterno.DataSet.Post;
 
         Dsvinc_transferencia_interno.DataSet.Append;
-        Dsvinc_transferencia_interno.DataSet.fieldbyname('ID_vinc_transferencia_interno').AsInteger := 0;
+        Dsvinc_transferencia_interno.DataSet.fieldbyname('ID_vinc_transferencia_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_vinc_transferencia_interno,1) FROM RDB$DATABASE');
         Dsvinc_transferencia_interno.DataSet.fieldbyname('id_transferencia_interno').AsInteger :=
           DsTransferenciaInterno.DataSet.fieldbyname('ID_TRANSFERENCIA_INTERNO').AsInteger;
         Dsvinc_transferencia_interno.DataSet.fieldbyname('id_interno').AsInteger :=
@@ -1571,7 +1618,7 @@ begin
           + ' WHERE ID_INTERNO = ' + DsCadastro.DataSet.fieldbyname('id_interno').Asstring;
 
         DSHISTORICO_interno.DataSet.Append;
-        DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+        DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
         DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
           DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
         DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsString := formatdatetime('dd/mm/yyy', DsCadastro.DataSet.fieldbyname('data_saida').AsDateTime);
@@ -1711,7 +1758,7 @@ begin
     DsCadastro.DataSet.Fieldbyname('STATUS_ISOLAMENTO').AsString := '';
     DsCadastro.DataSet.Fieldbyname('DATA_ISOLAMENTO').AsString := '';
 
-    if DBLookupComboBoxCela.KeyValue = -1 then
+    if DBLookupComboBoxCela.Text = '' then
     begin
       PageControlDadosInterno.ActivePageIndex := 1;
       ShowMessage('Digite a Cela!');
@@ -1750,14 +1797,17 @@ begin
       end;
     end;
 
-    DM.SqlExecute.SQL.Text := 'SELECT * FROM CELA WHERE ID_CELA = ' +
-      inttostr(DBLookupComboBoxCela.KeyValue);
-
     DM.DsExecute.DataSet.Close;
+    Dm.SqlExecute.SQL.Clear;
+    DM.SqlExecute.SQL.Text :=  'SELECT FIRST 1 c.* FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''';
+   //howmessage(DM.SqlExecute.SQL.Text);
+
     DM.DsExecute.DataSet.Open;
 
+    // DM.SQLConnect.ExecSQL('SELECT FIRST 1 s.ID_SOLARIO FROM SOLARIO s INNER JOIN PAVILHAO p ON (s.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (S.IDGALERIA = g.ID_GALERIA) WHERE SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+//    showmessage(inttostr( DM.DsExecute.DataSet.FieldByName('LIMITE_POR_CELA').AsInteger));
     LIMITE_POR_CELA := DM.DsExecute.DataSet.FieldByName('LIMITE_POR_CELA').AsInteger;
-
+  //  LIMITE_POR_CELA := 1;
     if DM.DsExecute.DataSet.FieldByName('ISOLAMENTO').AsString = 'S' then
     begin
       FrmSituacaoDisciplinar := TFrmSituacaoDisciplinar.Create(Self);
@@ -1789,12 +1839,16 @@ begin
 
     if LIMITE_POR_CELA > 0 then
     begin
+      cela :=  DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 c.ID_CELA FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+
       DM.SqlExecute.SQL.Text := 'SELECT COUNT(*) TOTAL FROM INTERNO WHERE st = ''A'' and nome_interno is not null and IDCELA = ' +
-        inttostr(DBLookupComboBoxCela.KeyValue);
+        inttostr(cela);
+        DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 s.ID_SOLARIO FROM SOLARIO s INNER JOIN PAVILHAO p ON (s.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (S.IDGALERIA = g.ID_GALERIA) WHERE SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+
       if DsCadastro.DataSet.State in [dsedit] then
         DM.SqlExecute.SQL.Text := 'SELECT COUNT(*) TOTAL FROM INTERNO WHERE id_interno<>' + DsCadastro.DataSet.FieldByName('id_interno').Asstring
           + ' and st = ''A'' and nome_interno is not null and IDCELA = ' +
-          inttostr(DBLookupComboBoxCela.KeyValue);
+          inttostr(cela);
 
       DM.DsExecute.DataSet.Close;
       DM.DsExecute.DataSet.Open;
@@ -1811,7 +1865,7 @@ begin
 
 
       DSHISTORICO_interno.DataSet.Append;
-      DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+      DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
       DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
         DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
       DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime :=
@@ -1835,7 +1889,7 @@ begin
       (dscadastro.DataSet.fieldbyname('em_transito').Asstring <> em_transito_old) then
     begin
       DSHISTORICO_interno.DataSet.Append;
-      DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+      DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
       DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
         DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
       DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime := Date;
@@ -1878,7 +1932,7 @@ begin
           DsMudancaCela.DataSet.Post;
 
           DsVinc_Mudanca_Cela.DataSet.Append;
-          DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_VINC_MUDANCA_CELA').AsInteger := 0;
+          DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_VINC_MUDANCA_CELA').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(ID_VINC_MUDANCA_CELA,1) FROM RDB$DATABASE');
 
           DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_MUDANCA_CELA').AsInteger :=
             DsMudancaCela.DataSet.fieldbyname('ID_MUDANCA_CELA').AsInteger;
@@ -1896,19 +1950,20 @@ begin
             idcela_old;
 
           DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_PAVILHAO_NOVO').AsInteger :=
-            DBLookupComboBoxPavilhao.KeyValue;
+            DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 ID_PAVILHAO FROM PAVILHAO WHERE PAVILHAO = ''' + DBLookupComboBoxPAvilhao.Text+'''');
           DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_GALERIA_NOVO').AsInteger :=
-            DBLookupComboBoxGaleria.KeyValue;
+            DM.SQLConnect.ExecSQLScalar('SELECT FIRST  1 ID_GALERIA FROM GALERIA INNER JOIN PAVILHAO ON (IDPAVILHAO = ID_PAVILHAO) WHERE GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
           DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_SOLARIO_NOVO').AsInteger :=
-            DBLookupComboBoxSolario.KeyValue;
+             DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 s.ID_SOLARIO FROM SOLARIO s INNER JOIN PAVILHAO p ON (s.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (S.IDGALERIA = g.ID_GALERIA) WHERE SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
           DsVinc_Mudanca_Cela.DataSet.fieldbyname('ID_CELA_NOVO').AsInteger :=
-            DBLookupComboBoxCela.KeyValue;
+             DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 c.ID_CELA FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+
 
           DsVinc_Mudanca_Cela.DataSet.Post;
 
           {LANÇANDO A MUDANÇA DE CELA DO INTERNO NO HISTÓRICO}
           DSHISTORICO_interno.DataSet.Append;
-          DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+          DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
           DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
             DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
           DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime := Date;
@@ -1936,6 +1991,12 @@ begin
     end;
 
     {Salvando}
+
+     DsCadastro.DataSet.FieldByName('IDPAVILHAO').AsInteger :=  DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 p.ID_PAVILHAO FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+     DsCadastro.DataSet.FieldByName('IDGALERIA').AsInteger :=  DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 g.ID_GALERIA FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+     DsCadastro.DataSet.FieldByName('IDSOLARIO').AsInteger  :=  DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 s.ID_SOLARIO FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+     DsCadastro.DataSet.FieldByName('IDCELA').AsInteger  :=  DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 c.ID_CELA FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+
     try
       StatusBar1.Panels[1].Text := 'SALVANDO';
       Novo.Enabled := True;
@@ -2060,18 +2121,23 @@ begin
   dsconspadrao.dataset.close;
   dsconspadrao.dataset.open;
 
-  DBLookupComboBoxPavilhao.KeyValue := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
+  if(SqlConspadrao.RowsAffected = 0) then
+    Showmessage('Não existe nenhuma cela padrão nessa unidade')
+  else
+  begin
+  DBLookupComboBoxPavilhao.Text := dsconspadrao.DataSet.fieldbyname('nome_pavilhao').AsVariant;
   DsCadastro.DataSet.FieldByName('idpavilhao').AsInteger := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
 
-  DBLookupComboBoxGaleria.KeyValue := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
+  DBLookupComboBoxGaleria.Text := dsconspadrao.DataSet.fieldbyname('nome_galeria').AsVariant;
   DsCadastro.DataSet.FieldByName('idgaleria').AsInteger := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
 
-  DBLookupComboBoxSolario.KeyValue := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
+  DBLookupComboBoxSolario.Text := dsconspadrao.DataSet.fieldbyname('nome_solario').AsVariant;
   DsCadastro.DataSet.FieldByName('idsolario').AsInteger := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
 
-  DBLookupComboBoxCela.KeyValue := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
+  DBLookupComboBoxCela.Text := dsconspadrao.DataSet.fieldbyname('nome_cela').AsVariant;
   DsCadastro.DataSet.FieldByName('idcela').AsInteger := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
 
+  end;
   DBEditDataMudanca.Enabled := false;
   DBEditDocumentoMudanca.Enabled := false;
   DBEditMotivoMudancaCela.Enabled := false;
@@ -2223,12 +2289,25 @@ begin
   idgaleria_old := dscadastro.DataSet.fieldbyname('idgaleria').Asstring;
   idpavilhao_old := dscadastro.DataSet.fieldbyname('idpavilhao').Asstring;
 
-  cela_old := DBLookupComboBoxCela.Text;
-  solario_old := DBLookupComboBoxSolario.Text;
-  galeria_old := DBLookupComboBoxGaleria.Text;
-  pavilhao_old := DBLookupComboBoxPavilhao.Text;
+ // cela_old :=  DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 c.CELA FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+ // solario_old := DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 s.SOLARIO FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+ // galeria_old := DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 g.GALERIA FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+ // pavilhao_old := DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 p.PAVILHAO FROM CELA c INNER JOIN PAVILHAO p ON (c.IDPAVILHAO = p.ID_PAVILHAO) INNER JOIN GALERIA g on (c.IDGALERIA = g.ID_GALERIA) INNER JOIN SOLARIO s on (s.ID_SOLARIO = c.IDSOLARIO) WHERE c.CELA = '''+DBLookupComboBoxCela.Text + ''' AND s.SOLARIO = '''+ DBLookupComboBoxSolario.Text+ ''' AND g.GALERIA = ''' + DBLookupComboBoxGaleria.Text + ''' AND p.PAVILHAO = ''' + DBLookupComboBoxPavilhao.Text + '''');
+
+  cela_old := DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 C.CELA FROM CELA C WHERE C.ID_CELA = '''+idcela_old+'''');
+  solario_old := DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 S.SOLARIO FROM SOLARIO S WHERE S.ID_SOLARIO = '''+idsolario_old+'''');
+  galeria_old := DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 G.GALERIA FROM GALERIA G WHERE G.ID_GALERIA = '''+idgaleria_old+'''');
+  pavilhao_old := DM.SQLConnect.ExecSQLScalar('SELECT FIRST 1 P.PAVILHAO FROM PAVILHAO P WHERE P.ID_PAVILHAO = '''+idpavilhao_old+'''');
 
   PageControlDadosInterno.ActivePageIndex := 0;
+
+  DBLookupComboBoxPavilhao.Text := pavilhao_old;
+  //DBLookupComboBoxPavilhao.OnChange(nil);
+  DBLookupComboBoxGaleria.Text := galeria_old;
+  //DBLookupComboBoxGaleria.OnChange(nil);
+  DBLookupComboBoxSolario.Text := solario_old;
+  //DBLookupComboBoxSolario.OnChange(nil);
+  DBLookupComboBoxCela.Text := cela_old;
 
   DBEditDataMudanca.Enabled := true;
   DBEditDocumentoMudanca.Enabled := true;
@@ -2402,16 +2481,16 @@ begin
         dsconspadrao.dataset.close;
         dsconspadrao.dataset.open;
 
-        DBLookupComboBoxPavilhao.KeyValue := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
+        DBLookupComboBoxPavilhao.Text := dsconspadrao.DataSet.fieldbyname('nome_pavilhao').AsVariant;
         DsCadastro.DataSet.FieldByName('idpavilhao').AsInteger := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
 
-        DBLookupComboBoxGaleria.KeyValue := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
+        DBLookupComboBoxGaleria.Text := dsconspadrao.DataSet.fieldbyname('nome_galeria').AsVariant;
         DsCadastro.DataSet.FieldByName('idgaleria').AsInteger := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
 
-        DBLookupComboBoxSolario.KeyValue := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
+        DBLookupComboBoxSolario.Text := dsconspadrao.DataSet.fieldbyname('nome_solario').AsVariant;
         DsCadastro.DataSet.FieldByName('idsolario').AsInteger := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
 
-        DBLookupComboBoxCela.KeyValue := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
+        DBLookupComboBoxCela.Text := dsconspadrao.DataSet.fieldbyname('nome_cela').AsVariant;
         DsCadastro.DataSet.FieldByName('idcela').AsInteger := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
 
       end;
@@ -2444,18 +2523,23 @@ begin
       dsconspadrao.dataset.close;
       dsconspadrao.dataset.open;
 
-      DBLookupComboBoxPavilhao.KeyValue := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
-      DsCadastro.DataSet.FieldByName('idpavilhao').AsInteger := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsVariant;
+      if dsconspadrao.DataSet.RecordCount = 0 then
+        showMessage('É necessário configurar as Alas padrões da unidade')
+      else
+      Begin
 
-      DBLookupComboBoxGaleria.KeyValue := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
-      DsCadastro.DataSet.FieldByName('idgaleria').AsInteger := dsconspadrao.DataSet.fieldbyname('id_galeria').AsVariant;
+      DBLookupComboBoxPavilhao.Text := dsconspadrao.DataSet.fieldbyname('nome_pavilhao').AsVariant;
+      DsCadastro.DataSet.FieldByName('idpavilhao').AsInteger := dsconspadrao.DataSet.fieldbyname('id_pavilhao').AsInteger;
 
-      DBLookupComboBoxSolario.KeyValue := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
-      DsCadastro.DataSet.FieldByName('idsolario').AsInteger := dsconspadrao.DataSet.fieldbyname('id_solario').AsVariant;
+      DBLookupComboBoxGaleria.Text := dsconspadrao.DataSet.fieldbyname('nome_galeria').AsVariant;
+      DsCadastro.DataSet.FieldByName('idgaleria').AsInteger := dsconspadrao.DataSet.fieldbyname('id_galeria').AsInteger;
 
-      DBLookupComboBoxCela.KeyValue := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
-      DsCadastro.DataSet.FieldByName('idcela').AsInteger := dsconspadrao.DataSet.fieldbyname('id_cela').AsVariant;
+      DBLookupComboBoxSolario.Text := dsconspadrao.DataSet.fieldbyname('nome_solario').AsVariant;
+      DsCadastro.DataSet.FieldByName('idsolario').AsInteger := dsconspadrao.DataSet.fieldbyname('id_solario').AsInteger;
 
+      DBLookupComboBoxCela.Text := dsconspadrao.DataSet.fieldbyname('nome_cela').AsVariant;
+      DsCadastro.DataSet.FieldByName('idcela').AsInteger := dsconspadrao.DataSet.fieldbyname('id_cela').AsInteger;
+     end;
     end;
   end;
 
@@ -2666,22 +2750,71 @@ begin
   FreeAndNil(FrmConsultaProced);
 end;
 
+procedure TFrmMovimentoInternos.DBLookupComboBoxPavilhaoChange(Sender: TObject);
+begin
+  inherited;
+  SqlGaleria.Close;
+  SqlGaleria.SQL.Text:= 'Select * from galeria g inner join pavilhao p on (p.id_pavilhao = g.idpavilhao) where p.pavilhao=:pavilhao order by g.galeria';
+  SqlGaleria.ParamByName('pavilhao').AsString := DBLookupComboBoxPavilhao.Text;
+  SqlGaleria.Open;
+  DBLookupComboBoxGaleria.Items.Clear;
+
+  while not SqlGaleria.Eof do
+  Begin
+    DBLookupComboBoxGaleria.Items.Add(SqlGaleria.FieldByName('galeria').AsString);
+    SqlGaleria.Next;
+  End;
+end;
+
 procedure TFrmMovimentoInternos.DBLookupComboBoxPavilhaoClick(
   Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxGaleria.KeyValue := null;
-  DBLookupComboBoxSolario.KeyValue := null;
-  DBLookupComboBoxCela.KeyValue := null;
+//  DBLookupComboBoxGaleria.KeyValue := null;
+//  DBLookupComboBoxSolario.KeyValue := null;
+ // DBLookupComboBoxCela.KeyValue := null;
 
+end;
+
+procedure TFrmMovimentoInternos.DBLookupComboBoxGaleriaChange(Sender: TObject);
+begin
+  inherited;
+  SqlSolario.Close;
+  SqlSolario.SQL.Text := 'select * from solario s inner join galeria g on (s.idgaleria = g.id_galeria) inner join pavilhao p on (s.idpavilhao = p.id_pavilhao) where g.galeria=:galeria and p.pavilhao=:pavilhao  order by s.solario';
+  SqlSolario.ParamByName('galeria').AsString := DBLookupComboBoxGaleria.Text;
+  SqlSolario.ParamByName('pavilhao').AsString := DBLookupComboBoxPAvilhao.Text;
+  SqlSolario.Open;
+  DBLookupComboBoxSolario.Items.Clear;
+  while not SqlSolario.EOF do
+  begin
+    DBLookupComboBoxSolario.Items.Add(SqlSolario.FieldByName('Solario').AsString);
+    SqlSolario.Next;
+  end;
 end;
 
 procedure TFrmMovimentoInternos.DBLookupComboBoxGaleriaClick(
   Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxSolario.KeyValue := null;
-  DBLookupComboBoxCela.KeyValue := null;
+  //DBLookupComboBoxSolario.KeyValue := null;
+ // DBLookupComboBoxCela.KeyValue := null;
+
+end;
+
+procedure TFrmMovimentoInternos.DBLookupComboBoxSolarioChange(Sender: TObject);
+begin
+  inherited;
+  SqlCela.Close;
+  SqlCela.SQL.Text := 'select * from cela c inner join solario s on(s.id_solario = c.idsolario) inner join galeria g on (g.id_galeria = c.idgaleria) where s.solario=:solario and g.galeria=:galeria order by c.cela';
+  SqlCela.ParamByName('solario').AsString := DBLookupComboBoxSolario.Text;
+  SqlCela.ParamByName('galeria').AsString := DBLookupComboBoxGaleria.Text;
+  SqlCela.Open;
+  DBLookupComboBoxCela.Items.Clear;
+  while not SqlCela.EOF do
+  begin
+    DBLookupComboBoxCela.Items.Add(SqlCela.FieldByName('Cela').AsString);
+    SqlCela.Next;
+  end;
 
 end;
 
@@ -2689,7 +2822,7 @@ procedure TFrmMovimentoInternos.DBLookupComboBoxSolarioClick(
   Sender: TObject);
 begin
   inherited;
-  DBLookupComboBoxCela.KeyValue := null;
+ // DBLookupComboBoxCela.KeyValue := null;
 
 end;
 
@@ -2699,23 +2832,23 @@ begin
   //
   try
     FrmFiltroCela := TFrmFiltroCela.Create(Application);
-    FrmFiltroCela.DBLookupComboBoxPavilhao.KeyValue := DBLookupComboBoxPavilhao.KeyValue;
-    FrmFiltroCela.DBLookupComboBoxGaleria.KeyValue := DBLookupComboBoxGaleria.KeyValue;
-    FrmFiltroCela.DBLookupComboBoxSolario.KeyValue := DBLookupComboBoxSolario.KeyValue;
-    FrmFiltroCela.DBLookupComboBoxCela.KeyValue := DBLookupComboBoxCela.KeyValue;
-    while FrmFiltroCela.DBLookupComboBoxCela.KeyValue = null do
+   // FrmFiltroCela.DBLookupComboBoxPavilhao.KeyValue := DBLookupComboBoxPavilhao.KeyValue;
+   // FrmFiltroCela.DBLookupComboBoxGaleria.KeyValue := DBLookupComboBoxGaleria.KeyValue;
+   // FrmFiltroCela.DBLookupComboBoxSolario.KeyValue := DBLookupComboBoxSolario.KeyValue;
+   // FrmFiltroCela.DBLookupComboBoxCela.KeyValue := DBLookupComboBoxCela.KeyValue;
+   { while FrmFiltroCela.DBLookupComboBoxCela.KeyValue = null do
     begin
       if FrmFiltroCela.ShowModal <> mrok then
         break;
     end;
-
+          }
     sFiltroCela := '';
     sCaptionCela := '';
 
     if FrmFiltroCela.ShowModal = mrok then
     begin
 
-      if FrmFiltroCela.DBLookupComboBoxPavilhao.KeyValue > 0 then
+     { if FrmFiltroCela.DBLookupComboBoxPavilhao.KeyValue > 0 then
         sCaptionCela := sCaptionCela + GLOBAL_NIVEL_1 + '=' + FrmFiltroCela.DBLookupComboBoxPavilhao.text + ' ';
 
       if FrmFiltroCela.DBLookupComboBoxGaleria.KeyValue > 0 then
@@ -2740,7 +2873,7 @@ begin
 
       if FrmFiltroCela.DBLookupComboBoxCela.KeyValue > 0 then
         sFiltroCela := sFiltroCela + ' and interno.idcela = ' + inttostr(FrmFiltroCela.DBLookupComboBoxCela.KeyValue);
-
+                                                             }
       SqlConsulta.sql.text := SqlConsultaBackup.sql.text
         + sFiltroCela
         + ' order by interno.nome_interno ';

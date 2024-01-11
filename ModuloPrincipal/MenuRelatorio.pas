@@ -10,7 +10,10 @@ uses
   frxExportPDF, frxExportXML, frxExportXLS, frxExportHTML, frxExportText,
   frxExportRTF, frxChart, frxDBSet,  FMTBcd,
   SqlExpr, Provider, DB, DBClient, Menus, FileCtrl, frxDBXComponents, Mask,
-  frxExportXLSX, frxExportDOCX, frxExportBaseDialog;
+  frxExportXLSX, frxExportDOCX, frxExportBaseDialog, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmMenuRelatorio = class(TForm)
@@ -45,7 +48,7 @@ type
     DsCadastro: TDataSource;
     CdsCadastro: TClientDataSet;
     DspCadastro: TDataSetProvider;
-    SqlCadastro: TSQLQuery;
+    SqlCadastroold: TSQLQuery;
     frxDBDataset1: TfrxDBDataset;
     PopupMenu1: TPopupMenu;
     Configurar1: TMenuItem;
@@ -59,6 +62,7 @@ type
     frxDBXComponents1: TfrxDBXComponents;
     frxDOCXExport1: TfrxDOCXExport;
     frxXLSXExport1: TfrxXLSXExport;
+    SqlCadastro: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);

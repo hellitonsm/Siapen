@@ -21,7 +21,7 @@ type
     Button1: TButton;
     DBGrid1: TDBGrid;
     DBMemo1: TDBMemo;
-    SQLHISTORICO_interno: TSQLQuery;
+    SQLHISTORICO_internoold: TSQLQuery;
     DSPHISTORICO_interno: TDataSetProvider;
     CDSHISTORICO_interno: TClientDataSet;
     DSHISTORICO_interno: TDataSource;
@@ -32,10 +32,10 @@ type
     dscalc_trabalho: TDataSource;
     cdscalc_trabalho: TClientDataSet;
     dspcalc_trabalho: TDataSetProvider;
-    SQLcalc_trabalho: TSQLQuery;
+    SQLcalc_trabalhoold: TSQLQuery;
     PopupMenuIsolamento: TPopupMenu;
     Liberar1: TMenuItem;
-    SQLhistorico_trabalho: TSQLQuery;
+    SQLhistorico_trabalhoold: TSQLQuery;
     dsphistorico_trabalho: TDataSetProvider;
     cdshistorico_trabalho: TClientDataSet;
     dshistorico_trabalho: TDataSource;
@@ -86,7 +86,7 @@ type
     dscertidao_trabalho: TDataSource;
     cdscertidao_trabalho: TClientDataSet;
     dspcertidao_trabalho: TDataSetProvider;
-    SQLcertidao_trabalho: TSQLQuery;
+    SQLcertidao_trabalhoold: TSQLQuery;
     DBGrid4: TDBGrid;
     adpDBDateTimePickerdtfinalcertidao: TadpDBDateTimePicker;
     BitBtn2: TBitBtn;
@@ -159,6 +159,10 @@ type
     DBEdit42: TDBEdit;
     BtnCopiar: TButton;
     DeletarRegistro1: TMenuItem;
+    SQLcertidao_trabalho: TFDQuery;
+    SQLHISTORICO_interno: TFDQuery;
+    SQLcalc_trabalho: TFDQuery;
+    SQLhistorico_trabalho: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
@@ -214,7 +218,7 @@ procedure TFrmCadastroInternoTrabalho.Button1Click(Sender: TObject);
 begin
   inherited;
   DSHISTORICO_interno.DataSet.Append;
-  DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+  DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(IDHISTORICO_INTERNO,1) FROM RDB$DATABASE');
   DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsString :=
@@ -285,7 +289,7 @@ begin
      end; }
 
     dshistorico_trabalho.DataSet.Append;
-    dshistorico_trabalho.DataSet.fieldbyname('id_historico_trabalho').AsInteger := 0;
+    dshistorico_trabalho.DataSet.fieldbyname('id_historico_trabalho').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_historico_trabalho,1) FROM RDB$DATABASE');
     dshistorico_trabalho.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
     dshistorico_trabalho.DataSet.fieldbyname('data').AsString := DsCadastro.DataSet.Fieldbyname('data_setor').AsString;
     dshistorico_trabalho.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;
@@ -348,7 +352,7 @@ begin
   end;
 
   DSCALC_TRABALHO.DataSet.Append;
-  DSCALC_TRABALHO.DataSet.fieldbyname('idcalc_setor_trabalho').AsInteger := 0;
+  DSCALC_TRABALHO.DataSet.fieldbyname('idcalc_setor_trabalho').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_calc_setor_trabalho,1) FROM RDB$DATABASE');
   DSCALC_TRABALHO.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSCALC_TRABALHO.DataSet.fieldbyname('data_inicial').AsString := formatdatetime('dd/mm/yyyy', DateTimePickerdatainicial.date);
   DSCALC_TRABALHO.DataSet.fieldbyname('data_final').AsString := formatdatetime('dd/mm/yyyy', DateTimePickerdatafinal.date);
@@ -596,7 +600,7 @@ begin
   end;
 
   dscertidao_trabalho.DataSet.Append;
-  dscertidao_trabalho.DataSet.fieldbyname('id_atestado_trabalho').AsInteger := 0;
+  dscertidao_trabalho.DataSet.fieldbyname('id_atestado_trabalho').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_atestado_trabalho,1) FROM RDB$DATABASE');
   dscertidao_trabalho.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dscertidao_trabalho.DataSet.fieldbyname('data_inicial').AsString := formatdatetime('dd/mm/yyyy', DateTimePickerdtinicialcertidao.date);
   dscertidao_trabalho.DataSet.fieldbyname('data_final').AsString := formatdatetime('dd/mm/yyyy', adpDBDateTimePickerdtfinalcertidao.date);

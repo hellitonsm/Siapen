@@ -17,9 +17,13 @@ object DM: TDM
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Charset=WIN1252'
-      'DriverID=FB')
-    Connected = True
+      'DriverID=FB'
+      'CharacterSet=WIN1252'
+      'PageSize=8192')
+    FetchOptions.AssignedValues = [evCache]
     LoginPrompt = False
+    Transaction = FDTransaction
+    UpdateTransaction = FDTransaction
     BeforeDisconnect = SQLConnectBeforeDisconnect
     Left = 21
     Top = 12
@@ -2020,15 +2024,6 @@ object DM: TDM
     DataSet = cdsturma
     Left = 112
     Top = 592
-  end
-  object FDConnection1: TFDConnection
-    Left = 272
-    Top = 624
-  end
-  object FDQuery1: TFDQuery
-    Connection = FDConnection1
-    Left = 360
-    Top = 624
   end
   object ImageListCorel2: TImageList
     Left = 872
@@ -39598,12 +39593,13 @@ object DM: TDM
       80071FFFFFFD0000FFFF3FFFFFFE000000000000000000000000000000000000
       000000000000}
   end
-  object FDManager1: TFDManager
-    FormatOptions.AssignedValues = [fvMapRules]
-    FormatOptions.OwnMapRules = True
-    FormatOptions.MapRules = <>
-    Active = True
-    Left = 904
-    Top = 536
+  object FDMoniFlatFileClientLink1: TFDMoniFlatFileClientLink
+    Left = 288
+    Top = 592
+  end
+  object FDTransaction: TFDTransaction
+    Connection = SQLConnect
+    Left = 200
+    Top = 592
   end
 end

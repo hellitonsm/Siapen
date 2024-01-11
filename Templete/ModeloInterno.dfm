@@ -2,34 +2,48 @@ inherited FrmModeloInterno: TFrmModeloInterno
   Left = 264
   Top = 81
   Caption = 'FrmModeloInterno'
+  ClientWidth = 944
   KeyPreview = True
   Menu = MainMenu1
-  ExplicitHeight = 643
+  ExplicitWidth = 956
+  ExplicitHeight = 641
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 526
-    ExplicitHeight = 525
+    Height = 525
+    ExplicitHeight = 524
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 508
+      Height = 507
       ButtonWidth = 99
-      ExplicitHeight = 507
+      ExplicitHeight = 506
       inherited Novo: TToolButton
         Caption = '&N'#195'O'
         Visible = False
+        ExplicitWidth = 99
       end
       inherited Editar: TToolButton
         Caption = '&EDI'#199#195'O'
+        ExplicitWidth = 99
       end
       inherited Cancelar: TToolButton
         Caption = '&CANCELA'
+        ExplicitWidth = 99
+      end
+      inherited Salvar: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Excluir: TToolButton
+        ExplicitWidth = 99
+      end
+      inherited Fechar: TToolButton
+        ExplicitWidth = 99
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 508
+      Top = 507
       DataSource = DsConsulta
       Hints.Strings = ()
       TabOrder = 2
-      ExplicitTop = 507
+      ExplicitTop = 506
     end
     object DBImage1: TDBImage
       Left = 8
@@ -45,31 +59,37 @@ inherited FrmModeloInterno: TFrmModeloInterno
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 526
-    ExplicitHeight = 525
+    Width = 829
+    Height = 525
+    ExplicitWidth = 829
+    ExplicitHeight = 527
     inherited Image2: TImage
       Width = 935
       ExplicitWidth = 935
     end
     inherited PageControlModeloCadastro: TPageControl
-      Height = 526
-      ExplicitHeight = 525
+      Width = 829
+      Height = 525
+      ExplicitWidth = 829
+      ExplicitHeight = 527
       inherited TabSheetCadastro: TTabSheet
-        ExplicitHeight = 498
+        ExplicitWidth = 821
+        ExplicitHeight = 497
         inherited PanelCadastro: TPanel
-          Height = 498
-          ExplicitHeight = 497
+          Width = 821
+          Height = 497
+          ExplicitWidth = 821
+          ExplicitHeight = 499
           object PageControlPrincipal: TPageControl
             Left = 1
             Top = 1
             Width = 819
-            Height = 496
+            Height = 495
             ActivePage = TabSheetPrincipal
             Align = alClient
             TabOrder = 0
             TabWidth = 150
-            ExplicitWidth = 815
-            ExplicitHeight = 495
+            ExplicitHeight = 497
             object TabSheetPrincipal: TTabSheet
               Caption = 'Identifica'#231#227'o'
               Enabled = False
@@ -1292,21 +1312,24 @@ inherited FrmModeloInterno: TFrmModeloInterno
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitHeight = 498
+        ExplicitWidth = 821
+        ExplicitHeight = 497
         inherited PanelLocalizaConsulta: TPanel
+          Width = 821
           Height = 42
+          ExplicitWidth = 821
           ExplicitHeight = 42
           DesignSize = (
             821
             42)
           inherited EditLocalizar: TEdit
-            Left = 216
-            Top = 6
+            Left = 215
+            Top = 5
             Width = 321
             Height = 31
             TabOrder = 2
-            ExplicitLeft = 216
-            ExplicitTop = 6
+            ExplicitLeft = 215
+            ExplicitTop = 5
             ExplicitWidth = 321
             ExplicitHeight = 31
           end
@@ -1352,11 +1375,14 @@ inherited FrmModeloInterno: TFrmModeloInterno
         end
         inherited PanelConsulta: TPanel
           Top = 42
-          Height = 456
+          Width = 821
+          Height = 455
           ExplicitTop = 42
-          ExplicitHeight = 455
+          ExplicitWidth = 821
+          ExplicitHeight = 454
           inherited DBGridConsulta: TDBGrid
-            Height = 454
+            Width = 819
+            Height = 453
             DataSource = DsConsulta
             Columns = <
               item
@@ -1416,7 +1442,7 @@ inherited FrmModeloInterno: TFrmModeloInterno
             SelectedColor = clSilver
             OnDblClick = DBGridConsultaDblClick
             ExplicitWidth = 815
-            ExplicitHeight = 453
+            ExplicitHeight = 452
             object LabelNome: TLabel
               Left = 82
               Top = 4
@@ -2417,10 +2443,16 @@ inherited FrmModeloInterno: TFrmModeloInterno
       end
     end
   end
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 944
+    ExplicitWidth = 944
+  end
   inherited StatusBar1: TStatusBar
-    Top = 558
+    Top = 557
+    Width = 944
     Height = 26
-    ExplicitTop = 557
+    ExplicitTop = 556
+    ExplicitWidth = 944
     ExplicitHeight = 26
   end
   inherited SqlCadastro: TFDQuery
@@ -2455,7 +2487,7 @@ inherited FrmModeloInterno: TFrmModeloInterno
     Top = 168
   end
   object DsConsulta: TDataSource
-    DataSet = CdsConsulta
+    DataSet = SqlConsulta
     OnDataChange = DsConsultaDataChange
     Left = 341
     Top = 65535

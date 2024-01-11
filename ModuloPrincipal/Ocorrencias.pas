@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, Buttons, jpeg;
+  Mask, Buttons, jpeg, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmOcorrencias = class(TFrmModeloCadastro)
@@ -16,7 +19,7 @@ type
     DBEdit1: TDBEdit;
     Label7: TLabel;
     DBLookupComboBoxOCORRENCIAS: TDBLookupComboBox;
-    SqlQuestionamento: TSQLQuery;
+    SqlQuestionamentoold: TSQLQuery;
     DSpQuestionamento: TDataSetProvider;
     CdsQuestionamento: TClientDataSet;
     DsQuestionamento: TDataSource;
@@ -42,6 +45,7 @@ type
     TabSheet2: TTabSheet;
     Status: TDBRadioGroup;
     DBRadioGroup2: TDBRadioGroup;
+    SqlQuestionamento: TFDQuery;
     procedure ComboBoxTipoKeyPress(Sender: TObject; var Key: Char);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);

@@ -10,12 +10,12 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Width = 944
     Height = 40
     Align = alTop
-    ExplicitWidth = 875
+    ExplicitWidth = 940
     ExplicitHeight = 40
     inherited ToolBarModeloCadastro: TToolBar
-      Width = 795
+      Width = 864
       Height = 40
-      ExplicitWidth = 795
+      ExplicitWidth = 860
       ExplicitHeight = 40
       inherited Novo: TToolButton
         Wrap = False
@@ -62,13 +62,13 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Left = 795
+      Left = 864
       Top = 0
       Width = 80
       Height = 40
       Align = alRight
       Hints.Strings = ()
-      ExplicitLeft = 795
+      ExplicitLeft = 860
       ExplicitTop = 0
       ExplicitWidth = 80
       ExplicitHeight = 40
@@ -81,8 +81,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Height = 493
     ExplicitLeft = 0
     ExplicitTop = 72
-    ExplicitWidth = 944
-    ExplicitHeight = 494
+    ExplicitWidth = 940
+    ExplicitHeight = 492
     inherited Image2: TImage
       Width = 875
       ExplicitWidth = 875
@@ -91,16 +91,16 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       Width = 944
       Height = 493
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 944
-      ExplicitHeight = 494
+      ExplicitWidth = 940
+      ExplicitHeight = 492
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 936
         ExplicitHeight = 465
         inherited PanelCadastro: TPanel
           Width = 936
           Height = 465
-          ExplicitWidth = 936
-          ExplicitHeight = 466
+          ExplicitWidth = 932
+          ExplicitHeight = 464
           object PageControlTransferencia: TPageControl
             Left = 1
             Top = 1
@@ -110,7 +110,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
             Align = alClient
             TabOrder = 0
             TabWidth = 200
-            ExplicitHeight = 464
+            ExplicitWidth = 930
+            ExplicitHeight = 462
             object TabSheetTransferencia: TTabSheet
               Caption = 'Dados do Recebimento'
               ImageIndex = 1
@@ -471,9 +472,9 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
         ExplicitWidth = 936
         ExplicitHeight = 465
         inherited PanelLocalizaConsulta: TPanel
-          Width = 867
+          Width = 936
           Height = 73
-          ExplicitWidth = 867
+          ExplicitWidth = 936
           ExplicitHeight = 73
           object Label5: TLabel [1]
             Left = 8
@@ -503,14 +504,14 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
         end
         inherited PanelConsulta: TPanel
           Top = 73
-          Width = 867
-          Height = 393
+          Width = 936
+          Height = 392
           ExplicitTop = 73
-          ExplicitWidth = 867
-          ExplicitHeight = 393
+          ExplicitWidth = 936
+          ExplicitHeight = 392
           inherited DBGridConsulta: TDBGrid
-            Width = 865
-            Height = 198
+            Width = 934
+            Height = 197
             DataSource = DsConsulta
             PopupMenu = PopupMenuLiberar
             Columns = <
@@ -580,8 +581,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
           end
           object DBGrid2: TDBGrid
             Left = 1
-            Top = 199
-            Width = 865
+            Top = 198
+            Width = 934
             Height = 193
             Align = alBottom
             DataSource = Dsvinc_transferencia_interno
@@ -637,13 +638,6 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    ExplicitWidth = 875
-  end
-  inherited StatusBar1: TStatusBar
-    ExplicitTop = 565
-    ExplicitWidth = 944
-  end
   inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
@@ -675,7 +669,7 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Left = 756
     Top = 88
   end
-  object Sqlvinc_transferencia_interno: TSQLQuery
+  object Sqlvinc_transferencia_internoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -687,8 +681,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'select * from vinc_transferencia_interno'
       'where id_transferencia_interno = :id_transferencia_interno')
     SQLConnection = DM.SQLConnect
-    Left = 673
-    Top = 231
+    Left = 377
+    Top = 391
   end
   object Dspvinc_transferencia_interno: TDataSetProvider
     DataSet = Sqlvinc_transferencia_interno
@@ -750,7 +744,7 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Left = 757
     Top = 231
   end
-  object SQLHISTORICO_interno: TSQLQuery
+  object SQLHISTORICO_internoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -763,8 +757,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'from historico_interno'
       'where idinterno=:id_interno')
     SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 136
+    Left = 344
+    Top = 192
   end
   object DSPHISTORICO_interno: TDataSetProvider
     DataSet = SQLHISTORICO_interno
@@ -800,14 +794,14 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Left = 703
     Top = 184
   end
-  object SQLinterno: TSQLQuery
+  object SQLinternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = DM.SQLConnect
-    Left = 676
-    Top = 184
+    Left = 188
+    Top = 408
   end
-  object SqlExecute: TSQLQuery
+  object SqlExecuteold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -815,8 +809,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'FROM INTERNO'
       'ORDER BY NOME_INTERNO')
     SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 344
+    Left = 208
+    Top = 240
   end
   object MainMenu1: TMainMenu
     Left = 203
@@ -828,11 +822,12 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       end
     end
   end
-  object SQLconspadrao: TSQLQuery
+  object SQLconspadraoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = DM.SQLConnect
-    Left = 248
+    Left = 200
+    Top = 176
   end
   object Dspconspadrao: TDataSetProvider
     DataSet = SQLconspadrao
@@ -867,7 +862,7 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Left = 700
     Top = 32
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -902,8 +897,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'AND T.DATA>= :DATA - 1'
       'ORDER BY T.DATA DESC')
     SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 32
+    Left = 168
+    Top = 472
   end
   object DsCela: TDataSource
     DataSet = CdsCela
@@ -926,7 +921,7 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Left = 768
     Top = 480
   end
-  object SqlCela: TSQLQuery
+  object SqlCelaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -940,10 +935,10 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'where idsolario=:id_solario'
       'order by cela')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 480
+    Left = 376
+    Top = 336
   end
-  object SqlSolario: TSQLQuery
+  object SqlSolarioold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -957,8 +952,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'where idgaleria=:id_galeria'
       'order by solario')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 432
+    Left = 368
+    Top = 272
   end
   object DspSolario: TDataSetProvider
     DataSet = SqlSolario
@@ -1002,7 +997,7 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     Left = 768
     Top = 384
   end
-  object SqlGaleria: TSQLQuery
+  object SqlGaleriaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1016,10 +1011,10 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'where idpavilhao=:id_pavilhao'
       'order by galeria')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 384
+    Left = 200
+    Top = 352
   end
-  object SqlPavilhao: TSQLQuery
+  object SqlPavilhaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1032,8 +1027,8 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
       'where id_up = :id_up'
       'order by pavilhao')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 341
+    Left = 280
+    Top = 453
   end
   object DspPavilhao: TDataSetProvider
     DataSet = SqlPavilhao
@@ -1064,5 +1059,121 @@ inherited FrmRecebimentoTransferencia: TFrmRecebimentoTransferencia
     OnTimer = Timer1Timer
     Left = 548
     Top = 136
+  end
+  object SQLconspadrao: TFDQuery
+    Left = 249
+    Top = 1
+  end
+  object SQLHISTORICO_interno: TFDQuery
+    SQL.Strings = (
+      'select *'
+      'from historico_interno'
+      'where idinterno=:id_interno')
+    Left = 657
+    Top = 139
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLinterno: TFDQuery
+    Left = 657
+    Top = 185
+  end
+  object SqlExecute: TFDQuery
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno, rgi'
+      'FROM INTERNO'
+      'ORDER BY NOME_INTERNO')
+    Left = 561
+    Top = 289
+  end
+  object SqlGaleria: TFDQuery
+    SQL.Strings = (
+      'select * from galeria'
+      'where idpavilhao=:id_pavilhao'
+      'order by galeria')
+    Left = 721
+    Top = 387
+    ParamData = <
+      item
+        Name = 'ID_PAVILHAO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsulta: TFDQuery
+    SQL.Strings = (
+      'SELECT '
+      '    T.LIBERADA,'
+      '    T.RECEBIDA,'
+      '    T.CANCELADA,'
+      
+        '    IIF(T.TIPO_DESTINO<>'#39'U'#39', '#39'LOCAL: '#39'||D.DESTINO, U2.NOME_UP) D' +
+        'ESTINO,'
+      '    T.DATA,'
+      '    T.TIPO_DOCUMENTO,'
+      '    T.NUMERO_DOCUMENTO,'
+      '    T.MOTIVO_MOVIMENTACAO,'
+      '    T.ID_TRANSFERENCIA_INTERNO'
+      'FROM TRANSFERENCIA_INTERNO T'
+      '   LEFT OUTER JOIN DESTINO D ON (D.ID_DESTINO = T.ID_DESTINO)'
+      '   LEFT OUTER JOIN UNIDADE_PENAL U2 ON (T.ID_ORIGEM = U2.ID_UP)'
+      'WHERE T.ID_UP_DESTINO= :ID_UP'
+      'AND T.DATA>= :DATA - 1'
+      'ORDER BY T.DATA DESC')
+    Left = 665
+    Top = 33
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA'
+        ParamType = ptInput
+      end>
+  end
+  object Sqlvinc_transferencia_interno: TFDQuery
+    SQL.Strings = (
+      'select * from vinc_transferencia_interno'
+      'where id_transferencia_interno = :id_transferencia_interno')
+    Left = 657
+    Top = 227
+    ParamData = <
+      item
+        Name = 'ID_TRANSFERENCIA_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlSolario: TFDQuery
+    SQL.Strings = (
+      'select * from solario'
+      'where idgaleria=:id_galeria'
+      'order by solario')
+    Left = 721
+    Top = 433
+    ParamData = <
+      item
+        Name = 'ID_GALERIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCela: TFDQuery
+    SQL.Strings = (
+      'select * from cela'
+      'where idsolario=:id_solario'
+      'order by cela')
+    Left = 729
+    Top = 483
+    ParamData = <
+      item
+        Name = 'ID_SOLARIO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlPavilhao: TFDQuery
+    Left = 729
+    Top = 337
   end
 end

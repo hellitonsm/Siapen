@@ -1,35 +1,34 @@
 inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
   Left = 251
   Top = 51
-  Width = 951
-  Height = 710
   Caption = 'Conselho Disciplinar'
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 594
+    ExplicitHeight = 525
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 576
+      Height = 508
+      ExplicitHeight = 507
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 576
+      Top = 508
       Hints.Strings = ()
+      ExplicitTop = 507
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 820
-    Height = 594
+    ExplicitWidth = 825
+    ExplicitHeight = 525
     inherited PageControlModeloCadastro: TPageControl
-      Width = 820
-      Height = 594
+      ExplicitWidth = 825
+      ExplicitHeight = 525
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 812
-          Height = 566
+          ExplicitWidth = 817
+          ExplicitHeight = 497
           inherited PageControlPrincipal: TPageControl
-            Width = 810
-            Height = 564
-            ActivePage = TabSheet1
+            ActivePage = TabSheet2
+            ExplicitWidth = 815
+            ExplicitHeight = 495
             object TabSheet1: TTabSheet
               Caption = 'Conselho Disciplinar'
               ImageIndex = 2
@@ -267,7 +266,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                   'Situa'#231#227'o do PDI (Andamento, Concluido/Arquivado, Conclu'#237'do, Recu' +
                   'rso)'
                 Style = csDropDownList
-                ItemHeight = 13
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 7
@@ -296,7 +294,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                 Width = 105
                 Height = 21
                 Style = csDropDownList
-                ItemHeight = 13
                 TabOrder = 9
                 Items.Strings = (
                   ''
@@ -311,7 +308,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                 Width = 149
                 Height = 21
                 Style = csDropDownList
-                ItemHeight = 13
                 TabOrder = 19
                 Items.Strings = (
                   ''
@@ -353,9 +349,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                 Font.Height = -13
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 23
-                OnClick = BitBtnIncluirClick
                 Glyph.Data = {
                   DE010000424DDE01000000000000760000002800000024000000120000000100
                   0400000000006801000000000000000000001000000000000000000000000000
@@ -374,6 +367,9 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                   333A333333333333333338330000333333333333333333333333333333333333
                   0000}
                 NumGlyphs = 2
+                ParentFont = False
+                TabOrder = 23
+                OnClick = BitBtnIncluirClick
               end
               object DBGrid6: TDBGrid
                 Left = 9
@@ -556,7 +552,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                 Width = 165
                 Height = 21
                 Style = csDropDownList
-                ItemHeight = 13
                 TabOrder = 10
                 Items.Strings = (
                   ''
@@ -640,7 +635,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                   Height = 21
                   Hint = 'Decis'#227'o do recurso'
                   Style = csDropDownList
-                  ItemHeight = 13
                   ParentShowHint = False
                   ShowHint = True
                   TabOrder = 0
@@ -658,7 +652,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                 Height = 21
                 Hint = 'Classifica'#231#227'o da conduta efetuada pelo interno'
                 Style = csDropDownList
-                ItemHeight = 13
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 16
@@ -720,7 +713,7 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
                 Top = 49
                 Width = 91
                 Height = 21
-                Date = 0.302563541663403200
+                Date = 45259.000000000000000000
                 Time = 0.302563541663403200
                 TabOrder = 0
               end
@@ -796,44 +789,39 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
       end
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
-          Width = 812
           inherited RadioGroupStatus: TRadioGroup
-            Left = 683
+            Left = 692
+            ExplicitLeft = 688
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 812
-          Height = 524
+          ExplicitHeight = 456
           inherited DBGridConsulta: TDBGrid
-            Width = 810
-            Height = 522
+            Width = 823
+            Height = 454
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 810
-            Height = 522
-            PanelHeight = 104
-            PanelWidth = 793
+            Width = 823
+            Height = 454
+            PanelWidth = 806
+            ExplicitWidth = 819
+            ExplicitHeight = 450
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 935
-    inherited Image2: TImage
-      Width = 935
-    end
+    ExplicitWidth = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 626
-    Width = 935
+    ExplicitTop = 558
   end
   inherited ImageListCadastro: TImageList
     Left = 608
     Top = 0
   end
-  inherited SqlCadastro: TSQLQuery
-    SQLConnection = DM.SQLConnect
+  inherited SqlCadastro: TFDQuery
     Left = 476
     Top = 80
   end
@@ -861,7 +849,7 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
     Left = 325
     Top = 71
   end
-  inherited SqlConsulta: TSQLQuery
+  inherited SqlConsulta: TFDQuery
     Left = 297
     Top = 71
   end
@@ -912,17 +900,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
     Left = 792
     Top = 16
   end
-  object Sqlfaltadisciplinar: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'SELECT  first 44 f.falta_disciplinar, f.id_falta_disciplinar, f.' +
-        'tipofalta'
-      'FROM falta_disciplinar f'
-      'order by f.id_falta_disciplinar')
-    Left = 480
-  end
   object Dspfaltadisciplinar: TDataSetProvider
     DataSet = Sqlfaltadisciplinar
     Left = 508
@@ -937,25 +914,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
   object Dsfaltadisciplinar: TDataSource
     DataSet = Cdsfaltadisciplinar
     Left = 564
-  end
-  object SQLhistorico_interno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptUnknown
-      end>
-    SQL.Strings = (
-      'select *'
-      'from historico_interno'
-      
-        'where idinterno=:id_interno and coalesce(tipo_historico,'#39#39')='#39#39' a' +
-        'nd setor like '#39'Conselho Disciplinar'#39
-      'order by data_hora desc')
-    SQLConnection = DM.SQLConnect
-    Left = 416
-    Top = 136
   end
   object dsphistorico_interno: TDataSetProvider
     DataSet = SQLhistorico_interno
@@ -1020,29 +978,6 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
     Left = 512
     Top = 136
   end
-  object SqlFaltaDelete: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'SELECT vf.*'
-      'FROM vinc_falta_disciplinar vf'
-      'where vf.id_interno = :id_interno'
-      ''
-      ''
-      ''
-      ''
-      ''
-      ''
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 796
-    Top = 136
-  end
   object DspFaltaDelete: TDataSetProvider
     DataSet = SqlFaltaDelete
     Left = 824
@@ -1064,14 +999,59 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
     Left = 880
     Top = 136
   end
-  object Sqlvincfaltadisciplinar: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
+  object Sqlfaltadisciplinar: TFDQuery
+    ObjectView = False
+    SQL.Strings = (
+      
+        'SELECT  first 44 f.falta_disciplinar, f.id_falta_disciplinar, f.' +
+        'tipofalta'
+      'FROM falta_disciplinar f'
+      'order by f.id_falta_disciplinar')
+    Left = 480
+  end
+  object SQLhistorico_interno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select *'
+      'from historico_interno'
+      
+        'where idinterno=:id_interno and coalesce(tipo_historico,'#39#39')='#39#39' a' +
+        'nd setor like '#39'Conselho Disciplinar'#39
+      'order by data_hora desc')
+    Left = 416
+    Top = 136
+    ParamData = <
       item
-        DataType = ftInteger
-        Name = 'id_interno'
+        Name = 'ID_INTERNO'
         ParamType = ptInput
       end>
+  end
+  object SqlFaltaDelete: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT vf.*'
+      'FROM vinc_falta_disciplinar vf'
+      'where vf.id_interno = :id_interno'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      '')
+    Left = 796
+    Top = 136
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object Sqlvincfaltadisciplinar: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       
         'SELECT vf.ID_VINC_FALTA_DISCIPLINAR,  vf.data_incidencia, vf.num' +
@@ -1089,11 +1069,15 @@ inherited frmConselhoDisciplinar: TfrmConselhoDisciplinar
         'ecisao_recurso, vf.classificacao_conduta, vf.homologacao, '
       'vf.quantidade_dias_isolamento, f.falta_disciplinar'
       
-        'FROM vinc_falta_disciplinar vf inner join falta_disciplinar f on' +
+        'FROM VINC_FALTA_DISCIPLINAR vf inner join falta_disciplinar f on' +
         ' (vf.id_falta_disciplinar = f.id_falta_disciplinar)'
       'where vf.id_interno = :id_interno'
       'order by data_incidencia desc')
-    SQLConnection = DM.SQLConnect
     Left = 727
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

@@ -1,33 +1,41 @@
 inherited frmCadastroEscolta: TfrmCadastroEscolta
   Left = 192
   Top = 122
-  Width = 741
-  Height = 550
   Caption = 'Cadastro de Escolta'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 461
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 443
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 443
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 610
-    Height = 461
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 725
+      ExplicitWidth = 725
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 610
-      Height = 461
+      Width = 825
+      Height = 532
       ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 602
-          Height = 433
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object PageControlEscolta: TPageControl
             Left = -4
             Top = 4
@@ -155,8 +163,8 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
                 Top = 76
                 Width = 135
                 Height = 21
-                Date = 41060.490616909720000000
-                Time = 41060.490616909720000000
+                Date = 41060.000000000000000000
+                Time = 0.490616909723030400
                 TabOrder = 2
                 DataField = 'ESCOLTA_DATA_IDA'
                 DataSource = DsCadastro
@@ -176,8 +184,8 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
                 Top = 76
                 Width = 135
                 Height = 21
-                Date = 41060.540477800930000000
-                Time = 41060.540477800930000000
+                Date = 41060.000000000000000000
+                Time = 0.540477800932421800
                 TabOrder = 4
                 DataField = 'ESCOLTA_DATA_RETORNO'
                 DataSource = DsCadastro
@@ -208,7 +216,6 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
                 Height = 21
                 DataField = 'ESCOLTA_ORIGEM'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'PFCAT'
                   'PFCG'
@@ -250,7 +257,6 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
                 Height = 21
                 DataField = 'ESCOLTA_DESTINO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'AC'
                   'AL'
@@ -306,7 +312,6 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
                 Height = 21
                 DataField = 'ESCOLTA_TIPO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'APOIO'
                   'AUDI'#202'NCIA'
@@ -917,15 +922,17 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 602
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 602
-          Height = 399
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 600
-            Height = 397
+            Width = 815
+            Height = 468
             Columns = <
               item
                 Expanded = False
@@ -1011,24 +1018,23 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 725
-    inherited Image2: TImage
-      Width = 725
-    end
+    Width = 940
     inherited LabelTitulo: TLabel
       Width = 173
       Caption = 'Cadastro de Escoltas'
+      ExplicitWidth = 173
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 493
-    Width = 725
+    Top = 564
+    Width = 940
   end
   inherited ImageListCadastro: TImageList
     Left = 632
     Top = 32
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM ESCOLTA')
@@ -1156,29 +1162,7 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
     Left = 651
     Top = 288
   end
-  object SQLInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'doc_oficio'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from'
-      'interno_inclusao i, solicitacao_vaga s, doc_oficio  o,'
-      'escolta e, interno_inclusao d, interno_vaga v'
-      'where  i.id_interno_inclusao = v.id_interno_inclusao and '
-      'v.id_solicitacao_vaga = s.id_solicitacao_vaga and'
-      's.id_solicitacao_vaga = o.id_solicitacao_vaga and '
-      'o.id_doc_oficio = e.id_doc_oficio and '
-      'o.id_doc_oficio = :doc_oficio')
-    SQLConnection = DM.SQLConnect
-    Left = 451
-    Top = 288
-  end
-  object SQLItinerario: TSQLQuery
+  object SQLItinerarioold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1194,39 +1178,39 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
     SQLConnection = DM.SQLConnect
     Left = 111
     Top = 524
-    object SQLItinerarioID_ITINERARIO_ESCOLTA: TIntegerField
+    object SQLItinerariooldID_ITINERARIO_ESCOLTA: TIntegerField
       FieldName = 'ID_ITINERARIO_ESCOLTA'
       Required = True
     end
-    object SQLItinerarioID_ESCOLTA: TIntegerField
+    object SQLItinerariooldID_ESCOLTA: TIntegerField
       FieldName = 'ID_ESCOLTA'
     end
-    object SQLItinerarioID_MEIO_TRANSPORTE: TIntegerField
+    object SQLItinerariooldID_MEIO_TRANSPORTE: TIntegerField
       FieldName = 'ID_MEIO_TRANSPORTE'
     end
-    object SQLItinerarioID_ITINERARIO_DESTINO: TIntegerField
+    object SQLItinerariooldID_ITINERARIO_DESTINO: TIntegerField
       FieldName = 'ID_ITINERARIO_DESTINO'
     end
-    object SQLItinerarioID_ITINERARIO_ORIGEM: TIntegerField
+    object SQLItinerariooldID_ITINERARIO_ORIGEM: TIntegerField
       FieldName = 'ID_ITINERARIO_ORIGEM'
     end
-    object SQLItinerarioITINERARIO_NUMERO: TStringField
+    object SQLItinerariooldITINERARIO_NUMERO: TStringField
       FieldName = 'ITINERARIO_NUMERO'
       Size = 30
     end
-    object SQLItinerarioITINERARIO_DATA_INICIAL: TSQLTimeStampField
+    object SQLItinerariooldITINERARIO_DATA_INICIAL: TSQLTimeStampField
       FieldName = 'ITINERARIO_DATA_INICIAL'
     end
-    object SQLItinerarioITINERARIO_DATA_FINAL: TSQLTimeStampField
+    object SQLItinerariooldITINERARIO_DATA_FINAL: TSQLTimeStampField
       FieldName = 'ITINERARIO_DATA_FINAL'
     end
-    object SQLItinerarioITINERARIO_HORA_INICIAL: TTimeField
+    object SQLItinerariooldITINERARIO_HORA_INICIAL: TTimeField
       FieldName = 'ITINERARIO_HORA_INICIAL'
     end
-    object SQLItinerarioITINERARIO_HORA_FINAL: TTimeField
+    object SQLItinerariooldITINERARIO_HORA_FINAL: TTimeField
       FieldName = 'ITINERARIO_HORA_FINAL'
     end
-    object SQLItinerarioATIVO: TStringField
+    object SQLItinerariooldATIVO: TStringField
       FieldName = 'ATIVO'
       Size = 1
     end
@@ -1284,7 +1268,7 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
     Left = 207
     Top = 524
   end
-  object SQLEscoltaFuncionarios: TSQLQuery
+  object SQLEscoltaFuncionariosold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1299,34 +1283,34 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
     SQLConnection = DM.SQLConnect
     Left = 463
     Top = 396
-    object SQLEscoltaFuncionariosID_ESCOLTA_FUNCIONARIO: TIntegerField
+    object SQLEscoltaFuncionariosoldID_ESCOLTA_FUNCIONARIO: TIntegerField
       FieldName = 'ID_ESCOLTA_FUNCIONARIO'
       Required = True
     end
-    object SQLEscoltaFuncionariosID_FUNCIONARIO: TIntegerField
+    object SQLEscoltaFuncionariosoldID_FUNCIONARIO: TIntegerField
       FieldName = 'ID_FUNCIONARIO'
       Required = True
     end
-    object SQLEscoltaFuncionariosID_ESCOLTA: TIntegerField
+    object SQLEscoltaFuncionariosoldID_ESCOLTA: TIntegerField
       FieldName = 'ID_ESCOLTA'
       Required = True
     end
-    object SQLEscoltaFuncionariosPCDP_NUMERO: TIntegerField
+    object SQLEscoltaFuncionariosoldPCDP_NUMERO: TIntegerField
       FieldName = 'PCDP_NUMERO'
     end
-    object SQLEscoltaFuncionariosPCDP_DATA_SCDP: TSQLTimeStampField
+    object SQLEscoltaFuncionariosoldPCDP_DATA_SCDP: TSQLTimeStampField
       FieldName = 'PCDP_DATA_SCDP'
     end
-    object SQLEscoltaFuncionariosPCDP_VALOR_PAS_IDA: TFloatField
+    object SQLEscoltaFuncionariosoldPCDP_VALOR_PAS_IDA: TFloatField
       FieldName = 'PCDP_VALOR_PAS_IDA'
     end
-    object SQLEscoltaFuncionariosPCDP_VALOR_PAS_RETORNO: TFloatField
+    object SQLEscoltaFuncionariosoldPCDP_VALOR_PAS_RETORNO: TFloatField
       FieldName = 'PCDP_VALOR_PAS_RETORNO'
     end
-    object SQLEscoltaFuncionariosPCDP_VALOR_DIARIAS: TFloatField
+    object SQLEscoltaFuncionariosoldPCDP_VALOR_DIARIAS: TFloatField
       FieldName = 'PCDP_VALOR_DIARIAS'
     end
-    object SQLEscoltaFuncionariosPCDP_SERVIDOR_CHEFE_MISSAO: TStringField
+    object SQLEscoltaFuncionariosoldPCDP_SERVIDOR_CHEFE_MISSAO: TStringField
       FieldName = 'PCDP_SERVIDOR_CHEFE_MISSAO'
       Size = 1
     end
@@ -1379,22 +1363,6 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
     Left = 643
     Top = 396
   end
-  object SQLEscoltaInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_escolta'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from escolta_interno_inclusao'
-      'where id_escolta = :id_escolta')
-    SQLConnection = DM.SQLConnect
-    Left = 467
-    Top = 340
-  end
   object dspEscoltaInterno: TDataSetProvider
     DataSet = SQLEscoltaInterno
     Left = 527
@@ -1411,5 +1379,68 @@ inherited frmCadastroEscolta: TfrmCadastroEscolta
     DataSet = cdsEscoltaInterno
     Left = 655
     Top = 340
+  end
+  object SQLInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from'
+      'interno_inclusao i, solicitacao_vaga s, doc_oficio  o,'
+      'escolta e, interno_inclusao d, interno_vaga v'
+      'where  i.id_interno_inclusao = v.id_interno_inclusao and '
+      'v.id_solicitacao_vaga = s.id_solicitacao_vaga and'
+      's.id_solicitacao_vaga = o.id_solicitacao_vaga and '
+      'o.id_doc_oficio = e.id_doc_oficio and '
+      'o.id_doc_oficio = :doc_oficio')
+    Left = 451
+    Top = 288
+    ParamData = <
+      item
+        Name = 'DOC_OFICIO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLEscoltaInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from escolta_interno_inclusao'
+      'where id_escolta = :id_escolta')
+    Left = 467
+    Top = 340
+    ParamData = <
+      item
+        Name = 'ID_ESCOLTA'
+        ParamType = ptInput
+      end>
+  end
+  object SQLEscoltaFuncionarios: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from escolta_funcionario'
+      'where id_escolta = :id_escolta'
+      '')
+    Left = 407
+    Top = 405
+    ParamData = <
+      item
+        Name = 'ID_ESCOLTA'
+        ParamType = ptInput
+      end>
+  end
+  object SQLItinerario: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from itinerario_escolta '
+      'where id_escolta= :id_escolta'
+      'order by ativo'
+      '')
+    Left = 80
+    Top = 528
+    ParamData = <
+      item
+        Name = 'ID_ESCOLTA'
+        ParamType = ptInput
+      end>
   end
 end

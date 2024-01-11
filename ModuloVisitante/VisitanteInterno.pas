@@ -5,7 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloFormulario, ExtCtrls, StdCtrls, DBCtrls, Buttons, jpeg,
-  FMTBcd, DB, DBClient, Provider, SqlExpr;
+  FMTBcd, DB, DBClient, Provider, SqlExpr, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFrmVisitanteInterno = class(TFrmModeloFormulario)
@@ -19,10 +22,11 @@ type
     SpeedButton1: TSpeedButton;
     Label9: TLabel;
     Editprontuario: TEdit;
-    SqlInterno: TSQLQuery;
+    SqlInternoold: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
+    SqlInterno: TFDQuery;
     procedure FormShow(Sender: TObject);
     procedure DBLookupComboBoxInternoClick(Sender: TObject);
     procedure DBLookupComboBoxParentescoClick(Sender: TObject);

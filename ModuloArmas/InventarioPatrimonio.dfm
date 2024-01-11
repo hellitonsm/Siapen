@@ -1,14 +1,19 @@
 inherited FrmInventarioPatrimonio: TFrmInventarioPatrimonio
   Left = 208
   Top = 138
-  Width = 814
-  Height = 460
   Caption = 'FrmInventarioPatrimonio'
-  PixelsPerInch = 96
+  ClientHeight = 466
+  ClientWidth = 803
+  ExplicitWidth = 815
+  ExplicitHeight = 504
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 798
-    Height = 381
+    Width = 803
+    Height = 425
+    ExplicitLeft = -1
+    ExplicitTop = 38
+    ExplicitWidth = 803
+    ExplicitHeight = 425
     object Label1: TLabel
       Left = 56
       Top = 16
@@ -60,6 +65,10 @@ inherited FrmInventarioPatrimonio: TFrmInventarioPatrimonio
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 798
+    Width = 803
+    ExplicitWidth = 412
+    inherited Image2: TImage
+      Width = 801
+    end
   end
 end

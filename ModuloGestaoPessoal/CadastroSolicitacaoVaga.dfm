@@ -1,32 +1,40 @@
 inherited frmSolicitacaoVaga: TfrmSolicitacaoVaga
   Left = 343
   Top = 128
-  Width = 674
-  Height = 549
   Caption = 'Solicita'#231#227'o de Vaga'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 460
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 442
+      Height = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 442
+      Top = 514
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 543
-    Height = 460
+    Width = 825
+    Height = 532
+    inherited Image2: TImage
+      Width = 658
+      ExplicitWidth = 658
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 543
-      Height = 460
+      Width = 825
+      Height = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
-          Width = 535
-          Height = 432
+          Width = 817
+          Height = 504
+          ExplicitWidth = 817
+          ExplicitHeight = 504
           object Label2: TLabel
             Left = 8
             Top = 12
@@ -132,8 +140,8 @@ inherited frmSolicitacaoVaga: TfrmSolicitacaoVaga
             Top = 72
             Width = 144
             Height = 21
-            Date = 41059.713744722220000000
-            Time = 41059.713744722220000000
+            Date = 41059.000000000000000000
+            Time = 0.713744722219416900
             TabOrder = 4
             DataField = 'DATA_AUTORIZA_VAGAS'
             DataSource = DsCadastro
@@ -273,39 +281,39 @@ inherited frmSolicitacaoVaga: TfrmSolicitacaoVaga
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 535
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 535
-          Height = 477
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 533
-            Height = 475
+            Width = 815
+            Height = 468
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 658
-    inherited Image2: TImage
-      Width = 658
-    end
+    Width = 940
     inherited LabelTitulo: TLabel
       Width = 160
       Caption = 'Solicita'#231#227'o de vaga'
+      ExplicitWidth = 160
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 492
-    Width = 658
+    Top = 564
+    Width = 940
   end
   inherited ImageListCadastro: TImageList
     Left = 644
     Top = 16
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM solicitacao_vaga')
@@ -386,15 +394,6 @@ inherited frmSolicitacaoVaga: TfrmSolicitacaoVaga
     Left = 560
     Top = 52
   end
-  object SQLPesquisa: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from interno_inclusao')
-    SQLConnection = DM.SQLConnect
-    Left = 339
-    Top = 304
-  end
   object DspPesquisa: TDataSetProvider
     DataSet = SQLPesquisa
     Left = 387
@@ -411,22 +410,6 @@ inherited frmSolicitacaoVaga: TfrmSolicitacaoVaga
     DataSet = cdsPesquisa
     Left = 483
     Top = 304
-  end
-  object SQLGrid: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_solicitacao_vaga'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from interno_vaga'
-      'where id_solicitacao_vaga = :id_solicitacao_vaga ')
-    SQLConnection = DM.SQLConnect
-    Left = 269
-    Top = 472
   end
   object dspGrid: TDataSetProvider
     DataSet = SQLGrid
@@ -470,5 +453,27 @@ inherited frmSolicitacaoVaga: TfrmSolicitacaoVaga
     OnDataChange = DsCadastroDataChange
     Left = 353
     Top = 472
+  end
+  object SQLPesquisa: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from interno_inclusao')
+    Left = 339
+    Top = 304
+  end
+  object SQLGrid: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from interno_vaga'
+      'where id_solicitacao_vaga = :id_solicitacao_vaga ')
+    Left = 269
+    Top = 472
+    ParamData = <
+      item
+        Name = 'ID_SOLICITACAO_VAGA'
+        ParamType = ptInput
+      end>
   end
 end

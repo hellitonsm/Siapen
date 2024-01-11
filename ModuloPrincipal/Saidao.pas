@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, Buttons, Menus, adpDBDateTimePicker;
+  ToolWin, Mask, Buttons, Menus, adpDBDateTimePicker, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmSaidao = class(TFrmModeloCadastro)
@@ -35,7 +38,6 @@ type
     DSPvinc_saidao: TDataSetProvider;
     cdsvinc_saidao: TClientDataSet;
     dsvinc_saidao: TDataSource;
-    SQLvinc_saidao: TSQLQuery;
     cdsvinc_saidaoID_VINC_SAIDAO: TIntegerField;
     cdsvinc_saidaoID_SAIDAO: TIntegerField;
     cdsvinc_saidaoID_INTERNO: TIntegerField;
@@ -56,6 +58,7 @@ type
     Button1: TButton;
     Btnincluir: TBitBtn;
     BitBtn2: TBitBtn;
+    SQLvinc_saidao: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure EditprontuarioExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -318,7 +321,7 @@ begin
   end;
 
   Dsvinc_saidao.DataSet.Append;
-  Dsvinc_saidao.DataSet.fieldbyname('ID_vinc_saidao').AsInteger := 0;
+  Dsvinc_saidao.DataSet.fieldbyname('ID_vinc_saidao').AsInteger := Dm.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_vinc_saidao,1) FROM RDB$DATABASE');
   Dsvinc_saidao.DataSet.fieldbyname('id_saidao').AsInteger :=
     DsCadastro.DataSet.fieldbyname('ID_saidao').AsInteger;
   Dsvinc_saidao.DataSet.fieldbyname('status').Asstring := 'ATIVO';
@@ -372,7 +375,7 @@ begin
         Application.ProcessMessages;
 
         Dsvinc_saidao.DataSet.Append;
-        Dsvinc_saidao.DataSet.fieldbyname('ID_vinc_saidao').AsInteger := 0;
+        Dsvinc_saidao.DataSet.fieldbyname('ID_vinc_saidao').AsInteger := Dm.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_vinc_saidao,1) FROM RDB$DATABASE');
         Dsvinc_saidao.DataSet.fieldbyname('id_saidao').AsInteger :=
           DsCadastro.DataSet.fieldbyname('ID_saidao').AsInteger;
         Dsvinc_saidao.DataSet.fieldbyname('status').Asstring := 'ATIVO';

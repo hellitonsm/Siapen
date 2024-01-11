@@ -2,19 +2,43 @@ inherited FrmCadastroSubEvento: TFrmCadastroSubEvento
   Left = 332
   Top = 213
   Caption = 'Cadastro de Sub-Eventos'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 952
+  ExplicitHeight = 621
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 531
+    ExplicitHeight = 531
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 513
+      ExplicitHeight = 513
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Width = 821
+    Height = 531
+    ExplicitWidth = 821
+    ExplicitHeight = 531
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
+          Width = 813
+          Height = 503
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 24
             Top = 24
@@ -99,7 +123,6 @@ inherited FrmCadastroSubEvento: TFrmCadastroSubEvento
             Width = 169
             Height = 21
             Style = csDropDownList
-            ItemHeight = 13
             TabOrder = 1
             OnChange = CbTipoEventoChange
             Items.Strings = (
@@ -108,17 +131,45 @@ inherited FrmCadastroSubEvento: TFrmCadastroSubEvento
           end
         end
       end
+      inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+        inherited PanelLocalizaConsulta: TPanel
+          Width = 813
+          ExplicitWidth = 813
+        end
+        inherited PanelConsulta: TPanel
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
+          inherited DBGridConsulta: TDBGrid
+            Width = 811
+            Height = 467
+          end
+        end
+      end
     end
+  end
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 936
+    ExplicitWidth = 936
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
   end
   inherited ImageListCadastro: TImageList
     Left = 576
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT *'
       'FROM SUB_EVENTOS'
       'ORDER BY DESCRICAO_EVENTOS')
-    SQLConnection = DM.SQLConnect
     Top = 200
   end
   inherited DspCadastro: TDataSetProvider
@@ -163,16 +214,15 @@ inherited FrmCadastroSubEvento: TFrmCadastroSubEvento
     Left = 621
     Top = 240
   end
-  object SqlEventos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
+  object SqlEventos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       
         'SELECT ID_EVENTOS, CODIGO || '#39' - '#39' || DESCRICAO_EVENTO AS DESCRI' +
         'CAO_EVENTO, CODIGO, TIPO_EVENTO FROM EVENTOS'
       'WHERE SUB_EVENTOS = '#39'S'#39
       'ORDER BY CODIGO || '#39' - '#39' || DESCRICAO_EVENTO')
-    SQLConnection = DM.SQLConnect
     Left = 591
     Top = 240
   end

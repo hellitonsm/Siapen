@@ -2,18 +2,26 @@ inherited FrmEquipe: TFrmEquipe
   Left = 509
   Top = 318
   Caption = 'Equipe'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 532
     inherited DBNavigator1: TDBNavigator
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Height = 532
     inherited PageControlModeloCadastro: TPageControl
+      Width = 821
+      Height = 531
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
+          Width = 813
+          Height = 503
           Caption = '...'
           object Label2: TLabel
             Left = 24
@@ -107,8 +115,8 @@ inherited FrmEquipe: TFrmEquipe
             Top = 192
             Width = 121
             Height = 21
-            Date = 44438.562768275460000000
-            Time = 44438.562768275460000000
+            Date = 44438.000000000000000000
+            Time = 0.562768275456619400
             TabOrder = 4
             DataField = 'DATABASE_PLANTAO'
             DataSource = DsCadastro
@@ -116,9 +124,16 @@ inherited FrmEquipe: TFrmEquipe
           end
         end
       end
+      inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
+      end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited StatusBar1: TStatusBar
+    Top = 564
+  end
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM EQUIPE')

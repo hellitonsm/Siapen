@@ -2,22 +2,39 @@ inherited frmDocOficio: TfrmDocOficio
   Left = 267
   Top = 96
   Caption = 'Cadastro de Oficios'
+  ClientHeight = 583
+  ClientWidth = 940
+  ExplicitWidth = 956
+  ExplicitHeight = 622
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 532
+    inherited ToolBarModeloCadastro: TToolBar
+      Height = 514
+    end
     inherited DBNavigator1: TDBNavigator
+      Top = 514
       Hints.Strings = ()
       OnClick = DBNavigator1Click
     end
   end
   inherited PanelModeloCadastro: TPanel
+    Width = 825
+    Height = 532
     inherited Image2: TImage
       Width = 853
       ExplicitWidth = 853
     end
     inherited PageControlModeloCadastro: TPageControl
+      Width = 825
+      Height = 532
       ActivePage = TabSheetCadastro
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelCadastro: TPanel
+          Width = 817
+          Height = 504
           ExplicitWidth = 817
           ExplicitHeight = 504
           object Label2: TLabel
@@ -269,18 +286,17 @@ inherited frmDocOficio: TfrmDocOficio
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 817
+        ExplicitHeight = 504
         inherited PanelLocalizaConsulta: TPanel
-          Width = 730
-          ExplicitWidth = 730
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 730
-          Height = 395
-          ExplicitWidth = 730
-          ExplicitHeight = 395
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 728
-            Height = 393
+            Width = 815
+            Height = 468
             Columns = <
               item
                 Expanded = False
@@ -383,6 +399,7 @@ inherited frmDocOficio: TfrmDocOficio
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
+    Width = 940
     inherited LabelTitulo: TLabel
       Width = 165
       Caption = 'Cadastro de Oficios'
@@ -390,10 +407,11 @@ inherited frmDocOficio: TfrmDocOficio
     end
   end
   inherited StatusBar1: TStatusBar
-    ExplicitTop = 564
-    ExplicitWidth = 940
+    Top = 564
+    Width = 940
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'SELECT * '
       'FROM doc_oficio')
@@ -493,17 +511,6 @@ inherited frmDocOficio: TfrmDocOficio
     Left = 540
     Top = 40
   end
-  object SQLflagautorizador: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM funcionario_autorizador'
-      'where descricao_autorizador = '#39'AUTORIZADOR'#39)
-    SQLConnection = DM.SQLConnect
-    Left = 628
-    Top = 36
-  end
   object DSPflagautorizador: TDataSetProvider
     DataSet = SQLflagautorizador
     Left = 656
@@ -543,22 +550,6 @@ inherited frmDocOficio: TfrmDocOficio
     OnDataChange = DsCadastroDataChange
     Left = 712
     Top = 36
-  end
-  object SQLGridInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_solicitacao_vaga'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'select * from INTERNO_VAGA i'
-      'where id_solicitacao_vaga = :id_solicitacao_vaga')
-    SQLConnection = DM.SQLConnect
-    Left = 251
-    Top = 300
   end
   object DSPGridInterno: TDataSetProvider
     DataSet = SQLGridInterno
@@ -619,25 +610,6 @@ inherited frmDocOficio: TfrmDocOficio
     Left = 543
     Top = 284
   end
-  object SQLinterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select id_interno, nome_interno from interno'
-      'where id_interno=-1')
-    SQLConnection = DM.SQLConnect
-    Left = 491
-    Top = 284
-  end
-  object SQLinternoinclusao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from interno_inclusao')
-    SQLConnection = DM.SQLConnect
-    Left = 211
-    Top = 384
-  end
   object dspinternoinclusao: TDataSetProvider
     DataSet = SQLinternoinclusao
     Left = 255
@@ -672,52 +644,43 @@ inherited frmDocOficio: TfrmDocOficio
     Left = 539
     Top = 336
   end
-  object SQloficiointerno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from oficio_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 491
-    Top = 332
-  end
-  object SQLSolicitacaoVaga: TSQLQuery
+  object SQLSolicitacaoVagaold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
       'select * from solicitacao_vaga')
     SQLConnection = DM.SQLConnect
-    Left = 208
-    Top = 36
-    object SQLSolicitacaoVagaID_SOLICITACAO_VAGA: TIntegerField
+    Left = 216
+    Top = 44
+    object SQLSolicitacaoVagaoldID_SOLICITACAO_VAGA: TIntegerField
       FieldName = 'ID_SOLICITACAO_VAGA'
       Required = True
     end
-    object SQLSolicitacaoVagaID_ORGAO: TIntegerField
+    object SQLSolicitacaoVagaoldID_ORGAO: TIntegerField
       FieldName = 'ID_ORGAO'
       Required = True
     end
-    object SQLSolicitacaoVagaID_UP: TIntegerField
+    object SQLSolicitacaoVagaoldID_UP: TIntegerField
       FieldName = 'ID_UP'
       Required = True
     end
-    object SQLSolicitacaoVagaQTD_VAGAS_SOLICITADAS: TIntegerField
+    object SQLSolicitacaoVagaoldQTD_VAGAS_SOLICITADAS: TIntegerField
       FieldName = 'QTD_VAGAS_SOLICITADAS'
     end
-    object SQLSolicitacaoVagaQTD_VAGAS_AUTORIZADAS: TIntegerField
+    object SQLSolicitacaoVagaoldQTD_VAGAS_AUTORIZADAS: TIntegerField
       FieldName = 'QTD_VAGAS_AUTORIZADAS'
     end
-    object SQLSolicitacaoVagaQTD_VAGAS_UTILIZADAS: TIntegerField
+    object SQLSolicitacaoVagaoldQTD_VAGAS_UTILIZADAS: TIntegerField
       FieldName = 'QTD_VAGAS_UTILIZADAS'
     end
-    object SQLSolicitacaoVagaDATA_AUTORIZA_VAGAS: TSQLTimeStampField
+    object SQLSolicitacaoVagaoldDATA_AUTORIZA_VAGAS: TSQLTimeStampField
       FieldName = 'DATA_AUTORIZA_VAGAS'
     end
-    object SQLSolicitacaoVagaOFICIO_DESC: TStringField
+    object SQLSolicitacaoVagaoldOFICIO_DESC: TStringField
       FieldName = 'OFICIO_DESC'
       Size = 100
     end
-    object SQLSolicitacaoVagaQTD_VAGAS_SEM_EFEITO: TIntegerField
+    object SQLSolicitacaoVagaoldQTD_VAGAS_SEM_EFEITO: TIntegerField
       FieldName = 'QTD_VAGAS_SEM_EFEITO'
     end
   end
@@ -768,5 +731,61 @@ inherited frmDocOficio: TfrmDocOficio
     DataSet = cdsSolicitacaoVaga
     Left = 360
     Top = 36
+  end
+  object SQLflagautorizador: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM funcionario_autorizador'
+      'where descricao_autorizador = '#39'AUTORIZADOR'#39)
+    Left = 628
+    Top = 36
+  end
+  object SQLGridInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from INTERNO_VAGA i'
+      'where id_solicitacao_vaga = :id_solicitacao_vaga')
+    Left = 251
+    Top = 300
+    ParamData = <
+      item
+        Name = 'ID_SOLICITACAO_VAGA'
+        ParamType = ptInput
+      end>
+  end
+  object SQLinterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select id_interno, nome_interno from interno'
+      'where id_interno=-1')
+    Left = 491
+    Top = 284
+  end
+  object SQLinternoinclusao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from interno_inclusao')
+    Left = 211
+    Top = 384
+  end
+  object SQloficiointerno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from oficio_interno')
+    Left = 491
+    Top = 332
+  end
+  object SQLSolicitacaoVaga: TFDQuery
+    SQL.Strings = (
+      'select * from solicitacao_vaga'
+      '')
+    Left = 171
+    Top = 40
   end
 end

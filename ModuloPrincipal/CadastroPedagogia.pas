@@ -6,12 +6,15 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroPedagogia = class(TFrmModeloInterno)
     TabSheet1: TTabSheet;
-    SQLPedagogia: TSQLQuery;
+    SQLPedagogiaold: TSQLQuery;
     DSPpedagogia: TDataSetProvider;
     CDSpedagogia: TClientDataSet;
     DSpedagogia: TDataSource;
@@ -37,7 +40,7 @@ type
     dbgridIncluir: TDBGrid;
     DBMemo2: TDBMemo;
     BtnIncluir: TButton;
-    SQLlivrointerno: TSQLQuery;
+    SQLlivrointernoold: TSQLQuery;
     DSPlivrointerno: TDataSetProvider;
     CDSLIvrointerno: TClientDataSet;
     DSlivrointerno: TDataSource;
@@ -47,22 +50,25 @@ type
     CDSLIvrointernoDATA: TSQLTimeStampField;
     CDSLIvrointernoOBS: TStringField;
     btnLivro: TSpeedButton;
-    SQLLivro: TSQLQuery;
+    SQLLivroold: TSQLQuery;
     dspLivro: TDataSetProvider;
     cdsLivro: TClientDataSet;
     dsLivro: TDataSource;
     cmbLivro: TDBLookupComboBox;
-    SQLlivrointernoID_LIVRO_INTERNO: TIntegerField;
-    SQLlivrointernoID_LIVRO: TIntegerField;
-    SQLlivrointernoID_INTERNO: TIntegerField;
-    SQLlivrointernoDATA_ENTREGA: TSQLTimeStampField;
-    SQLlivrointernoDATA: TSQLTimeStampField;
-    SQLlivrointernoOBS: TStringField;
+    SQLlivrointernooldID_LIVRO_INTERNO: TIntegerField;
+    SQLlivrointernooldID_LIVRO: TIntegerField;
+    SQLlivrointernooldID_INTERNO: TIntegerField;
+    SQLlivrointernooldDATA_ENTREGA: TSQLTimeStampField;
+    SQLlivrointernooldDATA: TSQLTimeStampField;
+    SQLlivrointernooldOBS: TStringField;
     CDSLIvrointernoDATA_ENTREGA: TSQLTimeStampField;
     CDSLIvrointernoLivro: TStringField;
     CDSLIvrointernoquant: TIntegerField;
     Label16: TLabel;
     Label17: TLabel;
+    SQLlivrointerno: TFDQuery;
+    SQLPedagogia: TFDQuery;
+    SQLLivro: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -76,6 +82,7 @@ type
     procedure CancelarClick(Sender: TObject);
     procedure cmbLivroClick(Sender: TObject);
     procedure cmbLivroDropDown(Sender: TObject);
+    procedure EditLocalizarChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -97,7 +104,7 @@ begin
   inherited;
 
   dspedagogia.DataSet.Append;
-  dspedagogia.DataSet.fieldbyname('id_historico_pedagogia').AsInteger := 0;
+  dspedagogia.DataSet.fieldbyname('id_historico_pedagogia').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idpedagogia,1) FROM RDB$DATABASE');
   dspedagogia.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dspedagogia.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;
@@ -226,7 +233,7 @@ var
 begin
   inherited;
   DSlivrointerno.DataSet.Append;
-  DSlivrointerno.DataSet.fieldbyname('id_livro_interno').AsInteger := 0;
+  DSlivrointerno.DataSet.fieldbyname('id_livro_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idremediointerno,1) FROM RDB$DATABASE');
   DSlivrointerno.DataSet.fieldbyname('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSlivrointerno.DataSet.fieldbyname('id_livro').AsInteger := DSlivro.DataSet.fieldbyname('id_livro').AsInteger;
   DSlivrointerno.DataSet.FieldByName('data_entrega').AsString := FormatDateTime('dd/mm/yyyy', dtpDataEntrega.Date);
@@ -236,7 +243,7 @@ begin
   DSlivrointerno.DataSet.Post;
 
   //bloco onde e inserido mais um no campo utilizado
-  dm.SqlExecute.sql.text := 'select * from livro where id_livro =  ' + IntToStr(cmbLivro.KeyValue);
+  dm.SqlExecute.sql.text := 'select * from LIVRO where id_livro =  ' + IntToStr(cmbLivro.KeyValue);
   dm.DsExecute.DataSet.close;
   dm.DsExecute.DataSet.Open;
   teste := dm.DsExecute.DataSet.FieldByName('UTILIZADO').AsInteger;
@@ -508,6 +515,34 @@ begin
     Excluir.Visible := False;
   end;
 
+end;
+
+procedure TFrmCadastroPedagogia.EditLocalizarChange(Sender: TObject);
+begin
+   if RadioGroupTipoLocalizar.ItemIndex = 1 then
+  begin
+    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or
+      (EditLocalizar.Text = ' ') then
+    begin
+      //showmessage('foi');
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'NOME_INTERNO LIKE ''%' + EditLocalizar.Text + '%''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
+  end
+  else
+  begin
+    if EditLocalizar.Text <> '' then
+    begin
+      DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'RGI = ''' + EditLocalizar.Text + '''';
+      DsConsulta.DataSet.filtered := True;
+    end
+    else
+      DsConsulta.DataSet.filtered := False;
+  end;
 end;
 
 procedure TFrmCadastroPedagogia.PageControlModeloCadastroChange(

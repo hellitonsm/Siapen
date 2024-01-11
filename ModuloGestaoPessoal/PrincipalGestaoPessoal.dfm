@@ -2,8 +2,8 @@ object FrmPrincipalGestaoPessoal: TFrmPrincipalGestaoPessoal
   Left = 211
   Top = 46
   Caption = 'SIAPEN - Gest'#227'o de Solicita'#231#227'o de Vagas no SISPF'
-  ClientHeight = 0
-  ClientWidth = 120
+  ClientHeight = 732
+  ClientWidth = 1044
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,17 +20,17 @@ object FrmPrincipalGestaoPessoal: TFrmPrincipalGestaoPessoal
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 120
-    Height = 0
+    Width = 1044
+    Height = 732
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 856
-    ExplicitHeight = 641
+    ExplicitWidth = 120
+    ExplicitHeight = 0
     object Image1: TImage
       Left = 1
       Top = 41
-      Width = 854
-      Height = 599
+      Width = 1042
+      Height = 690
       Align = alClient
       Center = True
       Picture.Data = {
@@ -6022,19 +6022,22 @@ object FrmPrincipalGestaoPessoal: TFrmPrincipalGestaoPessoal
         400514514005145140051451401FFFD9}
       Proportional = True
       Stretch = True
+      ExplicitWidth = 854
+      ExplicitHeight = 599
     end
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 854
+      Width = 1042
       Height = 40
       Align = alTop
       Caption = 'Panel2'
       TabOrder = 0
+      ExplicitWidth = 118
       object Image2: TImage
         Left = 1
         Top = 1
-        Width = 852
+        Width = 1040
         Height = 38
         Align = alClient
         Picture.Data = {
@@ -6049,6 +6052,7 @@ object FrmPrincipalGestaoPessoal: TFrmPrincipalGestaoPessoal
           000000000000000000000000FFC4001411010000000000000000000000000000
           0000FFDA000C03010002110311003F00DFD443700A9CB9FB720003FFD9}
         Stretch = True
+        ExplicitWidth = 852
       end
       object LabelTitulo: TLabel
         Left = 48

@@ -2,16 +2,18 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
   Left = 329
   Top = 56
   Caption = 'Cadastro de Ocorr'#234'ncias Plant'#227'o (Vers. 2013.1)'
+  ClientHeight = 674
+  ClientWidth = 946
   Menu = MainMenu1
-  ExplicitWidth = 956
-  ExplicitHeight = 642
+  ExplicitWidth = 958
+  ExplicitHeight = 732
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 531
-    ExplicitHeight = 530
+    Height = 621
+    ExplicitHeight = 620
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 513
-      ExplicitHeight = 512
+      Height = 603
+      ExplicitHeight = 602
       inherited Fechar: TToolButton
         Wrap = True
       end
@@ -21,30 +23,38 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         Caption = 'Imprimir'
         ImageIndex = 44
         Wrap = True
+        Visible = False
         OnClick = ImprimirClick
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 513
+      Top = 603
       Hints.Strings = ()
-      ExplicitTop = 512
+      ExplicitTop = 602
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 531
-    ExplicitHeight = 530
+    Width = 831
+    Height = 621
+    ExplicitWidth = 827
+    ExplicitHeight = 620
     inherited Image2: TImage
       Width = 728
       ExplicitWidth = 728
     end
     inherited PageControlModeloCadastro: TPageControl
-      Height = 531
-      ExplicitHeight = 530
+      Width = 831
+      Height = 621
+      ExplicitWidth = 827
+      ExplicitHeight = 620
       inherited TabSheetCadastro: TTabSheet
-        ExplicitHeight = 503
+        ExplicitWidth = 823
+        ExplicitHeight = 593
         inherited PanelCadastro: TPanel
-          Height = 503
-          ExplicitHeight = 503
+          Width = 823
+          Height = 593
+          ExplicitWidth = 819
+          ExplicitHeight = 592
           object Label9: TLabel
             Left = 7
             Top = 101
@@ -402,9 +412,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         end
       end
       inherited TabSheetConsulta: TTabSheet
-        ExplicitHeight = 503
+        ExplicitWidth = 823
+        ExplicitHeight = 593
         inherited PanelLocalizaConsulta: TPanel
+          Width = 823
           Height = 57
+          ExplicitWidth = 823
           ExplicitHeight = 57
           inherited Label1: TLabel
             Left = 43
@@ -458,9 +471,11 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         end
         inherited PanelConsulta: TPanel
           Top = 57
-          Height = 446
+          Width = 823
+          Height = 536
           ExplicitTop = 57
-          ExplicitHeight = 445
+          ExplicitWidth = 823
+          ExplicitHeight = 536
           inherited DBGridConsulta: TDBGrid
             Left = 0
             Width = 601
@@ -475,17 +490,23 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
   end
+  inherited PanelTituloModeloCadastro: TPanel
+    Width = 946
+    ExplicitWidth = 942
+  end
   inherited StatusBar1: TStatusBar
-    Top = 563
+    Top = 653
+    Width = 946
     Height = 21
-    ExplicitTop = 562
+    ExplicitTop = 653
+    ExplicitWidth = 946
     ExplicitHeight = 21
   end
   inherited ImageListCadastro: TImageList
     Left = 776
     Top = 0
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       
         'SELECT ID_OCORRENCIA_PLANTAO, ASSUNTO, OCORRENCIA, DATA_INICIO, ' +
@@ -548,24 +569,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     Left = 708
     Top = 0
   end
-  object SqlHistOcoInt: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_ocorrencia'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'SELECT ho.id_hist_oc, ho.id_interno, ho.id_ocorrencia_plantao, h' +
-        'o.data, i.rgi'
-      'FROM HISTORICO_OCORRENCIA_INTERNO ho'
-      'INNER JOIN INTERNO I ON (ho.id_interno = i.id_interno)'
-      'where id_ocorrencia_plantao = :id_ocorrencia')
-    Left = 478
-    Top = 388
-  end
   object CdsHistOcoInt: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'id_ocorrencia_plantao'
@@ -626,17 +629,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     Left = 647
     Top = 403
   end
-  object SqlNaturezaOcorrencia: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'Select *'
-      'from NATUREZA_OCORRENCIA'
-      'order by natureza_ocorrencia')
-    SQLConnection = DM.SQLConnect
-    Left = 160
-    Top = 397
-  end
   object CdsNaturezaOcorrencia: TClientDataSet
     Aggregates = <>
     Params = <>
@@ -673,19 +665,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
   end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'select id_ocorrencia_plantao, assunto, ocorrencia, data_inicio, ' +
-        'data_final'
-      'from ocorrencia_plantao'
-      ' ')
-    SQLConnection = DM.SQLConnect
-    Left = 521
-    Top = 175
-  end
   object DspConsulta: TDataSetProvider
     DataSet = SqlConsulta
     Left = 552
@@ -712,7 +691,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 39864.392612476900000000
-    ReportOptions.LastChange = 41381.478912986100000000
+    ReportOptions.LastChange = 45302.581814768520000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'procedure Page1OnBeforePrint(Sender: TfrxComponent);'
@@ -727,14 +706,17 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       '  '
       'procedure DialogPage1OnShow(Sender: TfrxComponent);'
       'begin'
-      '  Database.Params.LoadFromFile('#39'..\config\dbxconnections.ini'#39');'
+      '  Database.Params.LoadFromFile('#39'..\Config\dbxconnections.ini'#39');'
       '  SqlOcorrencia.Open;'
       '  while not SqlOcorrencia.EOF do'
       '  begin'
       
+        '    {ComboBox1.Items.Add(SqlOcorrencia.FieldByName('#39'ID_OCORRENCI' +
+        'A_PLANTAO'#39').AsString'
+      '    +'#39' ('#39'+SqlOcorrencia.FieldByName('#39'ASSUNTO'#39').AsString+'#39')'#39');}'
+      
         '    ComboBox1.Items.Add(SqlOcorrencia.FieldByName('#39'ID_OCORRENCIA' +
-        '_PLANTAO'#39').AsString'
-      '    +'#39' ('#39'+SqlOcorrencia.FieldByName('#39'ASSUNTO'#39').AsString+'#39')'#39');  '
+        '_PLANTAO'#39').AsString);            '
       '    SqlOcorrencia.Next;'
       '  end;'
       '    ComboBox1.setFocus;          '
@@ -767,9 +749,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     Left = 639
     Top = 320
     Datasets = <
-      item
-        DataSetName = 'frxDBDataset1'
-      end
       item
         DataSet = FrxOcorrrenciaPlantao.Sqlup
         DataSetName = 'Sqlup'
@@ -890,7 +869,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           item
             Name = 'ocorrencia'
             DataType = ftString
-            Expression = 'ComboBox1.text;'
+            Expression = 'ComboBox1.text'
+          end
+          item
+            Name = 'ocorrencia'
+            DataType = ftString
+            Expression = 'ComboBox1.text'
           end>
         SQL.Strings = (
           
@@ -922,8 +906,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           'inner join interno i on (i.id_interno = ho.id_interno) '
           'where op.ID_UP = :ID_UP'
           
-            'and ( (op.id_ocorrencia_plantao||'#39' ('#39'||op.assunto||'#39')'#39' LIKE '#39'%'#39'|' +
-            '| :ocorrencia || '#39'%'#39' ) )   '
+            '/*and ( (op.id_ocorrencia_plantao||'#39' ('#39'||op.assunto||'#39')'#39' LIKE '#39'%' +
+            #39'|| :ocorrencia || '#39'%'#39' ) )*/'
+          
+            'and op.id_ocorrencia_plantao = :ocorrencia                      ' +
+            '                                                                ' +
+            '                 '
           '                                              '
           '    '
           ''
@@ -943,7 +931,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
           item
             Name = 'ocorrencia'
             DataType = ftString
-            Expression = 'ComboBox1.text;'
+            Expression = 'ComboBox1.text'
+          end
+          item
+            Name = 'ocorrencia'
+            DataType = ftString
+            Expression = 'ComboBox1.text'
           end>
       end
       object sqlUnidadePenal: TfrxDBXQuery
@@ -1072,7 +1065,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         Font.Style = []
         Height = 151.858380000000000000
         ParentFont = False
-        Top = 18.897650000000000000
+        Top = 16.000000000000000000
         Width = 710.551640000000000000
         object Memo2: TfrxMemoView
           AllowVectorExport = True
@@ -1186,7 +1179,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         FillGap.Right = 0
         Frame.Typ = []
         Height = 19.236240000000000000
-        Top = 748.346940000000000000
+        Top = 704.000000000000000000
         Width = 710.551640000000000000
         DataSet = FrxOcorrrenciaPlantao.sqlListaOcorrencia
         DataSetName = 'sqlListaOcorrencia'
@@ -1195,7 +1188,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Left = 8.338590000000000000
-          Top = 3.118119999999976000
+          Top = 3.118119999999980000
           Width = 400.630180000000000000
           Height = 18.897650000000000000
           DataSet = FrxOcorrrenciaPlantao.sqlListaOcorrencia
@@ -1220,12 +1213,12 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         FillGap.Right = 0
         Frame.Typ = []
         Height = 22.677180000000000000
-        Top = 827.717070000000000000
+        Top = 744.000000000000000000
         Width = 710.551640000000000000
         object Memo19: TfrxMemoView
           AllowVectorExport = True
           Left = 172.078850000000000000
-          Top = 7.133889999999951000
+          Top = 7.133889999999950000
           Width = 502.677490000000000000
           Height = 18.897650000000000000
           DisplayFormat.DecimalSeparator = ','
@@ -1251,7 +1244,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         FillGap.Right = 0
         Frame.Typ = []
         Height = 494.764070000000000000
-        Top = 230.551330000000000000
+        Top = 188.000000000000000000
         Width = 710.551640000000000000
         AllowSplit = True
         Condition = 'sqlListaOcorrencia."ID_OCORRENCIA_PLANTAO"'
@@ -1260,7 +1253,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object Memo6: TfrxMemoView
           AllowVectorExport = True
           Left = 8.338590000000000000
-          Top = 475.866419999999900000
+          Top = 475.866420000000000000
           Width = 226.771800000000000000
           Height = 18.897650000000000000
           StretchMode = smActualHeight
@@ -1318,7 +1311,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object Memo30: TfrxMemoView
           AllowVectorExport = True
           Left = 271.992270000000000000
-          Top = 342.826839999999900000
+          Top = 342.826840000000000000
           Width = 404.409710000000000000
           Height = 18.897650000000000000
           DataSet = FrxOcorrrenciaPlantao.SQLDIRETOR
@@ -1340,7 +1333,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object Memo5: TfrxMemoView
           AllowVectorExport = True
           Left = 192.756030000000000000
-          Top = 393.582869999999900000
+          Top = 393.582870000000000000
           Width = 272.126160000000000000
           Height = 18.897650000000000000
           DisplayFormat.DecimalSeparator = ','
@@ -1357,7 +1350,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object sqlListaOcorrenciaID_OCORRENCIA_PLANTAO: TfrxMemoView
           AllowVectorExport = True
           Left = 5.338590000000000000
-          Top = 32.456709999999990000
+          Top = 32.456710000000000000
           Width = 238.110390000000000000
           Height = 18.897650000000000000
           DataSet = FrxOcorrrenciaPlantao.sqlListaOcorrencia
@@ -1376,7 +1369,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object sqlListaOcorrenciaDATA_INICIO: TfrxMemoView
           AllowVectorExport = True
           Left = 250.433210000000000000
-          Top = 33.015769999999970000
+          Top = 33.015770000000000000
           Width = 147.401670000000000000
           Height = 18.897650000000000000
           DataSet = FrxOcorrrenciaPlantao.sqlListaOcorrencia
@@ -1395,7 +1388,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object sqlListaOcorrenciaDATA_FINAL: TfrxMemoView
           AllowVectorExport = True
           Left = 402.291590000000000000
-          Top = 33.236240000000010000
+          Top = 33.236240000000000000
           Width = 204.094620000000000000
           Height = 18.897650000000000000
           DataSet = FrxOcorrrenciaPlantao.sqlListaOcorrencia
@@ -1476,7 +1469,7 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
         object sqlListaOcorrenciaADJUNTO: TfrxMemoView
           AllowVectorExport = True
           Left = 5.338590000000000000
-          Top = 61.913419999999970000
+          Top = 61.913420000000000000
           Width = 548.031850000000000000
           Height = 18.897650000000000000
           DataSet = FrxOcorrrenciaPlantao.sqlListaOcorrencia
@@ -1667,25 +1660,6 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
       end
     end
   end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      'SELECT id_interno, nome_interno, rgi'
-      'FROM INTERNO'
-      'WHERE ID_UP = :ID_UP'
-      'and coalesce(nome_interno,'#39#39')<>'#39#39
-      'AND ST = '#39'A'#39
-      'ORDER BY NOME_INTERNO')
-    Left = 280
-    Top = 296
-  end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
     Left = 308
@@ -1714,5 +1688,65 @@ inherited FrmCadastroOcorrenciaPlantao: TFrmCadastroOcorrenciaPlantao
     DataSet = CdsInterno
     Left = 364
     Top = 296
+  end
+  object SqlHistOcoInt: TFDQuery
+    ObjectView = False
+    FetchOptions.AssignedValues = [evAutoFetchAll]
+    FetchOptions.AutoFetchAll = afDisable
+    SQL.Strings = (
+      
+        'SELECT ho.id_hist_oc, ho.id_interno, ho.id_ocorrencia_plantao, h' +
+        'o.data, i.rgi'
+      'FROM HISTORICO_OCORRENCIA_INTERNO ho'
+      'INNER JOIN INTERNO I ON (ho.id_interno = i.id_interno)'
+      'where id_ocorrencia_plantao = :id_ocorrencia')
+    Left = 478
+    Top = 388
+    ParamData = <
+      item
+        Name = 'ID_OCORRENCIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlNaturezaOcorrencia: TFDQuery
+    ObjectView = False
+    SQL.Strings = (
+      'Select *'
+      'from NATUREZA_OCORRENCIA'
+      'order by natureza_ocorrencia')
+    Left = 160
+    Top = 397
+  end
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    SQL.Strings = (
+      
+        'select id_ocorrencia_plantao, assunto, ocorrencia, data_inicio, ' +
+        'data_final'
+      'from ocorrencia_plantao'
+      ' ')
+    Left = 521
+    Top = 175
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno, rgi'
+      'FROM INTERNO'
+      'WHERE ID_UP = :ID_UP'
+      'and coalesce(nome_interno,'#39#39')<>'#39#39
+      'AND ST = '#39'A'#39
+      'ORDER BY NOME_INTERNO')
+    Left = 280
+    Top = 296
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object frxDBXComponents1: TfrxDBXComponents
+    Left = 759
+    Top = 305
   end
 end

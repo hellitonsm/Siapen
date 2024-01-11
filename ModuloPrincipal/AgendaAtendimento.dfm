@@ -1,21 +1,23 @@
 inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
   Left = 313
   Top = 113
-  Width = 925
-  Height = 628
   Caption = 'Agenda de Atendimento'
   Menu = MainMenu1
-  OldCreateOrder = True
   OnClose = FormClose
-  PixelsPerInch = 96
+  ExplicitWidth = 952
+  ExplicitHeight = 641
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Width = 909
+    Width = 940
     Height = 39
     Align = alTop
+    ExplicitWidth = 936
+    ExplicitHeight = 39
     inherited ToolBarModeloCadastro: TToolBar
-      Width = 829
+      Width = 860
       Height = 39
+      ExplicitWidth = 856
+      ExplicitHeight = 39
       inherited Novo: TToolButton
         Wrap = False
       end
@@ -23,51 +25,78 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
         Left = 113
         Top = 0
         Wrap = False
+        ExplicitLeft = 113
+        ExplicitTop = 0
       end
       inherited Cancelar: TToolButton
         Left = 220
         Top = 0
         Wrap = False
+        ExplicitLeft = 220
+        ExplicitTop = 0
       end
       inherited Salvar: TToolButton
         Left = 327
         Top = 0
         Wrap = False
+        ExplicitLeft = 327
+        ExplicitTop = 0
       end
       inherited Excluir: TToolButton
         Left = 434
         Top = 0
         Wrap = False
+        ExplicitLeft = 434
+        ExplicitTop = 0
       end
       inherited Fechar: TToolButton
         Left = 541
         Top = 0
+        ExplicitLeft = 541
+        ExplicitTop = 0
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Left = 829
+      Left = 860
       Top = 0
       Width = 80
       Height = 39
       DataSource = DsConsulta
       Align = alRight
       Hints.Strings = ()
+      ExplicitLeft = 856
+      ExplicitTop = 0
+      ExplicitWidth = 80
+      ExplicitHeight = 39
     end
   end
   inherited PanelModeloCadastro: TPanel
     Left = 0
     Top = 71
-    Width = 909
-    Height = 480
-    inherited PageControlModeloCadastro: TPageControl
+    Width = 940
+    Height = 493
+    ExplicitLeft = 0
+    ExplicitTop = 71
+    ExplicitWidth = 936
+    ExplicitHeight = 492
+    inherited Image2: TImage
       Width = 909
-      Height = 480
-      ActivePage = TabSheetCadastro
+      ExplicitWidth = 909
+    end
+    inherited PageControlModeloCadastro: TPageControl
+      Width = 940
+      Height = 493
+      ExplicitWidth = 936
+      ExplicitHeight = 492
       inherited TabSheetCadastro: TTabSheet
         Caption = 'Atendimento'
+        ExplicitWidth = 932
+        ExplicitHeight = 465
         inherited PanelCadastro: TPanel
-          Width = 901
-          Height = 452
+          Width = 932
+          Height = 465
+          ExplicitWidth = 928
+          ExplicitHeight = 464
           object lbl1: TLabel
             Left = 25
             Top = 99
@@ -463,7 +492,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
                 Height = 21
                 DataField = 'CARGO_SOLICITANTE'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'Comandante da 3'#170' CPMind'
                   'Comandante do 4'#186' BPM'
@@ -491,7 +519,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
                 Height = 21
                 DataField = 'VOCATIVO_SOLICITANTE'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'Ilustrimimo(a)'
                   'Merit'#237'ssimo(a) Juiz(a)'
@@ -515,7 +542,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
                 Height = 21
                 DataField = 'FORMA_DE_TRATAMENTO'
                 DataSource = DsCadastro
-                ItemHeight = 13
                 Items.Strings = (
                   'Excelent'#237'ssimo(a) Senhor(a)'
                   'Excelent'#237'ssimo(a) Senhor(a)'
@@ -692,7 +718,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
             Height = 21
             DataField = 'TIPO_DOCUMENTO_SOLICITACAO'
             DataSource = DsCadastro
-            ItemHeight = 13
             Items.Strings = (
               'Alvar'#225
               'Carta Livramento'
@@ -740,8 +765,8 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
             Top = 77
             Width = 131
             Height = 21
-            Date = 41101.621299317130000000
-            Time = 41101.621299317130000000
+            Date = 41101.000000000000000000
+            Time = 0.621299317128432400
             TabOrder = 7
             DataField = 'DATA_AGENDA'
             DataSource = DsCadastro
@@ -750,9 +775,13 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 932
+        ExplicitHeight = 465
         inherited PanelLocalizaConsulta: TPanel
-          Width = 901
+          Width = 932
           Height = 113
+          ExplicitWidth = 932
+          ExplicitHeight = 113
           object lbl13: TLabel [0]
             Left = 506
             Top = 70
@@ -779,6 +808,9 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
             Top = 70
             Width = 168
             Caption = 'Localizar: (Interno) (M'#237'nimo 3 letras)'
+            ExplicitLeft = 109
+            ExplicitTop = 70
+            ExplicitWidth = 168
           end
           object btn7: TSpeedButton [4]
             Left = 773
@@ -806,7 +838,7 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
           object GroupBox1: TGroupBox [6]
             Left = 1
             Top = 1
-            Width = 899
+            Width = 930
             Height = 55
             Align = alTop
             Caption = 'Consulta'
@@ -853,8 +885,8 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
               Top = 27
               Width = 128
               Height = 22
-              Date = 40934.485215416670000000
-              Time = 40934.485215416670000000
+              Date = 40934.000000000000000000
+              Time = 0.485215416672872400
               TabOrder = 0
             end
             object DateTimePickerFinal: TDateTimePicker
@@ -862,8 +894,8 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
               Top = 27
               Width = 128
               Height = 22
-              Date = 40934.485215416670000000
-              Time = 40934.485215416670000000
+              Date = 40934.000000000000000000
+              Time = 0.485215416672872400
               TabOrder = 1
             end
             object CheckBoxTodosPostos: TCheckBox
@@ -893,8 +925,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
               Width = 100
               Height = 32
               Caption = 'Localizar'
-              TabOrder = 4
-              OnClick = btn4Click
               Glyph.Data = {
                 F6060000424DF606000000000000360000002800000018000000180000000100
                 180000000000C0060000120B0000120B00000000000000000000FF00FFFF00FF
@@ -952,6 +982,8 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
                 E9CCA4996964996964FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
                 FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF99696499
                 6964996964996964996964FF00FFFF00FFFF00FFFF00FFFF00FF}
+              TabOrder = 4
+              OnClick = btn4Click
             end
           end
           inherited EditLocalizar: TEdit
@@ -960,6 +992,9 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
             Width = 281
             TabOrder = 2
             OnEnter = EditLocalizarEnter
+            ExplicitLeft = 109
+            ExplicitTop = 88
+            ExplicitWidth = 281
           end
           object EditRGI: TEdit
             Left = 4
@@ -1019,11 +1054,14 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
         end
         inherited PanelConsulta: TPanel
           Top = 113
-          Width = 901
-          Height = 339
+          Width = 932
+          Height = 352
+          ExplicitTop = 113
+          ExplicitWidth = 932
+          ExplicitHeight = 352
           inherited DBGridConsulta: TDBGrid
-            Width = 899
-            Height = 307
+            Width = 930
+            Height = 320
             DataSource = DsConsulta
             OnColEnter = DBGridConsultaColEnter
             Columns = <
@@ -1163,8 +1201,8 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
           end
           object PanelRodape: TPanel
             Left = 1
-            Top = 308
-            Width = 899
+            Top = 321
+            Width = 930
             Height = 30
             Align = alBottom
             TabOrder = 1
@@ -1210,24 +1248,11 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
       end
     end
   end
-  inherited PanelTituloModeloCadastro: TPanel
-    Width = 909
-    inherited Image2: TImage
-      Width = 909
-    end
-  end
   inherited StatusBar1: TStatusBar
-    Top = 551
-    Width = 909
+    ExplicitTop = 563
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'IDAGENDA_ATENDIMENTO'
-        ParamType = ptInput
-        Value = 0
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM AGENDA_ATENDIMENTO'
@@ -1235,6 +1260,13 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
       '')
     Left = 544
     Top = 0
+    ParamData = <
+      item
+        Name = 'IDAGENDA_ATENDIMENTO'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 0
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 572
@@ -1251,15 +1283,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
   inherited DsCadastro: TDataSource
     Left = 628
     Top = 0
-  end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'EST'#193' NO FONTE')
-    SQLConnection = DM.SQLConnect
-    Left = 265
-    Top = 65535
   end
   object DspConsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -1280,28 +1303,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
     Left = 349
     Top = 65535
   end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID_UP'
-        ParamType = ptInput
-        Value = -1
-      end>
-    SQL.Strings = (
-      
-        'SELECT id_interno, nome_interno || '#39' || MAE: '#39' || coalesce(MAE,'#39 +
-        #39') as "nome_interno"'
-      'FROM INTERNO'
-      'WHERE ID_UP = :ID_UP'
-      'and coalesce(nome_interno,'#39#39')<>'#39#39
-      'AND ST = '#39'A'#39
-      'ORDER BY NOME_INTERNO')
-    SQLConnection = DM.SQLConnect
-    Left = 792
-    Top = 248
-  end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
     Left = 820
@@ -1318,15 +1319,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
     DataSet = CdsInterno
     Left = 876
     Top = 248
-  end
-  object SqlMenores: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 784
-    Top = 376
   end
   object DspMenores: TDataSetProvider
     DataSet = SqlMenores
@@ -1369,35 +1361,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
     DataSet = CdsDestino
     Left = 788
   end
-  object SqlDestino: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT C.CIDADE||'#39' / '#39'||C.UF AS CIDADE, D.* '
-      'FROM DESTINO D'
-      'LEFT JOIN CIDADE C ON (C.ID_CIDADE=D.IDCIDADE)'
-      'ORDER BY D.DESTINO')
-    SQLConnection = DM.SQLConnect
-    Left = 704
-  end
-  object SqlVisitante: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_visitante'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select '
-      'v.id_visitante, v.visitante'
-      'from visitante v'
-      'where id_visitante=:id_visitante')
-    SQLConnection = DM.SQLConnect
-    Left = 696
-    Top = 48
-  end
   object DspVisitante: TDataSetProvider
     DataSet = SqlVisitante
     Left = 724
@@ -1414,26 +1377,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
     DataSet = CdsVisitante
     Left = 780
     Top = 48
-  end
-  object SQLAdvogado: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      
-        'select ai.id_advogado, a.advogado || '#39' || OAB: '#39' || coalesce(a.o' +
-        'ab,'#39#39') as advogado from advogados_internos ai'
-      'inner join advogado a on (a.id_advogado = ai.id_advogado) '
-      'where ai.id_interno = :id_interno and ai.status = '#39'A'#39
-      'order by a.advogado')
-    SQLConnection = DM.SQLConnect
-    Left = 788
-    Top = 287
   end
   object dspAdvogado: TDataSetProvider
     DataSet = SQLAdvogado
@@ -1452,24 +1395,6 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
     Left = 872
     Top = 287
   end
-  object SQLComboVisitante: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_interno'
-        ParamType = ptInput
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select vi.id_visitante, v.visitante from visitante_interno vi'
-      'inner join visitante v on (v.id_visitante = vi.id_visitante)'
-      'where v.status = '#39'A'#39' and vi.id_interno = :id_interno'
-      'order by v.visitante')
-    SQLConnection = DM.SQLConnect
-    Left = 792
-    Top = 327
-  end
   object dspComboVisitante: TDataSetProvider
     DataSet = SQLComboVisitante
     Left = 820
@@ -1486,5 +1411,101 @@ inherited FrmAgendaAtendimento: TFrmAgendaAtendimento
     DataSet = cdsComboVisitante
     Left = 876
     Top = 327
+  end
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'EST'#193' NO FONTE')
+    Left = 265
+    Top = 65535
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'SELECT id_interno, nome_interno || '#39' || MAE: '#39' || coalesce(MAE,'#39 +
+        #39') as "nome_interno"'
+      'FROM INTERNO'
+      'WHERE ID_UP = :ID_UP'
+      'and coalesce(nome_interno,'#39#39')<>'#39#39
+      'AND ST = '#39'A'#39
+      'ORDER BY NOME_INTERNO')
+    Left = 792
+    Top = 248
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMenores: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      '')
+    Left = 784
+    Top = 376
+  end
+  object SqlDestino: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT C.CIDADE||'#39' / '#39'||C.UF AS CIDADE, D.* '
+      'FROM DESTINO D'
+      'LEFT JOIN CIDADE C ON (C.ID_CIDADE=D.IDCIDADE)'
+      'ORDER BY D.DESTINO')
+    Left = 704
+  end
+  object SqlVisitante: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select '
+      'v.id_visitante, v.visitante'
+      'from visitante v'
+      'where id_visitante=:id_visitante')
+    Left = 696
+    Top = 48
+    ParamData = <
+      item
+        Name = 'ID_VISITANTE'
+        ParamType = ptInput
+      end>
+  end
+  object SQLAdvogado: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select ai.id_advogado, a.advogado || '#39' || OAB: '#39' || coalesce(a.o' +
+        'ab,'#39#39') as advogado from advogados_internos ai'
+      'inner join advogado a on (a.id_advogado = ai.id_advogado) '
+      'where ai.id_interno = :id_interno and ai.status = '#39'A'#39
+      'order by a.advogado')
+    Left = 788
+    Top = 287
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLComboVisitante: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select vi.id_visitante, v.visitante from visitante_interno vi'
+      'inner join visitante v on (v.id_visitante = vi.id_visitante)'
+      'where v.status = '#39'A'#39' and vi.id_interno = :id_interno'
+      'order by v.visitante')
+    Left = 792
+    Top = 327
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

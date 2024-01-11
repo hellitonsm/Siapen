@@ -4,8 +4,8 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   Caption = 'SIAPEN'
-  ClientHeight = 702
-  ClientWidth = 1016
+  ClientHeight = 698
+  ClientWidth = 1000
   Color = clNone
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,8 +27,8 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
   object Bevel1: TBevel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 702
+    Width = 1000
+    Height = 698
     Align = alClient
     ExplicitWidth = 1163
     ExplicitHeight = 714
@@ -11531,6 +11531,7 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
       object ConsultaPROCED1: TMenuItem
         Caption = 'Consulta PROCED'
         ImageIndex = 3
+        Visible = False
         OnClick = ConsultaPROCED1Click
       end
     end
@@ -13216,18 +13217,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000}
   end
-  object SqlMovProcDetalhado: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT *'
-      
-        'FROM MOV_PROCEDIMENTOS M JOIN PROCEDIMENTOS P ON P.IDPROCEDIMENT' +
-        'OS=M.IDPROCEDIMENTOS')
-    SQLConnection = DM.SQLConnect
-    Left = 880
-    Top = 56
-  end
   object DspMovProcDetalhado: TDataSetProvider
     DataSet = SqlMovProcDetalhado
     Left = 908
@@ -13431,15 +13420,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
       end
     end
   end
-  object SqlEscalaPlantao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * FROM ESCALA_PLANTAO')
-    SQLConnection = DM.SQLConnect
-    Left = 880
-    Top = 176
-  end
   object DspEscalaPlantao: TDataSetProvider
     DataSet = SqlEscalaPlantao
     Left = 908
@@ -13555,32 +13535,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
     Left = 108
     Top = 8
   end
-  object SqlUP: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * FROM UNIDADE_PENAL'
-      'order by nome_up')
-    SQLConnection = DM.SQLConnect
-    Left = 80
-    Top = 8
-  end
-  object SQLfuncionario: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT F.ID_FUNCIONARIO, F.NOME_FUNCIONARIO, F.FOTO,'
-      '     F.DTNASCIMENTO, F.MATRICULA, P.POSTO_TRABALHO, U.NOME_UP '
-      '     FROM FUNCIONARIO F '
-      '     LEFT JOIN UNIDADE_PENAL U ON (F.ID_UP=U.ID_UP) '
-      
-        '     LEFT JOIN POSTO_TRABALHO P ON (F.IDPOSTO_TRABALHO=P.IDPOSTO' +
-        '_TRABALHO)'
-      '     WHERE F.ID_FUNCIONARIO=2099')
-    SQLConnection = DM.SQLConnect
-    Left = 880
-    Top = 232
-  end
   object dspfuncionario: TDataSetProvider
     DataSet = SQLfuncionario
     Left = 908
@@ -13602,22 +13556,6 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
     Filter = 'Imagens (*.jpg)|*.jpg'
     Left = 679
     Top = 8
-  end
-  object SqlUltimosLogs: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT F.ID_FUNCIONARIO, F.NOME_FUNCIONARIO, F.FOTO,'
-      '     F.DTNASCIMENTO, F.MATRICULA, P.POSTO_TRABALHO, U.NOME_UP '
-      '     FROM FUNCIONARIO F '
-      '     LEFT JOIN UNIDADE_PENAL U ON (F.ID_UP=U.ID_UP) '
-      
-        '     LEFT JOIN POSTO_TRABALHO P ON (F.IDPOSTO_TRABALHO=P.IDPOSTO' +
-        '_TRABALHO)'
-      '     WHERE F.ID_FUNCIONARIO=2099')
-    SQLConnection = DM.SQLConnect
-    Left = 880
-    Top = 280
   end
   object DspUltimosLogs: TDataSetProvider
     DataSet = SqlUltimosLogs
@@ -13651,5 +13589,59 @@ object FrmModuloPrincipal: TFrmModuloPrincipal
     OnTimer = TimerAtualizaRelQtdPresosTimer
     Left = 264
     Top = 104
+  end
+  object SqlUltimosLogs: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT F.ID_FUNCIONARIO, F.NOME_FUNCIONARIO, F.FOTO,'
+      ' F.DTNASCIMENTO, F.MATRICULA, P.POSTO_TRABALHO, U.NOME_UP '
+      ' FROM FUNCIONARIO F '
+      ' LEFT JOIN UNIDADE_PENAL U ON (F.ID_UP=U.ID_UP) '
+      
+        ' LEFT JOIN POSTO_TRABALHO P ON (F.IDPOSTO_TRABALHO=P.IDPOSTO_TRA' +
+        'BALHO)'
+      'WHERE F.ID_FUNCIONARIO=2099')
+    Left = 868
+    Top = 281
+  end
+  object SQLfuncionario: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT F.ID_FUNCIONARIO, F.NOME_FUNCIONARIO, F.FOTO,'
+      '     F.DTNASCIMENTO, F.MATRICULA, P.POSTO_TRABALHO, U.NOME_UP '
+      '     FROM FUNCIONARIO F '
+      '     LEFT JOIN UNIDADE_PENAL U ON (F.ID_UP=U.ID_UP) '
+      
+        '     LEFT JOIN POSTO_TRABALHO P ON (F.IDPOSTO_TRABALHO=P.IDPOSTO' +
+        '_TRABALHO)'
+      '     WHERE F.ID_FUNCIONARIO=2099')
+    Left = 868
+    Top = 241
+  end
+  object SqlEscalaPlantao: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM ESCALA_PLANTAO')
+    Left = 868
+    Top = 177
+  end
+  object SqlMovProcDetalhado: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT *'
+      
+        'FROM MOV_PROCEDIMENTOS M JOIN PROCEDIMENTOS P ON P.IDPROCEDIMENT' +
+        'OS=M.IDPROCEDIMENTOS'
+      '')
+    Left = 872
+    Top = 56
+  end
+  object SqlUP: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM UNIDADE_PENAL'
+      'order by nome_up')
+    Left = 72
+    Top = 8
   end
 end

@@ -5,14 +5,16 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, FMTBcd, DB, Grids, DBGrids, SqlExpr, Provider, DBClient,
-  StdCtrls, ExtCtrls, DBCtrls, Buttons;
+  StdCtrls, ExtCtrls, DBCtrls, Buttons, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmConsultaLocalizacaoPorProntuario = class(TForm)
     DBGrid1: TDBGrid;
     DsVinc_Mudanca_Cela: TDataSource;
     DspVinc_Mudanca_Cela: TDataSetProvider;
-    SqlVinc_Mudanca_Cela: TSQLQuery;
     CdsVinc_Mudanca_Cela: TClientDataSet;
     CdsVinc_Mudanca_CelaRGI: TStringField;
     CdsVinc_Mudanca_CelaNOME_INTERNO: TStringField;
@@ -36,10 +38,8 @@ type
     Label4: TLabel;
     Dsvinc_transferencia_interno: TDataSource;
     Dspvinc_transferencia_interno: TDataSetProvider;
-    Sqlvinc_transferencia_interno: TSQLQuery;
     DBGrid2: TDBGrid;
     Label5: TLabel;
-    SqlExecute: TSQLQuery;
     Cdsvinc_transferencia_interno: TClientDataSet;
     Cdsvinc_transferencia_internoRGI: TStringField;
     Cdsvinc_transferencia_internoNOME_INTERNO: TStringField;
@@ -51,11 +51,14 @@ type
     Cdsvinc_transferencia_internoLIBERADA: TStringField;
     Cdsvinc_transferencia_internoRECEBIDA: TStringField;
     EditLocalizar: TEdit;
-    SqlExecute2: TSQLQuery;
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     DBLookupComboBoxInterno: TDBLookupComboBox;
+    SqlVinc_Mudanca_Cela: TFDQuery;
+    Sqlvinc_transferencia_interno: TFDQuery;
+    SqlExecute: TFDQuery;
+    SqlExecute2: TFDQuery;
     procedure Edit1Exit(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure EditLocalizarExit(Sender: TObject);

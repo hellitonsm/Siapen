@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, DBCtrls, ToolWin, ExtCtrls,
-  Mask, jpeg, Lib;
+  Mask, jpeg, Lib, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  System.ImageList;
 
 type
   TFrmCadastroFaltasDisciplinares = class(TFrmModeloCadastro)
@@ -18,6 +21,10 @@ type
     DBEdit3: TDBEdit;
     Label5: TLabel;
     DBComboBox1: TDBComboBox;
+    SqlCadastroID_FALTA_DISCIPLINAR: TIntegerField;
+    SqlCadastroFALTA_DISCIPLINAR: TStringField;
+    SqlCadastroTEMPOREABILITACAO: TIntegerField;
+    SqlCadastroTIPOFALTA: TStringField;
     procedure NovoClick(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

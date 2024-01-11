@@ -6,23 +6,26 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, Buttons, jpeg, frxCtrls, adpDBDateTimePicker;
+  Mask, Buttons, jpeg, frxCtrls, adpDBDateTimePicker, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroProcesso = class(TFrmModeloCadastro)
     dsvincartigo: TDataSource;
     cdsvincartigo: TClientDataSet;
     dspvincartigo: TDataSetProvider;
-    SQLvincartigo: TSQLQuery;
+    SQLvincartigoold: TSQLQuery;
     cdsvincartigoID_VINC_ARTIGO: TIntegerField;
     cdsvincartigoID_ARTIGO: TIntegerField;
     cdsvincartigoID_PROCESSO: TIntegerField;
     cdsvincartigoArtigos: TStringField;
-    SqlLista: TSQLQuery;
+    SqlListaold: TSQLQuery;
     DspLista: TDataSetProvider;
     CdsLista: TClientDataSet;
     DsLista: TDataSource;
-    SqlConsulta: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
     DspConsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
@@ -59,7 +62,7 @@ type
     DBEdit5: TDBEdit;
     Label8: TLabel;
     adpDBDateTimePickerDataCondenacao: TadpDBDateTimePicker;
-    SqlDocumentos: TSQLQuery;
+    SqlDocumentosold: TSQLQuery;
     DspDocumentos: TDataSetProvider;
     CdsDocumentos: TClientDataSet;
     DsDocumentos: TDataSource;
@@ -103,13 +106,13 @@ type
     TabSheet5: TTabSheet;
     PanelEventos: TPanel;
     DBGridEventos: TDBGrid;
-    SqlEventos: TSQLQuery;
+    SqlEventosold: TSQLQuery;
     DspEventos: TDataSetProvider;
     CdsEventos: TClientDataSet;
     DsEventos: TDataSource;
     DsTipoEventos: TDataSource;
     BtnEventos: TButton;
-    SqlTipoEventos: TSQLQuery;
+    SqlTipoEventosold: TSQLQuery;
     DspTipoEventos: TDataSetProvider;
     CdsTipoEventos: TClientDataSet;
     CdsCadastroIDTIPO_EVENTO_PROCESSO: TIntegerField;
@@ -120,7 +123,7 @@ type
     Panel1: TPanel;
     DBGrid1: TDBGrid;
     BtnComutacao: TButton;
-    SqlComutacao: TSQLQuery;
+    SqlComutacaoold: TSQLQuery;
     DspComutacao: TDataSetProvider;
     CdsComutacao: TClientDataSet;
     DsComutacao: TDataSource;
@@ -157,15 +160,15 @@ type
     DBRadioGroup1: TDBRadioGroup;
     TabSheet9: TTabSheet;
     TabSheet10: TTabSheet;
-    SqlDetracao: TSQLQuery;
+    SqlDetracaoold: TSQLQuery;
     DspDetracao: TDataSetProvider;
     CdsDetracao: TClientDataSet;
     DsDetracao: TDataSource;
-    SqlInterrupcao: TSQLQuery;
+    SqlInterrupcaoold: TSQLQuery;
     DspInterrupcao: TDataSetProvider;
     CdsInterrupcao: TClientDataSet;
     DsInterrupcao: TDataSource;
-    SqlRemicao: TSQLQuery;
+    SqlRemicaoold: TSQLQuery;
     DspRemicao: TDataSetProvider;
     CdsRemicao: TClientDataSet;
     DsRemicao: TDataSource;
@@ -186,7 +189,7 @@ type
     MemoLinhaTempo: TRichEdit;
     Label34: TLabel;
     adpDBDateTimePickerFinalPena: TadpDBDateTimePicker;
-    SqlDelegacia: TSQLQuery;
+    SqlDelegaciaold: TSQLQuery;
     DspDelegacia: TDataSetProvider;
     CdsDelegacia: TClientDataSet;
     DsDelegacia: TDataSource;
@@ -197,7 +200,7 @@ type
     Label36: TLabel;
     DBLookupComboBoxCIDADE_INQUERITO: TDBLookupComboBox;
     SpeedButton3: TSpeedButton;
-    SqlCidadeInquerito: TSQLQuery;
+    SqlCidadeInqueritoold: TSQLQuery;
     DSpCidadeInquerito: TDataSetProvider;
     CdsCidadeInquerito: TClientDataSet;
     DsCidadeInquerito: TDataSource;
@@ -214,11 +217,11 @@ type
     Label37: TLabel;
     DBLookupComboBoxVara: TDBLookupComboBox;
     SpeedButton1: TSpeedButton;
-    SqlCidadeVara: TSQLQuery;
+    SqlCidadeVaraold: TSQLQuery;
     DspCidadeVara: TDataSetProvider;
     CdsCidadeVara: TClientDataSet;
     DsCidadeVara: TDataSource;
-    SqlVara: TSQLQuery;
+    SqlVaraold: TSQLQuery;
     DspVara: TDataSetProvider;
     CdsVara: TClientDataSet;
     DsVara: TDataSource;
@@ -236,6 +239,20 @@ type
     DBEdit17: TDBEdit;
     Button4: TButton;
     DBComboBox9: TDBComboBox;
+    SqlConsulta: TFDQuery;
+    SqlLista: TFDQuery;
+    SQLVincartigo: TFDQuery;
+    SqlCidadeInquerito: TFDQuery;
+    SqlDocumentos: TFDQuery;
+    SqlDelegacia: TFDQuery;
+    SqlRemicao: TFDQuery;
+    SqlCidadeVara: TFDQuery;
+    SqlVara: TFDQuery;
+    SqlEventos: TFDQuery;
+    SqlTipoEventos: TFDQuery;
+    SqlComutacao: TFDQuery;
+    SqlDetracao: TFDQuery;
+    SqlInterrupcao: TFDQuery;
     procedure SpeedButton4Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -277,6 +294,8 @@ type
     procedure DBLookupComboBoxVaraClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure EditLocalizarChange(Sender: TObject);
+    procedure CdsConsultaFilterRecord(DataSet: TDataSet; var Accept: Boolean);
   private
     procedure PreencheCombos;
     { Private declarations }
@@ -495,6 +514,78 @@ begin
 //  DataSet.FieldByName('MOTIVO_PRISAO').AsString := UpperCase(frxComboBoxMotivoPrisao.Text);
 //  DataSet.FieldByName('TIPO_CRIME').AsString := UpperCase(frxComboBoxTipoCrime.Text);
 //  DataSet.FieldByName('MOTIVO_LIBERACAO').AsString := UpperCase(frxComboBoxMotivoLiberacao.Text);
+
+end;
+
+procedure TFrmCadastroProcesso.CdsConsultaFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+
+  if DataSet[DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex]
+    .FieldName] <> Null then
+  begin
+
+    if EditLocalizar.Text <> ' ' then
+    begin
+
+      if (DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex]
+        .Field.DataType in [ftSmallint, ftInteger, ftWord, ftFloat, ftCurrency,
+        ftFMTBcd]) then
+      begin
+
+        if AnsiUpperCase(RemoveAcentos(EditLocalizar.Text))
+          = AnsiUpperCase
+          (RemoveAcentos(DataSet[DBGridConsulta.Columns.Items
+          [DBGridConsulta.SelectedIndex].FieldName])) then
+        begin
+          Accept := true;
+        end
+        else
+        begin
+          Accept := False;
+        end;
+
+      end
+      else
+      begin
+
+        if pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
+          AnsiUpperCase(RemoveAcentos(DataSet[DBGridConsulta.Columns.Items
+          [DBGridConsulta.SelectedIndex].FieldName]))) <> 0 then
+        begin
+          Accept := true;
+        end
+        else
+        begin
+          Accept := False;
+        end;
+
+      end;
+
+    end
+    else
+    begin
+      if pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
+        AnsiUpperCase(RemoveAcentos(DataSet[DBGridConsulta.Columns.Items
+        [DBGridConsulta.SelectedIndex].FieldName]))) = 1 then
+      begin
+        Accept := true;
+      end
+      else
+      begin
+        Accept := False;
+      end;
+
+    end;
+  end
+  else
+  begin
+    if EditLocalizar.Text = ' ' then
+      Accept := true
+    else
+      Accept := False;
+  end;
+
 
 end;
 
@@ -1562,6 +1653,16 @@ procedure TFrmCadastroProcesso.EditarClick(Sender: TObject);
 begin
   inherited;
   PageControlCondenacao.ActivePageIndex := 0;
+end;
+
+procedure TFrmCadastroProcesso.EditLocalizarChange(Sender: TObject);
+begin
+  if (EditLocalizar.Text <> '') then
+  begin
+    DsConsulta.DataSet.Filtered := False;
+    DsConsulta.DataSet.Filtered := True;
+  end else
+    DsConsulta.DataSet.Filtered := False;
 end;
 
 procedure TFrmCadastroProcesso.SpeedButton1Click(Sender: TObject);

@@ -6,11 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, Grids, DBGrids, StdCtrls, ToolWin, ExtCtrls, DBCtrls,
-  Mask, Buttons, jpeg, frxCtrls, Menus;
+  Mask, Buttons, jpeg, frxCtrls, Menus, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroVisitante = class(TFrmModeloCadastro)
-    SqlVisitanteInterno: TSQLQuery;
+    SqlVisitanteInternoold: TSQLQuery;
     DspVisitanteInterno: TDataSetProvider;
     CdsVisitanteInterno: TClientDataSet;
     DsVisitanteInterno: TDataSource;
@@ -88,7 +91,7 @@ type
     DBEdit3: TDBEdit;
     TabSheet4: TTabSheet;
     DBGrid4: TDBGrid;
-    SqlMenores: TSQLQuery;
+    SqlMenoresold: TSQLQuery;
     DspMenores: TDataSetProvider;
     CdsMenores: TClientDataSet;
     DsMenores: TDataSource;
@@ -101,11 +104,11 @@ type
     CdsMenoresDATA_NASCIMENTO: TSQLTimeStampField;
     CdsMenoresID_GRAU_PARENTESCO: TIntegerField;
     CdsMenoresGrauParentesco: TStringField;
-    SqlConsulta: TSQLQuery;
+    SqlConsultaold: TSQLQuery;
     Dspconsulta: TDataSetProvider;
     CdsConsulta: TClientDataSet;
     DsConsulta: TDataSource;
-    SqlSelectvisitante: TSQLQuery;
+    SqlSelectvisitanteold: TSQLQuery;
     Label20: TLabel;
     DBLookupComboBoxIDNATURALIDADE: TDBLookupComboBox;
     SpeedButton4: TSpeedButton;
@@ -115,7 +118,7 @@ type
     Label17: TLabel;
     DBEdit16: TDBEdit;
     Button1: TButton;
-    SqlInterno: TSQLQuery;
+    SqlInternoold: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
@@ -124,8 +127,8 @@ type
     Label22: TLabel;
     DBComboBox1: TDBComboBox;
     Label23: TLabel;
-    SqlTodosInterno: TSQLQuery;
-    SqlTodosVisitantes: TSQLQuery;
+    SqlTodosInternoold: TSQLQuery;
+    SqlTodosVisitantesold: TSQLQuery;
     RadioGroupTipoLocalizar: TRadioGroup;
     BtnBuscar: TButton;
     Button2: TButton;
@@ -136,9 +139,17 @@ type
     Dsconspadrao: TDataSource;
     Cdsconspadrao: TClientDataSet;
     Dspconspadrao: TDataSetProvider;
-    SQLconspadrao: TSQLQuery;
+    SQLconspadraoold: TSQLQuery;
     BitBtn2: TBitBtn;
     Button3: TButton;
+    SQLconspadrao: TFDQuery;
+    SqlVisitanteInterno: TFDQuery;
+    SqlConsulta: TFDQuery;
+    SqlTodosInterno: TFDQuery;
+    SqlMenores: TFDQuery;
+    SqlTodosVisitantes: TFDQuery;
+    SqlInterno: TFDQuery;
+    SqlSelectvisitante: TFDQuery;
     procedure NovoClick(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -338,7 +349,7 @@ begin
 
   //Inserindo o vinculo do interno com o visitante
   DsVisitanteInterno.DataSet.Append;
-  DsVisitanteInterno.DataSet.fieldbyname('ID_visitante_interno').AsInteger := 0;
+  DsVisitanteInterno.DataSet.fieldbyname('ID_visitante_interno').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(ID_VISITANTE_INTERNO,1) FROM RDB$DATABASE');
   DsVisitanteInterno.DataSet.fieldbyname('ID_interno').AsInteger := DBLookupComboBoxInterno.KeyValue;
   DsVisitanteInterno.DataSet.fieldbyname('id_visitante').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_visitante').AsInteger;
@@ -496,7 +507,7 @@ procedure TFrmCadastroVisitante.CdsMenoresAfterInsert(DataSet: TDataSet);
 begin
   inherited;
 
-  DataSet.FieldByName('ID_MENORES').AsInteger := 0;
+  DataSet.FieldByName('ID_MENORES').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_menores,1) FROM RDB$DATABASE');
   DataSet.fieldbyname('id_visitante').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_visitante').AsInteger;
 

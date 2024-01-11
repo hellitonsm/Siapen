@@ -38,7 +38,7 @@ type
     DBEdit9: TDBEdit;
     Label13: TLabel;
     DBLookupComboBox2: TDBLookupComboBox;
-    SQLcalc_trabalho_itens: TSQLQuery;
+    SQLcalc_trabalho_itensold: TSQLQuery;
     DSPcalc_trabalho_itens: TDataSetProvider;
     CDScalc_trabalho_itens: TClientDataSet;
     DScalc_trabalho_itens: TDataSource;
@@ -55,6 +55,7 @@ type
     CDScalc_trabalho_itensDIASREMIDO: TIntegerField;
     Button2: TButton;
     CDScalc_trabalho_itensSetorTrabalho: TStringField;
+    SQLcalc_trabalho_itens: TFDQuery;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure EditarClick(Sender: TObject);
@@ -192,6 +193,8 @@ begin
 
   dm.DsSetorTrabalho.DataSet.Close;
   dm.DsSetorTrabalho.DataSet.OPEN;
+
+  DScalc_trabalho_itens.DataSet.Open;
 end;
 
 procedure TFrmCalculoTrabalho.Button1Click(Sender: TObject);
@@ -211,7 +214,7 @@ begin
     DiasUteis(DsCadastro.DataSet.FieldByName('DATA_inicial').asdatetime
     , DsCadastro.DataSet.FieldByName('DATA_final').asdatetime, naoremir);
 
-  DsCadastro.DataSet.FieldByName('QTDEDIASREMIDO').AsFLOAT := ((DsCadastro.DataSet.FieldByName('QTDEDIASTRABALHADO').AsFLOAT) / 3);
+  DsCadastro.DataSet.FieldByName('QTDEDIASREMIDO').AsInteger := Round(((DsCadastro.DataSet.FieldByName('QTDEDIASTRABALHADO').AsFLOAT) / 3));
 
 end;
 
@@ -229,26 +232,36 @@ begin
   dm.DsExecute.DataSet.Open;
   DsCadastro.DataSet.fieldbyname('IDCALC_SETOR_TRABALHO').AsInteger := dm.DsExecute.DataSet.FieldByName('ID').AsInteger;
   dm.DsExecute.DataSet.Close;
+  DsCadastro.DataSet.FieldByName('totaldiastrabalho').AsInteger := 0;
+  DsCadastro.DataSet.FieldByName('totaldiasremido').AsInteger := 0;
 end;
 
 procedure TFrmCalculoTrabalho.Button2Click(Sender: TObject);
+var
+ count1,count2 : integer;
 begin
+  count1 := DsCadastro.DataSet.FieldByName('totaldiastrabalho').AsInteger;
+  count2 := DsCadastro.DataSet.FieldByName('totaldiasremido').AsInteger;
   DScalc_trabalho_itens.DataSet.Append;
-  DScalc_trabalho_itens.DataSet.fieldbyname('id_calc_trabalho_itens').AsInteger := 0;
+  DScalc_trabalho_itens.DataSet.fieldbyname('id_calc_trabalho_itens').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idcalc_trabalho_itens,1) FROM RDB$DATABASE');
   DScalc_trabalho_itens.DataSet.fieldbyname('id_calc_trabalho').AsInteger := DsCadastro.DataSet.fieldbyname('idcalc_setor_trabalho').AsInteger;
-  DScalc_trabalho_itens.DataSet.fieldbyname('data_inicial').AsInteger := DsCadastro.DataSet.fieldbyname('data_inicial').AsInteger;
-  DScalc_trabalho_itens.DataSet.fieldbyname('data_final').AsInteger := DsCadastro.DataSet.fieldbyname('data_final').AsInteger;
-  DScalc_trabalho_itens.DataSet.fieldbyname('id_setor_trabalho').Asfloat := DsCadastro.DataSet.fieldbyname('id_setor_trabalho').AsInteger;
-  DScalc_trabalho_itens.DataSet.fieldbyname('diastrabalhado').Asfloat := DsCadastro.DataSet.fieldbyname('qtdediastrabalhado').AsInteger;
-  DScalc_trabalho_itens.DataSet.fieldbyname('diasremido').Asfloat := DsCadastro.DataSet.fieldbyname('qtdediasremido').AsInteger;
+  DScalc_trabalho_itens.DataSet.fieldbyname('data_inicial').AsString := DsCadastro.DataSet.fieldbyname('data_inicial').AsString;
+  DScalc_trabalho_itens.DataSet.fieldbyname('data_final').AsString := DsCadastro.DataSet.fieldbyname('data_final').AsString;
+  DScalc_trabalho_itens.DataSet.fieldbyname('id_setor_trabalho').AsInteger := DsCadastro.DataSet.fieldbyname('id_setor_trabalho').AsInteger;
+  DScalc_trabalho_itens.DataSet.fieldbyname('diastrabalhado').AsInteger := Round(DsCadastro.DataSet.fieldbyname('qtdediastrabalhado').AsFloat);
+ // showmessage(FloatToStr(DsCadastro.DataSet.fieldbyname('qtdediastrabalhado').AsFloat));
+  DScalc_trabalho_itens.DataSet.fieldbyname('diasremido').AsInteger := Round(DsCadastro.DataSet.fieldbyname('qtdediasremido').AsFloat);
   DScalc_trabalho_itens.DataSet.Post;
 
-
+  count1 := count1 + DScalc_trabalho_itens.DataSet.fieldbyname('diastrabalhado').AsInteger;
+  count2 := count2 + DScalc_trabalho_itens.DataSet.fieldbyname('diasremido').AsInteger;
   DsCadastro.DataSet.fieldbyname('data_inicial').AsString := '';
   DsCadastro.DataSet.fieldbyname('data_final').AsString := '';
   DsCadastro.DataSet.fieldbyname('id_setor_trabalho').AsString := '';
   DsCadastro.DataSet.fieldbyname('qtdediastrabalhado').AsString := '';
   DsCadastro.DataSet.fieldbyname('qtdediasremido').AsString := '';
+  DsCadastro.DataSet.FieldByName('totaldiastrabalho').AsInteger := count1;
+  DsCadastro.DataSet.FieldByName('totaldiasremido').AsInteger := count2;
 
 end;
 
@@ -272,7 +285,9 @@ begin
     IniciaTransCadastro;
 
     iErro := TClientDataSet(DsCadastro.DataSet).ApplyUpdates(0);
+    showmessage(inttostr(iErro));
     iErro := iErro + TClientDataSet(DScalc_trabalho_itens.DataSet).ApplyUpdates(0);
+    showmessage(inttostr(iErro));
 
     if iErro = 0 then
       finalizaTransCadastro

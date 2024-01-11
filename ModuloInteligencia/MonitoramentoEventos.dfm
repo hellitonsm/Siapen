@@ -1,24 +1,27 @@
 inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
   Left = 163
   Top = 122
-  Width = 1102
-  Height = 533
   Caption = 'Monitoramento de Eventos'
-  OldCreateOrder = True
+  ClientHeight = 569
+  ClientWidth = 977
   WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
-  PixelsPerInch = 96
+  ExplicitWidth = 989
+  ExplicitHeight = 607
   TextHeight = 13
   inherited PanelGeral: TPanel
     Top = 42
-    Width = 1086
-    Height = 453
+    Width = 977
+    Height = 527
+    ExplicitTop = 42
+    ExplicitWidth = 412
+    ExplicitHeight = 166
     object DBGridEventos: TDBGrid
       Left = 1
       Top = 97
-      Width = 1084
-      Height = 355
+      Width = 975
+      Height = 429
       Align = alClient
       DataSource = DsMovEventos
       TabOrder = 0
@@ -78,10 +81,11 @@ inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
     object PnlGeral: TPanel
       Left = 1
       Top = 1
-      Width = 1084
+      Width = 975
       Height = 96
       Align = alTop
       TabOrder = 1
+      ExplicitWidth = 410
       object Label1: TLabel
         Left = 8
         Top = 1
@@ -116,8 +120,8 @@ inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
         Top = 15
         Width = 128
         Height = 22
-        Date = 40934.485215416670000000
-        Time = 40934.485215416670000000
+        Date = 40934.000000000000000000
+        Time = 0.485215416672872400
         TabOrder = 0
         OnChange = DateTimePickerEventoChange
       end
@@ -127,8 +131,6 @@ inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
         Width = 75
         Height = 25
         Caption = '&Atualizar '
-        TabOrder = 1
-        OnClick = BtnAtualizarEscalaDiaClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -147,6 +149,8 @@ inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
           3333333333338888883333330000333333333333333333333333333333333333
           0000}
         NumGlyphs = 2
+        TabOrder = 1
+        OnClick = BtnAtualizarEscalaDiaClick
       end
       object DBNavigator1: TDBNavigator
         Left = 709
@@ -194,11 +198,15 @@ inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 1086
+    Width = 977
     Height = 42
+    ExplicitWidth = 412
+    ExplicitHeight = 42
     inherited Image2: TImage
-      Width = 1084
+      Width = 975
       Height = 40
+      ExplicitWidth = 1084
+      ExplicitHeight = 40
     end
   end
   object DspMovEventos: TDataSetProvider
@@ -314,28 +322,6 @@ inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
     Left = 632
     Top = 193
   end
-  object SqlMovEventos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'SELECT * FROM MOV_EVENTOS')
-    SQLConnection = DM.SQLConnect
-    Left = 536
-    Top = 193
-  end
-  object SqlEventos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select id_eventos, '
-      '       codigo||'#39'-'#39'||descricao_evento descricao,'
-      '       sub_eventos'
-      'from eventos'
-      'order by codigo')
-    SQLConnection = DM.SQLConnect
-    Left = 536
-    Top = 241
-  end
   object DspEventos: TDataSetProvider
     DataSet = SqlEventos
     Left = 568
@@ -370,23 +356,42 @@ inherited FrmMonitoramentoEventos: TFrmMonitoramentoEventos
     Left = 568
     Top = 289
   end
-  object SqlSubEventos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select id_sub_eventos, '
-      '       codigo_sub_evento||'#39'-'#39'||descricao_eventos descricao'
-      'from sub_eventos'
-      'order by codigo_sub_evento')
-    SQLConnection = DM.SQLConnect
-    Left = 536
-    Top = 289
-  end
   object OpenDialog1: TOpenDialog
     DefaultExt = '*.*'
     Filter = 'Qualquer tipo de arquivo.|*.*'
     InitialDir = 'C:\'
     Left = 793
     Top = 59
+  end
+  object SqlMovEventos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * FROM MOV_EVENTOS')
+    Left = 536
+    Top = 193
+  end
+  object SqlEventos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select id_eventos, '
+      '       codigo||'#39'-'#39'||descricao_evento descricao,'
+      '       sub_eventos'
+      'from eventos'
+      'order by codigo')
+    Left = 536
+    Top = 241
+  end
+  object SqlSubEventos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select id_sub_eventos, '
+      '       codigo_sub_evento||'#39'-'#39'||descricao_eventos descricao'
+      'from sub_eventos'
+      'order by codigo_sub_evento')
+    Left = 536
+    Top = 289
   end
 end

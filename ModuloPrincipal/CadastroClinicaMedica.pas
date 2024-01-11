@@ -6,11 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroClinicaMedica = class(TFrmModeloInterno)
-    SQLclinicamedica: TSQLQuery;
+    SQLclinicamedicaold: TSQLQuery;
     DSPclinicamedica: TDataSetProvider;
     CDSclinicamedica: TClientDataSet;
     DSclinicamedica: TDataSource;
@@ -27,6 +30,7 @@ type
     CDSclinicamedicaID_FUNCIONARIO: TIntegerField;
     CDSclinicamedicaID_INTERNO: TIntegerField;
     CDSclinicamedicaFUNCIONRIO: TStringField;
+    SQLclinicamedica: TFDQuery;
     procedure Button1Click(Sender: TObject);
     procedure SalvarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -54,7 +58,7 @@ begin
   inherited;
   
   DSclinicamedica.DataSet.Append;
-  DSclinicamedica.DataSet.fieldbyname('ID_HISTORICO_CLINICA_MEDICA').AsInteger := 0;
+  DSclinicamedica.DataSet.fieldbyname('ID_HISTORICO_CLINICA_MEDICA').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(idatendiemnto_psicosocial,1) FROM RDB$DATABASE');
   DSclinicamedica.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSclinicamedica.DataSet.fieldbyname('id_funcionario').AsInteger := GLOBAL_ID_FUNCIONARIO;

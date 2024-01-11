@@ -1,34 +1,37 @@
 inherited FrmCadastroCorrespondencia: TFrmCadastroCorrespondencia
   Left = 254
   Top = 121
-  Width = 726
-  Height = 589
   Caption = 'Cadastro de Correspond'#234'ncia'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 500
+    ExplicitHeight = 532
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 482
+      Height = 515
+      ExplicitHeight = 514
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 482
+      Top = 515
       DataSource = dsGrid
       Hints.Strings = ()
+      ExplicitTop = 514
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 595
-    Height = 500
+    ExplicitWidth = 825
+    ExplicitHeight = 532
+    inherited Image2: TImage
+      Width = 710
+      ExplicitWidth = 710
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 595
-      Height = 500
-      ActivePage = TabSheetConsulta
+      ExplicitWidth = 825
+      ExplicitHeight = 532
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 587
-          Height = 472
+          Width = 821
+          Height = 505
+          ExplicitWidth = 821
+          ExplicitHeight = 505
           object Label2: TLabel
             Left = 20
             Top = 104
@@ -272,14 +275,17 @@ inherited FrmCadastroCorrespondencia: TFrmCadastroCorrespondencia
       end
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
-          Width = 587
+          Width = 821
+          ExplicitWidth = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 587
-          Height = 438
+          Width = 821
+          Height = 471
+          ExplicitWidth = 821
+          ExplicitHeight = 471
           inherited DBGridConsulta: TDBGrid
-            Width = 585
-            Height = 436
+            Width = 819
+            Height = 469
             DataSource = dsGrid
           end
         end
@@ -287,16 +293,13 @@ inherited FrmCadastroCorrespondencia: TFrmCadastroCorrespondencia
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 710
-    inherited Image2: TImage
-      Width = 710
-    end
+    ExplicitWidth = 940
   end
   inherited StatusBar1: TStatusBar
-    Top = 532
-    Width = 710
+    ExplicitTop = 565
+    ExplicitWidth = 944
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'select * from interno_correspondente')
     Left = 596
@@ -314,15 +317,6 @@ inherited FrmCadastroCorrespondencia: TFrmCadastroCorrespondencia
     Left = 680
     Top = 148
   end
-  object SQLCorrespondente: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select * from correspondente')
-    SQLConnection = DM.SQLConnect
-    Left = 599
-    Top = 104
-  end
   object dspCorrespondente: TDataSetProvider
     DataSet = SQLCorrespondente
     Left = 627
@@ -339,30 +333,6 @@ inherited FrmCadastroCorrespondencia: TFrmCadastroCorrespondencia
     DataSet = cdsCorrespondente
     Left = 683
     Top = 104
-  end
-  object SQLBusca: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'nome_interno'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'select i.nome_interno, i.id_interno, c.id_correspondente, c.corr' +
-        'espondente,'
-      'c.logradouro, c.bairro, c.cep,'
-      
-        'c.complemento, c.estado, ic.obs  from interno i, interno_corresp' +
-        'ondente ic, correspondente c'
-      'where c.id_correspondente = ic.id_correspondente and'
-      
-        'i.id_interno = ic.id_interno and nome_interno like :nome_interno' +
-        ' ')
-    SQLConnection = DM.SQLConnect
-    Left = 595
-    Top = 184
   end
   object dspBusca: TDataSetProvider
     DataSet = SQLBusca
@@ -385,24 +355,6 @@ inherited FrmCadastroCorrespondencia: TFrmCadastroCorrespondencia
     Left = 127
     Top = 60
   end
-  object SQLGrid: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'select i.nome_interno, i.id_interno, c.id_correspondente, c.corr' +
-        'espondente,'
-      'c.logradouro, c.bairro, c.cep, ic.id_interno_correspondente,'
-      
-        'c.complemento, c.estado, ic.obs  from interno i, interno_corresp' +
-        'ondente ic, correspondente c'
-      'where c.id_correspondente = ic.id_correspondente and'
-      'i.id_interno = ic.id_interno'
-      'order by  data desc')
-    SQLConnection = DM.SQLConnect
-    Left = 595
-    Top = 244
-  end
   object dspGrid: TDataSetProvider
     DataSet = SQLGrid
     Left = 623
@@ -418,6 +370,54 @@ inherited FrmCadastroCorrespondencia: TFrmCadastroCorrespondencia
   object dsGrid: TDataSource
     DataSet = cdsGrid
     Left = 679
+    Top = 244
+  end
+  object SQLCorrespondente: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from CORRESPONDENTE')
+    Left = 599
+    Top = 104
+  end
+  object SQLBusca: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select i.nome_interno, i.id_interno, c.id_correspondente, c.corr' +
+        'espondente,'
+      'c.logradouro, c.bairro, c.cep,'
+      
+        'c.complemento, c.estado, ic.obs  from interno i, interno_corresp' +
+        'ondente ic, correspondente c'
+      'where c.id_correspondente = ic.id_correspondente and'
+      
+        'i.id_interno = ic.id_interno and nome_interno like :nome_interno' +
+        ' ')
+    Left = 595
+    Top = 184
+    ParamData = <
+      item
+        Name = 'NOME_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLGrid: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select i.nome_interno, i.id_interno, c.id_correspondente, c.corr' +
+        'espondente,'
+      'c.logradouro, c.bairro, c.cep, ic.id_interno_correspondente,'
+      
+        'c.complemento, c.estado, ic.obs  from interno i, interno_corresp' +
+        'ondente ic, correspondente c'
+      'where c.id_correspondente = ic.id_correspondente and'
+      'i.id_interno = ic.id_interno'
+      'order by  data desc')
+    Left = 595
     Top = 244
   end
 end

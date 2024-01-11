@@ -7,12 +7,14 @@ uses
   Dialogs, MSHTML, ActiveX, OleCtrls, SHDocVw, StdCtrls, DBCtrls, ExtCtrls,
   FMTBcd, DB, DBClient, Provider, SqlExpr, Buttons, Mask, dbcgrids, Menus,
   jpeg, ComCtrls, IdBaseComponent, IdComponent, IdTCPConnection,
-  IdTCPClient, IdHTTP, Urlmon, WinInet;
+  IdTCPClient, IdHTTP, Urlmon, WinInet, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TFrmMonitoramento_Eletronico = class(TForm)
     PnlTitulo: TPanel;
-    SqlInterno: TSQLQuery;
     DspInterno: TDataSetProvider;
     CdsInterno: TClientDataSet;
     DsInterno: TDataSource;
@@ -28,7 +30,6 @@ type
     BtnTelaCheia: TButton;
     PnlLista: TPanel;
     Button3: TButton;
-    SqlLista: TSQLQuery;
     DspLista: TDataSetProvider;
     CdsLista: TClientDataSet;
     DsLista: TDataSource;
@@ -42,7 +43,6 @@ type
     DSHISTORICO_interno: TDataSource;
     CDSHISTORICO_interno: TClientDataSet;
     DSPHISTORICO_interno: TDataSetProvider;
-    SQLHISTORICO_interno: TSQLQuery;
     LabelSelecionados: TLabel;
     Button2: TButton;
     Button4: TButton;
@@ -65,6 +65,9 @@ type
     Animate1: TAnimate;
     WebBrowser1: TWebBrowser;
     IdHTTP1: TIdHTTP;
+    SqlInterno: TFDQuery;
+    SqlLista: TFDQuery;
+    SQLHISTORICO_interno: TFDQuery;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BtnTelaCheiaClick(Sender: TObject);

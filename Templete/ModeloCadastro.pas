@@ -75,8 +75,9 @@ type
     CompDBEdit: array of TDBEdit;
     CompClientDataSet: array of TClientDataSet;
   public
-    procedure FDClientDataSetReconcileError(DataSet: TFDMemTable;
-  E: EFDException; UpdateKind: TFDDatSRowState; var Action: TFDDAptReconcileAction);
+    procedure FDClientDataSetReconcileError(DataSet: TCustomClientDataset;
+      E: EReconcileError; UpdateKind: TUpdateKind;
+      var Action: TReconcileAction);
     procedure CorNosCampos;
     function IniciaTransCadastro: Boolean;
     function FinalizaTransCadastro: Boolean;
@@ -136,7 +137,7 @@ procedure TFrmModeloCadastro.EditarClick(Sender: TObject);
 begin
   PanelCadastro.Enabled := true;
   PageControlModeloCadastro.ActivePageIndex := 0;
-  // IniciaTransCadastro;
+  IniciaTransCadastro;
   StatusBar1.Panels[1].Text := 'EDIÇÃO';
   Novo.Enabled := False;
   Editar.Enabled := False;
@@ -161,9 +162,19 @@ begin
   Cancelar.Enabled := False;
   if PageControlModeloCadastro.CanFocus then
     PageControlModeloCadastro.SetFocus;
-  DsCadastro.DataSet.Cancel;
+  // ShowMessage(IntToStr(ComponentCount));
+  for iComp := 0 to ComponentCount - 1 do
+  begin
+    if (Components[iComp] is TDataSource) then
+    begin
+      // ShowMessage((Components[iComp] as TDataSource).Name);
+      (Components[iComp] as TDataSource).DataSet.Cancel;
+    end;
+  end;
+
+  // DsCadastro.DataSet.Cancel;
   StatusBar1.Panels[1].Text := '...';
-  CancelaTransCadastro;
+  // CancelaTransCadastro;
   CorNosCampos;
   PanelCadastro.Enabled := False;
 
@@ -209,6 +220,8 @@ begin
     erro_transacao := erro_transacao + TClientDataSet(DsCadastro.DataSet)
       .ApplyUpdates(0);
 
+    // SqlCadastro.CommitUpdates;
+
     if erro_transacao = 0 then
     begin
       for iComp := Low(CompClientDataSet) to High(CompClientDataSet) do
@@ -216,8 +229,8 @@ begin
         with (CompClientDataSet[iComp] as TClientDataSet) do
         begin
 
-         // TClientDataSet(CompClientDataSet[iComp]).OnReconcileError :=
-         //   FDClientDataSetReconcileError;
+          TClientDataSet(CompClientDataSet[iComp]).OnReconcileError :=
+            FDClientDataSetReconcileError;
 
           if Active then
           begin
@@ -241,7 +254,10 @@ begin
   end;
 
   if erro_transacao = 0 then
-    FinalizaTransCadastro
+  begin
+    FinalizaTransCadastro;
+    ShowMessage('Registro Salvo com Sucesso!');
+  end
   else
   begin
     CancelaTransCadastro;
@@ -254,8 +270,8 @@ begin
   PanelCadastro.Enabled := False;
   DBGridConsulta.DataSource.DataSet.Close;
 
-  if Salvar.Tag = 0 then
-    ShowMessage('Registro Salvo com Sucesso!');
+  { if Salvar.Tag = 0 then
+    ShowMessage('Registro Salvo com Sucesso!'); }
 
   EditLocalizar.Text := '';
   DBGridConsulta.DataSource.DataSet.Open;
@@ -418,20 +434,27 @@ begin
   with DsCadastro.DataSet do
   begin
     CanClose := False;
+    Filtered := False;
     if State in [dsedit, dsinsert] then
     begin
       if Application.MessageBox(' Cancelar inserção/edição?', 'Confirme.',
         mb_YesNo + Mb_IconQuestion) = idYes then
       begin
-        CanClose := true;
         Cancel;
+        CanClose := true;
       end;
     end
     else if Application.MessageBox(sfechar, 'Confirme.',
       mb_YesNo + Mb_IconQuestion) = mrYes then
     begin
+      if State in [dsedit, dsinsert] then
+      begin
+        Post;
+      end;
+      DM.SQLConnect.Commit();
       CanClose := true;
-      Active := False;
+
+      // Active := False;
     end;
   end;
 
@@ -450,7 +473,7 @@ begin
   LabelTitulo.Caption := Self.Caption;
   PanelCadastro.Enabled := False;
 
-  for iComp := 0 to Componentcount - 1 do
+  for iComp := 0 to ComponentCount - 1 do
   begin
 
     if (Components[iComp] is TDBEdit) then
@@ -514,7 +537,7 @@ begin
   // if DsCadastro.DataSet.State in [dsinsert, dsedit] then
   // DsCadastro.DataSet.Cancel;
   // CancelarClick(nil);
-
+  // DsCadastro.DataSet.Open;
 end;
 
 procedure TFrmModeloCadastro.CorNosCampos();
@@ -640,7 +663,7 @@ procedure TFrmModeloCadastro.FormDestroy(Sender: TObject);
 begin
   SetLength(CompLookupComboBox, 0);
   SetLength(CompDBEdit, 0);
-
+  // DsCadastro.DataSet.Filtered := False;
 end;
 
 procedure TFrmModeloCadastro.FormKeyPress(Sender: TObject; var Key: Char);
@@ -670,6 +693,7 @@ end;
 
 procedure TFrmModeloCadastro.EditLocalizarChange(Sender: TObject);
 begin
+  // ShowMessage('foi A');
   TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
   if EditLocalizar.Text <> '' then
   begin
@@ -680,15 +704,21 @@ begin
         .Field.FieldKind in [fkData] then
       begin
 
-        TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
-        TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := true;
+        // TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
+        // TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := true;
+        // SqlCadastro.Filtered := False;
+        // SqlCadastro.Filtered := True;
+        DsCadastro.DataSet.Filtered := False;
+        DsCadastro.DataSet.Filtered := true;
 
       end;
 
     end;
   end
   else
-    TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
+    // TClientDataSet(DBGridConsulta.DataSource.DataSet).Filtered := False;
+    // SqlCadastro.Filtered := False;
+    DsCadastro.DataSet.Filtered := False;
 end;
 
 procedure TFrmModeloCadastro.FormActivate(Sender: TObject);
@@ -703,13 +733,14 @@ begin
     except
     end;
     FinalizaTransMovimento;
+
   end;
 
 end;
 
-
-procedure TFrmModeloCadastro.FDClientDataSetReconcileError(DataSet: TFDMemTable;
-  E: EFDException; UpdateKind: TFDDatSRowState; var Action: TFDDAptReconcileAction);
+procedure TFrmModeloCadastro.FDClientDataSetReconcileError
+  (DataSet: TCustomClientDataset; E: EReconcileError; UpdateKind: TUpdateKind;
+  var Action: TReconcileAction);
 var
   arquivo: TextFile;
   NomeArquivo: string;
@@ -719,16 +750,18 @@ begin
       CreateDir('../log');
 
     NomeArquivo := '../log/' + Application.Name + '_' +
-      SiapStringReplace(DateTimeToStr(Now), ' ', '_', ':', '', '/', '-') + '.txt';
+      SiapStringReplace(DateTimeToStr(Now), ' ', '_', ':', '', '/',
+      '-') + '.txt';
 
     AssignFile(arquivo, NomeArquivo);
     Rewrite(arquivo);
 
-    Writeln(arquivo, DateTimeToStr(Now) + #13#10 + 'cds: ' + DataSet.Name + ' - ' + E.Message);
+    Writeln(arquivo, DateTimeToStr(Now) + #13#10 + 'cds: ' + DataSet.Name +
+      ' - ' + E.Message);
 
     CloseFile(arquivo);
 
-    Action := TFDDAptReconcileAction.raAbort;
+    Action := TReconcileAction.raAbort;
 
     ShowMessage('Inconsistência nos dados:' + TrataExceptionErro(E.Message));
 
@@ -736,8 +769,6 @@ begin
     // Tratar qualquer exceção que possa ocorrer no tratamento do erro
   end;
 end;
-
-
 
 procedure TFrmModeloCadastro.DBEditCPFExit(Sender: TObject);
 var
@@ -778,11 +809,20 @@ begin
   // Se o usuário trocar para a aba de Consulta a edição ou inserção é cancelada.
   if PageControlModeloCadastro.ActivePageIndex = 1 then
   begin
-    CancelarClick(nil);
-    if EditLocalizar.CanFocus then
+    // DsCadastro.DataSet.Open;
+    if DsCadastro.DataSet.State in [dsedit, dsinsert] then
     begin
-      EditLocalizar.SetFocus;
-    end;
+      if Application.MessageBox(' Cancelar inserção/edição?', 'Confirme.',
+        mb_YesNo + Mb_IconQuestion) = idYes then
+      begin
+        CancelarClick(nil);
+        if EditLocalizar.CanFocus then
+        begin
+          EditLocalizar.SetFocus;
+        end;
+      end;
+    end
+
   end;
 end;
 
@@ -791,7 +831,7 @@ end;
 procedure TFrmModeloCadastro.CdsCadastroFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
-
+  // DsCadastro.DataSet.Filtered := False;
   if DataSet[DBGridConsulta.Columns.Items[DBGridConsulta.SelectedIndex]
     .FieldName] <> Null then
   begin

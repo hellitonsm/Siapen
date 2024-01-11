@@ -1,32 +1,32 @@
 inherited FrmPostoTrabalho: TFrmPostoTrabalho
   Left = 218
   Top = 153
-  Width = 621
-  Height = 457
   Caption = 'Posto de Trabalho'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 368
-    inherited ToolBarModeloCadastro: TToolBar
-      Height = 350
-    end
+    Height = 532
     inherited DBNavigator1: TDBNavigator
-      Top = 350
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 490
-    Height = 368
+    Height = 532
+    inherited Image2: TImage
+      Width = 605
+      ExplicitWidth = 605
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 490
-      Height = 368
+      Width = 821
+      ExplicitWidth = 817
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
         inherited PanelCadastro: TPanel
           Width = 482
           Height = 340
+          ExplicitWidth = 482
+          ExplicitHeight = 340
           object Label2: TLabel
             Left = 24
             Top = 24
@@ -98,31 +98,30 @@ inherited FrmPostoTrabalho: TFrmPostoTrabalho
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
         inherited PanelLocalizaConsulta: TPanel
-          Width = 482
+          Width = 813
+          ExplicitWidth = 809
         end
         inherited PanelConsulta: TPanel
-          Width = 482
-          Height = 306
+          Width = 813
+          ExplicitWidth = 809
           inherited DBGridConsulta: TDBGrid
-            Width = 480
-            Height = 304
+            Width = 811
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 605
-    inherited Image2: TImage
-      Width = 605
-    end
+    ExplicitWidth = 932
   end
   inherited StatusBar1: TStatusBar
-    Top = 400
-    Width = 605
+    Top = 564
+    ExplicitTop = 563
+    ExplicitWidth = 932
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM POSTO_TRABALHO')

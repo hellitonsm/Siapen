@@ -1,33 +1,43 @@
 inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
   Left = 261
   Top = 247
-  Width = 882
-  Height = 348
   Caption = 'Cadastro de Portaria do Said'#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ClientWidth = 940
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 259
+    Height = 532
+    ExplicitHeight = 531
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 241
+      Height = 514
+      ExplicitHeight = 513
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 241
+      Top = 514
       Hints.Strings = ()
+      ExplicitTop = 513
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 751
-    Height = 259
+    Width = 825
+    Height = 532
+    ExplicitWidth = 821
+    ExplicitHeight = 531
+    inherited Image2: TImage
+      Width = 866
+      ExplicitWidth = 866
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 751
-      Height = 259
-      ActivePage = TabSheetCadastro
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 821
+      ExplicitHeight = 531
       inherited TabSheetCadastro: TTabSheet
         inherited PanelCadastro: TPanel
-          Width = 743
-          Height = 231
+          Width = 817
+          Height = 504
+          ExplicitWidth = 813
+          ExplicitHeight = 503
           object Label2: TLabel
             Left = 10
             Top = 8
@@ -142,15 +152,15 @@ inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
             KeyField = 'ID_UP'
             ListField = 'NOME_UP'
             ListSource = DM.DsUP
-            TabOrder = 8
+            TabOrder = 7
           end
           object adpDBDateTimePicker1: TadpDBDateTimePicker
             Left = 418
             Top = 24
             Width = 103
             Height = 21
-            Date = 41047.554883923610000000
-            Time = 41047.554883923610000000
+            Date = 41047.000000000000000000
+            Time = 0.554883923607121700
             TabOrder = 4
             DataField = 'DATA_SAIDA'
             DataSource = DsCadastro
@@ -161,8 +171,8 @@ inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
             Top = 24
             Width = 105
             Height = 21
-            Date = 41047.555191782410000000
-            Time = 41047.555191782410000000
+            Date = 41047.000000000000000000
+            Time = 0.555191782412293800
             TabOrder = 2
             DataField = 'DATA_PORTARIA'
             DataSource = DsCadastro
@@ -178,15 +188,15 @@ inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
             KeyField = 'ID_FUNCIONARIO'
             ListField = 'NOME_FUNCIONARIO'
             ListSource = DM.DsFuncionarioLista
-            TabOrder = 9
+            TabOrder = 8
           end
           object adpDBDateTimePicker3: TadpDBDateTimePicker
             Left = 527
             Top = 24
             Width = 98
             Height = 21
-            Date = 41047.555759120370000000
-            Time = 41047.555759120370000000
+            Date = 41047.000000000000000000
+            Time = 0.555759120368748000
             TabOrder = 5
             DataField = 'DATA_RETORNO'
             DataSource = DsCadastro
@@ -202,7 +212,7 @@ inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
             KeyField = 'ID_TIPO_SAIDAO'
             ListField = 'TIPO_SAIDAO'
             ListSource = DM.Dstiposaidao
-            TabOrder = 7
+            TabOrder = 6
           end
           object DBEditHORA: TDBEdit
             Left = 321
@@ -213,53 +223,43 @@ inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
             DataSource = DsCadastro
             TabOrder = 3
           end
-          object adpDBDateTimePicker4: TadpDBDateTimePicker
+          object DBEdit1: TDBEdit
             Left = 631
             Top = 24
-            Width = 98
+            Width = 121
             Height = 21
-            Date = 41047.555759120370000000
-            Time = 41047.555759120370000000
-            Kind = dtkTime
-            TabOrder = 6
-            DataField = 'DATA_RETORNO'
+            DataField = 'HORA_RETORNO'
             DataSource = DsCadastro
-            ReadOnly = False
+            TabOrder = 9
           end
         end
       end
       inherited TabSheetConsulta: TTabSheet
         inherited PanelLocalizaConsulta: TPanel
-          Width = 743
+          Width = 817
         end
         inherited PanelConsulta: TPanel
-          Width = 743
-          Height = 197
+          Width = 817
+          Height = 470
           inherited DBGridConsulta: TDBGrid
-            Width = 741
-            Height = 195
+            Width = 815
+            Height = 468
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 866
-    inherited Image2: TImage
-      Width = 866
-    end
+    Width = 940
+    ExplicitWidth = 936
   end
   inherited StatusBar1: TStatusBar
-    Top = 291
-    Width = 866
+    Top = 564
+    Width = 940
+    ExplicitTop = 564
+    ExplicitWidth = 940
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_up'
-        ParamType = ptInput
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM Saidao'
@@ -267,6 +267,12 @@ inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
       'order by data_portaria desc')
     Left = 664
     Top = 16
+    ParamData = <
+      item
+        Name = 'id_up'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 692
@@ -357,23 +363,36 @@ inherited FrmSaidaoCadastro: TFrmSaidaoCadastro
     Left = 603
     Top = 16
   end
-  object SQLvinc_saidao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_saidao'
-        ParamType = ptInput
-        Value = -1
-      end>
+  object SQLvinc_saidao: TFDQuery
     SQL.Strings = (
       'select v.*'
       'from vinc_saidao v'
       'inner join interno i on (v.id_interno=i.id_interno)'
       'where v.id_saidao = :id_saidao'
       'order by  i.nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 519
+    Left = 503
     Top = 16
+    ParamData = <
+      item
+        Name = 'ID_SAIDAO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLvinc_saidaoold: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select v.*'
+      'from vinc_saidao v'
+      'inner join interno i on (v.id_interno=i.id_interno)'
+      'where v.id_saidao = :id_saidao'
+      'order by  i.nome_interno')
+    Left = 503
+    Top = 184
+    ParamData = <
+      item
+        Name = 'ID_SAIDAO'
+        ParamType = ptInput
+      end>
   end
 end

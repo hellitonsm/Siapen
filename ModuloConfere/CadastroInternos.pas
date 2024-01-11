@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ToolWin, ExtCtrls, ImgList, StdCtrls, Grids, DBGrids,
-  FMTBcd, DB, DBClient, Provider , Mask, DBCtrls,
+  FMTBcd, DB, DBClient, Provider, Mask, DBCtrls,
   ModeloCadastro, Jpeg, Buttons, frxCtrls, dbcgrids, Menus,
   adpDBDateTimePicker, System.ImageList, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
@@ -260,7 +260,6 @@ type
     DBImageOutras: TDBImage;
     DBGrid4: TDBGrid;
     DBEdit6: TDBEdit;
-    adpDBDateTimePicker1: TadpDBDateTimePicker;
     Label17: TLabel;
     Label44: TLabel;
     DBNavigator3: TDBNavigator;
@@ -542,8 +541,7 @@ type
     procedure RecuperarFotosdeArquivo1Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure DBGridConsultaDblClick(Sender: TObject);
-    procedure CdsConsultaFilterRecord(DataSet: TDataSet;
-      var Accept: Boolean);
+    procedure CdsConsultaFilterRecord(DataSet: TDataSet; var Accept: Boolean);
     procedure RadioGroupTipoLocalizarClick(Sender: TObject);
     procedure PageControlInternoChange(Sender: TObject);
     procedure tsAdvogadoEnter(Sender: TObject);
@@ -573,25 +571,27 @@ procedure TFrmCadastroInternos.NovoClick(Sender: TObject);
 begin
   inherited;
   PreencheCombos();
-  dm.SqlExecute.SQL.Text := 'select gen_id (cod_up, 0) || gen_id (ID_INTERNO, 1) as ID from rdb$database';
+  dm.SqlExecute.SQL.Text :=
+    'select gen_id (cod_up, 0) || gen_id (ID_INTERNO, 1) as ID from rdb$database';
   dm.DsExecute.DataSet.Close;
   dm.DsExecute.DataSet.Open;
-  DsCadastro.DataSet.fieldbyname('ID_INTERNO').AsInteger := dm.DsExecute.DataSet.FieldByName('ID').AsInteger;
+  DsCadastro.DataSet.fieldbyname('ID_INTERNO').AsInteger :=
+    dm.DsExecute.DataSet.fieldbyname('ID').AsInteger;
   dm.DsExecute.DataSet.Close;
 
   PageControlInterno.ActivePageIndex := 0;
-  DsCadastro.DataSet.FieldByName('DATA_ENTRADA').AsDateTime := Date;
-  DsCadastro.DataSet.FieldByName('ID_UP').AsInteger := GLOBAL_ID_UP;
-  DsCadastro.DataSet.FieldByName('SEXO').AsString := 'M';
-  DsCadastro.DataSet.FieldByName('ST').AsString := 'A';
+  DsCadastro.DataSet.fieldbyname('DATA_ENTRADA').AsDateTime := Date;
+  DsCadastro.DataSet.fieldbyname('ID_UP').AsInteger := GLOBAL_ID_UP;
+  DsCadastro.DataSet.fieldbyname('SEXO').AsString := 'M';
+  DsCadastro.DataSet.fieldbyname('ST').AsString := 'A';
   if DBEditdtentrada.CanFocus then
     DBEditdtentrada.SetFocus;
 
-  SqlFoto.ParamByName('id_interno').AsInteger :=
-    DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
+  SqlFoto.ParamByName('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname
+    ('id_interno').AsInteger;
 
   DsFoto.DataSet.Close;
-  DsFoto.DataSet.OPEN;
+  DsFoto.DataSet.Open;
 
 end;
 
@@ -600,19 +600,19 @@ begin
   inherited;
   PageControlInterno.ActivePageIndex := 0;
   DateTimePickerHistorico.Date := Date;
-  //  EditLocalizarChange(nil);
+  // EditLocalizarChange(nil);
   ID_INTERNO := 0;
 
-  {Verifica as permissões que o usuário possui para esta tela
-  e habilita ou não os respectivos botões.
-  Estas verificações devem ser colocadas no final do evento FormCreate e
-  no final do evento OnDataChance do DsCadastro de cada tela.
-  Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
-  Ex. ContemValor('I', PERMISSAO_CONFERE).}
+  { Verifica as permissões que o usuário possui para esta tela
+    e habilita ou não os respectivos botões.
+    Estas verificações devem ser colocadas no final do evento FormCreate e
+    no final do evento OnDataChance do DsCadastro de cada tela.
+    Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
+    Ex. ContemValor('I', PERMISSAO_CONFERE). }
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Novo.Visible := False;
     Editar.Visible := False;
@@ -620,9 +620,9 @@ begin
     Salvar.Visible := False;
   end;
 
-  if ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Editar.Visible := False;
     Excluir.Visible := False;
@@ -632,23 +632,23 @@ begin
       Salvar.Visible := False;
   end;
 
-  if ContemValor('I', PERMISSAO_CADASTRO)
-    and ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if ContemValor('I', PERMISSAO_CADASTRO) and
+    ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Excluir.Visible := False;
   end;
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and ContemValor('E', PERMISSAO_CADASTRO)
-    and ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    ContemValor('E', PERMISSAO_CADASTRO) and ContemValor('D', PERMISSAO_CADASTRO)
+  then
   begin
     Novo.Visible := False;
   end;
 
-  if ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and ContemValor('D', PERMISSAO_CADASTRO) then
+  if ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Editar.Visible := False;
     if not Salvar.Visible then
@@ -657,9 +657,9 @@ begin
       Salvar.Visible := False;
   end;
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Novo.Visible := False;
     Editar.Visible := False;
@@ -669,9 +669,9 @@ begin
       Salvar.Visible := False;
   end;
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Novo.Visible := False;
     Excluir.Visible := False;
@@ -682,6 +682,7 @@ end;
 procedure TFrmCadastroInternos.FormShow(Sender: TObject);
 begin
 
+  //DBEditdtentrada.DataField.
   LabelPavilhao.Caption := GLOBAL_NIVEL_1;
   LabelGaleria.Caption := GLOBAL_NIVEL_2;
   LabelSolario.Caption := GLOBAL_NIVEL_3;
@@ -702,92 +703,92 @@ begin
   RadioGroupStatusClick(nil);
   InterageTelaAguarde();
 
-  DM.DSCIDADE.DataSet.Close;
-  DM.DSCIDADE.DataSet.OPEN;
+  dm.DSCIDADE.DataSet.Close;
+  dm.DSCIDADE.DataSet.Open;
 
   InterageTelaAguarde();
-  DM.DsUP.DataSet.Close;
-  DM.DsUP.DataSet.OPEN;
+  dm.DsUP.DataSet.Close;
+  dm.DsUP.DataSet.Open;
 
   InterageTelaAguarde();
-  DM.DSSERIEESTUDO.DataSet.Close;
-  DM.DSSERIEESTUDO.DataSet.OPEN;
+  dm.DSSERIEESTUDO.DataSet.Close;
+  dm.DSSERIEESTUDO.DataSet.Open;
 
   InterageTelaAguarde();
-  DM.DsProcedencia.DataSet.Close;
-  DM.DsProcedencia.DataSet.OPEN;
+  dm.DsProcedencia.DataSet.Close;
+  dm.DsProcedencia.DataSet.Open;
 
   InterageTelaAguarde();
-  DM.DsCondicaoInterno.DataSet.Close;
-  DM.DsCondicaoInterno.DataSet.OPEN;
+  dm.DsCondicaoInterno.DataSet.Close;
+  dm.DsCondicaoInterno.DataSet.Open;
 
   InterageTelaAguarde();
-  DM.DsDestino.DataSet.Close;
-  DM.DsDestino.DataSet.OPEN;
+  dm.DsDestino.DataSet.Close;
+  dm.DsDestino.DataSet.Open;
 
   InterageTelaAguarde();
   dm.DsSetorTrabalho.DataSet.Close;
-  dm.DsSetorTrabalho.DataSet.OPEN;
+  dm.DsSetorTrabalho.DataSet.Open;
 
   InterageTelaAguarde();
   dm.DSFUNCAOINTERNO.DataSet.Close;
-  dm.DSFUNCAOINTERNO.DataSet.OPEN;
+  dm.DSFUNCAOINTERNO.DataSet.Open;
 
   InterageTelaAguarde();
   dm.DSNACIONALIDADE.DataSet.Close;
-  dm.DSNACIONALIDADE.DataSet.OPEN;
+  dm.DSNACIONALIDADE.DataSet.Open;
 
   InterageTelaAguarde();
   dm.DSRACA.DataSet.Close;
-  dm.DSRACA.DataSet.OPEN;
+  dm.DSRACA.DataSet.Open;
 
   InterageTelaAguarde();
   dm.DSESCOLARIDADE.DataSet.Close;
-  dm.DSESCOLARIDADE.DataSet.OPEN;
+  dm.DSESCOLARIDADE.DataSet.Open;
 
   InterageTelaAguarde();
   dm.DSADVOGADO.DataSet.Close;
-  dm.DSADVOGADO.DataSet.OPEN;
+  dm.DSADVOGADO.DataSet.Open;
 
   InterageTelaAguarde();
   dm.DsProfissao.DataSet.Close;
-  dm.DsProfissao.DataSet.OPEN;
+  dm.DsProfissao.DataSet.Open;
 
   InterageTelaAguarde();
   DSHISTORICO_interno.DataSet.Close;
-  DSHISTORICO_interno.DataSet.OPEN;
+  DSHISTORICO_interno.DataSet.Open;
 
   DsFilhos.DataSet.Close;
-  DsFilhos.DataSet.OPEN;
+  DsFilhos.DataSet.Open;
 
   InterageTelaAguarde();
-  DM.DSFUNCIONARIO.DataSet.close;
-  DM.DSFUNCIONARIO.DataSet.Open;
+  dm.DSFUNCIONARIO.DataSet.Close;
+  dm.DSFUNCIONARIO.DataSet.Open;
 
   InterageTelaAguarde();
 
-  DM.DsPais.DataSet.Close;
-  DM.DsPais.DataSet.OPEN;
+  dm.DsPais.DataSet.Close;
+  dm.DsPais.DataSet.Open;
   InterageTelaAguarde();
 
   InterageTelaAguarde();
-  DM.DSartigo_perfil.DataSet.close;
+  dm.DSartigo_perfil.DataSet.Close;
   dm.DSartigo_perfil.DataSet.Open;
   InterageTelaAguarde();
 
   InterageTelaAguarde();
 
-  //  DM.Dsfaltadisciplinar.DataSet.close;
-  //  dm.Dsfaltadisciplinar.DataSet.Open;
-  //  InterageTelaAguarde();
+  // DM.Dsfaltadisciplinar.DataSet.close;
+  // dm.Dsfaltadisciplinar.DataSet.Open;
+  // InterageTelaAguarde();
 
   InterageTelaAguarde();
-  DsAdvogado_interno.DataSet.close;
+  dsADVOGADO_INTERNO.DataSet.Close;
   dsADVOGADO_INTERNO.DataSet.Open;
   InterageTelaAguarde();
 
   DsFaccao.DataSet.Close;
-  DsFaccao.DataSet.OPEN;
+  DsFaccao.DataSet.Open;
 
   FinalizaTelaAguarde;
 
@@ -796,8 +797,8 @@ begin
   DBEditdtentrada.Field.EditMask := '99\/99\/9999;1;_';
   DBEditdtprisao.Field.EditMask := '99\/99\/9999;1;_';
   DBEditdtrnascimento.Field.EditMask := '99\/99\/9999;1;_';
-  DBEditcpf.Field.EditMask := '999\.999\.999-99;0;_';
-  DBEditcep.field.editmask := '99.999-999;0;_';
+  DBEditCPF.Field.EditMask := '999\.999\.999-99;0;_';
+  DBEditcep.Field.EditMask := '99.999-999;0;_';
 
   PageControlModeloCadastro.ActivePageIndex := 1;
   if EditLocalizar.CanFocus then
@@ -805,7 +806,8 @@ begin
     EditLocalizar.SetFocus;
   end;
 
-  if ( ((PERMISSAO_INTELIGENCIA = '') or (PERMISSAO_INTELIGENCIA = 'R')) and ((PERMISSAO_JURIDICA = '') or (PERMISSAO_JURIDICA = 'R')) ) then
+  if (((PERMISSAO_INTELIGENCIA = '') or (PERMISSAO_INTELIGENCIA = 'R')) and
+    ((PERMISSAO_JURIDICA = '') or (PERMISSAO_JURIDICA = 'R'))) then
   begin
     DbrgReuColaborador.Visible := False;
   end;
@@ -813,15 +815,15 @@ begin
   if ID_INTERNO > 0 then
     Editar.OnClick(nil);
 
-  //teste para verificar se o campo presidio origem e solicitante vagas estão vazios, se estiverem poderão ser habilitados
-  {if DsCadastro.DataSet.FieldByName('id_presidio_origem').AsInteger = 0 then
+  // teste para verificar se o campo presidio origem e solicitante vagas estão vazios, se estiverem poderão ser habilitados
+  { if DsCadastro.DataSet.FieldByName('id_presidio_origem').AsInteger = 0 then
     DBLookupComboBoxPresidioOrigem.Enabled := true
-  else
+    else
     DBLookupComboBoxPresidioOrigem.Enabled := false;
-  if DsCadastro.DataSet.FieldByName('id_solicitante_vaga').asInteger = 0 then
+    if DsCadastro.DataSet.FieldByName('id_solicitante_vaga').asInteger = 0 then
     DBLookupComboBoxSolicitanteVaga.Enabled := true
-  else
-    DBLookupComboBoxPresidioOrigem.Enabled := false;  }
+    else
+    DBLookupComboBoxPresidioOrigem.Enabled := false; }
 end;
 
 procedure TFrmCadastroInternos.SpeedButton1Click(Sender: TObject);
@@ -835,12 +837,12 @@ begin
   end;
 
   FrmCadastroprocedencia := TFrmCadastroProcedencia.Create(Application);
-  FrmCadastroProcedencia.ShowModal;
-  FreeAndNil(FrmCadastroProcedencia);
+  FrmCadastroprocedencia.ShowModal;
+  FreeAndNil(FrmCadastroprocedencia);
   CorNosCampos;
 
-  DM.DsProcedencia.DataSet.Close;
-  DM.DsProcedencia.DataSet.OPEN;
+  dm.DsProcedencia.DataSet.Close;
+  dm.DsProcedencia.DataSet.Open;
 end;
 
 procedure TFrmCadastroInternos.SpeedButton2Click(Sender: TObject);
@@ -858,19 +860,22 @@ begin
   FreeAndNil(FrmCadastroCondicaoInterno);
   CorNosCampos;
 
-  DM.DsCondicaoInterno.DataSet.Close;
-  DM.DsCondicaoInterno.DataSet.OPEN;
+  dm.DsCondicaoInterno.DataSet.Close;
+  dm.DsCondicaoInterno.DataSet.Open;
 end;
 
 procedure TFrmCadastroInternos.EditLocalizarChange(Sender: TObject);
 begin
-
+   //showmessage('foi');
   // Se a pesquisa for por nome só começa a buscar a partir de 3 letras.
   if RadioGroupTipoLocalizar.ItemIndex = 1 then
   begin
-    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or (EditLocalizar.Text = ' ') then
+    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or
+      (EditLocalizar.Text = ' ') then
     begin
+      //showmessage('foi');
       DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'NOME_INTERNO LIKE ''%' + EditLocalizar.Text + '%''';
       DsConsulta.DataSet.filtered := True;
     end
     else
@@ -881,6 +886,7 @@ begin
     if EditLocalizar.Text <> '' then
     begin
       DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'RGI = ''' + EditLocalizar.Text + '''';
       DsConsulta.DataSet.filtered := True;
     end
     else
@@ -893,22 +899,25 @@ procedure TFrmCadastroInternos.SalvarClick(Sender: TObject);
 var
   iErro, ierro1: integer;
 begin
-  //DsCadastro.DataSet.FieldByName('id_up').AsInteger := GLOBAL_ID_UP;
-  DsCadastro.DataSet.Fieldbyname('ID_FUNCIONARIO').AsInteger := GLOBAL_ID_FUNCIONARIO;
-  //  DsCadastro.DataSet.FieldByName('FACCAO').AsString := UpperCase(frxComboBoxFaccao.Text);
+  // DsCadastro.DataSet.FieldByName('id_up').AsInteger := GLOBAL_ID_UP;
+  DsCadastro.DataSet.fieldbyname('ID_FUNCIONARIO').AsInteger :=
+    GLOBAL_ID_FUNCIONARIO;
+  // DsCadastro.DataSet.FieldByName('FACCAO').AsString := UpperCase(frxComboBoxFaccao.Text);
 
   if DbrgReuColaborador.ItemIndex = -1 then
-    DsCadastro.DataSet.FieldByName('COLABORADOR').AsString := 'N';
+    DsCadastro.DataSet.fieldbyname('COLABORADOR').AsString := 'N';
 
   if DsCadastro.DataSet.State in [dsinsert] then
   begin
-    if VerificaInternoExiste(DsCadastro.DataSet.fieldbyname('nome_interno').AsString,
-      DsCadastro.DataSet.fieldbyname('mae').AsString) then
+    if VerificaInternoExiste(DsCadastro.DataSet.fieldbyname('nome_interno')
+      .AsString, DsCadastro.DataSet.fieldbyname('mae').AsString) then
     begin
       ShowMessage('Interno com este Nome de Mãe, já existe no confere!');
-      if MessageDlg('Continuar com o cadastro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      if MessageDlg('Continuar com o cadastro?', mtConfirmation, [mbYes, mbNo],
+        0) = mrYes then
       begin
-        if MessageDlg('O registro poderá ficar duplicado, continuar?', mtConfirmation, [mbNo, mbYes], 0) <> mrYes then
+        if MessageDlg('O registro poderá ficar duplicado, continuar?',
+          mtConfirmation, [mbNo, mbYes], 0) <> mrYes then
         begin
           Exit;
         end;
@@ -933,8 +942,8 @@ begin
     if dsADVOGADO_INTERNO.DataSet.State in [dsedit, dsinsert] then
       dsADVOGADO_INTERNO.DataSet.Post;
 
-    if dsFilhos.DataSet.State in [dsedit, dsinsert] then
-      dsFilhos.DataSet.Post;
+    if DsFilhos.DataSet.State in [dsedit, dsinsert] then
+      DsFilhos.DataSet.Post;
 
     if DsFoto.DataSet.State in [dsedit, dsinsert] then
       DsFoto.DataSet.Post;
@@ -942,9 +951,9 @@ begin
     IniciaTransCadastro;
 
     iErro := TClientDataSet(DsCadastro.DataSet).ApplyUpdates(-1);
-    iErro := iErro + TClientDataSet(DSHISTORICO_interno.DataSet).ApplyUpdates(-1)
-      + TClientDataSet(dsFilhos.DataSet).ApplyUpdates(-1)
-      + TClientDataSet(dsADVOGADO_INTERNO.DataSet).ApplyUpdates(-1);
+    iErro := iErro + TClientDataSet(DSHISTORICO_interno.DataSet)
+      .ApplyUpdates(-1) + TClientDataSet(DsFilhos.DataSet).ApplyUpdates(-1) +
+      TClientDataSet(dsADVOGADO_INTERNO.DataSet).ApplyUpdates(-1);
     iErro := iErro + TClientDataSet(DsFoto.DataSet).ApplyUpdates(-1);
 
     if iErro = 0 then
@@ -968,7 +977,7 @@ begin
   PageControlInterno.ActivePageIndex := 0;
 
   DSHISTORICO_interno.DataSet.Close;
-  DSHISTORICO_interno.DataSet.OPEN;
+  DSHISTORICO_interno.DataSet.Open;
 
   DsConsulta.DataSet.Close;
   DsConsulta.DataSet.Open;
@@ -994,19 +1003,19 @@ begin
     end;
 
     // SqlCadastro.SQL.Text := 'SELECT * FROM INTERNO WHERE id_up=' + inttostr(GLOBAL_ID_UP) + ' and ID_INTERNO = ' +
-     //  Fieldbyname('ID_INTERNO').AsString;
+    // Fieldbyname('ID_INTERNO').AsString;
 
-//    if RadioGroupStatus.ItemIndex = 1 then
-//    begin
-//      SqlCadastro.SQL.Text := 'SELECT * FROM INTERNO WHERE ID_INTERNO = ' + Fieldbyname('ID_INTERNO').AsString;
-//    end
-//    else
-//    begin
-//      SqlCadastro.SQL.Text := 'SELECT * FROM INTERNO WHERE id_up=' + inttostr(GLOBAL_ID_UP) + ' and ID_INTERNO = ' +
-//        Fieldbyname('ID_INTERNO').AsString;
-//    end;
-//    DsCadastro.DataSet.Close;
-//    DsCadastro.DataSet.Open;
+    // if RadioGroupStatus.ItemIndex = 1 then
+    // begin
+    // SqlCadastro.SQL.Text := 'SELECT * FROM INTERNO WHERE ID_INTERNO = ' + Fieldbyname('ID_INTERNO').AsString;
+    // end
+    // else
+    // begin
+    // SqlCadastro.SQL.Text := 'SELECT * FROM INTERNO WHERE id_up=' + inttostr(GLOBAL_ID_UP) + ' and ID_INTERNO = ' +
+    // Fieldbyname('ID_INTERNO').AsString;
+    // end;
+    // DsCadastro.DataSet.Close;
+    // DsCadastro.DataSet.Open;
 
   end;
 
@@ -1019,18 +1028,25 @@ begin
   inherited;
 
   case RadioGroupTipoLocalizar.ItemIndex of
-    0: Campo := 'Prontuário';
-    1: Campo := 'Nome';
+    0:
+      Campo := 'Prontuário';
+    1:
+      Campo := 'Nome';
   end;
 
-  SqlConsulta.sql.text := SqlConsultaBackup.sql.text + ' and interno.id_up=' + inttostr(GLOBAL_ID_UP) + ' and interno.st= ' + qs('A') + ' order by interno.nome_interno ';
+  SqlConsulta.SQL.Text := SqlConsultaBackup.SQL.Text + ' and INTERNO.id_up=' +
+    inttostr(GLOBAL_ID_UP) + ' and INTERNO.st= ' + qs('A') +
+    ' order by INTERNO.nome_interno ';
   if RadioGroupStatus.ItemIndex = 1 then
   begin
     sNomeInterno := '';
     while Length(trim(sNomeInterno)) < 3 do
-      sNomeInterno := InputBox('Mínimo de TRÊS letras.', 'Digite pelo menos TRÊS letras do ' + Campo + ' do interno.', '');
-    SqlConsulta.sql.text := SqlConsultaBackup.sql.text + ' and coalesce(interno.st,' + Qs('I') + ') = ' + qs('I') + ' and nome_interno like ' + qs('%' + UpperCase(sNomeInterno) + '%') +
-      ' order by interno.nome_interno ';
+      sNomeInterno := InputBox('Mínimo de TRÊS letras.',
+        'Digite pelo menos TRÊS letras do ' + Campo + ' do INTERNO.', '');
+    SqlConsulta.SQL.Text := SqlConsultaBackup.SQL.Text +
+      ' and coalesce(INTERNO.st,' + qs('I') + ') = ' + qs('I') +
+      ' and nome_interno like ' + qs('%' + UpperCase(sNomeInterno) + '%') +
+      ' order by INTERNO.nome_interno ';
   end;
 
   if ID_INTERNO > 0 then
@@ -1038,10 +1054,45 @@ begin
     AddWhere(SqlConsulta, ' INTERNO.ID_INTERNO=' + inttostr(ID_INTERNO));
   end;
 
+  // SqlConsulta.ParamByName('ID_UP').AsInteger := GLOBAL_ID_UP;
   DsConsulta.DataSet.filtered := False;
+  // showmessage(SqlConsulta.SQL.Text);
   DsConsulta.DataSet.Close;
-  DsConsulta.DataSet.Open;
 
+  try
+    try
+      // Attempt to open the dataset
+      DsConsulta.DataSet.Open;
+    except
+      // Catch specific exceptions first (if applicable)
+      on E: EDatabaseError do
+      begin
+        // Handle database-related errors
+        ShowMessage('Database Error: ' + E.Message );
+      end;
+      on E: EFDDBEngineException do
+      begin
+        // Handle FireDAC-specific database engine errors
+        ShowMessage('FireDAC Engine Exception: ' + E.Message);
+      end;
+      // Catch more generic exceptions if needed
+      on E: Exception do
+      begin
+        // Handle other generic exceptions
+        ShowMessage('An unexpected error occurred: ' + E.Message);
+      end;
+    end;
+  except
+    // Catch any unexpected exceptions that might occur during the outer try-except block
+    on E: Exception do
+    begin
+      ShowMessage('An unexpected error occurred during dataset opening: ' +
+        E.Message);
+    end;
+  end;
+
+  // SqlConsulta.Open;
+  // DsConsulta.DataSet.Open;
   EditLocalizar.Text := UpperCase(sNomeInterno);
   EditLocalizarChange(nil);
   if EditLocalizar.CanFocus then
@@ -1052,32 +1103,32 @@ end;
 procedure TFrmCadastroInternos.EditarClick(Sender: TObject);
 begin
   inherited;
-  //  frxComboBoxFaccao.Text := UpperCase(DsCadastro.DataSet.FieldByName('FACCAO').AsString);
+  // frxComboBoxFaccao.Text := UpperCase(DsCadastro.DataSet.FieldByName('FACCAO').AsString);
   PageControlInterno.ActivePageIndex := 0;
   PreencheCombos();
 
-  SqlFoto.ParamByName('id_interno').AsInteger :=
-    DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
+  SqlFoto.ParamByName('id_interno').AsInteger := DsCadastro.DataSet.fieldbyname
+    ('id_interno').AsInteger;
 
   DsFoto.DataSet.Close;
-  DsFoto.DataSet.OPEN;
+  DsFoto.DataSet.Open;
 
   dsADVOGADO_INTERNO.DataSet.Close;
   dsADVOGADO_INTERNO.DataSet.Open;
 
-  //teste para verificar se o campo solicitante da vaga e presídio de origem está vazio,
-  //se já tiver preenchido só poderá ser alterado por um administrador do sistema
-  if ((DsCadastro.DataSet.FieldByName('id_solicitante_vaga').asString = '')
-    or (NOME_PERFILUSUARIO_LOGADO = 'ADMINISTRADOR')) then
-    DBLookupComboBoxSolicitanteVaga.Enabled := true
+  // teste para verificar se o campo solicitante da vaga e presídio de origem está vazio,
+  // se já tiver preenchido só poderá ser alterado por um administrador do sistema
+  if ((DsCadastro.DataSet.fieldbyname('id_solicitante_vaga').AsString = '') or
+    (NOME_PERFILUSUARIO_LOGADO = 'ADMINISTRADOR')) then
+    DBLookupComboBoxSolicitanteVaga.Enabled := True
   else
-    DBLookupComboBoxSolicitanteVaga.Enabled := false;
+    DBLookupComboBoxSolicitanteVaga.Enabled := False;
 
-  if ((DsCadastro.DataSet.FieldByName('id_presidio_origem').asString = '')
-    or (NOME_PERFILUSUARIO_LOGADO = 'ADMINISTRADOR')) then
-    DBLookupComboBoxPresidioOrigem.Enabled := true
+  if ((DsCadastro.DataSet.fieldbyname('id_presidio_origem').AsString = '') or
+    (NOME_PERFILUSUARIO_LOGADO = 'ADMINISTRADOR')) then
+    DBLookupComboBoxPresidioOrigem.Enabled := True
   else
-    DBLookupComboBoxPresidioOrigem.Enabled := false;
+    DBLookupComboBoxPresidioOrigem.Enabled := False;
 end;
 
 procedure TFrmCadastroInternos.CancelarClick(Sender: TObject);
@@ -1094,18 +1145,19 @@ end;
 procedure TFrmCadastroInternos.DBImageFOTOInternoClick(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
 
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImageFOTOInterno.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImageFOTOInterno.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1122,14 +1174,16 @@ begin
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsString :=
     FormatDateTime('dd/mm/yyyy', DateTimePickerHistorico.Date);
-  DSHISTORICO_interno.DataSet.fieldbyname('descricao').AsString := MemoDescricao.Lines.Text;
-  //DSHISTORICO_interno.DataSet.fieldbyname('setor').AsString := 'Inclusão';
+  DSHISTORICO_interno.DataSet.fieldbyname('descricao').AsString :=
+    MemoDescricao.Lines.Text;
+  // DSHISTORICO_interno.DataSet.fieldbyname('setor').AsString := 'Inclusão';
   DSHISTORICO_interno.DataSet.fieldbyname('setor').AsString := 'Geral';
   DSHISTORICO_interno.DataSet.fieldbyname('ID_FUNCIONARIO').AsInteger :=
     GLOBAL_ID_FUNCIONARIO;
   DSHISTORICO_interno.DataSet.Post;
 
-  DM.SQLConnect.ExecSql('EXECUTE PROCEDURE set_context(' + inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
+  dm.SQLConnect.ExecSql('EXECUTE PROCEDURE set_context(' +
+    inttostr(GLOBAL_ID_FUNCIONARIO) + ')');
   TClientDataSet(DSHISTORICO_interno.DataSet).ApplyUpdates(0);
 
   MemoDescricao.Lines.Clear;
@@ -1139,17 +1193,18 @@ end;
 procedure TFrmCadastroInternos.DBImageFOTOPERFILClick(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImageFOTOPERFIL.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImageFOTOPERFIL.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1159,17 +1214,18 @@ end;
 procedure TFrmCadastroInternos.DBImagetatuagem1Click(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImagetatuagem1.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImagetatuagem1.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1179,17 +1235,18 @@ end;
 procedure TFrmCadastroInternos.DBImageFOTO_SINAISClick(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImageFOTO_SINAIS.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImageFOTO_SINAIS.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1199,17 +1256,18 @@ end;
 procedure TFrmCadastroInternos.DBImageFOTO_SINAIS1Click(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImageFOTO_SINAIS1.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImageFOTO_SINAIS1.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1219,17 +1277,18 @@ end;
 procedure TFrmCadastroInternos.DBImageFOTO_SINAIS2Click(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImageFOTO_SINAIS2.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImageFOTO_SINAIS2.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1239,17 +1298,18 @@ end;
 procedure TFrmCadastroInternos.DBImageFOTO_SINAIS3Click(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImageFOTO_SINAIS3.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImageFOTO_SINAIS3.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1259,17 +1319,18 @@ end;
 procedure TFrmCadastroInternos.DBImageFOTO_SINAIS4Click(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsCadastro.DataSet do
   begin
-    if state in [dsedit, dsinsert] then
+    if State in [dsedit, dsinsert] then
     begin
       if OpenDialogCapturarFoto.Execute then
       begin
-        JPeg := TJPEGImage.Create;
-        JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-        DBImageFOTO_SINAIS4.Picture.Bitmap.Assign(JPeg);
+        Jpeg := TJpegImage.Create;
+        Jpeg.LoadFromFile
+          (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+        DBImageFOTO_SINAIS4.Picture.Bitmap.Assign(Jpeg);
       end;
     end;
   end;
@@ -1286,13 +1347,13 @@ begin
     Exit;
   end;
 
-  FrmCadastroraca := TFrmCadastroraca.create(Application);
-  frmcadastroraca.showmodal;
+  FrmCadastroraca := TFrmCadastroraca.Create(Application);
+  FrmCadastroraca.ShowModal;
   FreeAndNil(FrmCadastroraca);
   CorNosCampos;
 
-  DM.Dsraca.DataSet.Close;
-  DM.Dsraca.DataSet.OPEN;
+  dm.DSRACA.DataSet.Close;
+  dm.DSRACA.DataSet.Open;
 
 end;
 
@@ -1306,33 +1367,33 @@ begin
     Exit;
   end;
 
-  FrmCadastronacionalidade := TFrmCadastronacionalidade.create(Application);
-  FrmCadastronacionalidade.showmodal;
+  FrmCadastronacionalidade := TFrmCadastronacionalidade.Create(Application);
+  FrmCadastronacionalidade.ShowModal;
   FreeAndNil(FrmCadastronacionalidade);
   CorNosCampos;
 
-  DM.DsPais.DataSet.Close;
-  DM.DsPais.DataSet.OPEN;
+  dm.DsPais.DataSet.Close;
+  dm.DsPais.DataSet.Open;
 end;
 
 procedure TFrmCadastroInternos.SpeedButton4Click(Sender: TObject);
 begin
   inherited;
 
-  //Verifica se o usuário tem permissão de acesso ao cadastro.
+  // Verifica se o usuário tem permissão de acesso ao cadastro.
   if (PERMISSAO_CADASTRO = '') or (PERMISSAO_CADASTRO = 'R') then
   begin
     ShowMessage('Você não possui Permissão de Acesso ao menu de Cadastros!');
     Exit;
   end;
 
-  FrmCadastroCidade := TFrmCadastroCidade.create(Application);
-  FrmCadastroCidade.showmodal;
+  FrmCadastroCidade := TFrmCadastroCidade.Create(Application);
+  FrmCadastroCidade.ShowModal;
   FreeAndNil(FrmCadastroCidade);
   CorNosCampos;
 
-  DM.DSCIDADE.DataSet.Close;
-  DM.DSCIDADE.DataSet.OPEN;
+  dm.DSCIDADE.DataSet.Close;
+  dm.DSCIDADE.DataSet.Open;
 
 end;
 
@@ -1340,20 +1401,20 @@ procedure TFrmCadastroInternos.SpeedButton7Click(Sender: TObject);
 begin
   inherited;
 
-  //Verifica se o usuário tem permissão de Cadastro.
+  // Verifica se o usuário tem permissão de Cadastro.
   if (PERMISSAO_CADASTRO = '') or (PERMISSAO_CADASTRO = 'R') then
   begin
     ShowMessage('Você não possui Permissão de Acesso ao menu de Cadastros!');
     Exit;
   end;
 
-  FrmCadastroescolaridade := TFrmCadastroescolaridade.create(Application);
-  FrmCadastroescolaridade.showmodal;
+  FrmCadastroescolaridade := TFrmCadastroescolaridade.Create(Application);
+  FrmCadastroescolaridade.ShowModal;
   FreeAndNil(FrmCadastroescolaridade);
   CorNosCampos;
 
-  DM.DSESCOLARIDADE.DataSet.Close;
-  DM.DSESCOLARIDADE.DataSet.OPEN;
+  dm.DSESCOLARIDADE.DataSet.Close;
+  dm.DSESCOLARIDADE.DataSet.Open;
 
 end;
 
@@ -1363,17 +1424,18 @@ begin
 
   if (PERMISSAO_ADVOGADO = '') or (PERMISSAO_ADVOGADO = 'R') then
   begin
-    ShowMessage('Você não possui Permissão de Acesso ao Cadastro de Advogados!');
+    ShowMessage
+      ('Você não possui Permissão de Acesso ao Cadastro de Advogados!');
     Exit;
   end;
 
-  FrmCadastroadvogado := TFrmCadastroadvogado.create(Application);
-  FrmCadastroadvogado.showmodal;
+  FrmCadastroadvogado := TFrmCadastroadvogado.Create(Application);
+  FrmCadastroadvogado.ShowModal;
   FreeAndNil(FrmCadastroadvogado);
   CorNosCampos;
 
-  DM.DSADVOGADO.DataSet.Close;
-  DM.DSADVOGADO.DataSet.OPEN;
+  dm.DSADVOGADO.DataSet.Close;
+  dm.DSADVOGADO.DataSet.Open;
 end;
 
 procedure TFrmCadastroInternos.SpeedButton9Click(Sender: TObject);
@@ -1386,24 +1448,24 @@ begin
     Exit;
   end;
 
-  FrmCadastroprofissao := TFrmCadastroprofissao.create(Application);
-  FrmCadastroprofissao.showmodal;
+  FrmCadastroprofissao := TFrmCadastroprofissao.Create(Application);
+  FrmCadastroprofissao.ShowModal;
   FreeAndNil(FrmCadastroprofissao);
   CorNosCampos;
 
-  DM.DsProfissao.DataSet.Close;
-  DM.DsProfissao.DataSet.OPEN;
+  dm.DsProfissao.DataSet.Close;
+  dm.DsProfissao.DataSet.Open;
 end;
 
 procedure TFrmCadastroInternos.SpeedButton11Click(Sender: TObject);
 begin
   inherited;
-  FrmCadastroCidade := TFrmCadastroCidade.create(Application);
-  FrmCadastroCidade.showmodal;
+  FrmCadastroCidade := TFrmCadastroCidade.Create(Application);
+  FrmCadastroCidade.ShowModal;
   FreeAndNil(FrmCadastroCidade);
 
-  DM.DSCIDADE.DataSet.Close;
-  DM.DSCIDADE.DataSet.OPEN;
+  dm.DSCIDADE.DataSet.Close;
+  dm.DSCIDADE.DataSet.Open;
 
 end;
 
@@ -1412,44 +1474,45 @@ var
   Status: string;
 begin
   inherited;
-{
-  if Length(Trim(EditLocalizar.text)) < 2 then
+  {
+    if Length(Trim(EditLocalizar.text)) < 2 then
     exit;
 
-  case RadioGroupStatus.ItemIndex of
+    case RadioGroupStatus.ItemIndex of
     0: Status := 'A';
     1: Status := 'I';
-  end;
+    end;
 
-  if Status = 'I' then
-  begin
+    if Status = 'I' then
+    begin
     DsConsulta.DataSet.filter := 'st = ' + qs(Status)
-      + ' and ((nome_interno like ' + qs('%' + BuscaTroca(EditLocalizar.text, ' ', '%') + '%')
-      + ') or (nome_interno_soundex like ' + qs('%' + Soundex(EditLocalizar.text) + '%') + '))';
-  end
-  else
-  begin
+    + ' and ((nome_interno like ' + qs('%' + BuscaTroca(EditLocalizar.text, ' ', '%') + '%')
+    + ') or (nome_interno_soundex like ' + qs('%' + Soundex(EditLocalizar.text) + '%') + '))';
+    end
+    else
+    begin
     DsConsulta.DataSet.filter := ' id_up=' + inttostr(GLOBAL_ID_UP)
-      + ' and st = ' + qs(Status)
-      + ' and ((nome_interno like ' + qs('%' + BuscaTroca(EditLocalizar.text, ' ', '%') + '%')
-      + ') or (nome_interno_soundex like ' + qs('%' + Soundex(EditLocalizar.text) + '%') + '))';
-  end;
+    + ' and st = ' + qs(Status)
+    + ' and ((nome_interno like ' + qs('%' + BuscaTroca(EditLocalizar.text, ' ', '%') + '%')
+    + ') or (nome_interno_soundex like ' + qs('%' + Soundex(EditLocalizar.text) + '%') + '))';
+    end;
 
-  DsConsulta.DataSet.filtered := False;
-  DsConsulta.DataSet.filtered := True;
-    }
+    DsConsulta.DataSet.filtered := False;
+    DsConsulta.DataSet.filtered := True;
+  }
 end;
 
 procedure TFrmCadastroInternos.SpeedButton12Click(Sender: TObject);
 begin
   inherited;
-  FrmCadastrofaltasdisciplinares := TFrmCadastrofaltasdisciplinares.Create(Application);
+  FrmCadastrofaltasdisciplinares := TFrmCadastrofaltasdisciplinares.Create
+    (Application);
   FrmCadastrofaltasdisciplinares.ShowModal;
   FreeAndNil(FrmCadastrofaltasdisciplinares);
   CorNosCampos;
 
-  //  DM.Dsfaltadisciplinar.DataSet.Close;
-  //  DM.Dsfaltadisciplinar.DataSet.OPEN;
+  // DM.Dsfaltadisciplinar.DataSet.Close;
+  // DM.Dsfaltadisciplinar.DataSet.OPEN;
 end;
 
 procedure TFrmCadastroInternos.Button2Click(Sender: TObject);
@@ -1468,50 +1531,58 @@ begin
     if DBLookupComboBoxIDADVOGADO.CanFocus then
       DBLookupComboBoxIDADVOGADO.SetFocus;
 
-    exit;
+    Exit;
   end;
 
- { DM.SqlExecute.SQL.Text := 'select FIRST 1 * from advogados_internos where status = ''A'' and id_interno = '
+  { DM.SqlExecute.SQL.Text := 'select FIRST 1 * from advogados_internos where status = ''A'' and id_interno = '
     + DsCadastro.DataSet.fieldbyname('id_interno').AsString + ' and id_advogado = '
     + IntToStr(DBLookupComboBoxIDADVOGADO.KeyValue);
 
-  DM.DsExecute.DataSet.Close;
-  DM.DsExecute.DataSet.Open;
+    DM.DsExecute.DataSet.Close;
+    DM.DsExecute.DataSet.Open;
 
-  if not (DM.DsExecute.DataSet.IsEmpty) then
-  begin
-      ShowMessage('Este Advogado já está Constituído para este Interno!');
-      Exit;
-  end; }
+    if not (DM.DsExecute.DataSet.IsEmpty) then
+    begin
+    ShowMessage('Este Advogado já está Constituído para este Interno!');
+    Exit;
+    end; }
 
-  if dsADVOGADO_INTERNO.DataSet.Locate('id_advogado;status', VarArrayOf([DBLookupComboBoxIDADVOGADO.KeyValue, 'A']), [loCaseInsensitive]) then
+  if dsADVOGADO_INTERNO.DataSet.Locate('id_advogado;status',
+    VarArrayOf([DBLookupComboBoxIDADVOGADO.KeyValue, 'A']), [loCaseInsensitive])
+  then
   begin
     ShowMessage('Advogado já está Constituído e ativo para este Interno!');
     Exit;
   end;
 
-
-  if Application.MessageBox('Contituir este Advogado?',
-    'Confirme.', mb_YesNo + Mb_IconQuestion) = idYes then
+  if Application.MessageBox('Contituir este Advogado?', 'Confirme.',
+    mb_YesNo + Mb_IconQuestion) = idYes then
   begin
 
     dsADVOGADO_INTERNO.DataSet.Append;
-    dsADVOGADO_INTERNO.DataSet.fieldbyname('id_ADVOGADOs_INTERNOs').AsInteger := 0;
+    dsADVOGADO_INTERNO.DataSet.fieldbyname('id_ADVOGADOs_INTERNOs')
+      .AsInteger := 0;
     dsADVOGADO_INTERNO.DataSet.fieldbyname('id_interno').AsInteger :=
       DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
-    dsADVOGADO_INTERNO.DataSet.fieldbyname('OBSadvogado_interno').AsString := Memoobsadvogado.Lines.Text;
-    dsADVOGADO_INTERNO.DataSet.fieldbyname('ID_ADVOGADO').AsInteger := DBLookupComboBoxIDADVOGADO.KeyValue;
-    dsADVOGADO_INTERNO.DataSet.fieldbyname('DATA_CONSTITUICAO').AsString := DateToStr(DtpDataConstituicao.Date);
+    dsADVOGADO_INTERNO.DataSet.fieldbyname('OBSadvogado_interno').AsString :=
+      Memoobsadvogado.Lines.Text;
+    dsADVOGADO_INTERNO.DataSet.fieldbyname('ID_ADVOGADO').AsInteger :=
+      DBLookupComboBoxIDADVOGADO.KeyValue;
+    dsADVOGADO_INTERNO.DataSet.fieldbyname('DATA_CONSTITUICAO').AsString :=
+      DateToStr(DtpDataConstituicao.Date);
     dsADVOGADO_INTERNO.DataSet.fieldbyname('STATUS').AsString := 'A';
     dsADVOGADO_INTERNO.DataSet.Post;
 
     DSHISTORICO_interno.DataSet.Append;
-    DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+    DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno')
+      .AsInteger := 0;
     DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
       DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
-    DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime := DtpDataConstituicao.Date;
+    DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime :=
+      DtpDataConstituicao.Date;
     DSHISTORICO_interno.DataSet.fieldbyname('descricao').AsString :=
-      'Constituiu o Advogado: ' + DBLookupComboBoxIDADVOGADO.Text + ', Obs: ' + Memoobsadvogado.Lines.Text;
+      'Constituiu o Advogado: ' + DBLookupComboBoxIDADVOGADO.Text + ', Obs: ' +
+      Memoobsadvogado.Lines.Text;
     DSHISTORICO_interno.DataSet.fieldbyname('setor').AsString := 'Jurídico';
     DSHISTORICO_interno.DataSet.fieldbyname('ID_FUNCIONARIO').AsInteger :=
       GLOBAL_ID_FUNCIONARIO;
@@ -1526,7 +1597,7 @@ end;
 
 procedure TFrmCadastroInternos.BitBtn1Click(Sender: TObject);
 var
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
   ImageTeste: TImage;
   sNomePNG: string;
 begin
@@ -1536,11 +1607,12 @@ begin
   FrmImagemParaWEB.DBImageFOTOInterno.DataSource := DsCadastro;
   FrmImagemParaWEB.ShowModal;
 
-  DBImageFOTOInterno.Picture.Bitmap.Assign(FrmImagemParaWEB.Image1.picture);
+  DBImageFOTOInterno.Picture.Bitmap.Assign(FrmImagemParaWEB.Image1.Picture);
 
-  DBImageFOTOInterno.Picture.SaveToFile('interno-' + DBEditCodigo.Text + '.jpg');
+  DBImageFOTOInterno.Picture.SaveToFile('interno-' + DBEditCodigo.Text
+    + '.jpg');
 
-  freeandnil(FrmImagemParaWEB);
+  FreeAndNil(FrmImagemParaWEB);
 
 end;
 
@@ -1548,39 +1620,40 @@ procedure TFrmCadastroInternos.BitBtn2Click(Sender: TObject);
 begin
   inherited;
 
-  DBImageFOTOInterno.Picture.Bitmap.LoadFromFile(DsCadastro.DataSet.fieldbyname('id_interno').AsString + '.bmp');
+  DBImageFOTOInterno.Picture.Bitmap.LoadFromFile
+    (DsCadastro.DataSet.fieldbyname('id_interno').AsString + '.bmp');
 
 end;
 
 procedure TFrmCadastroInternos.CdsFilhosBeforePost(DataSet: TDataSet);
 begin
   inherited;
-  DataSet.FieldByName('idfilhos').AsInteger := 0;
+  DataSet.fieldbyname('idfilhos').AsInteger := 0;
 end;
 
 procedure TFrmCadastroInternos.CdsCadastroBeforePost(DataSet: TDataSet);
 begin
   inherited;
-  //  DataSet.FieldByName('FACCAO').AsString := UpperCase(frxComboBoxFaccao.Text);
+  // DataSet.FieldByName('FACCAO').AsString := UpperCase(frxComboBoxFaccao.Text);
 
 end;
 
 procedure TFrmCadastroInternos.PreencheCombos;
 begin
-  //  SqlLista.SQL.Text := 'SELECT DISTINCT FACCAO FROM INTERNO ';
+  // SqlLista.SQL.Text := 'SELECT DISTINCT FACCAO FROM INTERNO ';
   //
-  //  frxComboBoxFaccao.Items.Clear;
+  // frxComboBoxFaccao.Items.Clear;
   //
-  //  with DsLista.DataSet do
-  //  begin
-  //    Open;
-  //    while not EOF do
-  //    begin
-  //      frxComboBoxFaccao.Items.Add(FieldByName('FACCAO').AsString);
-  //      Next;
-  //    end;
-  //    close;
-  //  end;
+  // with DsLista.DataSet do
+  // begin
+  // Open;
+  // while not EOF do
+  // begin
+  // frxComboBoxFaccao.Items.Add(FieldByName('FACCAO').AsString);
+  // Next;
+  // end;
+  // close;
+  // end;
 
 end;
 
@@ -1598,23 +1671,23 @@ begin
     if IsEmpty then
       Exit;
 
-    //    if state in [dsbrowse] then
-    //    begin
-    //      frxComboBoxFaccao.Text := UpperCase(DsCadastro.DataSet.FieldByName('FACCAO').AsString);
-    //    end;
+    // if state in [dsbrowse] then
+    // begin
+    // frxComboBoxFaccao.Text := UpperCase(DsCadastro.DataSet.FieldByName('FACCAO').AsString);
+    // end;
 
   end;
 
-  {Verifica as permissões que o usuário possui para esta tela
-  e habilita ou não os respectivos botões.
-  Estas verificações devem ser colocadas no final do evento FormCreate e
-  no final do evento OnDataChance do DsCadastro de cada tela.
-  Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
-  Ex. ContemValor('I', PERMISSAO_CONFERE).}
+  { Verifica as permissões que o usuário possui para esta tela
+    e habilita ou não os respectivos botões.
+    Estas verificações devem ser colocadas no final do evento FormCreate e
+    no final do evento OnDataChance do DsCadastro de cada tela.
+    Obs: atentar para mudar a permissão referente à tela nas verificações abaixo.
+    Ex. ContemValor('I', PERMISSAO_CONFERE). }
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Novo.Visible := False;
     Editar.Visible := False;
@@ -1622,9 +1695,9 @@ begin
     Salvar.Visible := False;
   end;
 
-  if ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Editar.Visible := False;
     Excluir.Visible := False;
@@ -1634,23 +1707,23 @@ begin
       Salvar.Visible := False;
   end;
 
-  if ContemValor('I', PERMISSAO_CADASTRO)
-    and ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if ContemValor('I', PERMISSAO_CADASTRO) and
+    ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Excluir.Visible := False;
   end;
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and ContemValor('E', PERMISSAO_CADASTRO)
-    and ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    ContemValor('E', PERMISSAO_CADASTRO) and ContemValor('D', PERMISSAO_CADASTRO)
+  then
   begin
     Novo.Visible := False;
   end;
 
-  if ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and ContemValor('D', PERMISSAO_CADASTRO) then
+  if ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Editar.Visible := False;
     if not Salvar.Visible then
@@ -1659,9 +1732,9 @@ begin
       Salvar.Visible := False;
   end;
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and not ContemValor('E', PERMISSAO_CADASTRO)
-    and ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    not ContemValor('E', PERMISSAO_CADASTRO) and
+    ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Novo.Visible := False;
     Editar.Visible := False;
@@ -1671,9 +1744,9 @@ begin
       Salvar.Visible := False;
   end;
 
-  if not ContemValor('I', PERMISSAO_CADASTRO)
-    and ContemValor('E', PERMISSAO_CADASTRO)
-    and not ContemValor('D', PERMISSAO_CADASTRO) then
+  if not ContemValor('I', PERMISSAO_CADASTRO) and
+    ContemValor('E', PERMISSAO_CADASTRO) and
+    not ContemValor('D', PERMISSAO_CADASTRO) then
   begin
     Novo.Visible := False;
     Excluir.Visible := False;
@@ -1681,17 +1754,16 @@ begin
 
 end;
 
-procedure TFrmCadastroInternos.Recalculartodasasfotos1Click(
-  Sender: TObject);
+procedure TFrmCadastroInternos.Recalculartodasasfotos1Click(Sender: TObject);
 var
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   inherited;
 
   if InputBox('Informe a senha.', 'Qual a senha', '') <> 'agepensiap' then
     Exit;
 
-  with DsConsulta.dataset do
+  with DsConsulta.DataSet do
   begin
 
     first;
@@ -1706,20 +1778,21 @@ begin
       IniciaTransCadastro;
 
       DsCadastro.DataSet.Edit;
-      DBImageFOTOInterno.Picture.Bitmap.Assign(FrmImagemParaWEB.Image1.picture);
-      DBImageFOTOInterno.Picture.SaveToFile('interno-' + DBEditCodigo.Text + '.jpg');
-      DsCadastro.DataSet.post;
-      tclientdataset(DsCadastro.DataSet).ApplyUpdates(0);
+      DBImageFOTOInterno.Picture.Bitmap.Assign(FrmImagemParaWEB.Image1.Picture);
+      DBImageFOTOInterno.Picture.SaveToFile('interno-' + DBEditCodigo.Text
+        + '.jpg');
+      DsCadastro.DataSet.Post;
+      TClientDataSet(DsCadastro.DataSet).ApplyUpdates(0);
 
       finalizaTransCadastro;
 
-      freeandnil(FrmImagemParaWEB);
+      FreeAndNil(FrmImagemParaWEB);
       next;
 
     end;
 
-    First;
-    showmessage('Pronto!!!');
+    first;
+    ShowMessage('Pronto!!!');
 
   end;
 
@@ -1738,19 +1811,19 @@ begin
       if not Active then
       begin
         ShowMessage('Não tem interno posicionado na tela.');
-        exit;
+        Exit;
       end;
 
       if IsEmpty then
       begin
         ShowMessage('Não tem interno posicionado na tela.');
-        exit;
+        Exit;
       end;
 
-      if state in [dsinsert] then
+      if State in [dsinsert] then
       begin
         ShowMessage('Salve este registro de interno, depois posicione nele.');
-        exit;
+        Exit;
       end;
 
       GLOBAL_ID_INTERNO := fieldbyname('ID_INTERNO').AsInteger;
@@ -1760,7 +1833,8 @@ begin
     if not DirectoryExists(GLOBAL_PATCH_SISTEMA + '\Específicos\') then
       CreateDir(GLOBAL_PATCH_SISTEMA + '\Específicos\');
 
-    PATH_MOMENTO := GLOBAL_PATCH_SISTEMA + '\Específicos\' + trim(copy(self.Name, 4, 100)) + '\';
+    PATH_MOMENTO := GLOBAL_PATCH_SISTEMA + '\Específicos\' +
+      trim(copy(self.Name, 4, 100)) + '\';
     if not DirectoryExists(PATH_MOMENTO) then
       CreateDir(PATH_MOMENTO);
 
@@ -1792,26 +1866,27 @@ begin
   FreeAndNil(FrmCadastroFaccao);
 
   DsFaccao.DataSet.Close;
-  DsFaccao.DataSet.OPEN;
+  DsFaccao.DataSet.Open;
 
 end;
 
 procedure TFrmCadastroInternos.DBImageOutrasClick(Sender: TObject);
 var
   sOrigem, sDestino: string;
-  JPeg: TJpegImage;
+  Jpeg: TJpegImage;
 begin
   with DsFoto.DataSet do
   begin
 
-    if not (state in [dsedit, dsinsert]) then
+    if not(State in [dsedit, dsinsert]) then
       Append;
 
     if OpenDialogCapturarFoto.Execute then
     begin
-      JPeg := TJPEGImage.Create;
-      JPeg.LoadFromFile(ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
-      DBImageOutras.Picture.Bitmap.Assign(JPeg);
+      Jpeg := TJpegImage.Create;
+      Jpeg.LoadFromFile
+        (ConverterBmpParaJPeg(JpgToBmp(OpenDialogCapturarFoto.FileName)));
+      DBImageOutras.Picture.Bitmap.Assign(Jpeg);
     end;
 
   end;
@@ -1822,16 +1897,15 @@ procedure TFrmCadastroInternos.CdsFotoAfterInsert(DataSet: TDataSet);
 begin
   inherited;
 
-  DataSet.FieldByName('IDFOTO_INTERNO').AsInteger := 0;
-  DataSet.FieldByName('DESCRICAO').AsString := 'FOTO';
-  DataSet.FieldByName('ID_INTERNO').AsInteger :=
-    DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
-  DataSet.FieldByName('DATA').AsDateTime := DATE;
+  DataSet.fieldbyname('IDFOTO_INTERNO').AsInteger := 0;
+  DataSet.fieldbyname('DESCRICAO').AsString := 'FOTO';
+  DataSet.fieldbyname('ID_INTERNO').AsInteger := DsCadastro.DataSet.fieldbyname
+    ('id_interno').AsInteger;
+  DataSet.fieldbyname('DATA').AsDateTime := Date;
 
 end;
 
-procedure TFrmCadastroInternos.RecuperarFotosdeArquivo1Click(
-  Sender: TObject);
+procedure TFrmCadastroInternos.RecuperarFotosdeArquivo1Click(Sender: TObject);
 begin
   inherited;
 
@@ -1847,12 +1921,13 @@ begin
 
   if not ContemValor('D', PERMISSAO_ADVOGADO) then
   begin
-    ShowMessage('Você não possui permissão para desconstituir/inserir advogados!');
+    ShowMessage
+      ('Você não possui permissão para desconstituir/inserir advogados!');
     Exit;
   end;
 
   if dsADVOGADO_INTERNO.DataSet.IsEmpty then
-    exit;
+    Exit;
 
   if dsADVOGADO_INTERNO.DataSet.fieldbyname('STATUS').AsString = 'I' then
   begin
@@ -1860,28 +1935,31 @@ begin
     Exit;
   end;
 
-  if Application.MessageBox('Descontituir o Advogado selecionado?',
-    'Confirme.', mb_YesNo + Mb_IconQuestion) = idYes then
+  if Application.MessageBox('Descontituir o Advogado selecionado?', 'Confirme.',
+    mb_YesNo + Mb_IconQuestion) = idYes then
   begin
 
     DSHISTORICO_interno.DataSet.Append;
-    DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno').AsInteger := 0;
+    DSHISTORICO_interno.DataSet.fieldbyname('idhistorico_interno')
+      .AsInteger := 0;
     DSHISTORICO_interno.DataSet.fieldbyname('idinterno').AsInteger :=
       DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
     DSHISTORICO_interno.DataSet.fieldbyname('data_hora').AsDateTime := Date;
     DSHISTORICO_interno.DataSet.fieldbyname('descricao').AsString :=
       'Desconstituiu o Advogado/Escritório: ' +
-      dsADVOGADO_INTERNO.DataSet.fieldbyname('ADVOGADO').asstring + '.';
+      dsADVOGADO_INTERNO.DataSet.fieldbyname('ADVOGADO').AsString + '.';
     DSHISTORICO_interno.DataSet.fieldbyname('setor').AsString := 'Jurídico';
     DSHISTORICO_interno.DataSet.fieldbyname('ID_FUNCIONARIO').AsInteger :=
       GLOBAL_ID_FUNCIONARIO;
     DSHISTORICO_interno.DataSet.Post;
 
-    //dsADVOGADO_INTERNO.DataSet.Delete;
+    // dsADVOGADO_INTERNO.DataSet.Delete;
     dsADVOGADO_INTERNO.DataSet.Edit;
 
-    dsADVOGADO_INTERNO.DataSet.fieldbyname('OBSadvogado_interno').AsString := DBMemoObservacaoAdvogado.Lines.Text;
-    dsADVOGADO_INTERNO.DataSet.fieldbyname('DATA_DESCONSTITUICAO').AsString := DateToStr(Date);
+    dsADVOGADO_INTERNO.DataSet.fieldbyname('OBSadvogado_interno').AsString :=
+      DBMemoObservacaoAdvogado.Lines.Text;
+    dsADVOGADO_INTERNO.DataSet.fieldbyname('DATA_DESCONSTITUICAO').AsString :=
+      DateToStr(Date);
     dsADVOGADO_INTERNO.DataSet.fieldbyname('STATUS').AsString := 'I';
 
     dsADVOGADO_INTERNO.DataSet.UpdateRecord;
@@ -1895,7 +1973,7 @@ begin
   inherited;
   EditarClick(nil);
   DsFoto.DataSet.Close;
-  DsFoto.DataSet.OPEN;
+  DsFoto.DataSet.Open;
 end;
 
 procedure TFrmCadastroInternos.CdsConsultaFilterRecord(DataSet: TDataSet;
@@ -1903,7 +1981,7 @@ procedure TFrmCadastroInternos.CdsConsultaFilterRecord(DataSet: TDataSet;
 var
   Status, Campo: string;
 begin
-  //inherited;
+  // inherited;
 
   if chkSoundex.Checked then
   begin
@@ -1912,16 +1990,20 @@ begin
   end;
 
   case RadioGroupStatus.ItemIndex of
-    0: Status := 'A';
-    1: Status := 'I';
+    0:
+      Status := 'A';
+    1:
+      Status := 'I';
   end;
 
   case RadioGroupTipoLocalizar.ItemIndex of
-    0: Campo := 'RGI';
-    1: Campo := 'NOME_INTERNO';
+    0:
+      Campo := 'RGI';
+    1:
+      Campo := 'NOME_INTERNO';
   end;
 
-  if DataSet[Campo] <> Null then
+  if DataSet[Campo] <> null then
   begin
 
     if EditLocalizar.Text <> ' ' then
@@ -1932,27 +2014,28 @@ begin
         if Status = 'I' then
         begin
 
-          if (DataSet['st'] = Status)
-            and (pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
+          if (DataSet['st'] = Status) and
+            (pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
             AnsiUpperCase(RemoveAcentos(DataSet[Campo]))) <> 0) then
           begin
-            Accept := true;
+            Accept := True;
           end
           else
-            Accept := false;
+            Accept := False;
 
         end
         else
         begin
 
-          if (DataSet['id_up'] = inttostr(GLOBAL_ID_UP)) and (DataSet['st'] = Status)
-            and (pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
+          if (DataSet['id_up'] = inttostr(GLOBAL_ID_UP)) and
+            (DataSet['st'] = Status) and
+            (pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
             AnsiUpperCase(RemoveAcentos(DataSet[Campo]))) <> 0) then
           begin
-            Accept := true;
+            Accept := True;
           end
           else
-            Accept := false;
+            Accept := False;
 
         end;
       end
@@ -1961,27 +2044,28 @@ begin
         if Status = 'I' then
         begin
 
-          if (DataSet['st'] = Status)
-            and (AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)) =
-            AnsiUpperCase(RemoveAcentos(DataSet[Campo]))) then
+          if (DataSet['st'] = Status) and
+            (AnsiUpperCase(RemoveAcentos(EditLocalizar.Text))
+            = AnsiUpperCase(RemoveAcentos(DataSet[Campo]))) then
           begin
-            Accept := true;
+            Accept := True;
           end
           else
-            Accept := false;
+            Accept := False;
 
         end
         else
         begin
 
-          if (DataSet['id_up'] = inttostr(GLOBAL_ID_UP)) and (DataSet['st'] = Status)
-            and (AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)) =
-            AnsiUpperCase(RemoveAcentos(DataSet[Campo]))) then
+          if (DataSet['id_up'] = inttostr(GLOBAL_ID_UP)) and
+            (DataSet['st'] = Status) and
+            (AnsiUpperCase(RemoveAcentos(EditLocalizar.Text))
+            = AnsiUpperCase(RemoveAcentos(DataSet[Campo]))) then
           begin
-            Accept := true;
+            Accept := True;
           end
           else
-            Accept := false;
+            Accept := False;
 
         end;
       end;
@@ -1992,10 +2076,11 @@ begin
       if (pos(AnsiUpperCase(RemoveAcentos(EditLocalizar.Text)),
         AnsiUpperCase(RemoveAcentos(DataSet[Campo]))) = 1) then
       begin
-        Accept := true;
-      end else
+        Accept := True;
+      end
+      else
       begin
-        Accept := false;
+        Accept := False;
       end;
 
     end;
@@ -2004,15 +2089,14 @@ begin
   else
   begin
     if EditLocalizar.Text = ' ' then
-      Accept := true
+      Accept := True
     else
-      Accept := false;
+      Accept := False;
   end;
 
 end;
 
-procedure TFrmCadastroInternos.RadioGroupTipoLocalizarClick(
-  Sender: TObject);
+procedure TFrmCadastroInternos.RadioGroupTipoLocalizarClick(Sender: TObject);
 begin
   inherited;
   if EditLocalizar.CanFocus then
@@ -2031,7 +2115,8 @@ begin
     if (PERMISSAO_ADVOGADO = '') or (PERMISSAO_ADVOGADO = 'R') then
     begin
       PageControlInterno.ActivePage := TabSheet1;
-      ShowMessage('Você não possui permissão para vizualizar os advogados deste interno!');
+      ShowMessage
+        ('Você não possui permissão para vizualizar os advogados deste interno!');
     end;
   end;
 end;
@@ -2049,10 +2134,11 @@ begin
   dsADVOGADO_INTERNO.DataSet.Edit;
 
   dsADVOGADO_INTERNO.DataSet.fieldbyname('DATA_CONSTITUICAO').AsString :=
-    InputBox('Atualizar Data de Constituição', 'Qual a Data de Constituição deste Advogado?' + #13#13 + 'Formato da data: 20/01/2014', '');
+    InputBox('Atualizar Data de Constituição',
+    'Qual a Data de Constituição deste Advogado?' + #13#13 +
+    'Formato da data: 20/01/2014', '');
 
   dsADVOGADO_INTERNO.DataSet.UpdateRecord;
 end;
 
 end.
-

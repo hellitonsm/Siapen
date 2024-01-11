@@ -1,29 +1,29 @@
 object FrmMapas_Google: TFrmMapas_Google
   Left = 173
   Top = 178
-  Width = 870
-  Height = 506
   Caption = 'Localizar Endere'#231'os no Mapas'
+  ClientHeight = 508
+  ClientWidth = 924
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   WindowState = wsMaximized
   OnCreate = FormCreate
-  PixelsPerInch = 96
   TextHeight = 13
   object WebBrowser1: TWebBrowser
     Left = 0
     Top = 145
-    Width = 854
-    Height = 323
+    Width = 924
+    Height = 363
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 854
+    ExplicitHeight = 323
     ControlData = {
-      4C00000043580000622100000000000000000000000000000000000000000000
+      4C000000805F0000842500000000000000000000000000000000000000000000
       000000004C000000000000000000000001000000E0D057007335CF11AE690800
       2B2E126208000000000000004C0000000114020000000000C000000000000046
       8000000000000000000000000000000000000000000000000000000000000000
@@ -32,10 +32,11 @@ object FrmMapas_Google: TFrmMapas_Google
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 924
     Height = 145
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 120
     object Label1: TLabel
       Left = 9
       Top = 11
@@ -85,22 +86,6 @@ object FrmMapas_Google: TFrmMapas_Google
       TabOrder = 1
     end
   end
-  object SqlInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select i.id_interno, i.nome_interno,'
-      
-        'i.endereco||'#39', '#39'||i.numero||'#39' '#39'||c.cidade||'#39', '#39'||c.uf as "Endere' +
-        'co"'
-      'from interno i'
-      'left join cidade c on (i.idcidade = c.id_cidade)'
-      'where coalesce(nome_interno,'#39#39')<>'#39#39
-      'order by i.nome_interno')
-    SQLConnection = DM.SQLConnect
-    Left = 656
-    Top = 176
-  end
   object DspInterno: TDataSetProvider
     DataSet = SqlInterno
     Left = 684
@@ -116,6 +101,21 @@ object FrmMapas_Google: TFrmMapas_Google
   object DsInterno: TDataSource
     DataSet = CdsInterno
     Left = 740
+    Top = 176
+  end
+  object SqlInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select i.id_interno, i.nome_interno,'
+      
+        'i.endereco||'#39', '#39'||i.numero||'#39' '#39'||c.cidade||'#39', '#39'||c.uf as "Endere' +
+        'co"'
+      'from interno i'
+      'left join cidade c on (i.idcidade = c.id_cidade)'
+      'where coalesce(nome_interno,'#39#39')<>'#39#39
+      'order by i.nome_interno')
+    Left = 656
     Top = 176
   end
 end

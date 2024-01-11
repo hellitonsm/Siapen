@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, Mask, adpDBDateTimePicker, lib, Buttons;
+  ToolWin, Mask, adpDBDateTimePicker, lib, Buttons, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TfrmMemorando = class(TFrmModeloCadastro)
@@ -32,7 +35,6 @@ type
     EdtDescricao: TDBMemo;
     edtDataInicio: TadpDBDateTimePicker;
     edtDataFim: TadpDBDateTimePicker;
-    SQLFuncionario_Memo: TSQLQuery;
     dspFuncionario_Memo: TDataSetProvider;
     cdsFuncionario_Memo: TClientDataSet;
     PageControl1: TPageControl;
@@ -52,15 +54,14 @@ type
     cdsFuncionario_MemoID_FUNCIONARIO: TIntegerField;
     cdsFuncionario_Memonomefuncionario: TStringField;
     DBLookupComboBox2: TDBLookupComboBox;
-    SQLresp: TSQLQuery;
+    SQLrespold: TSQLQuery;
     dspresp: TDataSetProvider;
     cdsresp: TClientDataSet;
     dsresp: TDataSource;
     cdsrespID_FUNCIONARIO: TIntegerField;
     cdsrespNOME_FUNCIONARIO: TStringField;
-    SQLrespID_FUNCIONARIO: TIntegerField;
-    SQLrespNOME_FUNCIONARIO: TStringField;
-    SQLflagautorizador: TSQLQuery;
+    SQLrespoldID_FUNCIONARIO: TIntegerField;
+    SQLrespoldNOME_FUNCIONARIO: TStringField;
     DSPflagautorizador: TDataSetProvider;
     CDSflagautorizador: TClientDataSet;
     CDSflagautorizadorFuncionario: TStringField;
@@ -80,6 +81,9 @@ type
     SpeedButton1: TSpeedButton;
     SpeedButton2: TSpeedButton;
     Button1: TButton;
+    SQLFuncionario_Memo: TFDQuery;
+    SQLflagautorizador: TFDQuery;
+    SQLresp: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure btnIncluirClick(Sender: TObject);
     procedure NovoClick(Sender: TObject);

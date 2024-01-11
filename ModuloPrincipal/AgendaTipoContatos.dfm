@@ -1,28 +1,34 @@
 inherited FrmAgendaTipoContatos: TFrmAgendaTipoContatos
   Left = 338
   Top = 173
-  Height = 484
   Caption = 'Tipos de Contatos'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 395
+    Height = 532
     inherited ToolBarModeloCadastro: TToolBar
       Height = 377
+      ExplicitHeight = 377
     end
     inherited DBNavigator1: TDBNavigator
       Top = 377
       Hints.Strings = ()
+      ExplicitTop = 377
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Height = 395
+    Height = 532
     inherited PageControlModeloCadastro: TPageControl
-      Height = 395
+      Width = 821
+      Height = 531
+      ExplicitHeight = 395
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
           Height = 367
+          ExplicitHeight = 367
           object Label2: TLabel
             Left = 20
             Top = 18
@@ -61,8 +67,11 @@ inherited FrmAgendaTipoContatos: TFrmAgendaTipoContatos
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelConsulta: TPanel
           Height = 333
+          ExplicitHeight = 333
           inherited DBGridConsulta: TDBGrid
             Height = 331
           end
@@ -71,9 +80,10 @@ inherited FrmAgendaTipoContatos: TFrmAgendaTipoContatos
     end
   end
   inherited StatusBar1: TStatusBar
-    Top = 427
+    Top = 564
+    ExplicitTop = 563
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM AGENDA_TIPO_CONTATOS')

@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, adpDBDateTimePicker, Mask, Buttons;
+  ToolWin, adpDBDateTimePicker, Mask, Buttons, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmLancamentoRemicaoTrabalho = class(TFrmModeloCadastro)
@@ -28,7 +31,6 @@ type
     Editdiastrabalhado: TEdit;
     DBGrid2: TDBGrid;
     BitBtn1: TBitBtn;
-    SQLcalc_trabalho: TSQLQuery;
     dspcalc_trabalho: TDataSetProvider;
     cdscalc_trabalho: TClientDataSet;
     dscalc_trabalho: TDataSource;
@@ -50,6 +52,7 @@ type
     cdscalc_trabalhoID_SETOR_TRABALHO: TIntegerField;
     cdscalc_trabalhoID_LANCAMENTO_REMICAO_TRABALHO: TIntegerField;
     cdscalc_trabalhoInterno: TStringField;
+    SQLcalc_trabalho: TFDQuery;
     procedure BitBtn1Click(Sender: TObject);
     procedure NovoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -81,7 +84,7 @@ begin
   end;
 
   DSCALC_TRABALHO.DataSet.Append;
-  DSCALC_TRABALHO.DataSet.fieldbyname('idcalc_setor_trabalho').AsInteger := 0;
+  DSCALC_TRABALHO.DataSet.fieldbyname('idcalc_setor_trabalho').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_calc_setor_trabalho,1) FROM RDB$DATABASE');
   DSCALC_TRABALHO.DataSet.fieldbyname('id_lancamento_remicao_trabalho').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_lancamento_remicao_trabalho').AsInteger;
   DSCALC_TRABALHO.DataSet.fieldbyname('id_interno').AsInteger :=

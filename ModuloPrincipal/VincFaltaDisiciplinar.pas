@@ -6,12 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, adpDBDateTimePicker,DateUtils, Mask;
+  ToolWin, adpDBDateTimePicker,DateUtils, Mask, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmVincFaltaDisiciplinar = class(TFrmModeloCadastro)
     Label15: TLabel;
-    Sqlfaltadisciplinar: TSQLQuery;
     Dspfaltadisciplinar: TDataSetProvider;
     Cdsfaltadisciplinar: TClientDataSet;
     Dsfaltadisciplinar: TDataSource;
@@ -74,6 +76,7 @@ type
     DBEditDataProcedimento: TDBEdit;
     DBEditConclusao: TDBEdit;
     DBEditNatureza: TDBEdit;
+    Sqlfaltadisciplinar: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DBLookupComboBox2Click(Sender: TObject);

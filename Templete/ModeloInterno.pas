@@ -209,13 +209,16 @@ uses Lib, DmPrincipal, CadastroProcedencia, CadastroCondicaoInterno,
 
 procedure TFrmModeloInterno.EditLocalizarChange(Sender: TObject);
 begin
-
+  //showmessage('Foi a');
   // Se a pesquisa for por nome só começa a buscar a partir de 3 letras.
-  if RadioGroupTipoLocalizar.ItemIndex = 1 then
+   if RadioGroupTipoLocalizar.ItemIndex = 1 then
   begin
-    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or (EditLocalizar.Text = ' ') then
+    if ((EditLocalizar.Text <> '') and (Length(EditLocalizar.Text) >= 3)) or
+      (EditLocalizar.Text = ' ') then
     begin
+      //showmessage('foi');
       DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'NOME_INTERNO LIKE ''%' + EditLocalizar.Text + '%''';
       DsConsulta.DataSet.filtered := True;
     end
     else
@@ -226,6 +229,7 @@ begin
     if EditLocalizar.Text <> '' then
     begin
       DsConsulta.DataSet.filtered := False;
+      DsConsulta.DataSet.Filter := 'RGI = ''' + EditLocalizar.Text + '''';
       DsConsulta.DataSet.filtered := True;
     end
     else

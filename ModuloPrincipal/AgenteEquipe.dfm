@@ -1,24 +1,34 @@
 inherited FrmAgenteEquipe: TFrmAgenteEquipe
   Left = 214
   Top = 152
-  Width = 773
   Caption = 'si'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 583
+  ExplicitWidth = 948
   TextHeight = 13
   inherited PanelBotoes: TPanel
+    Height = 532
     inherited DBNavigator1: TDBNavigator
       Hints.Strings = ()
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 642
+    Height = 532
+    inherited Image2: TImage
+      Width = 757
+      ExplicitWidth = 757
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 642
+      Width = 821
+      Height = 531
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 642
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Width = 634
+          Width = 813
+          Height = 503
+          ExplicitWidth = 634
           object Label2: TLabel
             Left = 24
             Top = 24
@@ -233,11 +243,15 @@ inherited FrmAgenteEquipe: TFrmAgenteEquipe
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelLocalizaConsulta: TPanel
-          Width = 634
+          Width = 813
+          ExplicitWidth = 634
           inherited Label1: TLabel
             Left = 464
             Visible = False
+            ExplicitLeft = 464
           end
           object Label6: TLabel [1]
             Left = 9
@@ -259,6 +273,8 @@ inherited FrmAgenteEquipe: TFrmAgenteEquipe
             Width = 73
             TabOrder = 1
             Visible = False
+            ExplicitLeft = 512
+            ExplicitWidth = 73
           end
           object DBLookupComboBoxFiltroEquipe: TDBLookupComboBox
             Left = 49
@@ -273,7 +289,9 @@ inherited FrmAgenteEquipe: TFrmAgenteEquipe
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 634
+          Width = 813
+          Height = 469
+          ExplicitWidth = 634
           inherited DBGridConsulta: TDBGrid
             Width = 632
             Columns = <
@@ -316,15 +334,13 @@ inherited FrmAgenteEquipe: TFrmAgenteEquipe
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 757
-    inherited Image2: TImage
-      Width = 757
-    end
+    ExplicitWidth = 757
   end
   inherited StatusBar1: TStatusBar
-    Width = 757
+    Top = 564
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM AGENTE_EQUIPE'

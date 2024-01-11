@@ -2,26 +2,35 @@ inherited FrmRoupa: TFrmRoupa
   Left = 318
   Top = 302
   Caption = 'Cadastro de Roupas '
-  ClientHeight = 584
   ClientWidth = 944
+  ExplicitWidth = 956
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 533
+    ExplicitHeight = 532
+    inherited ToolBarModeloCadastro: TToolBar
+      ExplicitHeight = 514
+    end
     inherited DBNavigator1: TDBNavigator
       Hints.Strings = ()
+      ExplicitTop = 514
     end
   end
   inherited PanelModeloCadastro: TPanel
     Width = 829
-    Height = 533
+    ExplicitWidth = 825
+    ExplicitHeight = 532
     inherited Image2: TImage
       Width = 806
       ExplicitWidth = 806
     end
     inherited PageControlModeloCadastro: TPageControl
-      ActivePage = TabSheetCadastro
+      Width = 829
+      ExplicitWidth = 825
+      ExplicitHeight = 532
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 821
         inherited PanelCadastro: TPanel
+          Width = 821
           object Label3: TLabel
             Left = 152
             Top = 14
@@ -255,17 +264,26 @@ inherited FrmRoupa: TFrmRoupa
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 821
         inherited PanelLocalizaConsulta: TPanel
+          Width = 821
+          ExplicitWidth = 821
           inherited EditLocalizar: TEdit
             OnKeyUp = EditLocalizarKeyUp
           end
         end
         inherited PanelConsulta: TPanel
+          Width = 821
+          ExplicitWidth = 821
+          ExplicitHeight = 471
+          inherited DBGridConsulta: TDBGrid
+            Width = 819
+          end
           object DBGrid2: TDBGrid
             Left = 1
             Top = 1
             Width = 819
-            Height = 469
+            Height = 468
             Align = alClient
             DataSource = DsConsulta
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -308,7 +326,7 @@ inherited FrmRoupa: TFrmRoupa
               item
                 Expanded = False
                 FieldName = 'DATA'
-                Width = 56
+                Width = 83
                 Visible = True
               end>
           end
@@ -318,22 +336,14 @@ inherited FrmRoupa: TFrmRoupa
   end
   inherited PanelTituloModeloCadastro: TPanel
     Width = 944
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 565
-    Width = 944
-    ExplicitTop = 564
     ExplicitWidth = 940
   end
-  inherited SqlCadastro: TSQLQuery
-    DataSource = DsCadastro
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_roupas'
-        ParamType = ptInput
-        Value = '-1'
-      end>
+  inherited StatusBar1: TStatusBar
+    Width = 944
+    ExplicitWidth = 944
+  end
+  inherited SqlCadastro: TFDQuery
+    MasterSource = DsCadastro
     SQL.Strings = (
       'SELECT * '
       'FROM ROUPAS'
@@ -341,9 +351,15 @@ inherited FrmRoupa: TFrmRoupa
       ''
       ''
       '')
-    SQLConnection = DM.SQLConnect
     Left = 656
     Top = 64
+    ParamData = <
+      item
+        Name = 'id_roupas'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = '-1'
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 732
@@ -356,22 +372,6 @@ inherited FrmRoupa: TFrmRoupa
   inherited DsCadastro: TDataSource
     Left = 732
     Top = 120
-  end
-  object SQLRoupasInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_roupas'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'select * '
-      'from roupas_interno'
-      'where id_roupa = :id_roupas')
-    SQLConnection = DM.SQLConnect
-    Left = 663
-    Top = 240
   end
   object CDSRoupasInterno: TClientDataSet
     Aggregates = <>
@@ -417,43 +417,6 @@ inherited FrmRoupa: TFrmRoupa
     Left = 735
     Top = 240
   end
-  object SqlSelectRoupaInterno: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'select first 40 i.rgi, i.nome_interno, v.vestimentas, ri.qtde, r' +
-        '.data, r.id_roupas'
-      'from roupas r'
-      'inner join interno i on (r.id_interno = i.id_interno)'
-      'inner join roupas_interno ri on (r.id_roupas= ri.id_roupa)'
-      
-        'inner join vestimentas v on (ri.id_vestimentas = v.id_vestimenta' +
-        's)'
-      ''
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 664
-    Top = 364
-  end
-  object SqlConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      
-        'select i.rgi, i.nome_interno, v.vestimentas, ri.qtde, r.data, r.' +
-        'id_roupas'
-      'from roupas r'
-      'inner join interno i on (r.id_interno = i.id_interno)'
-      'inner join roupas_interno ri on (r.id_roupas= ri.id_roupa)'
-      
-        'inner join vestimentas v on (ri.id_vestimentas = v.id_vestimenta' +
-        's)'
-      '')
-    SQLConnection = DM.SQLConnect
-    Left = 168
-    Top = 352
-  end
   object Dspconsulta: TDataSetProvider
     DataSet = SqlConsulta
     Left = 204
@@ -498,5 +461,56 @@ inherited FrmRoupa: TFrmRoupa
     OnTimer = Timer1Timer
     Left = 191
     Top = 202
+  end
+  object SQLRoupasInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * '
+      'from ROUPAS_INTERNO'
+      'where id_roupa = :id_roupas')
+    Left = 663
+    Top = 240
+    ParamData = <
+      item
+        Name = 'ID_ROUPAS'
+        ParamType = ptInput
+      end>
+  end
+  object SqlSelectRoupaInterno: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select first 40 i.rgi, i.nome_interno, v.vestimentas, ri.qtde, r' +
+        '.data, r.id_roupas'
+      'from ROUPAS r'
+      'inner join interno i on (r.id_interno = i.id_interno)'
+      'inner join ROUPAS_INTERNO ri on (r.id_roupas= ri.id_roupa)'
+      
+        'inner join vestimentas v on (ri.id_vestimentas = v.id_vestimenta' +
+        's)'
+      ''
+      '')
+    Left = 664
+    Top = 364
+  end
+  object SqlConsulta: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select i.rgi, i.nome_interno, v.vestimentas, ri.qtde, r.data, r.' +
+        'id_roupas'
+      'from ROUPAS r'
+      'inner join interno i on (r.id_interno = i.id_interno)'
+      'inner join roupas_interno ri on (r.id_roupas= ri.id_roupa)'
+      
+        'inner join vestimentas v on (ri.id_vestimentas = v.id_vestimenta' +
+        's)'
+      ''
+      '')
+    Left = 168
+    Top = 352
   end
 end

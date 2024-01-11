@@ -1,110 +1,75 @@
 inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
   Left = 199
   Top = 108
-  Width = 952
-  Height = 624
   Caption = 'Cadastro da Sa'#250'de'
-  PixelsPerInch = 96
+  ClientHeight = 581
+  ClientWidth = 932
+  ExplicitWidth = 944
+  ExplicitHeight = 639
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 508
+    Height = 523
+    ExplicitHeight = 522
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 490
+      Height = 505
+      ExplicitHeight = 504
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 490
+      Top = 505
       Hints.Strings = ()
+      ExplicitTop = 504
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 821
-    Height = 508
+    Width = 817
+    Height = 523
+    ExplicitWidth = 813
+    ExplicitHeight = 522
+    inherited Image2: TImage
+      Width = 936
+      ExplicitWidth = 936
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 821
-      Height = 508
+      Width = 817
+      Height = 523
       ActivePage = TabSheetCadastro
+      ExplicitWidth = 813
+      ExplicitHeight = 522
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelCadastro: TPanel
-          Width = 813
-          Height = 480
+          Width = 809
+          Height = 495
+          ExplicitWidth = 805
+          ExplicitHeight = 494
           inherited PageControlPrincipal: TPageControl
-            Width = 811
-            Height = 478
-            ActivePage = TabSheetDadosGerais
+            Width = 807
+            Height = 493
+            ActivePage = TabSheet1
+            ExplicitWidth = 803
+            ExplicitHeight = 492
             inherited TabSheetPrincipal: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
               inherited Label3: TLabel
                 Left = 297
+                ExplicitLeft = 297
               end
               inherited DBEditCodigo: TDBEdit
                 Width = 93
+                ExplicitWidth = 93
               end
               inherited DBEdit2: TDBEdit
                 Left = 296
                 Width = 353
+                ExplicitLeft = 296
+                ExplicitWidth = 353
               end
-              inherited DBEdit3: TDBEdit
-                TabOrder = 4
-              end
-              inherited DBEditID_PROCEDENCIA: TDBEdit
-                TabOrder = 19
-              end
-              inherited DBLookupComboBoxID_PROCEDENCIA: TDBLookupComboBox
-                TabOrder = 20
-              end
-              inherited DBRadioGroup1: TDBRadioGroup
-                TabOrder = 6
-              end
-              inherited DBRadioGroup2: TDBRadioGroup
-                TabOrder = 18
-              end
-              inherited DBEdit7: TDBEdit
-                TabOrder = 16
-              end
-              inherited DBLookupComboBox2: TDBLookupComboBox
-                TabOrder = 17
-              end
-              inherited DBComboBox3: TDBComboBox
-                TabOrder = 15
-              end
-              inherited DBEdit86: TDBEdit
-                TabOrder = 3
-              end
-              inherited dbrgrpST: TDBRadioGroup
-                TabOrder = 5
-              end
-              inherited DBEdit4: TDBEdit
-                TabOrder = 9
-              end
-              inherited DBEdit20: TDBEdit
-                TabOrder = 10
-              end
-              inherited DBEdit29: TDBEdit
-                TabOrder = 12
-              end
-              inherited DBComboBox2: TDBComboBox
-                TabOrder = 13
-              end
-              inherited DBEditpermanencia: TDBEdit
-                TabOrder = 11
-              end
-              inherited DBLookupComboBoxFACCAO: TDBLookupComboBox
-                TabOrder = 21
-              end
-              inherited DBEdit8: TDBEdit
-                TabOrder = 24
-              end
-              inherited DBEdit31: TDBEdit
-                TabOrder = 25
-              end
-              inherited DBEdit33: TDBEdit
-                TabOrder = 26
-              end
-              inherited DBComboBox5: TDBComboBox
-                TabOrder = 27
-              end
-              inherited DBComboBox4: TDBComboBox
-                TabOrder = 28
-              end
+            end
+            inherited TabSheetDadosGerais: TTabSheet
+              ExplicitWidth = 799
+              ExplicitHeight = 465
             end
             object TabSheet1: TTabSheet
               Caption = 'Sa'#250'de'
@@ -112,9 +77,9 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
               object PageControlSaude: TPageControl
                 Left = 0
                 Top = 0
-                Width = 803
-                Height = 450
-                ActivePage = TabSheet2
+                Width = 799
+                Height = 465
+                ActivePage = TabSheet7
                 Align = alClient
                 TabOrder = 0
                 TabWidth = 80
@@ -133,7 +98,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Top = 33
                     Width = 91
                     Height = 21
-                    Date = 0.302563541663403200
+                    Date = 45258.000000000000000000
                     Time = 0.302563541663403200
                     TabOrder = 0
                   end
@@ -283,7 +248,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Top = 33
                     Width = 91
                     Height = 21
-                    Date = 0.302563541663403200
+                    Date = 45258.000000000000000000
                     Time = 0.302563541663403200
                     TabOrder = 0
                   end
@@ -366,7 +331,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Top = 33
                     Width = 91
                     Height = 21
-                    Date = 0.302563541663403200
+                    Date = 45258.000000000000000000
                     Time = 0.302563541663403200
                     TabOrder = 1
                   end
@@ -375,7 +340,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Top = 33
                     Width = 91
                     Height = 21
-                    Date = 0.302563541663403200
+                    Date = 45258.000000000000000000
                     Time = 0.302563541663403200
                     TabOrder = 2
                   end
@@ -510,7 +475,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                         Top = 33
                         Width = 91
                         Height = 21
-                        Date = 0.302563541663403200
+                        Date = 45258.000000000000000000
                         Time = 0.302563541663403200
                         TabOrder = 0
                       end
@@ -725,7 +690,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Top = 33
                     Width = 91
                     Height = 21
-                    Date = 0.302563541663403200
+                    Date = 45258.000000000000000000
                     Time = 0.302563541663403200
                     TabOrder = 0
                   end
@@ -827,8 +792,6 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Height = 25
                     Caption = 'Inserir'
                     Default = True
-                    TabOrder = 6
-                    OnClick = BitBtn1Click
                     Glyph.Data = {
                       DE010000424DDE01000000000000760000002800000024000000120000000100
                       0400000000006801000000000000000000001000000000000000000000000000
@@ -847,6 +810,8 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                       333A333333333333333338330000333333333333333333333333333333333333
                       0000}
                     NumGlyphs = 2
+                    TabOrder = 6
+                    OnClick = BitBtn1Click
                   end
                 end
                 object TabSheet7: TTabSheet
@@ -890,7 +855,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Top = 33
                     Width = 91
                     Height = 21
-                    Date = 0.302563541663403200
+                    Date = 45258.000000000000000000
                     Time = 0.302563541663403200
                     TabOrder = 0
                   end
@@ -957,9 +922,6 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Font.Height = -13
                     Font.Name = 'MS Sans Serif'
                     Font.Style = [fsBold]
-                    ParentFont = False
-                    TabOrder = 3
-                    OnClick = BitBtn2Click
                     Glyph.Data = {
                       DE010000424DDE01000000000000760000002800000024000000120000000100
                       0400000000006801000000000000000000001000000000000000000000000000
@@ -978,6 +940,9 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                       333A333333333333333338330000333333333333333333333333333333333333
                       0000}
                     NumGlyphs = 2
+                    ParentFont = False
+                    TabOrder = 3
+                    OnClick = BitBtn2Click
                   end
                 end
                 object TabSheet23: TTabSheet
@@ -1149,7 +1114,6 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     Style = csDropDownList
                     DataField = 'DATADEPENDENCIA'
                     DataSource = DsCadastro
-                    ItemHeight = 13
                     Items.Strings = (
                       'INF'#194'NCIA'
                       'ADOLESC'#202'NCIA'
@@ -1165,7 +1129,6 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
                     DataField = 'DROGASCOMCRIME'
                     DataSource = DsCadastro
                     ImeMode = imDisable
-                    ItemHeight = 13
                     Items.Strings = (
                       'N'#195'O'
                       'SIM, PARA USO DE DROGAS'
@@ -1393,48 +1356,56 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 809
+        ExplicitHeight = 495
         inherited PanelLocalizaConsulta: TPanel
-          Width = 813
+          Width = 809
+          ExplicitWidth = 809
           inherited EditLocalizar: TEdit
             TabOrder = 1
           end
           inherited RadioGroupStatus: TRadioGroup
-            Left = 691
+            Left = 687
             TabOrder = 3
+            ExplicitLeft = 687
           end
           inherited chkSoundex: TCheckBox
             Width = 60
             TabOrder = 2
+            ExplicitWidth = 60
           end
         end
         inherited PanelConsulta: TPanel
-          Width = 813
-          Height = 438
+          Width = 809
+          Height = 453
+          ExplicitWidth = 809
+          ExplicitHeight = 453
           inherited DBGridConsulta: TDBGrid
-            Width = 811
-            Height = 436
+            Width = 807
+            Height = 451
           end
           inherited DBCtrlGridConsulta: TDBCtrlGrid
-            Width = 811
-            Height = 436
-            PanelHeight = 87
-            PanelWidth = 794
+            Width = 807
+            Height = 451
+            PanelWidth = 790
+            ExplicitWidth = 807
+            ExplicitHeight = 451
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 936
-    inherited Image2: TImage
-      Width = 936
-    end
+    Width = 932
+    ExplicitWidth = 928
   end
   inherited StatusBar1: TStatusBar
-    Top = 540
-    Width = 936
+    Top = 555
+    Width = 932
+    ExplicitTop = 555
+    ExplicitWidth = 932
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     Left = 616
     Top = 288
   end
@@ -1450,7 +1421,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
     Left = 780
     Top = 288
   end
-  object Sqlhistorico_saude: TSQLQuery
+  object Sqlhistorico_saudeold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1514,7 +1485,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
     DataSet = Cdshistorico_saude
     Left = 620
   end
-  object SQLdieta: TSQLQuery
+  object SQLdietaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1610,7 +1581,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
     OnDataChange = DsCadastroDataChange
     Left = 748
   end
-  object SQLenfermidadeinterno: TSQLQuery
+  object SQLenfermidadeinternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1671,7 +1642,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
     Left = 880
     Top = 112
   end
-  object SQLremedioenfermdiade: TSQLQuery
+  object SQLremedioenfermdiadeold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1753,7 +1724,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
       OnClick = Liberar1Click
     end
   end
-  object SQLdeficienciainterno: TSQLQuery
+  object SQLdeficienciainternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1829,7 +1800,7 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
     Left = 760
     Top = 168
   end
-  object SQLvacinainterno: TSQLQuery
+  object SQLvacinainternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1892,5 +1863,91 @@ inherited FrmCadastroInternoSaude: TFrmCadastroInternoSaude
     DataSet = cdsvacinainterno
     Left = 760
     Top = 224
+  end
+  object Sqlhistorico_saude: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM historico_saude'
+      'where id_interno = :id_interno'
+      '')
+    Left = 468
+    Top = 65529
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLdieta: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'SELECT * '
+      'FROM controle_dieta'
+      'where'
+      'id_interno = :id_interno'
+      '')
+    Left = 668
+    Top = 57
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLremedioenfermdiade: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from remedio_enfermidade'
+      'where id_enfermidade_interno = :enfermidade'
+      '')
+    Left = 484
+    Top = 49
+    ParamData = <
+      item
+        Name = 'ENFERMIDADE'
+        ParamType = ptInput
+      end>
+  end
+  object SQLenfermidadeinterno: TFDQuery
+    SQL.Strings = (
+      'select * from ENFERMDIADE_INTERNO'
+      'where id_interno = :id'
+      '')
+    Left = 740
+    Top = 113
+    ParamData = <
+      item
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+  end
+  object SQLdeficienciainterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from DEFICIENCIA_INTERNO'
+      'where id_interno = :id_interno')
+    Left = 596
+    Top = 161
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SQLvacinainterno: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      'select * from vacina_interno'
+      'where id_interno = :id_interno'
+      ''
+      '')
+    Left = 604
+    Top = 217
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
   end
 end

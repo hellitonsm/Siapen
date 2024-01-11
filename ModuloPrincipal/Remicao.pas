@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloCadastro, FMTBcd, DB, DBClient, Provider, SqlExpr,
   ImgList, ComCtrls, jpeg, ExtCtrls, Grids, DBGrids, StdCtrls, DBCtrls,
-  ToolWin, adpDBDateTimePicker, Mask, Buttons;
+  ToolWin, adpDBDateTimePicker, Mask, Buttons, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmRemicao = class(TFrmModeloCadastro)
@@ -25,7 +28,6 @@ type
     DsConsulta: TDataSource;
     CdsConsulta: TClientDataSet;
     DspConsulta: TDataSetProvider;
-    SqlConsulta: TSQLQuery;
     DBEdit1: TDBEdit;
     Label9: TLabel;
     SaveDialogDoc: TSaveDialog;
@@ -33,6 +35,7 @@ type
     BtnVisuzalizarDocDigitalizador: TBitBtn;
     BtnIncluirDocDigitalizado: TBitBtn;
     DBText1: TDBText;
+    SqlConsulta: TFDQuery;
     procedure FormCreate(Sender: TObject);
     procedure CdsCadastroAfterInsert(DataSet: TDataSet);
     procedure NovoClick(Sender: TObject);

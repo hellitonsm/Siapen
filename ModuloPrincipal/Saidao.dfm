@@ -1,36 +1,52 @@
 inherited FrmSaidao: TFrmSaidao
   Left = 230
   Top = 154
-  Width = 967
-  Height = 599
   Caption = 'Said'#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
+  ClientHeight = 582
+  ClientWidth = 936
+  ExplicitWidth = 948
+  ExplicitHeight = 620
   TextHeight = 13
   inherited PanelBotoes: TPanel
-    Height = 510
+    Height = 531
+    ExplicitHeight = 530
     inherited ToolBarModeloCadastro: TToolBar
-      Height = 492
+      Height = 513
+      ExplicitHeight = 512
       inherited Novo: TToolButton
         Visible = False
       end
     end
     inherited DBNavigator1: TDBNavigator
-      Top = 492
+      Top = 513
       Hints.Strings = ()
+      ExplicitTop = 512
     end
   end
   inherited PanelModeloCadastro: TPanel
-    Width = 836
-    Height = 510
+    Width = 821
+    Height = 531
+    ExplicitWidth = 817
+    ExplicitHeight = 530
+    inherited Image2: TImage
+      Width = 951
+      ExplicitWidth = 951
+    end
     inherited PageControlModeloCadastro: TPageControl
-      Width = 836
-      Height = 510
-      ActivePage = TabSheetCadastro
+      Width = 821
+      Height = 531
+      ExplicitLeft = 6
+      ExplicitTop = 1
+      ExplicitWidth = 817
+      ExplicitHeight = 530
       inherited TabSheetCadastro: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelCadastro: TPanel
-          Width = 828
-          Height = 482
+          Width = 813
+          Height = 503
+          ExplicitWidth = 809
+          ExplicitHeight = 502
           object Label2: TLabel
             Left = 16
             Top = 8
@@ -155,8 +171,8 @@ inherited FrmSaidao: TFrmSaidao
             Top = 24
             Width = 103
             Height = 21
-            Date = 41047.554883923610000000
-            Time = 41047.554883923610000000
+            Date = 41047.000000000000000000
+            Time = 0.554883923607121700
             Enabled = False
             TabOrder = 4
             DataField = 'DATA_SAIDA'
@@ -168,8 +184,8 @@ inherited FrmSaidao: TFrmSaidao
             Top = 24
             Width = 105
             Height = 21
-            Date = 41047.555191782410000000
-            Time = 41047.555191782410000000
+            Date = 41047.000000000000000000
+            Time = 0.555191782412293800
             Enabled = False
             TabOrder = 2
             DataField = 'DATA_PORTARIA'
@@ -194,8 +210,8 @@ inherited FrmSaidao: TFrmSaidao
             Top = 24
             Width = 98
             Height = 21
-            Date = 41047.555759120370000000
-            Time = 41047.555759120370000000
+            Date = 41047.000000000000000000
+            Time = 0.555759120368748000
             Enabled = False
             TabOrder = 5
             DataField = 'DATA_RETORNO'
@@ -332,9 +348,6 @@ inherited FrmSaidao: TFrmSaidao
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 3
-                OnClick = BtnincluirClick
                 Glyph.Data = {
                   DE010000424DDE01000000000000760000002800000024000000120000000100
                   0400000000006801000000000000000000001000000000000000000000000000
@@ -353,6 +366,9 @@ inherited FrmSaidao: TFrmSaidao
                   333A333333333333333338330000333333333333333333333333333333333333
                   0000}
                 NumGlyphs = 2
+                ParentFont = False
+                TabOrder = 3
+                OnClick = BtnincluirClick
               end
               object BitBtn2: TBitBtn
                 Left = 16
@@ -365,9 +381,6 @@ inherited FrmSaidao: TFrmSaidao
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
-                ParentFont = False
-                TabOrder = 4
-                OnClick = BitBtn2Click
                 Glyph.Data = {
                   DE010000424DDE01000000000000760000002800000024000000120000000100
                   0400000000006801000000000000000000001000000000000000000000000000
@@ -386,6 +399,9 @@ inherited FrmSaidao: TFrmSaidao
                   3333333333338888883333330000333333333333333333333333333333333333
                   0000}
                 NumGlyphs = 2
+                ParentFont = False
+                TabOrder = 4
+                OnClick = BitBtn2Click
               end
             end
           end
@@ -417,8 +433,8 @@ inherited FrmSaidao: TFrmSaidao
             Top = 24
             Width = 98
             Height = 21
-            Date = 41047.555759120370000000
-            Time = 41047.555759120370000000
+            Date = 41047.000000000000000000
+            Time = 0.555759120368748000
             Enabled = False
             Kind = dtkTime
             TabOrder = 6
@@ -429,37 +445,36 @@ inherited FrmSaidao: TFrmSaidao
         end
       end
       inherited TabSheetConsulta: TTabSheet
+        ExplicitWidth = 813
+        ExplicitHeight = 503
         inherited PanelLocalizaConsulta: TPanel
-          Width = 828
+          Width = 813
+          ExplicitWidth = 813
         end
         inherited PanelConsulta: TPanel
-          Width = 828
-          Height = 448
+          Width = 813
+          Height = 469
+          ExplicitWidth = 813
+          ExplicitHeight = 469
           inherited DBGridConsulta: TDBGrid
-            Width = 826
-            Height = 446
+            Width = 811
+            Height = 467
           end
         end
       end
     end
   end
   inherited PanelTituloModeloCadastro: TPanel
-    Width = 951
-    inherited Image2: TImage
-      Width = 951
-    end
+    Width = 936
+    ExplicitWidth = 932
   end
   inherited StatusBar1: TStatusBar
-    Top = 542
-    Width = 951
+    Top = 563
+    Width = 936
+    ExplicitTop = 563
+    ExplicitWidth = 936
   end
-  inherited SqlCadastro: TSQLQuery
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_up'
-        ParamType = ptInput
-      end>
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM Saidao'
@@ -467,6 +482,12 @@ inherited FrmSaidao: TFrmSaidao
       'order by data_portaria desc')
     Left = 664
     Top = 16
+    ParamData = <
+      item
+        Name = 'id_up'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
   inherited DspCadastro: TDataSetProvider
     Left = 692
@@ -557,23 +578,21 @@ inherited FrmSaidao: TFrmSaidao
     Left = 603
     Top = 16
   end
-  object SQLvinc_saidao: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'id_saidao'
-        ParamType = ptInput
-        Value = -1
-      end>
+  object SQLvinc_saidao: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
     SQL.Strings = (
       'select v.*'
-      'from vinc_saidao v'
+      'from VINC_SAIDAO v'
       'inner join interno i on (v.id_interno=i.id_interno)'
       'where v.id_saidao = :id_saidao'
       'order by  i.nome_interno')
-    SQLConnection = DM.SQLConnect
     Left = 519
     Top = 16
+    ParamData = <
+      item
+        Name = 'ID_SAIDAO'
+        ParamType = ptInput
+      end>
   end
 end

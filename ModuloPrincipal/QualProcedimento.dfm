@@ -1,24 +1,26 @@
 inherited FrmQualProcedimento: TFrmQualProcedimento
   Left = 231
   Top = 155
-  VertScrollBar.Range = 0
   ActiveControl = EditLocalizar
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Qual Procedimento'
-  ClientHeight = 331
-  ClientWidth = 784
+  ClientHeight = 330
+  ClientWidth = 780
   OnShow = FormShow
-  PixelsPerInch = 96
+  ExplicitWidth = 796
+  ExplicitHeight = 369
   TextHeight = 13
   inherited PanelGeral: TPanel
-    Width = 784
-    Height = 290
+    Width = 780
+    Height = 289
+    ExplicitWidth = 780
+    ExplicitHeight = 289
     object DBGridOcorrencia: TDBGrid
       Left = 1
       Top = 35
-      Width = 782
-      Height = 103
+      Width = 778
+      Height = 102
       Cursor = crHandPoint
       Align = alClient
       BiDiMode = bdRightToLeft
@@ -62,8 +64,8 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
     end
     object Panel1: TPanel
       Left = 1
-      Top = 248
-      Width = 782
+      Top = 247
+      Width = 778
       Height = 41
       Align = alBottom
       TabOrder = 1
@@ -74,7 +76,6 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
         Height = 25
         Caption = 'Conf&irma'
         Default = True
-        TabOrder = 0
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -93,6 +94,7 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
           333A333333333333333338330000333333333333333333333333333333333333
           0000}
         NumGlyphs = 2
+        TabOrder = 0
       end
       object BitBtnCancela: TBitBtn
         Left = 25
@@ -100,8 +102,6 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
         Width = 150
         Height = 25
         Caption = 'Ca&ncela'
-        ModalResult = 3
-        TabOrder = 1
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -119,19 +119,21 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
           38F338F300003333333333333919333333388333338FFF830000333333333333
           3333333333333333333888330000333333333333333333333333333333333333
           0000}
+        ModalResult = 3
         NumGlyphs = 2
+        TabOrder = 1
       end
     end
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 782
+      Width = 778
       Height = 34
       Align = alTop
       Caption = 'Panel2'
       TabOrder = 2
       DesignSize = (
-        782
+        778
         34)
       object Label1: TLabel
         Left = 24
@@ -143,7 +145,7 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
       object EditLocalizar: TEdit
         Left = 95
         Top = 0
-        Width = 685
+        Width = 681
         Height = 32
         Anchors = [akLeft, akTop, akRight]
         CharCase = ecUpperCase
@@ -160,22 +162,29 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
     end
     object DBRichEdit1: TDBRichEdit
       Left = 1
-      Top = 138
-      Width = 782
+      Top = 137
+      Width = 778
       Height = 110
       Align = alBottom
       DataField = 'PESSOAS'
       DataSource = DsMovProcDetalhado
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
       TabOrder = 3
     end
   end
   inherited PanelTitulo: TPanel
-    Width = 784
+    Width = 780
+    ExplicitWidth = 780
     inherited Image2: TImage
-      Width = 782
+      Width = 778
+      ExplicitWidth = 782
     end
   end
-  object SqlMovProcDetalhado: TSQLQuery
+  object SqlMovProcDetalhadoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -294,5 +303,44 @@ inherited FrmQualProcedimento: TFrmQualProcedimento
   object Timer1: TTimer
     OnTimer = Timer1Timer
     Left = 144
+  end
+  object SqlMovProcDetalhado: TFDQuery
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      ''
+      'SELECT'
+      ''
+      'TRIM((SELECT LIST(MIX.DESC_HORA,'#39'; '#39')'
+      'FROM'
+      '(SELECT MOV_OCORRENCIA.IDMOV_PROCEDIMENTOS,'
+      
+        '  OCORRENCIA.DESCRICAO||'#39' AS '#39'||SUBSTR(MOV_OCORRENCIA.HORA,1,8)|' +
+        '|'#39'H'#39' DESC_HORA'
+      'FROM MOV_OCORRENCIA'
+      
+        'JOIN OCORRENCIA ON OCORRENCIA.IDOCORRENCIA=MOV_OCORRENCIA.IDOCOR' +
+        'RENCIA'
+      ') MIX'
+      
+        'WHERE MIX.IDMOV_PROCEDIMENTOS = M.IDMOV_PROCEDIMENTOS))||'#39';'#39' OCO' +
+        'RRENCIA_HORA,'
+      ''
+      'P.DESCRICAO, M.* , TRIM((SELECT LIST(NOME,'#39';'#39')'
+      'FROM SP_LISTA_MV_PESSOA_PROC(M.IDMOV_PROCEDIMENTOS))) DETALHE'
+      
+        'FROM MOV_PROCEDIMENTOS M JOIN PROCEDIMENTOS P ON (M.IDPROCEDIMEN' +
+        'TOS=P.IDPROCEDIMENTOS)'
+      'WHERE'
+      
+        'COALESCE(CAST(M.DATA AS DATE),CURRENT_DATE) BETWEEN '#39'27.07.1984'#39 +
+        ' AND '#39'28.04.2039'#39' AND'
+      'COALESCE(M.ST,'#39'A'#39')='#39'A'#39
+      'AND COALESCE(M.ID_UP,101)= 101'
+      'AND M.IDMOV_PROCEDIMENTOS_PRINCIPAL = 10159'
+      'ORDER BY P.DESCRICAO'
+      ''
+      '')
+    Left = 56
+    Top = 81
   end
 end

@@ -2,8 +2,8 @@ object FrmPrincipalMonitoramento: TFrmPrincipalMonitoramento
   Left = 345
   Top = 93
   Caption = 'M'#243'dulo Principal do Monitoramento'
-  ClientHeight = 0
-  ClientWidth = 120
+  ClientHeight = 627
+  ClientWidth = 956
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,16 +20,16 @@ object FrmPrincipalMonitoramento: TFrmPrincipalMonitoramento
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 120
+    Width = 956
     Height = 40
     Align = alTop
     Caption = 'Panel2'
     TabOrder = 0
-    ExplicitWidth = 912
+    ExplicitWidth = 120
     object Image2: TImage
       Left = 1
       Top = 1
-      Width = 910
+      Width = 954
       Height = 38
       Align = alClient
       Picture.Data = {
@@ -44,6 +44,7 @@ object FrmPrincipalMonitoramento: TFrmPrincipalMonitoramento
         000000000000000000000000FFC4001411010000000000000000000000000000
         0000FFDA000C03010002110311003F00DFD443700A9CB9FB720003FFD9}
       Stretch = True
+      ExplicitWidth = 910
     end
     object LabelTitulo: TLabel
       Left = 48
@@ -774,11 +775,12 @@ object FrmPrincipalMonitoramento: TFrmPrincipalMonitoramento
   object Panel1: TPanel
     Left = 0
     Top = 40
-    Width = 120
-    Height = 618
+    Width = 956
+    Height = 587
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 912
+    ExplicitWidth = 120
+    ExplicitHeight = 618
     object LbTotalEventos: TLabel
       Left = 0
       Top = 272
@@ -789,7 +791,7 @@ object FrmPrincipalMonitoramento: TFrmPrincipalMonitoramento
     object DBGridEventos: TDBGrid
       Left = 1
       Top = 57
-      Width = 910
+      Width = 954
       Height = 216
       Align = alTop
       DataSource = DsMonitoramentoEventos
@@ -880,10 +882,11 @@ object FrmPrincipalMonitoramento: TFrmPrincipalMonitoramento
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 910
+      Width = 954
       Height = 56
       Align = alTop
       TabOrder = 1
+      ExplicitWidth = 118
       object Label1: TLabel
         Left = 347
         Top = 9
@@ -2060,94 +2063,90 @@ object FrmPrincipalMonitoramento: TFrmPrincipalMonitoramento
     DataSet = SqlMonitoramentoEventos
     Left = 636
   end
-  object SqlMonitoramentoEventos: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftDate
-        Name = 'DATA1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DATA2'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
-        'o, up_oco.sigla as up_ocorrencia, f.nome_funcionario as funciona' +
-        'rio_monitor,'
-      
-        'e.codigo || '#39' - '#39' || e.descricao_evento as evento, sb.codigo_sub' +
-        '_evento || '#39' - '#39' || sb.descricao_eventos as sub_evento,'
-      
-        'me.plantao_ocorrencia, me.data_evento, me.hora_evento, me.arquiv' +
-        'o_relacionado, me.observacao, me.id_up_lancamento'
-      'from monitoramento_eventos me'
-      
-        'left join unidade_penal up_lan on (up_lan.id_up = me.id_up_lanca' +
-        'mento)'
-      
-        'left join unidade_penal up_oco on (up_oco.id_up = me.id_up_ocorr' +
-        'encia)'
-      
-        'left join funcionario f on (f.id_funcionario = me.id_funcionario' +
-        '_monitor)'
-      'left join eventos e on (e.id_eventos = me.id_eventos)'
-      
-        'left join sub_eventos sb on (sb.id_sub_eventos = me.id_sub_event' +
-        'os)'
-      'where me.data_evento between :data1 and :data2')
-    SQLConnection = DM.SQLConnect
-    Left = 608
-  end
-  object SqlMonitoramentoEventosBackup: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftDate
-        Name = 'DATA1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DATA2'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      
-        'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
-        'o, up_oco.sigla as up_ocorrencia, f.nome_funcionario as funciona' +
-        'rio_monitor,'
-      
-        'e.codigo || '#39' - '#39' || e.descricao_evento as evento, sb.codigo_sub' +
-        '_evento || '#39' - '#39' || sb.descricao_eventos as sub_evento,'
-      
-        'me.plantao_ocorrencia, me.data_evento, me.hora_evento, me.arquiv' +
-        'o_relacionado, me.observacao, me.id_up_lancamento'
-      'from monitoramento_eventos me'
-      
-        'left join unidade_penal up_lan on (up_lan.id_up = me.id_up_lanca' +
-        'mento)'
-      
-        'left join unidade_penal up_oco on (up_oco.id_up = me.id_up_ocorr' +
-        'encia)'
-      
-        'left join funcionario f on (f.id_funcionario = me.id_funcionario' +
-        '_monitor)'
-      'left join eventos e on (e.id_eventos = me.id_eventos)'
-      
-        'left join sub_eventos sb on (sb.id_sub_eventos = me.id_sub_event' +
-        'os)'
-      'where me.data_evento between :data1 and :data2')
-    SQLConnection = DM.SQLConnect
-    Left = 584
-  end
   object TimerEventos: TTimer
     Interval = 120000
     OnTimer = TimerEventosTimer
     Left = 313
     Top = 1
+  end
+  object SqlMonitoramentoEventosBackup: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
+        'o, up_oco.sigla as up_ocorrencia, f.nome_funcionario as funciona' +
+        'rio_monitor,'
+      
+        'e.codigo || '#39' - '#39' || e.descricao_evento as evento, sb.codigo_sub' +
+        '_evento || '#39' - '#39' || sb.descricao_eventos as sub_evento,'
+      
+        'me.plantao_ocorrencia, me.data_evento, me.hora_evento, me.arquiv' +
+        'o_relacionado, me.observacao, me.id_up_lancamento'
+      'from monitoramento_eventos me'
+      
+        'left join unidade_penal up_lan on (up_lan.id_up = me.id_up_lanca' +
+        'mento)'
+      
+        'left join unidade_penal up_oco on (up_oco.id_up = me.id_up_ocorr' +
+        'encia)'
+      
+        'left join funcionario f on (f.id_funcionario = me.id_funcionario' +
+        '_monitor)'
+      'left join eventos e on (e.id_eventos = me.id_eventos)'
+      
+        'left join sub_eventos sb on (sb.id_sub_eventos = me.id_sub_event' +
+        'os)'
+      'where me.data_evento between :data1 and :data2')
+    Left = 584
+    ParamData = <
+      item
+        Name = 'DATA1'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        ParamType = ptInput
+      end>
+  end
+  object SqlMonitoramentoEventos: TFDQuery
+    ObjectView = False
+    Connection = DM.SQLConnect
+    SQL.Strings = (
+      
+        'select me.id_monitoramento_eventos, up_lan.sigla as up_lancament' +
+        'o, up_oco.sigla as up_ocorrencia, f.nome_funcionario as funciona' +
+        'rio_monitor,'
+      
+        'e.codigo || '#39' - '#39' || e.descricao_evento as evento, sb.codigo_sub' +
+        '_evento || '#39' - '#39' || sb.descricao_eventos as sub_evento,'
+      
+        'me.plantao_ocorrencia, me.data_evento, me.hora_evento, me.arquiv' +
+        'o_relacionado, me.observacao, me.id_up_lancamento'
+      'from monitoramento_eventos me'
+      
+        'left join unidade_penal up_lan on (up_lan.id_up = me.id_up_lanca' +
+        'mento)'
+      
+        'left join unidade_penal up_oco on (up_oco.id_up = me.id_up_ocorr' +
+        'encia)'
+      
+        'left join funcionario f on (f.id_funcionario = me.id_funcionario' +
+        '_monitor)'
+      'left join eventos e on (e.id_eventos = me.id_eventos)'
+      
+        'left join sub_eventos sb on (sb.id_sub_eventos = me.id_sub_event' +
+        'os)'
+      'where me.data_evento between :data1 and :data2')
+    Left = 608
+    ParamData = <
+      item
+        Name = 'DATA1'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA2'
+        ParamType = ptInput
+      end>
   end
 end

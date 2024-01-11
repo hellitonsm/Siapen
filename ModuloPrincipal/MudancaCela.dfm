@@ -2,11 +2,12 @@ inherited FrmMudancaCela: TFrmMudancaCela
   Left = 189
   Top = 30
   Caption = 'Mudan'#231'a de Cela'
+  ClientHeight = 583
   ClientWidth = 909
   Menu = MainMenu1
   WindowState = wsMaximized
   ExplicitWidth = 921
-  ExplicitHeight = 642
+  ExplicitHeight = 641
   TextHeight = 13
   inherited PanelBotoes: TPanel
     Width = 909
@@ -89,39 +90,38 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Left = 0
     Top = 72
     Width = 909
-    Height = 493
+    Height = 492
     ExplicitLeft = 0
     ExplicitTop = 72
-    ExplicitWidth = 909
-    ExplicitHeight = 494
+    ExplicitWidth = 905
+    ExplicitHeight = 491
     inherited Image2: TImage
       Width = 894
       ExplicitWidth = 894
     end
     inherited PageControlModeloCadastro: TPageControl
       Width = 909
-      Height = 493
+      Height = 492
       ActivePage = TabSheetCadastro
-      ExplicitWidth = 909
-      ExplicitHeight = 494
+      ExplicitWidth = 905
+      ExplicitHeight = 491
       inherited TabSheetCadastro: TTabSheet
         ExplicitWidth = 901
-        ExplicitHeight = 465
+        ExplicitHeight = 464
         inherited PanelCadastro: TPanel
           Width = 901
-          Height = 465
+          Height = 464
           ExplicitWidth = 901
-          ExplicitHeight = 466
+          ExplicitHeight = 464
           object PageControlTransferencia: TPageControl
             Left = 1
             Top = 1
             Width = 899
-            Height = 463
+            Height = 462
             ActivePage = TabSheetTransferencia
             Align = alClient
             TabOrder = 0
             TabWidth = 200
-            ExplicitHeight = 464
             object TabSheetTransferencia: TTabSheet
               Caption = 'Dados da Mudan'#231'a'
               ImageIndex = 1
@@ -292,50 +292,43 @@ inherited FrmMudancaCela: TFrmMudancaCela
                   Height = 13
                   Caption = 'Nivel - 03'
                 end
-                object DBLookupComboBoxPavilhao: TDBLookupComboBox
+                object DBLookupComboBoxPavilhao: TComboBox
                   Left = 9
                   Top = 35
                   Width = 300
                   Height = 21
-                  KeyField = 'id_pavilhao'
-                  ListField = 'pavilhao'
-                  ListSource = DsPavilhao
                   TabOrder = 0
+                  OnChange = DBLookupComboBoxPavilhaoChange
+                  OnClick = DBLookupComboBoxPavilhaoClick
+                  OnExit = DBLookupComboBoxPavilhaoExit
                 end
-                object DBLookupComboBoxGaleria: TDBLookupComboBox
+                object DBLookupComboBoxGaleria: TComboBox
                   Left = 9
                   Top = 75
                   Width = 300
                   Height = 21
-                  KeyField = 'ID_GALERIA'
-                  ListField = 'GALERIA'
-                  ListSource = DsGaleria
                   TabOrder = 1
+                  OnChange = DBLookupComboBoxGaleriaChange
                 end
-                object DBLookupComboBoxCela: TDBLookupComboBox
+                object DBLookupComboBoxCela: TComboBox
                   Left = 321
                   Top = 75
                   Width = 300
                   Height = 21
-                  KeyField = 'ID_CELA'
-                  ListField = 'CELA'
-                  ListSource = DsCela
                   TabOrder = 3
                 end
-                object DBLookupComboBoxSolario: TDBLookupComboBox
+                object DBLookupComboBoxSolario: TComboBox
                   Left = 321
                   Top = 35
                   Width = 300
                   Height = 21
-                  KeyField = 'ID_SOLARIO'
-                  ListField = 'SOLARIO'
-                  ListSource = DsSolario
                   TabOrder = 2
+                  OnChange = DBLookupComboBoxSolarioChange
                 end
               end
               object DBGridMudanca: TDBGrid
                 Left = 0
-                Top = 320
+                Top = 341
                 Width = 876
                 Height = 97
                 DataSource = DsVinc_Mudanca_Cela
@@ -481,7 +474,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
       end
       inherited TabSheetConsulta: TTabSheet
         ExplicitWidth = 901
-        ExplicitHeight = 465
+        ExplicitHeight = 464
         inherited PanelLocalizaConsulta: TPanel
           Width = 901
           Height = 73
@@ -535,13 +528,13 @@ inherited FrmMudancaCela: TFrmMudancaCela
         inherited PanelConsulta: TPanel
           Top = 73
           Width = 901
-          Height = 392
+          Height = 391
           ExplicitTop = 73
           ExplicitWidth = 897
-          ExplicitHeight = 391
+          ExplicitHeight = 390
           inherited DBGridConsulta: TDBGrid
             Width = 899
-            Height = 214
+            Height = 213
             DataSource = DsConsulta
             PopupMenu = PopupMenuLiberar
             Columns = <
@@ -604,7 +597,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
           end
           object DBGridMudancaConsulta: TDBGrid
             Left = 1
-            Top = 215
+            Top = 214
             Width = 899
             Height = 176
             Align = alBottom
@@ -699,6 +692,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     ExplicitWidth = 905
   end
   inherited StatusBar1: TStatusBar
+    Top = 564
     Width = 909
     ExplicitWidth = 909
   end
@@ -737,7 +731,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Left = 756
     Top = 88
   end
-  object SqlVinc_Mudanca_Cela: TSQLQuery
+  object SqlVinc_Mudanca_Celaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -751,8 +745,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where id_mudanca_cela = :id_mudanca_cela'
       'order by id_mudanca_cela')
     SQLConnection = DM.SQLConnect
-    Left = 673
-    Top = 231
+    Left = 265
+    Top = 327
   end
   object DspVinc_Mudanca_Cela: TDataSetProvider
     DataSet = SqlVinc_Mudanca_Cela
@@ -867,7 +861,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Left = 757
     Top = 231
   end
-  object SQLHISTORICO_interno: TSQLQuery
+  object SQLHISTORICO_internoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -880,8 +874,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'from historico_interno'
       'where idinterno=:id_interno')
     SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 136
+    Left = 104
+    Top = 208
   end
   object DSPHISTORICO_interno: TDataSetProvider
     DataSet = SQLHISTORICO_interno
@@ -917,7 +911,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Left = 703
     Top = 184
   end
-  object SqlInterno: TSQLQuery
+  object SqlInternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -937,10 +931,10 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'FROM INTERNO'
       'WHERE ID_UP=:ID_UP')
     SQLConnection = DM.SQLConnect
-    Left = 676
-    Top = 184
+    Left = 180
+    Top = 320
   end
-  object SqlExecute: TSQLQuery
+  object SqlExecuteold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
@@ -948,8 +942,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'FROM INTERNO'
       'ORDER BY NOME_INTERNO')
     SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 288
+    Left = 104
+    Top = 408
   end
   object MainMenu1: TMainMenu
     Left = 203
@@ -961,7 +955,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
       end
     end
   end
-  object SqlConsulta: TSQLQuery
+  object SqlConsultaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -995,8 +989,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'AND M.DATA>= :DATA - 1'
       'order by m.id_mudanca_cela desc')
     SQLConnection = DM.SQLConnect
-    Left = 672
-    Top = 32
+    Left = 184
+    Top = 208
   end
   object DspConsulta: TDataSetProvider
     DataSet = SqlConsulta
@@ -1025,7 +1019,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
       OnClick = Liberar1Click
     end
   end
-  object SqlPavilhao: TSQLQuery
+  object SqlPavilhaoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1038,8 +1032,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where id_up = :id_up'
       'order by pavilhao')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 341
+    Left = 376
+    Top = 485
   end
   object DspPavilhao: TDataSetProvider
     DataSet = SqlPavilhao
@@ -1055,6 +1049,9 @@ inherited FrmMudancaCela: TFrmMudancaCela
   end
   object DsPavilhao: TDataSource
     DataSet = CdsPavilhao
+    OnStateChange = DsPavilhaoStateChange
+    OnDataChange = DsPavilhaoDataChange
+    OnUpdateData = DsPavilhaoUpdateData
     Left = 832
     Top = 341
   end
@@ -1079,7 +1076,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Left = 768
     Top = 384
   end
-  object SqlGaleria: TSQLQuery
+  object SqlGaleriaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1093,10 +1090,10 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where idpavilhao=:id_pavilhao'
       'order by galeria')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 384
+    Left = 320
+    Top = 488
   end
-  object SqlSolario: TSQLQuery
+  object SqlSolarioold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1110,8 +1107,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where idgaleria=:id_galeria'
       'order by solario')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 432
+    Left = 208
+    Top = 496
   end
   object DspSolario: TDataSetProvider
     DataSet = SqlSolario
@@ -1155,7 +1152,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Left = 768
     Top = 480
   end
-  object SqlCela: TSQLQuery
+  object SqlCelaold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1169,8 +1166,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where idsolario=:id_solario'
       'order by cela')
     SQLConnection = DM.SQLConnect
-    Left = 736
-    Top = 480
+    Left = 272
+    Top = 496
   end
   object Dsconspadrao: TDataSource
     DataSet = Cdsconspadrao
@@ -1187,13 +1184,14 @@ inherited FrmMudancaCela: TFrmMudancaCela
     DataSet = SQLconspadrao
     Left = 276
   end
-  object SQLconspadrao: TSQLQuery
+  object SQLconspadraoold: TSQLQuery
     MaxBlobSize = -1
     Params = <>
     SQLConnection = DM.SQLConnect
-    Left = 248
+    Left = 280
+    Top = 104
   end
-  object SqlPavAntes: TSQLQuery
+  object SqlPavAntesold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1206,10 +1204,10 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where id_up = :id_up'
       'order by pavilhao')
     SQLConnection = DM.SQLConnect
-    Left = 597
-    Top = 341
+    Left = 173
+    Top = 405
   end
-  object SqlGalAntes: TSQLQuery
+  object SqlGalAntesold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1223,10 +1221,10 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where idpavilhao=:id_pavilhao'
       'order by galeria')
     SQLConnection = DM.SQLConnect
-    Left = 597
-    Top = 384
+    Left = 245
+    Top = 408
   end
-  object SqlSolAntes: TSQLQuery
+  object SqlSolAntesold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1240,10 +1238,10 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where idgaleria=:id_galeria'
       'order by solario')
     SQLConnection = DM.SQLConnect
-    Left = 597
-    Top = 432
+    Left = 93
+    Top = 496
   end
-  object SqlCelaAntes: TSQLQuery
+  object SqlCelaAntesold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1257,8 +1255,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'where idsolario=:id_solario'
       'order by cela')
     SQLConnection = DM.SQLConnect
-    Left = 597
-    Top = 480
+    Left = 149
+    Top = 496
   end
   object DspCelaAntes: TDataSetProvider
     DataSet = SqlCelaAntes
@@ -1340,7 +1338,7 @@ inherited FrmMudancaCela: TFrmMudancaCela
     Left = 661
     Top = 480
   end
-  object SqlCelaInterno: TSQLQuery
+  object SqlCelaInternoold: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
@@ -1359,8 +1357,8 @@ inherited FrmMudancaCela: TFrmMudancaCela
       'FROM INTERNO'
       'WHERE ID_UP=:ID_UP')
     SQLConnection = DM.SQLConnect
-    Left = 548
-    Top = 192
+    Left = 108
+    Top = 320
   end
   object DspCelaInterno: TDataSetProvider
     DataSet = SqlCelaInterno
@@ -1384,5 +1382,217 @@ inherited FrmMudancaCela: TFrmMudancaCela
     OnTimer = Timer1Timer
     Left = 596
     Top = 104
+  end
+  object SQLHISTORICO_interno: TFDQuery
+    SQL.Strings = (
+      'select *'
+      'from historico_interno'
+      'where idinterno=:id_interno')
+    Left = 665
+    Top = 137
+    ParamData = <
+      item
+        Name = 'ID_INTERNO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlConsulta: TFDQuery
+    SQL.Strings = (
+      'SELECT '
+      '    M.CONFIRMADA,'
+      '    U.NOME_UP,'
+      '    M.DATA,'
+      '    M.TIPO_DOCUMENTO,'
+      '    M.NUMERO_DOCUMENTO,'
+      '    M.MOTIVO_MOVIMENTACAO,'
+      '    M.ID_MUDANCA_CELA,'
+      '    F.NOME_FUNCIONARIO'
+      'FROM mudanca_cela m'
+      '   INNER JOIN UNIDADE_PENAL U ON (M.ID_UP = U.ID_UP)'
+      
+        '   INNER JOIN FUNCIONARIO F ON (M.ID_FUNCIONARIO = F.ID_FUNCIONA' +
+        'RIO)'
+      'WHERE M.ID_UP= :ID_UP'
+      'AND M.DATA>= :DATA - 1'
+      'order by m.id_mudanca_cela desc'
+      '')
+    Left = 665
+    Top = 33
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATA'
+        ParamType = ptInput
+      end>
+  end
+  object SQLconspadrao: TFDQuery
+    Left = 249
+    Top = 1
+  end
+  object SqlCelaInterno: TFDQuery
+    SQL.Strings = (
+      'SELECT ID_INTERNO,'
+      'NOME_INTERNO,'
+      'IDPAVILHAO,'
+      'IDGALERIA,'
+      'IDSOLARIO,'
+      'IDCELA,'
+      'RGI'
+      'FROM INTERNO'
+      'WHERE ID_UP=:ID_UP')
+    Left = 537
+    Top = 193
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlInterno: TFDQuery
+    SQL.Strings = (
+      'SELECT ID_INTERNO,'
+      'NOME_INTERNO,'
+      'IDPAVILHAO,'
+      'IDGALERIA,'
+      'IDSOLARIO,'
+      'IDCELA,'
+      'RGI'
+      'FROM INTERNO'
+      'WHERE ID_UP=:ID_UP')
+    Left = 665
+    Top = 185
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlVinc_Mudanca_Cela: TFDQuery
+    SQL.Strings = (
+      'select * from vinc_mudanca_cela'
+      'where id_mudanca_cela = :id_mudanca_cela'
+      'order by id_mudanca_cela')
+    Left = 657
+    Top = 233
+    ParamData = <
+      item
+        Name = 'ID_MUDANCA_CELA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlExecute: TFDQuery
+    SQL.Strings = (
+      'SELECT id_interno, nome_interno, rgi'
+      'FROM INTERNO'
+      'ORDER BY NOME_INTERNO')
+    Left = 536
+    Top = 280
+  end
+  object SqlPavAntes: TFDQuery
+    SQL.Strings = (
+      'select * from pavilhao'
+      'where id_up = :id_up'
+      'order by pavilhao')
+    Left = 601
+    Top = 343
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
+  end
+  object SqlGalAntes: TFDQuery
+    SQL.Strings = (
+      'select * from galeria'
+      'where idpavilhao=:id_pavilhao'
+      'order by galeria')
+    Left = 601
+    Top = 383
+    ParamData = <
+      item
+        Name = 'ID_PAVILHAO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlSolAntes: TFDQuery
+    SQL.Strings = (
+      'select * from solario'
+      'where idgaleria=:id_galeria'
+      'order by solario')
+    Left = 593
+    Top = 433
+    ParamData = <
+      item
+        Name = 'ID_GALERIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCelaAntes: TFDQuery
+    SQL.Strings = (
+      'select * from cela'
+      'where idsolario=:id_solario'
+      'order by cela')
+    Left = 593
+    Top = 481
+    ParamData = <
+      item
+        Name = 'ID_SOLARIO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlSolario: TFDQuery
+    SQL.Strings = (
+      'select * from solario'
+      'where idgaleria=:id_galeria'
+      'order by solario')
+    Left = 737
+    Top = 433
+    ParamData = <
+      item
+        Name = 'ID_GALERIA'
+        ParamType = ptInput
+      end>
+  end
+  object SqlCela: TFDQuery
+    SQL.Strings = (
+      'select * from cela'
+      'where idsolario=:id_solario'
+      'order by cela')
+    Left = 737
+    Top = 481
+    ParamData = <
+      item
+        Name = 'ID_SOLARIO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlGaleria: TFDQuery
+    SQL.Strings = (
+      'select * from galeria'
+      'where idpavilhao=:id_pavilhao'
+      'order by galeria')
+    Left = 737
+    Top = 385
+    ParamData = <
+      item
+        Name = 'ID_PAVILHAO'
+        ParamType = ptInput
+      end>
+  end
+  object SqlPavilhao: TFDQuery
+    SQL.Strings = (
+      'select * from pavilhao'
+      'where id_up = :id_up'
+      'order by pavilhao')
+    Left = 737
+    Top = 337
+    ParamData = <
+      item
+        Name = 'ID_UP'
+        ParamType = ptInput
+      end>
   end
 end

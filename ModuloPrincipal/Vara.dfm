@@ -2,8 +2,6 @@ inherited FrmVara: TFrmVara
   Left = 212
   Top = 173
   Caption = 'Vara de Execu'#231#227'o'
-  OldCreateOrder = True
-  PixelsPerInch = 96
   TextHeight = 13
   inherited PanelBotoes: TPanel
     inherited DBNavigator1: TDBNavigator
@@ -84,7 +82,7 @@ inherited FrmVara: TFrmVara
       end
     end
   end
-  inherited SqlCadastro: TSQLQuery
+  inherited SqlCadastro: TFDQuery
     SQL.Strings = (
       'SELECT * '
       'FROM VARA')

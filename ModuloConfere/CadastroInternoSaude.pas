@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ModeloInterno, FMTBcd, DB, DBClient, Provider, SqlExpr, ImgList,
   ComCtrls, Grids, DBGrids, StdCtrls, ExtCtrls, DBCtrls, Mask, Buttons,
-  ToolWin, Menus, jpeg, dbcgrids;
+  ToolWin, Menus, jpeg, dbcgrids, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, System.ImageList;
 
 type
   TFrmCadastroInternoSaude = class(TFrmModeloInterno)
@@ -34,7 +37,7 @@ type
     DBEdit110: TDBEdit;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
-    Sqlhistorico_saude: TSQLQuery;
+    Sqlhistorico_saudeold: TSQLQuery;
     Dsphistorico_saude: TDataSetProvider;
     Cdshistorico_saude: TClientDataSet;
     dshistorico_saude: TDataSource;
@@ -51,7 +54,7 @@ type
     Cdshistorico_saudeID_INTERNO: TIntegerField;
     Cdshistorico_saudeSETOR: TStringField;
     Cdshistorico_saudeFuncionrio: TStringField;
-    SQLdieta: TSQLQuery;
+    SQLdietaold: TSQLQuery;
     DSPdieta: TDataSetProvider;
     cdsdieta: TClientDataSet;
     dsdieta: TDataSource;
@@ -84,7 +87,7 @@ type
     cdsdietaMdico: TStringField;
     cdsdietaTipoDieta: TStringField;
     TabSheet4: TTabSheet;
-    SQLenfermidadeinterno: TSQLQuery;
+    SQLenfermidadeinternoold: TSQLQuery;
     DSPenfermidadeinterno: TDataSetProvider;
     CDSenfermidadeinterno: TClientDataSet;
     DSENFERMDIADE_INTERNO: TDataSource;
@@ -107,7 +110,7 @@ type
     Label50: TLabel;
     Memoenfermidade: TMemo;
     DBGrid4: TDBGrid;
-    SQLremedioenfermdiade: TSQLQuery;
+    SQLremedioenfermdiadeold: TSQLQuery;
     DSPremedioenfermdiade: TDataSetProvider;
     CDSremedioenfermdiade: TClientDataSet;
     dsremedioenfermidade: TDataSource;
@@ -130,7 +133,7 @@ type
     PopupMenuIsolamento: TPopupMenu;
     Liberar1: TMenuItem;
     TabSheet6: TTabSheet;
-    SQLdeficienciainterno: TSQLQuery;
+    SQLdeficienciainternoold: TSQLQuery;
     dspdeficienciainterno: TDataSetProvider;
     cdsdeficienciainterno: TClientDataSet;
     dsdeficienciainterno: TDataSource;
@@ -159,7 +162,7 @@ type
     cdsdeficienciainternoID_FUNCIONARIO: TIntegerField;
     cdsdeficienciainternoDeficincia: TStringField;
     TabSheet7: TTabSheet;
-    SQLvacinainterno: TSQLQuery;
+    SQLvacinainternoold: TSQLQuery;
     dspvacinainterno: TDataSetProvider;
     cdsvacinainterno: TClientDataSet;
     dsvacinainterno: TDataSource;
@@ -205,6 +208,12 @@ type
     DBEdit100: TDBEdit;
     DBEdit101: TDBEdit;
     DBEdit15: TDBEdit;
+    Sqlhistorico_saude: TFDQuery;
+    SQLdieta: TFDQuery;
+    SQLremedioenfermdiade: TFDQuery;
+    SQLenfermidadeinterno: TFDQuery;
+    SQLdeficienciainterno: TFDQuery;
+    SQLvacinainterno: TFDQuery;
     procedure EditarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure DBComboBox27KeyPress(Sender: TObject; var Key: Char);
@@ -360,7 +369,7 @@ procedure TFrmCadastroInternoSaude.Button1Click(Sender: TObject);
 begin
   inherited;
   dshistorico_saude.DataSet.Append;
-  dshistorico_saude.DataSet.fieldbyname('id_historico_saude').AsInteger := 0;
+  dshistorico_saude.DataSet.fieldbyname('id_historico_saude').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_historico_saude,1) FROM RDB$DATABASE');
   dshistorico_saude.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dshistorico_saude.DataSet.fieldbyname('data').AsString :=
@@ -391,7 +400,7 @@ procedure TFrmCadastroInternoSaude.Button2Click(Sender: TObject);
 begin
   inherited;
   dsdieta.DataSet.Append;
-  dsdieta.DataSet.fieldbyname('id_controle_dieta').AsInteger := 0;
+  dsdieta.DataSet.fieldbyname('id_controle_dieta').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_controle_dieta,1) FROM RDB$DATABASE');;
   dsdieta.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dsdieta.DataSet.fieldbyname('data_consulta').AsString :=
@@ -509,7 +518,7 @@ begin
   end;
 
   dsremedioenfermidade.DataSet.Append;
-  dsremedioenfermidade.DataSet.fieldbyname('ID_remedio_enfermidade').AsInteger := 0;
+  dsremedioenfermidade.DataSet.fieldbyname('ID_remedio_enfermidade').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_remedio_enfermidade,1) FROM RDB$DATABASE');;
   dsremedioenfermidade.DataSet.fieldbyname('id_enfermidade_interno').AsInteger :=
     DBLookupComboBoxenfermidadeinterno.KeyValue;
   dsremedioenfermidade.DataSet.fieldbyname('ID_remedio').AsInteger :=
@@ -589,7 +598,7 @@ begin
   end;
 
   dsdeficienciainterno.DataSet.Append;
-  dsdeficienciainterno.DataSet.fieldbyname('ID_DEFICIENCIA_INTERNO').AsInteger := 0;
+  dsdeficienciainterno.DataSet.fieldbyname('ID_DEFICIENCIA_INTERNO').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_deficiencia_interno,1) FROM RDB$DATABASE');
   dsdeficienciainterno.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dsdeficienciainterno.DataSet.fieldbyname('ID_DEFICIENCIA').AsInteger :=
@@ -618,7 +627,7 @@ begin
   end;
 
   dsvacinainterno.DataSet.Append;
-  dsvacinainterno.DataSet.fieldbyname('ID_VACINA_INTERNO').AsInteger := 0;
+  dsvacinainterno.DataSet.fieldbyname('ID_VACINA_INTERNO').AsInteger := DM.SQLConnect.ExecSQLScalar('SELECT GEN_ID(COD_UP,0)||GEN_ID(id_vacina_interno,1) FROM RDB$DATABASE');
   dsvacinainterno.DataSet.fieldbyname('id_interno').AsInteger :=
     DsCadastro.DataSet.fieldbyname('id_interno').AsInteger;
   dsvacinainterno.DataSet.fieldbyname('ID_VACINA').AsInteger :=
